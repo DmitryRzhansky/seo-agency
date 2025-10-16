@@ -1,0 +1,66 @@
+        body {
+            padding-top: 90px; /* Offset for fixed navbar */
+            font-family: 'Inter', sans-serif; /* A modern, clean font */
+        }
+        .navbar {
+            transition: background-color 0.3s ease-in-out;
+        }
+        .hero-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+        .section-padding {
+            padding: 60px 0;
+        }
+        .section-title {
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        .price-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .price-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        .team-member img, .review-author img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .niche-list {
+            columns: 4;
+            -webkit-columns: 4;
+            -moz-columns: 4;
+        }
+        @media (max-width: 992px) {
+            .niche-list {
+                columns: 2;
+                -webkit-columns: 2;
+                -moz-columns: 2;
+            }
+        }
+        @media (max-width: 576px) {
+            .niche-list {
+                columns: 1;
+                -webkit-columns: 1;
+                -moz-columns: 1;
+            }
+            .hero-section {
+                text-align: center;
+            }
+        }
+        .footer-bg {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .footer-bg a {
+            color: #adb5bd;
+            text-decoration: none;
+        }
+        .footer-bg a:hover {
+            color: #ffffff;
+        }

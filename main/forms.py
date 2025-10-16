@@ -1,32 +1,29 @@
 from django import forms
+from .models import ContactRequest
 
-class ContactForm(forms.Form):
-    """
-    Форма для сбора заявок на консультацию.
-    """
-    # CharField для имени
+class ContactForm(forms.ModelForm):
+    """Форма обратной связи для главной страницы."""
+    
+    # Мы переопределяем поля, чтобы добавить Bootstrap классы
     name = forms.CharField(
-        max_length=100,
-        label='Ваше имя',
+        label='Ваше имя', 
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'})
     )
-    
-    # CharField для телефона, с требованием валидации (например, min/max length)
     phone = forms.CharField(
-        max_length=20,
-        label='Телефон',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Телефон'})
+        label='Телефон', 
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+7 (XXX) XXX-XX-XX'})
     )
-    
-    # EmailField для адреса почты
     email = forms.EmailField(
-        label='Email',
-        required=False, # Сделаем его необязательным, если пользователь не хочет его указывать
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email (необязательно)'})
+        label='Email (Необязательно)', 
+        required=False,
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'example@mail.ru'})
     )
-    
-    # CharField или TextField для сообщения
     message = forms.CharField(
-        label='Краткое описание задачи',
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Опишите вашу задачу'})
+        label='Сообщение / Подробности проекта', 
+        required=False,
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Опишите ваш проект или вопрос'})
     )
+
+    class Meta:
+        model = ContactRequest
+        fields = ['name', 'phone', 'email', 'message']

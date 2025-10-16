@@ -1,7 +1,12 @@
-from django.shortcuts import render, get_object_or_404
-from .models import ServiceCategory, Service, Post
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.db.models import Count # Будет полезно для отображения кол-ва постов в категориях
+from django.db.models import Count
+from django.contrib import messages
+# from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
+
+# Импорт моделей и формы
+from .models import ServiceCategory, Service, Post, ContactRequest
+from .forms import ContactForm
 
 
 # --- Главная страница (Landing Page) ---
@@ -9,23 +14,51 @@ from django.db.models import Count # Будет полезно для отобр
 def index(request):
     """
     Главная страница (лендинг). 
-    Здесь агрегируются данные из разных моделей для отображения.
+    Обрабатывает форму ContactForm, агрегирует данные и передает их в шаблон.
     """
-    # 1. Топ-услуги для секции 'Топ услуг маркетинга'
-    # Выбираем услуги, которые мы хотим показать на главной, например, первые 6 по порядку
+    
+    # 1. ОБРАБОТКА ФОРМЫ (POST-запрос)
+    if request.method == 'POST':
+        form = ContactForm(request.POST) 
+        if form.is_valid():
+            # Сохраняем заявку в базу данных
+            form.save()
+            
+            # TODO: Здесь можно добавить логику отправки email уведомления
+            
+            messages.success(request, 'Спасибо! Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.')
+            
+            # Редирект на главную страницу
+            return redirect('main:home') 
+        else:
+            # Если форма невалидна, добавляем сообщение об ошибке
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+            # Форма с ошибками будет передана в контекст ниже
+    
+    # 2. ИНИЦИАЛИЗАЦИЯ ФОРМЫ (GET-запрос)
+    else:
+        # Если это GET-запрос, создаем пустую форму
+        form = ContactForm()
+        
+    # 3. Получение данных для рендера страницы
     top_services = Service.objects.all().order_by('order')[:6] 
-
-    # 2. Недавние посты для секции 'Блог' на главной
     recent_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:3]
 
-    # Для демонстрации можем передать в контекст и другие данные, 
-    # если они понадобятся на главной (например, отзывы, команда)
+    # Список городов для секции Locations
+    cities_list = [
+        "Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", 
+        "Казань", "Нижний Новгород", "Самара", "Челябинск", 
+        "Ростов-на-Дону", "Уфа", "Красноярск", "Пермь", 
+        "Воронеж", "Волгоград", "Минск", "Астана", 
+        "Алматы", "Киев"
+    ]
     
     context = {
         'title': 'Комплексное продвижение бизнеса | Isakov Agency',
         'top_services': top_services,
         'recent_posts': recent_posts,
-        # Данные для хедера и футера (ServiceCategory) будут добавлены Контекстным процессором
+        'cities_list': cities_list,
+        'form': form, # <<< Форма передается в шаблон
     }
     return render(request, 'main/index.html', context)
 

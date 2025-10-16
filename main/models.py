@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.utils import timezone
 
 # --- Модели для Услуг (для хедера и футера) ---
 
@@ -77,3 +78,19 @@ class Post(models.Model):
         # Ссылка на отдельный пост
         from django.urls import reverse
         return reverse('main:post_detail', kwargs={'slug': self.slug})
+
+class ContactRequest(models.Model):
+    """Модель для хранения заявок, отправленных через форму на главной странице."""
+    name = models.CharField(max_length=100, verbose_name="Имя")
+    phone = models.CharField(max_length=20, verbose_name="Телефон")
+    email = models.EmailField(max_length=100, verbose_name="Email", blank=True, null=True)
+    message = models.TextField(verbose_name="Сообщение", blank=True)
+    created_at = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
+
+    class Meta:
+        verbose_name = "Заявка"
+        verbose_name_plural = "Заявки"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Заявка от {self.name} ({self.phone})"

@@ -1,0 +1,68 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-padding" id="blog-list">
+    <div class="container">
+        <h1 class="section-title text-center">{{ title }}</h1>
+
+        <div class="row g-4">
+            
+            {% for post in page_obj %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm border-0">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'main/img/blog_placeholder.jpg' %}" class="card-img-top" alt="Изображение блога" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">{{ post.title }}</h5>
+                        <p class="card-text text-muted small mb-3">Опубликовано: {{ post.published_date|date:"d M Y" }}</p>
+                        
+                        <a href="{% url 'main:post_detail' slug=post.slug %}" class="btn btn-outline-primary mt-auto">Читать полностью <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+                <div class="col-12 text-center py-5">
+                    <p class="lead text-muted">В этом разделе пока нет опубликованных постов.</p>
+                </div>
+            {% endfor %}
+
+        </div>
+
+        {% if is_paginated %}
+        <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center">
+                
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo; Предыдущая</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="#">&laquo; Предыдущая</a></li>
+                {% endif %}
+
+                {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая &raquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="#">Следующая &raquo;</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock content %}

@@ -11,13 +11,13 @@
                     <p class="lead mb-4">Помогаем компаниям расти и привлекать больше клиентов с 2016 года. Гарантируем результат и прозрачную отчетность.</p>
                     <a href="#contact" class="btn btn-primary btn-lg px-4">Получить консультацию</a>
                 </div>
-                <div class="col-lg-6 mt-4 mt-lg-0">
-                    <img src="https://placehold.co/500x500/EFEFEF/333?text=Фото+директора" class="img-fluid rounded-circle" alt="Директор компании">
+                <div class="col-lg-6 mt-4 mt-lg-0"> 
+                    <img src="https://isakov.work/isakov.webp" class="img-fluid"  alt="Директор компании" width="300" height="300">
                 </div>
             </div>
         </div>
     </section>
-
+<br><br>
     <section class="section-padding" id="how-we-work">
         <div class="container">
             <h2 class="text-center section-title">Как мы работаем</h2>
@@ -53,6 +53,7 @@
             </div>
         </div>
     </section>
+<br><br>
     
     <section class="section-padding bg-light" id="top-services">
         <div class="container">
@@ -88,6 +89,7 @@
             
         </div>
     </section>
+<br><br>
 
     <section class="section-padding" id="niches">
         <div class="container">
@@ -107,14 +109,30 @@
             </div>
         </div>
     </section>
+<br><br>
 
-    <section class="section-padding bg-light" id="locations">
-        <div class="container text-center">
-            <h2 class="section-title">Работаем по всей России и СНГ</h2>
-            <p class="lead">Москва • Санкт-Петербург • Новосибирск • Екатеринбург • Казань • Минск • Астана • Алматы</p>
+<section class="section-padding bg-light" id="locations">
+    <div class="container">
+        <h2 class="section-title text-center">Работаем по всей России и СНГ</h2>
+        
+        <div class="row justify-content-center text-center mt-4">
+            
+            {% comment %} 
+            Цикл по списку, переданному из views.py
+            {% endcomment %}
+            {% for city in cities_list %}
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                <span class="badge bg-primary text-white p-2 w-100">{{ city }}</span>
+            </div>
+            {% endfor %}
+
         </div>
-    </section>
+        <p class="text-center small text-muted mt-4">И множество других регионов.</p>
+    </div>
+</section>
 
+</section>
+<br><br>
 
     <section class="section-padding" id="tariffs">
         <div class="container">
@@ -177,6 +195,7 @@
             </div>
         </div>
     </section>
+<br><br>
 
     <section class="section-padding bg-light" id="team">
         <div class="container">
@@ -227,6 +246,7 @@
     </section>
 
     <hr class="my-5"> 
+<br><br>
 
     <section class="section-padding" id="reviews">
         <div class="container">
@@ -265,6 +285,7 @@
             </div>
         </div>
     </section>
+<br><br>
 
     <section class="section-padding bg-light" id="contact">
         <div class="container">
@@ -315,5 +336,6 @@
             </div>
         </div>
     </section>
+<br><br>
 
 {% endblock content %}

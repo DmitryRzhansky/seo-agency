@@ -7,10 +7,11 @@ from django.contrib import messages
 # Импорт моделей и формы
 from .models import ServiceCategory, Service, Post, ContactRequest
 from .forms import ContactForm
-
+from django.views.decorators.cache import cache_page # <<< Импорт декоратора
+from django.conf import settings # <<< Импорт settings для времени кэша
 
 # --- Главная страница (Landing Page) ---
-
+@cache_page(60 * 15, key_prefix="homepage")
 def index(request):
     """
     Главная страница (лендинг). 

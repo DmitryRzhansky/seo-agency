@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # --- Модели для Услуг (для хедера и футера) ---
 
@@ -65,6 +66,13 @@ class Post(models.Model):
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True, verbose_name="Изображение (превью)")
     published_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
+    author = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL, # Если пользователь удаляется, поле автора остается NULL
+        null=True,                 # Разрешаем NULL
+        blank=True,                # Делаем необязательным в админке
+        verbose_name="Автор"
+    )
 
     class Meta:
         verbose_name = "Пост в блоге"

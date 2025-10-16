@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load static custom_filters %}
 
 {% block content %}
 
@@ -91,24 +92,42 @@
     </section>
 <br><br>
 
-    <section class="section-padding" id="niches">
-        <div class="container">
-            <h2 class="text-center section-title">Экспертиза в 80+ нишах</h2>
-            <div class="niche-list small">
-                <p>Цветы</p><p>Ювелирные изделия</p><p>Продукты</p><p>Часы</p><p>Аптеки</p><p>Косметика</p><p>Бытовая техника</p><p>Книги</p><p>Скейтборды</p><p>Гинекология</p><p>Свадебные агентства</p><p>Салоны красоты</p>
+<section class="section-padding" id="niches">
+    <div class="container">
+        <h2 class="text-center section-title">Экспертиза в 80+ нишах</h2>
+        
+        {% with initial_niches="Цветы, Ювелирные изделия, Продукты, Часы, Аптеки, Косметика, Бытовая техника, Книги, Скейтборды, Гинекология, Свадебные агентства, Салоны красоты" %}
+        {% with hidden_niches="Онлайн-школы, Ремонт квартир, Входные двери, Клининг, Event-агентства, Велосипеды, Бурение скважин, Бизнес тренеры, Автошколы, Ветеринарные клиники, Шинные центры, ВУЗы, Грузоперевозки, Деревянные дома, Детская обувь, Детская одежда, Доставка еды, Зоомагазины, Издательства, Кулинария, Кейтеринг, Косметология, Квесты, Кадровые агентства, Логопед, Канцтовары, Ландшафтный дизайн, Металлоконструкции, Натяжные потолки, Мотоциклы, Нефтяные компании, Нижнее белье, Обувь, Окна, Ателье, Подарки, Керамическая плитка, Ремонт компьютеров, Сантехника, Студии звукозаписи, Страховые компании, Ткани и текстиль, Кондитерские изделия, Спецодежда, Фотографы, Фотостудии, Химчистка, Церкви, Школы танцев, Электромонтаж, Хостелы, Элитная недвижимость, Гостиницы" %}
+
+        <div class="row g-2 justify-content-center niche-grid">
+            {% for niche in initial_niches|split:", " %}
+            <div class="col-auto">
+                <span class="badge rounded-pill bg-light text-dark border p-2 shadow-sm">{{ niche }}</span>
             </div>
-            <div class="collapse" id="allNiches">
-                <div class="niche-list small">
-                    <p>Онлайн-школы</p><p>Ремонт квартир</p><p>Входные двери</p><p>Клининг</p><p>Event-агентства</p><p>Велосипеды</p><p>Бурение скважин</p><p>Бизнес тренеры</p><p>Автошколы</p><p>Ветеринарные клиники</p><p>Шинные центры</p><p>ВУЗы</p><p>Грузоперевозки</p><p>Деревянные дома</p><p>Детская обувь</p><p>Детская одежда</p><p>Доставка еды</p><p>Зоомагазины</p><p>Издательства</p><p>Кулинария</p><p>Кейтеринг</p><p>Косметология</p><p>Квесты</p><p>Кадровые агентства</p><p>Логопед</p><p>Канцтовары</p><p>Ландшафтный дизайн</p><p>Металлоконструкции</p><p>Натяжные потолки</p><p>Мотоциклы</p><p>Нефтяные компании</p><p>Нижнее белье</p><p>Обувь</p><p>Окна</p><p>Ателье</p><p>Подарки</p><p>Керамическая плитка</p><p>Ремонт компьютеров</p><p>Сантехника</p><p>Студии звукозаписи</p><p>Страховые компании</p><p>Ткани и текстиль</p><p>Кондитерские изделия</p><p>Спецодежда</p><p>Фотографы</p><p>Фотостудии</p><p>Химчистка</p><p>Церкви</p><p>Школы танцев</p><p>Электромонтаж</p><p>Хостелы</p><p>Элитная недвижимость</p><p>Гостиницы</p>
+            {% endfor %}
+        </div>
+        
+        <div class="collapse" id="allNiches">
+            <div class="row g-2 justify-content-center niche-grid mt-3">
+                {% for niche in hidden_niches|split:", " %}
+                <div class="col-auto">
+                    <span class="badge rounded-pill bg-light text-dark border p-2 shadow-sm">{{ niche }}</span>
                 </div>
-            </div>
-            <div class="text-center mt-4">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#allNiches" aria-expanded="false" aria-controls="allNiches">
-                    Посмотреть все
-                </button>
+                {% endfor %}
             </div>
         </div>
-    </section>
+        
+        {% endwith %}
+        {% endwith %}
+
+        <div class="text-center mt-4">
+            <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#allNiches" aria-expanded="false" aria-controls="allNiches">
+                Посмотреть все ниши
+            </button>
+        </div>
+    </div>
+</section>
+
 <br><br>
 
 <section class="section-padding bg-light" id="locations">

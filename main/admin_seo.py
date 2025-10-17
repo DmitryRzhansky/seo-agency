@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial
+from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest
 from seo.admin import SEOAdminMixin
 
 class SEOPreviewMixin:
@@ -115,7 +115,7 @@ class ServiceCategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, a
     def get_service_count(self, obj):
         count = obj.services.count()
         if count > 0:
-            url = reverse('admin:services_service_changelist') + f'?category__id__exact={obj.id}'
+            url = reverse('admin:main_service_changelist') + f'?category__id__exact={obj.id}'
             return format_html('<a href="{}">{} услуг</a>', url, count)
         return "0 услуг"
     get_service_count.short_description = 'Услуги'
@@ -129,6 +129,7 @@ class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.Mod
     list_filter = ('category', 'is_published')
     search_fields = ('title', 'short_description', 'content')
     prepopulated_fields = {'slug': ('title',)}
+    list_editable = ('order', 'is_published')
     
     fieldsets = (
         ('💼 Основная информация', {
@@ -153,7 +154,7 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelA
         'seo_validation', 'seo_title_length', 'seo_description_length'
     )
     list_filter = ('is_published', 'published_date', 'category', 'author')
-    search_fields = ('title', 'content', 'excerpt')
+    search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'published_date'
     readonly_fields = ('views_count', 'seo_preview')
@@ -164,7 +165,7 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelA
             'description': 'Основная информация о статье'
         }),
         ('📄 Содержимое', {
-            'fields': ('excerpt', 'content', 'image', 'image_alt'),
+            'fields': ('content', 'image', 'image_alt'),
             'description': 'Содержимое статьи и изображения'
         }),
         ('🍞 Навигация', {
@@ -190,6 +191,7 @@ class TeamMemberAdmin(admin.ModelAdmin):
     list_editable = ('order', 'is_active')
     search_fields = ('name', 'role', 'bio')
     list_filter = ('is_active',)
+    readonly_fields = ('photo_preview',)
     
     fieldsets = (
         ('👤 Основная информация', {
@@ -217,6 +219,7 @@ class TestimonialAdmin(admin.ModelAdmin):
     list_editable = ('order', 'rating', 'is_active')
     search_fields = ('author_name', 'author_title', 'content')
     list_filter = ('is_active', 'rating')
+    readonly_fields = ('photo_preview',)
     
     fieldsets = (
         ('⭐ Основная информация', {
@@ -237,3 +240,31 @@ class TestimonialAdmin(admin.ModelAdmin):
             )
         return "Нет фото"
     photo_preview.short_description = "Аватар"
+
+@admin.register(ContactRequest)
+class ContactRequestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'email', 'created_at', 'has_message')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'phone', 'email', 'message')
+    readonly_fields = ('created_at',)
+    date_hierarchy = 'created_at'
+    
+    fieldsets = (
+        ('📞 Контактная информация', {
+            'fields': ('name', 'phone', 'email'),
+            'description': 'Контактные данные клиента'
+        }),
+        ('💬 Сообщение', {
+            'fields': ('message',),
+            'description': 'Текст сообщения от клиента'
+        }),
+        ('📅 Время', {
+            'fields': ('created_at',),
+            'classes': ('collapse',),
+            'description': 'Время создания заявки'
+        }),
+    )
+    
+    def has_message(self, obj):
+        return "✅" if obj.message else "❌"
+    has_message.short_description = "Есть сообщение"

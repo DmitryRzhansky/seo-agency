@@ -79,6 +79,9 @@ TEMPLATES = [
 
                 'main.context_processors.services_menu',
             ],
+            'builtins': [
+                'main.templatetags.global_filters',
+            ],
         },
     },
 ]

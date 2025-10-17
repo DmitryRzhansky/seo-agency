@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.db.models import Count
+from django.db.models import Count, F
 from django.contrib import messages
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
@@ -126,6 +126,14 @@ def post_detail(request, slug):
     Страница отдельного поста в блоге.
     """
     post = get_object_or_404(Post, slug=slug)
+    
+    # Инкремент просмотров один раз на сессию для каждой статьи
+    session_key = f"viewed_post_{post.pk}"
+    if not request.session.get(session_key):
+        Post.objects.filter(pk=post.pk).update(views_count=F('views_count') + 1)
+        # Обновляем объект в памяти, чтобы в шаблоне было актуальное значение
+        post.refresh_from_db(fields=['views_count'])
+        request.session[session_key] = True
     
     # Можно добавить логику для "Похожих постов" или "Следующий/Предыдущий пост"
     

@@ -20,7 +20,10 @@
                     
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold">{{ post.title }}</h5>
-                        <p class="card-text text-muted small mb-3">Опубликовано: {{ post.published_date|date:"d M Y" }}</p>
+                        <p class="card-text text-muted small mb-3">
+                            Опубликовано: {{ post.published_date|date:"d M Y" }}
+                            · <i class="fas fa-eye me-1"></i> {{ post.views_count }}
+                        </p>
                         
                         <a href="{% url 'main:post_detail' slug=post.slug %}" class="btn btn-outline-primary mt-auto">Читать полностью <i class="fas fa-arrow-right ms-2"></i></a>
                     </div>

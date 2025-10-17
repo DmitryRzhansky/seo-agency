@@ -25,52 +25,52 @@
 
 <style>
 .breadcrumb-nav {
-    background-color: #e3f2fd; /* Более заметный цвет фона */
-    border-bottom: 2px solid #2196f3; /* Более заметная граница */
-    margin-top: 90px; /* Отступ от фиксированной навигации */
+    background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-bg-dark) 100%);
+    border-bottom: 1px solid var(--bs-border-dark);
+    margin-top: 90px;
     position: relative;
     z-index: 10;
-    min-height: 60px; /* Минимальная высота для видимости */
-    display: block !important; /* Принудительно показываем */
-    visibility: visible !important; /* Принудительно делаем видимым */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Добавляем тень для заметности */
+    min-height: 60px;
+    display: block !important;
+    visibility: visible !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .breadcrumb {
     background: none;
-    padding: 15px 0; /* Увеличиваем отступы для лучшей видимости */
+    padding: 15px 0;
     margin: 0;
     font-size: 0.9rem;
-    display: flex !important; /* Принудительно показываем */
+    display: flex !important;
     flex-wrap: wrap;
 }
 
 .breadcrumb-item {
-    display: inline-block !important; /* Принудительно показываем элементы */
+    display: inline-block !important;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
     content: "›";
-    color: #6c757d;
+    color: var(--bs-text-muted-dark);
     font-weight: bold;
     margin: 0 8px;
 }
 
 .breadcrumb-item a {
-    color: #1976d2; /* Более яркий синий цвет */
+    color: var(--bs-primary-dark);
     transition: color 0.2s ease;
     text-decoration: none;
-    font-weight: 500; /* Делаем текст более жирным */
+    font-weight: 500;
 }
 
 .breadcrumb-item a:hover {
-    color: #0d47a1; /* Более темный синий при наведении */
+    color: #0b5ed7;
     text-decoration: underline !important;
 }
 
 .breadcrumb-item.active {
-    color: #424242; /* Более темный цвет для активного элемента */
-    font-weight: 600; /* Делаем активный элемент еще более жирным */
+    color: var(--bs-text-dark);
+    font-weight: 600;
 }
 
 /* Адаптивность */

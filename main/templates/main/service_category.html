@@ -1,6 +1,11 @@
 {% extends "main/base.html" %}
+{% load seo_tags %}
 
 {% block title %}{{ category.title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs 'service_category' category.slug %}
+{% endblock breadcrumbs %}
 
 {% block content %}
 <section class="section-padding" id="service-category-hero">

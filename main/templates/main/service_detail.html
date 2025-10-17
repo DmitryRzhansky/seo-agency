@@ -1,6 +1,11 @@
 {% extends "main/base.html" %}
+{% load seo_tags %}
 
 {% block title %}{{ service.title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs 'service_detail' service.slug %}
+{% endblock breadcrumbs %}
 
 {% block content %}
 <style>

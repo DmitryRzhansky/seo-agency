@@ -1,6 +1,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 from django.conf import settings
+from ..models import Breadcrumb
 
 register = template.Library()
 
@@ -77,3 +78,36 @@ def robots_meta(obj):
     
     index = 'index' if obj.seo_index else 'noindex'
     return f'{index}, follow'
+
+
+@register.inclusion_tag('seo/breadcrumbs.html', takes_context=True)
+def breadcrumbs(context, page_type, page_slug=None):
+    """
+    Генерирует хлебные крошки для страницы.
+    
+    Использование:
+    {% load seo_tags %}
+    {% breadcrumbs 'service_detail' service.slug %}
+    {% breadcrumbs 'post_detail' post.slug %}
+    """
+    breadcrumbs_list = Breadcrumb.get_breadcrumbs_for_page(
+        page_type=page_type,
+        page_slug=page_slug,
+        context=context
+    )
+    
+    return {
+        'breadcrumbs': breadcrumbs_list,
+        'page_type': page_type,
+        'page_slug': page_slug,
+    }
+
+
+@register.simple_tag
+def get_breadcrumbs(page_type, page_slug=None, context=None):
+    """Возвращает список хлебных крошек для использования в шаблонах"""
+    return Breadcrumb.get_breadcrumbs_for_page(
+        page_type=page_type,
+        page_slug=page_slug,
+        context=context
+    )

@@ -1,5 +1,16 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load seo_tags %}
+
+{% block breadcrumbs %}
+{% if current_category %}
+{% breadcrumbs 'category_posts' current_category.slug %}
+{% elif search_query %}
+{% breadcrumbs 'search' %}
+{% else %}
+{% breadcrumbs 'post_list' %}
+{% endif %}
+{% endblock breadcrumbs %}
 
 {% block content %}
 

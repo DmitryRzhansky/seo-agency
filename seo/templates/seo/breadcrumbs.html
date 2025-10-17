@@ -1,0 +1,74 @@
+{% load static %}
+
+{% if breadcrumbs and breadcrumbs|length > 1 %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb mb-0 py-3">
+            {% for crumb in breadcrumbs %}
+                {% if forloop.last %}
+                    <!-- Последний элемент (текущая страница) -->
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ crumb.title }}
+                    </li>
+                {% else %}
+                    <!-- Обычные ссылки -->
+                    <li class="breadcrumb-item">
+                        <a href="{{ crumb.url }}" class="text-decoration-none">
+                            {{ crumb.title }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div>
+</nav>
+
+<style>
+.breadcrumb-nav {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.breadcrumb {
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: #6c757d;
+    font-weight: bold;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #0056b3;
+    text-decoration: underline !important;
+}
+
+.breadcrumb-item.active {
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+    
+    .breadcrumb-item {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+</style>
+{% endif %}

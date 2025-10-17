@@ -149,6 +149,19 @@ class Service(SEOModel):
     # Используем CKEditor5Field для подробного описания услуги
     content = CKEditor5Field(verbose_name="Подробное описание услуги", config_name='extends')
     short_description = models.TextField(max_length=300, verbose_name="Краткое описание")
+    image = models.ImageField(
+        upload_to='service_images/',
+        blank=True,
+        null=True,
+        verbose_name="Изображение услуги",
+        help_text="Рекомендуемый размер: 400x300px"
+    )
+    image_alt = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="Alt-текст для изображения",
+        help_text="Описание изображения для SEO и доступности"
+    )
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
     
@@ -178,6 +191,12 @@ class Service(SEOModel):
         # Ссылка на отдельную страницу услуги
         from django.urls import reverse
         return reverse('services:service_detail', kwargs={'slug': self.slug})
+    
+    def get_image_alt(self):
+        """Возвращает alt-текст для изображения услуги"""
+        if self.image_alt:
+            return self.image_alt
+        return f"Изображение услуги {self.title}"
     
     def get_breadcrumbs(self):
         """Возвращает хлебные крошки для услуги"""

@@ -136,6 +136,10 @@ class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.Mod
             'fields': ('category', 'title', 'slug', 'order', 'is_published', 'short_description'),
             'description': 'Основная информация об услуге'
         }),
+        ('🖼️ Изображение', {
+            'fields': ('image', 'image_alt'),
+            'description': 'Изображение услуги для отображения на сайте'
+        }),
         ('📝 Содержимое', {
             'fields': ('content',),
             'description': 'Подробное описание услуги'

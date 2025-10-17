@@ -459,7 +459,7 @@ body {
 }
 
 .hero-placeholder {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     min-height: 300px;
@@ -467,6 +467,12 @@ body {
     border-radius: 20px;
     border: 2px solid var(--bs-border-dark);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-placeholder:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
 .placeholder-content {
@@ -647,4 +653,59 @@ body {
     background-color: var(--bs-bg-dark) !important;
     border-color: var(--bs-border-dark) !important;
     color: var(--bs-text-muted-dark) !important;
+}
+
+/* Стили для секций "Еще услуги" и "Вам может понравиться" */
+#related-services .card,
+#related-posts .card {
+    background-color: var(--bs-bg-darker) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    color: var(--bs-text-dark) !important;
+}
+
+#related-services .card-title,
+#related-posts .card-title {
+    color: var(--bs-text-dark) !important;
+}
+
+#related-services .card-title a,
+#related-posts .card-title a {
+    color: var(--bs-text-dark) !important;
+    transition: color 0.3s ease;
+}
+
+#related-services .card-title a:hover,
+#related-posts .card-title a:hover {
+    color: var(--bs-primary-dark) !important;
+}
+
+#related-services .card-text,
+#related-posts .card-text {
+    color: var(--bs-text-muted-dark) !important;
+}
+
+#related-services .card-footer,
+#related-posts .card-footer {
+    background-color: transparent !important;
+    border-top: 1px solid var(--bs-border-dark) !important;
+}
+
+#related-services .card-footer small,
+#related-posts .card-footer small {
+    color: var(--bs-text-muted-dark) !important;
+}
+
+/* Стили для карточек услуг и статей */
+.related-service-card,
+.related-post-card {
+    background-color: var(--bs-bg-darker) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.related-service-card:hover,
+.related-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+    border-color: var(--bs-primary-dark) !important;
 }

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'blog',
     'services',
     'pages',
+    'seo',
     'ckeditor',
     'ckeditor_uploader',
 ]

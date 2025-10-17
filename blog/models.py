@@ -1,8 +1,9 @@
 from django.db import models
 from django.urls import reverse
+from seo.models import SEOModel
 
 
-class Category(models.Model):
+class Category(SEOModel):
     """Модель для категорий статей блога"""
     name = models.CharField(max_length=100, verbose_name="Название категории")
     slug = models.SlugField(unique=True, max_length=100, verbose_name="URL-идентификатор")

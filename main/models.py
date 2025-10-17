@@ -2,10 +2,11 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils import timezone
 from django.contrib.auth.models import User
+from seo.models import SEOModel
 
 # --- Модели для Услуг (для хедера и футера) ---
 
-class ServiceCategory(models.Model):
+class ServiceCategory(SEOModel):
     """Модель для разделов услуг (например, 'SEO-продвижение', 'Контекстная реклама')"""
     title = models.CharField(max_length=100, verbose_name="Название раздела")
     # Используем slug для создания ЧПУ-ссылок
@@ -26,7 +27,7 @@ class ServiceCategory(models.Model):
         return reverse('services:service_category', kwargs={'slug': self.slug})
 
 
-class Service(models.Model):
+class Service(SEOModel):
     """Модель для конкретных услуг внутри раздела"""
     category = models.ForeignKey(
         ServiceCategory,
@@ -57,7 +58,7 @@ class Service(models.Model):
 
 # --- Модели для Блога ---
 
-class Post(models.Model):
+class Post(SEOModel):
     """Модель для записей в блоге"""
     title = models.CharField(max_length=200, verbose_name="Заголовок")
     slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")

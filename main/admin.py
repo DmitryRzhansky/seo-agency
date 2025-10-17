@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import ServiceCategory, Service, Post, TeamMember, Testimonial
+from seo.admin import SEOAdminMixin
 
 # Настройка услуг
 class ServiceInline(admin.TabularInline):
@@ -10,8 +11,8 @@ class ServiceInline(admin.TabularInline):
     prepopulated_fields = {'slug': ('title',)}
 
 @admin.register(ServiceCategory)
-class ServiceCategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'order', 'slug', 'get_service_count')
+class ServiceCategoryAdmin(SEOAdminMixin, admin.ModelAdmin):
+    list_display = ('title', 'order', 'slug', 'get_service_count', 'seo_title_length', 'seo_description_length', 'seo_index')
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ServiceInline]
 
@@ -20,8 +21,8 @@ class ServiceCategoryAdmin(admin.ModelAdmin):
     get_service_count.short_description = 'Кол-во услуг'
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'order', 'slug')
+class ServiceAdmin(SEOAdminMixin, admin.ModelAdmin):
+    list_display = ('title', 'category', 'order', 'slug', 'seo_title_length', 'seo_description_length', 'seo_index')
     list_filter = ('category',)
     search_fields = ('title',)
     # Поле slug заполняется автоматически на основе title
@@ -38,8 +39,8 @@ class ServiceAdmin(admin.ModelAdmin):
 
 # Настройка блога
 @admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'published_date', 'is_published', 'views_count', 'slug')
+class PostAdmin(SEOAdminMixin, admin.ModelAdmin):
+    list_display = ('title', 'category', 'published_date', 'is_published', 'views_count', 'slug', 'seo_title_length', 'seo_description_length', 'seo_index')
     list_filter = ('is_published', 'published_date', 'category')
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}

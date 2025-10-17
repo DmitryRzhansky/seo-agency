@@ -22,6 +22,7 @@ def post_list(request):
 		'is_paginated': page_obj.has_other_pages(),
 		'categories': categories,
 		'current_category': None,
+		'seo_object': None,  # Для списка статей SEO-объект не нужен
 	})
 
 
@@ -47,6 +48,7 @@ def category_posts(request, slug):
 		'is_paginated': page_obj.has_other_pages(),
 		'categories': categories,
 		'current_category': category,
+		'seo_object': category,  # Передаем категорию как SEO-объект
 	})
 
 
@@ -82,6 +84,7 @@ def search_posts(request):
 		'categories': categories,
 		'current_category': None,
 		'search_query': query,
+		'seo_object': None,  # Для поиска SEO-объект не нужен
 	})
 
 
@@ -96,4 +99,5 @@ def post_detail(request, slug):
 	return render(request, 'main/post_detail.html', {
 		'title': post.title,
 		'post': post,
+		'seo_object': post,  # Передаем пост как SEO-объект
 	})

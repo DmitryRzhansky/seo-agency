@@ -83,6 +83,7 @@ def service_category_detail(request, slug):
         'title': category.title,
         'category': category,
         'services': services_in_category,
+        'seo_object': category,  # Передаем категорию как SEO-объект
     }
     return render(request, 'main/service_category.html', context)
 
@@ -96,6 +97,7 @@ def service_detail(request, slug):
     context = {
         'title': service.title,
         'service': service,
+        'seo_object': service,  # Передаем услугу как SEO-объект
     }
     return render(request, 'main/service_detail.html', context)
 
@@ -121,6 +123,7 @@ def post_list(request):
         'title': 'Блог | Полезные статьи о продвижении',
         'page_obj': page_obj,
         'is_paginated': page_obj.has_other_pages(),
+        'seo_object': None,  # Для списка статей SEO-объект не нужен
         # 'categories_with_count': categories_with_count,
     }
     return render(request, 'main/post_list.html', context)
@@ -146,5 +149,6 @@ def post_detail(request, slug):
     context = {
         'title': post.title,
         'post': post,
+        'seo_object': post,  # Передаем пост как SEO-объект
     }
     return render(request, 'main/post_detail.html', context)

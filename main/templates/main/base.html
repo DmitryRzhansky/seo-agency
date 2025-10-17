@@ -30,6 +30,28 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
             <div class="container">
                 <a class="navbar-brand fw-bold" href="{% url 'main:home' %}">Isakov Agency</a>
+                
+                {% if current_city %}
+                <div class="d-none d-lg-block ms-3">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="currentCityDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            {{ current_city.name }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="currentCityDropdown">
+                            <li><h6 class="dropdown-header">Выберите город</h6></li>
+                            {% for city in cities_menu %}
+                                {% if city.slug != current_city.slug %}
+                                <li><a class="dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'main:city_list' %}">Все города</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

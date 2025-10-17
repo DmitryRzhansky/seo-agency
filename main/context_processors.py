@@ -11,10 +11,20 @@ def services_menu(request):
     header_pages = SimplePage.objects.filter(is_published=True, show_in_header=True).order_by('order')
     footer_pages = SimplePage.objects.filter(is_published=True, show_in_footer=True).order_by('order')
     cities = City.objects.filter(is_active=True).order_by('order')[:10]  # Топ-10 городов
+    
+    # Определяем текущий город пользователя
+    current_city = None
+    user_city_slug = request.session.get('user_city')
+    if user_city_slug:
+        try:
+            current_city = City.objects.get(slug=user_city_slug, is_active=True)
+        except City.DoesNotExist:
+            pass
 
     return {
         'service_categories_menu': categories,
         'header_pages': header_pages,
         'footer_pages': footer_pages,
         'cities_menu': cities,
+        'current_city': current_city,
     }

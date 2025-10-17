@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+
+{% block title %}Услуги{% endblock title %}
+
+{% block content %}
+<section class="section-padding pt-5 mt-5">
+	<div class="container">
+		<h1 class="section-title text-center mb-4">Услуги</h1>
+		<div class="row g-4">
+			{% for service in services %}
+			<div class="col-sm-6 col-lg-4">
+				<a href="{% url 'services:service_detail' slug=service.slug %}" class="card h-100 text-decoration-none text-dark shadow-sm">
+					<div class="card-body">
+						<h5 class="card-title fw-bold">{{ service.title }}</h5>
+						<p class="card-text text-muted">{{ service.short_description }}</p>
+					</div>
+				</a>
+			</div>
+			{% empty %}
+				<div class="col-12 text-center text-muted">Пока нет услуг.</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endblock content %}
+

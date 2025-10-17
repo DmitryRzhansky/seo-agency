@@ -8,6 +8,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Подключаем URL'ы приложения main, даем ему namespace 'main'
     path('', include(('main.urls', 'main'), namespace='main')),
+    # Блог
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
+    # Услуги
+    path('services/', include(('services.urls', 'services'), namespace='services')),
+    # Простые страницы
+    path('pages/', include(('pages.urls', 'pages'), namespace='pages')),
     # URL для CKEditor
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]

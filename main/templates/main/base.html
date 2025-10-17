@@ -35,7 +35,7 @@
                                     <li><h6 class="dropdown-header">{{ category.title }}</h6></li>
                                     
                                     {% for service in category.services.all %}
-                                        <li><a class="dropdown-item" href="{% url 'main:service_detail' slug=service.slug %}">{{ service.title }}</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'services:service_detail' slug=service.slug %}">{{ service.title }}</a></li>
                                     {% endfor %}
                                     
                                     {% if not forloop.last %}
@@ -47,6 +47,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'main:home' %}#tariffs">Тарифы</a>
                         </li>
+                        {% for p in header_pages %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'pages:detail' slug=p.slug %}">{{ p.title }}</a>
+                        </li>
+                        {% endfor %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'main:home' %}#reviews">Отзывы</a>
                         </li>
@@ -54,7 +59,7 @@
                             <a class="nav-link" href="{% url 'main:home' %}#team">Команда</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'main:post_list' %}">Блог</a>
+                            <a class="nav-link" href="{% url 'blog:post_list' %}">Блог</a>
                         </li>
                          <li class="nav-item ms-lg-3">
                             <div class="text-end">
@@ -113,7 +118,7 @@
                     <ul class="list-unstyled">
                         {% comment %} Динамический список категорий услуг для футера {% endcomment %}
                         {% for category in service_categories_menu %}
-                            <li><a href="{% url 'main:service_category' slug=category.slug %}">{{ category.title }}</a></li>
+                            <li><a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -129,9 +134,10 @@
                  <div class="col-lg-3 col-md-4 col-12 mb-4 mb-lg-0">
                     <h5 class="fw-bold">Полезные ресурсы</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{% url 'main:post_list' %}">Блог</a></li>
-                        <li><a href="#">Кейсы</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="{% url 'blog:post_list' %}">Блог</a></li>
+                        {% for p in footer_pages %}
+                            <li><a href="{% url 'pages:detail' slug=p.slug %}">{{ p.title }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ page.title }}{% endblock title %}
+
+{% block content %}
+<section class="section-padding pt-5 mt-5">
+    <div class="container">
+        <h1 class="section-title">{{ page.title }}</h1>
+        <style>
+            .page-content { word-wrap: break-word; overflow-wrap: break-word; }
+            .page-content pre, .page-content code { white-space: pre-wrap; overflow-x: auto; max-width: 100%; padding: 10px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; }
+            .page-content table { display: block; max-width: 100%; overflow-x: auto; width: 100%; margin-bottom: 1rem; border-collapse: collapse; }
+            .page-content table th, .page-content table td { white-space: nowrap; padding: 8px; border: 1px solid #dee2e6; }
+        </style>
+        <div class="mt-4 page-content">
+            {{ page.content|safe }}
+        </div>
+    </div>
+    </section>
+{% endblock content %}
+

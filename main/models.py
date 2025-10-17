@@ -23,7 +23,7 @@ class ServiceCategory(models.Model):
     def get_absolute_url(self):
         # Будет использоваться для ссылки на общую страницу раздела услуг
         from django.urls import reverse
-        return reverse('main:service_category', kwargs={'slug': self.slug})
+        return reverse('services:service_category', kwargs={'slug': self.slug})
 
 
 class Service(models.Model):
@@ -52,7 +52,7 @@ class Service(models.Model):
     def get_absolute_url(self):
         # Ссылка на отдельную страницу услуги
         from django.urls import reverse
-        return reverse('main:service_detail', kwargs={'slug': self.slug})
+        return reverse('services:service_detail', kwargs={'slug': self.slug})
 
 
 # --- Модели для Блога ---
@@ -86,7 +86,7 @@ class Post(models.Model):
     def get_absolute_url(self):
         # Ссылка на отдельный пост
         from django.urls import reverse
-        return reverse('main:post_detail', kwargs={'slug': self.slug})
+        return reverse('blog:post_detail', kwargs={'slug': self.slug})
 
 class ContactRequest(models.Model):
     """Модель для хранения заявок, отправленных через форму на главной странице."""

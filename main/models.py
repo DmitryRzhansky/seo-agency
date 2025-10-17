@@ -75,6 +75,7 @@ class Service(SEOModel):
     content = RichTextField(verbose_name="Подробное описание услуги")
     short_description = models.TextField(max_length=300, verbose_name="Краткое описание")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
     
     # Хлебные крошки
     show_breadcrumbs = models.BooleanField(
@@ -127,6 +128,26 @@ class Service(SEOModel):
         })
         
         return breadcrumbs
+    
+    def get_related_services(self, limit=3):
+        """Возвращает связанные услуги для блока 'Еще услуги'"""
+        # Сначала ищем услуги из той же категории
+        related = Service.objects.filter(
+            category=self.category,
+            is_published=True
+        ).exclude(pk=self.pk).order_by('order')[:limit]
+        
+        # Если не хватает услуг из той же категории, дополняем из других категорий
+        if related.count() < limit:
+            remaining = limit - related.count()
+            additional = Service.objects.filter(
+                is_published=True
+            ).exclude(
+                pk__in=[s.pk for s in related]
+            ).exclude(pk=self.pk).order_by('order')[:remaining]
+            related = list(related) + list(additional)
+        
+        return related
 
 
 # --- Модели для Блога ---
@@ -215,6 +236,32 @@ class Post(SEOModel):
     def get_image_alt(self):
         """Возвращает альтернативный текст изображения или заголовок по умолчанию"""
         return self.image_alt or self.title
+    
+    def get_related_posts(self, limit=3):
+        """Возвращает связанные статьи для блока 'Вам может понравиться'"""
+        # Сначала ищем статьи из той же категории
+        if self.category:
+            related = Post.objects.filter(
+                category=self.category,
+                is_published=True
+            ).exclude(pk=self.pk).order_by('-published_date')[:limit]
+            
+            # Если не хватает статей из той же категории, дополняем из других категорий
+            if related.count() < limit:
+                remaining = limit - related.count()
+                additional = Post.objects.filter(
+                    is_published=True
+                ).exclude(
+                    pk__in=[p.pk for p in related]
+                ).exclude(pk=self.pk).order_by('-published_date')[:remaining]
+                related = list(related) + list(additional)
+        else:
+            # Если у статьи нет категории, берем последние опубликованные
+            related = Post.objects.filter(
+                is_published=True
+            ).exclude(pk=self.pk).order_by('-published_date')[:limit]
+        
+        return related
 
 class ContactRequest(models.Model):
     """Модель для хранения заявок, отправленных через форму на главной странице."""

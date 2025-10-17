@@ -96,8 +96,12 @@ def post_detail(request, slug):
 		Post.objects.filter(pk=post.pk).update(views_count=F('views_count') + 1)
 		post.refresh_from_db(fields=['views_count'])
 		request.session[session_key] = True
+	# Получаем связанные статьи для блока "Вам может понравиться"
+	related_posts = post.get_related_posts(limit=3)
+	
 	return render(request, 'main/post_detail.html', {
 		'title': post.title,
 		'post': post,
 		'seo_object': post,  # Передаем пост как SEO-объект
+		'related_posts': related_posts,  # Связанные статьи
 	})

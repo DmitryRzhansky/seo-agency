@@ -33,15 +33,15 @@ class ServiceCategoryAdmin(SEOAdminMixin, admin.ModelAdmin):
 
 @admin.register(Service)
 class ServiceAdmin(SEOAdminMixin, admin.ModelAdmin):
-    list_display = ('title', 'category', 'order', 'slug', 'seo_title_length', 'seo_description_length', 'seo_index')
-    list_filter = ('category',)
+    list_display = ('title', 'category', 'order', 'slug', 'is_published', 'seo_title_length', 'seo_description_length', 'seo_index')
+    list_filter = ('category', 'is_published')
     search_fields = ('title',)
     # Поле slug заполняется автоматически на основе title
     prepopulated_fields = {'slug': ('title',)}
     # Разделяем поля в форме редактирования
     fieldsets = (
         (None, {
-            'fields': ('category', 'title', 'slug', 'order', 'short_description')
+            'fields': ('category', 'title', 'slug', 'order', 'is_published', 'short_description')
         }),
         ('Содержимое', {
             'fields': ('content',),

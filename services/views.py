@@ -24,7 +24,11 @@ def service_category_detail(request, slug):
 
 def service_detail(request, slug):
 	service = get_object_or_404(Service, slug=slug)
+	# Получаем связанные услуги для блока "Еще услуги"
+	related_services = service.get_related_services(limit=3)
+	
 	return render(request, 'main/service_detail.html', {
 		'title': service.title,
 		'service': service,
+		'related_services': related_services,  # Связанные услуги
 	})

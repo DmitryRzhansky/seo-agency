@@ -115,4 +115,99 @@
     </div>
 </section>
 
+<!-- Блок "Вам может понравиться" -->
+{% if related_posts %}
+<section class="section-padding bg-light" id="related-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-title text-center mb-5">Вам может понравиться</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for related_post in related_posts %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm border-0 related-post-card">
+                    {% if related_post.image %}
+                        <img src="{{ related_post.image.url }}" class="card-img-top" alt="{{ related_post.get_image_alt }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'main/img/blog_placeholder.jpg' %}" class="card-img-top" alt="Изображение блога" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a href="{{ related_post.get_absolute_url }}" class="text-decoration-none text-dark">
+                                {{ related_post.title }}
+                            </a>
+                        </h5>
+                        
+                        {% if related_post.category %}
+                        <span class="badge mb-3" style="background-color: {{ related_post.category.color }}; color: white;">
+                            {{ related_post.category.name }}
+                        </span>
+                        {% endif %}
+                        
+                        <p class="card-text text-muted small flex-grow-1">
+                            {{ related_post.content|striptags|truncatewords:20 }}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <a href="{{ related_post.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
+                                Читать далее
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent border-0">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar-alt me-1"></i>
+                            {{ related_post.published_date|date:"d F Y" }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<style>
+/* Стили для блока "Вам может понравиться" */
+.related-post-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.related-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.related-post-card .card-title a {
+    transition: color 0.3s ease;
+}
+
+.related-post-card .card-title a:hover {
+    color: #007bff !important;
+}
+
+.related-post-card .btn {
+    transition: all 0.3s ease;
+}
+
+.related-post-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .related-post-card {
+        margin-bottom: 1.5rem;
+    }
+}
+</style>
+
 {% endblock content %}

@@ -56,23 +56,3 @@ class SimplePage(SEOModel):
         })
         
         return breadcrumbs
-
-
-# Сигналы для очистки кэша при изменении страниц
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
-from django.core.cache import cache
-
-
-@receiver(post_save, sender=SimplePage)
-def clear_menu_cache_on_save(sender, instance, **kwargs):
-    """Очищает кэш меню при сохранении страницы"""
-    cache.delete('header_pages_menu')
-    cache.delete('footer_pages_menu')
-
-
-@receiver(post_delete, sender=SimplePage)
-def clear_menu_cache_on_delete(sender, instance, **kwargs):
-    """Очищает кэш меню при удалении страницы"""
-    cache.delete('header_pages_menu')
-    cache.delete('footer_pages_menu')

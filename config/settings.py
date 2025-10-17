@@ -51,7 +51,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,7 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -114,17 +112,10 @@ else:
         }
     }
 
+# Кэширование отключено для разработки
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        # Путь к папке, где Django будет хранить файлы кэша
-        'LOCATION': BASE_DIR / 'django_cache', 
-        # Время жизни кэша по умолчанию: 300 секунд (5 минут)
-        'TIMEOUT': 300, 
-        'OPTIONS': {
-            # Ограничиваем количество записей кэша
-            'MAX_ENTRIES': 5000 
-        }
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
 
@@ -203,5 +194,3 @@ CKEDITOR_CONFIGS = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CACHE_MIDDLEWARE_SECONDS = 3600

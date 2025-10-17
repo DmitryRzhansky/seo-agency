@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.core.cache import cache
-from django.contrib import messages
 from .models import SimplePage
 from seo.admin import SEOAdminMixin
 
@@ -26,25 +24,3 @@ class SimplePageAdmin(SEOAdminMixin, admin.ModelAdmin):
             'description': 'Настройки навигационных хлебных крошек'
         }),
     )
-    
-    def save_model(self, request, obj, form, change):
-        """Переопределяем сохранение для очистки кэша"""
-        super().save_model(request, obj, form, change)
-        
-        # Очищаем кэш меню
-        cache.delete('header_pages_menu')
-        cache.delete('footer_pages_menu')
-        
-        # Показываем сообщение об успехе
-        messages.success(request, 'Страница сохранена и кэш меню обновлен!')
-    
-    def delete_model(self, request, obj):
-        """Переопределяем удаление для очистки кэша"""
-        super().delete_model(request, obj)
-        
-        # Очищаем кэш меню
-        cache.delete('header_pages_menu')
-        cache.delete('footer_pages_menu')
-        
-        # Показываем сообщение об успехе
-        messages.success(request, 'Страница удалена и кэш меню обновлен!')

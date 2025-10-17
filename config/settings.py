@@ -212,4 +212,58 @@ UNFOLD = {
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
     "ENVIRONMENT": "Isakov Agency Development",
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": "🏙️ Региональное SEO",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Города",
+                        "icon": "location_city",
+                        "link": lambda request: reverse_lazy("admin:main_city_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "💼 Услуги",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Категории услуг",
+                        "icon": "folder",
+                        "link": lambda request: reverse_lazy("admin:main_servicecategory_changelist"),
+                    },
+                    {
+                        "title": "Услуги",
+                        "icon": "business",
+                        "link": lambda request: reverse_lazy("admin:main_service_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "📝 Контент",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Блог",
+                        "icon": "article",
+                        "link": lambda request: reverse_lazy("admin:main_post_changelist"),
+                    },
+                    {
+                        "title": "Команда",
+                        "icon": "people",
+                        "link": lambda request: reverse_lazy("admin:main_teammember_changelist"),
+                    },
+                    {
+                        "title": "Отзывы",
+                        "icon": "star",
+                        "link": lambda request: reverse_lazy("admin:main_testimonial_changelist"),
+                    },
+                ],
+            },
+        ],
+    },
 }

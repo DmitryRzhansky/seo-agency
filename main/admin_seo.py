@@ -71,15 +71,15 @@ class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelA
     list_editable = ('order', 'is_active')
     
     fieldsets = (
-        ('Основное', {
+        ('🏙️ Основная информация', {
             'fields': ('name', 'slug', 'region', 'population', 'order', 'is_active'),
             'description': 'Основная информация о городе'
         }),
-        ('Региональные SEO', {
+        ('🎯 Региональное SEO', {
             'fields': ('local_title', 'local_description'),
             'description': 'Локальные заголовки и описания для регионального SEO'
         }),
-        ('Хлебные крошки', {
+        ('🍞 Навигация', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
             'classes': ('collapse',),
             'description': 'Настройки навигационных хлебных крошек'
@@ -101,11 +101,11 @@ class ServiceCategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, a
     prepopulated_fields = {'slug': ('title',)}
     
     fieldsets = (
-        ('Основное', {
+        ('📂 Основная информация', {
             'fields': ('title', 'slug', 'order'),
             'description': 'Основная информация о категории услуг'
         }),
-        ('Хлебные крошки', {
+        ('🍞 Навигация', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
             'classes': ('collapse',),
             'description': 'Настройки навигационных хлебных крошек'
@@ -131,15 +131,15 @@ class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.Mod
     prepopulated_fields = {'slug': ('title',)}
     
     fieldsets = (
-        ('Основное', {
+        ('💼 Основная информация', {
             'fields': ('category', 'title', 'slug', 'order', 'is_published', 'short_description'),
             'description': 'Основная информация об услуге'
         }),
-        ('Содержимое', {
+        ('📝 Содержимое', {
             'fields': ('content',),
             'description': 'Подробное описание услуги'
         }),
-        ('Хлебные крошки', {
+        ('🍞 Навигация', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
             'classes': ('collapse',),
             'description': 'Настройки навигационных хлебных крошек'
@@ -159,25 +159,25 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelA
     readonly_fields = ('views_count', 'seo_preview')
     
     fieldsets = (
-        ('Основное', {
+        ('📝 Основная информация', {
             'fields': ('title', 'slug', 'category', 'author', 'is_published'),
             'description': 'Основная информация о статье'
         }),
-        ('Содержимое', {
+        ('📄 Содержимое', {
             'fields': ('excerpt', 'content', 'image', 'image_alt'),
             'description': 'Содержимое статьи и изображения'
         }),
-        ('Хлебные крошки', {
+        ('🍞 Навигация', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
             'classes': ('collapse',),
             'description': 'Настройки навигационных хлебных крошек'
         }),
-        ('Статистика', {
+        ('📊 Статистика', {
             'fields': ('views_count',),
             'classes': ('collapse',),
             'description': 'Статистика просмотров'
         }),
-        ('SEO Предпросмотр', {
+        ('👁️ SEO Предпросмотр', {
             'fields': ('seo_preview',),
             'classes': ('collapse',),
             'description': 'Как будет выглядеть в поисковой выдаче'
@@ -192,11 +192,11 @@ class TeamMemberAdmin(admin.ModelAdmin):
     list_filter = ('is_active',)
     
     fieldsets = (
-        ('Основное', {
+        ('👤 Основная информация', {
             'fields': ('name', 'role', 'bio', 'order', 'is_active'),
             'description': 'Основная информация о участнике команды'
         }),
-        ('Фото', {
+        ('📸 Фото', {
             'fields': ('photo', 'photo_alt', 'photo_preview'),
             'description': 'Фото участника команды и альтернативный текст для SEO'
         }),
@@ -219,11 +219,11 @@ class TestimonialAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'rating')
     
     fieldsets = (
-        ('Основное', {
+        ('⭐ Основная информация', {
             'fields': ('author_name', 'author_title', 'content', 'rating', 'order', 'is_active'),
             'description': 'Основная информация об отзыве'
         }),
-        ('Аватар', {
+        ('📸 Аватар', {
             'fields': ('photo', 'photo_alt', 'photo_preview'),
             'description': 'Аватар автора отзыва и альтернативный текст для SEO'
         }),

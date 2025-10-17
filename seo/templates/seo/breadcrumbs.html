@@ -25,42 +25,59 @@
 
 <style>
 .breadcrumb-nav {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #e9ecef;
+    background-color: #e3f2fd; /* Более заметный цвет фона */
+    border-bottom: 2px solid #2196f3; /* Более заметная граница */
+    margin-top: 90px; /* Отступ от фиксированной навигации */
+    position: relative;
+    z-index: 10;
+    min-height: 60px; /* Минимальная высота для видимости */
+    display: block !important; /* Принудительно показываем */
+    visibility: visible !important; /* Принудительно делаем видимым */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Добавляем тень для заметности */
 }
 
 .breadcrumb {
     background: none;
-    padding: 0;
+    padding: 15px 0; /* Увеличиваем отступы для лучшей видимости */
     margin: 0;
     font-size: 0.9rem;
+    display: flex !important; /* Принудительно показываем */
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    display: inline-block !important; /* Принудительно показываем элементы */
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
     content: "›";
     color: #6c757d;
     font-weight: bold;
+    margin: 0 8px;
 }
 
 .breadcrumb-item a {
-    color: #007bff;
+    color: #1976d2; /* Более яркий синий цвет */
     transition: color 0.2s ease;
+    text-decoration: none;
+    font-weight: 500; /* Делаем текст более жирным */
 }
 
 .breadcrumb-item a:hover {
-    color: #0056b3;
+    color: #0d47a1; /* Более темный синий при наведении */
     text-decoration: underline !important;
 }
 
 .breadcrumb-item.active {
-    color: #6c757d;
-    font-weight: 500;
+    color: #424242; /* Более темный цвет для активного элемента */
+    font-weight: 600; /* Делаем активный элемент еще более жирным */
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
     .breadcrumb {
         font-size: 0.8rem;
+        padding: 10px 0;
     }
     
     .breadcrumb-item {

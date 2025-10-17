@@ -183,6 +183,33 @@ class Post(SEOModel):
         # Ссылка на отдельный пост
         from django.urls import reverse
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для статьи блога"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        
+        breadcrumbs.append({"title": "Блог", "url": "/blog/"})
+        
+        # Добавляем категорию, если она есть
+        if self.category:
+            breadcrumbs.append({
+                "title": self.category.name,
+                "url": self.category.get_absolute_url()
+            })
+        
+        breadcrumbs.append({
+            "title": self.title,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs
 
 class ContactRequest(models.Model):
     """Модель для хранения заявок, отправленных через форму на главной странице."""

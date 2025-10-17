@@ -22,6 +22,7 @@
 - ✅ **Service** (услуги)
 - ✅ **ServiceCategory** (категории услуг)
 - ✅ **Category** (категории блога)
+- ✅ **SimplePage** (произвольные страницы)
 
 ### 4. **Template Tags**
 ```django

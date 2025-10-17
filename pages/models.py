@@ -1,8 +1,9 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from seo.models import SEOModel
 
 
-class SimplePage(models.Model):
+class SimplePage(SEOModel):
     """Простые произвольные страницы (например, Глоссарий)."""
     title = models.CharField(max_length=200, verbose_name="Заголовок")
     slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")

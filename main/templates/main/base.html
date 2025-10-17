@@ -71,8 +71,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'blog:post_list' %}">Блог</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'main:city_list' %}">Города</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="citiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Города
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="citiesDropdown">
+                                <li><a class="dropdown-item" href="{% url 'main:city_list' %}">Все города</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                {% for city in cities_menu %}
+                                    <li><a class="dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a></li>
+                                {% endfor %}
+                            </ul>
                         </li>
                          <li class="nav-item ms-lg-3">
                             <div class="text-end">

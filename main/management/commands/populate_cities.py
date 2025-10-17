@@ -6,6 +6,28 @@ class Command(BaseCommand):
     help = 'Заполняет базу данных городами-миллионниками для регионального SEO'
 
     def handle(self, *args, **options):
+        # Словарь для перевода русских названий городов на английские
+        city_translations = {
+            'Москва': 'moscow',
+            'Санкт-Петербург': 'saint-petersburg',
+            'Новосибирск': 'novosibirsk',
+            'Екатеринбург': 'yekaterinburg',
+            'Казань': 'kazan',
+            'Нижний Новгород': 'nizhny-novgorod',
+            'Челябинск': 'chelyabinsk',
+            'Самара': 'samara',
+            'Омск': 'omsk',
+            'Ростов-на-Дону': 'rostov-on-don',
+            'Уфа': 'ufa',
+            'Красноярск': 'krasnoyarsk',
+            'Воронеж': 'voronezh',
+            'Пермь': 'perm',
+            'Волгоград': 'volgograd',
+            'Минск': 'minsk',
+            'Алматы': 'almaty',
+            'Астана': 'astana',
+            'Ташкент': 'tashkent',
+        }
         cities_data = [
             # Россия
             {'name': 'Москва', 'region': 'Московская область', 'population': 12615, 'order': 1},
@@ -35,13 +57,8 @@ class Command(BaseCommand):
         updated_count = 0
 
         for city_data in cities_data:
-            # Создаем slug из названия города
-            from django.utils.text import slugify
-            slug = slugify(city_data['name'])
-            
-            # Если slug пустой, используем название в нижнем регистре
-            if not slug:
-                slug = city_data['name'].lower().replace(' ', '-').replace('ё', 'e')
+            # Получаем английский slug из словаря
+            slug = city_translations.get(city_data['name'], city_data['name'].lower().replace(' ', '-'))
             
             # Проверяем, существует ли город с таким slug
             if City.objects.filter(slug=slug).exists():

@@ -1,6 +1,6 @@
 # main/context_processors.py
 
-from .models import ServiceCategory
+from .models import ServiceCategory, City
 from pages.models import SimplePage
 
 def services_menu(request):
@@ -10,9 +10,11 @@ def services_menu(request):
     categories = ServiceCategory.objects.all().order_by('order').prefetch_related('services')
     header_pages = SimplePage.objects.filter(is_published=True, show_in_header=True).order_by('order')
     footer_pages = SimplePage.objects.filter(is_published=True, show_in_footer=True).order_by('order')
+    cities = City.objects.filter(is_active=True).order_by('order')[:10]  # Топ-10 городов
 
     return {
         'service_categories_menu': categories,
         'header_pages': header_pages,
         'footer_pages': footer_pages,
+        'cities_menu': cities,
     }

@@ -233,3 +233,20 @@ def city_post_detail(request, city_slug, post_slug):
         'seo_object': post,
     }
     return render(request, 'main/city_post_detail.html', context)
+
+
+def set_city(request, slug):
+    """
+    Устанавливает выбранный город в сессии пользователя
+    """
+    from .models import City
+    
+    try:
+        city = City.objects.get(slug=slug, is_active=True)
+        request.session['user_city'] = slug
+        
+        # Перенаправляем на главную страницу
+        return redirect('main:home')
+    except City.DoesNotExist:
+        # Если город не найден, перенаправляем на список городов
+        return redirect('main:city_list')

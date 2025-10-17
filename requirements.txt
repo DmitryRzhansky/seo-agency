@@ -5,3 +5,4 @@ django-js-asset==3.1.2
 sqlparse==0.5.3
 python-dotenv==1.0.1
 Pillow==10.4.0
+requests==2.31.0

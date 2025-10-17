@@ -14,8 +14,8 @@ urlpatterns = [
     path('services/', include(('services.urls', 'services'), namespace='services')),
     # Простые страницы
     path('pages/', include(('pages.urls', 'pages'), namespace='pages')),
-    # URL для CKEditor
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    # URL для CKEditor 5
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
 ]
 
 # Настройка для работы с медиа- и статическими файлами

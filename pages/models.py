@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from seo.models import SEOModel
 
 
@@ -7,7 +7,7 @@ class SimplePage(SEOModel):
     """Простые произвольные страницы (например, Глоссарий)."""
     title = models.CharField(max_length=200, verbose_name="Заголовок")
     slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")
-    content = RichTextField(blank=True, verbose_name="Содержимое")
+    content = CKEditor5Field(blank=True, verbose_name="Содержимое", config_name='extends')
     show_in_header = models.BooleanField(default=False, verbose_name="Показывать в хэдере")
     show_in_footer = models.BooleanField(default=True, verbose_name="Показывать в футере")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")

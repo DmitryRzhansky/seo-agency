@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from django.utils import timezone
 from django.contrib.auth.models import User
 from seo.models import SEOModel
@@ -146,8 +146,8 @@ class Service(SEOModel):
     )
     title = models.CharField(max_length=150, verbose_name="Название услуги")
     slug = models.SlugField(unique=True, max_length=150, verbose_name="URL-идентификатор услуги")
-    # Используем RichTextField для подробного описания услуги
-    content = RichTextField(verbose_name="Подробное описание услуги")
+    # Используем CKEditor5Field для подробного описания услуги
+    content = CKEditor5Field(verbose_name="Подробное описание услуги", config_name='extends')
     short_description = models.TextField(max_length=300, verbose_name="Краткое описание")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
@@ -231,8 +231,8 @@ class Post(SEOModel):
     """Модель для записей в блоге"""
     title = models.CharField(max_length=200, verbose_name="Заголовок")
     slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")
-    # Используем RichTextField для форматированного контента блога
-    content = RichTextField(verbose_name="Содержимое поста")
+    # Используем CKEditor5Field для форматированного контента блога
+    content = CKEditor5Field(verbose_name="Содержимое поста", config_name='extends')
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True, verbose_name="Изображение (превью)")
     image_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст изображения", help_text="Описание изображения для SEO и доступности")
     published_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")

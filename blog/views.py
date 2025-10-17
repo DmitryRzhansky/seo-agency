@@ -9,7 +9,7 @@ from django.views.decorators.cache import never_cache
 @never_cache
 def post_list(request):
 	posts_list = Post.objects.filter(is_published=True).order_by('-published_date')
-	paginator = Paginator(posts_list, 10)
+	paginator = Paginator(posts_list, 9)
 	page_number = request.GET.get('page')
 	page_obj = paginator.get_page(page_number)
 	
@@ -34,7 +34,7 @@ def category_posts(request, slug):
 		category=category
 	).order_by('-published_date')
 	
-	paginator = Paginator(posts_list, 10)
+	paginator = Paginator(posts_list, 9)
 	page_number = request.GET.get('page')
 	page_obj = paginator.get_page(page_number)
 	
@@ -66,7 +66,7 @@ def search_posts(request):
 	
 	posts_list = posts_list.order_by('-published_date')
 	
-	paginator = Paginator(posts_list, 10)
+	paginator = Paginator(posts_list, 9)
 	page_number = request.GET.get('page')
 	page_obj = paginator.get_page(page_number)
 	

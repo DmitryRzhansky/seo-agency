@@ -109,8 +109,8 @@ def post_list(request):
     """
     posts_list = Post.objects.filter(is_published=True).order_by('-published_date')
 
-    # Настройка пагинации: 10 постов на странице
-    paginator = Paginator(posts_list, 10) 
+    # Настройка пагинации: 9 постов на странице
+    paginator = Paginator(posts_list, 9) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

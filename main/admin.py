@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ServiceCategory, Service, Post
+from .models import ServiceCategory, Service, Post, TeamMember, Testimonial
 
 # Настройка услуг
 class ServiceInline(admin.TabularInline):
@@ -45,3 +45,19 @@ class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'published_date'
     readonly_fields = ('views_count',)
+
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'role', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    search_fields = ('name', 'role')
+    list_filter = ('is_active',)
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ('author_name', 'author_title', 'order', 'rating', 'is_active')
+    list_editable = ('order', 'rating', 'is_active')
+    search_fields = ('author_name', 'author_title', 'content')
+    list_filter = ('is_active', 'rating')

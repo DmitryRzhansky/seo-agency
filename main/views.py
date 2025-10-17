@@ -5,13 +5,13 @@ from django.contrib import messages
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import ServiceCategory, Service, Post, ContactRequest
+from .models import ServiceCategory, Service, Post, ContactRequest, TeamMember, Testimonial
 from .forms import ContactForm
-from django.views.decorators.cache import cache_page # <<< Импорт декоратора
+from django.views.decorators.cache import never_cache # отключаем кэш для index
 from django.conf import settings # <<< Импорт settings для времени кэша
 
 # --- Главная страница (Landing Page) ---
-@cache_page(60 * 15, key_prefix="homepage")
+@never_cache
 def index(request):
     """
     Главная страница (лендинг). 
@@ -44,6 +44,8 @@ def index(request):
     # 3. Получение данных для рендера страницы
     top_services = Service.objects.all().order_by('order')[:6] 
     recent_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:3]
+    team_members = TeamMember.objects.filter(is_active=True).order_by('order')
+    testimonials = Testimonial.objects.filter(is_active=True).order_by('order')
 
     # Список городов для секции Locations
     cities_list = [
@@ -60,6 +62,8 @@ def index(request):
         'recent_posts': recent_posts,
         'cities_list': cities_list,
         'form': form, # <<< Форма передается в шаблон
+        'team_members': team_members,
+        'testimonials': testimonials,
     }
     return render(request, 'main/index.html', context)
 

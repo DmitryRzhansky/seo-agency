@@ -219,47 +219,23 @@
     <section class="section-padding bg-light" id="team">
         <div class="container">
             <h2 class="text-center section-title">Наша команда</h2>
-            <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <img src="https://placehold.co/100x100/EFEFEF/333?text=Фото" class="rounded-circle mb-3 team-member" alt="Виталий Исаков">
-                                <h5 class="fw-bold">Виталий Исаков</h5>
-                                <p class="text-muted">Директор, SEO-эксперт, опыт 8 лет</p>
-                                <p class="fst-italic">"Наша цель — не просто позиции в поиске, а реальный рост бизнеса клиента."</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <img src="https://placehold.co/100x100/EFEFEF/333?text=Фото" class="rounded-circle mb-3 team-member" alt="Анна Смирнова">
-                                <h5 class="fw-bold">Анна Смирнова</h5>
-                                <p class="text-muted">Ведущий SEO-специалист, опыт 6 лет</p>
-                                <p class="fst-italic">"Каждый проект — это уникальная задача, требующая глубокого анализа и нестандартных решений."</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <img src="https://placehold.co/100x100/EFEFEF/333?text=Фото" class="rounded-circle mb-3 team-member" alt="Иван Петров">
-                                <h5 class="fw-bold">Иван Петров</h5>
-                                <p class="text-muted">Программист, опыт 7 лет</p>
-                                <p class="fst-italic">"Чистый код и быстрая загрузка сайта — основа успешного SEO."</p>
-                            </div>
-                        </div>
+            <div class="row g-4 justify-content-center">
+                {% for member in team_members %}
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="card h-100 text-center shadow-sm p-4">
+                        {% if member.photo %}
+                        <img src="{{ member.photo.url }}" class="rounded-circle mb-3 team-member" alt="{{ member.name }}" width="100" height="100" style="object-fit: cover;">
+                        {% else %}
+                        <img src="https://placehold.co/100x100/EFEFEF/333?text=Фото" class="rounded-circle mb-3 team-member" alt="{{ member.name }}">
+                        {% endif %}
+                        <h5 class="fw-bold">{{ member.name }}</h5>
+                        <p class="text-muted">{{ member.role }}</p>
+                        {% if member.bio %}<p class="fst-italic">{{ member.bio }}</p>{% endif %}
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel" data-bs-slide="prev" style="filter: invert(1);">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel" data-bs-slide="next" style="filter: invert(1);">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                {% empty %}
+                <div class="col-12 text-center"><p class="text-muted">Добавьте членов команды в админке, чтобы показать здесь.</p></div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -270,37 +246,23 @@
     <section class="section-padding" id="reviews">
         <div class="container">
             <h2 class="text-center section-title">Нам доверяют бизнесы со всей России</h2>
-            <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <img src="https://placehold.co/100x100/EFEFEF/333?text=Фото" class="rounded-circle mb-3 review-author" alt="Елена Иванова">
-                                <p class="lead fst-italic">"Работали с Isakov Agency над SEO нашего интернет-магазина. За полгода трафик вырос в 3 раза! Очень довольны профессионализмом и вовлеченностью команды."</p>
-                                <h6 class="fw-bold mt-3">Елена Иванова</h6>
-                                <p class="text-muted">Директор, "Цветочный Рай"</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                       <div class="row justify-content-center">
-                            <div class="col-lg-8 text-center">
-                                <img src="https://placehold.co/100x100/EFEFEF/333?text=Фото" class="rounded-circle mb-3 review-author" alt="Петр Сидоров">
-                                <p class="lead fst-italic">"Заказывали создание сайта и настройку контекстной рекламы. Все сделали в срок, запустили кампании, которые сразу начали приносить лиды. Рекомендую!"</p>
-                                <h6 class="fw-bold mt-3">Петр Сидоров</h6>
-                                <p class="text-muted">Основатель, "СтройДом"</p>
-                            </div>
-                        </div>
+            <div class="row g-4 justify-content-center">
+                {% for t in testimonials %}
+                <div class="col-12 col-md-6">
+                    <div class="card h-100 shadow-sm p-4 text-center">
+                        {% if t.photo %}
+                        <img src="{{ t.photo.url }}" class="rounded-circle mb-3 review-author" alt="{{ t.author_name }}" width="80" height="80" style="object-fit: cover;">
+                        {% else %}
+                        <img src="https://placehold.co/80x80/EFEFEF/333?text=Фото" class="rounded-circle mb-3 review-author" alt="{{ t.author_name }}">
+                        {% endif %}
+                        <p class="lead fst-italic">{{ t.content }}</p>
+                        <h6 class="fw-bold mt-3">{{ t.author_name }}</h6>
+                        {% if t.author_title %}<p class="text-muted">{{ t.author_title }}</p>{% endif %}
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev" style="filter: invert(1);">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next" style="filter: invert(1);">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                {% empty %}
+                <div class="col-12 text-center"><p class="text-muted">Добавьте отзывы в админке, чтобы показать здесь.</p></div>
+                {% endfor %}
             </div>
         </div>
     </section>

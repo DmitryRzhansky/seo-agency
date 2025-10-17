@@ -103,3 +103,42 @@ class ContactRequest(models.Model):
 
     def __str__(self):
         return f"Заявка от {self.name} ({self.phone})"
+
+
+# --- Команда и Отзывы для главной страницы ---
+
+class TeamMember(models.Model):
+    """Участник команды для блока на главной странице."""
+    name = models.CharField(max_length=120, verbose_name="Имя")
+    role = models.CharField(max_length=150, verbose_name="Должность")
+    photo = models.ImageField(upload_to='team_photos/', blank=True, null=True, verbose_name="Фото")
+    bio = models.TextField(blank=True, verbose_name="Короткое описание")
+    order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    is_active = models.BooleanField(default=True, verbose_name="Показывать")
+
+    class Meta:
+        verbose_name = "Член команды"
+        verbose_name_plural = "Команда"
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return f"{self.name} — {self.role}"
+
+
+class Testimonial(models.Model):
+    """Отзыв клиента для блока на главной странице."""
+    author_name = models.CharField(max_length=120, verbose_name="Имя автора")
+    author_title = models.CharField(max_length=160, blank=True, verbose_name="Должность/Компания")
+    photo = models.ImageField(upload_to='testimonial_photos/', blank=True, null=True, verbose_name="Аватар")
+    content = models.TextField(verbose_name="Текст отзыва")
+    rating = models.PositiveSmallIntegerField(default=5, verbose_name="Оценка (1-5)")
+    order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    is_active = models.BooleanField(default=True, verbose_name="Показывать")
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        ordering = ['order', '-id']
+
+    def __str__(self):
+        return f"Отзыв: {self.author_name}"

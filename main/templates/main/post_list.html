@@ -7,6 +7,30 @@
     <div class="container">
         <h1 class="section-title text-center">{{ title }}</h1>
 
+        <!-- Фильтр по категориям -->
+        {% if categories %}
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8">
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <!-- Кнопка "Все" -->
+                    <a href="{% url 'blog:post_list' %}" 
+                       class="btn {% if not current_category %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
+                        Все статьи
+                    </a>
+                    
+                    <!-- Кнопки категорий -->
+                    {% for category in categories %}
+                        <a href="{% url 'blog:category_posts' slug=category.slug %}" 
+                           class="btn {% if current_category and current_category.slug == category.slug %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm"
+                           style="{% if current_category and current_category.slug == category.slug %}{% else %}border-color: {{ category.color }}; color: {{ category.color }};{% endif %}">
+                            {{ category.name }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
         <div class="row g-4">
             
             {% for post in page_obj %}
@@ -19,6 +43,13 @@
                     {% endif %}
                     
                     <div class="card-body d-flex flex-column">
+                        {% if post.category %}
+                        <div class="mb-2">
+                            <span class="badge" style="background-color: {{ post.category.color }}; color: white;">
+                                {{ post.category.name }}
+                            </span>
+                        </div>
+                        {% endif %}
                         <h5 class="card-title fw-bold">{{ post.title }}</h5>
                         <p class="card-text text-muted small mb-3">
                             Опубликовано: {{ post.published_date|date:"d M Y" }}

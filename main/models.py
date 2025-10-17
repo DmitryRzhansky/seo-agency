@@ -74,6 +74,14 @@ class Post(models.Model):
         blank=True,                # Делаем необязательным в админке
         verbose_name="Автор"
     )
+    category = models.ForeignKey(
+        'blog.Category',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Категория",
+        help_text="Выберите категорию для статьи"
+    )
 
     class Meta:
         verbose_name = "Пост в блоге"

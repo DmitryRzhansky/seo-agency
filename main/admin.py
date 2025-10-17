@@ -39,12 +39,25 @@ class ServiceAdmin(admin.ModelAdmin):
 # Настройка блога
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'published_date', 'is_published', 'views_count', 'slug')
-    list_filter = ('is_published', 'published_date')
+    list_display = ('title', 'category', 'published_date', 'is_published', 'views_count', 'slug')
+    list_filter = ('is_published', 'published_date', 'category')
     search_fields = ('title', 'content')
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'published_date'
     readonly_fields = ('views_count',)
+    
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'category', 'author', 'is_published')
+        }),
+        ('Содержимое', {
+            'fields': ('content', 'image'),
+        }),
+        ('Статистика', {
+            'fields': ('views_count',),
+            'classes': ('collapse',)
+        }),
+    )
 
 
 @admin.register(TeamMember)

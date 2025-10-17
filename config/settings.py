@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from django.templatetags.static import static
+from django.urls import reverse_lazy
 
 load_dotenv() 
 
@@ -35,6 +37,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',  # Django Unfold должен быть перед django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -200,3 +203,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # IPAPI_KEY = 'your_api_key_here'  # Получить на https://ipapi.co/api/
 # Без ключа: 1000 запросов/день, только HTTP
 # С ключом: больше запросов, HTTPS, больше данных
+
+# Настройки Django Unfold
+UNFOLD = {
+    "SITE_TITLE": "Isakov Agency - путник, ты нашел свое место...",
+    "SITE_HEADER": "Путник, ты нашел свое место...",
+    "SITE_SYMBOL": "👹",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": True,
+    "ENVIRONMENT": "Isakov Agency Development",
+}

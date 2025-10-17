@@ -1,0 +1,65 @@
+<!-- admin/seo_stats.html -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Города -->
+    <div class="bg-white p-4 rounded-lg shadow">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">🏙️ Города</h3>
+                <p class="text-sm text-gray-600">Всего: {{ cities_stats.total }}</p>
+                <p class="text-sm text-green-600">Активных: {{ cities_stats.active }}</p>
+                <p class="text-sm text-blue-600">С SEO: {{ cities_stats.with_seo }}</p>
+            </div>
+            <div class="text-3xl">🏙️</div>
+        </div>
+        {% if cities_stats.total > 0 %}
+        <div class="mt-2">
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 h-2 rounded-full" style="width: {% widthratio cities_stats.with_seo cities_stats.total 100 %}%"></div>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">SEO готовность: {% widthratio cities_stats.with_seo cities_stats.total 100 %}%</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Услуги -->
+    <div class="bg-white p-4 rounded-lg shadow">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">💼 Услуги</h3>
+                <p class="text-sm text-gray-600">Всего: {{ services_stats.total }}</p>
+                <p class="text-sm text-green-600">Опубликовано: {{ services_stats.published }}</p>
+                <p class="text-sm text-blue-600">С SEO: {{ services_stats.with_seo }}</p>
+            </div>
+            <div class="text-3xl">💼</div>
+        </div>
+        {% if services_stats.total > 0 %}
+        <div class="mt-2">
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-600 h-2 rounded-full" style="width: {% widthratio services_stats.with_seo services_stats.total 100 %}%"></div>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">SEO готовность: {% widthratio services_stats.with_seo services_stats.total 100 %}%</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Посты -->
+    <div class="bg-white p-4 rounded-lg shadow">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-lg font-semibold text-gray-900">📝 Посты</h3>
+                <p class="text-sm text-gray-600">Всего: {{ posts_stats.total }}</p>
+                <p class="text-sm text-green-600">Опубликовано: {{ posts_stats.published }}</p>
+                <p class="text-sm text-blue-600">С SEO: {{ posts_stats.with_seo }}</p>
+            </div>
+            <div class="text-3xl">📝</div>
+        </div>
+        {% if posts_stats.total > 0 %}
+        <div class="mt-2">
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-purple-600 h-2 rounded-full" style="width: {% widthratio posts_stats.with_seo posts_stats.total 100 %}%"></div>
+            </div>
+            <p class="text-xs text-gray-500 mt-1">SEO готовность: {% widthratio posts_stats.with_seo posts_stats.total 100 %}%</p>
+        </div>
+        {% endif %}
+    </div>
+</div>

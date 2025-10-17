@@ -15,7 +15,14 @@
                     <a href="#contact" class="btn btn-primary btn-lg px-4 slide-in-left">Получить консультацию</a>
                 </div>
                 <div class="col-lg-6 mt-4 mt-lg-0"> 
-                    <img src="https://isakov.work/isakov.webp" class="img-fluid slide-in-right"  alt="Директор компании" width="300" height="300">
+                    <div class="hero-image-container">
+                        <img src="https://isakov.work/isakov.webp" 
+                             class="img-fluid slide-in-right hero-director-image" 
+                             alt="Виталий Исаков - директор Isakov Agency" 
+                             width="300" 
+                             height="300"
+                             onerror="this.src='https://via.placeholder.com/300x300/2d2d2d/ffffff?text=Виталий+Исаков'">
+                    </div>
                 </div>
             </div>
         </div>
@@ -253,19 +260,162 @@
     <div class="container">
         <h2 class="section-title text-center">Работаем по всей России и СНГ</h2>
         
-        <div class="row justify-content-center text-center mt-4">
-            
-            {% comment %} 
-            Цикл по списку, переданному из views.py
-            {% endcomment %}
-            {% for city in cities_list %}
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
-                <span class="badge p-2 w-100">{{ city }}</span>
+        <div class="row g-4">
+            <!-- Центральный федеральный округ -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 location-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-building me-2"></i>Центральный ФО
+                        </h5>
+                        <div class="location-list">
+                            <span class="badge location-badge">Москва</span>
+                            <span class="badge location-badge">Санкт-Петербург</span>
+                            <span class="badge location-badge">Нижний Новгород</span>
+                            <span class="badge location-badge">Казань</span>
+                            <span class="badge location-badge">Самара</span>
+                            <span class="badge location-badge">Воронеж</span>
+                            <span class="badge location-badge">Ростов-на-Дону</span>
+                            <span class="badge location-badge">Краснодар</span>
+                            <span class="badge location-badge">Волгоград</span>
+                            <span class="badge location-badge">Саратов</span>
+                            <span class="badge location-badge">Тула</span>
+                            <span class="badge location-badge">Ярославль</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            {% endfor %}
 
+            <!-- Сибирский федеральный округ -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 location-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-mountain me-2"></i>Сибирский ФО
+                        </h5>
+                        <div class="location-list">
+                            <span class="badge location-badge">Новосибирск</span>
+                            <span class="badge location-badge">Красноярск</span>
+                            <span class="badge location-badge">Омск</span>
+                            <span class="badge location-badge">Томск</span>
+                            <span class="badge location-badge">Иркутск</span>
+                            <span class="badge location-badge">Барнаул</span>
+                            <span class="badge location-badge">Кемерово</span>
+                            <span class="badge location-badge">Новокузнецк</span>
+                            <span class="badge location-badge">Тюмень</span>
+                            <span class="badge location-badge">Хабаровск</span>
+                            <span class="badge location-badge">Владивосток</span>
+                            <span class="badge location-badge">Якутск</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Уральский федеральный округ -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 location-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-industry me-2"></i>Уральский ФО
+                        </h5>
+                        <div class="location-list">
+                            <span class="badge location-badge">Екатеринбург</span>
+                            <span class="badge location-badge">Челябинск</span>
+                            <span class="badge location-badge">Пермь</span>
+                            <span class="badge location-badge">Уфа</span>
+                            <span class="badge location-badge">Магнитогорск</span>
+                            <span class="badge location-badge">Нижний Тагил</span>
+                            <span class="badge location-badge">Сургут</span>
+                            <span class="badge location-badge">Тюмень</span>
+                            <span class="badge location-badge">Курган</span>
+                            <span class="badge location-badge">Оренбург</span>
+                            <span class="badge location-badge">Стерлитамак</span>
+                            <span class="badge location-badge">Златоуст</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Северо-Западный федеральный округ -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 location-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-ship me-2"></i>Северо-Западный ФО
+                        </h5>
+                        <div class="location-list">
+                            <span class="badge location-badge">Санкт-Петербург</span>
+                            <span class="badge location-badge">Калининград</span>
+                            <span class="badge location-badge">Мурманск</span>
+                            <span class="badge location-badge">Архангельск</span>
+                            <span class="badge location-badge">Петрозаводск</span>
+                            <span class="badge location-badge">Сыктывкар</span>
+                            <span class="badge location-badge">Великий Новгород</span>
+                            <span class="badge location-badge">Псков</span>
+                            <span class="badge location-badge">Вологда</span>
+                            <span class="badge location-badge">Череповец</span>
+                            <span class="badge location-badge">Северодвинск</span>
+                            <span class="badge location-badge">Котлас</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Южный федеральный округ -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 location-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-sun me-2"></i>Южный ФО
+                        </h5>
+                        <div class="location-list">
+                            <span class="badge location-badge">Ростов-на-Дону</span>
+                            <span class="badge location-badge">Краснодар</span>
+                            <span class="badge location-badge">Волгоград</span>
+                            <span class="badge location-badge">Ставрополь</span>
+                            <span class="badge location-badge">Сочи</span>
+                            <span class="badge location-badge">Астрахань</span>
+                            <span class="badge location-badge">Таганрог</span>
+                            <span class="badge location-badge">Новороссийск</span>
+                            <span class="badge location-badge">Шахты</span>
+                            <span class="badge location-badge">Армавир</span>
+                            <span class="badge location-badge">Пятигорск</span>
+                            <span class="badge location-badge">Кисловодск</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Дальневосточный федеральный округ -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 location-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-globe-asia me-2"></i>Дальневосточный ФО
+                        </h5>
+                        <div class="location-list">
+                            <span class="badge location-badge">Хабаровск</span>
+                            <span class="badge location-badge">Владивосток</span>
+                            <span class="badge location-badge">Якутск</span>
+                            <span class="badge location-badge">Благовещенск</span>
+                            <span class="badge location-badge">Петропавловск-Камчатский</span>
+                            <span class="badge location-badge">Южно-Сахалинск</span>
+                            <span class="badge location-badge">Магадан</span>
+                            <span class="badge location-badge">Комсомольск-на-Амуре</span>
+                            <span class="badge location-badge">Уссурийск</span>
+                            <span class="badge location-badge">Находка</span>
+                            <span class="badge location-badge">Артём</span>
+                            <span class="badge location-badge">Дальнереченск</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p class="text-center small text-muted mt-4">И множество других регионов.</p>
+
+        <div class="text-center mt-5">
+            <p class="lead text-muted">И множество других городов по всей России и СНГ!</p>
+            <a href="#contact" class="btn btn-primary btn-lg">Получить консультацию для вашего города</a>
+        </div>
     </div>
 </section>
 

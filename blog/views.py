@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from main.models import Post
 from .models import Category
 from django.core.paginator import Paginator
-from django.db.models import F
+from django.db.models import F, Q
 
 
 def post_list(request):
@@ -44,6 +44,40 @@ def category_posts(request, slug):
 		'is_paginated': page_obj.has_other_pages(),
 		'categories': categories,
 		'current_category': category,
+	})
+
+
+def search_posts(request):
+	"""Поиск по статьям блога"""
+	query = request.GET.get('q', '').strip()
+	posts_list = Post.objects.filter(is_published=True)
+	
+	if query:
+		# Поиск по заголовку, содержимому и названию категории
+		posts_list = posts_list.filter(
+			Q(title__icontains=query) |
+			Q(content__icontains=query) |
+			Q(category__name__icontains=query)
+		).distinct()
+	
+	posts_list = posts_list.order_by('-published_date')
+	
+	paginator = Paginator(posts_list, 10)
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+	
+	# Получаем все активные категории для фильтрации
+	categories = Category.objects.filter(is_active=True).order_by('order', 'name')
+	
+	title = f'Поиск: "{query}"' if query else 'Поиск по блогу'
+	
+	return render(request, 'main/post_list.html', {
+		'title': title,
+		'page_obj': page_obj,
+		'is_paginated': page_obj.has_other_pages(),
+		'categories': categories,
+		'current_category': None,
+		'search_query': query,
 	})
 
 

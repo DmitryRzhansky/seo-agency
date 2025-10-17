@@ -4,6 +4,81 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from seo.models import SEOModel
 
+# --- Модели для Регионального SEO ---
+
+class City(SEOModel):
+    """Модель для городов-миллионников для регионального SEO"""
+    name = models.CharField(max_length=100, verbose_name="Название города")
+    slug = models.SlugField(unique=True, max_length=100, verbose_name="URL-идентификатор")
+    population = models.PositiveIntegerField(verbose_name="Население", help_text="Количество жителей")
+    region = models.CharField(max_length=100, verbose_name="Регион/Область")
+    is_active = models.BooleanField(default=True, verbose_name="Активен", help_text="Показывать город на сайте")
+    order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    
+    # Региональные SEO поля
+    local_title = models.CharField(
+        max_length=200, 
+        blank=True, 
+        verbose_name="Локальный заголовок",
+        help_text="Например: 'SEO продвижение в Москве'"
+    )
+    local_description = models.TextField(
+        max_length=500, 
+        blank=True, 
+        verbose_name="Локальное описание",
+        help_text="Краткое описание услуг в этом городе"
+    )
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
+
+    class Meta:
+        verbose_name = "Город"
+        verbose_name_plural = "Города"
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return f"{self.name} ({self.region})"
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('main:city_detail', kwargs={'slug': self.slug})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для города"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        breadcrumbs.append({"title": "Города", "url": "/cities/"})
+        breadcrumbs.append({
+            "title": self.name,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs
+    
+    def get_local_title(self):
+        """Возвращает локальный заголовок или генерирует автоматически"""
+        if self.local_title:
+            return self.local_title
+        return f"SEO продвижение в {self.name}"
+
 # --- Модели для Услуг (для хедера и футера) ---
 
 class ServiceCategory(SEOModel):

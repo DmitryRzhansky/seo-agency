@@ -1,0 +1,116 @@
+{% extends "main/base.html" %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<section class="section-padding bg-light pt-5 mt-5" id="city-list">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="display-4 fw-bold text-center mb-5">Города присутствия</h1>
+                <p class="lead text-center text-muted mb-5">
+                    Мы предоставляем услуги SEO продвижения в крупнейших городах России и СНГ
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for city in cities %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm border-0 city-card">
+                    <div class="card-body d-flex flex-column text-center">
+                        <h3 class="card-title mb-3">
+                            <a href="{{ city.get_absolute_url }}" class="text-decoration-none text-dark">
+                                {{ city.name }}
+                            </a>
+                        </h3>
+                        
+                        <p class="text-muted mb-3">{{ city.region }}</p>
+                        
+                        <div class="mb-3">
+                            <span class="badge bg-primary fs-6">
+                                <i class="fas fa-users me-1"></i>
+                                {{ city.population|floatformat:0 }} тыс. жителей
+                            </span>
+                        </div>
+                        
+                        {% if city.local_description %}
+                        <p class="card-text text-muted flex-grow-1">
+                            {{ city.local_description|truncatewords:20 }}
+                        </p>
+                        {% endif %}
+                        
+                        <div class="mt-auto">
+                            <a href="{{ city.get_absolute_url }}" class="btn btn-outline-primary">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                SEO в {{ city.name }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-lg-12 text-center">
+                <div class="p-4 bg-white rounded shadow-sm">
+                    <h3 class="fw-bold mb-3">Нет вашего города в списке?</h3>
+                    <p class="lead mb-4">Мы работаем по всей России и готовы предоставить услуги в любом регионе!</p>
+                    <a href="{% url 'main:home' %}#contact" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Получить консультацию
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Стили для карточек городов */
+.city-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.city-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15) !important;
+}
+
+.city-card .card-title a {
+    transition: color 0.3s ease;
+}
+
+.city-card .card-title a:hover {
+    color: #007bff !important;
+}
+
+.city-card .btn {
+    transition: all 0.3s ease;
+}
+
+.city-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,123,255,0.3);
+}
+
+.city-card .badge {
+    transition: all 0.3s ease;
+}
+
+.city-card:hover .badge {
+    transform: scale(1.05);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .city-card {
+        margin-bottom: 1.5rem;
+    }
+}
+</style>
+{% endblock content %}

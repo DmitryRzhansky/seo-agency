@@ -1,6 +1,30 @@
 from django.contrib import admin
-from .models import ServiceCategory, Service, Post, TeamMember, Testimonial
+from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial
 from seo.admin import SEOAdminMixin
+
+# Настройка городов
+@admin.register(City)
+class CityAdmin(SEOAdminMixin, admin.ModelAdmin):
+    list_display = ('name', 'region', 'population', 'order', 'is_active', 'slug', 'seo_title_length', 'seo_description_length', 'seo_index')
+    list_filter = ('is_active', 'region')
+    search_fields = ('name', 'region')
+    prepopulated_fields = {'slug': ('name',)}
+    list_editable = ('order', 'is_active')
+    
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'slug', 'region', 'population', 'order', 'is_active')
+        }),
+        ('Региональные SEO', {
+            'fields': ('local_title', 'local_description'),
+            'description': 'Локальные заголовки и описания для регионального SEO'
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',),
+            'description': 'Настройки навигационных хлебных крошек'
+        }),
+    )
 
 # Настройка услуг
 class ServiceInline(admin.TabularInline):

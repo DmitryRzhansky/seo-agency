@@ -1,0 +1,177 @@
+{% extends "main/base.html" %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs city %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+<section class="section-padding bg-light pt-5 mt-5" id="city-detail">
+    <div class="container">
+        <!-- Заголовок города -->
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1 class="display-4 fw-bold mb-3">SEO продвижение в {{ city.name }}</h1>
+                <p class="lead text-muted mb-4">{{ city.region }} • {{ city.population|floatformat:0 }} тыс. жителей</p>
+                
+                {% if city.local_description %}
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <p class="fs-5 text-muted">{{ city.local_description }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Услуги в городе -->
+        {% if services %}
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <h2 class="section-title text-center mb-5">Наши услуги в {{ city.name }}</h2>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm border-0 service-card">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a href="{% url 'main:city_service_detail' city.slug service.slug %}" class="text-decoration-none text-dark">
+                                {{ service.title }}
+                            </a>
+                        </h5>
+                        
+                        <span class="badge mb-3" style="background-color: #007bff; color: white;">
+                            {{ service.category.title }}
+                        </span>
+                        
+                        <p class="card-text text-muted flex-grow-1">
+                            {{ service.short_description|truncatewords:20 }}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <a href="{% url 'main:city_service_detail' city.slug service.slug %}" class="btn btn-outline-primary btn-sm">
+                                Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Статьи блога -->
+        {% if recent_posts %}
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <h2 class="section-title text-center mb-5">Полезные статьи</h2>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for post in recent_posts %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm border-0 post-card">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.get_image_alt }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="fas fa-newspaper fa-3x text-muted"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a href="{% url 'main:city_post_detail' city.slug post.slug %}" class="text-decoration-none text-dark">
+                                {{ post.title }}
+                            </a>
+                        </h5>
+                        
+                        {% if post.category %}
+                        <span class="badge mb-3" style="background-color: {{ post.category.color }}; color: white;">
+                            {{ post.category.name }}
+                        </span>
+                        {% endif %}
+                        
+                        <p class="card-text text-muted small flex-grow-1">
+                            {{ post.content|striptags|truncatewords:15 }}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <a href="{% url 'main:city_post_detail' city.slug post.slug %}" class="btn btn-outline-primary btn-sm">
+                                Читать далее
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent border-0">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar-alt me-1"></i>
+                            {{ post.published_date|date:"d F Y" }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- CTA блок -->
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="p-5 bg-white rounded shadow-sm text-center">
+                    <h3 class="fw-bold mb-3">Готовы продвигать бизнес в {{ city.name }}?</h3>
+                    <p class="lead mb-4">Получите бесплатную консультацию по SEO продвижению в вашем городе</p>
+                    <a href="{% url 'main:home' %}#contact" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Получить консультацию
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Стили для карточек услуг и статей */
+.service-card, .post-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.service-card:hover, .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.service-card .card-title a, .post-card .card-title a {
+    transition: color 0.3s ease;
+}
+
+.service-card .card-title a:hover, .post-card .card-title a:hover {
+    color: #007bff !important;
+}
+
+.service-card .btn, .post-card .btn {
+    transition: all 0.3s ease;
+}
+
+.service-card .btn:hover, .post-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .service-card, .post-card {
+        margin-bottom: 1.5rem;
+    }
+}
+</style>
+{% endblock content %}

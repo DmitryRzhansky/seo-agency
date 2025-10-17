@@ -1,0 +1,199 @@
+{% extends "main/base.html" %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+<nav aria-label="breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'main:city_list' %}">Города</a></li>
+            <li class="breadcrumb-item"><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'services:service_list' %}">Услуги</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ service.title }}</li>
+        </ol>
+    </div>
+</nav>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<style>
+    /* 1. Основное правило для предотвращения выхода текста за границы (особенно длинные URL) */
+    .service-content {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* 2. Обработка блоков кода и pre */
+    .service-content pre, 
+    .service-content code {
+        white-space: pre-wrap; /* Переносит длинные строки кода */
+        word-wrap: break-word;
+        overflow-x: auto;      /* Добавляет горизонтальный скролл, если элемент не помещается */
+        max-width: 100%;       /* Гарантирует, что они не шире родителя */
+        padding: 10px;         /* Добавляем немного отступа для красоты */
+        background-color: #f8f9fa; /* Светлый фон для кода */
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+    }
+
+    /* 3. Обработка таблиц (могут быть широкими) */
+    .service-content table {
+        display: block;        /* Позволяет управлять скроллом */
+        max-width: 100%;
+        overflow-x: auto;      /* Горизонтальный скролл для широких таблиц */
+        width: 100%;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+    }
+    
+    .service-content table th, 
+    .service-content table td {
+        white-space: nowrap; /* Предотвращаем перенос внутри ячеек при горизонтальном скролле */
+        padding: 8px;
+        border: 1px solid #dee2e6;
+    }
+</style>
+
+<section class="section-padding pt-5 mt-5" id="city-service-detail-content">
+    <div class="container">
+        <!-- Региональная информация -->
+        <div class="row mb-4">
+            <div class="col-lg-12">
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <i class="fas fa-map-marker-alt me-3 fa-2x"></i>
+                    <div>
+                        <h5 class="alert-heading mb-1">{{ service.title }} в {{ city.name }}</h5>
+                        <p class="mb-0">{{ city.region }} • {{ city.population|floatformat:0 }} тыс. жителей</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h1 class="display-4 fw-bold mb-4 text-center">{{ service.title }} в {{ city.name }}</h1>
+
+                <p class="lead text-center mb-5 text-muted">{{ service.short_description }}</p>
+
+                <div class="service-content">
+                    {{ service.content|safe }}
+                </div>
+                
+                <hr class="my-5">
+
+                <div class="p-4 bg-light rounded text-center shadow-sm">
+                    <h3 class="fw-bold mb-3">Готовы заказать {{ service.title|lower }} в {{ city.name }}?</h3>
+                    <p class="lead mb-4">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании в {{ city.name }}.</p>
+                    <a href="{% url 'main:home' %}#contact" class="btn btn-primary btn-lg">
+                        <i class="fas fa-paper-plane me-2"></i> Получить консультацию
+                    </a>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{{ city.get_absolute_url }}" class="text-muted small text-decoration-none">
+                        <i class="fas fa-chevron-left me-2"></i> Вернуться к услугам в {{ city.name }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Блок "Еще услуги" -->
+{% if related_services %}
+<section class="section-padding bg-light" id="related-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="section-title text-center mb-5">Еще услуги в {{ city.name }}</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            {% for related_service in related_services %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 shadow-sm border-0 related-service-card">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a href="{% url 'main:city_service_detail' city.slug related_service.slug %}" class="text-decoration-none text-dark">
+                                {{ related_service.title }}
+                            </a>
+                        </h5>
+                        
+                        <span class="badge mb-3" style="background-color: #007bff; color: white;">
+                            {{ related_service.category.title }}
+                        </span>
+                        
+                        <p class="card-text text-muted flex-grow-1">
+                            {{ related_service.short_description|truncatewords:25 }}
+                        </p>
+                        
+                        <div class="mt-auto">
+                            <a href="{% url 'main:city_service_detail' city.slug related_service.slug %}" class="btn btn-outline-primary btn-sm">
+                                Подробнее
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer bg-transparent border-0">
+                        <small class="text-muted">
+                            <i class="fas fa-tag me-1"></i>
+                            {{ related_service.category.title }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<style>
+/* Стили для блока "Еще услуги" */
+.related-service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.related-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.related-service-card .card-title a {
+    transition: color 0.3s ease;
+}
+
+.related-service-card .card-title a:hover {
+    color: #007bff !important;
+}
+
+.related-service-card .btn {
+    transition: all 0.3s ease;
+}
+
+.related-service-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.related-service-card .badge {
+    transition: all 0.3s ease;
+}
+
+.related-service-card:hover .badge {
+    transform: scale(1.05);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .related-service-card {
+        margin-bottom: 1.5rem;
+    }
+}
+</style>
+
+{% endblock content %}

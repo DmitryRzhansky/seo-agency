@@ -12,6 +12,20 @@ class ServiceCategory(SEOModel):
     # Используем slug для создания ЧПУ-ссылок
     slug = models.SlugField(unique=True, max_length=100, verbose_name="URL-идентификатор")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
 
     class Meta:
         verbose_name = "Раздел услуг"
@@ -25,6 +39,26 @@ class ServiceCategory(SEOModel):
         # Будет использоваться для ссылки на общую страницу раздела услуг
         from django.urls import reverse
         return reverse('services:service_category', kwargs={'slug': self.slug})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для категории услуг"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        
+        breadcrumbs.append({"title": "Услуги", "url": "/services/"})
+        
+        breadcrumbs.append({
+            "title": self.title,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs
 
 
 class Service(SEOModel):
@@ -41,6 +75,20 @@ class Service(SEOModel):
     content = RichTextField(verbose_name="Подробное описание услуги")
     short_description = models.TextField(max_length=300, verbose_name="Краткое описание")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
 
     class Meta:
         verbose_name = "Услуга"
@@ -54,6 +102,31 @@ class Service(SEOModel):
         # Ссылка на отдельную страницу услуги
         from django.urls import reverse
         return reverse('services:service_detail', kwargs={'slug': self.slug})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для услуги"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        
+        breadcrumbs.append({"title": "Услуги", "url": "/services/"})
+        
+        breadcrumbs.append({
+            "title": self.category.title,
+            "url": self.category.get_absolute_url()
+        })
+        
+        breadcrumbs.append({
+            "title": self.title,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs
 
 
 # --- Модели для Блога ---
@@ -82,6 +155,20 @@ class Post(SEOModel):
         blank=True,
         verbose_name="Категория",
         help_text="Выберите категорию для статьи"
+    )
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
     )
 
     class Meta:

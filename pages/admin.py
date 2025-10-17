@@ -18,6 +18,11 @@ class SimplePageAdmin(SEOAdminMixin, admin.ModelAdmin):
             'fields': ('show_in_header', 'show_in_footer', 'order'),
             'description': 'Настройки отображения страницы в меню'
         }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',),
+            'description': 'Настройки навигационных хлебных крошек'
+        }),
     )
 from django.contrib import admin
 

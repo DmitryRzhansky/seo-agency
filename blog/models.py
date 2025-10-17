@@ -16,6 +16,20 @@ class Category(SEOModel):
     )
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_active = models.BooleanField(default=True, verbose_name="Активна")
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
 
     class Meta:
         verbose_name = "Категория блога"
@@ -27,3 +41,23 @@ class Category(SEOModel):
 
     def get_absolute_url(self):
         return reverse('blog:category_posts', kwargs={'slug': self.slug})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для категории блога"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        
+        breadcrumbs.append({"title": "Блог", "url": "/blog/"})
+        
+        breadcrumbs.append({
+            "title": self.name,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs

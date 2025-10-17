@@ -80,26 +80,24 @@ def robots_meta(obj):
     return f'{index}, follow'
 
 
-@register.inclusion_tag('seo/breadcrumbs.html', takes_context=True)
-def breadcrumbs(context, page_type, page_slug=None):
+@register.inclusion_tag('seo/breadcrumbs.html')
+def breadcrumbs(obj):
     """
-    Генерирует хлебные крошки для страницы.
+    Генерирует хлебные крошки для объекта.
     
     Использование:
     {% load seo_tags %}
-    {% breadcrumbs 'service_detail' service.slug %}
-    {% breadcrumbs 'post_detail' post.slug %}
+    {% breadcrumbs service %}
+    {% breadcrumbs post %}
+    {% breadcrumbs category %}
     """
-    breadcrumbs_list = Breadcrumb.get_breadcrumbs_for_page(
-        page_type=page_type,
-        page_slug=page_slug,
-        context=context
-    )
+    if not obj or not hasattr(obj, 'get_breadcrumbs'):
+        return {'breadcrumbs': []}
+    
+    breadcrumbs_list = obj.get_breadcrumbs()
     
     return {
         'breadcrumbs': breadcrumbs_list,
-        'page_type': page_type,
-        'page_slug': page_slug,
     }
 
 

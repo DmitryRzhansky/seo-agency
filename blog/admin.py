@@ -19,6 +19,11 @@ class CategoryAdmin(SEOAdminMixin, admin.ModelAdmin):
             'fields': ('color',),
             'description': 'Настройте цвет категории для отображения на сайте'
         }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',),
+            'description': 'Настройки навигационных хлебных крошек'
+        }),
     )
 
     def get_posts_count(self, obj):

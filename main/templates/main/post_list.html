@@ -4,11 +4,36 @@
 
 {% block breadcrumbs %}
 {% if current_category %}
-{% breadcrumbs 'category_posts' current_category.slug %}
+{% breadcrumbs current_category %}
 {% elif search_query %}
-{% breadcrumbs 'search' %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb mb-0 py-3">
+            <li class="breadcrumb-item">
+                <a href="/" class="text-decoration-none">Главная</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="/blog/" class="text-decoration-none">Блог</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Поиск: "{{ search_query }}"
+            </li>
+        </ol>
+    </div>
+</nav>
 {% else %}
-{% breadcrumbs 'post_list' %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
+    <div class="container">
+        <ol class="breadcrumb mb-0 py-3">
+            <li class="breadcrumb-item">
+                <a href="/" class="text-decoration-none">Главная</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Блог
+            </li>
+        </ol>
+    </div>
+</nav>
 {% endif %}
 {% endblock breadcrumbs %}
 

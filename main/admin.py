@@ -15,6 +15,17 @@ class ServiceCategoryAdmin(SEOAdminMixin, admin.ModelAdmin):
     list_display = ('title', 'order', 'slug', 'get_service_count', 'seo_title_length', 'seo_description_length', 'seo_index')
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ServiceInline]
+    
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'order')
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',),
+            'description': 'Настройки навигационных хлебных крошек'
+        }),
+    )
 
     def get_service_count(self, obj):
         return obj.services.count()
@@ -35,6 +46,11 @@ class ServiceAdmin(SEOAdminMixin, admin.ModelAdmin):
         ('Содержимое', {
             'fields': ('content',),
         }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',),
+            'description': 'Настройки навигационных хлебных крошек'
+        }),
     )
 
 # Настройка блога
@@ -53,6 +69,11 @@ class PostAdmin(SEOAdminMixin, admin.ModelAdmin):
         }),
         ('Содержимое', {
             'fields': ('content', 'image'),
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',),
+            'description': 'Настройки навигационных хлебных крошек'
         }),
         ('Статистика', {
             'fields': ('views_count',),

@@ -99,3 +99,25 @@ def city_prepositional(city_name):
     else:
         # Если не подходит ни одно правило, добавляем "е"
         return city_name + 'е'
+
+@register.filter
+def format_population(population):
+    """
+    Форматирует численность населения с точками как разделителями тысяч.
+    Предполагается, что в базе данных число хранится в тысячах.
+    Использование: {{ city.population|format_population }}
+    """
+    if not population:
+        return "0"
+    
+    try:
+        # Число в базе данных хранится в тысячах, поэтому умножаем на 1000
+        pop = int(float(population) * 1000)
+        
+        # Форматируем число с точками как разделителями тысяч
+        formatted = f"{pop:,}".replace(",", ".")
+        
+        return formatted
+            
+    except (ValueError, TypeError):
+        return str(population)

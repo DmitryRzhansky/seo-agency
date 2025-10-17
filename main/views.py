@@ -245,8 +245,8 @@ def set_city(request, slug):
         city = City.objects.get(slug=slug, is_active=True)
         request.session['user_city'] = slug
         
-        # Перенаправляем на главную страницу
-        return redirect('main:home')
+        # Перенаправляем на страницу выбранного города
+        return redirect('main:city_detail', slug=slug)
     except City.DoesNotExist:
         # Если город не найден, перенаправляем на список городов
         return redirect('main:city_list')

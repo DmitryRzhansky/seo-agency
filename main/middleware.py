@@ -49,6 +49,7 @@ class GeoLocationMiddleware:
             '/media/',
             '/api/',
             '/cities/',  # Уже на странице городов
+            '/set-city/',  # Страница установки города
         ]
         
         for excluded_path in excluded_paths:

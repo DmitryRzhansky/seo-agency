@@ -1,0 +1,394 @@
+/* Темная тема для Isakov Agency */
+
+/* CSS переменные для темной темы */
+:root {
+    --bs-dark: #1a1a1a;
+    --bs-darker: #0d1117;
+    --bs-dark-light: #2d2d2d;
+    --bs-primary-dark: #0d6efd;
+    --bs-text-dark: #e6e6e6;
+    --bs-text-muted-dark: #8b949e;
+    --bs-border-dark: #30363d;
+    --bs-bg-dark: #161b22;
+    --bs-bg-darker: #0d1117;
+}
+
+/* Основные стили для темной темы */
+body {
+    background-color: var(--bs-bg-dark) !important;
+    color: var(--bs-text-dark) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Навигация */
+.navbar {
+    background-color: var(--bs-bg-darker) !important;
+    border-bottom: 1px solid var(--bs-border-dark) !important;
+    backdrop-filter: blur(10px);
+    opacity: 1 !important;
+}
+
+.navbar-dark {
+    background-color: var(--bs-bg-darker) !important;
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--bs-text-dark) !important;
+}
+
+.navbar-brand:hover,
+.nav-link:hover {
+    color: var(--bs-primary-dark) !important;
+}
+
+.navbar-toggler {
+    border-color: var(--bs-border-dark) !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Dropdown меню */
+.dropdown-menu {
+    background-color: var(--bs-bg-darker) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dropdown-item {
+    color: var(--bs-text-dark) !important;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bs-dark-light) !important;
+    color: var(--bs-text-dark) !important;
+}
+
+.dropdown-header {
+    color: var(--bs-text-muted-dark) !important;
+}
+
+/* Кнопки */
+.btn-outline-primary {
+    border-color: var(--bs-primary-dark) !important;
+    color: var(--bs-primary-dark) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--bs-primary-dark) !important;
+    border-color: var(--bs-primary-dark) !important;
+    color: white !important;
+}
+
+.btn-primary {
+    background-color: var(--bs-primary-dark) !important;
+    border-color: var(--bs-primary-dark) !important;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7 !important;
+    border-color: #0a58ca !important;
+}
+
+/* Карточки */
+.card {
+    background-color: var(--bs-bg-darker) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    color: var(--bs-text-dark) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.price-card {
+    background-color: var(--bs-bg-darker) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+}
+
+.price-card.border-primary {
+    border-color: var(--bs-primary-dark) !important;
+    box-shadow: 0 0 20px rgba(13, 110, 253, 0.2) !important;
+}
+
+/* Футер */
+.footer-bg {
+    background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-dark) 100%) !important;
+    border-top: 1px solid var(--bs-border-dark) !important;
+}
+
+.footer-bg h5,
+.footer-bg a {
+    color: var(--bs-text-dark) !important;
+}
+
+.footer-bg a:hover {
+    color: var(--bs-primary-dark) !important;
+}
+
+.footer-bg .text-white-50 {
+    color: var(--bs-text-muted-dark) !important;
+}
+
+/* Секции */
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-light {
+    background-color: var(--bs-bg-dark) !important;
+}
+
+/* Заголовки */
+.section-title {
+    color: var(--bs-text-dark) !important;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--bs-primary-dark), #0b5ed7);
+    border-radius: 2px;
+}
+
+/* Hero секция */
+.hero-section {
+    background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-bg-dark) 100%);
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(13, 110, 253, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Формы */
+.form-control {
+    background-color: var(--bs-bg-darker) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    color: var(--bs-text-dark) !important;
+}
+
+.form-control:focus {
+    background-color: var(--bs-bg-darker) !important;
+    border-color: var(--bs-primary-dark) !important;
+    color: var(--bs-text-dark) !important;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+}
+
+.form-label {
+    color: var(--bs-text-dark) !important;
+}
+
+/* Badge */
+.badge {
+    background-color: var(--bs-dark-light) !important;
+    color: var(--bs-text-dark) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    background-color: var(--bs-primary-dark) !important;
+    color: white !important;
+    transform: scale(1.05);
+}
+
+.badge.bg-primary {
+    background-color: var(--bs-primary-dark) !important;
+}
+
+/* Алерты */
+.alert {
+    background-color: var(--bs-bg-darker) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    color: var(--bs-text-dark) !important;
+}
+
+/* Плавные анимации появления */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Анимация для карточек при наведении */
+.card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Анимация для кнопок */
+.btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* Анимация для иконок */
+.fas, .fa {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.card:hover .fas,
+.card:hover .fa {
+    transform: scale(1.2) rotate(5deg);
+    color: var(--bs-primary-dark) !important;
+}
+
+/* Анимация для изображений команды */
+.team-member,
+.review-author {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover,
+.review-author:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
+}
+
+/* Пульсирующая анимация для важных элементов */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+/* Анимация загрузки */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 100px 0 60px;
+    }
+    
+    .section-padding {
+        padding: 60px 0;
+    }
+    
+    .card:hover {
+        transform: translateY(-3px) scale(1.01);
+    }
+}
+
+/* Дополнительные утилиты */
+.text-muted {
+    color: var(--bs-text-muted-dark) !important;
+}
+
+.border {
+    border-color: var(--bs-border-dark) !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3) !important;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.4) !important;
+}

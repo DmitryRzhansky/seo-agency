@@ -164,6 +164,11 @@ STATIC_URL = '/static/'
 # Путь, куда `collectstatic` будет собирать все статические файлы для продакшена
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Дополнительные директории со статическими файлами
+STATICFILES_DIRS = [
+    BASE_DIR / 'main' / 'static',
+]
+
 # Media files (User-uploaded content)
 # URL для доступа к медиафайлам в браузере
 MEDIA_URL = '/media/'

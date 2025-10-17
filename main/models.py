@@ -138,6 +138,7 @@ class Post(SEOModel):
     # Используем RichTextField для форматированного контента блога
     content = RichTextField(verbose_name="Содержимое поста")
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True, verbose_name="Изображение (превью)")
+    image_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст изображения", help_text="Описание изображения для SEO и доступности")
     published_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
     views_count = models.PositiveIntegerField(default=0, verbose_name="Просмотры")
@@ -210,6 +211,10 @@ class Post(SEOModel):
         })
         
         return breadcrumbs
+    
+    def get_image_alt(self):
+        """Возвращает альтернативный текст изображения или заголовок по умолчанию"""
+        return self.image_alt or self.title
 
 class ContactRequest(models.Model):
     """Модель для хранения заявок, отправленных через форму на главной странице."""
@@ -235,6 +240,7 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=120, verbose_name="Имя")
     role = models.CharField(max_length=150, verbose_name="Должность")
     photo = models.ImageField(upload_to='team_photos/', blank=True, null=True, verbose_name="Фото")
+    photo_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст фото", help_text="Описание фото для SEO и доступности")
     bio = models.TextField(blank=True, verbose_name="Короткое описание")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_active = models.BooleanField(default=True, verbose_name="Показывать")
@@ -246,6 +252,10 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return f"{self.name} — {self.role}"
+    
+    def get_photo_alt(self):
+        """Возвращает альтернативный текст фото или имя и должность по умолчанию"""
+        return self.photo_alt or f"Фото {self.name}, {self.role}"
 
 
 class Testimonial(models.Model):
@@ -253,6 +263,7 @@ class Testimonial(models.Model):
     author_name = models.CharField(max_length=120, verbose_name="Имя автора")
     author_title = models.CharField(max_length=160, blank=True, verbose_name="Должность/Компания")
     photo = models.ImageField(upload_to='testimonial_photos/', blank=True, null=True, verbose_name="Аватар")
+    photo_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст аватара", help_text="Описание аватара для SEO и доступности")
     content = models.TextField(verbose_name="Текст отзыва")
     rating = models.PositiveSmallIntegerField(default=5, verbose_name="Оценка (1-5)")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
@@ -265,3 +276,7 @@ class Testimonial(models.Model):
 
     def __str__(self):
         return f"Отзыв: {self.author_name}"
+    
+    def get_photo_alt(self):
+        """Возвращает альтернативный текст аватара или имя автора по умолчанию"""
+        return self.photo_alt or f"Аватар {self.author_name}"

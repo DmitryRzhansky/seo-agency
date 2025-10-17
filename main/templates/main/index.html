@@ -224,7 +224,7 @@
                 <div class="col-12 col-sm-6 col-lg-4">
                     <div class="card h-100 text-center shadow-sm p-4">
                         {% if member.photo %}
-                        <img src="{{ member.photo.url }}" class="rounded-circle mb-3 team-member" alt="{{ member.name }}" width="100" height="100" style="object-fit: cover;">
+                        <img src="{{ member.photo.url }}" class="rounded-circle mb-3 team-member" alt="{{ member.get_photo_alt }}" width="100" height="100" style="object-fit: cover;">
                         {% else %}
                         <img src="https://placehold.co/100x100/EFEFEF/333?text=Фото" class="rounded-circle mb-3 team-member" alt="{{ member.name }}">
                         {% endif %}
@@ -251,7 +251,7 @@
                 <div class="col-12 col-md-6">
                     <div class="card h-100 shadow-sm p-4 text-center">
                         {% if t.photo %}
-                        <img src="{{ t.photo.url }}" class="rounded-circle mb-3 review-author" alt="{{ t.author_name }}" width="80" height="80" style="object-fit: cover;">
+                        <img src="{{ t.photo.url }}" class="rounded-circle mb-3 review-author" alt="{{ t.get_photo_alt }}" width="80" height="80" style="object-fit: cover;">
                         {% else %}
                         <img src="https://placehold.co/80x80/EFEFEF/333?text=Фото" class="rounded-circle mb-3 review-author" alt="{{ t.author_name }}">
                         {% endif %}

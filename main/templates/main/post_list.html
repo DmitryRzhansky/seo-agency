@@ -110,7 +110,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="card h-100 shadow-sm border-0">
                     {% if post.image %}
-                        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}" style="height: 200px; object-fit: cover;">
+                        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.get_image_alt }}" style="height: 200px; object-fit: cover;">
                     {% else %}
                         <img src="{% static 'main/img/blog_placeholder.jpg' %}" class="card-img-top" alt="Изображение блога" style="height: 200px; object-fit: cover;">
                     {% endif %}

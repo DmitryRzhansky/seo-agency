@@ -68,7 +68,7 @@ class PostAdmin(SEOAdminMixin, admin.ModelAdmin):
             'fields': ('title', 'slug', 'category', 'author', 'is_published')
         }),
         ('Содержимое', {
-            'fields': ('content', 'image'),
+            'fields': ('content', 'image', 'image_alt'),
         }),
         ('Хлебные крошки', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
@@ -88,6 +88,16 @@ class TeamMemberAdmin(admin.ModelAdmin):
     list_editable = ('order', 'is_active')
     search_fields = ('name', 'role')
     list_filter = ('is_active',)
+    
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'role', 'bio', 'order', 'is_active')
+        }),
+        ('Фото', {
+            'fields': ('photo', 'photo_alt'),
+            'description': 'Загрузите фото участника команды и укажите альтернативный текст для SEO'
+        }),
+    )
 
 
 @admin.register(Testimonial)
@@ -96,3 +106,13 @@ class TestimonialAdmin(admin.ModelAdmin):
     list_editable = ('order', 'rating', 'is_active')
     search_fields = ('author_name', 'author_title', 'content')
     list_filter = ('is_active', 'rating')
+    
+    fieldsets = (
+        (None, {
+            'fields': ('author_name', 'author_title', 'content', 'rating', 'order', 'is_active')
+        }),
+        ('Аватар', {
+            'fields': ('photo', 'photo_alt'),
+            'description': 'Загрузите аватар автора отзыва и укажите альтернативный текст для SEO'
+        }),
+    )

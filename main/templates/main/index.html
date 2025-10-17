@@ -98,34 +98,151 @@
     <div class="container">
         <h2 class="text-center section-title">Экспертиза в 80+ нишах</h2>
         
-        {% with initial_niches="Цветы, Ювелирные изделия, Продукты, Часы, Аптеки, Косметика, Бытовая техника, Книги, Скейтборды, Гинекология, Свадебные агентства, Салоны красоты" %}
-        {% with hidden_niches="Онлайн-школы, Ремонт квартир, Входные двери, Клининг, Event-агентства, Велосипеды, Бурение скважин, Бизнес тренеры, Автошколы, Ветеринарные клиники, Шинные центры, ВУЗы, Грузоперевозки, Деревянные дома, Детская обувь, Детская одежда, Доставка еды, Зоомагазины, Издательства, Кулинария, Кейтеринг, Косметология, Квесты, Кадровые агентства, Логопед, Канцтовары, Ландшафтный дизайн, Металлоконструкции, Натяжные потолки, Мотоциклы, Нефтяные компании, Нижнее белье, Обувь, Окна, Ателье, Подарки, Керамическая плитка, Ремонт компьютеров, Сантехника, Студии звукозаписи, Страховые компании, Ткани и текстиль, Кондитерские изделия, Спецодежда, Фотографы, Фотостудии, Химчистка, Церкви, Школы танцев, Электромонтаж, Хостелы, Элитная недвижимость, Гостиницы" %}
-
-        <div class="row g-2 justify-content-center niche-grid">
-            {% for niche in initial_niches|split:", " %}
-            <div class="col-auto">
-                <span class="badge rounded-pill bg-light text-dark border p-2 shadow-sm">{{ niche }}</span>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <div class="collapse" id="allNiches">
-            <div class="row g-2 justify-content-center niche-grid mt-3">
-                {% for niche in hidden_niches|split:", " %}
-                <div class="col-auto">
-                    <span class="badge rounded-pill bg-light text-dark border p-2 shadow-sm">{{ niche }}</span>
+        <div class="row g-4">
+            <!-- Розничная торговля -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 niche-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-store me-2"></i>Розничная торговля
+                        </h5>
+                        <div class="niche-list">
+                            <span class="badge niche-badge">Цветы</span>
+                            <span class="badge niche-badge">Ювелирные изделия</span>
+                            <span class="badge niche-badge">Продукты</span>
+                            <span class="badge niche-badge">Часы</span>
+                            <span class="badge niche-badge">Аптеки</span>
+                            <span class="badge niche-badge">Косметика</span>
+                            <span class="badge niche-badge">Бытовая техника</span>
+                            <span class="badge niche-badge">Книги</span>
+                            <span class="badge niche-badge">Строительные магазины</span>
+                            <span class="badge niche-badge">Обувь</span>
+                            <span class="badge niche-badge">Одежда</span>
+                            <span class="badge niche-badge">Зоомагазины</span>
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
+            </div>
+
+            <!-- Сфера услуг -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 niche-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-concierge-bell me-2"></i>Сфера услуг
+                        </h5>
+                        <div class="niche-list">
+                            <span class="badge niche-badge">Салоны красоты</span>
+                            <span class="badge niche-badge">Косметология</span>
+                            <span class="badge niche-badge">Свадебные агентства</span>
+                            <span class="badge niche-badge">Event-агентства</span>
+                            <span class="badge niche-badge">Клининг</span>
+                            <span class="badge niche-badge">Химчистка</span>
+                            <span class="badge niche-badge">Фотографы</span>
+                            <span class="badge niche-badge">Фотостудии</span>
+                            <span class="badge niche-badge">Школы танцев</span>
+                            <span class="badge niche-badge">Ателье</span>
+                            <span class="badge niche-badge">Квесты</span>
+                            <span class="badge niche-badge">Кадровые агентства</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Медицина и здоровье -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 niche-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-heartbeat me-2"></i>Медицина и здоровье
+                        </h5>
+                        <div class="niche-list">
+                            <span class="badge niche-badge">Гинекология</span>
+                            <span class="badge niche-badge">Ветеринарные клиники</span>
+                            <span class="badge niche-badge">Логопед</span>
+                            <span class="badge niche-badge">Стоматология</span>
+                            <span class="badge niche-badge">Пластическая хирургия</span>
+                            <span class="badge niche-badge">Медицинские центры</span>
+                            <span class="badge niche-badge">Санатории</span>
+                            <span class="badge niche-badge">Фитнес-клубы</span>
+                            <span class="badge niche-badge">Йога-студии</span>
+                            <span class="badge niche-badge">Массажные салоны</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Образование -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 niche-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-graduation-cap me-2"></i>Образование
+                        </h5>
+                        <div class="niche-list">
+                            <span class="badge niche-badge">Онлайн-школы</span>
+                            <span class="badge niche-badge">ВУЗы</span>
+                            <span class="badge niche-badge">Автошколы</span>
+                            <span class="badge niche-badge">Бизнес тренеры</span>
+                            <span class="badge niche-badge">Языковые школы</span>
+                            <span class="badge niche-badge">Детские сады</span>
+                            <span class="badge niche-badge">Репетиторы</span>
+                            <span class="badge niche-badge">Курсы программирования</span>
+                            <span class="badge niche-badge">Музыкальные школы</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Строительство и ремонт -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 niche-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-hammer me-2"></i>Строительство и ремонт
+                        </h5>
+                        <div class="niche-list">
+                            <span class="badge niche-badge">Ремонт квартир</span>
+                            <span class="badge niche-badge">Входные двери</span>
+                            <span class="badge niche-badge">Окна</span>
+                            <span class="badge niche-badge">Натяжные потолки</span>
+                            <span class="badge niche-badge">Деревянные дома</span>
+                            <span class="badge niche-badge">Металлоконструкции</span>
+                            <span class="badge niche-badge">Ландшафтный дизайн</span>
+                            <span class="badge niche-badge">Электромонтаж</span>
+                            <span class="badge niche-badge">Сантехника</span>
+                            <span class="badge niche-badge">Керамическая плитка</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Транспорт и логистика -->
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 niche-category">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary mb-3">
+                            <i class="fas fa-truck me-2"></i>Транспорт и логистика
+                        </h5>
+                        <div class="niche-list">
+                            <span class="badge niche-badge">Грузоперевозки</span>
+                            <span class="badge niche-badge">Велосипеды</span>
+                            <span class="badge niche-badge">Мотоциклы</span>
+                            <span class="badge niche-badge">Скейтборды</span>
+                            <span class="badge niche-badge">Шинные центры</span>
+                            <span class="badge niche-badge">Автосервисы</span>
+                            <span class="badge niche-badge">Такси</span>
+                            <span class="badge niche-badge">Доставка еды</span>
+                            <span class="badge niche-badge">Курьерские услуги</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        {% endwith %}
-        {% endwith %}
 
-        <div class="text-center mt-4">
-            <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#allNiches" aria-expanded="false" aria-controls="allNiches">
-                Посмотреть все ниши
-            </button>
+        <div class="text-center mt-5">
+            <p class="lead text-muted">И это только часть наших экспертных ниш!</p>
+            <a href="#contact" class="btn btn-primary btn-lg">Получить консультацию по вашей нише</a>
         </div>
     </div>
 </section>
@@ -143,7 +260,7 @@
             {% endcomment %}
             {% for city in cities_list %}
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
-                <span class="badge bg-primary text-white p-2 w-100">{{ city }}</span>
+                <span class="badge p-2 w-100">{{ city }}</span>
             </div>
             {% endfor %}
 
@@ -278,7 +395,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     
-                    <form method="post" action="{% url 'main:home' %}" class="p-4 p-md-5 rounded bg-white shadow-lg">
+                    <form method="post" action="{% url 'main:home' %}" class="p-4 p-md-5 rounded shadow-lg">
                         {% csrf_token %} 
                         
                         <div class="row g-3">

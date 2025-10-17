@@ -3,6 +3,7 @@
 import requests
 import logging
 from typing import Optional
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -21,12 +22,20 @@ def get_city_by_ip(ip_address: str) -> Optional[str]:
     Возвращает название города на русском языке или None
     """
     if not ip_address or ip_address in ['127.0.0.1', '::1']:
-        # Для локального IP возвращаем Москву по умолчанию
-        return 'Москва'
+        # Для локального IP возвращаем Пермь по умолчанию (для тестирования)
+        return 'Perm'
     
     try:
-        # Используем бесплатный API ipapi.co
-        response = requests.get(f'http://ipapi.co/{ip_address}/json/', timeout=5)
+        # Используем API ipapi.co
+        api_key = getattr(settings, 'IPAPI_KEY', None)
+        if api_key:
+            # С API ключом (рекомендуется для продакшена)
+            url = f'https://ipapi.co/{ip_address}/json/?key={api_key}'
+        else:
+            # Без API ключа (бесплатный тариф)
+            url = f'http://ipapi.co/{ip_address}/json/'
+        
+        response = requests.get(url, timeout=5)
         response.raise_for_status()
         data = response.json()
         

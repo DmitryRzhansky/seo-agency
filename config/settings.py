@@ -195,3 +195,8 @@ CKEDITOR_CONFIGS = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Настройки для геолокации
+# IPAPI_KEY = 'your_api_key_here'  # Получить на https://ipapi.co/api/
+# Без ключа: 1000 запросов/день, только HTTP
+# С ключом: больше запросов, HTTPS, больше данных

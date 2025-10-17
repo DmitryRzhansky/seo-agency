@@ -250,3 +250,27 @@ def set_city(request, slug):
     except City.DoesNotExist:
         # Если город не найден, перенаправляем на список городов
         return redirect('main:city_list')
+
+
+def contacts(request):
+    """
+    Страница контактов с формой обратной связи
+    """
+    # Обработка формы
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Спасибо! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.')
+            return redirect('main:contacts')
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+    else:
+        form = ContactForm()
+    
+    context = {
+        'title': 'Контакты | Isakov Agency',
+        'form': form,
+        'seo_object': None,  # Можно создать отдельную SEO модель для страницы контактов
+    }
+    return render(request, 'main/contacts.html', context)

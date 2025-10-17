@@ -15,7 +15,7 @@ urlpatterns = [
     path('set-city/<slug:slug>/', views.set_city, name='set_city'),
     
     # --- Дополнительные страницы ---
-    # path('contacts/', views.contacts, name='contacts'),
+    path('contacts/', views.contacts, name='contacts'),
     # path('faq/', views.faq, name='faq'),
     # path('privacy/', views.privacy_policy, name='privacy_policy'),
 

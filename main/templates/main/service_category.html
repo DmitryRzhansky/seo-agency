@@ -33,7 +33,7 @@
                         <h5 class="card-title fw-bold text-primary">{{ service.title }}</h5>
                         <p class="card-text text-muted mb-4 flex-grow-1">{{ service.short_description }}</p>
                         
-                        <a href="{% url 'main:service_detail' slug=service.slug %}" class="btn btn-outline-dark mt-auto">
+                        <a href="{% url 'services:service_detail' slug=service.slug %}" class="btn btn-outline-dark mt-auto">
                             Подробнее об услуге
                         </a>
                     </div>

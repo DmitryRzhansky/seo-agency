@@ -102,6 +102,7 @@ def service_detail(request, slug):
 
 # --- Представления для Блога ---
 
+@never_cache
 def post_list(request):
     """
     Общая страница блога со списком всех постов и пагинацией.
@@ -125,6 +126,7 @@ def post_list(request):
     return render(request, 'main/post_list.html', context)
 
 
+@never_cache
 def post_detail(request, slug):
     """
     Страница отдельного поста в блоге.

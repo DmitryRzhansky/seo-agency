@@ -3,8 +3,10 @@ from main.models import Post
 from .models import Category
 from django.core.paginator import Paginator
 from django.db.models import F, Q
+from django.views.decorators.cache import never_cache
 
 
+@never_cache
 def post_list(request):
 	posts_list = Post.objects.filter(is_published=True).order_by('-published_date')
 	paginator = Paginator(posts_list, 10)
@@ -23,6 +25,7 @@ def post_list(request):
 	})
 
 
+@never_cache
 def category_posts(request, slug):
 	"""Отображение статей конкретной категории"""
 	category = get_object_or_404(Category, slug=slug, is_active=True)
@@ -47,6 +50,7 @@ def category_posts(request, slug):
 	})
 
 
+@never_cache
 def search_posts(request):
 	"""Поиск по статьям блога"""
 	query = request.GET.get('q', '').strip()
@@ -81,6 +85,7 @@ def search_posts(request):
 	})
 
 
+@never_cache
 def post_detail(request, slug):
 	post = get_object_or_404(Post, slug=slug)
 	session_key = f"viewed_post_{post.pk}"

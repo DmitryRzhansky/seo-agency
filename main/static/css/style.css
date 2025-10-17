@@ -709,3 +709,18 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
     border-color: var(--bs-primary-dark) !important;
 }
+
+/* Стили для CTA блока на странице города */
+.city-cta-block {
+    background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-bg-dark) 100%) !important;
+    border: 1px solid var(--bs-border-dark) !important;
+    color: var(--bs-text-dark) !important;
+}
+
+.city-cta-block h3 {
+    color: var(--bs-text-dark) !important;
+}
+
+.city-cta-block p {
+    color: var(--bs-text-muted-dark) !important;
+}

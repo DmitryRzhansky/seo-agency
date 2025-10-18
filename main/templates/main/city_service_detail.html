@@ -4,17 +4,21 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-<nav aria-label="breadcrumb">
+{% if service.show_breadcrumbs %}
+<nav class="breadcrumb-nav">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'main:city_list' %}">Города</a></li>
-            <li class="breadcrumb-item"><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'services:service_list' %}">Услуги</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ service.title }}</li>
+            {% for breadcrumb in service.get_breadcrumbs:city %}
+            {% if forloop.last %}
+            <li class="breadcrumb-item active">{{ breadcrumb.title }}</li>
+            {% else %}
+            <li class="breadcrumb-item"><a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a></li>
+            {% endif %}
+            {% endfor %}
         </ol>
     </div>
 </nav>
+{% endif %}
 {% endblock breadcrumbs %}
 
 {% block content %}

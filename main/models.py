@@ -198,7 +198,7 @@ class Service(SEOModel):
             return self.image_alt
         return f"Изображение услуги {self.title}"
     
-    def get_breadcrumbs(self):
+    def get_breadcrumbs(self, city=None):
         """Возвращает хлебные крошки для услуги"""
         if not self.show_breadcrumbs:
             return []
@@ -209,17 +209,28 @@ class Service(SEOModel):
         # Автоматические крошки
         breadcrumbs = [{"title": "Главная", "url": "/"}]
         
-        breadcrumbs.append({"title": "Услуги", "url": "/services/"})
-        
-        breadcrumbs.append({
-            "title": self.category.title,
-            "url": self.category.get_absolute_url()
-        })
-        
-        breadcrumbs.append({
-            "title": self.title,
-            "url": self.get_absolute_url()
-        })
+        # Если это услуга в контексте города
+        if city:
+            breadcrumbs.append({"title": "Города", "url": "/cities/"})
+            breadcrumbs.append({
+                "title": city.name,
+                "url": city.get_absolute_url()
+            })
+            breadcrumbs.append({
+                "title": self.title,
+                "url": f"/cities/{city.slug}/services/{self.slug}/"
+            })
+        else:
+            # Обычные крошки для услуги
+            breadcrumbs.append({"title": "Услуги", "url": "/services/"})
+            breadcrumbs.append({
+                "title": self.category.title,
+                "url": self.category.get_absolute_url()
+            })
+            breadcrumbs.append({
+                "title": self.title,
+                "url": self.get_absolute_url()
+            })
         
         return breadcrumbs
     

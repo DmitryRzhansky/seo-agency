@@ -421,3 +421,165 @@ class Testimonial(models.Model):
     def get_photo_alt(self):
         """Возвращает альтернативный текст аватара или имя автора по умолчанию"""
         return self.photo_alt or f"Аватар {self.author_name}"
+
+
+# --- Модели для Портфолио ---
+
+class PortfolioItem(SEOModel):
+    """Модель для работ в портфолио"""
+    title = models.CharField(max_length=200, verbose_name="Название проекта")
+    slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")
+    short_description = models.TextField(max_length=300, verbose_name="Краткое описание")
+    full_description = CKEditor5Field(verbose_name="Подробное описание проекта", config_name='extends')
+    
+    # Изображения
+    main_image = models.ImageField(
+        upload_to='portfolio_images/',
+        verbose_name="Главное изображение",
+        help_text="Основное изображение проекта (рекомендуемый размер: 800x600px)"
+    )
+    main_image_alt = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="Alt-текст для главного изображения",
+        help_text="Описание изображения для SEO и доступности"
+    )
+    
+    # Дополнительные изображения (галерея)
+    gallery_images = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Галерея изображений",
+        help_text="Список путей к дополнительным изображениям проекта"
+    )
+    
+    # Информация о проекте
+    client_name = models.CharField(
+        max_length=150,
+        blank=True,
+        verbose_name="Название клиента/компании",
+        help_text="Название компании или имя клиента"
+    )
+    project_type = models.CharField(
+        max_length=100,
+        choices=[
+            ('seo', 'SEO-продвижение'),
+            ('context', 'Контекстная реклама'),
+            ('smm', 'SMM'),
+            ('design', 'Дизайн'),
+            ('development', 'Разработка'),
+            ('complex', 'Комплексное продвижение'),
+        ],
+        default='seo',
+        verbose_name="Тип проекта"
+    )
+    
+    # Результаты проекта
+    results = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Результаты проекта",
+        help_text="Список достигнутых результатов. Формат: [{\"metric\": \"Показатель\", \"value\": \"Значение\", \"description\": \"Описание\"}]"
+    )
+    
+    # Технические детали
+    technologies = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Использованные технологии",
+        help_text="Список технологий и инструментов. Формат: [\"Технология 1\", \"Технология 2\"]"
+    )
+    
+    # Ссылки
+    project_url = models.URLField(
+        blank=True,
+        verbose_name="Ссылка на проект",
+        help_text="Ссылка на готовый проект или сайт"
+    )
+    
+    # Метаданные
+    order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
+    is_featured = models.BooleanField(default=False, verbose_name="Рекомендуемый проект", help_text="Показывать в блоке рекомендуемых проектов")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
+
+    class Meta:
+        verbose_name = "Работа в портфолио"
+        verbose_name_plural = "Портфолио"
+        ordering = ['order', '-created_at']
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('main:portfolio_detail', kwargs={'slug': self.slug})
+    
+    def get_main_image_alt(self):
+        """Возвращает alt-текст для главного изображения"""
+        if self.main_image_alt:
+            return self.main_image_alt
+        return f"Изображение проекта {self.title}"
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для проекта портфолио"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        breadcrumbs.append({"title": "Портфолио", "url": "/portfolio/"})
+        breadcrumbs.append({
+            "title": self.title,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs
+    
+    def get_project_type_display_ru(self):
+        """Возвращает русское название типа проекта"""
+        type_names = {
+            'seo': 'SEO-продвижение',
+            'context': 'Контекстная реклама',
+            'smm': 'SMM',
+            'design': 'Дизайн',
+            'development': 'Разработка',
+            'complex': 'Комплексное продвижение',
+        }
+        return type_names.get(self.project_type, self.project_type)
+    
+    def get_results_list(self):
+        """Возвращает список результатов в удобном формате"""
+        if not self.results:
+            return []
+        return self.results if isinstance(self.results, list) else []
+    
+    def get_technologies_list(self):
+        """Возвращает список технологий в удобном формате"""
+        if not self.technologies:
+            return []
+        return self.technologies if isinstance(self.technologies, list) else []
+    
+    def get_gallery_images_list(self):
+        """Возвращает список изображений галереи"""
+        if not self.gallery_images:
+            return []
+        return self.gallery_images if isinstance(self.gallery_images, list) else []

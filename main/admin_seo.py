@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest
+from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest, PortfolioItem
 from seo.admin import SEOAdminMixin
 
 class SEOPreviewMixin:
@@ -272,3 +272,70 @@ class ContactRequestAdmin(admin.ModelAdmin):
     def has_message(self, obj):
         return "✅" if obj.message else "❌"
     has_message.short_description = "Есть сообщение"
+
+
+@admin.register(PortfolioItem)
+class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelAdmin):
+    """Админка для работ в портфолио"""
+    
+    list_display = [
+        'title', 'client_name', 'project_type', 'is_published', 
+        'is_featured', 'order', 'created_at', 'seo_preview'
+    ]
+    list_filter = [
+        'is_published', 'is_featured', 'project_type', 'created_at'
+    ]
+    search_fields = ['title', 'client_name', 'short_description']
+    list_editable = ['is_published', 'is_featured', 'order']
+    readonly_fields = ['created_at', 'updated_at', 'seo_preview', 'seo_validation']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': (
+                'title', 'slug', 'client_name', 'project_type',
+                'short_description', 'full_description'
+            )
+        }),
+        ('Изображения', {
+            'fields': (
+                'main_image', 'main_image_alt', 'gallery_images'
+            ),
+            'description': 'Загрузите главное изображение и дополнительные изображения для галереи'
+        }),
+        ('Результаты и технологии', {
+            'fields': ('results', 'technologies'),
+            'description': 'Добавьте достигнутые результаты и использованные технологии'
+        }),
+        ('Ссылки', {
+            'fields': ('project_url',),
+            'description': 'Ссылка на готовый проект или сайт'
+        }),
+        ('Настройки отображения', {
+            'fields': (
+                'is_published', 'is_featured', 'order',
+                'show_breadcrumbs', 'custom_breadcrumbs'
+            )
+        }),
+        ('SEO настройки', {
+            'fields': (
+                'seo_title', 'seo_description', 'seo_canonical',
+                'meta_keywords', 'seo_preview', 'seo_validation'
+            ),
+            'classes': ('collapse',)
+        }),
+        ('Метаданные', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related()
+    
+    def save_model(self, request, obj, form, change):
+        """Автоматическое заполнение SEO полей при сохранении"""
+        if not obj.seo_title:
+            obj.seo_title = f"{obj.title} - Портфолио | Isakov Agency"
+        if not obj.seo_description:
+            obj.seo_description = obj.short_description[:160] if obj.short_description else f"Проект {obj.title} в портфолио Isakov Agency"
+        super().save_model(request, obj, form, change)

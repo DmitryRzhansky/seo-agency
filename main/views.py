@@ -5,7 +5,7 @@ from django.contrib import messages
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import City, ServiceCategory, Service, Post, ContactRequest, TeamMember, Testimonial
+from .models import City, ServiceCategory, Service, Post, ContactRequest, TeamMember, Testimonial, PortfolioItem
 from .forms import ContactForm
 from django.views.decorators.cache import never_cache # отключаем кэш для index
 from django.conf import settings # <<< Импорт settings для времени кэша
@@ -274,3 +274,52 @@ def contacts(request):
         'seo_object': None,  # Можно создать отдельную SEO модель для страницы контактов
     }
     return render(request, 'main/contacts.html', context)
+
+
+# --- Портфолио ---
+
+def portfolio_list(request):
+    """
+    Страница со списком всех работ в портфолио
+    """
+    # Получаем все опубликованные работы
+    portfolio_items = PortfolioItem.objects.filter(is_published=True).order_by('order', '-created_at')
+    
+    # Пагинация
+    paginator = Paginator(portfolio_items, 9)  # 9 работ на страницу
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    # Получаем рекомендуемые проекты для отдельного блока
+    featured_projects = PortfolioItem.objects.filter(
+        is_published=True, 
+        is_featured=True
+    ).order_by('order', '-created_at')[:3]
+    
+    context = {
+        'title': 'Портфолио | Isakov Agency',
+        'page_obj': page_obj,
+        'featured_projects': featured_projects,
+        'seo_object': None,  # Можно создать отдельную SEO модель для страницы портфолио
+    }
+    return render(request, 'main/portfolio_list.html', context)
+
+
+def portfolio_detail(request, slug):
+    """
+    Детальная страница работы из портфолио
+    """
+    portfolio_item = get_object_or_404(PortfolioItem, slug=slug, is_published=True)
+    
+    # Получаем похожие проекты (из той же категории или последние)
+    related_projects = PortfolioItem.objects.filter(
+        is_published=True
+    ).exclude(pk=portfolio_item.pk).order_by('order', '-created_at')[:3]
+    
+    context = {
+        'title': f'{portfolio_item.title} | Портфолио | Isakov Agency',
+        'portfolio_item': portfolio_item,
+        'related_projects': related_projects,
+        'seo_object': portfolio_item,
+    }
+    return render(request, 'main/portfolio_detail.html', context)

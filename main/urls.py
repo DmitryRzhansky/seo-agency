@@ -16,6 +16,11 @@ urlpatterns = [
     
     # --- Дополнительные страницы ---
     path('contacts/', views.contacts, name='contacts'),
+    
+    # --- Портфолио ---
+    path('portfolio/', views.portfolio_list, name='portfolio_list'),
+    path('portfolio/<slug:slug>/', views.portfolio_detail, name='portfolio_detail'),
+    
     # path('faq/', views.faq, name='faq'),
     # path('privacy/', views.privacy_policy, name='privacy_policy'),
 

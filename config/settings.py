@@ -324,6 +324,11 @@ UNFOLD = {
                         "link": lambda request: reverse_lazy("admin:main_post_changelist"),
                     },
                     {
+                        "title": "Портфолио",
+                        "icon": "work",
+                        "link": lambda request: reverse_lazy("admin:main_portfolioitem_changelist"),
+                    },
+                    {
                         "title": "Команда",
                         "icon": "people",
                         "link": lambda request: reverse_lazy("admin:main_teammember_changelist"),

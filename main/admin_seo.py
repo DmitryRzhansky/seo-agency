@@ -4,8 +4,99 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest, PortfolioItem
+from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage
 from seo.admin import SEOAdminMixin
+
+class CustomHeadScriptsMixin:
+    """Миксин для добавления плашки кастомных скриптов в админку"""
+    
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        
+        # Добавляем плашку кастомных скриптов
+        custom_scripts_fieldset = (
+            '🔧 Кастомные скрипты в head', {
+                'fields': (),
+                'description': self._get_custom_scripts_info(obj),
+                'classes': ('collapse',),
+            }
+        )
+        
+        # Вставляем плашку в начало
+        return (custom_scripts_fieldset,) + fieldsets
+    
+    def _get_custom_scripts_info(self, obj):
+        """Получает информацию о кастомных скриптах для объекта"""
+        if not obj:
+            return "Создайте объект, чтобы увидеть доступные кастомные скрипты"
+        
+        # Определяем тип страницы и slug
+        page_type = self._get_page_type(obj)
+        page_slug = self._get_page_slug(obj)
+        
+        # Получаем скрипты
+        scripts = CustomHeadScript.objects.filter(is_active=True).order_by('order', 'name')
+        relevant_scripts = []
+        
+        for script in scripts:
+            if script.should_display_on_page(page_type, page_slug):
+                relevant_scripts.append(script)
+        
+        # Создаем URL для добавления нового скрипта с предзаполненными полями
+        add_script_url = f"/admin/main/customheadscript/add/?page_type={page_type}&page_slug={page_slug or ''}"
+        
+        if not relevant_scripts:
+            return f"""
+            <div style="padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">
+                <strong>📄 Информация о странице:</strong><br>
+                • Тип: <code>{page_type}</code><br>
+                • Slug: <code>{page_slug or 'не указан'}</code><br><br>
+                
+                <strong>🔧 Кастомные скрипты:</strong><br>
+                Для этой страницы нет активных кастомных скриптов.<br><br>
+                
+                <a href="{add_script_url}" class="button" style="background: #007cba; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block; margin-right: 10px;">➕ Добавить скрипт для этой страницы</a>
+                <a href="/admin/main/customheadscript/" class="button" style="background: #6c757d; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block;">📋 Все скрипты</a>
+            </div>
+            """
+        
+        script_list = []
+        for script in relevant_scripts:
+            script_list.append(f"• {script.name} ({script.get_content_type_display()})")
+        
+        return f"""
+        <div style="padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">
+            <strong>📄 Информация о странице:</strong><br>
+            • Тип: <code>{page_type}</code><br>
+            • Slug: <code>{page_slug or 'не указан'}</code><br><br>
+            
+            <strong>🔧 Активные скрипты для этой страницы:</strong><br>
+            {'<br>'.join(script_list)}<br><br>
+            
+            <a href="{add_script_url}" class="button" style="background: #007cba; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block; margin-right: 10px;">➕ Добавить еще скрипт</a>
+            <a href="/admin/main/customheadscript/" class="button" style="background: #6c757d; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block;">📋 Управление скриптами</a>
+        </div>
+        """
+    
+    def _get_page_type(self, obj):
+        """Определяет тип страницы для объекта"""
+        if hasattr(obj, '_meta'):
+            model_name = obj._meta.model_name
+            if model_name == 'post':
+                return 'post_detail'
+            elif model_name == 'service':
+                return 'service_detail'
+            elif model_name == 'portfolioitem':
+                return 'portfolio_detail'
+            elif model_name == 'city':
+                return 'city_detail'
+        return 'unknown'
+    
+    def _get_page_slug(self, obj):
+        """Получает slug объекта"""
+        if hasattr(obj, 'slug'):
+            return obj.slug
+        return None
 
 class SEOPreviewMixin:
     """Миксин для предпросмотра SEO сниппета"""
@@ -58,7 +149,7 @@ class SEOValidationMixin:
     seo_validation.short_description = "SEO статус"
 
 @admin.register(City)
-class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelAdmin):
+class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     list_display = (
         'name', 'region', 'population', 'order', 'is_active', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
@@ -119,7 +210,7 @@ class ServiceCategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, a
     get_service_count.short_description = 'Услуги'
 
 @admin.register(Service)
-class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelAdmin):
+class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     list_display = (
         'title', 'category', 'order', 'slug', 'is_published', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
@@ -150,7 +241,7 @@ class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.Mod
     )
 
 @admin.register(Post)
-class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelAdmin):
+class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     list_display = (
         'title', 'category', 'published_date', 'is_published', 'views_count', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
@@ -273,7 +364,7 @@ class ContactRequestAdmin(admin.ModelAdmin):
 
 
 @admin.register(PortfolioItem)
-class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelAdmin):
+class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     """Админка для работ в портфолио"""
     
     list_display = [
@@ -344,4 +435,77 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, adm
             obj.seo_description = obj.short_description[:160] if obj.short_description else f"Проект {obj.title} в портфолио Isakov Agency"
             
         super().save_model(request, obj, form, change)
+
+
+@admin.register(CustomHeadScript)
+class CustomHeadScriptAdmin(admin.ModelAdmin):
+    """Админка для кастомных скриптов и HTML-тегов"""
     
+    list_display = (
+        'name', 'content_type', 'page_type', 'page_slug', 
+        'is_active', 'order', 'created_at'
+    )
+    
+    list_filter = (
+        'content_type', 'page_type', 'is_active', 'created_at'
+    )
+    
+    search_fields = ('name', 'html_content', 'page_type', 'page_slug')
+    
+    list_editable = ('is_active', 'order')
+    
+    fieldsets = (
+        ('📝 Основная информация', {
+            'fields': ('name', 'content_type', 'html_content'),
+            'description': 'Основная информация о скрипте или HTML-теге'
+        }),
+        ('🎯 Условия отображения', {
+            'fields': ('page_type', 'page_slug'),
+            'description': 'Настройте, на каких страницах должен отображаться скрипт'
+        }),
+        ('⚙️ Настройки', {
+            'fields': ('is_active', 'order'),
+            'description': 'Управление активностью и порядком отображения'
+        }),
+    )
+    
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by('order', 'name')
+    
+    def get_form(self, request, obj=None, **kwargs):
+        """Переопределяем форму для предзаполнения полей из URL параметров"""
+        form = super().get_form(request, obj, **kwargs)
+        
+        # Если это создание нового объекта (не редактирование)
+        if obj is None:
+            # Получаем параметры из URL
+            page_type = request.GET.get('page_type', '')
+            page_slug = request.GET.get('page_slug', '')
+            
+            # Предзаполняем поля, если они переданы в URL
+            if page_type or page_slug:
+                class PrefilledForm(form):
+                    def __init__(self, *args, **kwargs):
+                        super().__init__(*args, **kwargs)
+                        if page_type:
+                            self.fields['page_type'].initial = page_type
+                        if page_slug:
+                            self.fields['page_slug'].initial = page_slug
+                        
+                        # Добавляем подсказку
+                        if page_type and page_slug:
+                            self.fields['page_type'].help_text = f"Предзаполнено для страницы: {page_type} / {page_slug}"
+                            self.fields['page_slug'].help_text = f"Предзаполнено для страницы: {page_type} / {page_slug}"
+                
+                return PrefilledForm
+        
+        return form
+    
+    class Media:
+        css = {
+            'all': ('admin/css/custom_head_script_admin.css',)
+        }
+        js = ('admin/js/custom_head_script_admin.js',)
+
+
+# HomePage убрана из админки по запросу пользователя

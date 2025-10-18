@@ -5,7 +5,7 @@ from django.contrib import messages
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import City, ServiceCategory, Service, Post, ContactRequest, TeamMember, Testimonial, PortfolioItem
+from .models import City, ServiceCategory, Service, Post, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage
 from .forms import ContactForm
 from django.views.decorators.cache import never_cache # отключаем кэш для index
 from django.conf import settings # <<< Импорт settings для времени кэша
@@ -50,14 +50,27 @@ def index(request):
     # Получаем активные города из базы данных
     cities_list = City.objects.filter(is_active=True).order_by('order', 'name')
     
+    # Получаем настройки главной страницы
+    try:
+        home_page = HomePage.objects.filter(is_active=True).first()
+        if not home_page:
+            # Создаем дефолтную главную страницу, если её нет
+            home_page = HomePage.objects.create()
+    except:
+        home_page = None
+    
     context = {
-        'title': 'Комплексное продвижение бизнеса | Isakov Agency',
+        'title': home_page.hero_title if home_page else 'Комплексное продвижение бизнеса | Isakov Agency',
         'top_services': top_services,
         'recent_posts': recent_posts,
         'cities_list': cities_list,
         'form': form, # <<< Форма передается в шаблон
         'team_members': team_members,
         'testimonials': testimonials,
+        'home_page': home_page,
+        'seo_object': home_page,
+        'page_type': 'home',
+        'page_slug': None,
     }
     return render(request, 'main/index.html', context)
 
@@ -161,6 +174,8 @@ def city_list(request):
         'title': 'Города присутствия | SEO продвижение по России',
         'cities': cities,
         'seo_object': None,
+        'page_type': 'city_list',
+        'page_slug': None,
     }
     return render(request, 'main/city_list.html', context)
 
@@ -182,6 +197,8 @@ def city_detail(request, slug):
         'services': services,
         'recent_posts': recent_posts,
         'seo_object': city,
+        'page_type': 'city_detail',
+        'page_slug': city.slug,
     }
     return render(request, 'main/city_detail.html', context)
 
@@ -203,6 +220,8 @@ def city_service_detail(request, city_slug, service_slug):
         'service': service,
         'related_services': related_services,
         'seo_object': service,
+        'page_type': 'city_service_detail',
+        'page_slug': f"{city.slug}/{service.slug}",
     }
     return render(request, 'main/city_service_detail.html', context)
 
@@ -231,6 +250,8 @@ def city_post_detail(request, city_slug, post_slug):
         'post': post,
         'related_posts': related_posts,
         'seo_object': post,
+        'page_type': 'city_post_detail',
+        'page_slug': f"{city.slug}/{post.slug}",
     }
     return render(request, 'main/city_post_detail.html', context)
 
@@ -337,6 +358,8 @@ def portfolio_list(request):
         'current_type': project_type,
         'search_query': search_query,
         'seo_object': None,  # Можно создать отдельную SEO модель для страницы портфолио
+        'page_type': 'portfolio_list',
+        'page_slug': None,
     }
     return render(request, 'main/portfolio_list.html', context)
 
@@ -357,5 +380,7 @@ def portfolio_detail(request, slug):
         'portfolio_item': portfolio_item,
         'related_projects': related_projects,
         'seo_object': portfolio_item,
+        'page_type': 'portfolio_detail',
+        'page_slug': portfolio_item.slug,
     }
     return render(request, 'main/portfolio_detail.html', context)

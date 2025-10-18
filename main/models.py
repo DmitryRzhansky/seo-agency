@@ -113,6 +113,183 @@ class City(SEOModel):
         
         return city_declensions.get(self.name, f"в {self.name}")
 
+# --- Модель для главной страницы ---
+
+class HomePage(SEOModel):
+    """Модель для редактирования главной страницы"""
+    
+    # Основные блоки
+    hero_title = models.CharField(
+        max_length=200,
+        default="Комплексное продвижение бизнеса",
+        verbose_name="Главный заголовок"
+    )
+    
+    hero_subtitle = models.TextField(
+        default="SEO, контекстная реклама, создание сайтов. Увеличиваем трафик и продажи для вашего бизнеса.",
+        verbose_name="Подзаголовок"
+    )
+    
+    hero_button_text = models.CharField(
+        max_length=100,
+        default="Получить консультацию",
+        verbose_name="Текст кнопки"
+    )
+    
+    # Блок услуг
+    services_title = models.CharField(
+        max_length=200,
+        default="Наши услуги",
+        verbose_name="Заголовок блока услуг"
+    )
+    
+    services_subtitle = models.TextField(
+        default="Комплексные решения для продвижения вашего бизнеса в интернете",
+        verbose_name="Подзаголовок блока услуг"
+    )
+    
+    # Блок команды
+    team_title = models.CharField(
+        max_length=200,
+        default="Наша команда",
+        verbose_name="Заголовок блока команды"
+    )
+    
+    team_subtitle = models.TextField(
+        default="Профессионалы с многолетним опытом работы в digital-маркетинге",
+        verbose_name="Подзаголовок блока команды"
+    )
+    
+    # Блок отзывов
+    testimonials_title = models.CharField(
+        max_length=200,
+        default="Отзывы клиентов",
+        verbose_name="Заголовок блока отзывов"
+    )
+    
+    testimonials_subtitle = models.TextField(
+        default="Что говорят о нас наши клиенты",
+        verbose_name="Подзаголовок блока отзывов"
+    )
+    
+    # Настройки
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активна",
+        help_text="Включить/выключить главную страницу"
+    )
+    
+    # Метаданные
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
+    
+    class Meta:
+        verbose_name = "Главная страница"
+        verbose_name_plural = "Главная страница"
+    
+    def __str__(self):
+        return "Главная страница"
+    
+    def save(self, *args, **kwargs):
+        # Автоматически заполняем SEO поля, если они пустые
+        if not self.seo_title:
+            self.seo_title = f"{self.hero_title} | Isakov Agency"
+        if not self.seo_description:
+            self.seo_description = self.hero_subtitle[:160]
+        super().save(*args, **kwargs)
+
+# --- Модель для кастомных скриптов и HTML-тегов ---
+
+class CustomHeadScript(models.Model):
+    """Модель для кастомных скриптов и HTML-тегов в head"""
+    
+    # Основная информация
+    name = models.CharField(
+        max_length=25000,
+        verbose_name="Название",
+        help_text="Описательное название для идентификации скрипта"
+    )
+    
+    # Тип контента
+    CONTENT_TYPE_CHOICES = [
+        ('script', 'JavaScript скрипт'),
+        ('meta', 'Meta теги'),
+        ('link', 'Link теги'),
+        ('style', 'CSS стили'),
+        ('other', 'Другой HTML'),
+    ]
+    
+    content_type = models.CharField(
+        max_length=20,
+        choices=CONTENT_TYPE_CHOICES,
+        default='script',
+        verbose_name="Тип контента"
+    )
+    
+    # HTML код
+    html_content = models.TextField(
+        verbose_name="HTML код",
+        help_text="HTML код для вставки в head (без тегов <head> и </head>)"
+    )
+    
+    # Условия отображения
+    page_type = models.CharField(
+        max_length=50,
+        blank=True,
+        verbose_name="Тип страницы",
+        help_text="Оставьте пустым для всех страниц, или укажите: home, city_detail, city_list, service_detail, post_detail, portfolio_detail, portfolio_list"
+    )
+    
+    page_slug = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="Slug страницы",
+        help_text="Оставьте пустым для всех страниц этого типа, или укажите конкретный slug"
+    )
+    
+    # Настройки
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активен",
+        help_text="Включить/выключить скрипт"
+    )
+    
+    order = models.IntegerField(
+        default=100,
+        verbose_name="Порядок",
+        help_text="Порядок отображения (меньше = выше)"
+    )
+    
+    # Метаданные
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
+    
+    class Meta:
+        verbose_name = "Кастомный скрипт/тег"
+        verbose_name_plural = "Кастомные скрипты/теги"
+        ordering = ['order', 'name']
+    
+    def __str__(self):
+        return f"{self.name} ({self.get_content_type_display()})"
+    
+    def should_display_on_page(self, page_type, page_slug=None):
+        """Проверяет, должен ли скрипт отображаться на данной странице"""
+        if not self.is_active:
+            return False
+        
+        # Если указан конкретный тип страницы
+        if self.page_type:
+            if self.page_type != page_type:
+                return False
+            
+            # Если указан конкретный slug
+            if self.page_slug and page_slug:
+                return self.page_slug == page_slug
+            elif self.page_slug and not page_slug:
+                return False
+        
+        return True
+
 # --- Модели для Услуг (для хедера и футера) ---
 
 class ServiceCategory(SEOModel):

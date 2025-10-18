@@ -57,6 +57,24 @@ def get_post_breadcrumbs(post, city=None):
     else:
         return post.get_breadcrumbs()
 
+@register.simple_tag
+def get_custom_head_scripts(page_type, page_slug=None):
+    """
+    Получает кастомные скрипты и HTML-теги для head.
+    Использование: {% get_custom_head_scripts 'home' %} или {% get_custom_head_scripts 'city_detail' 'moscow' %}
+    """
+    from main.models import CustomHeadScript
+    
+    scripts = CustomHeadScript.objects.filter(is_active=True).order_by('order', 'name')
+    
+    # Фильтруем по типу страницы и slug
+    filtered_scripts = []
+    for script in scripts:
+        if script.should_display_on_page(page_type, page_slug):
+            filtered_scripts.append(script)
+    
+    return filtered_scripts
+
 # Регистрируем фильтр в глобальном регистре для совместимости с Django Unfold
 @global_register.filter
 def length_is(value, arg):

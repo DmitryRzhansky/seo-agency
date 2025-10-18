@@ -121,10 +121,18 @@
                                 <span>{{ portfolio_item.client_name }}</span>
                             </div>
                             {% endif %}
+                            {% if portfolio_item.cooperation_start %}
                             <div class="info-item">
-                                <strong>Дата создания:</strong>
-                                <span>{{ portfolio_item.created_at|date:"d.m.Y" }}</span>
+                                <strong>Начало сотрудничества:</strong>
+                                <span>{{ portfolio_item.cooperation_start }}</span>
                             </div>
+                            {% endif %}
+                            {% if portfolio_item.cooperation_end %}
+                            <div class="info-item">
+                                <strong>Конец сотрудничества:</strong>
+                                <span>{{ portfolio_item.cooperation_end }}</span>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

@@ -294,6 +294,12 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, adm
                 'short_description', 'full_description'
             )
         }),
+        ('Период сотрудничества', {
+            'fields': (
+                'cooperation_start', 'cooperation_end'
+            ),
+            'description': 'Укажите даты начала и окончания сотрудничества в текстовом формате'
+        }),
         ('Изображения', {
             'fields': (
                 'main_image', 'main_image_alt', 'gallery_images'
@@ -336,4 +342,6 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, adm
             obj.seo_title = f"{obj.title} - Портфолио | Isakov Agency"
         if not obj.seo_description:
             obj.seo_description = obj.short_description[:160] if obj.short_description else f"Проект {obj.title} в портфолио Isakov Agency"
+            
         super().save_model(request, obj, form, change)
+    

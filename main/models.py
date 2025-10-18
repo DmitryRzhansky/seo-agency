@@ -497,6 +497,22 @@ class PortfolioItem(SEOModel):
         help_text="Ссылка на готовый проект или сайт"
     )
     
+    # Даты сотрудничества
+    cooperation_start = models.CharField(
+        max_length=100,
+        default="",
+        blank=True,
+        verbose_name="Начало сотрудничества",
+        help_text="Например: 'Январь 2024' или 'Март 2023'"
+    )
+    cooperation_end = models.CharField(
+        max_length=100,
+        default="",
+        blank=True,
+        verbose_name="Конец сотрудничества",
+        help_text="Например: 'Декабрь 2024' или 'Сотрудничество продолжается'"
+    )
+    
     # Метаданные
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
@@ -583,3 +599,15 @@ class PortfolioItem(SEOModel):
         if not self.gallery_images:
             return []
         return self.gallery_images if isinstance(self.gallery_images, list) else []
+    
+    def get_cooperation_period(self):
+        """Возвращает отформатированную информацию о периоде сотрудничества"""
+        if not self.cooperation_start and not self.cooperation_end:
+            return "Период не указан"
+        
+        if self.cooperation_start and self.cooperation_end:
+            return f"{self.cooperation_start} — {self.cooperation_end}"
+        elif self.cooperation_start:
+            return f"{self.cooperation_start} — Период не завершен"
+        else:
+            return "Период не указан"

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'services',
     'pages',
     'seo',
+    'seo_management',
     'django_ckeditor_5',
 ]
 
@@ -331,6 +332,22 @@ UNFOLD = {
                         "title": "Отзывы",
                         "icon": "star",
                         "link": lambda request: reverse_lazy("admin:main_testimonial_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "🔍 SEO",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Sitemap",
+                        "icon": "map",
+                        "link": lambda request: reverse_lazy("admin:seo_management_sitemapsettings_changelist"),
+                    },
+                    {
+                        "title": "Robots.txt",
+                        "icon": "settings",
+                        "link": lambda request: reverse_lazy("admin:seo_management_robotstxtsettings_changelist"),
                     },
                 ],
             },

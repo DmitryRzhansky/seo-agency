@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # SEO файлы (sitemap.xml, robots.txt)
+    path('', include(('seo_management.urls', 'seo_management'), namespace='seo_management')),
     # Подключаем URL'ы приложения main, даем ему namespace 'main'
     path('', include(('main.urls', 'main'), namespace='main')),
     # Блог

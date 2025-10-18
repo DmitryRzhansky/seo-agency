@@ -85,7 +85,7 @@ class City(SEOModel):
         """Возвращает локальный заголовок или генерирует автоматически"""
         if self.local_title:
             return self.local_title
-        return f"SEO продвижение в {self.get_name_prepositional()}"
+        return f"SEO продвижение {self.get_name_prepositional()}"
     
     def get_name_prepositional(self):
         """Возвращает название города в предложном падеже"""

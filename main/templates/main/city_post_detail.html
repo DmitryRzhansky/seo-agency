@@ -229,7 +229,7 @@
 
                     <div class="text-center">
                         <a href="{% url 'main:city_detail' city.slug %}" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-arrow-left me-2"></i> Все статьи для {{ city.name }}
+                            <i class="fas fa-arrow-left me-2"></i> Все статьи {{ city.get_name_prepositional }}
                         </a>
                     </div>
 

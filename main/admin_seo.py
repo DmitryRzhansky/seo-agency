@@ -47,8 +47,6 @@ class SEOValidationMixin:
             warnings.append("❌ Нет SEO заголовка")
         if not obj.get_seo_description():
             warnings.append("❌ Нет SEO описания")
-        if hasattr(obj, 'meta_keywords') and not obj.meta_keywords:
-            warnings.append("⚠️ Нет ключевых слов")
             
         if warnings:
             return format_html(
@@ -319,7 +317,7 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, adm
         ('SEO настройки', {
             'fields': (
                 'seo_title', 'seo_description', 'seo_canonical',
-                'meta_keywords', 'seo_preview', 'seo_validation'
+                'seo_preview', 'seo_validation'
             ),
             'classes': ('collapse',)
         }),

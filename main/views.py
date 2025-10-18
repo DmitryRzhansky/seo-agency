@@ -278,28 +278,64 @@ def contacts(request):
 
 # --- Портфолио ---
 
+@never_cache
 def portfolio_list(request):
     """
-    Страница со списком всех работ в портфолио
+    Страница со списком всех работ в портфолио с фильтрацией и поиском
     """
-    # Получаем все опубликованные работы
+    # Получаем все опубликованные работы (фильтрация теперь происходит на клиенте)
     portfolio_items = PortfolioItem.objects.filter(is_published=True).order_by('order', '-created_at')
     
-    # Пагинация
+    # Получаем тип проекта для передачи в шаблон (но не фильтруем на сервере)
+    project_type = request.GET.get('type')
+    
+    # Поиск по названию, описанию и клиенту
+    search_query = request.GET.get('q', '').strip()
+    if search_query:
+        from django.db.models import Q
+        portfolio_items = portfolio_items.filter(
+            Q(title__icontains=search_query) |
+            Q(short_description__icontains=search_query) |
+            Q(client_name__icontains=search_query)
+        ).distinct()
+    
+    # Пагинация для всех работ
     paginator = Paginator(portfolio_items, 9)  # 9 работ на страницу
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    # Получаем рекомендуемые проекты для отдельного блока
+    # Получаем рекомендуемые проекты для отдельного блока (с пагинацией)
     featured_projects = PortfolioItem.objects.filter(
         is_published=True, 
         is_featured=True
-    ).order_by('order', '-created_at')[:3]
+    ).order_by('order', '-created_at')
+    
+    # Пагинация для рекомендуемых проектов
+    featured_paginator = Paginator(featured_projects, 6)  # 6 рекомендуемых проектов на страницу
+    featured_page_number = request.GET.get('featured_page', 1)
+    featured_page_obj = featured_paginator.get_page(featured_page_number)
+    
+    # Получаем все типы проектов для фильтрации
+    project_types = PortfolioItem.objects.filter(is_published=True).values_list('project_type', flat=True).distinct()
+    project_type_choices = [
+        ('seo', 'SEO-продвижение'),
+        ('context', 'Контекстная реклама'),
+        ('smm', 'SMM'),
+        ('design', 'Дизайн'),
+        ('development', 'Разработка'),
+        ('complex', 'Комплексное продвижение'),
+    ]
+    available_types = [(choice[0], choice[1]) for choice in project_type_choices if choice[0] in project_types]
     
     context = {
         'title': 'Портфолио | Isakov Agency',
         'page_obj': page_obj,
-        'featured_projects': featured_projects,
+        'featured_page_obj': featured_page_obj,
+        'is_paginated': page_obj.has_other_pages(),
+        'is_featured_paginated': featured_page_obj.has_other_pages(),
+        'available_types': available_types,
+        'current_type': project_type,
+        'search_query': search_query,
         'seo_object': None,  # Можно создать отдельную SEO модель для страницы портфолио
     }
     return render(request, 'main/portfolio_list.html', context)

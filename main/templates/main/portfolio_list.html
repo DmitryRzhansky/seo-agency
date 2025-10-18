@@ -42,109 +42,113 @@
 </section>
 
 <!-- Рекомендуемые проекты -->
-{% if featured_projects %}
+{% if featured_page_obj %}
 <section class="section-padding bg-light">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <h2 class="text-center mb-5">Рекомендуемые проекты</h2>
                 
-                <!-- Слайдер рекомендуемых проектов -->
-                <div id="featuredProjectsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
-                    <div class="carousel-inner">
-                        {% for project in featured_projects %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8 col-md-10">
-                                    <div class="portfolio-card featured featured-slide">
-                                        <div class="row align-items-center">
-                                            <div class="col-md-6">
-                                                <div class="portfolio-image">
-                                                    {% if project.main_image %}
-                                                    <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
-                                                    {% else %}
-                                                    <div class="no-image-placeholder">
-                                                        <i class="fas fa-image fa-3x text-muted"></i>
-                                                        <p class="text-muted mt-2">Изображение отсутствует</p>
-                                                    </div>
-                                                    {% endif %}
-                                                    <div class="portfolio-overlay">
-                                                        <div class="portfolio-actions">
-                                                            <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
-                                                                <i class="fas fa-eye me-2"></i>
-                                                                Подробнее
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="portfolio-content">
-                                                    <div class="portfolio-meta">
-                                                        <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
-                                                        {% if project.client_name %}
-                                                        <span class="text-muted">{{ project.client_name }}</span>
-                                                        {% endif %}
-                                                    </div>
-                                                    <h3 class="portfolio-title">
-                                                        <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                                                    </h3>
-                                                    <p class="portfolio-description">{{ project.short_description }}</p>
-                                                    
-                                                    <!-- Результаты проекта -->
-                                                    {% if project.get_results_list %}
-                                                    <div class="project-results mt-3">
-                                                        <h5 class="text-primary">Результаты:</h5>
-                                                        <div class="row">
-                                                            {% for result in project.get_results_list|slice:":2" %}
-                                                            <div class="col-6">
-                                                                <div class="result-item">
-                                                                    <div class="result-value">{{ result.value }}</div>
-                                                                    <div class="result-metric">{{ result.metric }}</div>
-                                                                </div>
-                                                            </div>
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                    {% endif %}
-                                                    
-                                                    <div class="mt-3">
-                                                        <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary">
-                                                            <i class="fas fa-arrow-right me-2"></i>
-                                                            Смотреть проект
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                <!-- Сетка рекомендуемых проектов -->
+                <div class="row g-4">
+                    {% for project in featured_page_obj %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="portfolio-card featured">
+                            <div class="portfolio-image">
+                                {% if project.main_image %}
+                                <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
+                                {% else %}
+                                <div class="no-image-placeholder">
+                                    <i class="fas fa-image fa-3x text-muted"></i>
+                                    <p class="text-muted mt-2">Изображение отсутствует</p>
+                                </div>
+                                {% endif %}
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-actions">
+                                        <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
+                                            <i class="fas fa-eye me-2"></i>
+                                            Подробнее
+                                        </a>
                                     </div>
                                 </div>
                             </div>
+                            <div class="portfolio-content">
+                                <div class="portfolio-meta">
+                                    <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
+                                    {% if project.client_name %}
+                                    <span class="text-muted">{{ project.client_name }}</span>
+                                    {% endif %}
+                                </div>
+                                <h3 class="portfolio-title">
+                                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                                </h3>
+                                <p class="portfolio-description">{{ project.short_description }}</p>
+                                
+                                <!-- Результаты проекта -->
+                                {% if project.get_results_list %}
+                                <div class="project-results mt-3">
+                                    <h6 class="text-primary">Результаты:</h6>
+                                    <div class="row">
+                                        {% for result in project.get_results_list|slice:":2" %}
+                                        <div class="col-6">
+                                            <div class="result-item">
+                                                <div class="result-value">{{ result.value }}</div>
+                                                <div class="result-metric">{{ result.metric }}</div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+                                <div class="mt-3">
+                                    <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary">
+                                        <i class="fas fa-arrow-right me-2"></i>
+                                        Смотреть проект
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        {% endfor %}
                     </div>
-                    
-                    <!-- Навигация слайдера -->
-                    {% if featured_projects|length > 1 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#featuredProjectsCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Предыдущий</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#featuredProjectsCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Следующий</span>
-                    </button>
-                    
-                    <!-- Индикаторы -->
-                    <div class="carousel-indicators">
-                        {% for project in featured_projects %}
-                        <button type="button" data-bs-target="#featuredProjectsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" 
-                                {% if forloop.first %}class="active" aria-current="true"{% endif %} 
-                                aria-label="Слайд {{ forloop.counter }}"></button>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+                    {% endfor %}
                 </div>
+                
+                <!-- Пагинация для рекомендуемых проектов -->
+                {% if is_featured_paginated %}
+                <nav aria-label="Навигация по рекомендуемым проектам" class="mt-5">
+                    <ul class="pagination justify-content-center">
+                        {% if featured_page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?featured_page=1{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Первая</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?featured_page={{ featured_page_obj.previous_page_number }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Предыдущая</a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for num in featured_page_obj.paginator.page_range %}
+                        {% if featured_page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                        {% elif num > featured_page_obj.number|add:'-3' and num < featured_page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?featured_page={{ num }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">{{ num }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        
+                        {% if featured_page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?featured_page={{ featured_page_obj.next_page_number }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Следующая</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?featured_page={{ featured_page_obj.paginator.num_pages }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Последняя</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -158,90 +162,123 @@
             <div class="col-12">
                 <h2 class="text-center mb-5">Все работы</h2>
                 
+                <!-- Поисковая форма -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-6">
+                        <form method="get" class="d-flex">
+                            <div class="input-group">
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="q" 
+                                       placeholder="Поиск по проектам..." 
+                                       value="{{ search_query }}"
+                                       aria-label="Поиск по проектам">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Фильтр по типам проектов -->
+                {% if available_types %}
+                <div class="row justify-content-center mb-5">
+                    <div class="col-lg-8">
+                        <div class="d-flex flex-wrap justify-content-center gap-2" id="portfolio-filters">
+                            <!-- Кнопка "Все" -->
+                            <button type="button" 
+                                    class="btn {% if not current_type %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm filter-btn" 
+                                    data-type="">
+                                Все проекты
+                            </button>
+                            
+                            <!-- Кнопки типов проектов -->
+                            {% for type_value, type_name in available_types %}
+                                <button type="button" 
+                                        class="btn {% if current_type == type_value %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm filter-btn" 
+                                        data-type="{{ type_value }}">
+                                    {{ type_name }}
+                                </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Информация о поиске -->
+                {% if search_query %}
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-8">
+                        <div class="alert alert-info text-center">
+                            <i class="fas fa-search me-2"></i>
+                            Результаты поиска по запросу: <strong>"{{ search_query }}"</strong>
+                            {% if page_obj %}
+                                (найдено {{ page_obj.paginator.count }} {{ page_obj.paginator.count|pluralize:"проект,проекта,проектов" }})
+                            {% endif %}
+                            <a href="{% url 'main:portfolio_list' %}" class="btn btn-sm btn-outline-secondary ms-3">
+                                <i class="fas fa-times me-1"></i> Очистить поиск
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
                 {% if page_obj %}
-                <!-- Слайдер всех работ -->
-                <div id="allProjectsCarousel" class="carousel slide" data-bs-interval="false">
-                    <div class="carousel-inner">
-                        {% for project in page_obj %}
-                        {% if forloop.counter0|divisibleby:3 %}
-                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <div class="row">
-                        {% endif %}
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="portfolio-card">
-                                        <div class="portfolio-image">
-                                            {% if project.main_image %}
-                                            <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
-                                            {% else %}
-                                            <div class="no-image-placeholder">
-                                                <i class="fas fa-image fa-3x text-muted"></i>
-                                                <p class="text-muted mt-2">Изображение отсутствует</p>
-                                            </div>
-                                            {% endif %}
-                                            <div class="portfolio-overlay">
-                                                <div class="portfolio-actions">
-                                                    <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
-                                                        <i class="fas fa-eye me-2"></i>
-                                                        Подробнее
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="portfolio-content">
-                                            <div class="portfolio-meta">
-                                                <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
-                                                {% if project.client_name %}
-                                                <span class="text-muted">{{ project.client_name }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <h3 class="portfolio-title">
-                                                <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                                            </h3>
-                                            <p class="portfolio-description">{{ project.short_description }}</p>
-                                        </div>
+                <!-- Сетка всех работ -->
+                <div id="portfolio-grid" class="row g-4">
+                    {% for project in page_obj %}
+                    <div class="col-lg-4 col-md-6 portfolio-item" data-type="{{ project.project_type }}">
+                        <div class="portfolio-card">
+                            <div class="portfolio-image">
+                                {% if project.main_image %}
+                                <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
+                                {% else %}
+                                <div class="no-image-placeholder">
+                                    <i class="fas fa-image fa-3x text-muted"></i>
+                                    <p class="text-muted mt-2">Изображение отсутствует</p>
+                                </div>
+                                {% endif %}
+                                <div class="portfolio-overlay">
+                                    <div class="portfolio-actions">
+                                        <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
+                                            <i class="fas fa-eye me-2"></i>
+                                            Подробнее
+                                        </a>
                                     </div>
                                 </div>
-                        {% if forloop.counter|divisibleby:3 or forloop.last %}
+                            </div>
+                            <div class="portfolio-content">
+                                <div class="portfolio-meta">
+                                    <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
+                                    {% if project.client_name %}
+                                    <span class="text-muted">{{ project.client_name }}</span>
+                                    {% endif %}
+                                </div>
+                                <h3 class="portfolio-title">
+                                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                                </h3>
+                                <p class="portfolio-description">{{ project.short_description }}</p>
                             </div>
                         </div>
-                        {% endif %}
-                        {% endfor %}
                     </div>
-                    
-                    <!-- Навигация слайдера -->
-                    {% if page_obj|length > 3 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#allProjectsCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Предыдущий</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#allProjectsCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Следующий</span>
-                    </button>
-                    
-                    <!-- Индикаторы -->
-                    <div class="carousel-indicators">
-                        {% for project in page_obj %}
-                        {% if forloop.counter0|divisibleby:3 %}
-                        <button type="button" data-bs-target="#allProjectsCarousel" data-bs-slide-to="{{ forloop.counter0|floatformat:0|add:0|div:3 }}" 
-                                {% if forloop.first %}class="active" aria-current="true"{% endif %} 
-                                aria-label="Слайд {{ forloop.counter0|floatformat:0|add:1|div:3|add:1 }}"></button>
-                        {% endif %}
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+                    {% empty %}
+                        <div class="col-12 text-center py-5">
+                            <p class="lead text-muted">В этом разделе пока нет опубликованных проектов.</p>
+                        </div>
+                    {% endfor %}
                 </div>
                 
                 <!-- Пагинация -->
-                {% if page_obj.has_other_pages %}
-                <nav aria-label="Навигация по страницам портфолио">
+                {% if is_paginated %}
+                <nav aria-label="Навигация по страницам портфолио" class="mt-5">
                     <ul class="pagination justify-content-center">
                         {% if page_obj.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page=1">Первая</a>
+                            <a class="page-link" href="?page=1{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Первая</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Предыдущая</a>
                         </li>
                         {% endif %}
                         
@@ -252,17 +289,17 @@
                         </li>
                         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            <a class="page-link" href="?page={{ num }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">{{ num }}</a>
                         </li>
                         {% endif %}
                         {% endfor %}
                         
                         {% if page_obj.has_next %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Следующая</a>
                         </li>
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if current_type %}&type={{ current_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">Последняя</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -447,26 +484,7 @@
     border-color: var(--bs-primary);
 }
 
-/* Стили для слайдеров */
-.featured-slide {
-    min-height: 400px;
-    padding: 2rem;
-}
-
-.featured-slide .portfolio-image {
-    height: 300px;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.featured-slide .portfolio-content {
-    padding: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
+/* Стили для рекомендуемых проектов */
 .project-results {
     background: rgba(13, 110, 253, 0.1);
     padding: 1rem;
@@ -492,111 +510,22 @@
     font-weight: 500;
 }
 
-/* Кастомизация карусели */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 50px;
-    height: 50px;
-    background: var(--bs-primary);
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.8;
+/* Анимации для фильтрации */
+.portfolio-item {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.filter-btn {
     transition: all 0.3s ease;
 }
 
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.1);
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-control-prev {
-    left: -25px;
-}
-
-.carousel-control-next {
-    right: -25px;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
-}
-
-.carousel-indicators {
-    bottom: -50px;
-}
-
-.carousel-indicators [data-bs-target] {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--bs-border-dark);
-    border: none;
-    margin: 0 5px;
-    transition: all 0.3s ease;
-}
-
-.carousel-indicators .active {
-    background-color: var(--bs-primary);
-    transform: scale(1.2);
-}
-
-/* Анимации для слайдов */
-.carousel-item {
-    transition: transform 0.6s ease-in-out;
-}
-
-.carousel-item.active {
-    transform: translateX(0);
-}
-
-.carousel-item-next:not(.carousel-item-start),
-.active.carousel-item-end {
-    transform: translateX(100%);
-}
-
-.carousel-item-prev:not(.carousel-item-end),
-.active.carousel-item-start {
-    transform: translateX(-100%);
-}
-
-/* Адаптивность для слайдеров */
+/* Адаптивность */
 @media (max-width: 768px) {
-    .featured-slide {
-        min-height: auto;
-        padding: 1rem;
-    }
-    
-    .featured-slide .portfolio-image {
-        height: 200px;
-        margin-bottom: 1rem;
-    }
-    
-    .featured-slide .portfolio-content {
-        padding: 0;
-    }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .carousel-control-prev {
-        left: -20px;
-    }
-    
-    .carousel-control-next {
-        right: -20px;
-    }
-    
-    .carousel-indicators {
-        bottom: -40px;
-    }
-    
     .portfolio-image {
         height: 200px;
     }
@@ -609,41 +538,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Инициализация слайдеров
-    const featuredCarousel = document.getElementById('featuredProjectsCarousel');
-    const allProjectsCarousel = document.getElementById('allProjectsCarousel');
-    
-    // Настройка автопрокрутки для рекомендуемых проектов
-    if (featuredCarousel) {
-        const featuredCarouselInstance = new bootstrap.Carousel(featuredCarousel, {
-            interval: 8000,
-            wrap: true,
-            touch: true
-        });
-        
-        // Пауза при наведении
-        featuredCarousel.addEventListener('mouseenter', function() {
-            featuredCarouselInstance.pause();
-        });
-        
-        featuredCarousel.addEventListener('mouseleave', function() {
-            featuredCarouselInstance.cycle();
-        });
-    }
-    
-    // Настройка слайдера всех работ (без автопрокрутки)
-    if (allProjectsCarousel) {
-        const allProjectsCarouselInstance = new bootstrap.Carousel(allProjectsCarousel, {
-            interval: false,
-            wrap: true,
-            touch: true,
-            ride: false
-        });
-        
-        // Дополнительная защита от автопрокрутки
-        allProjectsCarouselInstance.pause();
-    }
-    
     // Плавная прокрутка к секции портфолио
     const portfolioLink = document.querySelector('a[href="#portfolio"]');
     if (portfolioLink) {
@@ -698,6 +592,95 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.display = 'none';
         });
     });
+    
+    // Обработка формы поиска
+    const searchForm = document.querySelector('form[method="get"]');
+    if (searchForm) {
+        const searchInput = searchForm.querySelector('input[name="q"]');
+        if (searchInput) {
+            // Сохраняем текущие параметры фильтрации
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentType = urlParams.get('type');
+            
+            // Добавляем скрытое поле для типа, если он есть
+            if (currentType) {
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'type';
+                hiddenInput.value = currentType;
+                searchForm.appendChild(hiddenInput);
+            }
+        }
+    }
+    
+    // Фильтрация портфолио без перезагрузки страницы
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    
+    if (filterButtons.length > 0 && portfolioItems.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const selectedType = this.getAttribute('data-type');
+                
+                // Обновляем активную кнопку
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-outline-primary');
+                });
+                this.classList.remove('btn-outline-primary');
+                this.classList.add('btn-primary');
+                
+                // Фильтруем элементы
+                let visibleCount = 0;
+                portfolioItems.forEach(item => {
+                    const itemType = item.getAttribute('data-type');
+                    
+                    if (selectedType === '' || itemType === selectedType) {
+                        item.style.display = 'block';
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(30px)';
+                        
+                        // Анимация появления
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, visibleCount * 100);
+                        
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Показываем сообщение, если нет результатов
+                let noResultsMessage = document.getElementById('no-results-message');
+                if (visibleCount === 0) {
+                    if (!noResultsMessage) {
+                        noResultsMessage = document.createElement('div');
+                        noResultsMessage.id = 'no-results-message';
+                        noResultsMessage.className = 'col-12 text-center py-5';
+                        noResultsMessage.innerHTML = '<p class="lead text-muted">В выбранной категории пока нет проектов.</p>';
+                        portfolioGrid.appendChild(noResultsMessage);
+                    }
+                    noResultsMessage.style.display = 'block';
+                } else {
+                    if (noResultsMessage) {
+                        noResultsMessage.style.display = 'none';
+                    }
+                }
+                
+                // Обновляем URL без перезагрузки страницы
+                const url = new URL(window.location);
+                if (selectedType) {
+                    url.searchParams.set('type', selectedType);
+                } else {
+                    url.searchParams.delete('type');
+                }
+                window.history.pushState({}, '', url);
+            });
+        });
+    }
 });
 </script>
 {% endblock content %}

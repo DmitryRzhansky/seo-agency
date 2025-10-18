@@ -91,7 +91,7 @@
                     
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">
-                            <a href="{% url 'main:city_post_detail' city.slug post.slug %}" class="text-decoration-none text-dark">
+                            <a href="{% url 'main:city_post_detail' city.slug post.slug %}" class="text-decoration-none">
                                 {{ post.title }}
                             </a>
                         </h5>
@@ -169,6 +169,15 @@
 .service-card .btn:hover, .post-card .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.post-card .card-title a {
+    color: white !important;
+    transition: color 0.3s ease;
+}
+
+.post-card .card-title a:hover {
+    color: #007bff !important;
 }
 
 /* Адаптивность */

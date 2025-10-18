@@ -1,21 +1,98 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% load seo_tags %}
+{% load custom_filters %}
 
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-<nav aria-label="breadcrumb">
+{% get_post_breadcrumbs post city as breadcrumbs %}
+{% if breadcrumbs %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
     <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Главная</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'main:city_list' %}">Города</a></li>
-            <li class="breadcrumb-item"><a href="{{ city.get_absolute_url }}">{{ city.name }}</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'blog:post_list' %}">Блог</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
+        <ol class="breadcrumb mb-0 py-3">
+            {% for crumb in breadcrumbs %}
+                {% if forloop.last %}
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ crumb.title }}
+                    </li>
+                {% else %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ crumb.url }}" class="text-decoration-none">
+                            {{ crumb.title }}
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
         </ol>
     </div>
 </nav>
+
+<style>
+.breadcrumb-nav {
+    background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-bg-dark) 100%);
+    border-bottom: 1px solid var(--bs-border-dark);
+    margin-top: 90px;
+    position: relative;
+    z-index: 10;
+    min-height: 60px;
+    display: block !important;
+    visibility: visible !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.breadcrumb {
+    background: none;
+    padding: 15px 0;
+    margin: 0;
+    font-size: 0.9rem;
+    display: flex !important;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    display: inline-block !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: var(--bs-text-muted-dark);
+    font-weight: bold;
+    margin: 0 8px;
+}
+
+.breadcrumb-item a {
+    color: var(--bs-primary-dark);
+    transition: color 0.2s ease;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item a:hover {
+    color: #0b5ed7;
+    text-decoration: underline !important;
+}
+
+.breadcrumb-item.active {
+    color: var(--bs-text-dark);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 0.8rem;
+        padding: 10px 0;
+    }
+    
+    .breadcrumb-item {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+</style>
+{% endif %}
 {% endblock breadcrumbs %}
 
 {% block content %}
@@ -55,9 +132,31 @@
         padding: 8px;
         border: 1px solid #dee2e6;
     }
+    
+    /* Стили для темного контейнера статьи */
+    article.bg-dark h1,
+    article.bg-dark h2,
+    article.bg-dark h3,
+    article.bg-dark h4,
+    article.bg-dark h5,
+    article.bg-dark h6 {
+        color: var(--bs-text-dark) !important;
+    }
+    
+    article.bg-dark .text-muted {
+        color: var(--bs-text-muted-dark) !important;
+    }
+    
+    article.bg-dark .post-content {
+        color: var(--bs-text-dark) !important;
+    }
+    
+    article.bg-dark .post-content p {
+        color: var(--bs-text-dark) !important;
+    }
 </style>
 
-<section class="section-padding bg-light pt-5 mt-5" id="city-post-detail">
+<section class="section-padding pt-5 mt-5" id="city-post-detail">
     <div class="container">
         <!-- Региональная информация -->
         <div class="row mb-4">
@@ -65,8 +164,8 @@
                 <div class="alert alert-info d-flex align-items-center" role="alert">
                     <i class="fas fa-map-marker-alt me-3 fa-2x"></i>
                     <div>
-                        <h5 class="alert-heading mb-1">Статья для {{ city.name }}</h5>
-                        <p class="mb-0">{{ city.region }} • {{ city.population|floatformat:0 }} тыс. жителей</p>
+                        <h5 class="alert-heading mb-1">Статья {{ city.get_name_prepositional }}</h5>
+                        <p class="mb-0">{{ city.region }} • {{ city.population|format_number }} жителей</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +191,7 @@
 
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <article class="bg-white p-4 p-md-5 rounded shadow-sm">
+                <article class="bg-dark p-4 p-md-5 rounded shadow-sm" style="background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-bg-dark) 100%) !important; border: 1px solid var(--bs-border-dark);">
                     
                     <h1 class="display-5 fw-bold mb-3">{{ post.title }}</h1>
                     

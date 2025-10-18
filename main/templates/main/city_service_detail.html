@@ -1,23 +1,96 @@
 {% extends "main/base.html" %}
 {% load seo_tags %}
+{% load custom_filters %}
 
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% if service.show_breadcrumbs %}
-<nav class="breadcrumb-nav">
+{% get_service_breadcrumbs service city as breadcrumbs %}
+{% if breadcrumbs %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav">
     <div class="container">
-        <ol class="breadcrumb">
-            {% for breadcrumb in service.get_breadcrumbs:city %}
-            {% if forloop.last %}
-            <li class="breadcrumb-item active">{{ breadcrumb.title }}</li>
-            {% else %}
-            <li class="breadcrumb-item"><a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a></li>
-            {% endif %}
+        <ol class="breadcrumb mb-0 py-3">
+            {% for crumb in breadcrumbs %}
+                {% if forloop.last %}
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ crumb.title }}
+                    </li>
+                {% else %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ crumb.url }}" class="text-decoration-none">
+                            {{ crumb.title }}
+                        </a>
+                    </li>
+                {% endif %}
             {% endfor %}
         </ol>
     </div>
 </nav>
+
+<style>
+.breadcrumb-nav {
+    background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-bg-dark) 100%);
+    border-bottom: 1px solid var(--bs-border-dark);
+    margin-top: 90px;
+    position: relative;
+    z-index: 10;
+    min-height: 60px;
+    display: block !important;
+    visibility: visible !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.breadcrumb {
+    background: none;
+    padding: 15px 0;
+    margin: 0;
+    font-size: 0.9rem;
+    display: flex !important;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    display: inline-block !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    color: var(--bs-text-muted-dark);
+    font-weight: bold;
+    margin: 0 8px;
+}
+
+.breadcrumb-item a {
+    color: var(--bs-primary-dark);
+    transition: color 0.2s ease;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb-item a:hover {
+    color: #0b5ed7;
+    text-decoration: underline !important;
+}
+
+.breadcrumb-item.active {
+    color: var(--bs-text-dark);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 0.8rem;
+        padding: 10px 0;
+    }
+    
+    .breadcrumb-item {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+</style>
 {% endif %}
 {% endblock breadcrumbs %}
 

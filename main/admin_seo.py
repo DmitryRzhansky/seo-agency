@@ -74,7 +74,7 @@ class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelA
             'description': 'Основная информация о городе'
         }),
         ('🎯 Региональное SEO', {
-            'fields': ('local_title', 'local_description'),
+            'fields': ('local_title', 'local_description', 'name_prepositional'),
             'description': 'Локальные заголовки и описания для регионального SEO'
         }),
         ('🍞 Навигация', {

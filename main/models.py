@@ -29,6 +29,14 @@ class City(SEOModel):
         help_text="Краткое описание услуг в этом городе"
     )
     
+    # Склонение города
+    name_prepositional = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Название в предложном падеже",
+        help_text="Например: 'в Казани', 'в Москве', 'в Санкт-Петербурге'"
+    )
+    
     # Хлебные крошки
     show_breadcrumbs = models.BooleanField(
         default=True,
@@ -77,7 +85,33 @@ class City(SEOModel):
         """Возвращает локальный заголовок или генерирует автоматически"""
         if self.local_title:
             return self.local_title
-        return f"SEO продвижение в {self.name}"
+        return f"SEO продвижение в {self.get_name_prepositional()}"
+    
+    def get_name_prepositional(self):
+        """Возвращает название города в предложном падеже"""
+        if self.name_prepositional:
+            return self.name_prepositional
+        
+        # Автоматическое склонение для некоторых городов
+        city_declensions = {
+            'Казань': 'в Казани',
+            'Москва': 'в Москве',
+            'Санкт-Петербург': 'в Санкт-Петербурге',
+            'Новосибирск': 'в Новосибирске',
+            'Екатеринбург': 'в Екатеринбурге',
+            'Нижний Новгород': 'в Нижнем Новгороде',
+            'Самара': 'в Самаре',
+            'Омск': 'в Омске',
+            'Казань': 'в Казани',
+            'Ростов-на-Дону': 'в Ростове-на-Дону',
+            'Уфа': 'в Уфе',
+            'Красноярск': 'в Красноярске',
+            'Воронеж': 'в Воронеже',
+            'Пермь': 'в Перми',
+            'Волгоград': 'в Волгограде',
+        }
+        
+        return city_declensions.get(self.name, f"в {self.name}")
 
 # --- Модели для Услуг (для хедера и футера) ---
 
@@ -311,7 +345,7 @@ class Post(SEOModel):
         from django.urls import reverse
         return reverse('blog:post_detail', kwargs={'slug': self.slug})
     
-    def get_breadcrumbs(self):
+    def get_breadcrumbs(self, city=None):
         """Возвращает хлебные крошки для статьи блога"""
         if not self.show_breadcrumbs:
             return []
@@ -322,19 +356,32 @@ class Post(SEOModel):
         # Автоматические крошки
         breadcrumbs = [{"title": "Главная", "url": "/"}]
         
-        breadcrumbs.append({"title": "Блог", "url": "/blog/"})
-        
-        # Добавляем категорию, если она есть
-        if self.category:
+        # Если это статья в контексте города
+        if city:
+            breadcrumbs.append({"title": "Города", "url": "/cities/"})
             breadcrumbs.append({
-                "title": self.category.name,
-                "url": self.category.get_absolute_url()
+                "title": city.name,
+                "url": city.get_absolute_url()
             })
-        
-        breadcrumbs.append({
-            "title": self.title,
-            "url": self.get_absolute_url()
-        })
+            breadcrumbs.append({
+                "title": self.title,
+                "url": f"/cities/{city.slug}/blog/{self.slug}/"
+            })
+        else:
+            # Обычные крошки для статьи
+            breadcrumbs.append({"title": "Блог", "url": "/blog/"})
+            
+            # Добавляем категорию, если она есть
+            if self.category:
+                breadcrumbs.append({
+                    "title": self.category.name,
+                    "url": self.category.get_absolute_url()
+                })
+            
+            breadcrumbs.append({
+                "title": self.title,
+                "url": self.get_absolute_url()
+            })
         
         return breadcrumbs
     

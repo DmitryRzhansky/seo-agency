@@ -26,6 +26,17 @@ def length_is(value, arg):
     except (ValueError, TypeError):
         return False
 
+@register.filter
+def div(value, arg):
+    """
+    Делит значение на аргумент.
+    Использование: {{ value|div:"3" }}
+    """
+    try:
+        return int(value) // int(arg)
+    except (ValueError, TypeError, ZeroDivisionError):
+        return 0
+
 # Регистрируем фильтр в глобальном регистре для совместимости с Django Unfold
 @global_register.filter
 def length_is(value, arg):

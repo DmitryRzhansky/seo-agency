@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load seo_tags %}
+{% load custom_filters %}
 
 {% block title %}{{ title }}{% endblock title %}
 
@@ -47,43 +48,102 @@
         <div class="row">
             <div class="col-12">
                 <h2 class="text-center mb-5">Рекомендуемые проекты</h2>
-                <div class="row">
-                    {% for project in featured_projects %}
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="portfolio-card featured">
-                            <div class="portfolio-image">
-                                {% if project.main_image %}
-                                <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
-                                {% else %}
-                                <div class="no-image-placeholder">
-                                    <i class="fas fa-image fa-3x text-muted"></i>
-                                    <p class="text-muted mt-2">Изображение отсутствует</p>
-                                </div>
-                                {% endif %}
-                                <div class="portfolio-overlay">
-                                    <div class="portfolio-actions">
-                                        <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
-                                            <i class="fas fa-eye me-2"></i>
-                                            Подробнее
-                                        </a>
+                
+                <!-- Слайдер рекомендуемых проектов -->
+                <div id="featuredProjectsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
+                    <div class="carousel-inner">
+                        {% for project in featured_projects %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 col-md-10">
+                                    <div class="portfolio-card featured featured-slide">
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6">
+                                                <div class="portfolio-image">
+                                                    {% if project.main_image %}
+                                                    <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
+                                                    {% else %}
+                                                    <div class="no-image-placeholder">
+                                                        <i class="fas fa-image fa-3x text-muted"></i>
+                                                        <p class="text-muted mt-2">Изображение отсутствует</p>
+                                                    </div>
+                                                    {% endif %}
+                                                    <div class="portfolio-overlay">
+                                                        <div class="portfolio-actions">
+                                                            <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
+                                                                <i class="fas fa-eye me-2"></i>
+                                                                Подробнее
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="portfolio-content">
+                                                    <div class="portfolio-meta">
+                                                        <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
+                                                        {% if project.client_name %}
+                                                        <span class="text-muted">{{ project.client_name }}</span>
+                                                        {% endif %}
+                                                    </div>
+                                                    <h3 class="portfolio-title">
+                                                        <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                                                    </h3>
+                                                    <p class="portfolio-description">{{ project.short_description }}</p>
+                                                    
+                                                    <!-- Результаты проекта -->
+                                                    {% if project.get_results_list %}
+                                                    <div class="project-results mt-3">
+                                                        <h5 class="text-primary">Результаты:</h5>
+                                                        <div class="row">
+                                                            {% for result in project.get_results_list|slice:":2" %}
+                                                            <div class="col-6">
+                                                                <div class="result-item">
+                                                                    <div class="result-value">{{ result.value }}</div>
+                                                                    <div class="result-metric">{{ result.metric }}</div>
+                                                                </div>
+                                                            </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                    
+                                                    <div class="mt-3">
+                                                        <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary">
+                                                            <i class="fas fa-arrow-right me-2"></i>
+                                                            Смотреть проект
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="portfolio-content">
-                                <div class="portfolio-meta">
-                                    <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
-                                    {% if project.client_name %}
-                                    <span class="text-muted">{{ project.client_name }}</span>
-                                    {% endif %}
-                                </div>
-                                <h3 class="portfolio-title">
-                                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                                </h3>
-                                <p class="portfolio-description">{{ project.short_description }}</p>
-                            </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    
+                    <!-- Навигация слайдера -->
+                    {% if featured_projects|length > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#featuredProjectsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Предыдущий</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#featuredProjectsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Следующий</span>
+                    </button>
+                    
+                    <!-- Индикаторы -->
+                    <div class="carousel-indicators">
+                        {% for project in featured_projects %}
+                        <button type="button" data-bs-target="#featuredProjectsCarousel" data-bs-slide-to="{{ forloop.counter0 }}" 
+                                {% if forloop.first %}class="active" aria-current="true"{% endif %} 
+                                aria-label="Слайд {{ forloop.counter }}"></button>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -99,43 +159,77 @@
                 <h2 class="text-center mb-5">Все работы</h2>
                 
                 {% if page_obj %}
-                <div class="row">
-                    {% for project in page_obj %}
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="portfolio-card">
-                            <div class="portfolio-image">
-                                {% if project.main_image %}
-                                <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
-                                {% else %}
-                                <div class="no-image-placeholder">
-                                    <i class="fas fa-image fa-3x text-muted"></i>
-                                    <p class="text-muted mt-2">Изображение отсутствует</p>
-                                </div>
-                                {% endif %}
-                                <div class="portfolio-overlay">
-                                    <div class="portfolio-actions">
-                                        <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
-                                            <i class="fas fa-eye me-2"></i>
-                                            Подробнее
-                                        </a>
+                <!-- Слайдер всех работ -->
+                <div id="allProjectsCarousel" class="carousel slide" data-bs-interval="false">
+                    <div class="carousel-inner">
+                        {% for project in page_obj %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="row">
+                        {% endif %}
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="portfolio-card">
+                                        <div class="portfolio-image">
+                                            {% if project.main_image %}
+                                            <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
+                                            {% else %}
+                                            <div class="no-image-placeholder">
+                                                <i class="fas fa-image fa-3x text-muted"></i>
+                                                <p class="text-muted mt-2">Изображение отсутствует</p>
+                                            </div>
+                                            {% endif %}
+                                            <div class="portfolio-overlay">
+                                                <div class="portfolio-actions">
+                                                    <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
+                                                        <i class="fas fa-eye me-2"></i>
+                                                        Подробнее
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-content">
+                                            <div class="portfolio-meta">
+                                                <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
+                                                {% if project.client_name %}
+                                                <span class="text-muted">{{ project.client_name }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <h3 class="portfolio-title">
+                                                <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                                            </h3>
+                                            <p class="portfolio-description">{{ project.short_description }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="portfolio-content">
-                                <div class="portfolio-meta">
-                                    <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
-                                    {% if project.client_name %}
-                                    <span class="text-muted">{{ project.client_name }}</span>
-                                    {% endif %}
-                                </div>
-                                <h3 class="portfolio-title">
-                                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                                </h3>
-                                <p class="portfolio-description">{{ project.short_description }}</p>
+                        {% if forloop.counter|divisibleby:3 or forloop.last %}
                             </div>
                         </div>
+                        {% endif %}
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    
+                    <!-- Навигация слайдера -->
+                    {% if page_obj|length > 3 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#allProjectsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Предыдущий</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#allProjectsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Следующий</span>
+                    </button>
+                    
+                    <!-- Индикаторы -->
+                    <div class="carousel-indicators">
+                        {% for project in page_obj %}
+                        {% if forloop.counter0|divisibleby:3 %}
+                        <button type="button" data-bs-target="#allProjectsCarousel" data-bs-slide-to="{{ forloop.counter0|floatformat:0|add:0|div:3 }}" 
+                                {% if forloop.first %}class="active" aria-current="true"{% endif %} 
+                                aria-label="Слайд {{ forloop.counter0|floatformat:0|add:1|div:3|add:1 }}"></button>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
                 
                 <!-- Пагинация -->
@@ -353,7 +447,156 @@
     border-color: var(--bs-primary);
 }
 
+/* Стили для слайдеров */
+.featured-slide {
+    min-height: 400px;
+    padding: 2rem;
+}
+
+.featured-slide .portfolio-image {
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.featured-slide .portfolio-content {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-results {
+    background: rgba(13, 110, 253, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid var(--bs-primary);
+}
+
+.result-item {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--bs-primary);
+    margin-bottom: 0.25rem;
+}
+
+.result-metric {
+    font-size: 0.9rem;
+    color: var(--bs-text-muted-dark);
+    font-weight: 500;
+}
+
+/* Кастомизация карусели */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: var(--bs-primary);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control-prev {
+    left: -25px;
+}
+
+.carousel-control-next {
+    right: -25px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.carousel-indicators {
+    bottom: -50px;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--bs-border-dark);
+    border: none;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+    background-color: var(--bs-primary);
+    transform: scale(1.2);
+}
+
+/* Анимации для слайдов */
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item.active {
+    transform: translateX(0);
+}
+
+.carousel-item-next:not(.carousel-item-start),
+.active.carousel-item-end {
+    transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-end),
+.active.carousel-item-start {
+    transform: translateX(-100%);
+}
+
+/* Адаптивность для слайдеров */
 @media (max-width: 768px) {
+    .featured-slide {
+        min-height: auto;
+        padding: 1rem;
+    }
+    
+    .featured-slide .portfolio-image {
+        height: 200px;
+        margin-bottom: 1rem;
+    }
+    
+    .featured-slide .portfolio-content {
+        padding: 0;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-control-prev {
+        left: -20px;
+    }
+    
+    .carousel-control-next {
+        right: -20px;
+    }
+    
+    .carousel-indicators {
+        bottom: -40px;
+    }
+    
     .portfolio-image {
         height: 200px;
     }
@@ -363,4 +606,98 @@
     }
 }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Инициализация слайдеров
+    const featuredCarousel = document.getElementById('featuredProjectsCarousel');
+    const allProjectsCarousel = document.getElementById('allProjectsCarousel');
+    
+    // Настройка автопрокрутки для рекомендуемых проектов
+    if (featuredCarousel) {
+        const featuredCarouselInstance = new bootstrap.Carousel(featuredCarousel, {
+            interval: 8000,
+            wrap: true,
+            touch: true
+        });
+        
+        // Пауза при наведении
+        featuredCarousel.addEventListener('mouseenter', function() {
+            featuredCarouselInstance.pause();
+        });
+        
+        featuredCarousel.addEventListener('mouseleave', function() {
+            featuredCarouselInstance.cycle();
+        });
+    }
+    
+    // Настройка слайдера всех работ (без автопрокрутки)
+    if (allProjectsCarousel) {
+        const allProjectsCarouselInstance = new bootstrap.Carousel(allProjectsCarousel, {
+            interval: false,
+            wrap: true,
+            touch: true,
+            ride: false
+        });
+        
+        // Дополнительная защита от автопрокрутки
+        allProjectsCarouselInstance.pause();
+    }
+    
+    // Плавная прокрутка к секции портфолио
+    const portfolioLink = document.querySelector('a[href="#portfolio"]');
+    if (portfolioLink) {
+        portfolioLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const portfolioSection = document.getElementById('portfolio');
+            if (portfolioSection) {
+                portfolioSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+    
+    // Анимация появления карточек при прокрутке
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+    
+    // Наблюдаем за карточками портфолио
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    portfolioCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+    });
+    
+    // Добавляем индикатор загрузки для изображений
+    const portfolioImages = document.querySelectorAll('.portfolio-image img');
+    portfolioImages.forEach(img => {
+        img.addEventListener('load', function() {
+            this.style.opacity = '1';
+        });
+        
+        img.addEventListener('error', function() {
+            const placeholder = this.parentElement.querySelector('.no-image-placeholder');
+            if (placeholder) {
+                placeholder.style.display = 'flex';
+            }
+            this.style.display = 'none';
+        });
+    });
+});
+</script>
 {% endblock content %}

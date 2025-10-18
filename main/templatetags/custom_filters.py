@@ -58,10 +58,13 @@ def get_post_breadcrumbs(post, city=None):
         return post.get_breadcrumbs()
 
 @register.simple_tag
-def get_custom_head_scripts(page_type, page_slug=None):
+def get_custom_head_scripts(page_type, page_slug=None, position=None):
     """
     Получает кастомные скрипты и HTML-теги для head.
-    Использование: {% get_custom_head_scripts 'home' %} или {% get_custom_head_scripts 'city_detail' 'moscow' %}
+    Использование: 
+    - {% get_custom_head_scripts 'home' %} - все скрипты
+    - {% get_custom_head_scripts 'city_detail' 'moscow' %} - для конкретной страницы
+    - {% get_custom_head_scripts 'home' '' 'early' %} - только для определенной позиции
     """
     from main.models import CustomHeadScript
     
@@ -71,9 +74,42 @@ def get_custom_head_scripts(page_type, page_slug=None):
     filtered_scripts = []
     for script in scripts:
         if script.should_display_on_page(page_type, page_slug):
-            filtered_scripts.append(script)
+            # Если указана позиция, фильтруем по ней
+            if position is None or script.position == position:
+                filtered_scripts.append(script)
     
     return filtered_scripts
+
+@register.simple_tag
+def get_head_content_preview(page_type, page_slug=None):
+    """
+    Получает предпросмотр содержимого head с разбивкой по позициям.
+    Использование: {% get_head_content_preview 'home' %}
+    """
+    from main.models import CustomHeadScript
+    
+    # Получаем все скрипты для страницы
+    scripts = CustomHeadScript.objects.filter(is_active=True).order_by('order', 'name')
+    
+    # Фильтруем по типу страницы и slug
+    filtered_scripts = []
+    for script in scripts:
+        if script.should_display_on_page(page_type, page_slug):
+            filtered_scripts.append(script)
+    
+    # Группируем по позициям
+    positions = {
+        'very_early': [],
+        'early': [],
+        'middle': [],
+        'late': [],
+        'very_late': []
+    }
+    
+    for script in filtered_scripts:
+        positions[script.position].append(script)
+    
+    return positions
 
 # Регистрируем фильтр в глобальном регистре для совместимости с Django Unfold
 @global_register.filter

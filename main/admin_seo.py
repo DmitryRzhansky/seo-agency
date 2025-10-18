@@ -45,38 +45,97 @@ class CustomHeadScriptsMixin:
         # Создаем URL для добавления нового скрипта с предзаполненными полями
         add_script_url = f"/admin/main/customheadscript/add/?page_type={page_type}&page_slug={page_slug or ''}"
         
-        if not relevant_scripts:
-            return f"""
-            <div style="padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">
-                <strong>📄 Информация о странице:</strong><br>
-                • Тип: <code>{page_type}</code><br>
-                • Slug: <code>{page_slug or 'не указан'}</code><br><br>
-                
-                <strong>🔧 Кастомные скрипты:</strong><br>
-                Для этой страницы нет активных кастомных скриптов.<br><br>
-                
-                <a href="{add_script_url}" class="button" style="background: #007cba; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block; margin-right: 10px;">➕ Добавить скрипт для этой страницы</a>
-                <a href="/admin/main/customheadscript/" class="button" style="background: #6c757d; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block;">📋 Все скрипты</a>
-            </div>
-            """
+        # Группируем скрипты по позициям
+        positions = {
+            'very_early': [],
+            'early': [],
+            'middle': [],
+            'late': [],
+            'very_late': []
+        }
         
-        script_list = []
         for script in relevant_scripts:
-            script_list.append(f"• {script.name} ({script.get_content_type_display()})")
+            positions[script.position].append(script)
         
-        return f"""
+        # Создаем HTML для отображения структуры head
+        head_structure = self._create_head_structure_html(positions, page_type, page_slug, add_script_url)
+        
+        return head_structure
+    
+    def _create_head_structure_html(self, positions, page_type, page_slug, add_script_url):
+        """Создает HTML для отображения структуры head"""
+        
+        position_names = {
+            'very_early': 'Очень рано (после charset и viewport)',
+            'early': 'Рано (после базовых meta)',
+            'middle': 'В середине (после SEO meta)',
+            'late': 'Поздно (перед CSS)',
+            'very_late': 'Очень поздно (перед закрытием head)'
+        }
+        
+        position_colors = {
+            'very_early': '#e3f2fd',
+            'early': '#f3e5f5',
+            'middle': '#e8f5e8',
+            'late': '#fff3e0',
+            'very_late': '#fce4ec'
+        }
+        
+        structure_html = f"""
         <div style="padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">
             <strong>📄 Информация о странице:</strong><br>
             • Тип: <code>{page_type}</code><br>
             • Slug: <code>{page_slug or 'не указан'}</code><br><br>
             
-            <strong>🔧 Активные скрипты для этой страницы:</strong><br>
-            {'<br>'.join(script_list)}<br><br>
-            
-            <a href="{add_script_url}" class="button" style="background: #007cba; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block; margin-right: 10px;">➕ Добавить еще скрипт</a>
-            <a href="/admin/main/customheadscript/" class="button" style="background: #6c757d; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block;">📋 Управление скриптами</a>
+            <strong>🔧 Структура head для этой страницы:</strong><br><br>
+        """
+        
+        # Показываем структуру head
+        structure_html += """
+        <div style="background: white; border: 1px solid #ddd; border-radius: 5px; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 12px;">
+            <div style="color: #666;">&lt;head&gt;</div>
+            <div style="margin-left: 20px; color: #333;">&lt;meta charset="UTF-8"&gt;</div>
+            <div style="margin-left: 20px; color: #333;">&lt;meta name="viewport" content="..."&gt;</div>
+        """
+        
+        for position_key, scripts in positions.items():
+            if scripts:
+                color = position_colors[position_key]
+                structure_html += f"""
+                <div style="margin-left: 20px; background: {color}; padding: 5px; border-radius: 3px; margin: 5px 0;">
+                    <div style="font-weight: bold; color: #333;">📍 {position_names[position_key]}</div>
+                """
+                for script in scripts:
+                    structure_html += f"""
+                    <div style="margin-left: 10px; color: #666;">
+                        • {script.name} ({script.get_content_type_display()})
+                    </div>
+                    """
+                structure_html += "</div>"
+            else:
+                structure_html += f"""
+                <div style="margin-left: 20px; color: #ccc; font-style: italic;">
+                    📍 {position_names[position_key]} - пусто
+                </div>
+                """
+        
+        structure_html += """
+            <div style="margin-left: 20px; color: #333;">&lt;link href="bootstrap.css"&gt;</div>
+            <div style="margin-left: 20px; color: #333;">&lt;link href="style.css"&gt;</div>
+            <div style="color: #666;">&lt;/head&gt;</div>
         </div>
         """
+        
+        # Кнопки управления
+        structure_html += f"""
+            <div style="margin-top: 15px;">
+                <a href="{add_script_url}" class="button" style="background: #007cba; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block; margin-right: 10px;">➕ Добавить скрипт</a>
+                <a href="/admin/main/customheadscript/" class="button" style="background: #6c757d; color: white; padding: 8px 16px; text-decoration: none; border-radius: 3px; display: inline-block;">📋 Все скрипты</a>
+            </div>
+        </div>
+        """
+        
+        return structure_html
     
     def _get_page_type(self, obj):
         """Определяет тип страницы для объекта"""
@@ -442,12 +501,12 @@ class CustomHeadScriptAdmin(admin.ModelAdmin):
     """Админка для кастомных скриптов и HTML-тегов"""
     
     list_display = (
-        'name', 'content_type', 'page_type', 'page_slug', 
+        'name', 'content_type', 'position', 'page_type', 'page_slug', 
         'is_active', 'order', 'created_at'
     )
     
     list_filter = (
-        'content_type', 'page_type', 'is_active', 'created_at'
+        'content_type', 'position', 'page_type', 'is_active', 'created_at'
     )
     
     search_fields = ('name', 'html_content', 'page_type', 'page_slug')
@@ -458,6 +517,10 @@ class CustomHeadScriptAdmin(admin.ModelAdmin):
         ('📝 Основная информация', {
             'fields': ('name', 'content_type', 'html_content'),
             'description': 'Основная информация о скрипте или HTML-теге'
+        }),
+        ('📍 Позиционирование', {
+            'fields': ('position',),
+            'description': 'Выберите, где в head должен быть размещен скрипт'
         }),
         ('🎯 Условия отображения', {
             'fields': ('page_type', 'page_slug'),

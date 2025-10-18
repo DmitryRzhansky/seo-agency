@@ -247,6 +247,23 @@ class CustomHeadScript(models.Model):
         help_text="Оставьте пустым для всех страниц этого типа, или укажите конкретный slug"
     )
     
+    # Позиция в head
+    POSITION_CHOICES = [
+        ('very_early', 'Очень рано (после charset и viewport)'),
+        ('early', 'Рано (после базовых meta)'),
+        ('middle', 'В середине (после SEO meta)'),
+        ('late', 'Поздно (перед CSS)'),
+        ('very_late', 'Очень поздно (перед закрытием head)'),
+    ]
+    
+    position = models.CharField(
+        max_length=20,
+        choices=POSITION_CHOICES,
+        default='middle',
+        verbose_name="Позиция в head",
+        help_text="Выберите, где в head должен быть размещен скрипт"
+    )
+    
     # Настройки
     is_active = models.BooleanField(
         default=True,

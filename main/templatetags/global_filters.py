@@ -50,6 +50,10 @@ def city_prepositional(city_name):
         'Воронеж': 'в Воронеже',
         'Пермь': 'в Перми',
         'Волгоград': 'в Волгограде',
+        'Минск': 'в Минске',
+        'Алматы': 'в Алмате',
+        'Астана': 'в Астане',
+        'Ташкент': 'в Ташкенте',
         'Серпухов': 'в Серпухове',
         'Химки': 'в Химках',
         'Мытищи': 'в Мытищах',
@@ -110,23 +114,3 @@ def city_prepositional(city_name):
         # Если не подходит ни одно правило, добавляем "е"
         return f"в {city_name}е"
 
-@register.filter
-def format_population(population):
-    """
-    Форматирует численность населения с точками как разделителями тысяч.
-    Использование: {{ city.population|format_population }}
-    """
-    if not population:
-        return "0"
-    
-    try:
-        # Число в базе данных хранится как полное количество жителей
-        pop = int(float(population))
-        
-        # Форматируем число с точками как разделителями тысяч
-        formatted = f"{pop:,}".replace(",", ".")
-        
-        return formatted
-            
-    except (ValueError, TypeError):
-        return str(population)

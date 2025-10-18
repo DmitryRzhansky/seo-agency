@@ -37,16 +37,6 @@ def div(value, arg):
     except (ValueError, TypeError, ZeroDivisionError):
         return 0
 
-@register.filter
-def format_number(value):
-    """
-    Форматирует число с пробелами в качестве разделителей тысяч.
-    Использование: {{ value|format_number }}
-    """
-    try:
-        return f"{int(value):,}".replace(",", " ")
-    except (ValueError, TypeError):
-        return value
 
 @register.simple_tag
 def get_service_breadcrumbs(service, city=None):

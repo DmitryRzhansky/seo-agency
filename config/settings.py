@@ -413,6 +413,22 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": "👥 Пользователи и группы",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Пользователи",
+                        "icon": "person",
+                        "link": lambda request: reverse_lazy("admin:auth_user_changelist"),
+                    },
+                    {
+                        "title": "Группы",
+                        "icon": "group",
+                        "link": lambda request: reverse_lazy("admin:auth_group_changelist"),
+                    },
+                ],
+            },
         ],
     },
     "DASHBOARD_CALLBACKS": [],

@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'blog',
     'services',
     'pages',
+    'team',
+    'portfolio',
+    'utils',
     'seo',
     'seo_management',
     'django_ckeditor_5',
@@ -321,7 +324,7 @@ UNFOLD = {
                     {
                         "title": "Блог",
                         "icon": "article",
-                        "link": lambda request: reverse_lazy("admin:main_post_changelist"),
+                        "link": lambda request: reverse_lazy("admin:blog_post_changelist"),
                     },
                     {
                         "title": "Портфолио",
@@ -359,3 +362,14 @@ UNFOLD = {
         ],
     },
 }
+
+# Настройки админки
+ADMIN_COLLAPSED_GROUPS = [
+    'main',
+    'blog', 
+    'team',
+    'portfolio',
+    'services',
+    'seo',
+    'pages'
+]

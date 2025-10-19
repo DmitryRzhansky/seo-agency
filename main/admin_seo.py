@@ -4,8 +4,14 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation
+from django.utils.translation import gettext_lazy as _
+from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation
 from seo.admin import SEOAdminMixin
+
+# Настройка заголовков админки
+admin.site.site_header = _('Панель управления Isakov Agency')
+admin.site.site_title = _('Админка')
+admin.site.index_title = _('Управление сайтом')
 
 class CustomHeadScriptsMixin:
     """Миксин для добавления плашки кастомных скриптов в админку"""
@@ -209,6 +215,9 @@ class SEOValidationMixin:
 
 @admin.register(City)
 class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Город')
+        verbose_name_plural = _('Города')
     list_display = (
         'name', 'region', 'population', 'order', 'is_active', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
@@ -242,6 +251,9 @@ class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
 
 @admin.register(ServiceCategory)
 class ServiceCategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Категория услуг')
+        verbose_name_plural = _('Категории услуг')
     list_display = (
         'title', 'order', 'slug', 'get_service_count', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
@@ -270,6 +282,9 @@ class ServiceCategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, a
 
 @admin.register(Service)
 class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Услуга')
+        verbose_name_plural = _('Услуги')
     list_display = (
         'title', 'category', 'order', 'slug', 'is_published', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
@@ -299,46 +314,12 @@ class ServiceAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHea
         }),
     )
 
-@admin.register(Post)
-class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
-    list_display = (
-        'title', 'category', 'published_date', 'is_published', 'views_count', 
-        'seo_validation', 'seo_title_length', 'seo_description_length'
-    )
-    list_filter = ('is_published', 'published_date', 'category', 'author')
-    search_fields = ('title', 'content')
-    prepopulated_fields = {'slug': ('title',)}
-    date_hierarchy = 'published_date'
-    readonly_fields = ('views_count', 'seo_preview')
-    
-    fieldsets = (
-        ('📝 Основная информация', {
-            'fields': ('title', 'slug', 'category', 'author', 'is_published'),
-            'description': 'Основная информация о статье'
-        }),
-        ('📄 Содержимое', {
-            'fields': ('content', 'image', 'image_alt'),
-            'description': 'Содержимое статьи и изображения'
-        }),
-        ('🍞 Навигация', {
-            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
-            'classes': ('collapse',),
-            'description': 'Настройки навигационных хлебных крошек'
-        }),
-        ('📊 Статистика', {
-            'fields': ('views_count',),
-            'classes': ('collapse',),
-            'description': 'Статистика просмотров'
-        }),
-        ('👁️ SEO Предпросмотр', {
-            'fields': ('seo_preview',),
-            'classes': ('collapse',),
-            'description': 'Как будет выглядеть в поисковой выдаче'
-        }),
-    )
 
 @admin.register(TeamMember)
 class TeamMemberAdmin(admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Участник команды')
+        verbose_name_plural = _('Участники команды')
     list_display = ('name', 'role', 'order', 'is_active', 'photo_preview')
     list_editable = ('order', 'is_active')
     search_fields = ('name', 'role', 'bio')
@@ -367,6 +348,9 @@ class TeamMemberAdmin(admin.ModelAdmin):
 
 @admin.register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Отзыв клиента')
+        verbose_name_plural = _('Отзывы клиентов')
     list_display = ('author_name', 'author_title', 'order', 'rating', 'is_active', 'photo_preview')
     list_editable = ('order', 'rating', 'is_active')
     search_fields = ('author_name', 'author_title', 'content')
@@ -395,6 +379,9 @@ class TestimonialAdmin(admin.ModelAdmin):
 
 @admin.register(ContactRequest)
 class ContactRequestAdmin(admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Заявка с сайта')
+        verbose_name_plural = _('Заявки с сайта')
     list_display = ('name', 'phone', 'email', 'created_at', 'has_message')
     list_filter = ('created_at',)
     search_fields = ('name', 'phone', 'email', 'message')
@@ -424,6 +411,9 @@ class ContactRequestAdmin(admin.ModelAdmin):
 
 @admin.register(PortfolioItem)
 class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Работа в портфолио')
+        verbose_name_plural = _('Работы в портфолио')
     """Админка для работ в портфолио"""
     
     list_display = [
@@ -498,6 +488,9 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, Cus
 
 @admin.register(CustomHeadScript)
 class CustomHeadScriptAdmin(admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Кастомный скрипт')
+        verbose_name_plural = _('Кастомные скрипты')
     """Админка для кастомных скриптов и HTML-тегов"""
     
     list_display = (
@@ -576,6 +569,9 @@ class CustomHeadScriptAdmin(admin.ModelAdmin):
 
 @admin.register(RegionalPostAdaptation)
 class RegionalPostAdaptationAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    class Meta:
+        verbose_name = _('Региональная адаптация статьи')
+        verbose_name_plural = _('Региональные адаптации статей')
     list_display = (
         'post', 'city', 'get_title_preview', 'get_content_preview', 
         'is_active', 'seo_validation', 'seo_title_length', 'seo_description_length', 'created_at'

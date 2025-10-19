@@ -5,7 +5,8 @@ from django.contrib import messages
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import City, ServiceCategory, Service, Post, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage
+from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage
+from blog.models import Post
 from .forms import ContactForm
 from django.views.decorators.cache import never_cache # отключаем кэш для index
 from django.conf import settings # <<< Импорт settings для времени кэша
@@ -245,7 +246,7 @@ def city_post_detail(request, city_slug, post_slug):
     related_posts = post.get_related_posts(limit=3)
     
     # Получаем региональную адаптацию
-    from .models import RegionalPostAdaptation
+    from main.models import RegionalPostAdaptation
     try:
         regional_adaptation = RegionalPostAdaptation.objects.get(
             post=post, 

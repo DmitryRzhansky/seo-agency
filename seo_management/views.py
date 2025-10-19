@@ -4,7 +4,8 @@ from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
 from django.utils import timezone
 from .models import SitemapSettings, RobotsTxtSettings
-from main.models import Service, City, Post
+from main.models import Service, City
+from blog.models import Post
 from blog.models import Category
 from pages.models import SimplePage
 

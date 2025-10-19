@@ -3,6 +3,6 @@
 # Импортируем улучшенные админ-классы
 from .admin_seo import (
     CityAdmin, ServiceCategoryAdmin, ServiceAdmin, 
-    PostAdmin, TeamMemberAdmin, TestimonialAdmin, ContactRequestAdmin,
+    TeamMemberAdmin, TestimonialAdmin, ContactRequestAdmin,
     PortfolioItemAdmin
 )

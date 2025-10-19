@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from main.models import Post
+from .models import Post
 from .models import Category
 from django.core.paginator import Paginator
 from django.db.models import F, Q

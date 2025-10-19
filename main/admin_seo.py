@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage
+from .models import City, ServiceCategory, Service, Post, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation
 from seo.admin import SEOAdminMixin
 
 class CustomHeadScriptsMixin:
@@ -572,3 +572,54 @@ class CustomHeadScriptAdmin(admin.ModelAdmin):
 
 
 # HomePage убрана из админки по запросу пользователя
+
+
+@admin.register(RegionalPostAdaptation)
+class RegionalPostAdaptationAdmin(admin.ModelAdmin):
+    list_display = (
+        'post', 'city', 'get_title_preview', 'get_content_preview', 
+        'is_active', 'created_at'
+    )
+    list_filter = ('city', 'is_active', 'created_at', 'post__category')
+    search_fields = ('post__title', 'title', 'description', 'city__name')
+    list_editable = ('is_active',)
+    readonly_fields = ('created_at', 'updated_at')
+    
+    fieldsets = (
+        ('📝 Основная информация', {
+            'fields': ('post', 'city', 'is_active'),
+            'description': 'Выберите статью и город для создания региональной адаптации'
+        }),
+        ('📄 Региональное содержимое', {
+            'fields': ('title', 'content', 'description'),
+            'description': 'Заполните поля для создания уникальной версии статьи для города'
+        }),
+        ('📊 Метаданные', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',),
+            'description': 'Информация о создании и обновлении'
+        }),
+    )
+    
+    def get_title_preview(self, obj):
+        """Показывает превью заголовка"""
+        title = obj.get_title()
+        if len(title) > 50:
+            title = title[:50] + "..."
+        return title
+    get_title_preview.short_description = 'Заголовок'
+    
+    def get_content_preview(self, obj):
+        """Показывает превью контента"""
+        content = obj.get_content()
+        # Убираем HTML теги для превью
+        import re
+        content_text = re.sub(r'<[^>]+>', '', content)
+        if len(content_text) > 100:
+            content_text = content_text[:100] + "..."
+        return content_text
+    get_content_preview.short_description = 'Содержимое'
+    
+    def get_queryset(self, request):
+        """Оптимизируем запросы"""
+        return super().get_queryset(request).select_related('post', 'city')

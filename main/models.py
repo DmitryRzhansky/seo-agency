@@ -525,6 +525,7 @@ class Post(SEOModel):
         verbose_name="Пользовательские хлебные крошки",
         help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
     )
+    
 
     class Meta:
         verbose_name = "Пост в блоге"
@@ -582,6 +583,7 @@ class Post(SEOModel):
     def get_image_alt(self):
         """Возвращает альтернативный текст изображения или заголовок по умолчанию"""
         return self.image_alt or self.title
+    
     
     def get_related_posts(self, limit=3):
         """Возвращает связанные статьи для блока 'Вам может понравиться'"""
@@ -863,3 +865,74 @@ class PortfolioItem(SEOModel):
             return f"{self.cooperation_start} — Период не завершен"
         else:
             return "Период не указан"
+
+
+class RegionalPostAdaptation(models.Model):
+    """Модель для региональных адаптаций статей"""
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='regional_adaptations',
+        verbose_name="Базовая статья"
+    )
+    city = models.ForeignKey(
+        City,
+        on_delete=models.CASCADE,
+        verbose_name="Город"
+    )
+    title = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="Региональный заголовок",
+        help_text="Оставьте пустым, чтобы использовать базовый заголовок + город"
+    )
+    # Используем CKEditor5Field для форматированного контента
+    content = CKEditor5Field(
+        blank=True,
+        verbose_name="Региональное содержимое",
+        help_text="Оставьте пустым, чтобы использовать базовое содержимое",
+        config_name='extends'
+    )
+    description = models.TextField(
+        max_length=300,
+        blank=True,
+        verbose_name="Региональное описание",
+        help_text="Оставьте пустым, чтобы использовать базовое описание + город"
+    )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активна"
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
+
+    class Meta:
+        verbose_name = "Региональная адаптация статьи"
+        verbose_name_plural = "Региональные адаптации статей"
+        unique_together = ['post', 'city']  # Одна адаптация на статью и город
+        ordering = ['city__name', 'post__title']
+
+    def __str__(self):
+        return f"{self.post.title} для {self.city.name}"
+
+    def get_title(self):
+        """Возвращает региональный заголовок или базовый + город"""
+        if self.title:
+            return self.title
+        return f"{self.post.title} {self.city.get_name_prepositional()}"
+
+    def get_content(self):
+        """Возвращает региональный контент или базовый"""
+        if self.content:
+            return self.content
+        return self.post.content
+
+    def get_description(self):
+        """Возвращает региональное описание или базовое + город"""
+        if self.description:
+            return self.description
+        
+        base_description = self.post.get_seo_description() or ""
+        if base_description:
+            return f"{base_description} {self.city.get_name_prepositional()}."
+        return f"SEO-продвижение {self.city.get_name_prepositional()}."

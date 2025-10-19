@@ -244,12 +244,48 @@ def city_post_detail(request, city_slug, post_slug):
     # Получаем связанные статьи
     related_posts = post.get_related_posts(limit=3)
     
+    # Получаем региональную адаптацию
+    from .models import RegionalPostAdaptation
+    try:
+        regional_adaptation = RegionalPostAdaptation.objects.get(
+            post=post, 
+            city=city, 
+            is_active=True
+        )
+        
+        # Создаем объект с региональными данными
+        class RegionalPost:
+            def __init__(self, post, adaptation):
+                self.base_post = post
+                self.adaptation = adaptation
+                
+            @property
+            def title(self):
+                return self.adaptation.get_title()
+                
+            @property
+            def content(self):
+                return self.adaptation.get_content()
+                
+            @property
+            def description(self):
+                return self.adaptation.get_description()
+                
+            def __getattr__(self, name):
+                return getattr(self.base_post, name)
+        
+        regional_post = RegionalPost(post, regional_adaptation)
+        
+    except RegionalPostAdaptation.DoesNotExist:
+        # Если нет региональной адаптации, используем базовую статью
+        regional_post = post
+    
     context = {
-        'title': f"{post.title} | {city.name}",
+        'title': f"{regional_post.title} | {city.name}",
         'city': city,
-        'post': post,
+        'post': regional_post,
         'related_posts': related_posts,
-        'seo_object': post,
+        'seo_object': regional_post,
         'page_type': 'city_post_detail',
         'page_slug': f"{city.slug}/{post.slug}",
     }

@@ -4,8 +4,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# Импортируем кастомный админ-сайт
+from main.admin_site import admin_site
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),
     # SEO файлы (sitemap.xml, robots.txt)
     path('', include(('seo_management.urls', 'seo_management'), namespace='seo_management')),
     # Подключаем URL'ы приложения main, даем ему namespace 'main'

@@ -1,9 +1,9 @@
 from django.contrib import admin
 from .models import SimplePage
 from seo.admin import SEOAdminMixin
+from main.admin_site import admin_site
 
 
-@admin.register(SimplePage)
 class SimplePageAdmin(SEOAdminMixin, admin.ModelAdmin):
     list_display = ('title', 'slug', 'is_published', 'show_in_header', 'show_in_footer', 'order', 'seo_title_length', 'seo_description_length', 'seo_index')
     list_editable = ('is_published', 'show_in_header', 'show_in_footer', 'order')
@@ -24,3 +24,6 @@ class SimplePageAdmin(SEOAdminMixin, admin.ModelAdmin):
             'description': 'Настройки навигационных хлебных крошек'
         }),
     )
+
+# Регистрируем модель в кастомном админ-сайте
+admin_site.register(SimplePage, SimplePageAdmin)

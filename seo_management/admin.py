@@ -3,9 +3,9 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from .models import SitemapSettings, RobotsTxtSettings
+from main.admin_site import admin_site
 
 
-@admin.register(SitemapSettings)
 class SitemapSettingsAdmin(admin.ModelAdmin):
     """Админка для настроек sitemap"""
     
@@ -48,7 +48,6 @@ class SitemapSettingsAdmin(admin.ModelAdmin):
         return qs
 
 
-@admin.register(RobotsTxtSettings)
 class RobotsTxtSettingsAdmin(admin.ModelAdmin):
     """Админка для настроек robots.txt"""
     
@@ -102,3 +101,7 @@ class RobotsTxtSettingsAdmin(admin.ModelAdmin):
                 )
             )
         return response
+
+# Регистрируем модели в кастомном админ-сайте
+admin_site.register(SitemapSettings, SitemapSettingsAdmin)
+admin_site.register(RobotsTxtSettings, RobotsTxtSettingsAdmin)

@@ -299,6 +299,11 @@ UNFOLD = {
                         "icon": "location_city",
                         "link": lambda request: reverse_lazy("admin:main_city_changelist"),
                     },
+                    {
+                        "title": "Региональные адаптации статей",
+                        "icon": "article",
+                        "link": lambda request: reverse_lazy("admin:main_regionalpostadaptation_changelist"),
+                    },
                 ],
             },
             {
@@ -318,35 +323,73 @@ UNFOLD = {
                 ],
             },
             {
-                "title": "📝 Контент",
+                "title": "📝 Блог",
                 "separator": True,
                 "items": [
                     {
-                        "title": "Блог",
+                        "title": "Категории блога",
+                        "icon": "folder",
+                        "link": lambda request: reverse_lazy("admin:blog_category_changelist"),
+                    },
+                    {
+                        "title": "Статьи блога",
                         "icon": "article",
                         "link": lambda request: reverse_lazy("admin:blog_post_changelist"),
                     },
+                ],
+            },
+            {
+                "title": "👥 Команда и отзывы",
+                "separator": True,
+                "items": [
                     {
-                        "title": "Портфолио",
-                        "icon": "work",
-                        "link": lambda request: reverse_lazy("admin:main_portfolioitem_changelist"),
-                    },
-                    {
-                        "title": "Команда",
+                        "title": "Участники команды",
                         "icon": "people",
                         "link": lambda request: reverse_lazy("admin:main_teammember_changelist"),
                     },
                     {
-                        "title": "Отзывы",
+                        "title": "Отзывы клиентов",
                         "icon": "star",
                         "link": lambda request: reverse_lazy("admin:main_testimonial_changelist"),
                     },
                 ],
             },
             {
-                "title": "🔍 SEO",
+                "title": "💼 Портфолио",
                 "separator": True,
                 "items": [
+                    {
+                        "title": "Работы в портфолио",
+                        "icon": "work",
+                        "link": lambda request: reverse_lazy("admin:main_portfolioitem_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "📄 Заявки",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Заявки с сайта",
+                        "icon": "mail",
+                        "link": lambda request: reverse_lazy("admin:main_contactrequest_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "🔍 SEO и система",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Кастомные скрипты",
+                        "icon": "code",
+                        "link": lambda request: reverse_lazy("admin:main_customheadscript_changelist"),
+                    },
+                    {
+                        "title": "Хлебные крошки",
+                        "icon": "menu",
+                        "link": lambda request: reverse_lazy("admin:seo_breadcrumb_changelist"),
+                    },
                     {
                         "title": "Sitemap",
                         "icon": "map",
@@ -359,17 +402,45 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": "📄 Страницы",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Статические страницы",
+                        "icon": "description",
+                        "link": lambda request: reverse_lazy("admin:pages_simplepage_changelist"),
+                    },
+                ],
+            },
         ],
     },
+    "DASHBOARD_CALLBACKS": [],
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇺🇸",
+                "ru": "🇷🇺",
+            },
+        },
+    },
+    "SILENCED_SYSTEM_CHECKS": ["security.W019"],
+    "HIDE_APPS": [
+        "auth",
+        "contenttypes", 
+        "sessions",
+        "admin",
+        "pages",
+        "seo"
+    ],
 }
 
 # Настройки админки
 ADMIN_COLLAPSED_GROUPS = [
     'main',
     'blog', 
-    'team',
-    'portfolio',
     'services',
     'seo',
+    'seo_management',
     'pages'
 ]

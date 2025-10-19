@@ -7,9 +7,9 @@ from .models import Category, Post
 from seo.admin import SEOAdminMixin
 from main.admin_seo import SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin
 from main.models import CustomHeadScript
+from main.admin_site import admin_site
 
 
-@admin.register(Category)
 class CategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     class Meta:
         verbose_name = _('Категория блога')
@@ -52,7 +52,6 @@ class CategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHe
     get_posts_count.short_description = 'Количество статей'
 
 
-@admin.register(Post)
 class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     class Meta:
         verbose_name = _('Статья блога')
@@ -102,3 +101,7 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
     
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('category', 'author')
+
+# Регистрируем модели в кастомном админ-сайте
+admin_site.register(Category, CategoryAdmin)
+admin_site.register(Post, PostAdmin)

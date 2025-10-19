@@ -22,6 +22,9 @@ urlpatterns = [
     path('portfolio/', views.portfolio_list, name='portfolio_list'),
     path('portfolio/<slug:slug>/', views.portfolio_detail, name='portfolio_detail'),
     
+    # --- Карта сайта ---
+    path('sitemap/', views.sitemap_page, name='sitemap'),
+    
     # path('faq/', views.faq, name='faq'),
 
 ]

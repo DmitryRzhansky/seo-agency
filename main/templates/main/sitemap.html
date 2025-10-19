@@ -1,0 +1,279 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<style>
+.sitemap-hero-icon {
+    color: var(--bs-primary);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.sitemap-hero-icon:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.sitemap-section {
+    background: var(--bs-bg-dark);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-bottom: 2rem;
+}
+
+.sitemap-section h3 {
+    color: var(--bs-primary);
+    border-bottom: 2px solid var(--bs-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.sitemap-list {
+    list-style: none;
+    padding: 0;
+}
+
+.sitemap-list li {
+    margin-bottom: 0.75rem;
+}
+
+.sitemap-list a {
+    color: var(--bs-text-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sitemap-list a:hover {
+    background: rgba(13, 110, 253, 0.1);
+    color: var(--bs-primary);
+    transform: translateX(5px);
+}
+
+.sitemap-list a::before {
+    content: "→";
+    margin-right: 0.5rem;
+    color: var(--bs-primary);
+    font-weight: bold;
+}
+
+.sitemap-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-left: 1.5rem;
+}
+
+.sitemap-category {
+    margin-bottom: 2rem;
+}
+
+.sitemap-category h4 {
+    color: var(--bs-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.sitemap-category .sitemap-list {
+    margin-left: 1rem;
+}
+
+.sitemap-stats {
+    background: linear-gradient(135deg, var(--bs-primary), var(--bs-secondary));
+    color: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.sitemap-stats h4 {
+    margin-bottom: 1rem;
+}
+
+.sitemap-stats .row {
+    text-align: center;
+}
+
+.sitemap-stats .col-md-3 {
+    padding: 0.5rem;
+}
+
+.sitemap-stats .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    display: block;
+}
+
+.sitemap-stats .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+</style>
+
+<!-- Hero секция -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-4">Карта сайта</h1>
+                <p class="lead mb-4">Полная структура сайта Isakov Agency. Найдите нужную информацию быстро и удобно.</p>
+            </div>
+            <div class="col-lg-4 mt-4 mt-lg-0 d-flex justify-content-center align-items-center">
+                <i class="fas fa-sitemap fa-10x text-primary sitemap-hero-icon"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <!-- Статистика -->
+    <div class="sitemap-stats">
+        <h4 class="text-center mb-4">Статистика сайта</h4>
+        <div class="row">
+            <div class="col-md-3">
+                <span class="stat-number">{{ sitemap_data.services|length }}</span>
+                <span class="stat-label">Категорий услуг</span>
+            </div>
+            <div class="col-md-3">
+                <span class="stat-number">{{ sitemap_data.blog_posts|length }}</span>
+                <span class="stat-label">Статей в блоге</span>
+            </div>
+            <div class="col-md-3">
+                <span class="stat-number">{{ sitemap_data.cities|length }}</span>
+                <span class="stat-label">Городов</span>
+            </div>
+            <div class="col-md-3">
+                <span class="stat-number">{{ sitemap_data.pages|length }}</span>
+                <span class="stat-label">Страниц</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Основные страницы -->
+        <div class="col-lg-6">
+            <div class="sitemap-section">
+                <h3>🏠 Основные страницы</h3>
+                <ul class="sitemap-list">
+                    {% for page in sitemap_data.main_pages %}
+                    <li>
+                        <a href="{{ page.url }}">{{ page.title }}</a>
+                        <div class="sitemap-description">{{ page.description }}</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Услуги -->
+        <div class="col-lg-6">
+            <div class="sitemap-section">
+                <h3>💼 Услуги</h3>
+                {% for category in sitemap_data.services %}
+                <div class="sitemap-category">
+                    <h4>{{ category.title }}</h4>
+                    <ul class="sitemap-list">
+                        {% for service in category.services.all %}
+                        <li>
+                            <a href="{{ service.get_absolute_url }}">{{ service.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Блог -->
+        <div class="col-lg-6">
+            <div class="sitemap-section">
+                <h3>📝 Блог</h3>
+                {% for category in sitemap_data.blog_categories %}
+                <div class="sitemap-category">
+                    <h4>{{ category.name }} ({{ category.post_set.count }} статей)</h4>
+                    <ul class="sitemap-list">
+                        {% for post in category.post_set.all|slice:":5" %}
+                        <li>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        </li>
+                        {% endfor %}
+                        {% if category.post_set.count > 5 %}
+                        <li>
+                            <a href="{% url 'blog:category_posts' category.slug %}">... и еще {{ category.post_set.count|add:"-5" }} статей</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Региональные страницы -->
+        <div class="col-lg-6">
+            <div class="sitemap-section">
+                <h3>🏙️ Региональные страницы</h3>
+                <ul class="sitemap-list">
+                    {% for city in sitemap_data.cities %}
+                    <li>
+                        <a href="{{ city.get_absolute_url }}">SEO в {{ city.name }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Дополнительные страницы -->
+    {% if sitemap_data.pages %}
+    <div class="row">
+        <div class="col-12">
+            <div class="sitemap-section">
+                <h3>📄 Дополнительные страницы</h3>
+                <ul class="sitemap-list">
+                    {% for page in sitemap_data.pages %}
+                    <li>
+                        <a href="{{ page.get_absolute_url }}">{{ page.title }}</a>
+                        {% if page.short_description %}
+                        <div class="sitemap-description">{{ page.short_description }}</div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Полезные ссылки -->
+    <div class="row">
+        <div class="col-12">
+            <div class="sitemap-section">
+                <h3>🔗 Полезные ссылки</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="sitemap-list">
+                        <li><a href="/#contact">Связаться с нами</a></li>
+                        <li><a href="/#services">Наши услуги</a></li>
+                        <li><a href="/#portfolio">Портфолио</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="sitemap-list">
+                            <li><a href="/privacy/">Политика конфиденциальности</a></li>
+                            <li><a href="/sitemap.xml">XML Sitemap</a></li>
+                            <li><a href="/robots.txt">Robots.txt</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

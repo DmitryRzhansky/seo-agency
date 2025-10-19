@@ -2,12 +2,14 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Count, F
 from django.contrib import messages
+from django.urls import reverse
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
 from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage
-from blog.models import Post
+from blog.models import Post, Category
 from .forms import ContactForm
+from pages.models import SimplePage
 from django.views.decorators.cache import never_cache # отключаем кэш для index
 from django.conf import settings # <<< Импорт settings для времени кэша
 
@@ -439,3 +441,38 @@ def portfolio_detail(request, slug):
         'page_slug': portfolio_item.slug,
     }
     return render(request, 'main/portfolio_detail.html', context)
+
+
+def sitemap_page(request):
+    """
+    HTML-страница карты сайта с красивым дизайном
+    """
+    # Получаем все данные для карты сайта
+    services = ServiceCategory.objects.all().prefetch_related('services')
+    blog_categories = Category.objects.all().prefetch_related('post_set')
+    blog_posts = Post.objects.filter(is_published=True).select_related('category')
+    cities = City.objects.all()
+    pages = SimplePage.objects.filter(is_published=True)
+    
+    # Создаем структуру карты сайта
+    sitemap_data = {
+        'main_pages': [
+            {'title': 'Главная', 'url': '/', 'description': 'Главная страница агентства'},
+            {'title': 'Услуги', 'url': '/services/', 'description': 'Все наши услуги'},
+            {'title': 'Блог', 'url': '/blog/', 'description': 'Статьи и новости'},
+            {'title': 'Портфолио', 'url': '/portfolio/', 'description': 'Примеры наших работ'},
+            {'title': 'Контакты', 'url': '/#contact', 'description': 'Свяжитесь с нами'},
+        ],
+        'services': services,
+        'blog_categories': blog_categories,
+        'blog_posts': blog_posts,
+        'cities': cities,
+        'pages': pages,
+    }
+    
+    context = {
+        'title': 'Карта сайта | Isakov Agency',
+        'sitemap_data': sitemap_data,
+        'page_type': 'sitemap',
+    }
+    return render(request, 'main/sitemap.html', context)

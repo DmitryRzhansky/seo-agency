@@ -234,7 +234,7 @@ def city_post_detail(request, city_slug, post_slug):
     city = get_object_or_404(City, slug=city_slug, is_active=True)
     post = get_object_or_404(Post, slug=post_slug, is_published=True)
     
-    # Инкремент просмотров
+    # Инкремент просмотров (для базовой статьи)
     session_key = f"viewed_post_{post.pk}"
     if not request.session.get(session_key):
         Post.objects.filter(pk=post.pk).update(views_count=F('views_count') + 1)
@@ -273,6 +273,13 @@ def city_post_detail(request, city_slug, post_slug):
                 
             def __getattr__(self, name):
                 return getattr(self.base_post, name)
+        
+        # Инкремент просмотров для региональной адаптации
+        regional_session_key = f"viewed_regional_{regional_adaptation.pk}"
+        if not request.session.get(regional_session_key):
+            RegionalPostAdaptation.objects.filter(pk=regional_adaptation.pk).update(views_count=F('views_count') + 1)
+            regional_adaptation.refresh_from_db(fields=['views_count'])
+            request.session[regional_session_key] = True
         
         regional_post = RegionalPost(post, regional_adaptation)
         

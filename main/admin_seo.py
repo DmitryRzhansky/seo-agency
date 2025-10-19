@@ -575,15 +575,15 @@ class CustomHeadScriptAdmin(admin.ModelAdmin):
 
 
 @admin.register(RegionalPostAdaptation)
-class RegionalPostAdaptationAdmin(admin.ModelAdmin):
+class RegionalPostAdaptationAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     list_display = (
         'post', 'city', 'get_title_preview', 'get_content_preview', 
-        'is_active', 'created_at'
+        'is_active', 'seo_validation', 'seo_title_length', 'seo_description_length', 'created_at'
     )
     list_filter = ('city', 'is_active', 'created_at', 'post__category')
     search_fields = ('post__title', 'title', 'description', 'city__name')
     list_editable = ('is_active',)
-    readonly_fields = ('created_at', 'updated_at')
+    readonly_fields = ('views_count', 'seo_preview', 'created_at', 'updated_at')
     
     fieldsets = (
         ('📝 Основная информация', {
@@ -593,6 +593,21 @@ class RegionalPostAdaptationAdmin(admin.ModelAdmin):
         ('📄 Региональное содержимое', {
             'fields': ('title', 'content', 'description'),
             'description': 'Заполните поля для создания уникальной версии статьи для города'
+        }),
+        ('🍞 Навигация', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',),
+            'description': 'Настройки навигационных хлебных крошек'
+        }),
+        ('📊 Статистика', {
+            'fields': ('views_count',),
+            'classes': ('collapse',),
+            'description': 'Статистика просмотров'
+        }),
+        ('👁️ SEO Предпросмотр', {
+            'fields': ('seo_preview',),
+            'classes': ('collapse',),
+            'description': 'Как будет выглядеть в поисковой выдаче'
         }),
         ('📊 Метаданные', {
             'fields': ('created_at', 'updated_at'),

@@ -867,7 +867,7 @@ class PortfolioItem(SEOModel):
             return "Период не указан"
 
 
-class RegionalPostAdaptation(models.Model):
+class RegionalPostAdaptation(SEOModel):
     """Модель для региональных адаптаций статей"""
     post = models.ForeignKey(
         Post,
@@ -903,6 +903,26 @@ class RegionalPostAdaptation(models.Model):
         default=True,
         verbose_name="Активна"
     )
+    views_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Просмотры",
+        help_text="Количество просмотров региональной версии статьи"
+    )
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
+    
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
 
@@ -936,3 +956,42 @@ class RegionalPostAdaptation(models.Model):
         if base_description:
             return f"{base_description} {self.city.get_name_prepositional()}."
         return f"SEO-продвижение {self.city.get_name_prepositional()}."
+    
+    def get_absolute_url(self):
+        """Возвращает URL региональной адаптации статьи"""
+        from django.urls import reverse
+        return reverse('main:city_post_detail', kwargs={
+            'city_slug': self.city.slug,
+            'post_slug': self.post.slug
+        })
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для региональной адаптации"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        # Если есть кастомные крошки, используем их
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Создаем автоматические крошки
+        breadcrumbs = [
+            {"title": "Главная", "url": "/"},
+            {"title": "Города", "url": "/cities/"},
+            {"title": self.city.name, "url": self.city.get_absolute_url()},
+        ]
+        
+        # Добавляем категорию, если есть
+        if self.post.category:
+            breadcrumbs.append({
+                "title": self.post.category.name,
+                "url": self.post.category.get_absolute_url()
+            })
+        
+        # Добавляем саму статью
+        breadcrumbs.append({
+            "title": self.get_title(),
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs

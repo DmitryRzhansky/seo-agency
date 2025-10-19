@@ -70,45 +70,6 @@
     </section>
 <br><br>
     
-    <section class="section-padding bg-light" id="top-services">
-        <div class="container">
-            <h2 class="text-center section-title">Топ услуг маркетинга</h2>
-            
-            {% comment %} 
-            !!! ВАЖНО !!!
-            Мы договаривались добавить иконки. Здесь я заменил статический код на динамический, 
-            используя переменную top_services из views.py.
-            Если нужно отображать карусель, как было раньше, мы можем ее восстановить,
-            но пока используем простой ряд карточек для простоты.
-            
-            Поскольку в модели Service нет поля для иконки, я временно использую статичную иконку,
-            пока мы не добавим ее в модель.
-            
-            Вам нужно убедиться, что в админке добавлены 6+ услуг, чтобы они отобразились.
-            {% endcomment %}
-            
-            <div class="row justify-content-center g-4">
-                {% for service in top_services %}
-                <div class="col-md-4 col-lg-2">
-                    <a href="{% url 'services:service_detail' slug=service.slug %}" class="card text-center p-3 h-100 text-decoration-none text-dark shadow-sm">
-                        {% if service.image %}
-                            <img src="{{ service.image.url }}" class="img-fluid mb-3" alt="{{ service.get_image_alt }}" style="height: 220px; width: 100%; max-width: 180px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                        {% else %}
-                            <div class="fs-1 text-primary mb-3"><i class="fas fa-bolt"></i></div>
-                        {% endif %}
-                        <h6 class="card-title fw-bold mb-0">{{ service.title }}</h6>
-                    </a>
-                </div>
-                {% empty %}
-                 <div class="col-12 text-center py-3">
-                    <p class="text-muted">Услуги пока не добавлены в административной панели.</p>
-                </div>
-                {% endfor %}
-            </div>
-            
-        </div>
-    </section>
-<br><br>
 
 <section class="section-padding" id="niches">
     <div class="container">

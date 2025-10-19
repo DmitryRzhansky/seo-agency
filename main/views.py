@@ -340,6 +340,17 @@ def contacts(request):
     return render(request, 'main/contacts.html', context)
 
 
+def privacy_policy(request):
+    """
+    Страница политики конфиденциальности
+    """
+    context = {
+        'title': 'Политика конфиденциальности | Isakov Agency',
+        'seo_object': None,
+    }
+    return render(request, 'main/privacy_policy.html', context)
+
+
 # --- Портфолио ---
 
 @never_cache

@@ -1,6 +1,6 @@
-/* SEO-тематические анимации - стили для заднего фона */
+/* Анимация "Паутина данных" для SEO-агентства */
 
-/* Основной контейнер для SEO-объектов */
+/* Основной контейнер для анимации (сохраняем все важные настройки) */
 #seo-animation-container {
     position: fixed !important;
     top: 0 !important;
@@ -19,359 +19,133 @@
     padding: 0 !important;
 }
 
-/* Базовые стили для геометрических объектов */
-.seo-object {
+/* Стили для узлов данных */
+.data-node {
     position: absolute !important;
     pointer-events: none !important;
     will-change: transform, opacity !important;
     backface-visibility: hidden !important;
     transform-style: preserve-3d !important;
-}
-
-/* Стили для геометрических фигур */
-.seo-circle {
-    filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3)) !important;
-}
-
-.seo-triangle {
-    filter: drop-shadow(0 4px 8px rgba(40, 167, 69, 0.3)) !important;
-}
-
-.seo-square {
-    filter: drop-shadow(0 4px 8px rgba(255, 193, 7, 0.3)) !important;
-}
-
-.seo-diamond {
-    filter: drop-shadow(0 4px 8px rgba(111, 66, 193, 0.3)) !important;
-}
-
-.seo-hexagon {
-    filter: drop-shadow(0 4px 8px rgba(23, 162, 184, 0.3)) !important;
-}
-
-.seo-star {
-    filter: drop-shadow(0 4px 8px rgba(255, 193, 7, 0.4)) !important;
-}
-
-.seo-wave {
-    filter: drop-shadow(0 4px 8px rgba(40, 167, 69, 0.3)) !important;
-}
-
-.seo-spiral {
-    filter: drop-shadow(0 4px 8px rgba(111, 66, 193, 0.3)) !important;
-}
-
-.seo-polygon {
-    filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3)) !important;
-}
-
-.seo-blob {
-    filter: drop-shadow(0 4px 8px rgba(23, 162, 184, 0.3)) !important;
+    border-radius: 50% !important;
+    transition: none !important;
 }
 
 /* Стили для соединений */
-.seo-connection {
+.data-connection {
     position: absolute !important;
     pointer-events: none !important;
     z-index: -1 !important;
     transition: opacity 0.3s ease !important;
 }
 
-/* Анимации для геометрических фигур */
-@keyframes geometricPulse {
+/* Анимации для узлов данных */
+@keyframes dataPulse {
     0% { 
         opacity: 0.3; 
         transform: scale(1);
+        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
     }
     50% {
         opacity: 0.7;
-        transform: scale(1.05);
+        transform: scale(1.2);
+        box-shadow: 0 0 16px rgba(13, 110, 253, 0.6);
     }
     100% { 
         opacity: 0.4; 
         transform: scale(1);
+        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
     }
 }
 
-@keyframes geometricFloat {
+@keyframes dataGlow {
+    0% { 
+        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(13, 110, 253, 0.8);
+    }
+    100% { 
+        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+    }
+}
+
+@keyframes dataFloat {
     0% { 
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-5px);
     }
     100% { 
         transform: translateY(0px);
     }
 }
 
-@keyframes geometricRotate {
-    0% { 
-        transform: rotate(0deg);
-    }
-    100% { 
-        transform: rotate(360deg);
-    }
+/* Применяем анимации к узлам данных */
+.data-node:nth-child(3n) {
+    animation: dataPulse 4s ease-in-out infinite !important;
 }
 
-@keyframes geometricBounce {
-    0%, 100% { 
-        transform: translateY(0px) scale(1);
-    }
-    25% {
-        transform: translateY(-5px) scale(1.02);
-    }
-    50% { 
-        transform: translateY(0px) scale(1);
-    }
-    75% {
-        transform: translateY(-3px) scale(1.01);
-    }
+.data-node:nth-child(3n+1) {
+    animation: dataGlow 3s ease-in-out infinite !important;
 }
 
-@keyframes geometricMorph {
-    0% { 
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    }
-    25% {
-        border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
-    }
-    50% { 
-        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
-    }
-    75% {
-        border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
-    }
-    100% { 
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    }
-}
-
-@keyframes geometricGlow {
-    0% { 
-        filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3));
-    }
-    50% {
-        filter: drop-shadow(0 8px 16px rgba(13, 110, 253, 0.6));
-    }
-    100% { 
-        filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3));
-    }
-}
-
-/* Применяем анимации к новым абстрактным объектам */
-.seo-mandala {
-    animation: geometricPulse 4s ease-in-out infinite !important;
-}
-
-.seo-crystal {
-    animation: geometricFloat 3s ease-in-out infinite !important;
-}
-
-.seo-nebula {
-    animation: geometricMorph 5s ease-in-out infinite !important;
-}
-
-.seo-quantum {
-    animation: geometricGlow 3s ease-in-out infinite !important;
-}
-
-.seo-fractal {
-    animation: geometricRotate 8s linear infinite !important;
-}
-
-.seo-torus {
-    animation: geometricPulse 6s ease-in-out infinite !important;
-}
-
-.seo-helix {
-    animation: geometricMorph 4s ease-in-out infinite !important;
-}
-
-.seo-lattice {
-    animation: geometricBounce 5s ease-in-out infinite !important;
-}
-
-.seo-molecule {
-    animation: geometricGlow 3s ease-in-out infinite !important;
-}
-
-.seo-galaxy {
-    animation: geometricMorph 7s ease-in-out infinite !important;
-}
-
-.seo-vortex {
-    animation: geometricRotate 6s linear infinite !important;
-}
-
-.seo-prism {
-    animation: geometricFloat 5s ease-in-out infinite !important;
+.data-node:nth-child(3n+2) {
+    animation: dataFloat 5s ease-in-out infinite !important;
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-    .seo-object {
-        opacity: 0.5 !important;
+    .data-node {
+        opacity: 0.4 !important;
     }
     
-    .seo-mandala {
+    .data-node:nth-child(3n) {
         animation-duration: 5s !important;
     }
     
-    .seo-crystal {
+    .data-node:nth-child(3n+1) {
         animation-duration: 4s !important;
     }
     
-    .seo-nebula {
-        animation-duration: 6s !important;
-    }
-    
-    .seo-quantum {
-        animation-duration: 4s !important;
-    }
-    
-    .seo-fractal {
-        animation-duration: 10s !important;
-    }
-    
-    .seo-torus {
-        animation-duration: 7s !important;
-    }
-    
-    .seo-helix {
-        animation-duration: 5s !important;
-    }
-    
-    .seo-lattice {
-        animation-duration: 6s !important;
-    }
-    
-    .seo-molecule {
-        animation-duration: 4s !important;
-    }
-    
-    .seo-galaxy {
-        animation-duration: 9s !important;
-    }
-    
-    .seo-vortex {
-        animation-duration: 8s !important;
-    }
-    
-    .seo-prism {
+    .data-node:nth-child(3n+2) {
         animation-duration: 6s !important;
     }
 }
 
 @media (max-width: 480px) {
-    .seo-object {
-        opacity: 0.3 !important;
+    .data-node {
+        opacity: 0.2 !important;
     }
     
     /* Уменьшаем количество анимаций на очень маленьких экранах */
-    .seo-mandala,
-    .seo-crystal,
-    .seo-nebula,
-    .seo-quantum,
-    .seo-fractal,
-    .seo-torus,
-    .seo-helix,
-    .seo-lattice,
-    .seo-molecule,
-    .seo-galaxy,
-    .seo-vortex,
-    .seo-prism {
+    .data-node {
         animation: none !important;
     }
 }
 
 /* Стили для высокопроизводительных устройств */
 @media (min-width: 1200px) and (min-height: 800px) {
-    .seo-object {
+    .data-node {
         opacity: 0.6 !important;
     }
     
-    .seo-mandala {
+    .data-node:nth-child(3n) {
         animation-duration: 3s !important;
     }
     
-    .seo-crystal {
+    .data-node:nth-child(3n+1) {
         animation-duration: 2.5s !important;
     }
     
-    .seo-nebula {
+    .data-node:nth-child(3n+2) {
         animation-duration: 4s !important;
-    }
-    
-    .seo-quantum {
-        animation-duration: 2.5s !important;
-    }
-    
-    .seo-fractal {
-        animation-duration: 6s !important;
-    }
-    
-    .seo-torus {
-        animation-duration: 5s !important;
-    }
-    
-    .seo-helix {
-        animation-duration: 3s !important;
-    }
-    
-    .seo-lattice {
-        animation-duration: 4s !important;
-    }
-    
-    .seo-molecule {
-        animation-duration: 2.5s !important;
-    }
-    
-    .seo-galaxy {
-        animation-duration: 5s !important;
-    }
-    
-    .seo-vortex {
-        animation-duration: 4s !important;
-    }
-    
-    .seo-prism {
-        animation-duration: 4s !important;
-    }
-    
-    .seo-wave {
-        animation-duration: 3s !important;
-    }
-    
-    .seo-spiral {
-        animation-duration: 4s !important;
-    }
-    
-    .seo-polygon {
-        animation-duration: 3.5s !important;
-    }
-    
-    .seo-blob {
-        animation-duration: 5.5s !important;
     }
 }
 
 /* Стили для устройств с поддержкой prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-    .seo-object {
-        animation: none !important;
-    }
-    
-    .seo-circle,
-    .seo-triangle,
-    .seo-square,
-    .seo-diamond,
-    .seo-hexagon,
-    .seo-star,
-    .seo-wave,
-    .seo-spiral,
-    .seo-polygon,
-    .seo-blob {
+    .data-node {
         animation: none !important;
     }
 }
@@ -388,7 +162,7 @@ html {
     padding: 0 !important;
 }
 
-/* Убеждаемся, что космические объекты не влияют на z-index других элементов */
+/* Убеждаемся, что анимация не влияет на z-index других элементов */
 .hero-section,
 .section-padding,
 .navbar,
@@ -397,7 +171,7 @@ html {
     z-index: 1 !important;
 }
 
-/* Делаем фоны секций полупрозрачными для видимости космической анимации */
+/* Делаем фоны секций полупрозрачными для видимости анимации */
 .hero-section {
     background: linear-gradient(135deg, rgba(13, 17, 22, 0.8) 0%, rgba(22, 27, 34, 0.8) 100%) !important;
 }

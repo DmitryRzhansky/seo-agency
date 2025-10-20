@@ -2,40 +2,7 @@
 {% load static %}
 {% load seo_tags %}
 
-{% block breadcrumbs %}
-{% if current_category %}
-{% breadcrumbs current_category %}
-{% elif search_query %}
-<nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <div class="container">
-        <ol class="breadcrumb mb-0 py-3">
-            <li class="breadcrumb-item">
-                <a href="/" class="text-decoration-none">Главная</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="/blog/" class="text-decoration-none">Блог</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                Поиск: "{{ search_query }}"
-            </li>
-        </ol>
-    </div>
-</nav>
-{% else %}
-<nav aria-label="breadcrumb" class="breadcrumb-nav">
-    <div class="container">
-        <ol class="breadcrumb mb-0 py-3">
-            <li class="breadcrumb-item">
-                <a href="/" class="text-decoration-none">Главная</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                Блог
-            </li>
-        </ol>
-    </div>
-</nav>
-{% endif %}
-{% endblock breadcrumbs %}
+{% block breadcrumbs %}{% endblock breadcrumbs %}
 
 {% block content %}
 
@@ -62,7 +29,7 @@
         <!-- Поисковая форма -->
         <div class="row justify-content-center mb-4">
             <div class="col-lg-6">
-                <form method="get" action="{% url 'blog:search' %}" class="d-flex">
+                <form method="get" action="{% url 'blog:search' %}#blog-list" class="d-flex">
                     <div class="input-group">
                         <input type="text" 
                                class="form-control" 
@@ -84,14 +51,14 @@
             <div class="col-lg-8">
                 <div class="d-flex flex-wrap justify-content-center gap-2">
                     <!-- Кнопка "Все" -->
-                    <a href="{% url 'blog:post_list' %}" 
+                    <a href="{% url 'blog:post_list' %}#blog-list" 
                        class="btn {% if not current_category %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">
                         Все статьи
                     </a>
                     
                     <!-- Кнопки категорий -->
                     {% for category in categories %}
-                        <a href="{% url 'blog:category_posts' slug=category.slug %}" 
+                        <a href="{% url 'blog:category_posts' slug=category.slug %}#blog-list" 
                            class="btn {% if current_category and current_category.slug == category.slug %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm"
                            style="{% if current_category and current_category.slug == category.slug %}{% else %}border-color: {{ category.color }}; color: {{ category.color }};{% endif %}">
                             {{ category.name }}
@@ -112,7 +79,7 @@
                     {% if page_obj %}
                         (найдено {{ page_obj.paginator.count }} {{ page_obj.paginator.count|pluralize:"статья,статьи,статей" }})
                     {% endif %}
-                    <a href="{% url 'blog:post_list' %}" class="btn btn-sm btn-outline-secondary ms-3">
+                    <a href="{% url 'blog:post_list' %}#blog-list" class="btn btn-sm btn-outline-secondary ms-3">
                         <i class="fas fa-times me-1"></i> Очистить поиск
                     </a>
                 </div>

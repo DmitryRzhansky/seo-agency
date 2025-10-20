@@ -1,0 +1,44 @@
+/* Стили для карточек услуг и статей */
+.service-card, .post-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.service-card:hover, .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.service-card .card-title a, .post-card .card-title a {
+    transition: color 0.3s ease;
+}
+
+.service-card .card-title a:hover, .post-card .card-title a:hover {
+    color: #007bff !important;
+}
+
+.service-card .btn, .post-card .btn {
+    transition: all 0.3s ease;
+}
+
+.service-card .btn:hover, .post-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
+}
+
+.post-card .card-title a {
+    color: white !important;
+    transition: color 0.3s ease;
+}
+
+.post-card .card-title a:hover {
+    color: #007bff !important;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .service-card, .post-card {
+        margin-bottom: 1.5rem;
+    }
+}

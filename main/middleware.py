@@ -2,7 +2,7 @@
 
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponse
 from .utils import get_client_ip, get_city_by_ip, get_city_slug_by_name
 import logging
 
@@ -96,4 +96,86 @@ class GeoLocationMiddleware:
             return HttpResponseRedirect(city_url)
         except Exception as e:
             logger.error(f"Ошибка при перенаправлении на город {city_slug}: {e}")
+            return None
+
+
+class RedirectMiddleware:
+    """
+    Middleware для обработки 301/302 редиректов
+    """
+    
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Проверяем редиректы только для GET запросов
+        if request.method == 'GET':
+            redirect_response = self.check_redirects(request)
+            if redirect_response:
+                return redirect_response
+        
+        response = self.get_response(request)
+        return response
+    
+    def check_redirects(self, request):
+        """
+        Проверяет, есть ли редирект для данного пути
+        """
+        try:
+            from seo_management.models import Redirect
+            
+            # Получаем путь запроса
+            request_path = request.path
+            
+            # Ищем подходящий редирект
+            redirect_obj = self.find_matching_redirect(request_path)
+            
+            if redirect_obj:
+                # Выполняем редирект
+                return self.perform_redirect(request, redirect_obj)
+                
+        except Exception as e:
+            logger.error(f"Ошибка при проверке редиректов: {e}")
+        
+        return None
+    
+    def find_matching_redirect(self, request_path):
+        """
+        Находит подходящий редирект для пути
+        """
+        try:
+            from seo_management.models import Redirect
+            
+            # Получаем все активные редиректы
+            redirects = Redirect.objects.filter(status='active').order_by('-created_at')
+            
+            # Ищем точное совпадение сначала
+            for redirect_obj in redirects:
+                if redirect_obj.is_match(request_path):
+                    return redirect_obj
+                    
+        except Exception as e:
+            logger.error(f"Ошибка при поиске редиректа: {e}")
+        
+        return None
+    
+    def perform_redirect(self, request, redirect_obj):
+        """
+        Выполняет редирект
+        """
+        try:
+            # Получаем URL для редиректа
+            redirect_url = redirect_obj.get_redirect_url(request)
+            
+            # Логируем редирект
+            logger.info(f"Выполняется {redirect_obj.redirect_type} редирект: {request.path} → {redirect_url}")
+            
+            # Выполняем редирект в зависимости от типа
+            if redirect_obj.redirect_type == '301':
+                return HttpResponsePermanentRedirect(redirect_url)
+            else:  # 302
+                return HttpResponseRedirect(redirect_url)
+                
+        except Exception as e:
+            logger.error(f"Ошибка при выполнении редиректа: {e}")
             return None

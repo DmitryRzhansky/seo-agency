@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'main.middleware.RedirectMiddleware',  # Редиректы должны быть рано в цепочке
     'main.middleware.GeoLocationMiddleware',
 ]
 

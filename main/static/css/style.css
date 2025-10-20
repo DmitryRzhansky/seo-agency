@@ -206,8 +206,14 @@ body {
 @media (max-width: 576px) {
     .home-hero .row.align-items-center { align-items: flex-start !important; }
     .home-hero .col-lg-6:first-child { order: 0; }
-    .home-hero .col-lg-6:last-child { order: 1; margin-top: 1.25rem; }
+    .home-hero .col-lg-6:last-child { order: 1; margin-top: 10.5rem; }
     .home-hero { padding-top: 40px; padding-bottom: 40px; }
+}
+
+/* Более широкая мобильная сетка и принудительное перекрытие утилит Bootstrap */
+@media (max-width: 768px) {
+    .home-hero .col-lg-6.mt-4.mt-lg-0 { margin-top: 1.5rem !important; }
+    .home-hero .director-card { margin-top: 1.5rem !important; }
 }
 
 /* Hero ширина на мобилках: контейнер на всю ширину */

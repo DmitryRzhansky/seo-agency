@@ -122,3 +122,96 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 })();
+
+// AJAX-подгрузка списков для блога, услуг и портфолио (без перезагрузки страницы)
+(function() {
+    function fetchAndSwap(url, sectionSelector) {
+        return fetch(url, { headers: { 'X-Requested-With': 'fetch' } })
+            .then(r => r.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newSection = doc.querySelector(sectionSelector);
+                const currentSection = document.querySelector(sectionSelector);
+                if (newSection && currentSection) {
+                    currentSection.innerHTML = newSection.innerHTML;
+                    history.pushState({}, '', url);
+                    currentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            })
+            .catch(() => {});
+    }
+
+    // Блог: форма поиска и фильтры категорий
+    (function initBlogAjax() {
+        const sectionSelector = '#blog-list';
+        const section = document.querySelector(sectionSelector);
+        if (!section) return;
+
+        // Перехватываем submit формы поиска
+        section.addEventListener('submit', function(e) {
+            const form = e.target.closest('form');
+            if (!form) return;
+            e.preventDefault();
+            const url = form.getAttribute('action') || window.location.href;
+            const params = new URLSearchParams(new FormData(form));
+            const finalUrl = url.split('#')[0] + '?' + params.toString() + '#blog-list';
+            fetchAndSwap(finalUrl, sectionSelector);
+        });
+
+        // Перехватываем клики по кнопкам категорий/пагинации
+        section.addEventListener('click', function(e) {
+            const a = e.target.closest('a');
+            if (!a) return;
+            const href = a.getAttribute('href') || '';
+            if (href.includes('#blog-list')) {
+                e.preventDefault();
+                fetchAndSwap(href, sectionSelector);
+            }
+        });
+    })();
+
+    // Услуги: форма поиска и категории
+    (function initServicesAjax() {
+        const sectionSelector = '#services-list';
+        const section = document.querySelector(sectionSelector);
+        if (!section) return;
+
+        section.addEventListener('submit', function(e) {
+            const form = e.target.closest('form');
+            if (!form) return;
+            e.preventDefault();
+            const url = form.getAttribute('action') || window.location.href;
+            const params = new URLSearchParams(new FormData(form));
+            const finalUrl = url.split('#')[0] + '?' + params.toString() + '#services-list';
+            fetchAndSwap(finalUrl, sectionSelector);
+        });
+
+        section.addEventListener('click', function(e) {
+            const a = e.target.closest('a');
+            if (!a) return;
+            const href = a.getAttribute('href') || '';
+            if (href.includes('#services-list')) {
+                e.preventDefault();
+                fetchAndSwap(href, sectionSelector);
+            }
+        });
+    })();
+
+    // Портфолио: форма поиска
+    (function initPortfolioAjax() {
+        const sectionSelector = '#portfolio';
+        const section = document.querySelector(sectionSelector);
+        if (!section) return;
+        const searchForm = document.getElementById('search-form');
+        if (searchForm) {
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const url = window.location.pathname;
+                const params = new URLSearchParams(new FormData(searchForm));
+                const finalUrl = url + '?' + params.toString() + '#portfolio';
+                fetchAndSwap(finalUrl, sectionSelector);
+            });
+        }
+    })();
+})();

@@ -1,4 +1,5 @@
 {% extends "main/base.html" %}
+{% load static %}
 {% load seo_tags %}
 {% load custom_filters %}
 
@@ -27,111 +28,17 @@
     </div>
 </nav>
 
-<style>
-.breadcrumb-nav {
-    background: linear-gradient(135deg, var(--bs-bg-darker) 0%, var(--bs-bg-dark) 100%);
-    border-bottom: 1px solid var(--bs-border-dark);
-    margin-top: 90px;
-    position: relative;
-    z-index: 10;
-    min-height: 60px;
-    display: block !important;
-    visibility: visible !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.breadcrumb {
-    background: none;
-    padding: 15px 0;
-    margin: 0;
-    font-size: 0.9rem;
-    display: flex !important;
-    flex-wrap: wrap;
-}
-
-.breadcrumb-item {
-    display: inline-block !important;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-    content: "›";
-    color: var(--bs-text-muted-dark);
-    font-weight: bold;
-    margin: 0 8px;
-}
-
-.breadcrumb-item a {
-    color: var(--bs-primary-dark);
-    transition: color 0.2s ease;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.breadcrumb-item a:hover {
-    color: #0b5ed7;
-    text-decoration: underline !important;
-}
-
-.breadcrumb-item.active {
-    color: var(--bs-text-dark);
-    font-weight: 600;
-}
-
-@media (max-width: 768px) {
-    .breadcrumb {
-        font-size: 0.8rem;
-        padding: 10px 0;
-    }
-    
-    .breadcrumb-item {
-        max-width: 150px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-}
-</style>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/breadcrumbs.css' %}">
+{% endblock extra_css %}
 {% endif %}
 {% endblock breadcrumbs %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/city_service_detail.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
-<style>
-    /* 1. Основное правило для предотвращения выхода текста за границы (особенно длинные URL) */
-    .service-content {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-
-    /* 2. Обработка блоков кода и pre */
-    .service-content pre, 
-    .service-content code {
-        white-space: pre-wrap; /* Переносит длинные строки кода */
-        word-wrap: break-word;
-        overflow-x: auto;      /* Добавляет горизонтальный скролл, если элемент не помещается */
-        max-width: 100%;       /* Гарантирует, что они не шире родителя */
-        padding: 10px;         /* Добавляем немного отступа для красоты */
-        background-color: #f8f9fa; /* Светлый фон для кода */
-        border: 1px solid #e9ecef;
-        border-radius: 4px;
-    }
-
-    /* 3. Обработка таблиц (могут быть широкими) */
-    .service-content table {
-        display: block;        /* Позволяет управлять скроллом */
-        max-width: 100%;
-        overflow-x: auto;      /* Горизонтальный скролл для широких таблиц */
-        width: 100%;
-        margin-bottom: 1rem;
-        border-collapse: collapse;
-    }
-    
-    .service-content table th, 
-    .service-content table td {
-        white-space: nowrap; /* Предотвращаем перенос внутри ячеек при горизонтальном скролле */
-        padding: 8px;
-        border: 1px solid #dee2e6;
-    }
-</style>
 
 <section class="section-padding pt-5 mt-5" id="city-service-detail-content">
     <div class="container">
@@ -230,50 +137,5 @@
 </section>
 {% endif %}
 
-<style>
-/* Стили для блока "Еще услуги" */
-.related-service-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.related-service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-}
-
-.related-service-card .card-title a {
-    transition: color 0.3s ease;
-}
-
-.related-service-card .card-title a:hover {
-    color: #007bff !important;
-}
-
-.related-service-card .btn {
-    transition: all 0.3s ease;
-}
-
-.related-service-card .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
-}
-
-.related-service-card .badge {
-    transition: all 0.3s ease;
-}
-
-.related-service-card:hover .badge {
-    transform: scale(1.05);
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .related-service-card {
-        margin-bottom: 1.5rem;
-    }
-}
-</style>
 
 {% endblock content %}

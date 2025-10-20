@@ -10,6 +10,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/service_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/cards.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
@@ -98,50 +99,5 @@
 </section>
 {% endif %}
 
-<style>
-/* Стили для блока "Еще услуги" */
-.related-service-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.related-service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
-}
-
-.related-service-card .card-title a {
-    transition: color 0.3s ease;
-}
-
-.related-service-card .card-title a:hover {
-    color: #007bff !important;
-}
-
-.related-service-card .btn {
-    transition: all 0.3s ease;
-}
-
-.related-service-card .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
-}
-
-.related-service-card .badge {
-    transition: all 0.3s ease;
-}
-
-.related-service-card:hover .badge {
-    transform: scale(1.05);
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .related-service-card {
-        margin-bottom: 1.5rem;
-    }
-}
-</style>
 
 {% endblock content %}

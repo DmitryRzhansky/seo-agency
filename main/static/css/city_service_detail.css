@@ -1,0 +1,37 @@
+/* Стили для страницы детального просмотра услуги города */
+
+/* 1. Основное правило для предотвращения выхода текста за границы (особенно длинные URL) */
+.service-content {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* 2. Обработка блоков кода и pre */
+.service-content pre, 
+.service-content code {
+    white-space: pre-wrap; /* Переносит длинные строки кода */
+    word-wrap: break-word;
+    overflow-x: auto;      /* Добавляет горизонтальный скролл, если элемент не помещается */
+    max-width: 100%;       /* Гарантирует, что они не шире родителя */
+    padding: 10px;         /* Добавляем немного отступа для красоты */
+    background-color: #f8f9fa; /* Светлый фон для кода */
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+}
+
+/* 3. Обработка таблиц (могут быть широкими) */
+.service-content table {
+    display: block;        /* Позволяет управлять скроллом */
+    max-width: 100%;
+    overflow-x: auto;      /* Горизонтальный скролл для широких таблиц */
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+.service-content table th, 
+.service-content table td {
+    white-space: nowrap; /* Предотвращаем перенос внутри ячеек при горизонтальном скролле */
+    padding: 8px;
+    border: 1px solid #dee2e6;
+}

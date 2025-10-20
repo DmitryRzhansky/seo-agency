@@ -106,3 +106,19 @@ document.addEventListener('DOMContentLoaded', function() {
         else showConsent();
     }
 })();
+
+// Back-to-top button logic
+(function() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    const threshold = 400; // px
+    function onScroll() {
+        if (window.scrollY > threshold) btn.classList.add('show');
+        else btn.classList.remove('show');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();

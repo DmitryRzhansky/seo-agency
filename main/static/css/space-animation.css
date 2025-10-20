@@ -49,6 +49,34 @@
     filter: drop-shadow(0 4px 8px rgba(23, 162, 184, 0.3)) !important;
 }
 
+.seo-star {
+    filter: drop-shadow(0 4px 8px rgba(255, 193, 7, 0.4)) !important;
+}
+
+.seo-wave {
+    filter: drop-shadow(0 4px 8px rgba(40, 167, 69, 0.3)) !important;
+}
+
+.seo-spiral {
+    filter: drop-shadow(0 4px 8px rgba(111, 66, 193, 0.3)) !important;
+}
+
+.seo-polygon {
+    filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3)) !important;
+}
+
+.seo-blob {
+    filter: drop-shadow(0 4px 8px rgba(23, 162, 184, 0.3)) !important;
+}
+
+/* Стили для соединений */
+.seo-connection {
+    position: absolute !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+    transition: opacity 0.3s ease !important;
+}
+
 /* Анимации для геометрических фигур */
 @keyframes geometricPulse {
     0% { 
@@ -101,6 +129,36 @@
     }
 }
 
+@keyframes geometricMorph {
+    0% { 
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+    25% {
+        border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+    }
+    50% { 
+        border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    }
+    75% {
+        border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
+    }
+    100% { 
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+}
+
+@keyframes geometricGlow {
+    0% { 
+        filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3));
+    }
+    50% {
+        filter: drop-shadow(0 8px 16px rgba(13, 110, 253, 0.6));
+    }
+    100% { 
+        filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3));
+    }
+}
+
 /* Применяем анимации к геометрическим объектам */
 .seo-circle {
     animation: geometricPulse 4s ease-in-out infinite !important;
@@ -120,6 +178,26 @@
 
 .seo-hexagon {
     animation: geometricPulse 6s ease-in-out infinite !important;
+}
+
+.seo-star {
+    animation: geometricGlow 3s ease-in-out infinite !important;
+}
+
+.seo-wave {
+    animation: geometricMorph 4s ease-in-out infinite !important;
+}
+
+.seo-spiral {
+    animation: geometricRotate 6s linear infinite !important;
+}
+
+.seo-polygon {
+    animation: geometricFloat 5s ease-in-out infinite !important;
+}
+
+.seo-blob {
+    animation: geometricMorph 7s ease-in-out infinite !important;
 }
 
 /* Адаптивность для мобильных устройств */
@@ -147,6 +225,26 @@
     .seo-hexagon {
         animation-duration: 7s !important;
     }
+    
+    .seo-star {
+        animation-duration: 4s !important;
+    }
+    
+    .seo-wave {
+        animation-duration: 5s !important;
+    }
+    
+    .seo-spiral {
+        animation-duration: 8s !important;
+    }
+    
+    .seo-polygon {
+        animation-duration: 6s !important;
+    }
+    
+    .seo-blob {
+        animation-duration: 9s !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -155,23 +253,16 @@
     }
     
     /* Уменьшаем количество анимаций на очень маленьких экранах */
-    .seo-circle {
-        animation: none !important;
-    }
-    
-    .seo-triangle {
-        animation: none !important;
-    }
-    
-    .seo-square {
-        animation: none !important;
-    }
-    
-    .seo-diamond {
-        animation: none !important;
-    }
-    
-    .seo-hexagon {
+    .seo-circle,
+    .seo-triangle,
+    .seo-square,
+    .seo-diamond,
+    .seo-hexagon,
+    .seo-star,
+    .seo-wave,
+    .seo-spiral,
+    .seo-polygon,
+    .seo-blob {
         animation: none !important;
     }
 }
@@ -201,6 +292,26 @@
     .seo-hexagon {
         animation-duration: 5s !important;
     }
+    
+    .seo-star {
+        animation-duration: 2.5s !important;
+    }
+    
+    .seo-wave {
+        animation-duration: 3s !important;
+    }
+    
+    .seo-spiral {
+        animation-duration: 4s !important;
+    }
+    
+    .seo-polygon {
+        animation-duration: 3.5s !important;
+    }
+    
+    .seo-blob {
+        animation-duration: 5.5s !important;
+    }
 }
 
 /* Стили для устройств с поддержкой prefers-reduced-motion */
@@ -213,7 +324,12 @@
     .seo-triangle,
     .seo-square,
     .seo-diamond,
-    .seo-hexagon {
+    .seo-hexagon,
+    .seo-star,
+    .seo-wave,
+    .seo-spiral,
+    .seo-polygon,
+    .seo-blob {
         animation: none !important;
     }
 }

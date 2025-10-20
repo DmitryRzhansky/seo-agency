@@ -14,6 +14,16 @@ def get_client_ip(request):
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
+    # Если локальный IP в дев-режиме — пробуем получить публичный IP через ipapi.co
+    try:
+        if ip in ['127.0.0.1', '::1'] and getattr(settings, 'DEBUG', False):
+            resp = requests.get('https://ipapi.co/ip/', timeout=3)
+            if resp.ok:
+                public_ip = resp.text.strip()
+                if public_ip:
+                    return public_ip
+    except Exception:
+        pass
     return ip
 
 def get_city_by_ip(ip_address: str) -> Optional[str]:
@@ -22,8 +32,13 @@ def get_city_by_ip(ip_address: str) -> Optional[str]:
     Возвращает название города на русском языке или None
     """
     if not ip_address or ip_address in ['127.0.0.1', '::1']:
-        # Для локального IP возвращаем Пермь по умолчанию (для тестирования)
-        return 'Perm'
+        # Локальная разработка: используем дефолтный город, чтобы плашка отображалась
+        try:
+            if getattr(settings, 'DEBUG', False):
+                return 'Perm'
+        except Exception:
+            pass
+        return None
     
     try:
         # Используем API ipapi.co
@@ -32,8 +47,8 @@ def get_city_by_ip(ip_address: str) -> Optional[str]:
             # С API ключом (рекомендуется для продакшена)
             url = f'https://ipapi.co/{ip_address}/json/?key={api_key}'
         else:
-            # Без API ключа (бесплатный тариф)
-            url = f'http://ipapi.co/{ip_address}/json/'
+            # Без API ключа (бесплатный тариф) — используем HTTPS
+            url = f'https://ipapi.co/{ip_address}/json/'
         
         response = requests.get(url, timeout=5)
         response.raise_for_status()

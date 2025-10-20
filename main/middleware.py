@@ -21,10 +21,10 @@ class GeoLocationMiddleware:
         # Проверяем, нужно ли определять геолокацию
         if self.should_detect_geo(request):
             city_slug = self.detect_user_city(request)
-            if city_slug:
-                # Перенаправляем на региональную страницу
-                return self.redirect_to_city(request, city_slug)
-        
+            # Не редиректим, только сохраняем город в сессии для плашки и меню
+            if city_slug and 'user_city' not in request.session:
+                request.session['user_city'] = city_slug
+                request.session['user_city_detected_at'] = True
         response = self.get_response(request)
         return response
     
@@ -56,15 +56,15 @@ class GeoLocationMiddleware:
             if path.startswith(excluded_path):
                 return False
         
-        # Проверяем, есть ли уже город в сессии
-        if 'user_city' in request.session:
+        # Проверяем, есть ли уже город в сессии и время последнего определения
+        if 'user_city' in request.session and 'user_city_detected_at' in request.session:
             return False
         
         # Проверяем, есть ли параметр города в URL
         if '/cities/' in path:
             return False
         
-        # Проверяем, это ли главная страница
+        # Определяем город только на главной, и только если нет данных в сессии
         return path == '/'
     
     def detect_user_city(self, request):
@@ -78,8 +78,6 @@ class GeoLocationMiddleware:
             if city_name:
                 city_slug = get_city_slug_by_name(city_name)
                 if city_slug:
-                    # Сохраняем город в сессии
-                    request.session['user_city'] = city_slug
                     return city_slug
                     
         except Exception as e:

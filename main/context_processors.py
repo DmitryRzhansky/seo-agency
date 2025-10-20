@@ -10,7 +10,8 @@ def services_menu(request):
     categories = ServiceCategory.objects.all().order_by('order').prefetch_related('services')
     header_pages = SimplePage.objects.filter(is_published=True, show_in_header=True).order_by('order')
     footer_pages = SimplePage.objects.filter(is_published=True, show_in_footer=True).order_by('order')
-    cities = City.objects.filter(is_active=True).order_by('order')[:10]  # Топ-10 городов
+    # Показываем все активные города (упорядочены)
+    cities = City.objects.filter(is_active=True).order_by('order')
     
     # Определяем текущий город пользователя
     current_city = None

@@ -161,11 +161,13 @@
         {% block breadcrumbs %}{% endblock breadcrumbs %}
 
         {% if messages %}
-        <div class="container pt-5 mt-5">
+        <div class="flash-messages" aria-live="polite" aria-atomic="true">
             {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow" role="alert">
+                <div class="d-flex align-items-start">
+                    <div class="me-3 flex-grow-1">{{ message }}</div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
             {% endfor %}
         </div>

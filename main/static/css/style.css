@@ -644,6 +644,27 @@ body {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+.flash-messages {
+    position: fixed;
+    top: 80px; /* ниже фиксированного navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92vw, 800px);
+    z-index: 6000; /* выше cookie баннера */
+}
+
+.flash-messages .alert {
+    background: linear-gradient(135deg, var(--bs-bg-darker), var(--bs-bg-dark));
+    border: 1px solid var(--bs-border-dark);
+    color: var(--bs-text-dark);
+    border-radius: 12px;
+}
+
+.flash-messages .btn-close {
+    filter: invert(1) contrast(200%);
+    opacity: 1;
+}
+
 .cookie-consent.cookie-visible {
     opacity: 1;
     transform: translateY(0);

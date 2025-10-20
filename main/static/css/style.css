@@ -513,6 +513,23 @@ body {
     line-height: 1;
 }
 
+/* Единые hover-эффекты для иконок hero (как в портфолио) */
+.blog-hero-icon,
+.city-hero-icon,
+.services-hero-icon {
+    opacity: 0.85;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 10px 20px rgba(13, 110, 253, 0.3));
+}
+
+.blog-hero-icon:hover,
+.city-hero-icon:hover,
+.services-hero-icon:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    filter: drop-shadow(0 15px 30px rgba(13, 110, 253, 0.5));
+}
+
 @media (min-width: 1200px) {
     .blog-hero-icon {
         font-size: clamp(18rem, 26vmin, 36rem);

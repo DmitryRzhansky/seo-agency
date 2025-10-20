@@ -1,7 +1,7 @@
-/* Космические абстрактные фигуры - стили для заднего фона */
+/* SEO-тематические анимации - стили для заднего фона */
 
-/* Основной контейнер для космических объектов */
-#space-animation-container {
+/* Основной контейнер для SEO-объектов */
+#seo-animation-container {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -19,8 +19,8 @@
     padding: 0 !important;
 }
 
-/* Базовые стили для космических объектов */
-.space-object {
+/* Базовые стили для геометрических объектов */
+.seo-object {
     position: absolute !important;
     pointer-events: none !important;
     will-change: transform, opacity !important;
@@ -28,73 +28,56 @@
     transform-style: preserve-3d !important;
 }
 
-/* Стили для звезд */
-.space-star {
-    filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.5)) !important;
+/* Стили для геометрических фигур */
+.seo-circle {
+    filter: drop-shadow(0 4px 8px rgba(13, 110, 253, 0.3)) !important;
 }
 
-.space-star:hover {
-    filter: drop-shadow(0 0 20px rgba(74, 158, 255, 0.8)) !important;
+.seo-triangle {
+    filter: drop-shadow(0 4px 8px rgba(40, 167, 69, 0.3)) !important;
 }
 
-/* Стили для планет */
-.space-planet {
-    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3)) !important;
+.seo-square {
+    filter: drop-shadow(0 4px 8px rgba(255, 193, 7, 0.3)) !important;
 }
 
-/* Стили для туманностей */
-.space-nebula {
-    filter: blur(2px) drop-shadow(0 0 20px rgba(255, 255, 255, 0.1)) !important;
+.seo-diamond {
+    filter: drop-shadow(0 4px 8px rgba(111, 66, 193, 0.3)) !important;
 }
 
-/* Стили для астероидов */
-.space-asteroid {
-    filter: drop-shadow(0 0 8px rgba(139, 69, 19, 0.4)) !important;
+.seo-hexagon {
+    filter: drop-shadow(0 4px 8px rgba(23, 162, 184, 0.3)) !important;
 }
 
-/* Стили для комет */
-.space-comet {
-    filter: drop-shadow(0 0 12px rgba(135, 206, 235, 0.6)) !important;
-}
-
-/* Анимации */
-@keyframes twinkle {
+/* Анимации для геометрических фигур */
+@keyframes geometricPulse {
     0% { 
         opacity: 0.3; 
         transform: scale(1);
-        filter: brightness(1);
     }
     50% {
-        opacity: 0.8;
-        transform: scale(1.1);
-        filter: brightness(1.5);
-    }
-    100% { 
-        opacity: 1; 
-        transform: scale(1.2);
-        filter: brightness(2);
-    }
-}
-
-@keyframes nebulaPulse {
-    0% { 
-        opacity: 0.2; 
-        transform: scale(1);
-        filter: blur(2px) brightness(1);
-    }
-    50% {
-        opacity: 0.5;
+        opacity: 0.7;
         transform: scale(1.05);
-        filter: blur(1px) brightness(1.2);
     }
     100% { 
-        opacity: 0.6; 
-        transform: scale(1.1);
-        filter: blur(2px) brightness(1.5);
+        opacity: 0.4; 
+        transform: scale(1);
     }
 }
 
-@keyframes planetRotate {
+@keyframes geometricFloat {
+    0% { 
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% { 
+        transform: translateY(0px);
+    }
+}
+
+@keyframes geometricRotate {
     0% { 
         transform: rotate(0deg);
     }
@@ -103,163 +86,135 @@
     }
 }
 
-@keyframes asteroidFloat {
-    0% { 
-        transform: translateY(0px) rotate(0deg);
+@keyframes geometricBounce {
+    0%, 100% { 
+        transform: translateY(0px) scale(1);
     }
     25% {
-        transform: translateY(-10px) rotate(90deg);
+        transform: translateY(-5px) scale(1.02);
     }
     50% { 
-        transform: translateY(0px) rotate(180deg);
+        transform: translateY(0px) scale(1);
     }
     75% {
-        transform: translateY(10px) rotate(270deg);
-    }
-    100% { 
-        transform: translateY(0px) rotate(360deg);
+        transform: translateY(-3px) scale(1.01);
     }
 }
 
-@keyframes cometTrail {
-    0% { 
-        opacity: 0.3;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.1);
-    }
-    100% { 
-        opacity: 0.3;
-        transform: scale(1);
-    }
+/* Применяем анимации к геометрическим объектам */
+.seo-circle {
+    animation: geometricPulse 4s ease-in-out infinite !important;
 }
 
-/* Применяем анимации к объектам */
-.space-star {
-    animation: twinkle 3s ease-in-out infinite alternate !important;
+.seo-triangle {
+    animation: geometricFloat 3s ease-in-out infinite !important;
 }
 
-.space-nebula {
-    animation: nebulaPulse 4s ease-in-out infinite alternate !important;
+.seo-square {
+    animation: geometricBounce 5s ease-in-out infinite !important;
 }
 
-.space-planet {
-    animation: planetRotate 20s linear infinite !important;
+.seo-diamond {
+    animation: geometricRotate 8s linear infinite !important;
 }
 
-.space-asteroid {
-    animation: asteroidFloat 8s ease-in-out infinite !important;
-}
-
-.space-comet {
-    animation: cometTrail 2s ease-in-out infinite alternate !important;
+.seo-hexagon {
+    animation: geometricPulse 6s ease-in-out infinite !important;
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-    .space-object {
+    .seo-object {
         opacity: 0.5 !important;
     }
     
-    .space-star {
+    .seo-circle {
+        animation-duration: 5s !important;
+    }
+    
+    .seo-triangle {
         animation-duration: 4s !important;
     }
     
-    .space-nebula {
+    .seo-square {
         animation-duration: 6s !important;
     }
     
-    .space-planet {
-        animation-duration: 30s !important;
+    .seo-diamond {
+        animation-duration: 10s !important;
     }
     
-    .space-asteroid {
-        animation-duration: 12s !important;
-    }
-    
-    .space-comet {
-        animation-duration: 3s !important;
+    .seo-hexagon {
+        animation-duration: 7s !important;
     }
 }
 
 @media (max-width: 480px) {
-    .space-object {
+    .seo-object {
         opacity: 0.3 !important;
     }
     
     /* Уменьшаем количество анимаций на очень маленьких экранах */
-    .space-star {
+    .seo-circle {
         animation: none !important;
     }
     
-    .space-nebula {
+    .seo-triangle {
         animation: none !important;
     }
     
-    .space-planet {
+    .seo-square {
         animation: none !important;
     }
     
-    .space-asteroid {
+    .seo-diamond {
         animation: none !important;
     }
     
-    .space-comet {
+    .seo-hexagon {
         animation: none !important;
     }
 }
 
 /* Стили для высокопроизводительных устройств */
 @media (min-width: 1200px) and (min-height: 800px) {
-    .space-object {
+    .seo-object {
         opacity: 0.6 !important;
     }
     
-    .space-star {
-        animation-duration: 2s !important;
+    .seo-circle {
+        animation-duration: 3s !important;
     }
     
-    .space-nebula {
-        animation-duration: 3s !important;
+    .seo-triangle {
+        animation-duration: 2.5s !important;
+    }
+    
+    .seo-square {
+        animation-duration: 4s !important;
+    }
+    
+    .seo-diamond {
+        animation-duration: 6s !important;
+    }
+    
+    .seo-hexagon {
+        animation-duration: 5s !important;
     }
 }
 
 /* Стили для устройств с поддержкой prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-    .space-object {
+    .seo-object {
         animation: none !important;
     }
     
-    .space-star,
-    .space-nebula,
-    .space-planet,
-    .space-asteroid,
-    .space-comet {
+    .seo-circle,
+    .seo-triangle,
+    .seo-square,
+    .seo-diamond,
+    .seo-hexagon {
         animation: none !important;
-    }
-}
-
-/* Стили для темной темы (уже есть в проекте) */
-@media (prefers-color-scheme: dark) {
-    .space-star {
-        filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.7)) !important;
-    }
-    
-    .space-comet {
-        filter: drop-shadow(0 0 12px rgba(135, 206, 235, 0.8)) !important;
-    }
-}
-
-/* Стили для светлой темы */
-@media (prefers-color-scheme: light) {
-    .space-star {
-        filter: drop-shadow(0 0 8px rgba(74, 158, 255, 0.4)) !important;
-    }
-    
-    .space-comet {
-        filter: drop-shadow(0 0 10px rgba(135, 206, 235, 0.5)) !important;
     }
 }
 
@@ -346,14 +301,14 @@ html {
 
 /* Стили для отключения анимации при низкой производительности */
 @media (prefers-reduced-motion: reduce) {
-    #space-animation-container {
+    #seo-animation-container {
         display: none !important;
     }
 }
 
 /* Стили для печати */
 @media print {
-    #space-animation-container {
+    #seo-animation-container {
         display: none !important;
     }
 }

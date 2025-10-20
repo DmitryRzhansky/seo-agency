@@ -1,9 +1,9 @@
-// Космические абстрактные фигуры для заднего фона
+// SEO-тематические анимации для заднего фона
 document.addEventListener('DOMContentLoaded', function() {
-    // Создаем контейнер для космических фигур
-    const spaceContainer = document.createElement('div');
-    spaceContainer.id = 'space-animation-container';
-    spaceContainer.style.cssText = `
+    // Создаем контейнер для SEO-элементов
+    const seoContainer = document.createElement('div');
+    seoContainer.id = 'seo-animation-container';
+    seoContainer.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
@@ -21,23 +21,23 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     
     // Добавляем контейнер в body
-    document.body.appendChild(spaceContainer);
+    document.body.appendChild(seoContainer);
     
     // Убеждаемся, что контейнер занимает всю область экрана
     function updateContainerSize() {
-        spaceContainer.style.width = window.innerWidth + 'px';
-        spaceContainer.style.height = window.innerHeight + 'px';
-        spaceContainer.style.minHeight = window.innerHeight + 'px';
+        seoContainer.style.width = window.innerWidth + 'px';
+        seoContainer.style.height = window.innerHeight + 'px';
+        seoContainer.style.minHeight = window.innerHeight + 'px';
     }
     
     // Обновляем размер при загрузке
     updateContainerSize();
     
-    // Массив для хранения фигур
-    const spaceObjects = [];
+    // Массив для хранения SEO-элементов
+    const seoObjects = [];
     
-    // Класс для космических объектов
-    class SpaceObject {
+    // Класс для SEO-элементов
+    class SeoObject {
         constructor() {
             this.element = document.createElement('div');
             this.type = this.getRandomType();
@@ -54,16 +54,16 @@ document.addEventListener('DOMContentLoaded', function() {
             
             this.createElement();
             this.updatePosition();
-            spaceContainer.appendChild(this.element);
+            seoContainer.appendChild(this.element);
         }
         
         getRandomType() {
-            const types = ['star', 'planet', 'nebula', 'asteroid', 'comet'];
+            const types = ['circle', 'triangle', 'square', 'diamond', 'hexagon'];
             return types[Math.floor(Math.random() * types.length)];
         }
         
         createElement() {
-            this.element.className = `space-object space-${this.type}`;
+            this.element.className = `seo-object seo-${this.type}`;
             this.element.style.cssText = `
                 position: absolute;
                 left: ${this.x}px;
@@ -77,124 +77,126 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Создаем содержимое в зависимости от типа
             switch(this.type) {
-                case 'star':
-                    this.createStar();
+                case 'circle':
+                    this.createCircle();
                     break;
-                case 'planet':
-                    this.createPlanet();
+                case 'triangle':
+                    this.createTriangle();
                     break;
-                case 'nebula':
-                    this.createNebula();
+                case 'square':
+                    this.createSquare();
                     break;
-                case 'asteroid':
-                    this.createAsteroid();
+                case 'diamond':
+                    this.createDiamond();
                     break;
-                case 'comet':
-                    this.createComet();
+                case 'hexagon':
+                    this.createHexagon();
                     break;
             }
         }
         
-        createStar() {
-            this.element.innerHTML = `
-                <div style="
-                    width: 100%;
-                    height: 100%;
-                    background: radial-gradient(circle, #ffffff 0%, #4a9eff 30%, transparent 70%);
-                    border-radius: 50%;
-                    box-shadow: 0 0 ${this.size/2}px #4a9eff;
-                    animation: twinkle 3s ease-in-out infinite alternate;
-                "></div>
-            `;
-        }
-        
-        createPlanet() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+        createCircle() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
             const color = colors[Math.floor(Math.random() * colors.length)];
             
             this.element.innerHTML = `
                 <div style="
                     width: 100%;
                     height: 100%;
-                    background: radial-gradient(circle at 30% 30%, 
-                        ${color} 0%, 
-                        ${color}dd 40%, 
-                        ${color}88 70%, 
-                        ${color}44 100%);
+                    background: ${color};
                     border-radius: 50%;
-                    box-shadow: inset -${this.size/4}px -${this.size/4}px ${this.size/2}px rgba(0,0,0,0.3);
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
                 "></div>
             `;
         }
         
-        createNebula() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
-            const color1 = colors[Math.floor(Math.random() * colors.length)];
-            const color2 = colors[Math.floor(Math.random() * colors.length)];
+        createTriangle() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
             
             this.element.innerHTML = `
                 <div style="
                     width: 100%;
                     height: 100%;
-                    background: radial-gradient(ellipse, 
-                        ${color1}44 0%, 
-                        ${color2}22 50%, 
-                        transparent 100%);
-                    border-radius: 50%;
-                    filter: blur(2px);
-                    animation: nebulaPulse 4s ease-in-out infinite alternate;
+                    background: ${color};
+                    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
                 "></div>
             `;
         }
         
-        createAsteroid() {
+        createSquare() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
             this.element.innerHTML = `
                 <div style="
                     width: 100%;
                     height: 100%;
-                    background: linear-gradient(45deg, 
-                        #8b4513 0%, 
-                        #a0522d 25%, 
-                        #cd853f 50%, 
-                        #8b4513 75%, 
-                        #654321 100%);
-                    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-                    box-shadow: inset -${this.size/6}px -${this.size/6}px ${this.size/3}px rgba(0,0,0,0.4);
+                    background: ${color};
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
                 "></div>
             `;
         }
         
-        createComet() {
+        createDiamond() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
             this.element.innerHTML = `
                 <div style="
                     width: 100%;
                     height: 100%;
-                    position: relative;
-                ">
-                    <div style="
-                        width: 60%;
-                        height: 60%;
-                        background: radial-gradient(circle, #ffffff 0%, #87ceeb 50%, transparent 100%);
-                        border-radius: 50%;
-                        position: absolute;
-                        top: 20%;
-                        left: 20%;
-                    "></div>
-                    <div style="
-                        width: 200%;
-                        height: 20%;
-                        background: linear-gradient(90deg, 
-                            transparent 0%, 
-                            #87ceeb 20%, 
-                            #ffffff 50%, 
-                            transparent 100%);
-                        position: absolute;
-                        top: 40%;
-                        left: -50%;
-                        border-radius: 50%;
-                        filter: blur(1px);
-                    "></div>
-                </div>
+                    background: ${color};
+                    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+                "></div>
+            `;
+        }
+        
+        createHexagon() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            this.element.innerHTML = `
+                <div style="
+                    width: 100%;
+                    height: 100%;
+                    background: ${color};
+                    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+                "></div>
             `;
         }
         
@@ -223,16 +225,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Создаем космические объекты
+    // Создаем SEO-объекты
     const objectCount = Math.min(15, Math.floor(window.innerWidth / 100));
     for (let i = 0; i < objectCount; i++) {
-        const obj = new SpaceObject();
-        spaceObjects.push(obj);
+        const obj = new SeoObject();
+        seoObjects.push(obj);
     }
     
     // Анимационный цикл
     function animate() {
-        spaceObjects.forEach(obj => obj.updatePosition());
+        seoObjects.forEach(obj => obj.updatePosition());
         requestAnimationFrame(animate);
     }
     
@@ -244,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Обновляем размер контейнера
         updateContainerSize();
         
-        spaceObjects.forEach(obj => {
+        seoObjects.forEach(obj => {
             // Пересчитываем позиции при изменении размера окна
             if (obj.x > window.innerWidth) obj.x = window.innerWidth - obj.size;
             if (obj.y > window.innerHeight) obj.y = window.innerHeight - obj.size;

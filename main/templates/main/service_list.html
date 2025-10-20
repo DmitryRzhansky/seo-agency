@@ -3,24 +3,74 @@
 {% block title %}Услуги{% endblock title %}
 
 {% block content %}
-<section class="section-padding pt-5 mt-5">
-	<div class="container">
-		<h1 class="section-title text-center mb-4">Услуги</h1>
-		<div class="row g-4">
-			{% for service in services %}
-			<div class="col-sm-6 col-lg-4">
-				<a href="{% url 'services:service_detail' slug=service.slug %}" class="card h-100 text-decoration-none text-dark shadow-sm">
-					<div class="card-body">
-						<h5 class="card-title fw-bold">{{ service.title }}</h5>
-						<p class="card-text text-muted">{{ service.short_description }}</p>
-					</div>
-				</a>
-			</div>
-			{% empty %}
-				<div class="col-12 text-center text-muted">Пока нет услуг.</div>
-			{% endfor %}
-		</div>
-	</div>
+<!-- Hero секция услуг -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-3 slide-in-left">Наши услуги</h1>
+                <p class="lead mb-4 slide-in-left">Комплексные решения: SEO, контекстная реклама, аналитика, разработка и дизайн. Выбирайте нужную услугу или раздел.</p>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0 d-flex justify-content-center align-items-center">
+                <i class="fas fa-list-check text-primary services-hero-icon"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Разделы услуг с услугами -->
+<section class="section-padding bg-light pt-5" id="services-list">
+    <div class="container">
+        {% if categories %}
+        <div class="row g-4">
+            {% for category in categories %}
+            <div class="col-lg-6">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="mb-0">{{ category.title }}</h3>
+                            <a href="{% url 'services:service_category' slug=category.slug %}" class="btn btn-outline-primary btn-sm">В раздел</a>
+                        </div>
+                        <div class="row g-3">
+                            {% for service in category.services.all %}
+                            <div class="col-md-12">
+                                <a href="{% url 'services:service_detail' slug=service.slug %}" class="card h-100 text-decoration-none text-dark service-item-card">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold mb-2">{{ service.title }}</h5>
+                                        <p class="card-text text-muted small mb-0">{{ service.short_description }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            {% empty %}
+                            <div class="col-12 text-muted small">Пока нет услуг в этом разделе.</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center text-muted">Пока нет разделов услуг.</div>
+        {% endif %}
+    </div>
+    
+    {% if services and not categories %}
+    <div class="container mt-5">
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-sm-6 col-lg-4">
+                <a href="{% url 'services:service_detail' slug=service.slug %}" class="card h-100 text-decoration-none text-dark service-item-card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ service.title }}</h5>
+                        <p class="card-text text-muted">{{ service.short_description }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </section>
 {% endblock content %}
 

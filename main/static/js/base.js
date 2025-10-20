@@ -57,6 +57,21 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.classList.add('pulse-animation');
         }
     });
+
+    // Навигация: пункт "Услуги" должен открывать dropdown на мобилке и вести на страницу на десктопе
+    const servicesLink = document.getElementById('servicesDropdown');
+    function updateServicesToggle() {
+        if (!servicesLink) return;
+        if (window.innerWidth >= 992) {
+            // На десктопе убираем dropdown-поведение, оставляем переход по ссылке
+            servicesLink.removeAttribute('data-bs-toggle');
+        } else {
+            // На мобилке оставляем открытие dropdown по клику
+            servicesLink.setAttribute('data-bs-toggle', 'dropdown');
+        }
+    }
+    updateServicesToggle();
+    window.addEventListener('resize', updateServicesToggle);
 });
 
 

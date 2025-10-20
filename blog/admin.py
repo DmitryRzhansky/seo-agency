@@ -63,23 +63,18 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
     )
     list_filter = ('is_published', 'published_date', 'category', 'author')
     search_fields = ('title', 'content', 'author__username')
-    prepopulated_fields = {'slug': ('title',)}
+    prepopulated_fields = {'slug': ('seo_title',)}
     date_hierarchy = 'published_date'
     readonly_fields = ('published_date', 'views_count')
     
     fieldsets = (
         ('📝 Основная информация', {
-            'fields': ('title', 'slug', 'category', 'author', 'is_published'),
+            'fields': ('slug', 'category', 'author', 'is_published'),
             'description': 'Основная информация о статье'
         }),
         ('📄 Содержимое', {
             'fields': ('content', 'image', 'image_alt'),
             'description': 'Содержимое статьи и изображения'
-        }),
-        ('SEO настройки', {
-            'fields': ('seo_title', 'seo_description', 'seo_canonical', 'seo_index'),
-            'classes': ('collapse',),
-            'description': 'Настройки для поисковых систем'
         }),
         ('🍞 Навигация', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
@@ -99,8 +94,41 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
             readonly.extend(['seo_preview'])
         return readonly
     
+    def get_fieldsets(self, request, obj=None):
+        """Переопределяем fieldsets для добавления кастомного описания SEO секции"""
+        fieldsets = super().get_fieldsets(request, obj)
+        
+        # Находим SEO секцию и обновляем её описание
+        updated_fieldsets = []
+        for name, options in fieldsets:
+            if name == 'SEO настройки':
+                # Обновляем описание SEO секции
+                updated_options = options.copy()
+                updated_options['description'] = 'Настройки для поисковых систем. SEO заголовок будет использоваться как основной заголовок статьи.'
+                updated_fieldsets.append((name, updated_options))
+            else:
+                updated_fieldsets.append((name, options))
+        
+        return updated_fieldsets
+    
     def get_queryset(self, request):
         return super().get_queryset(request).select_related('category', 'author')
+    
+    def save_model(self, request, obj, form, change):
+        """Автоматическое заполнение SEO полей при сохранении"""
+        if not obj.seo_title:
+            obj.seo_title = "Новая статья | Блог | Isakov Agency"
+        if not obj.seo_description:
+            # Создаем описание из контента, убирая HTML теги
+            import re
+            clean_content = re.sub(r'<[^>]+>', '', str(obj.content))
+            obj.seo_description = clean_content[:160] if clean_content else "Статья в блоге Isakov Agency"
+            
+        # Автоматически заполняем поле title из seo_title для совместимости
+        if obj.seo_title and not obj.title:
+            obj.title = obj.seo_title.replace(" | Блог | Isakov Agency", "")
+            
+        super().save_model(request, obj, form, change)
 
 # Регистрируем модели в кастомном админ-сайте
 admin_site.register(Category, CategoryAdmin)

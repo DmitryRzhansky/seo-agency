@@ -1,5 +1,12 @@
 // Анимации появления при прокрутке и вспомогательные эффекты
 document.addEventListener('DOMContentLoaded', function() {
+    // Ленивая загрузка изображений
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        if (!img.hasAttribute('loading')) {
+            img.setAttribute('loading', 'lazy');
+        }
+    });
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'

@@ -124,10 +124,15 @@ else:
         }
     }
 
-# Кэширование отключено для разработки
+# Легкое кэширование с коротким TTL
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 300,  # 5 минут
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000,
+        }
     }
 }
 

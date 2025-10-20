@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         getRandomType() {
-            const types = ['circle', 'triangle', 'square', 'diamond', 'hexagon', 'star', 'wave', 'spiral', 'polygon', 'blob'];
+            const types = ['mandala', 'crystal', 'nebula', 'quantum', 'fractal', 'torus', 'helix', 'lattice', 'molecule', 'galaxy', 'vortex', 'prism'];
             return types[Math.floor(Math.random() * types.length)];
         }
         
@@ -77,40 +77,46 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Создаем содержимое в зависимости от типа
             switch(this.type) {
-                case 'circle':
-                    this.createCircle();
+                case 'mandala':
+                    this.createMandala();
                     break;
-                case 'triangle':
-                    this.createTriangle();
+                case 'crystal':
+                    this.createCrystal();
                     break;
-                case 'square':
-                    this.createSquare();
+                case 'nebula':
+                    this.createNebula();
                     break;
-                case 'diamond':
-                    this.createDiamond();
+                case 'quantum':
+                    this.createQuantum();
                     break;
-                case 'hexagon':
-                    this.createHexagon();
+                case 'fractal':
+                    this.createFractal();
                     break;
-                case 'star':
-                    this.createStar();
+                case 'torus':
+                    this.createTorus();
                     break;
-                case 'wave':
-                    this.createWave();
+                case 'helix':
+                    this.createHelix();
                     break;
-                case 'spiral':
-                    this.createSpiral();
+                case 'lattice':
+                    this.createLattice();
                     break;
-                case 'polygon':
-                    this.createPolygon();
+                case 'molecule':
+                    this.createMolecule();
                     break;
-                case 'blob':
-                    this.createBlob();
+                case 'galaxy':
+                    this.createGalaxy();
+                    break;
+                case 'vortex':
+                    this.createVortex();
+                    break;
+                case 'prism':
+                    this.createPrism();
                     break;
             }
         }
         
-        createCircle() {
+        createMandala() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -126,12 +132,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     height: 100%;
                     background: ${color};
                     border-radius: 50%;
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 20%;
+                        left: 20%;
+                        width: 60%;
+                        height: 60%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+                        border-radius: 50%;
+                        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 35%;
+                        left: 35%;
+                        width: 30%;
+                        height: 30%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
-        createTriangle() {
+        createCrystal() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -146,13 +173,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: 100%;
                     height: 100%;
                     background: ${color};
-                    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+                    clip-path: polygon(50% 0%, 100% 25%, 75% 100%, 25% 100%, 0% 25%);
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 20%;
+                        left: 20%;
+                        width: 60%;
+                        height: 60%;
+                        background: linear-gradient(45deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+                        clip-path: polygon(50% 0%, 100% 25%, 75% 100%, 25% 100%, 0% 25%);
+                    "></div>
+                </div>
             `;
         }
         
-        createSquare() {
+        createNebula() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -167,13 +205,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: 100%;
                     height: 100%;
                     background: ${color};
-                    border-radius: 8px;
+                    border-radius: 50%;
+                    position: relative;
+                    filter: blur(1px);
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 10%;
+                        left: 10%;
+                        width: 80%;
+                        height: 80%;
+                        background: radial-gradient(ellipse, rgba(255,255,255,0.3) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 30%;
+                        left: 30%;
+                        width: 40%;
+                        height: 40%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 60%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
-        createDiamond() {
+        createQuantum() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -188,13 +247,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: 100%;
                     height: 100%;
                     background: ${color};
-                    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                    border-radius: 50%;
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 25%;
+                        left: 25%;
+                        width: 50%;
+                        height: 50%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+                        border-radius: 50%;
+                        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 0%;
+                        left: 0%;
+                        width: 100%;
+                        height: 100%;
+                        background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 50%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
-        createHexagon() {
+        createFractal() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -209,13 +289,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: 100%;
                     height: 100%;
                     background: ${color};
-                    clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
+                    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 20%;
+                        left: 20%;
+                        width: 60%;
+                        height: 60%;
+                        background: linear-gradient(45deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+                        clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 40%;
+                        left: 40%;
+                        width: 20%;
+                        height: 20%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
-        createStar() {
+        createTorus() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -230,13 +330,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: 100%;
                     height: 100%;
                     background: ${color};
-                    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+                    border-radius: 50%;
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 20%;
+                        left: 20%;
+                        width: 60%;
+                        height: 60%;
+                        background: transparent;
+                        border: 3px solid rgba(255,255,255,0.6);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 35%;
+                        left: 35%;
+                        width: 30%;
+                        height: 30%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
-        createWave() {
+        createHelix() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -252,12 +373,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     height: 100%;
                     background: ${color};
                     border-radius: 50% 30% 70% 40%;
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 15%;
+                        left: 15%;
+                        width: 70%;
+                        height: 70%;
+                        background: linear-gradient(45deg, rgba(255,255,255,0.3) 0%, transparent 50%);
+                        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 30%;
+                        left: 30%;
+                        width: 40%;
+                        height: 40%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
-        createSpiral() {
+        createLattice() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -272,42 +413,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: 100%;
                     height: 100%;
                     background: ${color};
-                    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+                    border-radius: 8px;
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                                    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+                        background-size: 20px 20px;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 25%;
+                        left: 25%;
+                        width: 50%;
+                        height: 50%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
-        createPolygon() {
-            const colors = [
-                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
-                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
-                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
-                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
-                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
-            ];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const sides = Math.floor(Math.random() * 4) + 5; // 5-8 сторон
-            const points = [];
-            for (let i = 0; i < sides; i++) {
-                const angle = (i * 360) / sides;
-                const x = 50 + 40 * Math.cos(angle * Math.PI / 180);
-                const y = 50 + 40 * Math.sin(angle * Math.PI / 180);
-                points.push(`${x}% ${y}%`);
-            }
-            
-            this.element.innerHTML = `
-                <div style="
-                    width: 100%;
-                    height: 100%;
-                    background: ${color};
-                    clip-path: polygon(${points.join(', ')});
-                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
-            `;
-        }
-        
-        createBlob() {
+        createMolecule() {
             const colors = [
                 'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
                 'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
@@ -322,26 +455,270 @@ document.addEventListener('DOMContentLoaded', function() {
                     width: 100%;
                     height: 100%;
                     background: ${color};
-                    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+                    border-radius: 50%;
+                    position: relative;
                     box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
-                "></div>
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 20%;
+                        left: 20%;
+                        width: 60%;
+                        height: 60%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 10%;
+                        left: 10%;
+                        width: 20%;
+                        height: 20%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 70%;
+                        left: 70%;
+                        width: 20%;
+                        height: 20%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 10%;
+                        left: 70%;
+                        width: 20%;
+                        height: 20%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 70%;
+                        left: 10%;
+                        width: 20%;
+                        height: 20%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
+            `;
+        }
+        
+        createGalaxy() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            this.element.innerHTML = `
+                <div style="
+                    width: 100%;
+                    height: 100%;
+                    background: ${color};
+                    border-radius: 50%;
+                    position: relative;
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.3) 0%, transparent 50%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 20%;
+                        left: 20%;
+                        width: 60%;
+                        height: 60%;
+                        background: radial-gradient(ellipse at 70% 70%, rgba(255,255,255,0.2) 0%, transparent 60%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 40%;
+                        left: 40%;
+                        width: 20%;
+                        height: 20%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
+            `;
+        }
+        
+        createVortex() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            this.element.innerHTML = `
+                <div style="
+                    width: 100%;
+                    height: 100%;
+                    background: ${color};
+                    border-radius: 50%;
+                    position: relative;
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: conic-gradient(from 0deg, rgba(255,255,255,0.3) 0%, transparent 50%, rgba(255,255,255,0.3) 100%);
+                        border-radius: 50%;
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 30%;
+                        left: 30%;
+                        width: 40%;
+                        height: 40%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
+            `;
+        }
+        
+        createPrism() {
+            const colors = [
+                'linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%)',
+                'linear-gradient(135deg, #28a745 0%, #20c997 100%)',
+                'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)',
+                'linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%)',
+                'linear-gradient(135deg, #17a2b8 0%, #0dcaf0 100%)'
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            this.element.innerHTML = `
+                <div style="
+                    width: 100%;
+                    height: 100%;
+                    background: ${color};
+                    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+                    position: relative;
+                    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 20%;
+                        left: 20%;
+                        width: 60%;
+                        height: 60%;
+                        background: linear-gradient(45deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+                        clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+                    "></div>
+                    <div style="
+                        position: absolute;
+                        top: 40%;
+                        left: 40%;
+                        width: 20%;
+                        height: 20%;
+                        background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+                        border-radius: 50%;
+                    "></div>
+                </div>
             `;
         }
         
         updatePosition() {
+            // Магнитные взаимодействия с другими объектами
+            let magneticForceX = 0;
+            let magneticForceY = 0;
+            
+            seoObjects.forEach(other => {
+                if (other !== this) {
+                    const dx = other.x - this.x;
+                    const dy = other.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150 && distance > 0) {
+                        // Притяжение на близком расстоянии
+                        const force = (150 - distance) / 150 * 0.02;
+                        magneticForceX += (dx / distance) * force;
+                        magneticForceY += (dy / distance) * force;
+                    } else if (distance < 50 && distance > 0) {
+                        // Отталкивание на очень близком расстоянии
+                        const force = (50 - distance) / 50 * 0.05;
+                        magneticForceX -= (dx / distance) * force;
+                        magneticForceY -= (dy / distance) * force;
+                    }
+                }
+            });
+            
+            // Применяем магнитные силы
+            this.vx += magneticForceX;
+            this.vy += magneticForceY;
+            
+            // Ограничиваем скорость
+            const maxSpeed = 1;
+            const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+            if (speed > maxSpeed) {
+                this.vx = (this.vx / speed) * maxSpeed;
+                this.vy = (this.vy / speed) * maxSpeed;
+            }
+            
+            // Добавляем небольшое случайное движение
+            this.vx += (Math.random() - 0.5) * 0.01;
+            this.vy += (Math.random() - 0.5) * 0.01;
+            
+            // Обновляем позицию
             this.x += this.vx;
             this.y += this.vy;
             this.rotation += this.rotationSpeed;
             
-            // Пульсация
+            // Пульсация с реакцией на соседей
             this.pulsePhase += this.pulseSpeed;
-            const pulse = Math.sin(this.pulsePhase) * 0.1 + 1;
+            let pulse = Math.sin(this.pulsePhase) * 0.1 + 1;
             
-            // Проверяем границы экрана
-            if (this.x < -this.size) this.x = window.innerWidth;
-            if (this.x > window.innerWidth) this.x = -this.size;
-            if (this.y < -this.size) this.y = window.innerHeight;
-            if (this.y > window.innerHeight) this.y = -this.size;
+            // Усиливаем пульсацию при приближении к другим объектам
+            const nearbyObjects = seoObjects.filter(other => {
+                if (other === this) return false;
+                const dx = other.x - this.x;
+                const dy = other.y - this.y;
+                return Math.sqrt(dx * dx + dy * dy) < 100;
+            });
+            
+            if (nearbyObjects.length > 0) {
+                pulse += nearbyObjects.length * 0.05;
+            }
+            
+            // Проверяем границы экрана с затуханием
+            if (this.x < -this.size) {
+                this.x = window.innerWidth;
+                this.vx *= 0.8;
+            }
+            if (this.x > window.innerWidth) {
+                this.x = -this.size;
+                this.vx *= 0.8;
+            }
+            if (this.y < -this.size) {
+                this.y = window.innerHeight;
+                this.vy *= 0.8;
+            }
+            if (this.y > window.innerHeight) {
+                this.y = -this.size;
+                this.vy *= 0.8;
+            }
             
             // Обновляем позицию
             this.element.style.left = this.x + 'px';
@@ -363,8 +740,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Создаем соединения между объектами
     function createConnections() {
         const connections = [];
-        for (let i = 0; i < seoObjects.length; i++) {
-            for (let j = i + 1; j < seoObjects.length; j++) {
+        const maxConnections = Math.min(seoObjects.length * 2, 30); // Ограничиваем количество соединений
+        let connectionCount = 0;
+        
+        for (let i = 0; i < seoObjects.length && connectionCount < maxConnections; i++) {
+            for (let j = i + 1; j < seoObjects.length && connectionCount < maxConnections; j++) {
                 const obj1 = seoObjects[i];
                 const obj2 = seoObjects[j];
                 const distance = Math.sqrt(
@@ -372,7 +752,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
                 
                 // Создаем соединение если объекты близко
-                if (distance < 200 && Math.random() < 0.3) {
+                if (distance < 180 && Math.random() < 0.4) {
                     const connection = document.createElement('div');
                     connection.className = 'seo-connection';
                     connection.style.cssText = `
@@ -381,9 +761,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         top: ${Math.min(obj1.y, obj2.y)}px;
                         width: ${Math.abs(obj1.x - obj2.x)}px;
                         height: ${Math.abs(obj1.y - obj2.y)}px;
-                        border: 1px solid rgba(13, 110, 253, 0.2);
                         pointer-events: none;
                         z-index: -1;
+                        transition: opacity 0.3s ease;
+                        opacity: 0;
                     `;
                     
                     // Создаем SVG линию для соединения
@@ -402,9 +783,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     line.setAttribute('y1', obj1.y - Math.min(obj1.y, obj2.y));
                     line.setAttribute('x2', obj2.x - Math.min(obj1.x, obj2.x));
                     line.setAttribute('y2', obj2.y - Math.min(obj1.y, obj2.y));
-                    line.setAttribute('stroke', 'rgba(13, 110, 253, 0.3)');
-                    line.setAttribute('stroke-width', '1');
-                    line.setAttribute('stroke-dasharray', '5,5');
+                    
+                    // Разные стили соединений в зависимости от расстояния
+                    if (distance < 100) {
+                        line.setAttribute('stroke', 'rgba(13, 110, 253, 0.6)');
+                        line.setAttribute('stroke-width', '2');
+                        line.setAttribute('stroke-dasharray', '3,3');
+                    } else {
+                        line.setAttribute('stroke', 'rgba(13, 110, 253, 0.3)');
+                        line.setAttribute('stroke-width', '1');
+                        line.setAttribute('stroke-dasharray', '8,4');
+                    }
                     
                     svg.appendChild(line);
                     connection.appendChild(svg);
@@ -413,8 +802,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     connections.push({
                         element: connection,
                         obj1: obj1,
-                        obj2: obj2
+                        obj2: obj2,
+                        line: line,
+                        distance: distance
                     });
+                    
+                    connectionCount++;
                 }
             }
         }
@@ -436,20 +829,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2)
             );
             
-            if (distance < 200) {
+            if (distance < 180) {
                 conn.element.style.left = Math.min(obj1.x, obj2.x) + 'px';
                 conn.element.style.top = Math.min(obj1.y, obj2.y) + 'px';
                 conn.element.style.width = Math.abs(obj1.x - obj2.x) + 'px';
                 conn.element.style.height = Math.abs(obj1.y - obj2.y) + 'px';
-                conn.element.style.opacity = '1';
+                
+                // Плавное появление соединения
+                const opacity = Math.max(0, 1 - (distance / 180));
+                conn.element.style.opacity = opacity;
                 
                 // Обновляем SVG линию
-                const line = conn.element.querySelector('line');
-                if (line) {
-                    line.setAttribute('x1', obj1.x - Math.min(obj1.x, obj2.x));
-                    line.setAttribute('y1', obj1.y - Math.min(obj1.y, obj2.y));
-                    line.setAttribute('x2', obj2.x - Math.min(obj1.x, obj2.x));
-                    line.setAttribute('y2', obj2.y - Math.min(obj1.y, obj2.y));
+                if (conn.line) {
+                    conn.line.setAttribute('x1', obj1.x - Math.min(obj1.x, obj2.x));
+                    conn.line.setAttribute('y1', obj1.y - Math.min(obj1.y, obj2.y));
+                    conn.line.setAttribute('x2', obj2.x - Math.min(obj1.x, obj2.x));
+                    conn.line.setAttribute('y2', obj2.y - Math.min(obj1.y, obj2.y));
+                    
+                    // Обновляем стиль линии в зависимости от расстояния
+                    if (distance < 100) {
+                        conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.6 * opacity})`);
+                        conn.line.setAttribute('stroke-width', '2');
+                        conn.line.setAttribute('stroke-dasharray', '3,3');
+                    } else {
+                        conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.3 * opacity})`);
+                        conn.line.setAttribute('stroke-width', '1');
+                        conn.line.setAttribute('stroke-dasharray', '8,4');
+                    }
                 }
             } else {
                 conn.element.style.opacity = '0';

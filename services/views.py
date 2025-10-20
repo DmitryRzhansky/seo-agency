@@ -9,6 +9,7 @@ def service_list(request):
 		'title': 'Услуги',
 		'categories': categories,
 		'services': services,
+		# Для списка услуг SEO-объект не задаем, используем дефолтные мета
 	})
 
 
@@ -19,6 +20,7 @@ def service_category_detail(request, slug):
 		'title': category.title,
 		'category': category,
 		'services': services_in_category,
+		'seo_object': category,  # Включаем SEO теги категории
 	})
 
 
@@ -31,4 +33,5 @@ def service_detail(request, slug):
 		'title': service.title,
 		'service': service,
 		'related_services': related_services,  # Связанные услуги
+		'seo_object': service,  # Включаем SEO теги услуги
 	})

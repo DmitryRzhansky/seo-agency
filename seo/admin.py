@@ -40,13 +40,13 @@ class SEOAdminMixin:
         form = super().get_form(request, obj, **kwargs)
         
         # Настраиваем виджеты для SEO полей
-        if hasattr(form.base_fields, 'seo_title'):
+        if 'seo_title' in form.base_fields:
             form.base_fields['seo_title'].widget.attrs.update({
                 'placeholder': 'Рекомендуется 50-60 символов',
                 'maxlength': '60'
             })
         
-        if hasattr(form.base_fields, 'seo_description'):
+        if 'seo_description' in form.base_fields:
             form.base_fields['seo_description'].widget = Textarea(attrs={
                 'rows': 3,
                 'placeholder': 'Рекомендуется 150-160 символов',

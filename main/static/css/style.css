@@ -626,6 +626,87 @@ body {
     animation: arrowFloat 2s ease-in-out infinite;
 }
 
+/* Cookie consent banner */
+.cookie-consent {
+    position: fixed;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    z-index: 5000;
+    background: linear-gradient(135deg, var(--bs-bg-darker), var(--bs-bg-dark));
+    border: 1px solid var(--bs-border-dark);
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    color: var(--bs-text-dark);
+    backdrop-filter: blur(6px);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-consent.cookie-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cookie-consent.cookie-hidden {
+    display: none;
+}
+
+.cookie-consent__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+    flex-wrap: wrap; /* если текст длинный — кнопка не исчезнет */
+}
+
+.cookie-consent__actions {
+    flex-shrink: 0;
+    display: flex;
+}
+
+.cookie-consent__actions--prominent {
+    padding: 8px;
+    background: rgba(13,110,253,0.08);
+    border: 1px solid rgba(13,110,253,0.25);
+    border-radius: 10px;
+}
+
+.cookie-accept-btn {
+    padding: 10px 22px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.cookie-consent__actions .btn {
+    white-space: nowrap;
+}
+
+.cookie-consent__text {
+    font-size: 0.95rem;
+    flex: 1 1 0;
+    min-width: 240px;
+}
+
+@media (max-width: 576px) {
+    .cookie-consent__content {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: left;
+        gap: 12px;
+    }
+
+    .cookie-consent__actions .btn {
+        width: 100%;
+    }
+
+    .cookie-consent__actions--prominent {
+        padding: 10px;
+    }
+}
+
 .down-arrow i {
     font-size: 1.5rem;
 }

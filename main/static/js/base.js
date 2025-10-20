@@ -75,3 +75,34 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Cookie consent logic
+(function() {
+    const STORAGE_KEY = 'isakov_cookie_consent_accepted_v1';
+    function showConsent() {
+        const banner = document.getElementById('cookie-consent');
+        if (!banner) return;
+        banner.classList.remove('cookie-hidden');
+        requestAnimationFrame(() => banner.classList.add('cookie-visible'));
+        const accept = function() {
+                try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
+                banner.classList.remove('cookie-visible');
+                setTimeout(() => banner.classList.add('cookie-hidden'), 250);
+        };
+        const btn = document.getElementById('cookie-accept-btn');
+        if (btn) {
+            btn.addEventListener('click', accept);
+        }
+        // мобильная ссылка удалена — оставляем только кнопку
+    }
+
+    try {
+        const accepted = localStorage.getItem(STORAGE_KEY) === '1';
+        if (!accepted) {
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showConsent);
+            else showConsent();
+        }
+    } catch (e) {
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', showConsent);
+        else showConsent();
+    }
+})();

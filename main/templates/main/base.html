@@ -236,6 +236,19 @@
             </div>
         </div>
     </footer>
+
+    <!-- Баннер согласия на обработку персональных данных / cookies -->
+    <div id="cookie-consent" class="cookie-consent cookie-hidden" role="dialog" aria-live="polite" aria-label="Согласие на обработку персональных данных">
+        <div class="cookie-consent__content">
+            <div class="cookie-consent__text">
+                Мы используем файлы cookies и обрабатываем персональные данные для улучшения работы сайта и аналитики. Подробнее в нашей
+                <a href="{% url 'main:privacy_policy' %}" class="link-primary">Политике конфиденциальности</a>.
+            </div>
+            <div class="cookie-consent__actions cookie-consent__actions--prominent">
+                <button type="button" class="btn btn-primary btn-lg cookie-accept-btn" id="cookie-accept-btn">Принять</button>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
     <script src="{% static 'js/base.js' %}"></script>

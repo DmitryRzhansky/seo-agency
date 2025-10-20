@@ -1,16 +1,46 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
+from django.db.models import Q
 from main.models import ServiceCategory, Service
 
 
 def service_list(request):
-	categories = ServiceCategory.objects.all().order_by('order')
-	services = Service.objects.all().order_by('order')
-	return render(request, 'main/service_list.html', {
-		'title': 'Услуги',
-		'categories': categories,
-		'services': services,
-		# Для списка услуг SEO-объект не задаем, используем дефолтные мета
-	})
+    categories = ServiceCategory.objects.all().order_by('order')
+
+    # Параметры фильтрации
+    query = request.GET.get('q', '').strip()
+    category_slug = request.GET.get('category', '').strip()
+
+    current_category = None
+    filtered_services = Service.objects.filter(is_published=True).order_by('order')
+
+    if category_slug:
+        try:
+            current_category = ServiceCategory.objects.get(slug=category_slug)
+            filtered_services = filtered_services.filter(category=current_category)
+        except ServiceCategory.DoesNotExist:
+            current_category = None
+
+    if query:
+        filtered_services = filtered_services.filter(
+            Q(title__icontains=query) | Q(short_description__icontains=query)
+        )
+
+    # Пагинация, как в блоге
+    paginator = Paginator(filtered_services, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'main/service_list.html', {
+        'title': 'Услуги',
+        'categories': categories,
+        'services': None,  # не используем общий список напрямую в шаблоне
+        'filtered_services': page_obj,
+        'is_paginated': page_obj.has_other_pages(),
+        'current_category': current_category,
+        'search_query': query,
+        # Для списка услуг SEO-объект не задаем, используем дефолтные мета
+    })
 
 
 def service_category_detail(request, slug):

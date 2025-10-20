@@ -18,59 +18,86 @@
     </div>
 </section>
 
-<!-- Разделы услуг с услугами -->
+<!-- Разделы услуг с фильтром и поиском -->
 <section class="section-padding bg-light pt-5" id="services-list">
     <div class="container">
-        {% if categories %}
-        <div class="row g-4">
-            {% for category in categories %}
+        <!-- Поиск -->
+        <div class="row justify-content-center mb-4">
             <div class="col-lg-6">
-                <div class="card h-100 shadow-sm border-0">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h3 class="mb-0">{{ category.title }}</h3>
-                            <a href="{% url 'services:service_category' slug=category.slug %}" class="btn btn-outline-primary btn-sm">В раздел</a>
-                        </div>
-                        <div class="row g-3">
-                            {% for service in category.services.all %}
-                            <div class="col-md-12">
-                                <a href="{% url 'services:service_detail' slug=service.slug %}" class="card h-100 text-decoration-none text-dark service-item-card">
-                                    <div class="card-body">
-                                        <h5 class="card-title fw-bold mb-2">{{ service.title }}</h5>
-                                        <p class="card-text text-muted small mb-0">{{ service.short_description }}</p>
-                                    </div>
-                                </a>
-                            </div>
-                            {% empty %}
-                            <div class="col-12 text-muted small">Пока нет услуг в этом разделе.</div>
-                            {% endfor %}
-                        </div>
+                <form method="get" action="{% url 'services:service_list' %}#services-list" class="d-flex">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="q" placeholder="Поиск по услугам..." value="{{ search_query }}" aria-label="Поиск по услугам">
+                        {% if current_category %}
+                        <input type="hidden" name="category" value="{{ current_category.slug }}">
+                        {% endif %}
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Фильтр по категориям -->
+        {% if categories %}
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8">
+                <div class="d-flex flex-wrap justify-content-center gap-2">
+                    <a href="{% url 'services:service_list' %}#services-list" class="btn {% if not current_category %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">Все услуги</a>
+                    {% for category in categories %}
+                        <a href="{% url 'services:service_list' %}?category={{ category.slug }}#services-list" class="btn {% if current_category and current_category.slug == category.slug %}btn-primary{% else %}btn-outline-primary{% endif %} btn-sm">{{ category.title }}</a>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
         </div>
-        {% else %}
-        <div class="text-center text-muted">Пока нет разделов услуг.</div>
         {% endif %}
-    </div>
-    
-    {% if services and not categories %}
-    <div class="container mt-5">
+
+        <!-- Список услуг (пагинация) -->
+        {% if filtered_services %}
         <div class="row g-4">
-            {% for service in services %}
+            {% for service in filtered_services %}
             <div class="col-sm-6 col-lg-4">
                 <a href="{% url 'services:service_detail' slug=service.slug %}" class="card h-100 text-decoration-none text-dark service-item-card">
+                    {% if service.image %}
+                    <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.get_image_alt }}" style="height: 180px; object-fit: cover;">
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title fw-bold">{{ service.title }}</h5>
-                        <p class="card-text text-muted">{{ service.short_description }}</p>
+                        <p class="card-text text-muted small mb-0">{{ service.short_description }}</p>
                     </div>
                 </a>
             </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">Ничего не найдено.</div>
             {% endfor %}
         </div>
+        {% endif %}
+
+        <!-- Пагинация -->
+        {% if is_paginated %}
+        <nav aria-label="Навигация по услугам" class="mt-5">
+            <ul class="pagination justify-content-center">
+                {% if filtered_services.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ filtered_services.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_category %}&category={{ current_category.slug }}{% endif %}#services-list">&laquo; Предыдущая</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="#">&laquo; Предыдущая</a></li>
+                {% endif %}
+
+                {% for i in filtered_services.paginator.page_range %}
+                    {% if filtered_services.number == i %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ i }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_category %}&category={{ current_category.slug }}{% endif %}#services-list">{{ i }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_category %}&category={{ current_category.slug }}{% endif %}#services-list">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if filtered_services.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ filtered_services.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_category %}&category={{ current_category.slug }}{% endif %}#services-list">Следующая &raquo;</a></li>
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="#">Следующая &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
     </div>
-    {% endif %}
 </section>
 {% endblock content %}
 

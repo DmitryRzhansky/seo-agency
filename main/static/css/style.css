@@ -202,6 +202,20 @@ body {
     padding: 100px 0; /* небольшой внутренний отступ сверху/снизу */
 }
 
+/* Моб. адаптация hero на главной: текст выше, карточка ниже */
+@media (max-width: 576px) {
+    .home-hero .row.align-items-center { align-items: flex-start !important; }
+    .home-hero .col-lg-6:first-child { order: 0; }
+    .home-hero .col-lg-6:last-child { order: 1; margin-top: 1.25rem; }
+    .home-hero { padding-top: 40px; padding-bottom: 40px; }
+}
+
+/* Hero ширина на мобилках: контейнер на всю ширину */
+@media (max-width: 576px) {
+    .hero-section { min-height: 100vh; }
+    .hero-section .container { width: 100% !important; max-width: 100% !important; padding-left: 12px; padding-right: 12px; }
+}
+
 /* Единый крупный размер и hover для всех hero-иконок */
 .blog-hero-icon,
 .city-hero-icon,

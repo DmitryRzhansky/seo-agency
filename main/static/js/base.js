@@ -63,10 +63,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateServicesToggle() {
         if (!servicesLink) return;
         if (window.innerWidth >= 992) {
-            // На десктопе убираем dropdown-поведение, оставляем переход по ссылке
+            // Десктоп: ссылка ведет на страницу
             servicesLink.removeAttribute('data-bs-toggle');
         } else {
-            // На мобилке оставляем открытие dropdown по клику
+            // Мобилка: ссылка открывает dropdown
             servicesLink.setAttribute('data-bs-toggle', 'dropdown');
         }
     }

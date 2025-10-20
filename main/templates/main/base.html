@@ -111,6 +111,8 @@
                                 Услуги
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                                <li class="d-lg-none"><a class="dropdown-item fw-bold" href="{% url 'services:service_list' %}">Все услуги</a></li>
+                                <li class="d-lg-none"><hr class="dropdown-divider"></li>
                                 {% comment %} Динамическое меню услуг с использованием контекстного процессора {% endcomment %}
                                 {% for category in service_categories_menu %}
                                     <li><h6 class="dropdown-header">{{ category.title }}</h6></li>

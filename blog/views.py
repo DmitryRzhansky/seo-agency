@@ -17,7 +17,7 @@ def post_list(request):
 	categories = Category.objects.filter(is_active=True).order_by('order', 'name')
 	
 	return render(request, 'main/post_list.html', {
-		'title': 'Блог | Полезные статьи о продвижении',
+		'title': 'Блог',
 		'page_obj': page_obj,
 		'is_paginated': page_obj.has_other_pages(),
 		'categories': categories,
@@ -43,7 +43,7 @@ def category_posts(request, slug):
 	categories = Category.objects.filter(is_active=True).order_by('order', 'name')
 	
 	return render(request, 'main/post_list.html', {
-		'title': f'{category.name} | Блог',
+		'title': category.name,
 		'page_obj': page_obj,
 		'is_paginated': page_obj.has_other_pages(),
 		'categories': categories,

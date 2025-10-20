@@ -499,6 +499,18 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
+/* Иконка в hero секции блога */
+.blog-hero-icon {
+    font-size: clamp(14rem, 22vmin, 32rem);
+    line-height: 1;
+}
+
+@media (min-width: 1200px) {
+    .blog-hero-icon {
+        font-size: clamp(18rem, 26vmin, 36rem);
+    }
+}
+
 /* Контактная информация в навигации */
 .navbar .text-dark {
     color: var(--bs-text-dark) !important;

@@ -165,11 +165,12 @@
                 <!-- Поисковая форма -->
                 <div class="row justify-content-center mb-4">
                     <div class="col-lg-6">
-                        <form method="get" class="d-flex">
+                        <form method="get" class="d-flex" id="search-form">
                             <div class="input-group">
                                 <input type="text" 
                                        class="form-control" 
                                        name="q" 
+                                       id="search-input"
                                        placeholder="Поиск по проектам..." 
                                        value="{{ search_query }}"
                                        aria-label="Поиск по проектам">
@@ -594,22 +595,70 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Обработка формы поиска
-    const searchForm = document.querySelector('form[method="get"]');
-    if (searchForm) {
-        const searchInput = searchForm.querySelector('input[name="q"]');
-        if (searchInput) {
-            // Сохраняем текущие параметры фильтрации
-            const urlParams = new URLSearchParams(window.location.search);
-            const currentType = urlParams.get('type');
-            
-            // Добавляем скрытое поле для типа, если он есть
-            if (currentType) {
-                const hiddenInput = document.createElement('input');
-                hiddenInput.type = 'hidden';
-                hiddenInput.name = 'type';
-                hiddenInput.value = currentType;
-                searchForm.appendChild(hiddenInput);
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    
+    if (searchForm && searchInput) {
+        // Сохраняем текущие параметры фильтрации
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentType = urlParams.get('type');
+        
+        // Добавляем скрытое поле для типа, если он есть
+        if (currentType) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'type';
+            hiddenInput.value = currentType;
+            searchForm.appendChild(hiddenInput);
+        }
+        
+        // Если есть поисковый запрос, прокручиваем к результатам
+        const searchQuery = urlParams.get('q');
+        if (searchQuery) {
+            // Ждем загрузки всех элементов
+            setTimeout(() => {
+                const portfolioSection = document.getElementById('portfolio');
+                if (portfolioSection) {
+                    portfolioSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }, 100);
+        }
+        
+        // Обработка отправки формы поиска
+        searchForm.addEventListener('submit', function(e) {
+            const searchValue = searchInput.value.trim();
+            if (searchValue) {
+                // Прокручиваем к результатам поиска после отправки
+                setTimeout(() => {
+                    const portfolioSection = document.getElementById('portfolio');
+                    if (portfolioSection) {
+                        portfolioSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 200);
             }
+        });
+        
+        // Обработка очистки поиска
+        const clearSearchBtn = document.querySelector('a[href*="portfolio_list"]');
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', function(e) {
+                // Прокручиваем к началу портфолио после очистки
+                setTimeout(() => {
+                    const portfolioSection = document.getElementById('portfolio');
+                    if (portfolioSection) {
+                        portfolioSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }, 200);
+            });
         }
     }
     

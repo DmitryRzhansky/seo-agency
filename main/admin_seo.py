@@ -219,22 +219,18 @@ class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
         verbose_name = _('Город')
         verbose_name_plural = _('Города')
     list_display = (
-        'name', 'region', 'population', 'order', 'is_active', 
+        'name', 'region', 'order', 'is_active', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
     )
-    list_filter = ('is_active', 'region', 'population')
+    list_filter = ('is_active', 'region')
     search_fields = ('name', 'region', 'local_title', 'local_description')
     prepopulated_fields = {'slug': ('name',)}
     list_editable = ('order', 'is_active')
     
     fieldsets = (
         ('🏙️ Основная информация', {
-            'fields': ('name', 'slug', 'region', 'population', 'order', 'is_active'),
+            'fields': ('name', 'slug', 'region', 'order', 'is_active'),
             'description': 'Основная информация о городе'
-        }),
-        ('🎯 Региональное SEO', {
-            'fields': ('local_title', 'local_description', 'name_prepositional'),
-            'description': 'Локальные заголовки и описания для регионального SEO'
         }),
         ('🍞 Навигация', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),

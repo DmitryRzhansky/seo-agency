@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         constructor() {
             this.element = document.createElement('div');
             this.type = this.getRandomType();
-            this.size = Math.random() * 100 + 20; // 20-120px
+            this.size = Math.random() * 120 + 40; // 40-160px
             this.x = Math.random() * (window.innerWidth - this.size);
             this.y = Math.random() * (window.innerHeight - this.size);
             this.vx = (Math.random() - 0.5) * 0.5; // скорость по X
@@ -641,36 +641,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         updatePosition() {
-            // Магнитные взаимодействия с другими объектами
-            let magneticForceX = 0;
-            let magneticForceY = 0;
-            
+            // Отталкивание при столкновении с другими объектами
             seoObjects.forEach(other => {
                 if (other !== this) {
                     const dx = other.x - this.x;
                     const dy = other.y - this.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
+                    const minDistance = (this.size + other.size) / 2 + 10; // Минимальное расстояние между объектами
                     
-                    if (distance < 150 && distance > 0) {
-                        // Притяжение на близком расстоянии
-                        const force = (150 - distance) / 150 * 0.02;
-                        magneticForceX += (dx / distance) * force;
-                        magneticForceY += (dy / distance) * force;
-                    } else if (distance < 50 && distance > 0) {
-                        // Отталкивание на очень близком расстоянии
-                        const force = (50 - distance) / 50 * 0.05;
-                        magneticForceX -= (dx / distance) * force;
-                        magneticForceY -= (dy / distance) * force;
+                    if (distance < minDistance && distance > 0) {
+                        // Отталкивание при столкновении
+                        const force = (minDistance - distance) / minDistance * 0.1;
+                        const pushX = (dx / distance) * force;
+                        const pushY = (dy / distance) * force;
+                        
+                        this.vx -= pushX;
+                        this.vy -= pushY;
+                        other.vx += pushX;
+                        other.vy += pushY;
                     }
                 }
             });
             
-            // Применяем магнитные силы
-            this.vx += magneticForceX;
-            this.vy += magneticForceY;
-            
             // Ограничиваем скорость
-            const maxSpeed = 1;
+            const maxSpeed = 1.5;
             const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
             if (speed > maxSpeed) {
                 this.vx = (this.vx / speed) * maxSpeed;
@@ -678,29 +672,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Добавляем небольшое случайное движение
-            this.vx += (Math.random() - 0.5) * 0.01;
-            this.vy += (Math.random() - 0.5) * 0.01;
+            this.vx += (Math.random() - 0.5) * 0.005;
+            this.vy += (Math.random() - 0.5) * 0.005;
             
             // Обновляем позицию
             this.x += this.vx;
             this.y += this.vy;
             this.rotation += this.rotationSpeed;
             
-            // Пульсация с реакцией на соседей
+            // Пульсация
             this.pulsePhase += this.pulseSpeed;
-            let pulse = Math.sin(this.pulsePhase) * 0.1 + 1;
-            
-            // Усиливаем пульсацию при приближении к другим объектам
-            const nearbyObjects = seoObjects.filter(other => {
-                if (other === this) return false;
-                const dx = other.x - this.x;
-                const dy = other.y - this.y;
-                return Math.sqrt(dx * dx + dy * dy) < 100;
-            });
-            
-            if (nearbyObjects.length > 0) {
-                pulse += nearbyObjects.length * 0.05;
-            }
+            const pulse = Math.sin(this.pulsePhase) * 0.15 + 1;
             
             // Проверяем границы экрана с затуханием
             if (this.x < -this.size) {
@@ -731,7 +713,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Создаем SEO-объекты
-    const objectCount = Math.min(25, Math.floor(window.innerWidth / 80));
+    const objectCount = Math.min(20, Math.floor(window.innerWidth / 100));
     for (let i = 0; i < objectCount; i++) {
         const obj = new SeoObject();
         seoObjects.push(obj);
@@ -752,7 +734,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
                 
                 // Создаем соединение если объекты близко
-                if (distance < 180 && Math.random() < 0.4) {
+                if (distance < 200 && Math.random() < 0.3) {
                     const connection = document.createElement('div');
                     connection.className = 'seo-connection';
                     connection.style.cssText = `
@@ -829,14 +811,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 Math.pow(obj1.x - obj2.x, 2) + Math.pow(obj1.y - obj2.y, 2)
             );
             
-            if (distance < 180) {
+            if (distance < 200) {
                 conn.element.style.left = Math.min(obj1.x, obj2.x) + 'px';
                 conn.element.style.top = Math.min(obj1.y, obj2.y) + 'px';
                 conn.element.style.width = Math.abs(obj1.x - obj2.x) + 'px';
                 conn.element.style.height = Math.abs(obj1.y - obj2.y) + 'px';
                 
                 // Плавное появление соединения
-                const opacity = Math.max(0, 1 - (distance / 180));
+                const opacity = Math.max(0, 1 - (distance / 200));
                 conn.element.style.opacity = opacity;
                 
                 // Обновляем SVG линию

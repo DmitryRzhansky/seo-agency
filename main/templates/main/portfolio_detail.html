@@ -6,19 +6,7 @@
 
 {% block breadcrumbs %}
 {% if portfolio_item.show_breadcrumbs %}
-<nav class="breadcrumb-nav">
-    <div class="container">
-        <ol class="breadcrumb">
-            {% for breadcrumb in portfolio_item.get_breadcrumbs %}
-            {% if forloop.last %}
-            <li class="breadcrumb-item active">{{ breadcrumb.title }}</li>
-            {% else %}
-            <li class="breadcrumb-item"><a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a></li>
-            {% endif %}
-            {% endfor %}
-        </ol>
-    </div>
-</nav>
+{% breadcrumbs portfolio_item %}
 {% endif %}
 {% endblock breadcrumbs %}
 

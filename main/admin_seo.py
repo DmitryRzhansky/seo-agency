@@ -460,13 +460,6 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, Cus
                 'show_breadcrumbs', 'custom_breadcrumbs'
             )
         }),
-        ('SEO настройки', {
-            'fields': (
-                'seo_title', 'seo_description', 'seo_canonical',
-                'seo_preview', 'seo_validation'
-            ),
-            'classes': ('collapse',)
-        }),
         ('Метаданные', {
             'fields': ('created_at', 'updated_at'),
             'classes': ('collapse',)
@@ -475,6 +468,23 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, Cus
     
     def get_queryset(self, request):
         return super().get_queryset(request).select_related()
+    
+    def get_fieldsets(self, request, obj=None):
+        """Переопределяем fieldsets для добавления кастомного описания SEO секции"""
+        fieldsets = super().get_fieldsets(request, obj)
+        
+        # Находим SEO секцию и обновляем её описание
+        updated_fieldsets = []
+        for name, options in fieldsets:
+            if name == 'SEO настройки':
+                # Обновляем описание SEO секции
+                updated_options = options.copy()
+                updated_options['description'] = 'Настройки для поисковых систем. SEO заголовок будет использоваться как основной заголовок проекта.'
+                updated_fieldsets.append((name, updated_options))
+            else:
+                updated_fieldsets.append((name, options))
+        
+        return updated_fieldsets
     
     def save_model(self, request, obj, form, change):
         """Автоматическое заполнение SEO полей при сохранении"""

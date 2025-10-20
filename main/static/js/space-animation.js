@@ -1,6 +1,6 @@
-// Анимация "Паутина данных" для SEO-агентства
+// Простая анимация "Паутина данных" для SEO-агентства
 document.addEventListener('DOMContentLoaded', function() {
-    // Создаем контейнер для анимации (сохраняем все важные настройки)
+    // Создаем контейнер для анимации
     const dataContainer = document.createElement('div');
     dataContainer.id = 'seo-animation-container';
     dataContainer.style.cssText = `
@@ -20,22 +20,22 @@ document.addEventListener('DOMContentLoaded', function() {
         padding: 0;
     `;
     
-    // Добавляем контейнер в body
     document.body.appendChild(dataContainer);
+
+    // Сеть отключена — работаем только с крупными плавными точками
     
-    // Убеждаемся, что контейнер занимает всю область экрана
+    // Обновляем размер контейнера
     function updateContainerSize() {
         dataContainer.style.width = window.innerWidth + 'px';
         dataContainer.style.height = window.innerHeight + 'px';
         dataContainer.style.minHeight = window.innerHeight + 'px';
     }
     
-    // Обновляем размер при загрузке
     updateContainerSize();
     
-    // Массив для хранения узлов данных
+    // Массив для хранения узлов
     const dataNodes = [];
-    const connections = [];
+    // Соединения не используются
     
     // Класс для узлов данных
     class DataNode {
@@ -43,13 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
             this.element = document.createElement('div');
             this.x = Math.random() * window.innerWidth;
             this.y = Math.random() * window.innerHeight;
-            this.vx = (Math.random() - 0.5) * 0.3; // медленное движение
-            this.vy = (Math.random() - 0.5) * 0.3;
-            this.size = Math.random() * 16 + 12; // 12-28px
-            this.opacity = Math.random() * 0.6 + 0.4; // 0.4-1.0
+            this.vx = (Math.random() - 0.5) * 0.12; // немного быстрее движение
+            this.vy = (Math.random() - 0.5) * 0.12;
+            this.size = Math.random() * 170 + 100; // 100-270px — крупнее точки
+            this.opacity = Math.random() * 0.2 + 0.15; // 0.15-0.35 — мягкая видимость
             this.pulsePhase = Math.random() * Math.PI * 2;
             this.pulseSpeed = Math.random() * 0.02 + 0.01;
-            this.glowIntensity = Math.random() * 0.7 + 0.6;
             
             this.createElement();
             this.updatePosition();
@@ -64,16 +63,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 top: ${this.y}px;
                 width: ${this.size}px;
                 height: ${this.size}px;
-                background: radial-gradient(circle, rgba(13, 110, 253, 1) 0%, rgba(13, 110, 253, 0.8) 30%, rgba(13, 110, 253, 0.4) 70%, transparent 100%);
+                background: radial-gradient(circle, rgba(13, 110, 253, 0.9) 0%, rgba(13, 110, 253, 0.5) 50%, rgba(13, 110, 253, 0.15) 80%, transparent 100%);
                 border-radius: 50%;
-                box-shadow: 0 0 ${this.size * 3}px rgba(13, 110, 253, ${this.glowIntensity}), 0 0 ${this.size * 6}px rgba(13, 110, 253, ${this.glowIntensity * 0.5});
+                box-shadow: 0 0 ${Math.round(this.size * 0.8)}px rgba(13, 110, 253, 0.35), 0 0 ${Math.round(this.size * 1.4)}px rgba(13, 110, 253, 0.2);
                 opacity: ${this.opacity};
                 transition: none;
             `;
         }
         
         updatePosition() {
-            // Медленное дрейфование
+            // Легкая случайность для плавного дрейфа
+            this.vx += (Math.random() - 0.5) * 0.003;
+            this.vy += (Math.random() - 0.5) * 0.003;
+            const maxV = 0.18;
+            if (this.vx > maxV) this.vx = maxV; if (this.vx < -maxV) this.vx = -maxV;
+            if (this.vy > maxV) this.vy = maxV; if (this.vy < -maxV) this.vy = -maxV;
+
             this.x += this.vx;
             this.y += this.vy;
             
@@ -81,11 +86,12 @@ document.addEventListener('DOMContentLoaded', function() {
             this.pulsePhase += this.pulseSpeed;
             const pulse = Math.sin(this.pulsePhase) * 0.2 + 1;
             
-            // Проверяем границы экрана
-            if (this.x < 0) this.x = window.innerWidth;
-            if (this.x > window.innerWidth) this.x = 0;
-            if (this.y < 0) this.y = window.innerHeight;
-            if (this.y > window.innerHeight) this.y = 0;
+            // Проверяем границы экрана с учетом размера
+            const margin = this.size * 0.5;
+            if (this.x < -margin) this.x = window.innerWidth + margin;
+            if (this.x > window.innerWidth + margin) this.x = -margin;
+            if (this.y < -margin) this.y = window.innerHeight + margin;
+            if (this.y > window.innerHeight + margin) this.y = -margin;
             
             // Обновляем позицию
             this.element.style.left = this.x + 'px';
@@ -94,123 +100,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Создаем узлы данных
-    const nodeCount = Math.min(35, Math.floor(window.innerWidth / 80));
+    // Создаем немного крупных узлов
+    const nodeCount = Math.max(6, Math.min(10, Math.floor(window.innerWidth / 300)));
     for (let i = 0; i < nodeCount; i++) {
         const node = new DataNode();
         dataNodes.push(node);
     }
-    
-    // Создаем соединения между узлами
-    function createConnections() {
-        // Очищаем старые соединения
-        connections.forEach(conn => {
-            if (conn.element && conn.element.parentNode) {
-                conn.element.parentNode.removeChild(conn.element);
-            }
-        });
-        connections.length = 0;
-        
-        // Создаем новые соединения
-        for (let i = 0; i < dataNodes.length; i++) {
-            for (let j = i + 1; j < dataNodes.length; j++) {
-                const node1 = dataNodes[i];
-                const node2 = dataNodes[j];
-                const distance = Math.sqrt(
-                    Math.pow(node1.x - node2.x, 2) + Math.pow(node1.y - node2.y, 2)
-                );
-                
-                // Создаем соединение если узлы близко
-                if (distance < 200 && Math.random() < 0.6) {
-                    const connection = document.createElement('div');
-                    connection.className = 'data-connection';
-                    
-                    // Создаем SVG линию
-                    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.style.cssText = `
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        pointer-events: none;
-                    `;
-                    
-                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    line.setAttribute('x1', node1.x);
-                    line.setAttribute('y1', node1.y);
-                    line.setAttribute('x2', node2.x);
-                    line.setAttribute('y2', node2.y);
-                    
-                    // Стиль линии зависит от расстояния
-                    const opacity = Math.max(0, 1 - (distance / 200));
-                    if (distance < 120) {
-                        line.setAttribute('stroke', `rgba(13, 110, 253, ${0.8 * opacity})`);
-                        line.setAttribute('stroke-width', '3');
-                        line.setAttribute('stroke-dasharray', '3,6');
-                    } else {
-                        line.setAttribute('stroke', `rgba(13, 110, 253, ${0.5 * opacity})`);
-                        line.setAttribute('stroke-width', '2');
-                        line.setAttribute('stroke-dasharray', '8,12');
-                    }
-                    
-                    svg.appendChild(line);
-                    connection.appendChild(svg);
-                    dataContainer.appendChild(connection);
-                    
-                    connections.push({
-                        element: connection,
-                        svg: svg,
-                        line: line,
-                        node1: node1,
-                        node2: node2,
-                        distance: distance
-                    });
-                }
-            }
-        }
-    }
-    
-    // Создаем начальные соединения
-    createConnections();
+    // Сети нет — соединения не создаем
     
     // Анимационный цикл
     function animate() {
         // Обновляем позиции узлов
         dataNodes.forEach(node => node.updatePosition());
         
-        // Обновляем соединения
-        connections.forEach(conn => {
-            const node1 = conn.node1;
-            const node2 = conn.node2;
-            const distance = Math.sqrt(
-                Math.pow(node1.x - node2.x, 2) + Math.pow(node1.y - node2.y, 2)
-            );
-            
-            if (distance < 200) {
-                // Обновляем позиции линии
-                conn.line.setAttribute('x1', node1.x);
-                conn.line.setAttribute('y1', node1.y);
-                conn.line.setAttribute('x2', node2.x);
-                conn.line.setAttribute('y2', node2.y);
-                
-                // Обновляем прозрачность
-                const opacity = Math.max(0, 1 - (distance / 200));
-                if (distance < 120) {
-                    conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.8 * opacity})`);
-                } else {
-                    conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.5 * opacity})`);
-                }
-            } else {
-                // Скрываем соединение если узлы далеко
-                conn.element.style.opacity = '0';
-            }
-        });
+        // Соединений нет
         
-        // Периодически пересоздаем соединения для динамичности
-        if (Math.random() < 0.001) {
-            createConnections();
-        }
+        // Пересоздавать нечего
         
         requestAnimationFrame(animate);
     }
@@ -221,15 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Обработка изменения размера окна
     window.addEventListener('resize', function() {
         updateContainerSize();
-        
         // Пересчитываем позиции узлов
         dataNodes.forEach(node => {
             if (node.x > window.innerWidth) node.x = window.innerWidth - node.size;
             if (node.y > window.innerHeight) node.y = window.innerHeight - node.size;
         });
-        
-        // Пересоздаем соединения
-        createConnections();
+        // Соединения отсутствуют
     });
     
     // Пауза анимации при неактивной вкладке

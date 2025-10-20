@@ -1,0 +1,359 @@
+/* Космические абстрактные фигуры - стили для заднего фона */
+
+/* Основной контейнер для космических объектов */
+#space-animation-container {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+    overflow: hidden !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Базовые стили для космических объектов */
+.space-object {
+    position: absolute !important;
+    pointer-events: none !important;
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+    transform-style: preserve-3d !important;
+}
+
+/* Стили для звезд */
+.space-star {
+    filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.5)) !important;
+}
+
+.space-star:hover {
+    filter: drop-shadow(0 0 20px rgba(74, 158, 255, 0.8)) !important;
+}
+
+/* Стили для планет */
+.space-planet {
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.3)) !important;
+}
+
+/* Стили для туманностей */
+.space-nebula {
+    filter: blur(2px) drop-shadow(0 0 20px rgba(255, 255, 255, 0.1)) !important;
+}
+
+/* Стили для астероидов */
+.space-asteroid {
+    filter: drop-shadow(0 0 8px rgba(139, 69, 19, 0.4)) !important;
+}
+
+/* Стили для комет */
+.space-comet {
+    filter: drop-shadow(0 0 12px rgba(135, 206, 235, 0.6)) !important;
+}
+
+/* Анимации */
+@keyframes twinkle {
+    0% { 
+        opacity: 0.3; 
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+        filter: brightness(1.5);
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1.2);
+        filter: brightness(2);
+    }
+}
+
+@keyframes nebulaPulse {
+    0% { 
+        opacity: 0.2; 
+        transform: scale(1);
+        filter: blur(2px) brightness(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05);
+        filter: blur(1px) brightness(1.2);
+    }
+    100% { 
+        opacity: 0.6; 
+        transform: scale(1.1);
+        filter: blur(2px) brightness(1.5);
+    }
+}
+
+@keyframes planetRotate {
+    0% { 
+        transform: rotate(0deg);
+    }
+    100% { 
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes asteroidFloat {
+    0% { 
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(90deg);
+    }
+    50% { 
+        transform: translateY(0px) rotate(180deg);
+    }
+    75% {
+        transform: translateY(10px) rotate(270deg);
+    }
+    100% { 
+        transform: translateY(0px) rotate(360deg);
+    }
+}
+
+@keyframes cometTrail {
+    0% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+    100% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+}
+
+/* Применяем анимации к объектам */
+.space-star {
+    animation: twinkle 3s ease-in-out infinite alternate !important;
+}
+
+.space-nebula {
+    animation: nebulaPulse 4s ease-in-out infinite alternate !important;
+}
+
+.space-planet {
+    animation: planetRotate 20s linear infinite !important;
+}
+
+.space-asteroid {
+    animation: asteroidFloat 8s ease-in-out infinite !important;
+}
+
+.space-comet {
+    animation: cometTrail 2s ease-in-out infinite alternate !important;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .space-object {
+        opacity: 0.5 !important;
+    }
+    
+    .space-star {
+        animation-duration: 4s !important;
+    }
+    
+    .space-nebula {
+        animation-duration: 6s !important;
+    }
+    
+    .space-planet {
+        animation-duration: 30s !important;
+    }
+    
+    .space-asteroid {
+        animation-duration: 12s !important;
+    }
+    
+    .space-comet {
+        animation-duration: 3s !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .space-object {
+        opacity: 0.3 !important;
+    }
+    
+    /* Уменьшаем количество анимаций на очень маленьких экранах */
+    .space-star {
+        animation: none !important;
+    }
+    
+    .space-nebula {
+        animation: none !important;
+    }
+    
+    .space-planet {
+        animation: none !important;
+    }
+    
+    .space-asteroid {
+        animation: none !important;
+    }
+    
+    .space-comet {
+        animation: none !important;
+    }
+}
+
+/* Стили для высокопроизводительных устройств */
+@media (min-width: 1200px) and (min-height: 800px) {
+    .space-object {
+        opacity: 0.6 !important;
+    }
+    
+    .space-star {
+        animation-duration: 2s !important;
+    }
+    
+    .space-nebula {
+        animation-duration: 3s !important;
+    }
+}
+
+/* Стили для устройств с поддержкой prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .space-object {
+        animation: none !important;
+    }
+    
+    .space-star,
+    .space-nebula,
+    .space-planet,
+    .space-asteroid,
+    .space-comet {
+        animation: none !important;
+    }
+}
+
+/* Стили для темной темы (уже есть в проекте) */
+@media (prefers-color-scheme: dark) {
+    .space-star {
+        filter: drop-shadow(0 0 10px rgba(74, 158, 255, 0.7)) !important;
+    }
+    
+    .space-comet {
+        filter: drop-shadow(0 0 12px rgba(135, 206, 235, 0.8)) !important;
+    }
+}
+
+/* Стили для светлой темы */
+@media (prefers-color-scheme: light) {
+    .space-star {
+        filter: drop-shadow(0 0 8px rgba(74, 158, 255, 0.4)) !important;
+    }
+    
+    .space-comet {
+        filter: drop-shadow(0 0 10px rgba(135, 206, 235, 0.5)) !important;
+    }
+}
+
+/* Обеспечиваем совместимость с существующими стилями */
+body {
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+html {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Убеждаемся, что космические объекты не влияют на z-index других элементов */
+.hero-section,
+.section-padding,
+.navbar,
+.footer-bg {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Делаем фоны секций полупрозрачными для видимости космической анимации */
+.hero-section {
+    background: linear-gradient(135deg, rgba(13, 17, 22, 0.8) 0%, rgba(22, 27, 34, 0.8) 100%) !important;
+}
+
+.hero-section::before {
+    background: radial-gradient(circle at 30% 20%, rgba(13, 110, 253, 0.05) 0%, transparent 50%) !important;
+}
+
+.bg-light {
+    background-color: rgba(22, 27, 34, 0.7) !important;
+}
+
+.section-padding {
+    background-color: rgba(13, 17, 22, 0.6) !important;
+}
+
+/* Специальные стили для секций с градиентами */
+.niche-category,
+.location-category {
+    background: linear-gradient(135deg, rgba(13, 17, 22, 0.8) 0%, rgba(22, 27, 34, 0.8) 100%) !important;
+}
+
+.price-card {
+    background-color: rgba(13, 17, 22, 0.8) !important;
+}
+
+/* Формы и карточки */
+.card {
+    background-color: rgba(13, 17, 22, 0.8) !important;
+}
+
+.form-control {
+    background-color: rgba(13, 17, 22, 0.8) !important;
+}
+
+/* Футер */
+.footer-bg {
+    background: linear-gradient(135deg, rgba(13, 17, 22, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%) !important;
+}
+
+/* Навигация */
+.navbar {
+    background-color: rgba(13, 17, 22, 0.9) !important;
+    backdrop-filter: blur(10px) !important;
+    z-index: 1000 !important;
+}
+
+/* Dropdown меню */
+.dropdown-menu {
+    background-color: rgba(13, 17, 22, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Алерты */
+.alert {
+    background-color: rgba(13, 17, 22, 0.9) !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+/* Стили для отключения анимации при низкой производительности */
+@media (prefers-reduced-motion: reduce) {
+    #space-animation-container {
+        display: none !important;
+    }
+}
+
+/* Стили для печати */
+@media print {
+    #space-animation-container {
+        display: none !important;
+    }
+}

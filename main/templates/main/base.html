@@ -70,7 +70,15 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="{% url 'main:home' %}">Isakov Agency</a>
+                {% if page_type == 'home' %}
+                <span class="navbar-brand fw-bold">
+                    <i class="fas fa-chart-line me-2"></i>Isakov Agency
+                </span>
+                {% else %}
+                <a class="navbar-brand fw-bold" href="{% url 'main:home' %}">
+                    <i class="fas fa-chart-line me-2"></i>Isakov Agency
+                </a>
+                {% endif %}
                 
                 {% if current_city %}
                 <div class="d-none d-lg-block ms-3">

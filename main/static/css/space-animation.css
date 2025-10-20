@@ -41,31 +41,31 @@
 /* Анимации для узлов данных */
 @keyframes dataPulse {
     0% { 
-        opacity: 0.3; 
+        opacity: 0.6; 
         transform: scale(1);
-        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+        box-shadow: 0 0 20px rgba(13, 110, 253, 0.6), 0 0 40px rgba(13, 110, 253, 0.3);
     }
     50% {
-        opacity: 0.7;
-        transform: scale(1.2);
-        box-shadow: 0 0 16px rgba(13, 110, 253, 0.6);
+        opacity: 1;
+        transform: scale(1.3);
+        box-shadow: 0 0 30px rgba(13, 110, 253, 0.9), 0 0 60px rgba(13, 110, 253, 0.5);
     }
     100% { 
-        opacity: 0.4; 
+        opacity: 0.7; 
         transform: scale(1);
-        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+        box-shadow: 0 0 20px rgba(13, 110, 253, 0.6), 0 0 40px rgba(13, 110, 253, 0.3);
     }
 }
 
 @keyframes dataGlow {
     0% { 
-        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+        box-shadow: 0 0 20px rgba(13, 110, 253, 0.6), 0 0 40px rgba(13, 110, 253, 0.3);
     }
     50% {
-        box-shadow: 0 0 20px rgba(13, 110, 253, 0.8);
+        box-shadow: 0 0 40px rgba(13, 110, 253, 1), 0 0 80px rgba(13, 110, 253, 0.6);
     }
     100% { 
-        box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+        box-shadow: 0 0 20px rgba(13, 110, 253, 0.6), 0 0 40px rgba(13, 110, 253, 0.3);
     }
 }
 
@@ -97,7 +97,7 @@
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .data-node {
-        opacity: 0.4 !important;
+        opacity: 0.6 !important;
     }
     
     .data-node:nth-child(3n) {
@@ -115,7 +115,7 @@
 
 @media (max-width: 480px) {
     .data-node {
-        opacity: 0.2 !important;
+        opacity: 0.4 !important;
     }
     
     /* Уменьшаем количество анимаций на очень маленьких экранах */

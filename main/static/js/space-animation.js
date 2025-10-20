@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', function() {
             this.y = Math.random() * window.innerHeight;
             this.vx = (Math.random() - 0.5) * 0.3; // медленное движение
             this.vy = (Math.random() - 0.5) * 0.3;
-            this.size = Math.random() * 8 + 4; // 4-12px
-            this.opacity = Math.random() * 0.4 + 0.2; // 0.2-0.6
+            this.size = Math.random() * 16 + 12; // 12-28px
+            this.opacity = Math.random() * 0.6 + 0.4; // 0.4-1.0
             this.pulsePhase = Math.random() * Math.PI * 2;
             this.pulseSpeed = Math.random() * 0.02 + 0.01;
-            this.glowIntensity = Math.random() * 0.5 + 0.3;
+            this.glowIntensity = Math.random() * 0.7 + 0.6;
             
             this.createElement();
             this.updatePosition();
@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 top: ${this.y}px;
                 width: ${this.size}px;
                 height: ${this.size}px;
-                background: radial-gradient(circle, rgba(13, 110, 253, 0.8) 0%, rgba(13, 110, 253, 0.3) 50%, transparent 100%);
+                background: radial-gradient(circle, rgba(13, 110, 253, 1) 0%, rgba(13, 110, 253, 0.8) 30%, rgba(13, 110, 253, 0.4) 70%, transparent 100%);
                 border-radius: 50%;
-                box-shadow: 0 0 ${this.size * 2}px rgba(13, 110, 253, ${this.glowIntensity});
+                box-shadow: 0 0 ${this.size * 3}px rgba(13, 110, 253, ${this.glowIntensity}), 0 0 ${this.size * 6}px rgba(13, 110, 253, ${this.glowIntensity * 0.5});
                 opacity: ${this.opacity};
                 transition: none;
             `;
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Создаем узлы данных
-    const nodeCount = Math.min(25, Math.floor(window.innerWidth / 100));
+    const nodeCount = Math.min(35, Math.floor(window.innerWidth / 80));
     for (let i = 0; i < nodeCount; i++) {
         const node = new DataNode();
         dataNodes.push(node);
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 );
                 
                 // Создаем соединение если узлы близко
-                if (distance < 150 && Math.random() < 0.4) {
+                if (distance < 200 && Math.random() < 0.6) {
                     const connection = document.createElement('div');
                     connection.className = 'data-connection';
                     
@@ -143,15 +143,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     line.setAttribute('y2', node2.y);
                     
                     // Стиль линии зависит от расстояния
-                    const opacity = Math.max(0, 1 - (distance / 150));
-                    if (distance < 80) {
-                        line.setAttribute('stroke', `rgba(13, 110, 253, ${0.6 * opacity})`);
-                        line.setAttribute('stroke-width', '2');
-                        line.setAttribute('stroke-dasharray', '2,4');
+                    const opacity = Math.max(0, 1 - (distance / 200));
+                    if (distance < 120) {
+                        line.setAttribute('stroke', `rgba(13, 110, 253, ${0.8 * opacity})`);
+                        line.setAttribute('stroke-width', '3');
+                        line.setAttribute('stroke-dasharray', '3,6');
                     } else {
-                        line.setAttribute('stroke', `rgba(13, 110, 253, ${0.3 * opacity})`);
-                        line.setAttribute('stroke-width', '1');
-                        line.setAttribute('stroke-dasharray', '5,10');
+                        line.setAttribute('stroke', `rgba(13, 110, 253, ${0.5 * opacity})`);
+                        line.setAttribute('stroke-width', '2');
+                        line.setAttribute('stroke-dasharray', '8,12');
                     }
                     
                     svg.appendChild(line);
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Math.pow(node1.x - node2.x, 2) + Math.pow(node1.y - node2.y, 2)
             );
             
-            if (distance < 150) {
+            if (distance < 200) {
                 // Обновляем позиции линии
                 conn.line.setAttribute('x1', node1.x);
                 conn.line.setAttribute('y1', node1.y);
@@ -195,11 +195,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 conn.line.setAttribute('y2', node2.y);
                 
                 // Обновляем прозрачность
-                const opacity = Math.max(0, 1 - (distance / 150));
-                if (distance < 80) {
-                    conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.6 * opacity})`);
+                const opacity = Math.max(0, 1 - (distance / 200));
+                if (distance < 120) {
+                    conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.8 * opacity})`);
                 } else {
-                    conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.3 * opacity})`);
+                    conn.line.setAttribute('stroke', `rgba(13, 110, 253, ${0.5 * opacity})`);
                 }
             } else {
                 // Скрываем соединение если узлы далеко

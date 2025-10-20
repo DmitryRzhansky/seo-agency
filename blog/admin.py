@@ -29,11 +29,6 @@ class CategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHe
             'fields': ('color',),
             'description': 'Настройте цвет категории для отображения на сайте'
         }),
-        ('SEO настройки', {
-            'fields': ('seo_title', 'seo_description', 'seo_canonical', 'seo_index'),
-            'classes': ('collapse',),
-            'description': 'Настройки для поисковых систем'
-        }),
         ('Хлебные крошки', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
             'classes': ('collapse',),

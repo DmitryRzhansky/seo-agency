@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Специальные анимации для разных секций
-    const heroElements = document.querySelectorAll('.hero-section h1, .hero-section p, .hero-section .btn');
+    const heroElements = document.querySelectorAll('.hero-section h1, .hero-section p, .hero-section .btn, .hero-section .director-card');
     heroElements.forEach((el, index) => {
         el.classList.add('slide-in-left');
         el.style.animationDelay = `${index * 0.2}s`;

@@ -79,11 +79,15 @@ class SEOAdminMixin:
     def get_list_display(self, request):
         """Добавляет SEO-поля в список объектов"""
         list_display = super().get_list_display(request)
-        if hasattr(self, 'list_display') and self.list_display:
-            # Преобразуем в список, если это tuple
-            if isinstance(list_display, tuple):
-                list_display = list(list_display)
-            return list_display + ['seo_title_length', 'seo_description_length', 'seo_index']
+        # Преобразуем к списку для безопасного редактирования
+        if isinstance(list_display, tuple):
+            list_display = list(list_display)
+
+        # Добавляем недостающие SEO-колонки без дублирования
+        for col in ['seo_title_length', 'seo_description_length', 'seo_index']:
+            if col not in list_display:
+                list_display.append(col)
+
         return list_display
 
 

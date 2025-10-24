@@ -3,10 +3,10 @@ from .models import Post
 from .models import Category
 from django.core.paginator import Paginator
 from django.db.models import F, Q
-from django.views.decorators.cache import never_cache, cache_page
+from django.views.decorators.cache import never_cache  # cache_page ОТКЛЮЧЕН
 
 
-@cache_page(300)  # 5 минут кэш для списка статей
+# @cache_page(300)  # КЭШИРОВАНИЕ ОТКЛЮЧЕНО
 def post_list(request):
 	posts_list = Post.objects.filter(is_published=True).order_by('-published_date')
 	paginator = Paginator(posts_list, 9)
@@ -26,7 +26,7 @@ def post_list(request):
 	})
 
 
-@cache_page(300)  # 5 минут кэш для статей категории
+# @cache_page(300)  # КЭШИРОВАНИЕ ОТКЛЮЧЕНО
 def category_posts(request, slug):
 	"""Отображение статей конкретной категории"""
 	category = get_object_or_404(Category, slug=slug, is_active=True)

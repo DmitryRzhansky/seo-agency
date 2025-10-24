@@ -64,9 +64,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'main.middleware.NoCacheMiddleware',  # Отключаем кэширование
    #  'main.middleware.RedirectMiddleware',  # Редиректы должны быть рано в цепочке
    # 'main.middleware.GeoLocationMiddleware',
 ]
+
+# Отключаем кэширование для всех ответов Django
+CACHE_MIDDLEWARE_SECONDS = 0
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+CACHE_MIDDLEWARE_ALIAS = 'default'
 
 ROOT_URLCONF = 'config.urls'
 
@@ -103,14 +109,21 @@ DATABASES = {
     }
 }
 
-# Легкое кэширование с коротким TTL
+# КЭШИРОВАНИЕ ОТКЛЮЧЕНО ДЛЯ РАЗРАБОТКИ
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/1",  # /1 - это номер базы данных в Redis, можно использовать любой
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
+
+# Используем dummy кэш (никакого кэширования)
 CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",  # /1 - это номер базы данных в Redis, можно использовать любой
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
 

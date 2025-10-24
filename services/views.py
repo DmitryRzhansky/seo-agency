@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.views.decorators.cache import cache_page
+# from django.views.decorators.cache import cache_page  # ОТКЛЮЧЕНО
 from main.models import ServiceCategory, Service
 
 
-@cache_page(300)  # 5 минут кэш для списка услуг
+# @cache_page(300)  # КЭШИРОВАНИЕ ОТКЛЮЧЕНО
 def service_list(request):
     categories = ServiceCategory.objects.all().order_by('order')
 

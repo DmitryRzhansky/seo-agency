@@ -103,10 +103,14 @@ def service_detail(request, slug):
     Страница отдельной услуги (например, /service/audit-saita/).
     """
     service = get_object_or_404(Service, slug=slug)
+    
+    # Получаем связанные услуги
+    related_services = service.get_related_services(limit=3)
 
     context = {
         'title': service.title,
         'service': service,
+        'related_services': related_services,
         'seo_object': service,  # Передаем услугу как SEO-объект
     }
     return render(request, 'main/service_detail.html', context)

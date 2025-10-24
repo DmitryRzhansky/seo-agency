@@ -223,13 +223,18 @@
     box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
 }
 
+/* Переопределяем отступы для блога */
+.section-modern {
+    padding: 40px 0 !important;
+}
+
 /* Карточки постов */
 .blog-grid-modern {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px;
     margin-top: 20px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -244,7 +249,7 @@
     transition: all 0.4s ease;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
 }
 
@@ -291,7 +296,7 @@
 
 .blog-card-image {
     width: 100%;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
     border-radius: 20px 20px 0 0;
 }
@@ -922,12 +927,12 @@
 /* Адаптивность для планшетов */
 @media (max-width: 992px) and (min-width: 769px) {
     .blog-grid-modern {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        max-width: 1000px;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        max-width: 1200px;
     }
     
     .blog-card-modern {
-        max-width: 400px;
+        max-width: 420px;
     }
 }
 

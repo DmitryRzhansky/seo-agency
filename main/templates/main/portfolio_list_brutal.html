@@ -1,0 +1,211 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs current_category %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/portfolio-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция портфолио - брутальная -->
+<section class="brutal-portfolio-hero">
+    <div class="brutal-container">
+        <div class="brutal-portfolio-hero-content">
+            <br><br>
+            <h1 class="brutal-portfolio-hero-title">Портфолио</h1>
+            <p class="brutal-portfolio-hero-subtitle">
+                Примеры успешных проектов, которые мы реализовали для наших клиентов. 
+                Каждый проект - это результат профессионального подхода и глубокого понимания задач бизнеса.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Поиск по портфолио - брутальный -->
+<section class="brutal-portfolio-search">
+    <div class="brutal-container">
+        <form method="get" action="{% url 'main:portfolio_list' %}" class="brutal-portfolio-search-form">
+            <input 
+                type="text" 
+                name="q" 
+                value="{{ search_query|default:'' }}" 
+                placeholder="Поиск по проектам..." 
+                class="brutal-portfolio-search-input"
+            >
+            <button type="submit" class="brutal-portfolio-search-button">
+                Найти
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- Фильтры по типу проекта - брутальные -->
+{% if available_types %}
+<section class="brutal-portfolio-filters">
+    <div class="brutal-container">
+        <h2 class="brutal-portfolio-filters-title">Фильтр по типу проекта</h2>
+        <div class="brutal-portfolio-filters-grid">
+            <div class="brutal-portfolio-filter-card {% if not current_type %}active{% endif %}">
+                <a href="{% url 'main:portfolio_list' %}" class="brutal-portfolio-filter-link">
+                    Все проекты
+                </a>
+            </div>
+            {% for type_value, type_label in available_types %}
+            <div class="brutal-portfolio-filter-card {% if current_type == type_value %}active{% endif %}">
+                <a href="{% url 'main:portfolio_list' %}?type={{ type_value }}" class="brutal-portfolio-filter-link">
+                    {{ type_label }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Рекомендуемые проекты - брутальные -->
+{% if featured_page_obj %}
+<section class="brutal-portfolio-featured">
+    <div class="brutal-container">
+        <h2 class="brutal-portfolio-featured-title">Рекомендуемые проекты</h2>
+        <div class="brutal-portfolio-featured-grid">
+            {% for project in featured_page_obj %}
+            <div class="brutal-portfolio-featured-card">
+                {% if project.main_image %}
+                <img src="{{ project.main_image.url }}" class="brutal-portfolio-featured-image" alt="{{ project.get_main_image_alt }}">
+                {% else %}
+                <div class="brutal-portfolio-featured-placeholder">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                {% endif %}
+                
+                <div class="brutal-portfolio-featured-content">
+                    <div class="brutal-portfolio-featured-type">{{ project.get_project_type_display_ru }}</div>
+                    <h3 class="brutal-portfolio-featured-title-card">{{ project.title }}</h3>
+                    <p class="brutal-portfolio-featured-description">
+                        {{ project.short_description|truncatewords:20 }}
+                    </p>
+                    <div class="brutal-portfolio-featured-meta">
+                        {% if project.client_name %}
+                        <span class="brutal-portfolio-featured-client">{{ project.client_name }}</span>
+                        {% endif %}
+                        <span class="brutal-portfolio-featured-date">{{ project.created_at|date:"d.m.Y" }}</span>
+                    </div>
+                    <a href="{{ project.get_absolute_url }}" class="brutal-portfolio-featured-link">
+                        Смотреть проект
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Пагинация для рекомендуемых -->
+        {% if is_featured_paginated %}
+        <div class="brutal-portfolio-pagination">
+            {% if featured_page_obj.has_previous %}
+                <a href="?featured_page=1">Первая</a>
+                <a href="?featured_page={{ featured_page_obj.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+            
+            <span class="current">
+                Страница {{ featured_page_obj.number }} из {{ featured_page_obj.paginator.num_pages }}
+            </span>
+            
+            {% if featured_page_obj.has_next %}
+                <a href="?featured_page={{ featured_page_obj.next_page_number }}">Следующая</a>
+                <a href="?featured_page={{ featured_page_obj.paginator.num_pages }}">Последняя</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Все проекты - брутальные -->
+<section class="brutal-portfolio-projects">
+    <div class="brutal-container">
+        <h2 class="brutal-portfolio-projects-title">
+            {% if current_type %}
+                {{ current_type|title }} проекты
+            {% elif search_query %}
+                Результаты поиска: "{{ search_query }}"
+            {% else %}
+                Все проекты
+            {% endif %}
+        </h2>
+        
+        {% if page_obj %}
+        <div class="brutal-portfolio-projects-grid">
+            {% for project in page_obj %}
+            <div class="brutal-portfolio-card">
+                {% if project.main_image %}
+                <img src="{{ project.main_image.url }}" class="brutal-portfolio-card-image" alt="{{ project.get_main_image_alt }}">
+                {% else %}
+                <div class="brutal-portfolio-card-placeholder">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                {% endif %}
+                
+                <div class="brutal-portfolio-card-content">
+                    <div class="brutal-portfolio-card-type">{{ project.get_project_type_display_ru }}</div>
+                    <h3 class="brutal-portfolio-card-title">{{ project.title }}</h3>
+                    <p class="brutal-portfolio-card-description">
+                        {{ project.short_description|truncatewords:20 }}
+                    </p>
+                    <div class="brutal-portfolio-card-meta">
+                        {% if project.client_name %}
+                        <span class="brutal-portfolio-card-client">{{ project.client_name }}</span>
+                        {% endif %}
+                        <span class="brutal-portfolio-card-date">{{ project.created_at|date:"d.m.Y" }}</span>
+                    </div>
+                    <a href="{{ project.get_absolute_url }}" class="brutal-portfolio-card-link">
+                        Смотреть проект
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Пагинация -->
+        {% if is_paginated %}
+        <div class="brutal-portfolio-pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">Первая</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+            
+            <span class="current">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+            </span>
+            
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <div class="brutal-portfolio-empty">
+            <i class="fas fa-search"></i>
+            <h3>Проекты не найдены</h3>
+            <p>
+                {% if search_query %}
+                    По запросу "{{ search_query }}" ничего не найдено. Попробуйте изменить поисковый запрос.
+                {% else %}
+                    В этом разделе пока нет опубликованных проектов.
+                {% endif %}
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock content %}

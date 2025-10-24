@@ -1,0 +1,560 @@
+/* Брутальный стиль для портфолио */
+
+/* Переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-green: #00ff00;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #333333;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+}
+
+/* Основные стили */
+* {
+    font-family: 'Courier New', monospace;
+}
+
+/* Контейнер */
+.brutal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero секция портфолио */
+.brutal-portfolio-hero {
+    background: var(--brutal-white);
+    padding: 60px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+    position: relative;
+}
+
+.brutal-portfolio-hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brutal-portfolio-hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 0px var(--brutal-green);
+    line-height: 1.2;
+}
+
+.brutal-portfolio-hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Поиск по портфолио */
+.brutal-portfolio-search {
+    background: var(--brutal-gray);
+    padding: 40px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-portfolio-search-form {
+    display: flex;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.brutal-portfolio-search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: var(--brutal-border);
+    background: var(--brutal-white);
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.brutal-portfolio-search-input:focus {
+    outline: none;
+    box-shadow: var(--brutal-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.brutal-portfolio-search-button {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 15px 30px;
+    border: var(--brutal-border);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.brutal-portfolio-search-button:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+/* Фильтры по типу проекта */
+.brutal-portfolio-filters {
+    background: var(--brutal-white);
+    padding: 40px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-portfolio-filters-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-portfolio-filters-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.brutal-portfolio-filter-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.brutal-portfolio-filter-card:hover,
+.brutal-portfolio-filter-card.active {
+    background: var(--brutal-green);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-portfolio-filter-link {
+    display: block;
+    padding: 12px 24px;
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.brutal-portfolio-filter-card:hover .brutal-portfolio-filter-link,
+.brutal-portfolio-filter-card.active .brutal-portfolio-filter-link {
+    color: var(--brutal-white);
+}
+
+/* Рекомендуемые проекты */
+.brutal-portfolio-featured {
+    background: var(--brutal-gray);
+    padding: 60px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-portfolio-featured-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.brutal-portfolio-featured-title::before {
+    content: '★';
+    position: absolute;
+    top: -10px;
+    left: -40px;
+    font-size: 1.5rem;
+    color: var(--brutal-green);
+}
+
+.brutal-portfolio-featured-title::after {
+    content: '★';
+    position: absolute;
+    top: -10px;
+    right: -40px;
+    font-size: 1.5rem;
+    color: var(--brutal-green);
+}
+
+.brutal-portfolio-featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.brutal-portfolio-featured-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.brutal-portfolio-featured-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-portfolio-featured-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-portfolio-featured-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--brutal-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-portfolio-featured-placeholder i {
+    font-size: 3rem;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-portfolio-featured-content {
+    padding: 25px;
+}
+
+.brutal-portfolio-featured-type {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 5px 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 15px;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-portfolio-featured-title-card {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.brutal-portfolio-featured-description {
+    color: var(--brutal-dark-gray);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.brutal-portfolio-featured-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-portfolio-featured-client {
+    font-weight: 600;
+}
+
+.brutal-portfolio-featured-date {
+    font-weight: 500;
+}
+
+.brutal-portfolio-featured-link {
+    display: inline-block;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 10px 20px;
+    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-portfolio-featured-link:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0px var(--brutal-green);
+}
+
+/* Все проекты */
+.brutal-portfolio-projects {
+    background: var(--brutal-white);
+    padding: 60px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-portfolio-projects-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-portfolio-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.brutal-portfolio-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.brutal-portfolio-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-portfolio-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-portfolio-card-placeholder {
+    width: 100%;
+    height: 180px;
+    background: var(--brutal-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-portfolio-card-placeholder i {
+    font-size: 2.5rem;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-portfolio-card-content {
+    padding: 20px;
+}
+
+.brutal-portfolio-card-type {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 12px;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-portfolio-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.brutal-portfolio-card-description {
+    color: var(--brutal-dark-gray);
+    line-height: 1.4;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.brutal-portfolio-card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-portfolio-card-client {
+    font-weight: 600;
+}
+
+.brutal-portfolio-card-date {
+    font-weight: 500;
+}
+
+.brutal-portfolio-card-link {
+    display: inline-block;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 8px 16px;
+    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-portfolio-card-link:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px var(--brutal-green);
+}
+
+/* Пагинация */
+.brutal-portfolio-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.brutal-portfolio-pagination a {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    padding: 10px 20px;
+    border: var(--brutal-border);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-portfolio-pagination a:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-portfolio-pagination .current {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 10px 20px;
+    border: var(--brutal-border);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--brutal-shadow);
+}
+
+/* Пустое состояние */
+.brutal-portfolio-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-portfolio-empty i {
+    font-size: 4rem;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 20px;
+}
+
+.brutal-portfolio-empty h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-portfolio-empty p {
+    font-size: 1.1rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.5;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-portfolio-hero-title {
+        font-size: 2rem;
+    }
+    
+    .brutal-portfolio-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .brutal-portfolio-search-form {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .brutal-portfolio-filters-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .brutal-portfolio-featured-grid,
+    .brutal-portfolio-projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .brutal-portfolio-pagination {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .brutal-portfolio-pagination a,
+    .brutal-portfolio-pagination .current {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}

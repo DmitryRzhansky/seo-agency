@@ -546,6 +546,163 @@
     box-shadow: 2px 2px 0px var(--brutal-green);
 }
 
+/* Прокручиваемый контент услуг - как в блоге */
+.brutal-service-scrollable {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    border: 2px solid var(--brutal-black);
+    background: var(--brutal-gray);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    scroll-behavior: smooth;
+}
+
+/* Стилизация скроллбара для прокручиваемого контента услуг */
+.brutal-service-scrollable::-webkit-scrollbar {
+    width: 12px;
+}
+
+.brutal-service-scrollable::-webkit-scrollbar-track {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+}
+
+.brutal-service-scrollable::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-service-scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-green);
+}
+
+/* Форматирование текста в прокручиваемом контенте услуг */
+.brutal-service-scrollable p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: var(--brutal-black);
+    font-weight: 500;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.brutal-service-scrollable h1,
+.brutal-service-scrollable h2,
+.brutal-service-scrollable h3,
+.brutal-service-scrollable h4,
+.brutal-service-scrollable h5,
+.brutal-service-scrollable h6 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--brutal-black);
+}
+
+.brutal-service-scrollable h2 {
+    font-size: 1.3rem;
+    color: var(--brutal-green);
+}
+
+.brutal-service-scrollable h3 {
+    font-size: 1.1rem;
+    color: var(--brutal-black);
+}
+
+.brutal-service-scrollable ul,
+.brutal-service-scrollable ol {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.brutal-service-scrollable li {
+    margin-bottom: 8px;
+    position: relative;
+    color: var(--brutal-black);
+    font-weight: 500;
+}
+
+.brutal-service-scrollable ul li::before {
+    content: "▶";
+    color: var(--brutal-green);
+    font-weight: 700;
+    position: absolute;
+    left: -20px;
+}
+
+.brutal-service-scrollable ol {
+    counter-reset: brutal-counter;
+}
+
+.brutal-service-scrollable ol li {
+    counter-increment: brutal-counter;
+    position: relative;
+}
+
+.brutal-service-scrollable ol li::before {
+    content: counter(brutal-counter) '.';
+    color: var(--brutal-green);
+    font-weight: 700;
+    position: absolute;
+    left: -25px;
+    min-width: 20px;
+}
+
+.brutal-service-scrollable strong {
+    color: var(--brutal-black);
+    font-weight: 700;
+    background: linear-gradient(120deg, var(--brutal-green) 0%, transparent 100%);
+    padding: 2px 4px;
+}
+
+.brutal-service-scrollable blockquote {
+    border-left: 4px solid var(--brutal-green);
+    background: var(--brutal-gray);
+    padding: 20px;
+    margin: 30px 0;
+    font-style: italic;
+    position: relative;
+}
+
+.brutal-service-scrollable blockquote::before {
+    content: '"';
+    font-size: 4rem;
+    color: var(--brutal-green);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-family: serif;
+}
+
+.brutal-service-scrollable img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+    margin: 15px 0;
+}
+
+.brutal-service-scrollable a {
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--brutal-green);
+    transition: all 0.3s ease;
+}
+
+.brutal-service-scrollable a:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 2px 4px;
+    border-bottom: none;
+}
+
 .brutal-content-full p {
     margin-bottom: 20px;
     font-size: 1rem;

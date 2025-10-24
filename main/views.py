@@ -449,7 +449,7 @@ def portfolio_list(request):
         'page_type': 'portfolio_list',
         'page_slug': None,
     }
-    return render(request, 'main/portfolio_list.html', context)
+    return render(request, 'main/portfolio_list_brutal.html', context)
 
 
 def portfolio_detail(request, slug):
@@ -471,7 +471,7 @@ def portfolio_detail(request, slug):
         'page_type': 'portfolio_detail',
         'page_slug': portfolio_item.slug,
     }
-    return render(request, 'main/portfolio_detail.html', context)
+    return render(request, 'main/portfolio_detail_brutal.html', context)
 
 
 def sitemap_page(request):

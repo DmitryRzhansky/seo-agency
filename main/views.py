@@ -198,10 +198,14 @@ def city_detail(request, slug):
     services = Service.objects.filter(is_published=True).select_related('category').order_by('order')
     recent_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:6]
     
+    # Получаем категории услуг для фильтрации
+    service_categories = ServiceCategory.objects.all().prefetch_related('services')
+    
     context = {
         'title': city.get_local_title(),
         'city': city,
         'services': services,
+        'service_categories': service_categories,
         'recent_posts': recent_posts,
         'seo_object': city,
         'page_type': 'city_detail',
@@ -231,6 +235,29 @@ def city_service_detail(request, city_slug, service_slug):
         'page_slug': f"{city.slug}/{service.slug}",
     }
     return render(request, 'main/city_service_detail.html', context)
+
+
+@never_cache
+def city_category_detail(request, city_slug, category_slug):
+    """
+    Страница категории услуг в конкретном городе.
+    """
+    city = get_object_or_404(City, slug=city_slug, is_active=True)
+    category = get_object_or_404(ServiceCategory, slug=category_slug)
+    
+    # Получаем услуги этой категории
+    services = Service.objects.filter(category=category, is_published=True).order_by('order')
+    
+    context = {
+        'title': f"{category.title} в {city.name}",
+        'city': city,
+        'category': category,
+        'services': services,
+        'seo_object': category,
+        'page_type': 'city_category_detail',
+        'page_slug': f"{city.slug}/{category.slug}",
+    }
+    return render(request, 'main/city_category_detail.html', context)
 
 
 @never_cache

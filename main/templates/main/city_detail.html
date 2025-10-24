@@ -40,20 +40,17 @@
 <!-- Основной контент -->
 <section class="city-content-modern">
     <div class="container">
-        <!-- Услуги в городе -->
-        {% if services %}
+        <!-- Категории услуг -->
+        {% if service_categories %}
         <div class="city-services-modern">
             <h2 class="city-services-title">Наши услуги {{ city.get_name_prepositional }}</h2>
             <div class="city-services-grid">
-                {% for service in services %}
+                {% for category in service_categories %}
                 <div class="city-service-card">
-                    {% if service.image %}
-                    <img src="{{ service.image.url }}" alt="{{ service.image_alt|default:service.title }}" class="city-service-image">
-                    {% endif %}
-                    <div class="city-service-category">{{ service.category.title }}</div>
-                    <h3 class="city-service-title">{{ service.title }}</h3>
-                    <p class="city-service-description">{{ service.short_description|truncatewords:20 }}</p>
-                    <a href="{{ service.get_absolute_url }}" class="city-service-link">Подробнее</a>
+                    <div class="city-service-category">{{ category.title }}</div>
+                    <h3 class="city-service-title">{{ category.title }}</h3>
+                    <p class="city-service-description">{{ category.description|truncatewords:20 }}</p>
+                    <a href="{% url 'main:city_category_detail' city.slug category.slug %}" class="city-service-link">Услуги {{ city.get_name_prepositional }}</a>
                 </div>
                 {% endfor %}
             </div>

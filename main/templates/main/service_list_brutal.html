@@ -14,7 +14,14 @@
     <div class="brutal-container">
         <div class="brutal-hero-content">
             <h1 class="brutal-hero-title">Что мы делаем</h1>
-            <p class="brutal-hero-subtitle">Комплексные решения для роста вашего бизнеса. SEO, контекстная реклама, аналитика, разработка и дизайн.</p>
+            <div class="brutal-hero-animation">
+                <div class="brutal-hero-brick">SEO</div>
+                <div class="brutal-hero-brick">Контекст</div>
+                <div class="brutal-hero-brick">Аналитика</div>
+                <div class="brutal-hero-brick">Разработка</div>
+                <div class="brutal-hero-brick">Дизайн</div>
+            </div>
+            <p class="brutal-hero-subtitle">Комплексные решения для роста вашего бизнеса. Строим ваш успех кирпичик за кирпичиком.</p>
         </div>
     </div>
 </section>
@@ -123,58 +130,8 @@
     <div class="brutal-container">
         <h2 class="brutal-services-title">Все услуги</h2>
         
-        <!-- Переключатель стилей -->
-        <div class="brutal-layout-switcher">
-            <button class="brutal-layout-btn active" data-layout="stairs">Лестница</button>
-            <button class="brutal-layout-btn" data-layout="web">Паутина</button>
-            <button class="brutal-layout-btn" data-layout="spiral">Спираль</button>
-            <button class="brutal-layout-btn" data-layout="brick">Кирпичи</button>
-        </div>
-        
-        <!-- Лестничное расположение -->
-        <div class="brutal-all-services-grid" id="stairs-layout">
-            {% for service in filtered_services %}
-            <div class="brutal-stair-card">
-                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
-                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
-                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:15 }}</p>
-                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <!-- Паутинное расположение -->
-        <div class="brutal-web-grid" id="web-layout" style="display: none;">
-            <!-- Паутинные линии -->
-            <div class="web-line web-line-1"></div>
-            <div class="web-line web-line-2"></div>
-            <div class="web-line web-line-3"></div>
-            <div class="web-line web-line-4"></div>
-            
-            {% for service in filtered_services|slice:":5" %}
-            <div class="brutal-web-card">
-                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
-                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
-                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:10 }}</p>
-                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <!-- Спиральное расположение -->
-        <div class="brutal-spiral-grid" id="spiral-layout" style="display: none;">
-            {% for service in filtered_services|slice:":5" %}
-            <div class="brutal-spiral-card">
-                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
-                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
-                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:12 }}</p>
-                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <!-- Кирпичный дом -->
-        <div class="brutal-brick-house" id="brick-layout" style="display: none;">
+        <!-- Кирпичный дом - разделы услуг -->
+        <div class="brutal-brick-house">
             <div class="brutal-brick-row">
                 <div class="brutal-brick-card">
                     <h3 class="brutal-service-card-title">Аудит</h3>
@@ -206,6 +163,18 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Лестница - категории услуг -->
+        <div class="brutal-all-services-grid">
+            {% for category in categories %}
+            <div class="brutal-stair-card">
+                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
+                <h3 class="brutal-service-card-title">{{ category.title }}</h3>
+                <p class="brutal-service-card-description">{{ category.description|truncatewords:15 }}</p>
+                <a href="{% url 'services:service_category_detail' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endif %}
@@ -223,37 +192,4 @@
 
 {% endblock content %}
 
-{% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const layoutBtns = document.querySelectorAll('.brutal-layout-btn');
-    const layouts = {
-        'stairs': document.getElementById('stairs-layout'),
-        'web': document.getElementById('web-layout'),
-        'spiral': document.getElementById('spiral-layout'),
-        'brick': document.getElementById('brick-layout')
-    };
-
-    layoutBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const layout = this.dataset.layout;
-            
-            // Убираем активный класс со всех кнопок
-            layoutBtns.forEach(b => b.classList.remove('active'));
-            // Добавляем активный класс к текущей кнопке
-            this.classList.add('active');
-            
-            // Скрываем все макеты
-            Object.values(layouts).forEach(l => {
-                if (l) l.style.display = 'none';
-            });
-            
-            // Показываем выбранный макет
-            if (layouts[layout]) {
-                layouts[layout].style.display = 'flex';
-            }
-        });
-    });
-});
-</script>
 {% endblock extra_js %}

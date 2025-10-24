@@ -128,6 +128,7 @@
             <button class="brutal-layout-btn active" data-layout="stairs">Лестница</button>
             <button class="brutal-layout-btn" data-layout="web">Паутина</button>
             <button class="brutal-layout-btn" data-layout="spiral">Спираль</button>
+            <button class="brutal-layout-btn" data-layout="brick">Кирпичи</button>
         </div>
         
         <!-- Лестничное расположение -->
@@ -144,6 +145,12 @@
         
         <!-- Паутинное расположение -->
         <div class="brutal-web-grid" id="web-layout" style="display: none;">
+            <!-- Паутинные линии -->
+            <div class="web-line web-line-1"></div>
+            <div class="web-line web-line-2"></div>
+            <div class="web-line web-line-3"></div>
+            <div class="web-line web-line-4"></div>
+            
             {% for service in filtered_services|slice:":5" %}
             <div class="brutal-web-card">
                 <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
@@ -164,6 +171,40 @@
                 <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
             </div>
             {% endfor %}
+        </div>
+        
+        <!-- Кирпичный дом -->
+        <div class="brutal-brick-house" id="brick-layout" style="display: none;">
+            <div class="brutal-brick-row">
+                <div class="brutal-brick-card">
+                    <h3 class="brutal-service-card-title">Аудит</h3>
+                    <p class="brutal-service-card-description">Находим проблемы</p>
+                </div>
+            </div>
+            <div class="brutal-brick-row">
+                <div class="brutal-brick-card">
+                    <h3 class="brutal-service-card-title">Техническое SEO</h3>
+                    <p class="brutal-service-card-description">Исправляем ошибки</p>
+                </div>
+                <div class="brutal-brick-card special">
+                    <h3 class="brutal-service-card-title">Продвижение</h3>
+                    <p class="brutal-service-card-description">Растем в поиске</p>
+                </div>
+                <div class="brutal-brick-card">
+                    <h3 class="brutal-service-card-title">Контент</h3>
+                    <p class="brutal-service-card-description">Пишем тексты</p>
+                </div>
+            </div>
+            <div class="brutal-brick-row">
+                <div class="brutal-brick-card">
+                    <h3 class="brutal-service-card-title">Ссылки</h3>
+                    <p class="brutal-service-card-description">Получаем авторитет</p>
+                </div>
+                <div class="brutal-brick-card">
+                    <h3 class="brutal-service-card-title">Аналитика</h3>
+                    <p class="brutal-service-card-description">Отслеживаем результат</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -189,7 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const layouts = {
         'stairs': document.getElementById('stairs-layout'),
         'web': document.getElementById('web-layout'),
-        'spiral': document.getElementById('spiral-layout')
+        'spiral': document.getElementById('spiral-layout'),
+        'brick': document.getElementById('brick-layout')
     };
 
     layoutBtns.forEach(btn => {

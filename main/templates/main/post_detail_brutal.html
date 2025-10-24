@@ -21,7 +21,9 @@
         <div class="brutal-post-hero-content">
             <h1 class="brutal-post-hero-title">{{ post.title }}</h1>
             <div class="brutal-post-hero-meta">
+                {% if post.category %}
                 <div class="brutal-post-hero-category">{{ post.category.name }}</div>
+                {% endif %}
                 <div class="brutal-post-hero-date">{{ post.published_date|date:"d.m.Y" }}</div>
                 <div class="brutal-post-hero-views">{{ post.views_count }} просмотров</div>
             </div>
@@ -64,7 +66,7 @@
                 <div class="brutal-post-content-block content">
                     <div class="brutal-post-block-number">04</div>
                     <h3>Полный текст статьи</h3>
-                    <div class="brutal-post-text">
+                    <div class="brutal-post-text brutal-post-scrollable">
                         {{ post.content|safe }}
                     </div>
                 </div>

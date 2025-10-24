@@ -79,6 +79,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     updateServicesToggle();
     window.addEventListener('resize', updateServicesToggle);
+    
+    // Прокрутка контента блога колесиком мыши
+    const blogScrollable = document.querySelector('.brutal-post-scrollable');
+    if (blogScrollable) {
+        blogScrollable.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            this.scrollTop += e.deltaY;
+        });
+        
+        // Делаем контейнер фокусируемым для клавиатуры
+        blogScrollable.setAttribute('tabindex', '0');
+        
+        // Прокрутка клавишами
+        blogScrollable.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                this.scrollTop -= 50;
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                this.scrollTop += 50;
+            } else if (e.key === 'PageUp') {
+                e.preventDefault();
+                this.scrollTop -= 200;
+            } else if (e.key === 'PageDown') {
+                e.preventDefault();
+                this.scrollTop += 200;
+            }
+        });
+    }
 });
 
 

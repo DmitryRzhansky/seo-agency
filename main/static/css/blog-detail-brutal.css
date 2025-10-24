@@ -98,6 +98,41 @@
     border-bottom: 4px solid var(--brutal-green);
 }
 
+/* Прокручиваемый контент */
+.brutal-post-scrollable {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
+    border: 2px solid var(--brutal-black);
+    background: var(--brutal-gray);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    scroll-behavior: smooth;
+}
+
+/* Стилизация скроллбара для прокручиваемого контента */
+.brutal-post-scrollable::-webkit-scrollbar {
+    width: 12px;
+}
+
+.brutal-post-scrollable::-webkit-scrollbar-track {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+}
+
+.brutal-post-scrollable::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-post-scrollable::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-green);
+}
+
 .brutal-post-content-wrapper {
     display: flex;
     gap: 40px;

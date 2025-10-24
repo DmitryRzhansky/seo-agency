@@ -90,22 +90,20 @@
 
 .brutal-blog-search-button {
     padding: 15px 30px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    border: var(--brutal-border);
+    background: var(--brutal-white);
+    color: var(--brutal-green);
+    border: 2px solid var(--brutal-green);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: var(--brutal-shadow);
 }
 
 .brutal-blog-search-button:hover {
     background: var(--brutal-green);
     color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    transform: translateX(5px);
 }
 
 /* Категории блога */
@@ -285,23 +283,20 @@
 
 .brutal-blog-card-link {
     display: inline-block;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 10px 20px;
-    text-decoration: none;
+    margin-top: auto;
+    color: var(--brutal-green);
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid var(--brutal-green);
     transition: all 0.3s ease;
-    box-shadow: 4px 4px 0px var(--brutal-black);
+    text-align: center;
 }
 
 .brutal-blog-card-link:hover {
     background: var(--brutal-green);
     color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: 6px 6px 0px var(--brutal-black);
+    transform: translateX(5px);
 }
 
 /* Пустое состояние */

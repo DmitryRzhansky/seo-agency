@@ -207,9 +207,11 @@
 
 .brutal-contacts-details small {
     color: var(--brutal-black) !important;
-    font-size: 0.9rem;
-    font-style: italic;
-    font-weight: 700 !important;
+    font-size: 1rem !important;
+    font-style: normal !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
 }
 
 /* Форма обратной связи */

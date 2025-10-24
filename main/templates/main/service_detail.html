@@ -54,12 +54,35 @@
     </div>
 </section>
 
-<!-- Основной контент -->
-<section class="section-modern">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="service-detail-content">
+        <!-- Основной контент -->
+        <section class="section-modern">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        {% if service.image %}
+                        <div class="row justify-content-center mb-5"> 
+                            <div class="col-lg-10">
+                                <div class="service-image-container">
+                                    <img 
+                                        src="{{ service.image.url }}" 
+                                        class="service-detail-image" 
+                                        alt="{{ service.get_image_alt }}"
+                                    >
+                                    <div class="service-image-overlay">
+                                        <div class="service-image-category">{{ service.category.title }}</div>
+                                        <div class="service-image-price">От 50 000 ₽</div>
+                                    </div>
+                                    <div class="service-image-decoration">
+                                        <div class="service-decoration-circle circle-1"></div>
+                                        <div class="service-decoration-circle circle-2"></div>
+                                        <div class="service-decoration-circle circle-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="service-detail-content">
                     <!-- Анимированные элементы контента -->
                     <div class="content-elements">
                         <div class="content-element element-1">

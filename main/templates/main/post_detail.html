@@ -64,13 +64,23 @@
             <div class="col-lg-10">
                 {% if post.image %}
                 <div class="row justify-content-center mb-5"> 
-                    <div class="col-lg-8">
-                        <img 
-                            src="{{ post.image.url }}" 
-                            class="img-fluid rounded mx-auto d-block" 
-                            alt="{{ post.get_image_alt }}" 
-                            style="max-height: 400px; width: auto; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);"
-                        >
+                    <div class="col-lg-10">
+                        <div class="post-image-container">
+                            <img 
+                                src="{{ post.image.url }}" 
+                                class="post-detail-image" 
+                                alt="{{ post.get_image_alt }}"
+                            >
+                            <div class="post-image-overlay">
+                                <div class="post-image-category">{{ post.category.name|default:"Статья" }}</div>
+                                <div class="post-image-date">{{ post.published_date|date:"d M Y" }}</div>
+                            </div>
+                            <div class="post-image-decoration">
+                                <div class="decoration-circle circle-1"></div>
+                                <div class="decoration-circle circle-2"></div>
+                                <div class="decoration-circle circle-3"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {% endif %}

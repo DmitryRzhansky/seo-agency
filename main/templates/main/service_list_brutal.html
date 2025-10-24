@@ -123,12 +123,44 @@
     <div class="brutal-container">
         <h2 class="brutal-services-title">Все услуги</h2>
         
-        <div class="brutal-all-services-grid">
+        <!-- Переключатель стилей -->
+        <div class="brutal-layout-switcher">
+            <button class="brutal-layout-btn active" data-layout="stairs">Лестница</button>
+            <button class="brutal-layout-btn" data-layout="web">Паутина</button>
+            <button class="brutal-layout-btn" data-layout="spiral">Спираль</button>
+        </div>
+        
+        <!-- Лестничное расположение -->
+        <div class="brutal-all-services-grid" id="stairs-layout">
             {% for service in filtered_services %}
-            <div class="brutal-service-card">
+            <div class="brutal-stair-card">
                 <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
                 <h3 class="brutal-service-card-title">{{ service.title }}</h3>
                 <p class="brutal-service-card-description">{{ service.short_description|truncatewords:15 }}</p>
+                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Паутинное расположение -->
+        <div class="brutal-web-grid" id="web-layout" style="display: none;">
+            {% for service in filtered_services|slice:":5" %}
+            <div class="brutal-web-card">
+                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
+                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
+                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:10 }}</p>
+                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Спиральное расположение -->
+        <div class="brutal-spiral-grid" id="spiral-layout" style="display: none;">
+            {% for service in filtered_services|slice:":5" %}
+            <div class="brutal-spiral-card">
+                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
+                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
+                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:12 }}</p>
                 <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
             </div>
             {% endfor %}
@@ -149,3 +181,37 @@
 </section>
 
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const layoutBtns = document.querySelectorAll('.brutal-layout-btn');
+    const layouts = {
+        'stairs': document.getElementById('stairs-layout'),
+        'web': document.getElementById('web-layout'),
+        'spiral': document.getElementById('spiral-layout')
+    };
+
+    layoutBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const layout = this.dataset.layout;
+            
+            // Убираем активный класс со всех кнопок
+            layoutBtns.forEach(b => b.classList.remove('active'));
+            // Добавляем активный класс к текущей кнопке
+            this.classList.add('active');
+            
+            // Скрываем все макеты
+            Object.values(layouts).forEach(l => {
+                if (l) l.style.display = 'none';
+            });
+            
+            // Показываем выбранный макет
+            if (layouts[layout]) {
+                layouts[layout].style.display = 'flex';
+            }
+        });
+    });
+});
+</script>
+{% endblock extra_js %}

@@ -45,6 +45,22 @@
                 <h3 class="brutal-difference-title">ГАРАНТИЯ РЕЗУЛЬТАТА</h3>
                 <p class="brutal-difference-description">ВОЗВРАЩАЕМ ДЕНЬГИ ЕСЛИ НЕ ДОСТИГЛИ ЦЕЛЕЙ</p>
             </div>
+            <div class="brutal-difference-card difference-5">
+                <h3 class="brutal-difference-title">БРУТАЛЬНАЯ СКОРОСТЬ</h3>
+                <p class="brutal-difference-description">РАБОТАЕМ В 3 РАЗА БЫСТРЕЕ КОНКУРЕНТОВ</p>
+            </div>
+            <div class="brutal-difference-card difference-6">
+                <h3 class="brutal-difference-title">АВАНГАРДНЫЙ СТИЛЬ</h3>
+                <p class="brutal-difference-description">НЕ СКУЧНЫЕ ШАБЛОНЫ А УНИКАЛЬНЫЕ РЕШЕНИЯ</p>
+            </div>
+            <div class="brutal-difference-card difference-7">
+                <h3 class="brutal-difference-title">ХАОС И БЕЗУМИЕ</h3>
+                <p class="brutal-difference-description">ТВОРИМ ИСКУССТВО ИЗ SEO</p>
+            </div>
+            <div class="brutal-difference-card difference-8">
+                <h3 class="brutal-difference-title">ВЗРЫВНОЙ РОСТ</h3>
+                <p class="brutal-difference-description">ТРАФИК РАСТЕТ КАК ГРИБЫ ПОСЛЕ ДОЖДЯ</p>
+            </div>
         </div>
     </div>
 </section>
@@ -112,3 +128,39 @@
 </section>
 
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Анимация при скролле для кирпичей
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bricks = entry.target.querySelectorAll('.brutal-chaos-brick');
+                bricks.forEach((brick, index) => {
+                    setTimeout(() => {
+                        brick.style.animationPlayState = 'running';
+                    }, index * 200);
+                });
+            }
+        });
+    }, observerOptions);
+
+    const chaosSection = document.querySelector('.brutal-chaos-bricks');
+    if (chaosSection) {
+        observer.observe(chaosSection);
+    }
+
+    // Останавливаем анимацию по умолчанию
+    const bricks = document.querySelectorAll('.brutal-chaos-brick');
+    bricks.forEach(brick => {
+        brick.style.animationPlayState = 'paused';
+    });
+});
+</script>
+{% endblock extra_js %}

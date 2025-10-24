@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import SimplePage
 from seo.admin import SEOAdminMixin
-from main.admin_site import admin_site
+from django.contrib import admin
 
 
 class SimplePageAdmin(SEOAdminMixin, admin.ModelAdmin):
@@ -26,4 +26,4 @@ class SimplePageAdmin(SEOAdminMixin, admin.ModelAdmin):
     )
 
 # Регистрируем модель в кастомном админ-сайте
-admin_site.register(SimplePage, SimplePageAdmin)
+admin.site.register(SimplePage, SimplePageAdmin)

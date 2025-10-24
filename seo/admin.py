@@ -3,8 +3,7 @@ from django.utils.html import format_html
 from django.db import models
 from django.forms import Textarea
 from .models import SEOModel, Breadcrumb
-from main.admin_site import admin_site
-
+from django.contrib import admin
 
 class SEOAdminMixin:
     """
@@ -142,4 +141,4 @@ class BreadcrumbAdmin(admin.ModelAdmin):
         return form
 
 # Регистрируем модель в кастомном админ-сайте
-admin_site.register(Breadcrumb, BreadcrumbAdmin)
+admin.site.register(Breadcrumb, BreadcrumbAdmin)

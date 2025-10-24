@@ -5,9 +5,9 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/home/dmitriy/Музыка/seo-agency-cursor-2/seo-agency
-EnvironmentFile=/home/dmitriy/Музыка/seo-agency-cursor-2/seo-agency/.env
-ExecStart=/home/dmitriy/Музыка/seo-agency-cursor-2/seo-agency/venv/bin/gunicorn config.wsgi:application --bind 127.0.0.1:8000 --workers 3 --timeout 60 --access-logfile - --error-logfile -
+WorkingDirectory=/var/www/seo-agency
+EnvironmentFile=/var/www/seo-agency/.env
+ExecStart=/var/www/seo-agency/venv/bin/gunicorn config.wsgi:application --bind 127.0.0.1:8000 --workers 3 --timeout 60 --access-logfile - --error-logfile -
 Restart=always
 RestartSec=3
 

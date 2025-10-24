@@ -1648,9 +1648,9 @@ body {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
     backdrop-filter: blur(20px);
     border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 25px;
+    border-radius: 0;
     padding: 40px;
-    margin-bottom: 50px;
+    margin-bottom: 0;
     position: relative;
     overflow: hidden;
 }
@@ -1675,7 +1675,7 @@ body {
 .search-input-modern {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
+    border-radius: 0;
     padding: 15px 20px;
     color: #ffffff;
     font-size: 1.1rem;
@@ -1696,7 +1696,7 @@ body {
 .search-btn-modern {
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
     border: none;
-    border-radius: 15px;
+    border-radius: 0;
     padding: 15px 25px;
     color: #ffffff;
     font-weight: 600;

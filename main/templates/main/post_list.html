@@ -118,7 +118,11 @@
                     {% endif %}
                     <h3 class="blog-card-title">{{ post.title }}</h3>
                     <p class="blog-card-excerpt">
-                        {{ post.excerpt|default:post.content|truncatewords:25 }}
+                        {% if post.excerpt %}
+                            {{ post.excerpt }}
+                        {% else %}
+                            {{ post.content|striptags|truncatewords:25 }}
+                        {% endif %}
                     </p>
                     
                     <div class="blog-card-meta">

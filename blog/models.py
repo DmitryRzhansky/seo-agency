@@ -72,6 +72,7 @@ class Post(SEOModel):
     slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")
     # Используем CKEditor5Field для форматированного контента блога
     content = CKEditor5Field(verbose_name="Содержимое поста", config_name='extends')
+    excerpt = models.TextField(max_length=500, blank=True, verbose_name="Краткое описание", help_text="Краткое описание статьи для карточек и превью")
     image = models.ImageField(upload_to='blog_images/', blank=True, null=True, verbose_name="Изображение (превью)")
     image_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст изображения", help_text="Описание изображения для SEO и доступности")
     published_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")

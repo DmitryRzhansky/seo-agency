@@ -86,6 +86,7 @@ body {
 .gradient-text-animated {
     background: linear-gradient(135deg, #6366f1, #ec4899, #14b8a6, #6366f1);
     background-size: 300% 300%;
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -107,6 +108,7 @@ body {
 
 .text-gradient {
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700;
@@ -528,6 +530,7 @@ body {
 .icon-gradient-large {
     font-size: 3rem;
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -604,6 +607,7 @@ body {
 .icon-gradient-huge {
     font-size: 4rem;
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -819,6 +823,7 @@ body {
     font-size: 1.5rem;
     font-weight: 900;
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
@@ -1152,6 +1157,7 @@ body {
     font-size: 1.8rem;
     font-weight: 900;
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 15px;
@@ -1189,6 +1195,7 @@ body {
     font-size: 2rem;
     font-weight: 900;
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 5px;
@@ -1542,6 +1549,7 @@ body {
     font-size: 3.5rem;
     font-weight: 900;
     background: linear-gradient(135deg, #ffffff, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
@@ -1558,6 +1566,7 @@ body {
 .services-hero-icon {
     font-size: 8rem;
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     opacity: 0.3;
@@ -1800,6 +1809,7 @@ body {
     font-size: 1.4rem;
     font-weight: 800;
     background: linear-gradient(135deg, #ffffff, #6366f1);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 15px;
@@ -1809,6 +1819,7 @@ body {
 
 .service-card-modern:hover .service-card-title {
     background: linear-gradient(135deg, #6366f1, #ec4899);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -2081,6 +2092,7 @@ body {
     font-size: 3rem;
     font-weight: 900;
     background: linear-gradient(135deg, #ffffff, #6366f1);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
@@ -2109,6 +2121,7 @@ body {
     font-size: 2.2rem;
     font-weight: 800;
     background: linear-gradient(135deg, #ffffff, #6366f1);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     position: relative;
@@ -2133,6 +2146,7 @@ body {
     font-size: 1.8rem;
     font-weight: 700;
     background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -2314,6 +2328,7 @@ body {
     text-align: center;
     margin-bottom: 50px;
     background: linear-gradient(135deg, #ffffff, #6366f1);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

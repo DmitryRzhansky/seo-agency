@@ -200,7 +200,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .brutal-minimal-card.main {
@@ -217,13 +217,14 @@
 
 .brutal-minimal-card.main .brutal-minimal-title {
     font-size: 1.8rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     line-height: 1.1;
 }
 
 .brutal-minimal-card.main .brutal-minimal-description {
     font-size: 1.1rem;
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 .brutal-minimal-title {
@@ -245,18 +246,9 @@
     box-shadow: 10px 10px 0px var(--brutal-black);
 }
 
-/* Метка для главного блока */
+/* Убираем метку для главного блока */
 .brutal-minimal-card.main::before {
-    content: "ГЛАВНОЕ";
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    padding: 5px 10px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    border: 2px solid var(--brutal-black);
+    display: none;
 }
 
 .brutal-minimal-card .brutal-service-card-link {

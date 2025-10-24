@@ -43,7 +43,7 @@
                 <div class="brutal-post-content-block main">
                     <div class="brutal-post-block-number">01</div>
                     <h2>О статье</h2>
-                    <p>{{ post.excerpt|default:post.content|striptags|truncatewords:30 }}</p>
+                    <p>{{ post.excerpt|default:"Краткое описание статьи не указано." }}</p>
                 </div>
                 
                 <div class="brutal-post-content-block">

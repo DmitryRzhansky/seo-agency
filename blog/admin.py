@@ -68,7 +68,7 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
             'description': 'Основная информация о статье'
         }),
         ('📄 Содержимое', {
-            'fields': ('content', 'image', 'image_alt'),
+            'fields': ('excerpt', 'content', 'image', 'image_alt'),
             'description': 'Содержимое статьи и изображения'
         }),
         ('🍞 Навигация', {

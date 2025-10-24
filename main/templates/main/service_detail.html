@@ -39,9 +39,28 @@
         <section class="brutal-service-detail-content">
             <div class="brutal-container">
                 <div class="brutal-service-detail-wrapper">
-                    <!-- Текстовый контент -->
+                    <!-- Первый текстовый блок -->
                     <div class="brutal-service-text-content">
-                        {{ service.content|safe }}
+                        <h2>Описание услуги</h2>
+                        <p>{{ service.short_description }}</p>
+                        {% if service.content %}
+                            <div class="brutal-content-preview">
+                                {{ service.content|truncatewords:50|safe }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Второй текстовый блок -->
+                    <div class="brutal-service-text-content second">
+                        <h3>Что включает услуга</h3>
+                        <ul>
+                            <li>Комплексный анализ вашего проекта</li>
+                            <li>Разработка индивидуальной стратегии</li>
+                            <li>Техническая оптимизация сайта</li>
+                            <li>Создание качественного контента</li>
+                            <li>Построение ссылочной массы</li>
+                            <li>Еженедельная отчетность о результатах</li>
+                        </ul>
                     </div>
                     
                     <!-- Изображение - авангардное расположение -->

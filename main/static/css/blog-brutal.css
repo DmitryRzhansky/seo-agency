@@ -40,12 +40,14 @@
 }
 
 .brutal-blog-hero-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--brutal-black);
     margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 0px var(--brutal-black);
+    line-height: 1.2;
 }
 
 .brutal-blog-hero-subtitle {
@@ -146,10 +148,12 @@
     color: var(--brutal-green);
     font-weight: 700;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: 2px solid var(--brutal-green);
     transition: all 0.3s ease;
     text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .brutal-blog-category-card.active .brutal-blog-category-link {
@@ -161,6 +165,8 @@
     background: var(--brutal-green);
     color: var(--brutal-white);
     transform: translateX(5px);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    border-color: var(--brutal-black);
 }
 
 /* Сетка статей */

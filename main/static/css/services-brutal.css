@@ -179,6 +179,75 @@
     50% { border-color: var(--brutal-green); }
 }
 
+/* Минималистичные блоки */
+.brutal-minimal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.brutal-minimal-card {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    padding: 30px;
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.brutal-minimal-card.main {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    grid-column: span 2;
+}
+
+.brutal-minimal-card.main .brutal-minimal-title,
+.brutal-minimal-card.main .brutal-minimal-description {
+    color: var(--brutal-white);
+}
+
+.brutal-minimal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.brutal-minimal-description {
+    font-size: 1rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.4;
+}
+
+.brutal-minimal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0px var(--brutal-black);
+}
+
+.brutal-minimal-card .brutal-service-card-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.brutal-minimal-card .brutal-service-card-link:hover {
+    color: var(--brutal-black);
+    transform: translateX(5px);
+}
+
+.brutal-minimal-card.main .brutal-service-card-link {
+    color: var(--brutal-white);
+}
+
+.brutal-minimal-card.main .brutal-service-card-link:hover {
+    color: var(--brutal-black);
+}
+
 /* Стилизация текста "кирпичик за кирпичиком" */
 .brick-text {
     display: inline-block;
@@ -1202,12 +1271,11 @@
     animation-delay: 0.6s;
 }
 
-/* Хаотичные кирпичи - категории услуг */
+/* Все услуги - минималистичные блоки */
 .brutal-chaos-bricks {
     background: var(--brutal-white);
     padding: 80px 0;
     position: relative;
-    overflow: hidden;
 }
 
 .brutal-chaos-grid {

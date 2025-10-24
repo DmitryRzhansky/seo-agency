@@ -28,62 +28,22 @@
 <section class="brutal-differences">
     <div class="brutal-container">
         <h2 class="brutal-services-title">Чем мы отличаемся</h2>
-        <div class="brutal-differences-grid">
-            <div class="brutal-difference-card difference-1">
-                <h3 class="brutal-difference-title">БЕЗУМНЫЙ РЕЗУЛЬТАТ</h3>
-                <p class="brutal-difference-description">ВЗРЫВАЕМ ТОПЫ ЗА 2 НЕДЕЛИ</p>
+        <div class="brutal-minimal-grid">
+            <div class="brutal-minimal-card main">
+                <h3 class="brutal-minimal-title">Быстрый результат</h3>
+                <p class="brutal-minimal-description">Первые результаты уже через 2 недели. Взрываем топы без воды.</p>
             </div>
-            <div class="brutal-difference-card difference-2">
-                <h3 class="brutal-difference-title">ХАОТИЧНЫЙ ПОДХОД</h3>
-                <p class="brutal-difference-description">РАБОТАЕМ ТОЛЬКО С ЦЕЛЕВОЙ АУДИТОРИЕЙ</p>
+            <div class="brutal-minimal-card">
+                <h3 class="brutal-minimal-title">Точный подход</h3>
+                <p class="brutal-minimal-description">Работаем только с вашей целевой аудиторией. Никакого спама.</p>
             </div>
-            <div class="brutal-difference-card difference-3">
-                <h3 class="brutal-difference-title">ПРОЗРАЧНАЯ ОТЧЕТНОСТЬ</h3>
-                <p class="brutal-difference-description">ЕЖЕНЕДЕЛЬНЫЕ ОТЧЕТЫ О РЕЗУЛЬТАТАХ</p>
+            <div class="brutal-minimal-card">
+                <h3 class="brutal-minimal-title">Прозрачная отчетность</h3>
+                <p class="brutal-minimal-description">Еженедельные отчеты о результатах. Видим каждый шаг.</p>
             </div>
-            <div class="brutal-difference-card difference-4">
-                <h3 class="brutal-difference-title">ГАРАНТИЯ РЕЗУЛЬТАТА</h3>
-                <p class="brutal-difference-description">ВОЗВРАЩАЕМ ДЕНЬГИ ЕСЛИ НЕ ДОСТИГЛИ ЦЕЛЕЙ</p>
-            </div>
-            <div class="brutal-difference-card difference-5">
-                <h3 class="brutal-difference-title">БРУТАЛЬНАЯ СКОРОСТЬ</h3>
-                <p class="brutal-difference-description">РАБОТАЕМ В 3 РАЗА БЫСТРЕЕ КОНКУРЕНТОВ</p>
-            </div>
-            <div class="brutal-difference-card difference-6">
-                <h3 class="brutal-difference-title">АВАНГАРДНЫЙ СТИЛЬ</h3>
-                <p class="brutal-difference-description">НЕ СКУЧНЫЕ ШАБЛОНЫ А УНИКАЛЬНЫЕ РЕШЕНИЯ</p>
-            </div>
-            <div class="brutal-difference-card difference-7">
-                <h3 class="brutal-difference-title">ХАОС И БЕЗУМИЕ</h3>
-                <p class="brutal-difference-description">ТВОРИМ ИСКУССТВО ИЗ SEO</p>
-            </div>
-            <div class="brutal-difference-card difference-8">
-                <h3 class="brutal-difference-title">ВЗРЫВНОЙ РОСТ</h3>
-                <p class="brutal-difference-description">ТРАФИК РАСТЕТ КАК ГРИБЫ ПОСЛЕ ДОЖДЯ</p>
-            </div>
-            <div class="brutal-difference-card difference-9">
-                <h3 class="brutal-difference-title">БЕЗУМНАЯ КРЕАТИВНОСТЬ</h3>
-                <p class="brutal-difference-description">КАЖДЫЙ ПРОЕКТ КАК ПРОИЗВЕДЕНИЕ ИСКУССТВА</p>
-            </div>
-            <div class="brutal-difference-card difference-10">
-                <h3 class="brutal-difference-title">ХАОТИЧНАЯ ЭФФЕКТИВНОСТЬ</h3>
-                <p class="brutal-difference-description">РАБОТАЕМ В 5 РАЗ БЫСТРЕЕ ОБЫЧНЫХ АГЕНТСТВ</p>
-            </div>
-            <div class="brutal-difference-card difference-11">
-                <h3 class="brutal-difference-title">БРУТАЛЬНАЯ ПРАВДА</h3>
-                <p class="brutal-difference-description">ГОВОРИМ ПРАВДУ А НЕ СЛАДКИЕ ОБЕЩАНИЯ</p>
-            </div>
-            <div class="brutal-difference-card difference-12">
-                <h3 class="brutal-difference-title">АВАНГАРДНЫЙ ПОДХОД</h3>
-                <p class="brutal-difference-description">ИСПОЛЬЗУЕМ ТОЛЬКО ПЕРЕДОВЫЕ ТЕХНОЛОГИИ</p>
-            </div>
-            <div class="brutal-difference-card difference-13">
-                <h3 class="brutal-difference-title">ВЗРЫВНОЙ РЕЗУЛЬТАТ</h3>
-                <p class="brutal-difference-description">РЕЗУЛЬТАТЫ ПРЕВОСХОДЯТ ВСЕ ОЖИДАНИЯ</p>
-            </div>
-            <div class="brutal-difference-card difference-14">
-                <h3 class="brutal-difference-title">ХАОС И ПОРЯДОК</h3>
-                <p class="brutal-difference-description">СОЗДАЕМ ХАОС ДЛЯ КОНКУРЕНТОВ ПОРЯДОК ДЛЯ ВАС</p>
+            <div class="brutal-minimal-card">
+                <h3 class="brutal-minimal-title">Гарантия результата</h3>
+                <p class="brutal-minimal-description">Возвращаем деньги, если не достигли целей. Без вопросов.</p>
             </div>
         </div>
     </div>
@@ -124,15 +84,15 @@
 </section>
 
 <!-- Полный список услуг -->
-<!-- Хаотичные кирпичи - категории услуг -->
+<!-- Все услуги - минималистичные блоки -->
 <section class="brutal-chaos-bricks">
     <div class="brutal-container">
         <h2 class="brutal-services-title">Все услуги</h2>
-        <div class="brutal-chaos-grid">
+        <div class="brutal-minimal-grid">
             {% for category in categories %}
-            <div class="brutal-chaos-brick chaos-brick-{{ forloop.counter }}">
-                <h3 class="brutal-service-card-title">{{ category.title }}</h3>
-                <p class="brutal-service-card-description">{{ category.description|truncatewords:10 }}</p>
+            <div class="brutal-minimal-card">
+                <h3 class="brutal-minimal-title">{{ category.title }}</h3>
+                <p class="brutal-minimal-description">{{ category.description|truncatewords:15 }}</p>
                 <a href="{% url 'services:service_category' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
             </div>
             {% endfor %}
@@ -153,38 +113,4 @@
 
 {% endblock content %}
 
-{% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Анимация при скролле для кирпичей
-    const observerOptions = {
-        threshold: 0.3,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const bricks = entry.target.querySelectorAll('.brutal-chaos-brick');
-                bricks.forEach((brick, index) => {
-                    setTimeout(() => {
-                        brick.style.animationPlayState = 'running';
-                    }, index * 200);
-                });
-            }
-        });
-    }, observerOptions);
-
-    const chaosSection = document.querySelector('.brutal-chaos-bricks');
-    if (chaosSection) {
-        observer.observe(chaosSection);
-    }
-
-    // Останавливаем анимацию по умолчанию
-    const bricks = document.querySelectorAll('.brutal-chaos-brick');
-    bricks.forEach(brick => {
-        brick.style.animationPlayState = 'paused';
-    });
-});
-</script>
 {% endblock extra_js %}

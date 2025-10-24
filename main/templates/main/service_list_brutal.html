@@ -24,19 +24,31 @@
     </div>
 </section>
 
-<!-- Рандомные блоки услуг -->
-<section class="brutal-random-services">
+<!-- Чем мы отличаемся -->
+<section class="brutal-differences">
     <div class="brutal-container">
         <h2 class="brutal-services-title">Чем мы отличаемся</h2>
-        <div class="brutal-random-grid">
-            {% for service in filtered_services|slice:":5" %}
-            <div class="brutal-random-card random-card-{{ forloop.counter }}">
-                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
-                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
-                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:15 }}</p>
-                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
+        <div class="brutal-differences-grid">
+            <div class="brutal-difference-card difference-1">
+                <div class="brutal-difference-icon">⚡</div>
+                <h3 class="brutal-difference-title">Быстрый результат</h3>
+                <p class="brutal-difference-description">Первые результаты уже через 2 недели</p>
             </div>
-            {% endfor %}
+            <div class="brutal-difference-card difference-2">
+                <div class="brutal-difference-icon">🎯</div>
+                <h3 class="brutal-difference-title">Точный подход</h3>
+                <p class="brutal-difference-description">Работаем только с вашей целевой аудиторией</p>
+            </div>
+            <div class="brutal-difference-card difference-3">
+                <div class="brutal-difference-icon">📊</div>
+                <h3 class="brutal-difference-title">Прозрачная отчетность</h3>
+                <p class="brutal-difference-description">Еженедельные отчеты о результатах</p>
+            </div>
+            <div class="brutal-difference-card difference-4">
+                <div class="brutal-difference-icon">🛡️</div>
+                <h3 class="brutal-difference-title">Гарантия результата</h3>
+                <p class="brutal-difference-description">Возвращаем деньги, если не достигли целей</p>
+            </div>
         </div>
     </div>
 </section>
@@ -44,7 +56,7 @@
 <!-- Секция услуг - брутальная сетка -->
 <section class="brutal-services">
     <div class="brutal-container">
-        <h2 class="brutal-services-title">Чем мы отличаемся</h2>
+        <h2 class="brutal-services-title">Все услуги</h2>
         
         <div class="brutal-services-grid">
             <!-- Главная карточка (зеленая, большая) - первая услуга -->

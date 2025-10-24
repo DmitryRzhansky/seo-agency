@@ -33,7 +33,10 @@ def service_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    return render(request, 'main/service_list.html', {
+    # Выбираем шаблон в зависимости от параметра
+    template_name = 'main/service_list_brutal.html'  # Используем брутальный дизайн
+    
+    return render(request, template_name, {
         'title': 'Услуги',
         'categories': categories,
         'services': None,  # не используем общий список напрямую в шаблоне

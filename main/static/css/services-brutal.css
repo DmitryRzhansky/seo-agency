@@ -1,0 +1,520 @@
+/* Брутальный авангардный дизайн для страницы услуг */
+
+/* Основные переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-gray: #f5f5f5;
+    --brutal-green: #00ff00;
+    --brutal-dark-gray: #333333;
+    --brutal-border: 4px solid #000000;
+    --brutal-shadow: 8px 8px 0px #000000;
+}
+
+/* Сброс стилей */
+* {
+    box-sizing: border-box;
+}
+
+/* Основной контейнер */
+.brutal-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background: var(--brutal-white);
+}
+
+/* Hero секция - брутальная */
+.brutal-hero {
+    background: var(--brutal-white);
+    padding: 80px 0;
+    border-bottom: var(--brutal-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.brutal-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 49%, var(--brutal-black) 50%, transparent 51%);
+    background-size: 20px 20px;
+    opacity: 0.05;
+    z-index: 1;
+}
+
+.brutal-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.brutal-hero-title {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin: 0;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    position: relative;
+}
+
+.brutal-hero-title::after {
+    content: '[001]';
+    position: absolute;
+    top: -20px;
+    left: -60px;
+    font-size: 1.5rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+    background: var(--brutal-white);
+    padding: 5px 10px;
+    border: var(--brutal-border);
+    transform: rotate(-5deg);
+}
+
+.brutal-hero-subtitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brutal-dark-gray);
+    margin-top: 30px;
+    line-height: 1.2;
+    max-width: 600px;
+}
+
+/* Секция услуг - брутальная сетка */
+.brutal-services {
+    background: var(--brutal-white);
+    padding: 80px 0;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-services-title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.brutal-services-title::before {
+    content: '[002]';
+    position: absolute;
+    top: -15px;
+    left: -50px;
+    font-size: 1.2rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+    background: var(--brutal-white);
+    padding: 3px 8px;
+    border: var(--brutal-border);
+    transform: rotate(3deg);
+}
+
+/* Брутальная сетка услуг */
+.brutal-services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* Главная карточка (большая, зеленая) */
+.brutal-main-card {
+    background: var(--brutal-green);
+    border: var(--brutal-border);
+    padding: 60px;
+    position: relative;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: var(--brutal-shadow);
+    transform: rotate(-1deg);
+    transition: all 0.3s ease;
+}
+
+.brutal-main-card:hover {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 12px 12px 0px var(--brutal-black);
+}
+
+.brutal-main-card::before {
+    content: '[ГЛАВНОЕ]';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 2px solid var(--brutal-black);
+    transform: rotate(5deg);
+}
+
+.brutal-main-card-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.brutal-main-card-description {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--brutal-black);
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.brutal-main-card-link {
+    display: inline-block;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: 3px solid var(--brutal-black);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-main-card-link:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    transform: translateY(-2px);
+}
+
+/* Обычные карточки услуг */
+.brutal-service-card {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 40px;
+    position: relative;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brutal-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 0px var(--brutal-black);
+}
+
+.brutal-service-card-number {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    background: var(--brutal-white);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--brutal-black);
+}
+
+.brutal-service-card-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+.brutal-service-card-description {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--brutal-dark-gray);
+    line-height: 1.4;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+
+.brutal-service-card-link {
+    display: inline-block;
+    color: var(--brutal-black);
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.brutal-service-card-link:hover {
+    color: var(--brutal-green);
+    text-decoration: none;
+}
+
+/* Секция цен - брутальная */
+.brutal-pricing {
+    background: var(--brutal-white);
+    padding: 80px 0;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-pricing-title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.brutal-pricing-title::before {
+    content: '[003]';
+    position: absolute;
+    top: -15px;
+    left: -50px;
+    font-size: 1.2rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+    background: var(--brutal-white);
+    padding: 3px 8px;
+    border: var(--brutal-border);
+    transform: rotate(3deg);
+}
+
+.brutal-pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.brutal-pricing-card {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 50px 40px;
+    position: relative;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.brutal-pricing-card.popular {
+    background: var(--brutal-green);
+    transform: scale(1.05);
+}
+
+.brutal-pricing-card.popular::before {
+    content: '[ПОПУЛЯРНО]';
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 2px solid var(--brutal-black);
+    transform: rotate(-5deg);
+}
+
+.brutal-pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 0px var(--brutal-black);
+}
+
+.brutal-pricing-card.popular:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.brutal-pricing-card-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+.brutal-pricing-card-price {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.brutal-pricing-card-description {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--brutal-dark-gray);
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.brutal-pricing-card-link {
+    display: inline-block;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    border: 3px solid var(--brutal-black);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-pricing-card-link:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+}
+
+/* CTA секция */
+.brutal-cta {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.brutal-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 49%, var(--brutal-green) 50%, transparent 51%);
+    background-size: 30px 30px;
+    opacity: 0.1;
+    z-index: 1;
+}
+
+.brutal-cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.brutal-cta-title {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+.brutal-cta-description {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brutal-cta-button {
+    display: inline-block;
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    padding: 20px 40px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.2rem;
+    border: 4px solid var(--brutal-green);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 8px 8px 0px var(--brutal-white);
+}
+
+.brutal-cta-button:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    transform: translateY(-2px);
+    box-shadow: 12px 12px 0px var(--brutal-white);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .brutal-services-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .brutal-main-card {
+        grid-row: span 1;
+    }
+    
+    .brutal-pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .brutal-hero-title {
+        font-size: 4rem;
+    }
+    
+    .brutal-hero-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .brutal-services-title,
+    .brutal-pricing-title,
+    .brutal-cta-title {
+        font-size: 3rem;
+    }
+    
+    .brutal-main-card,
+    .brutal-service-card,
+    .brutal-pricing-card {
+        padding: 30px 20px;
+    }
+    
+    .brutal-main-card-title {
+        font-size: 2.5rem;
+    }
+    
+    .brutal-service-card-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .brutal-hero-title {
+        font-size: 3rem;
+    }
+    
+    .brutal-hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .brutal-services-title,
+    .brutal-pricing-title,
+    .brutal-cta-title {
+        font-size: 2.5rem;
+    }
+    
+    .brutal-main-card,
+    .brutal-service-card,
+    .brutal-pricing-card {
+        padding: 20px 15px;
+    }
+}

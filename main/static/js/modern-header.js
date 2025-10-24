@@ -137,4 +137,25 @@ document.addEventListener('DOMContentLoaded', function() {
         // Инициализируем индикаторы
         setTimeout(updateScrollIndicators, 100);
     }
+    
+    // Кнопка "наверх"
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        // Показать/скрыть кнопку при скролле
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        // Плавная прокрутка вверх при клике
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });

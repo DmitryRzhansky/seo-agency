@@ -202,79 +202,136 @@
             {% endblock content %}
     </main>
 
-    <footer class="footer-bg pt-5 pb-4">
+    <footer class="footer-modern">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5 class="fw-bold">Виталий Исаков | SEO-эксперт</h5>
-                    <p class="small">Комплексное продвижение бизнеса в интернете. Помогаем компаниям расти и привлекать больше клиентов с 2015 года.</p>
-                     <div class="d-flex text-center">
-                        <div class="me-4">
-                            <h4 class="fw-bold mb-0">150+</h4>
-                            <p class="small text-white-50">клиентов</p>
-                        </div>
-                        <div class="me-4">
-                            <h4 class="fw-bold mb-0">10+</h4>
-                            <p class="small text-white-50">лет на рынке</p>
-                        </div>
-                        <div>
-                            <h4 class="fw-bold mb-0">100%</h4>
-                            <p class="small text-white-50">рекомендуют</p>
+                <!-- Бренд и статистика -->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="footer-brand">
+                        <h3>Isakov Agency</h3>
+                        <p>Комплексное продвижение бизнеса в интернете. Помогаем компаниям расти и привлекать больше клиентов с 2015 года.</p>
+                        
+                        <div class="footer-stats">
+                            <div class="footer-stat">
+                                <div class="footer-stat-number">150+</div>
+                                <div class="footer-stat-label">клиентов</div>
+                            </div>
+                            <div class="footer-stat">
+                                <div class="footer-stat-number">10+</div>
+                                <div class="footer-stat-label">лет опыта</div>
+                            </div>
+                            <div class="footer-stat">
+                                <div class="footer-stat-number">100%</div>
+                                <div class="footer-stat-label">результат</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Услуги -->
                 <div class="col-lg-2 col-md-4 col-6 mb-4 mb-lg-0">
-                    <h5 class="fw-bold">Услуги</h5>
-                    <ul class="list-unstyled">
-                        {% comment %} Динамический список категорий услуг для футера {% endcomment %}
-                        {% for category in service_categories_menu %}
-                            <li><a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a></li>
-                        {% endfor %}
-                    </ul>
+                    <div class="footer-section">
+                        <h5>Услуги</h5>
+                        <ul class="footer-links">
+                            {% for category in service_categories_menu %}
+                            <li>
+                                <a href="{% url 'services:service_category' slug=category.slug %}">
+                                    <i class="fas fa-arrow-right"></i>{{ category.title }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
+                
+                <!-- Контакты -->
                 <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
-                    <h5 class="fw-bold">Связаться с нами</h5>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><i class="fas fa-phone me-2"></i>+7 (963) 641-59-44</li>
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i>isakov@isakov.work</li>
-                        <li class="mb-2"><i class="fas fa-clock me-2"></i>Пн-Пт: 10:00 - 19:00</li>
-                    </ul>
+                    <div class="footer-section">
+                        <h5>Контакты</h5>
+                        <div class="footer-contact">
+                            <div class="footer-contact-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+79636415944">+7 (963) 641-59-44</a>
+                            </div>
+                            <div class="footer-contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:isakov@isakov.work">isakov@isakov.work</a>
+                            </div>
+                            <div class="footer-contact-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Пн-Пт: 10:00 - 19:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="footer-social">
+                            <a href="https://vk.com/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="VK">
+                                <i class="fab fa-vk"></i>
+                            </a>
+                            <a href="https://t.me/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="Telegram">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                 <div class="col-lg-3 col-md-4 col-12 mb-4 mb-lg-0">
-                    <h5 class="fw-bold">Полезные ресурсы</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'blog:post_list' %}">Блог</a></li>
-                        <li><a href="{% url 'main:contacts' %}">Контакты</a></li>
-                        {% for p in footer_pages %}
-                            <li><a href="{% url 'pages:detail' slug=p.slug %}">{{ p.title }}</a></li>
-                        {% endfor %}
-                    </ul>
+                
+                <!-- Полезные ресурсы -->
+                <div class="col-lg-3 col-md-4 col-12 mb-4 mb-lg-0">
+                    <div class="footer-section">
+                        <h5>Ресурсы</h5>
+                        <ul class="footer-links">
+                            <li>
+                                <a href="{% url 'blog:post_list' %}">
+                                    <i class="fas fa-arrow-right"></i>Блог
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'main:portfolio_list' %}">
+                                    <i class="fas fa-arrow-right"></i>Портфолио
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'main:contacts' %}">
+                                    <i class="fas fa-arrow-right"></i>Контакты
+                                </a>
+                            </li>
+                            {% for p in footer_pages %}
+                            <li>
+                                <a href="{% url 'pages:detail' slug=p.slug %}">
+                                    <i class="fas fa-arrow-right"></i>{{ p.title }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
-            <div class="row">
-                <div class="col-md-8 small">
-                    <p>© 2015-{% now "Y" %} Isakov Agency. Все права защищены.</p>
-                </div>
-                <div class="col-md-4 text-md-end small">
-                     <a href="{% url 'main:privacy_policy' %}" class="me-3">Политика конфиденциальности</a>
-                     <a href="{% url 'main:sitemap' %}">Карта сайта</a>
+            
+            <!-- Нижняя часть футера -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="footer-copyright">
+                        © 2015-{% now "Y" %} Isakov Agency. Все права защищены.
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="{% url 'main:privacy_policy' %}">Политика конфиденциальности</a>
+                        <a href="{% url 'main:sitemap' %}">Карта сайта</a>
+                    </div>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Кнопка прокрутки вверх -->
-    <button id="back-to-top" class="back-to-top" aria-label="Прокрутить вверх">
+    <button id="back-to-top" class="back-to-top-modern" aria-label="Прокрутить вверх">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Плавающие соц-иконки справа -->
-    <div class="social-float" aria-label="Социальные сети">
-        <a class="social-float__btn vk" href="https://vk.com/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="VK">
+    <!-- Плавающие соц-иконки -->
+    <div class="social-float-modern" aria-label="Социальные сети">
+        <a class="vk" href="https://vk.com/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="VK">
             <i class="fab fa-vk"></i>
         </a>
-        <a class="social-float__btn tg" href="https://t.me/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="Telegram">
+        <a class="tg" href="https://t.me/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="Telegram">
             <i class="fab fa-telegram"></i>
         </a>
     </div>

@@ -29,21 +29,25 @@
     <div class="brutal-container">
         <h2 class="brutal-services-title">Чем мы отличаемся</h2>
         <div class="brutal-minimal-grid">
-            <div class="brutal-minimal-card main">
-                <h3 class="brutal-minimal-title">Быстрый результат</h3>
-                <p class="brutal-minimal-description">Первые результаты уже через 2 недели. Взрываем топы без воды.</p>
+            <div class="brutal-minimal-card main" data-number="">
+                <h3 class="brutal-minimal-title">Находим, где у вас косяки</h3>
+                <p class="brutal-minimal-description">Технический аудит, семантика, анализ конкурентов. За 48 часов.</p>
             </div>
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">Точный подход</h3>
-                <p class="brutal-minimal-description">Работаем только с вашей целевой аудиторией. Никакого спама.</p>
+            <div class="brutal-minimal-card" data-number="02">
+                <h3 class="brutal-minimal-title">Чиним всё, что сломано</h3>
+                <p class="brutal-minimal-description">Скорость, индексация, структура, мета-теги, разметка. Без воды.</p>
             </div>
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">Прозрачная отчетность</h3>
-                <p class="brutal-minimal-description">Еженедельные отчеты о результатах. Видим каждый шаг.</p>
+            <div class="brutal-minimal-card" data-number="03">
+                <h3 class="brutal-minimal-title">Пишем нормальные тексты</h3>
+                <p class="brutal-minimal-description">Не шлак с ключами через слово, а полезный контент для людей.</p>
             </div>
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">Гарантия результата</h3>
-                <p class="brutal-minimal-description">Возвращаем деньги, если не достигли целей. Без вопросов.</p>
+            <div class="brutal-minimal-card" data-number="04">
+                <h3 class="brutal-minimal-title">Получаем ссылки</h3>
+                <p class="brutal-minimal-description">Белые методы: PR, гостевые посты. Никаких бирж и помоек.</p>
+            </div>
+            <div class="brutal-minimal-card" data-number="05">
+                <h3 class="brutal-minimal-title">Показываем результат</h3>
+                <p class="brutal-minimal-description">Отчёты с реальными цифрами каждый месяц.</p>
             </div>
         </div>
     </div>
@@ -88,11 +92,11 @@
 <section class="brutal-chaos-bricks">
     <div class="brutal-container">
         <h2 class="brutal-services-title">Все услуги</h2>
-        <div class="brutal-minimal-grid">
+        <div class="brutal-services-grid">
             {% for category in categories %}
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">{{ category.title }}</h3>
-                <p class="brutal-minimal-description">{{ category.description|truncatewords:15 }}</p>
+            <div class="brutal-service-card">
+                <h3 class="brutal-service-card-title">{{ category.title }}</h3>
+                <p class="brutal-service-card-description">{{ category.description|truncatewords:15 }}</p>
                 <a href="{% url 'services:service_category' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
             </div>
             {% endfor %}

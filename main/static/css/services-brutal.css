@@ -179,27 +179,35 @@
     50% { border-color: var(--brutal-green); }
 }
 
-/* Минималистичные блоки */
+/* Минималистичные блоки - нестандартная сетка */
 .brutal-minimal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
     margin-top: 40px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .brutal-minimal-card {
     background: var(--brutal-white);
-    border: 2px solid var(--brutal-black);
-    padding: 30px;
-    box-shadow: 4px 4px 0px var(--brutal-black);
+    border: 3px solid var(--brutal-black);
+    padding: 25px;
+    box-shadow: 6px 6px 0px var(--brutal-black);
     transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .brutal-minimal-card.main {
     background: var(--brutal-green);
     color: var(--brutal-white);
-    grid-column: span 2;
+    grid-row: span 2;
+    padding: 35px;
 }
 
 .brutal-minimal-card.main .brutal-minimal-title,
@@ -207,23 +215,65 @@
     color: var(--brutal-white);
 }
 
+.brutal-minimal-card.main .brutal-minimal-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.brutal-minimal-card.main .brutal-minimal-description {
+    font-size: 1.1rem;
+}
+
 .brutal-minimal-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--brutal-black);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     line-height: 1.2;
 }
 
 .brutal-minimal-description {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--brutal-dark-gray);
     line-height: 1.4;
 }
 
 .brutal-minimal-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 8px 8px 0px var(--brutal-black);
+    transform: translateY(-3px);
+    box-shadow: 10px 10px 0px var(--brutal-black);
+}
+
+/* Нумерация для блоков */
+.brutal-minimal-card::before {
+    content: attr(data-number);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: 2px solid var(--brutal-black);
+}
+
+.brutal-minimal-card.main::before {
+    content: "[ГЛАВНОЕ]";
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    width: auto;
+    height: auto;
+    padding: 5px 10px;
+    border-radius: 0;
+    top: 15px;
+    right: 15px;
+    left: auto;
+    font-size: 0.8rem;
 }
 
 .brutal-minimal-card .brutal-service-card-link {
@@ -1276,6 +1326,49 @@
     background: var(--brutal-white);
     padding: 80px 0;
     position: relative;
+}
+
+/* Сетка для услуг - нестандартное расположение */
+.brutal-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brutal-service-card {
+    background: var(--brutal-white);
+    border: 3px solid var(--brutal-black);
+    padding: 25px;
+    box-shadow: 6px 6px 0px var(--brutal-black);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brutal-service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 10px 10px 0px var(--brutal-black);
+}
+
+.brutal-service-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+.brutal-service-card-description {
+    font-size: 0.95rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.4;
+    margin-bottom: 15px;
 }
 
 .brutal-chaos-grid {

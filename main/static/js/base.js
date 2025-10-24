@@ -108,6 +108,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Прокрутка контента услуг колесиком мыши
+    const serviceScrollableElements = document.querySelectorAll('.brutal-content-text, .brutal-content-preview, .brutal-content-full');
+    serviceScrollableElements.forEach(function(element) {
+        element.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            this.scrollTop += e.deltaY;
+        });
+        
+        // Делаем контейнер фокусируемым для клавиатуры
+        element.setAttribute('tabindex', '0');
+        
+        // Прокрутка клавишами
+        element.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                this.scrollTop -= 50;
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                this.scrollTop += 50;
+            } else if (e.key === 'PageUp') {
+                e.preventDefault();
+                this.scrollTop -= 200;
+            } else if (e.key === 'PageDown') {
+                e.preventDefault();
+                this.scrollTop += 200;
+            }
+        });
+    });
 });
 
 

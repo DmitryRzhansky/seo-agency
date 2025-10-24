@@ -133,6 +133,128 @@
     box-shadow: 2px 2px 0px var(--brutal-green);
 }
 
+/* Форматирование текста в прокручиваемом контенте блога */
+.brutal-post-scrollable p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: var(--brutal-black);
+    font-weight: 500;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.brutal-post-scrollable h1,
+.brutal-post-scrollable h2,
+.brutal-post-scrollable h3,
+.brutal-post-scrollable h4,
+.brutal-post-scrollable h5,
+.brutal-post-scrollable h6 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--brutal-black);
+}
+
+.brutal-post-scrollable h2 {
+    font-size: 1.3rem;
+    color: var(--brutal-green);
+}
+
+.brutal-post-scrollable h3 {
+    font-size: 1.1rem;
+    color: var(--brutal-black);
+}
+
+.brutal-post-scrollable ul,
+.brutal-post-scrollable ol {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.brutal-post-scrollable li {
+    margin-bottom: 8px;
+    position: relative;
+    color: var(--brutal-black);
+    font-weight: 500;
+}
+
+.brutal-post-scrollable ul li::before {
+    content: "▶";
+    color: var(--brutal-green);
+    font-weight: 700;
+    position: absolute;
+    left: -20px;
+}
+
+.brutal-post-scrollable ol {
+    counter-reset: brutal-counter;
+}
+
+.brutal-post-scrollable ol li {
+    counter-increment: brutal-counter;
+    position: relative;
+}
+
+.brutal-post-scrollable ol li::before {
+    content: counter(brutal-counter) '.';
+    color: var(--brutal-green);
+    font-weight: 700;
+    position: absolute;
+    left: -25px;
+    min-width: 20px;
+}
+
+.brutal-post-scrollable strong {
+    color: var(--brutal-black);
+    font-weight: 700;
+    background: linear-gradient(120deg, var(--brutal-green) 0%, transparent 100%);
+    padding: 2px 4px;
+}
+
+.brutal-post-scrollable blockquote {
+    border-left: 4px solid var(--brutal-green);
+    background: var(--brutal-gray);
+    padding: 20px;
+    margin: 30px 0;
+    font-style: italic;
+    position: relative;
+}
+
+.brutal-post-scrollable blockquote::before {
+    content: '"';
+    font-size: 4rem;
+    color: var(--brutal-green);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-family: serif;
+}
+
+.brutal-post-scrollable img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+    margin: 15px 0;
+}
+
+.brutal-post-scrollable a {
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid var(--brutal-green);
+    transition: all 0.3s ease;
+}
+
+.brutal-post-scrollable a:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 2px 4px;
+    border-bottom: none;
+}
+
 .brutal-post-content-wrapper {
     display: flex;
     gap: 40px;

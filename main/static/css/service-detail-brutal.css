@@ -216,6 +216,30 @@
     overflow-y: auto;
     max-height: 400px;
     width: 100%;
+    scroll-behavior: smooth;
+}
+
+/* Стилизация скроллбара для прокручиваемого контента услуг */
+.brutal-content-text::-webkit-scrollbar {
+    width: 12px;
+}
+
+.brutal-content-text::-webkit-scrollbar-track {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+}
+
+.brutal-content-text::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-content-text::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-green);
 }
 
 .brutal-content-text p {
@@ -456,6 +480,30 @@
     border-radius: 0;
     max-height: 400px;
     overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+/* Стилизация скроллбара для preview контента */
+.brutal-content-preview::-webkit-scrollbar {
+    width: 12px;
+}
+
+.brutal-content-preview::-webkit-scrollbar-track {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+}
+
+.brutal-content-preview::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-content-preview::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-green);
 }
 
 .brutal-content-preview p {
@@ -472,6 +520,30 @@
     border-radius: 0;
     max-height: 500px;
     overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+/* Стилизация скроллбара для полного контента */
+.brutal-content-full::-webkit-scrollbar {
+    width: 12px;
+}
+
+.brutal-content-full::-webkit-scrollbar-track {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+}
+
+.brutal-content-full::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border: 2px solid var(--brutal-black);
+    border-radius: 6px;
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-content-full::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-green);
 }
 
 .brutal-content-full p {

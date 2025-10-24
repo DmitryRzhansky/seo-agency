@@ -5,143 +5,91 @@
 
 {% block title %}{{ title }}{% endblock title %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/cards.css' %}">
-{% endblock extra_css %}
-
 {% block breadcrumbs %}
 {% breadcrumbs city %}
 {% endblock breadcrumbs %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cities-modern.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
-<section class="section-padding bg-light pt-5 mt-5" id="city-detail">
+
+<!-- Hero секция города -->
+<section class="city-hero-modern">
     <div class="container">
-        <!-- Заголовок города -->
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1 class="display-4 fw-bold mb-3">SEO продвижение {{ city.get_name_prepositional }}</h1>
-                <p class="lead text-muted mb-4">{{ city.region }}</p>
-                
-                {% if city.local_description %}
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <p class="fs-5 text-muted">{{ city.local_description }}</p>
-                    </div>
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="city-hero-content">
+                    <h1 class="city-hero-title">SEO продвижение {{ city.get_name_prepositional }}</h1>
+                    <p class="city-hero-region">{{ city.region }}</p>
+                    {% if city.local_description %}
+                    <p class="city-hero-description">{{ city.local_description }}</p>
+                    {% endif %}
                 </div>
-                {% endif %}
+            </div>
+            <div class="col-lg-4 mt-4 mt-lg-0 d-flex justify-content-center align-items-center">
+                <div class="city-hero-visual">
+                    <i class="fas fa-map-marker-alt city-hero-icon"></i>
+                </div>
             </div>
         </div>
+    </div>
+</section>
 
+<!-- Основной контент -->
+<section class="city-content-modern">
+    <div class="container">
         <!-- Услуги в городе -->
         {% if services %}
-        <div class="row mt-5">
-            <div class="col-lg-12">
-                <h2 class="section-title text-center mb-5">Наши услуги {{ city.get_name_prepositional }}</h2>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            {% for service in services %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 service-card">
+        <div class="city-services-modern">
+            <h2 class="city-services-title">Наши услуги {{ city.get_name_prepositional }}</h2>
+            <div class="city-services-grid">
+                {% for service in services %}
+                <div class="city-service-card">
                     {% if service.image %}
-                        <img src="{{ service.image.url }}" class="card-img-top" alt="{{ service.get_image_alt }}" style="height: 200px; object-fit: cover;">
+                    <img src="{{ service.image.url }}" alt="{{ service.image_alt|default:service.title }}" class="city-service-image">
                     {% endif %}
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">
-                            <a href="{% url 'main:city_service_detail' city.slug service.slug %}" class="text-decoration-none">
-                                {{ service.title }}
-                            </a>
-                        </h5>
-                        
-                        <span class="badge mb-3" style="background-color: #007bff; color: white;">
-                            {{ service.category.title }}
-                        </span>
-                        
-                        <p class="card-text text-muted flex-grow-1">
-                            {{ service.short_description|truncatewords:20 }}
-                        </p>
-                        
-                        <div class="mt-auto">
-                            <a href="{% url 'main:city_service_detail' city.slug service.slug %}" class="btn btn-outline-primary btn-sm">
-                                Подробнее
-                            </a>
-                        </div>
-                    </div>
+                    <div class="city-service-category">{{ service.category.title }}</div>
+                    <h3 class="city-service-title">{{ service.title }}</h3>
+                    <p class="city-service-description">{{ service.short_description|truncatewords:20 }}</p>
+                    <a href="{{ service.get_absolute_url }}" class="city-service-link">Подробнее</a>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
         {% endif %}
 
-        <!-- Статьи блога -->
+        <!-- Блог города -->
         {% if recent_posts %}
-        <div class="row mt-5">
-            <div class="col-lg-12">
-                <h2 class="section-title text-center mb-5">Полезные статьи</h2>
-            </div>
-        </div>
-        
-        <div class="row g-4">
-            {% for post in recent_posts %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 post-card">
+        <div class="city-blog-modern">
+            <h2 class="city-blog-title">Полезные статьи {{ city.get_name_prepositional }}</h2>
+            <div class="city-blog-grid">
+                {% for post in recent_posts %}
+                <div class="city-blog-card">
                     {% if post.image %}
-                        <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.get_image_alt }}" style="height: 200px; object-fit: cover;">
-                    {% else %}
-                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
-                            <i class="fas fa-newspaper fa-3x text-muted"></i>
-                        </div>
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="city-blog-image">
                     {% endif %}
-                    
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">
-                            <a href="{% url 'main:city_post_detail' city.slug post.slug %}" class="text-decoration-none">
-                                {{ post.title }}
-                            </a>
-                        </h5>
-                        
-                        {% if post.category %}
-                        <span class="badge mb-3" style="background-color: {{ post.category.color }}; color: white;">
-                            {{ post.category.name }}
-                        </span>
-                        {% endif %}
-                        
-                        <p class="card-text text-muted small flex-grow-1">
+                    <h3 class="city-blog-title-card">{{ post.title }}</h3>
+                    <p class="city-blog-excerpt">
+                        {% if post.excerpt %}
+                            {{ post.excerpt|truncatewords:15 }}
+                        {% else %}
                             {{ post.content|striptags|truncatewords:15 }}
-                        </p>
-                        
-                        <div class="mt-auto">
-                            <a href="{% url 'main:city_post_detail' city.slug post.slug %}" class="btn btn-outline-primary btn-sm">
-                                Читать далее
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="card-footer bg-transparent border-0">
-                        <small class="text-muted">
-                            <i class="fas fa-calendar-alt me-1"></i>
-                            {{ post.published_date|date:"d F Y" }}
-                        </small>
-                    </div>
+                        {% endif %}
+                    </p>
+                    <a href="{{ post.get_absolute_url }}" class="city-blog-link">Читать далее</a>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
         {% endif %}
 
-        <!-- CTA блок -->
-        <div class="row mt-5">
-            <div class="col-lg-12">
-                <div class="p-5 rounded shadow-sm text-center city-cta-block">
-                    <h3 class="fw-bold mb-3">Готовы продвигать бизнес {{ city.get_name_prepositional }}?</h3>
-                    <p class="lead mb-4">Получите бесплатную консультацию по SEO продвижению в вашем городе</p>
-                    <a href="{% url 'main:home' %}#contact" class="btn btn-primary btn-lg">
-                        <i class="fas fa-paper-plane me-2"></i>
-                        Получить консультацию
-                    </a>
-                </div>
-            </div>
+        <!-- CTA секция -->
+        <div class="city-cta-modern">
+            <h3 class="city-cta-title">Готовы продвигать бизнес {{ city.get_name_prepositional }}?</h3>
+            <p class="city-cta-text">Получите бесплатную консультацию по SEO продвижению в вашем городе</p>
+            <a href="{% url 'main:contacts' %}" class="city-cta-btn">Получить консультацию</a>
         </div>
     </div>
 </section>

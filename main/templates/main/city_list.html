@@ -3,73 +3,58 @@
 
 {% block title %}{{ title }}{% endblock title %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cities-modern.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
+
 <!-- Hero секция городов -->
-<section class="hero-section inner-hero">
+<section class="city-hero-modern">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6">
-                <h1 class="display-4 fw-bold mb-3 slide-in-left">Города присутствия</h1>
-                <p class="lead mb-4 slide-in-left">Мы предоставляем услуги SEO-продвижения и комплексного интернет-маркетинга в крупнейших городах России и СНГ.</p>
+            <div class="col-lg-8">
+                <div class="city-hero-content">
+                    <h1 class="city-hero-title">Города присутствия</h1>
+                    <p class="city-hero-description">Мы предоставляем услуги SEO-продвижения и комплексного интернет-маркетинга в крупнейших городах России и СНГ.</p>
+                </div>
             </div>
-            <div class="col-lg-6 mt-4 mt-lg-0 d-flex justify-content-center align-items-center">
-                <i class="fas fa-city text-primary city-hero-icon"></i>
+            <div class="col-lg-4 mt-4 mt-lg-0 d-flex justify-content-center align-items-center">
+                <div class="city-hero-visual">
+                    <i class="fas fa-city city-hero-icon"></i>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section-padding bg-light pt-5" id="city-list">
+<!-- Основной контент -->
+<section class="city-content-modern">
     <div class="container">
-        
-        <div class="row g-4">
-            {% for city in cities %}
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 city-card">
-                    <div class="card-body d-flex flex-column text-center">
-                        <h3 class="card-title mb-3">
-                            <a href="{{ city.get_absolute_url }}" class="text-decoration-none">
-                                {{ city.name }}
-                            </a>
-                        </h3>
-                        
-                        <div class="mb-3">
-                            <span class="badge bg-primary fs-6">
-                                <i class="fas fa-map-marker-alt me-1"></i>
-                                {{ city.region }}
-                            </span>
-                        </div>
-                        
-                        {% if city.local_description %}
-                        <p class="card-text text-muted flex-grow-1">
-                            {{ city.local_description|truncatewords:20 }}
-                        </p>
-                        {% endif %}
-                        
-                        <div class="mt-auto">
-                            <a href="{{ city.get_absolute_url }}" class="btn btn-outline-primary">
-                                <i class="fas fa-map-marker-alt me-2"></i>
-                                SEO {{ city.get_name_prepositional }}
-                            </a>
-                        </div>
-                    </div>
+        <!-- Список городов -->
+        <div class="city-services-modern">
+            <h2 class="city-services-title">Наши города</h2>
+            <div class="city-services-grid">
+                {% for city in cities %}
+                <div class="city-service-card">
+                    <div class="city-service-category">{{ city.region }}</div>
+                    <h3 class="city-service-title">{{ city.name }}</h3>
+                    {% if city.local_description %}
+                    <p class="city-service-description">{{ city.local_description|truncatewords:20 }}</p>
+                    {% endif %}
+                    <a href="{{ city.get_absolute_url }}" class="city-service-link">SEO {{ city.get_name_prepositional }}</a>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-        
-        <div class="row mt-5">
-            <div class="col-lg-12 text-center">
-                <div class="p-4 city-cta-block rounded shadow-sm">
-                    <h3 class="fw-bold mb-3">Нет вашего города в списке?</h3>
-                    <p class="lead mb-4">Мы работаем по всей России и готовы предоставить услуги в любом регионе!</p>
-                    <a href="{% url 'main:home' %}#contact" class="btn btn-primary btn-lg">
-                        <i class="fas fa-paper-plane me-2"></i>
-                        Получить консультацию
-                    </a>
-                </div>
-            </div>
+
+        <!-- CTA секция -->
+        <div class="city-cta-modern">
+            <h3 class="city-cta-title">Не нашли свой город?</h3>
+            <p class="city-cta-text">Мы работаем по всей России и СНГ. Свяжитесь с нами для обсуждения условий работы в вашем регионе</p>
+            <a href="{% url 'main:contacts' %}" class="city-cta-btn">Связаться с нами</a>
         </div>
     </div>
 </section>
+
 {% endblock content %}

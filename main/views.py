@@ -195,8 +195,8 @@ def city_detail(request, slug):
     city = get_object_or_404(City, slug=slug, is_active=True)
     
     # Получаем услуги и статьи для этого города
-    services = Service.objects.filter(is_published=True).order_by('order')[:6]
-    recent_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:3]
+    services = Service.objects.filter(is_published=True).select_related('category').order_by('order')
+    recent_posts = Post.objects.filter(is_published=True).order_by('-published_date')[:6]
     
     context = {
         'title': city.get_local_title(),

@@ -10,217 +10,143 @@
 {% endif %}
 {% endblock breadcrumbs %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/portfolio-modern.css' %}">
+{% endblock extra_css %}
+
 {% block content %}
-<!-- Hero секция проекта -->
-<section class="project-hero">
+
+<!-- Hero секция детальной страницы портфолио -->
+<section class="portfolio-detail-hero">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="project-meta mb-3">
-                    <span class="badge bg-primary me-2">{{ portfolio_item.get_project_type_display_ru }}</span>
-                    {% if portfolio_item.client_name %}
-                    <span class="text-muted">{{ portfolio_item.client_name }}</span>
-                    {% endif %}
-                </div>
-                <h1 class="display-4 fw-bold mb-3">{{ portfolio_item.title }}</h1>
-                <p class="lead mb-4">{{ portfolio_item.short_description }}</p>
-                {% if portfolio_item.project_url %}
-                <a href="{{ portfolio_item.project_url }}" target="_blank" class="btn btn-primary btn-lg me-3 mb-2 mb-sm-0">
-                    <i class="fas fa-external-link-alt me-2"></i>
-                    Посмотреть проект
-                </a>
-                {% endif %}
-                <a href="{% url 'main:contacts' %}" class="btn btn-outline-primary btn-lg ms-0 ms-sm-2">
-                    <i class="fas fa-handshake me-2"></i>
-                    Обсудить проект
-                </a>
-            </div>
-            <div class="col-lg-6 mt-4 mt-lg-0">
-                <div class="project-image">
-                    {% if portfolio_item.main_image %}
-                    <img src="{{ portfolio_item.main_image.url }}" alt="{{ portfolio_item.get_main_image_alt }}" class="img-fluid rounded">
-                    {% else %}
-                    <div class="no-image-placeholder">
-                        <i class="fas fa-image fa-5x text-muted"></i>
-                        <p class="text-muted mt-3">Изображение отсутствует</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="portfolio-detail-hero-content">
+                    <h1 class="portfolio-detail-title">{{ portfolio_item.title }}</h1>
+                    <p class="portfolio-detail-subtitle">{{ portfolio_item.short_description }}</p>
+                    
+                    <div class="portfolio-detail-meta">
+                        <div class="portfolio-meta-item">
+                            <i class="fas fa-tag"></i>
+                            {{ portfolio_item.get_project_type_display_ru }}
+                        </div>
+                        {% if portfolio_item.client_name %}
+                        <div class="portfolio-meta-item">
+                            <i class="fas fa-building"></i>
+                            {{ portfolio_item.client_name }}
+                        </div>
+                        {% endif %}
+                        {% if portfolio_item.project_url %}
+                        <div class="portfolio-meta-item">
+                            <i class="fas fa-external-link-alt"></i>
+                            <a href="{{ portfolio_item.project_url }}" target="_blank" style="color: inherit;">Посмотреть проект</a>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Описание проекта -->
-<section class="section-padding">
+<!-- Основной контент -->
+<section class="section-modern">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="project-description">
-                    <h2 class="mb-4">О проекте</h2>
-                    <div class="content">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                {% if portfolio_item.main_image %}
+                <div class="row justify-content-center mb-5"> 
+                    <div class="col-lg-10">
+                        <div class="portfolio-image-container">
+                            <img 
+                                src="{{ portfolio_item.main_image.url }}" 
+                                class="portfolio-detail-image" 
+                                alt="{{ portfolio_item.get_main_image_alt }}"
+                            >
+                            <div class="portfolio-image-overlay">
+                                <div class="portfolio-image-type">{{ portfolio_item.get_project_type_display_ru }}</div>
+                                {% if portfolio_item.client_name %}
+                                <div class="portfolio-image-client">{{ portfolio_item.client_name }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="portfolio-image-decoration">
+                                <div class="portfolio-decoration-circle circle-1"></div>
+                                <div class="portfolio-decoration-circle circle-2"></div>
+                                <div class="portfolio-decoration-circle circle-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="portfolio-detail-content">
+                    <div class="portfolio-detail-text">
                         {{ portfolio_item.full_description|safe }}
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="project-sidebar">
-                    <!-- Результаты проекта -->
-                    {% if portfolio_item.get_results_list %}
-                    <div class="sidebar-card mb-4">
-                        <h3 class="sidebar-title">Результаты</h3>
-                        <div class="results-list">
-                            {% for result in portfolio_item.get_results_list %}
-                            <div class="result-item">
-                                <div class="result-metric">{{ result.metric }}</div>
-                                <div class="result-value">{{ result.value }}</div>
-                                {% if result.description %}
-                                <div class="result-description">{{ result.description }}</div>
-                                {% endif %}
-                            </div>
-                            {% endfor %}
+
+                <!-- Результаты проекта -->
+                {% if portfolio_item.get_results_list %}
+                <div class="portfolio-results-section">
+                    <h3 class="portfolio-results-title">Результаты проекта</h3>
+                    <div class="portfolio-results-grid-detail">
+                        {% for result in portfolio_item.get_results_list %}
+                        <div class="portfolio-result-card">
+                            <div class="portfolio-result-value-detail">{{ result.value }}</div>
+                            <div class="portfolio-result-metric-detail">{{ result.metric }}</div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endif %}
-                    
-                    <!-- Технологии -->
-                    {% if portfolio_item.get_technologies_list %}
-                    <div class="sidebar-card mb-4">
-                        <h3 class="sidebar-title">Технологии</h3>
-                        <div class="technologies-list">
-                            {% for tech in portfolio_item.get_technologies_list %}
-                            <span class="badge bg-secondary me-2 mb-2">{{ tech }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
-                    
-                    <!-- Информация о проекте -->
-                    <div class="sidebar-card">
-                        <h3 class="sidebar-title">Информация</h3>
-                        <div class="project-info">
-                            <div class="info-item">
-                                <strong>Тип проекта:</strong>
-                                <span>{{ portfolio_item.get_project_type_display_ru }}</span>
-                            </div>
-                            {% if portfolio_item.client_name %}
-                            <div class="info-item">
-                                <strong>Клиент:</strong>
-                                <span>{{ portfolio_item.client_name }}</span>
-                            </div>
-                            {% endif %}
-                            {% if portfolio_item.cooperation_start %}
-                            <div class="info-item">
-                                <strong>Начало сотрудничества:</strong>
-                                <span>{{ portfolio_item.cooperation_start }}</span>
-                            </div>
-                            {% endif %}
-                            {% if portfolio_item.cooperation_end %}
-                            <div class="info-item">
-                                <strong>Конец сотрудничества:</strong>
-                                <span>{{ portfolio_item.cooperation_end }}</span>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
+                </div>
+                {% endif %}
+
+                <div class="text-center mt-5">
+                    <a href="{% url 'main:portfolio_list' %}" class="btn btn-outline-primary btn-lg" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1)); border: 1px solid rgba(99, 102, 241, 0.3); color: #6366f1; border-radius: 15px; padding: 15px 30px;">
+                        <i class="fas fa-arrow-left me-2"></i> Все работы портфолио
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Галерея изображений -->
-{% if portfolio_item.get_gallery_images_list %}
-<section class="section-padding bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center mb-5">Галерея проекта</h2>
-                <div class="row">
-                    {% for image_path in portfolio_item.get_gallery_images_list %}
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="gallery-item">
-                            <img src="{{ image_path }}" alt="Изображение проекта {{ portfolio_item.title }}" class="img-fluid rounded">
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- Похожие проекты -->
+<!-- Блок "Похожие проекты" -->
 {% if related_projects %}
-<section class="section-padding">
+<section class="related-portfolio-modern">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center mb-5">Похожие проекты</h2>
-                <div class="row">
-                    {% for project in related_projects %}
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="portfolio-card">
-                            <div class="portfolio-image">
-                                {% if project.main_image %}
-                                <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" class="img-fluid">
-                                {% else %}
-                                <div class="no-image-placeholder">
-                                    <i class="fas fa-image fa-3x text-muted"></i>
-                                    <p class="text-muted mt-2">Изображение отсутствует</p>
-                                </div>
-                                {% endif %}
-                                <div class="portfolio-overlay">
-                                    <div class="portfolio-actions">
-                                        <a href="{{ project.get_absolute_url }}" class="btn btn-primary">
-                                            <i class="fas fa-eye me-2"></i>
-                                            Подробнее
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="portfolio-content">
-                                <div class="portfolio-meta">
-                                    <span class="badge bg-primary">{{ project.get_project_type_display_ru }}</span>
-                                    {% if project.client_name %}
-                                    <span class="text-muted">{{ project.client_name }}</span>
-                                    {% endif %}
-                                </div>
-                                <h3 class="portfolio-title">
-                                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                                </h3>
-                                <p class="portfolio-description">{{ project.short_description }}</p>
-                            </div>
+        <h2 class="related-portfolio-title">Похожие проекты</h2>
+        <div class="row g-4">
+            {% for related_project in related_projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="related-portfolio-card">
+                    {% if related_project.main_image %}
+                        <img src="{{ related_project.main_image.url }}" class="related-portfolio-image" alt="{{ related_project.get_main_image_alt }}">
+                    {% else %}
+                        <div class="related-portfolio-placeholder">
+                            <i class="fas fa-image"></i>
                         </div>
+                    {% endif %}
+                    
+                    <div class="related-portfolio-content">
+                        <div class="related-portfolio-type">{{ related_project.get_project_type_display_ru }}</div>
+                        <h3 class="related-portfolio-title-card">
+                            <a href="{{ related_project.get_absolute_url }}" class="text-decoration-none" style="color: inherit;">
+                                {{ related_project.title }}
+                            </a>
+                        </h3>
+                        <p class="related-portfolio-description">
+                            {{ related_project.short_description|truncatewords:15 }}
+                        </p>
+                        <a href="{{ related_project.get_absolute_url }}" class="related-portfolio-link">
+                            Смотреть проект <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>
 {% endif %}
 
-<!-- CTA секция -->
-<section class="section-padding bg-primary text-white">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h2 class="mb-3">Заинтересовал проект?</h2>
-                <p class="lead mb-0">Свяжитесь с нами, и мы обсудим, как можем реализовать похожий проект для вашего бизнеса.</p>
-            </div>
-            <div class="col-lg-4 text-lg-end">
-                <a href="{% url 'main:contacts' %}" class="btn btn-light btn-lg">
-                    <i class="fas fa-phone me-2"></i>
-                    Обсудить проект
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/portfolio_detail.css' %}">
-{% endblock extra_css %}
 {% endblock content %}

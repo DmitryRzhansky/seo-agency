@@ -308,7 +308,7 @@
 
 .brutal-service-image {
     width: 100%;
-    height: 350px;
+    height: 550px;
     object-fit: cover;
     border: var(--brutal-border);
     box-shadow: var(--brutal-shadow);

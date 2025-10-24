@@ -226,6 +226,21 @@
 /* Переопределяем отступы для блога */
 .section-modern {
     padding: 40px 0 !important;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
+    position: relative;
+    overflow: hidden;
+}
+
+.section-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 /* Карточки постов */
@@ -427,6 +442,39 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
+}
+
+.post-detail-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+    animation: postDetailBackground 8s ease-in-out infinite;
+}
+
+.post-detail-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.2) 0%, transparent 50%);
+    animation: postDetailShine 6s ease-in-out infinite;
+}
+
+@keyframes postDetailBackground {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+@keyframes postDetailShine {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
 }
 
 .post-detail-hero::before {

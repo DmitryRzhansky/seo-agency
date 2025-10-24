@@ -157,64 +157,7 @@
     75% { transform: translateY(-10px) rotate(3deg); }
 }
 
-.contacts-floating-elements {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-}
-
-.contacts-floating-element {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(236, 72, 153, 0.3));
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: contactsElementFloat 6s ease-in-out infinite;
-}
-
-.contacts-floating-element i {
-    font-size: 1.5rem;
-    color: #ffffff;
-}
-
-.contacts-floating-element.element-1 {
-    top: 10%;
-    left: 10%;
-    animation-delay: 0s;
-}
-
-.contacts-floating-element.element-2 {
-    top: 20%;
-    right: 15%;
-    animation-delay: 1.5s;
-}
-
-.contacts-floating-element.element-3 {
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 3s;
-}
-
-.contacts-floating-element.element-4 {
-    bottom: 10%;
-    right: 10%;
-    animation-delay: 4.5s;
-}
-
-@keyframes contactsElementFloat {
-    0%, 100% { transform: translateY(0px) scale(1); opacity: 0.7; }
-    25% { transform: translateY(-20px) scale(1.1); opacity: 1; }
-    50% { transform: translateY(-10px) scale(0.9); opacity: 0.8; }
-    75% { transform: translateY(-15px) scale(1.05); opacity: 0.9; }
-}
+/* Убираем плавающие элементы */
 
 /* Контактная информация */
 .contacts-info-modern {

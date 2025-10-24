@@ -1792,11 +1792,93 @@ body {
     opacity: 1;
 }
 
+.service-card-image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+}
+
 .service-card-image {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 20px 20px 0 0;
+    transition: all 0.4s ease;
+}
+
+.service-card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: placeholderShine 3s ease-in-out infinite;
+}
+
+@keyframes placeholderShine {
+    0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.3; }
+    50% { transform: rotate(180deg) scale(1.1); opacity: 0.6; }
+}
+
+.service-placeholder-icon {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    position: relative;
+    animation: iconFloat 2s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.service-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 15px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.service-card-modern:hover .service-card-overlay {
+    opacity: 1;
+}
+
+.service-card-category-overlay {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.9), rgba(236, 72, 153, 0.9));
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.service-card-modern:hover .service-card-image {
+    transform: scale(1.1);
 }
 
 .service-card-content {
@@ -2500,6 +2582,14 @@ body {
     
     .service-detail-text {
         font-size: 1rem;
+    }
+    
+    .service-card-image-container {
+        height: 200px;
+    }
+    
+    .service-placeholder-icon {
+        font-size: 3rem;
     }
 }
 

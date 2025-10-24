@@ -78,9 +78,18 @@
         <div class="services-grid-modern">
             {% for service in filtered_services %}
             <div class="service-card-modern">
-                {% if service.image %}
-                <img src="{{ service.image.url }}" class="service-card-image" alt="{{ service.get_image_alt }}">
-                {% endif %}
+                <div class="service-card-image-container">
+                    {% if service.image %}
+                    <img src="{{ service.image.url }}" class="service-card-image" alt="{{ service.get_image_alt }}">
+                    {% else %}
+                    <div class="service-card-placeholder">
+                        <i class="fas fa-cogs service-placeholder-icon"></i>
+                    </div>
+                    {% endif %}
+                    <div class="service-card-overlay">
+                        <div class="service-card-category-overlay">{{ service.category.title }}</div>
+                    </div>
+                </div>
                 <div class="service-card-content">
                     <div class="service-card-category">{{ service.category.title }}</div>
                     <h3 class="service-card-title">{{ service.title }}</h3>

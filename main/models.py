@@ -10,7 +10,6 @@ class City(SEOModel):
     """Модель для городов-миллионников для регионального SEO"""
     name = models.CharField(max_length=100, verbose_name="Название города")
     slug = models.SlugField(unique=True, max_length=100, verbose_name="URL-идентификатор")
-    population = models.PositiveIntegerField(verbose_name="Население", help_text="Количество жителей")
     region = models.CharField(max_length=100, verbose_name="Регион/Область")
     is_active = models.BooleanField(default=True, verbose_name="Активен", help_text="Показывать город на сайте")
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")

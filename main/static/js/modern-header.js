@@ -73,4 +73,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Поддержка сенсорной прокрутки для мега-меню
+    const servicesGrid = document.querySelector('.services-grid');
+    if (servicesGrid) {
+        let isScrolling = false;
+        
+        servicesGrid.addEventListener('touchstart', function() {
+            isScrolling = true;
+        });
+        
+        servicesGrid.addEventListener('touchend', function() {
+            isScrolling = false;
+        });
+        
+        // Предотвращаем закрытие меню при прокрутке
+        servicesGrid.addEventListener('touchmove', function(e) {
+            if (isScrolling) {
+                e.stopPropagation();
+            }
+        });
+    }
 });

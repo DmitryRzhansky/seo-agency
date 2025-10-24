@@ -913,6 +913,27 @@ body {
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+/* Стили для горизонтальной прокрутки */
+.services-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.services-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.services-grid::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.5);
+    border-radius: 4px;
+}
+
+.services-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(99, 102, 241, 0.7);
 }
 
 .service-category-modern {
@@ -1037,8 +1058,17 @@ body {
     }
     
     .services-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 15px;
+        overflow-x: auto;
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 15px;
+    }
+    
+    .service-category-modern {
+        flex: 0 0 250px;
+        min-width: 250px;
     }
     
     .header-contacts-modern {

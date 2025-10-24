@@ -371,7 +371,7 @@ def contacts(request):
         'form': form,
         'seo_object': None,  # Можно создать отдельную SEO модель для страницы контактов
     }
-    return render(request, 'main/contacts.html', context)
+    return render(request, 'main/contacts_brutal.html', context)
 
 
 def privacy_policy(request):

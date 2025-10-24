@@ -1,0 +1,572 @@
+/* Брутальный стиль для контактов */
+
+/* Переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-green: #00ff00;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #333333;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+}
+
+/* Основные стили */
+* {
+    font-family: 'Courier New', monospace;
+}
+
+/* Контейнер */
+.brutal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero секция контактов */
+.brutal-contacts-hero {
+    background: var(--brutal-white);
+    padding: 60px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+    position: relative;
+}
+
+.brutal-contacts-hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brutal-contacts-hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 3px 3px 0px var(--brutal-green);
+    line-height: 1.2;
+}
+
+.brutal-contacts-hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.brutal-contacts-hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.brutal-contacts-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 15px 30px;
+    border: var(--brutal-border);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-contacts-hero-btn:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-contacts-hero-btn.outline {
+    background: var(--brutal-white);
+    color: var(--brutal-green);
+    border: var(--brutal-border);
+}
+
+.brutal-contacts-hero-btn.outline:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+}
+
+/* Основной контент контактов */
+.brutal-contacts-content {
+    background: var(--brutal-gray);
+    padding: 60px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-contacts-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Контактная информация */
+.brutal-contacts-info-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 30px;
+    box-shadow: var(--brutal-shadow);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.brutal-contacts-info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-contacts-info-block-number {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-contacts-info-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-contacts-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--brutal-gray);
+}
+
+.brutal-contacts-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.brutal-contacts-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+    font-size: 1.2rem;
+}
+
+.brutal-contacts-details h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.brutal-contacts-details p {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.brutal-contacts-details a {
+    color: var(--brutal-green);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.brutal-contacts-details a:hover {
+    color: var(--brutal-black);
+    text-decoration: underline;
+}
+
+.brutal-contacts-details small {
+    color: var(--brutal-dark-gray);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Форма обратной связи */
+.brutal-contacts-form-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 30px;
+    box-shadow: var(--brutal-shadow);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.brutal-contacts-form-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-contacts-form-block-number {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-contacts-form-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-contacts-form-subtitle {
+    color: var(--brutal-dark-gray);
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+/* Форма */
+.brutal-contacts-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.brutal-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.brutal-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.brutal-form-label {
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.brutal-contacts-form input,
+.brutal-contacts-form textarea {
+    padding: 12px 15px;
+    border: var(--brutal-border);
+    background: var(--brutal-white);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--brutal-black);
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-contacts-form input:focus,
+.brutal-contacts-form textarea:focus {
+    outline: none;
+    box-shadow: 5px 5px 0px var(--brutal-green);
+    transform: translateY(-2px);
+}
+
+.brutal-contacts-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.brutal-form-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.brutal-contacts-form-btn {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 15px 30px;
+    border: var(--brutal-border);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--brutal-shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    align-self: flex-start;
+}
+
+.brutal-contacts-form-btn:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+/* Дополнительная информация */
+.brutal-contacts-additional {
+    background: var(--brutal-white);
+    padding: 60px 0;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-contacts-additional-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.brutal-contacts-additional-card {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 30px;
+    box-shadow: var(--brutal-shadow);
+    position: relative;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.brutal-contacts-additional-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-contacts-additional-block-number {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-contacts-additional-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-contacts-additional-card p {
+    color: var(--brutal-dark-gray);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.brutal-contacts-additional-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 12px 24px;
+    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-contacts-additional-link:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0px var(--brutal-green);
+}
+
+/* Социальные сети */
+.brutal-contacts-social {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.brutal-contacts-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-contacts-social-link:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0px var(--brutal-green);
+}
+
+/* CTA блок */
+.brutal-contacts-cta {
+    background: var(--brutal-gray);
+    padding: 60px 0;
+    text-align: center;
+    border-top: var(--brutal-border);
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-contacts-cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--brutal-white);
+    padding: 40px;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    position: relative;
+}
+
+.brutal-contacts-cta-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--brutal-green);
+}
+
+.brutal-contacts-cta-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.brutal-contacts-cta-text {
+    font-size: 1.1rem;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.brutal-contacts-cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.brutal-contacts-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 15px 30px;
+    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 4px 4px 0px var(--brutal-black);
+}
+
+.brutal-contacts-cta-btn:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0px var(--brutal-green);
+}
+
+.brutal-contacts-cta-btn.outline {
+    background: var(--brutal-white);
+    color: var(--brutal-green);
+    border: 2px solid var(--brutal-green);
+}
+
+.brutal-contacts-cta-btn.outline:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-contacts-hero-title {
+        font-size: 2rem;
+    }
+    
+    .brutal-contacts-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .brutal-contacts-hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .brutal-contacts-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .brutal-form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .brutal-contacts-additional-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .brutal-contacts-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .brutal-contacts-social {
+        flex-wrap: wrap;
+    }
+}

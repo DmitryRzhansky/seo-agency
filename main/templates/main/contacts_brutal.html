@@ -1,0 +1,207 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs current_category %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/contacts-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция контактов - брутальная -->
+<section class="brutal-contacts-hero">
+    <div class="brutal-container">
+        <div class="brutal-contacts-hero-content">
+            <br><br>
+            <h1 class="brutal-contacts-hero-title">Контакты</h1>
+            <p class="brutal-contacts-hero-subtitle">
+                Готовы обсудить ваш проект? Мы всегда рады новым клиентам и интересным задачам!
+            </p>
+            
+            <div class="brutal-contacts-hero-buttons">
+                <a href="tel:+79636415944" class="brutal-contacts-hero-btn">
+                    <i class="fas fa-phone"></i>
+                    +7 (963) 641-59-44
+                </a>
+                <a href="mailto:isakov@isakov.work" class="brutal-contacts-hero-btn outline">
+                    <i class="fas fa-envelope"></i>
+                    isakov@isakov.work
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент контактов - брутальный -->
+<section class="brutal-contacts-content">
+    <div class="brutal-container">
+        <div class="brutal-contacts-wrapper">
+            <!-- Контактная информация - брутальная -->
+            <div class="brutal-contacts-info">
+                <div class="brutal-contacts-info-card">
+                    <div class="brutal-contacts-info-block-number">01</div>
+                    <h2>Контактная информация</h2>
+                    
+                    <div class="brutal-contacts-item">
+                        <div class="brutal-contacts-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="brutal-contacts-details">
+                            <h3>Телефон</h3>
+                            <p><a href="tel:+79636415944">+7 (963) 641-59-44</a></p>
+                            <small>Пн-Пт: 10:00 - 19:00</small>
+                        </div>
+                    </div>
+                    
+                    <div class="brutal-contacts-item">
+                        <div class="brutal-contacts-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="brutal-contacts-details">
+                            <h3>Email</h3>
+                            <p><a href="mailto:isakov@isakov.work">isakov@isakov.work</a></p>
+                            <small>Ответим в течение 5 минут</small>
+                        </div>
+                    </div>
+                    
+                    <div class="brutal-contacts-item">
+                        <div class="brutal-contacts-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="brutal-contacts-details">
+                            <h3>Время работы</h3>
+                            <p>Пн-Пт: 10:00 - 19:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Форма обратной связи - брутальная -->
+            <div class="brutal-contacts-form">
+                <div class="brutal-contacts-form-card">
+                    <div class="brutal-contacts-form-block-number">02</div>
+                    <h2>Напишите нам</h2>
+                    <p class="brutal-contacts-form-subtitle">
+                        Заполните форму ниже, и мы свяжемся с вами в ближайшее время для обсуждения вашего проекта.
+                    </p>
+                    
+                    <form method="post" class="brutal-contacts-form">
+                        {% csrf_token %}
+                        
+                        <div class="brutal-form-row">
+                            <div class="brutal-form-group">
+                                <label for="{{ form.name.id_for_label }}" class="brutal-form-label">{{ form.name.label }}</label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
+                                    <div class="brutal-form-error">{{ form.name.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="brutal-form-group">
+                                <label for="{{ form.phone.id_for_label }}" class="brutal-form-label">{{ form.phone.label }}</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <div class="brutal-form-error">{{ form.phone.errors.0 }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="brutal-form-group">
+                            <label for="{{ form.email.id_for_label }}" class="brutal-form-label">{{ form.email.label }}</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="brutal-form-error">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="brutal-form-group">
+                            <label for="{{ form.message.id_for_label }}" class="brutal-form-label">{{ form.message.label }}</label>
+                            {{ form.message }}
+                            {% if form.message.errors %}
+                                <div class="brutal-form-error">{{ form.message.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <button type="submit" class="brutal-contacts-form-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Отправить сообщение
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Дополнительная информация - брутальная -->
+<section class="brutal-contacts-additional">
+    <div class="brutal-container">
+        <div class="brutal-contacts-additional-grid">
+            <div class="brutal-contacts-additional-card">
+                <div class="brutal-contacts-additional-block-number">03</div>
+                <h3>Быстрая связь</h3>
+                <p>Для срочных вопросов звоните нам напрямую. Мы всегда готовы помочь!</p>
+                <a href="tel:+79636415944" class="brutal-contacts-additional-link">
+                    <i class="fas fa-phone"></i>
+                    Позвонить сейчас
+                </a>
+            </div>
+            
+            <div class="brutal-contacts-additional-card">
+                <div class="brutal-contacts-additional-block-number">04</div>
+                <h3>Консультация</h3>
+                <p>Нужна бесплатная консультация по вашему проекту? Напишите нам!</p>
+                <a href="mailto:isakov@isakov.work" class="brutal-contacts-additional-link">
+                    <i class="fas fa-envelope"></i>
+                    Написать письмо
+                </a>
+            </div>
+            
+            <div class="brutal-contacts-additional-card">
+                <div class="brutal-contacts-additional-block-number">05</div>
+                <h3>Социальные сети</h3>
+                <p>Следите за нашими новостями и обновлениями в социальных сетях.</p>
+                <div class="brutal-contacts-social">
+                    <a href="#" class="brutal-contacts-social-link">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="brutal-contacts-social-link">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="brutal-contacts-social-link">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA блок - брутальный -->
+<section class="brutal-contacts-cta">
+    <div class="brutal-container">
+        <div class="brutal-contacts-cta-content">
+            <h3 class="brutal-contacts-cta-title">Готовы начать работу?</h3>
+            <p class="brutal-contacts-cta-text">Свяжитесь с нами прямо сейчас, и мы обсудим ваш проект в деталях!</p>
+            <div class="brutal-contacts-cta-buttons">
+                <a href="tel:+79636415944" class="brutal-contacts-cta-btn">
+                    <i class="fas fa-phone"></i>
+                    Позвонить
+                </a>
+                <a href="mailto:isakov@isakov.work" class="brutal-contacts-cta-btn outline">
+                    <i class="fas fa-envelope"></i>
+                    Написать
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

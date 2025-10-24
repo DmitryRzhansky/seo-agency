@@ -90,7 +90,7 @@
 
 .brutal-contacts-hero-btn.outline {
     background: var(--brutal-white);
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     border: var(--brutal-border);
 }
 
@@ -194,7 +194,7 @@
 }
 
 .brutal-contacts-details a {
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     text-decoration: none;
     font-weight: 700;
     transition: all 0.3s ease;
@@ -526,7 +526,7 @@
 
 .brutal-contacts-cta-btn.outline {
     background: var(--brutal-white);
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     border: 2px solid var(--brutal-green);
 }
 

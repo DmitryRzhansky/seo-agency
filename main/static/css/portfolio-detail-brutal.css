@@ -77,7 +77,7 @@
 }
 
 .brutal-portfolio-detail-link {
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
     text-decoration: none;
     padding: 8px 16px;
@@ -176,7 +176,7 @@
 
 .brutal-portfolio-detail-block.main .brutal-portfolio-detail-block-number {
     background: var(--brutal-white);
-    color: var(--brutal-green);
+    color: var(--brutal-black);
 }
 
 .brutal-portfolio-detail-block h2,
@@ -218,7 +218,7 @@
 
 .brutal-portfolio-detail-block li::before {
     content: "▶";
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
     position: absolute;
     left: -20px;
@@ -249,7 +249,7 @@
 .brutal-portfolio-result-metric {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     margin-bottom: 5px;
 }
 
@@ -327,7 +327,7 @@
 
 .brutal-portfolio-scrollable h2 {
     font-size: 1.3rem;
-    color: var(--brutal-green);
+    color: var(--brutal-black);
 }
 
 .brutal-portfolio-scrollable h3 {
@@ -350,7 +350,7 @@
 
 .brutal-portfolio-scrollable ul li::before {
     content: "▶";
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
     position: absolute;
     left: -20px;
@@ -367,7 +367,7 @@
 
 .brutal-portfolio-scrollable ol li::before {
     content: counter(brutal-counter) '.';
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
     position: absolute;
     left: -25px;
@@ -393,7 +393,7 @@
 .brutal-portfolio-scrollable blockquote::before {
     content: '"';
     font-size: 4rem;
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     position: absolute;
     top: -10px;
     left: 10px;
@@ -409,7 +409,7 @@
 }
 
 .brutal-portfolio-scrollable a {
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
     text-decoration: none;
     border-bottom: 2px solid var(--brutal-green);
@@ -674,7 +674,7 @@
     top: -15px;
     left: -50px;
     font-size: 1.2rem;
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
 }
 
@@ -684,7 +684,7 @@
     top: -15px;
     right: -50px;
     font-size: 1.2rem;
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
 }
 
@@ -749,7 +749,7 @@
 
 .brutal-related-portfolio-type {
     font-size: 0.9rem;
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 10px;
@@ -771,7 +771,7 @@
 }
 
 .brutal-related-portfolio-title-link:hover {
-    color: var(--brutal-green);
+    color: var(--brutal-black);
 }
 
 .brutal-related-portfolio-description {
@@ -785,7 +785,7 @@
 .brutal-related-portfolio-link {
     display: inline-block;
     margin-top: auto;
-    color: var(--brutal-green);
+    color: var(--brutal-black);
     font-weight: 700;
     text-decoration: none;
     padding: 10px 20px;

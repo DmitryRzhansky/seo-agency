@@ -121,7 +121,7 @@
                         {% if post.excerpt %}
                             {{ post.excerpt }}
                         {% else %}
-                            {{ post.content|striptags|truncatewords:15 }}
+                            {{ post.content|striptags|truncatewords:15|safe }}
                         {% endif %}
                     </p>
                     

@@ -171,7 +171,7 @@
 
 @keyframes typing {
     from { width: 0; }
-    to { width: 15ch; }
+    to { width: 14ch; }
 }
 
 @keyframes blink-caret {
@@ -337,40 +337,43 @@
     }
 }
 
-.brutal-difference-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    animation: iconBounce 2s ease-in-out infinite;
-}
-
-@keyframes iconBounce {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
 
 .brutal-difference-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 900;
     color: var(--brutal-black);
     margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px var(--brutal-green);
 }
 
 .brutal-difference-description {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--brutal-dark-gray);
     line-height: 1.4;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .brutal-difference-card:hover {
-    transform: translateY(-15px) rotate(-2deg) scale(1.05);
-    box-shadow: 20px 20px 0px var(--brutal-black);
+    transform: translateY(-15px) rotate(-5deg) scale(1.1);
+    box-shadow: 25px 25px 0px var(--brutal-black);
     background: var(--brutal-green);
     color: var(--brutal-white);
+    border: 4px solid var(--brutal-black);
 }
 
-.brutal-difference-card:hover .brutal-difference-title,
+.brutal-difference-card:hover .brutal-difference-title {
+    color: var(--brutal-white);
+    text-shadow: 3px 3px 0px var(--brutal-black);
+    transform: rotate(2deg);
+}
+
 .brutal-difference-card:hover .brutal-difference-description {
     color: var(--brutal-white);
+    transform: rotate(-1deg);
 }
 
 /* Секция услуг - брутальная сетка */

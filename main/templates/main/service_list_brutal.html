@@ -30,93 +30,25 @@
         <h2 class="brutal-services-title">Чем мы отличаемся</h2>
         <div class="brutal-differences-grid">
             <div class="brutal-difference-card difference-1">
-                <div class="brutal-difference-icon">⚡</div>
-                <h3 class="brutal-difference-title">Быстрый результат</h3>
-                <p class="brutal-difference-description">Первые результаты уже через 2 недели</p>
+                <h3 class="brutal-difference-title">БЕЗУМНЫЙ РЕЗУЛЬТАТ</h3>
+                <p class="brutal-difference-description">ВЗРЫВАЕМ ТОПЫ ЗА 2 НЕДЕЛИ</p>
             </div>
             <div class="brutal-difference-card difference-2">
-                <div class="brutal-difference-icon">🎯</div>
-                <h3 class="brutal-difference-title">Точный подход</h3>
-                <p class="brutal-difference-description">Работаем только с вашей целевой аудиторией</p>
+                <h3 class="brutal-difference-title">ХАОТИЧНЫЙ ПОДХОД</h3>
+                <p class="brutal-difference-description">РАБОТАЕМ ТОЛЬКО С ЦЕЛЕВОЙ АУДИТОРИЕЙ</p>
             </div>
             <div class="brutal-difference-card difference-3">
-                <div class="brutal-difference-icon">📊</div>
-                <h3 class="brutal-difference-title">Прозрачная отчетность</h3>
-                <p class="brutal-difference-description">Еженедельные отчеты о результатах</p>
+                <h3 class="brutal-difference-title">ПРОЗРАЧНАЯ ОТЧЕТНОСТЬ</h3>
+                <p class="brutal-difference-description">ЕЖЕНЕДЕЛЬНЫЕ ОТЧЕТЫ О РЕЗУЛЬТАТАХ</p>
             </div>
             <div class="brutal-difference-card difference-4">
-                <div class="brutal-difference-icon">🛡️</div>
-                <h3 class="brutal-difference-title">Гарантия результата</h3>
-                <p class="brutal-difference-description">Возвращаем деньги, если не достигли целей</p>
+                <h3 class="brutal-difference-title">ГАРАНТИЯ РЕЗУЛЬТАТА</h3>
+                <p class="brutal-difference-description">ВОЗВРАЩАЕМ ДЕНЬГИ ЕСЛИ НЕ ДОСТИГЛИ ЦЕЛЕЙ</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Секция услуг - брутальная сетка -->
-<section class="brutal-services">
-    <div class="brutal-container">
-        <h2 class="brutal-services-title">Все услуги</h2>
-        
-        <div class="brutal-services-grid">
-            <!-- Главная карточка (зеленая, большая) - первая услуга -->
-            {% if filtered_services %}
-                {% with first_service=filtered_services.0 %}
-                <div class="brutal-main-card">
-                    <h3 class="brutal-main-card-title">{{ first_service.title }}</h3>
-                    <p class="brutal-main-card-description">{{ first_service.short_description }}</p>
-                    <a href="{% url 'services:service_detail' slug=first_service.slug %}" class="brutal-main-card-link">Подробнее</a>
-                </div>
-                {% endwith %}
-
-                <!-- Остальные услуги -->
-                {% for service in filtered_services|slice:"1:5" %}
-                <div class="brutal-service-card">
-                    <div class="brutal-service-card-number">{{ forloop.counter|add:1 }}.</div>
-                    <h3 class="brutal-service-card-title">{{ service.title }}</h3>
-                    <p class="brutal-service-card-description">{{ service.short_description|truncatewords:15 }}</p>
-                    <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
-                </div>
-                {% endfor %}
-            {% else %}
-                <!-- Если нет услуг, показываем заглушки -->
-                <div class="brutal-main-card">
-                    <h3 class="brutal-main-card-title">Находим, где у вас косяки</h3>
-                    <p class="brutal-main-card-description">Технический аудит, семантика, анализ конкурентов. За 48 часов.</p>
-                    <a href="{% url 'main:contacts' %}" class="brutal-main-card-link">Заказать аудит</a>
-                </div>
-
-                <div class="brutal-service-card">
-                    <div class="brutal-service-card-number">02.</div>
-                    <h3 class="brutal-service-card-title">Чиним всё, что сломано</h3>
-                    <p class="brutal-service-card-description">Скорость, индексация, структура, мета-теги, разметка. Без воды.</p>
-                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
-                </div>
-
-                <div class="brutal-service-card">
-                    <div class="brutal-service-card-number">03.</div>
-                    <h3 class="brutal-service-card-title">Пишем нормальные тексты</h3>
-                    <p class="brutal-service-card-description">Не шлак с ключами через слово, а полезный контент для людей.</p>
-                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
-                </div>
-
-                <div class="brutal-service-card">
-                    <div class="brutal-service-card-number">04.</div>
-                    <h3 class="brutal-service-card-title">Получаем ссылки</h3>
-                    <p class="brutal-service-card-description">Белые методы: PR, гостевые посты. Никаких бирж и помоек.</p>
-                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
-                </div>
-
-                <div class="brutal-service-card">
-                    <div class="brutal-service-card-number">05.</div>
-                    <h3 class="brutal-service-card-title">Показываем результат</h3>
-                    <p class="brutal-service-card-description">Отчёты с реальными цифрами каждый месяц.</p>
-                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-</section>
 
 <!-- Секция цен - брутальная -->
 <section class="brutal-pricing">
@@ -155,6 +87,7 @@
 <!-- Хаотичные кирпичи - категории услуг -->
 <section class="brutal-chaos-bricks">
     <div class="brutal-container">
+        <h2 class="brutal-services-title">Все услуги</h2>
         <div class="brutal-chaos-grid">
             {% for category in categories %}
             <div class="brutal-chaos-brick chaos-brick-{{ forloop.counter }}">

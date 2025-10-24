@@ -19,37 +19,47 @@
 
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/service_detail.css' %}">
-<link rel="stylesheet" href="{% static 'css/cards.css' %}">
+<link rel="stylesheet" href="{% static 'css/index-modern.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<section class="section-padding pt-5 mt-5" id="service-detail-content">
+<!-- Hero секция детальной страницы -->
+<section class="service-detail-hero">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <h1 class="display-4 fw-bold mb-4 text-center">{{ service.title }}</h1>
+                <h1 class="service-detail-title">{{ service.title }}</h1>
+                <p class="service-detail-subtitle">{{ service.short_description }}</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-                <p class="lead text-center mb-5 text-muted">{{ service.short_description }}</p>
-
-                <div class="service-content">
-                    {{ service.content|safe }}
+<!-- Основной контент -->
+<section class="section-modern">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="service-detail-content">
+                    <div class="service-detail-text">
+                        {{ service.content|safe }}
+                    </div>
                 </div>
                 
-                <hr class="my-5">
-
-                <div class="p-4 bg-light rounded text-center shadow-sm">
-                    <h3 class="fw-bold mb-3">Готовы обсудить вашу задачу?</h3>
-                    <p class="lead mb-4">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
-                    <a href="{% url 'main:home' %}#contact" class="btn btn-primary btn-lg">
-                        <i class="fas fa-paper-plane me-2"></i> Получить консультацию
+                <!-- CTA блок -->
+                <div class="service-cta-modern">
+                    <h3 class="service-cta-title">Готовы обсудить вашу задачу?</h3>
+                    <p class="service-cta-text">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
+                    <a href="{% url 'main:home' %}#contact" class="service-cta-btn">
+                        <i class="fas fa-paper-plane me-2"></i>Получить консультацию
                     </a>
                 </div>
 
+                <!-- Навигация -->
                 <div class="text-center mt-4">
-                    <a href="{% url 'services:service_category' slug=service.category.slug %}" class="text-muted small text-decoration-none">
-                        <i class="fas fa-chevron-left me-2"></i> Вернуться в раздел "{{ service.category.title }}"
+                    <a href="{% url 'services:service_category' slug=service.category.slug %}" class="service-card-link">
+                        <i class="fas fa-chevron-left me-2"></i>Вернуться в раздел "{{ service.category.title }}"
                     </a>
                 </div>
             </div>
@@ -59,47 +69,29 @@
 
 <!-- Блок "Еще услуги" -->
 {% if related_services %}
-<section class="section-padding bg-light" id="related-services">
+<section class="related-services-modern">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2 class="section-title text-center mb-5">Еще услуги</h2>
-            </div>
-        </div>
+        <h2 class="related-services-title">Еще услуги</h2>
         <div class="row g-4">
             {% for related_service in related_services %}
             <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 related-service-card">
+                <div class="related-service-card">
                     {% if related_service.image %}
-                        <img src="{{ related_service.image.url }}" class="card-img-top" alt="{{ related_service.get_image_alt }}" style="height: 200px; object-fit: cover;">
+                        <img src="{{ related_service.image.url }}" class="related-service-image" alt="{{ related_service.get_image_alt }}">
                     {% endif %}
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">
-                            <a href="{{ related_service.get_absolute_url }}" class="text-decoration-none">
+                    <div class="related-service-content">
+                        <div class="related-service-category">{{ related_service.category.title }}</div>
+                        <h3 class="related-service-title">
+                            <a href="{{ related_service.get_absolute_url }}" class="text-decoration-none" style="color: inherit;">
                                 {{ related_service.title }}
                             </a>
-                        </h5>
-                        
-                        <span class="badge mb-3" style="background-color: #007bff; color: white;">
-                            {{ related_service.category.title }}
-                        </span>
-                        
-                        <p class="card-text text-muted flex-grow-1">
+                        </h3>
+                        <p class="related-service-description">
                             {{ related_service.short_description|truncatewords:25 }}
                         </p>
-                        
-                        <div class="mt-auto">
-                            <a href="{{ related_service.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
-                                Подробнее
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="card-footer bg-transparent border-0">
-                        <small class="text-muted">
-                            <i class="fas fa-tag me-1"></i>
-                            {{ related_service.category.title }}
-                        </small>
+                        <a href="{{ related_service.get_absolute_url }}" class="related-service-link">
+                            Подробнее <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>

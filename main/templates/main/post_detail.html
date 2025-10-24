@@ -25,7 +25,7 @@
                         {% if post.excerpt %}
                             {{ post.excerpt }}
                         {% else %}
-                            {{ post.content|striptags|truncatewords:30 }}
+                            {{ post.content|striptags|truncatewords:15 }}
                         {% endif %}
                     </p>
                     
@@ -129,7 +129,7 @@
                             {% if related_post.excerpt %}
                                 {{ related_post.excerpt }}
                             {% else %}
-                                {{ related_post.content|striptags|truncatewords:20 }}
+                                {{ related_post.content|striptags|truncatewords:12 }}
                             {% endif %}
                         </p>
                         <a href="{{ related_post.get_absolute_url }}" class="related-post-link">

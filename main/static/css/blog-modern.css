@@ -153,10 +153,10 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #6366f1, #ec4899, #14b8a6, #6366f1);
-    background-size: 200% 100%;
-    animation: gradientMove 3s ease-in-out infinite;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .blog-search-input-modern {
@@ -861,9 +861,23 @@
 
 /* Связанные посты */
 .related-posts-modern {
-    background: rgba(255, 255, 255, 0.02);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
     padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.related-posts-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .related-posts-title {

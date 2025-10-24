@@ -298,7 +298,7 @@
     gap: 20px;
     margin-top: 40px;
     position: relative;
-    min-height: 400px;
+    min-height: 600px;
 }
 
 .brutal-difference-card {
@@ -372,18 +372,72 @@
     transform: translateY(50px) rotate(10deg) scale(0.7);
 }
 
+.brutal-difference-card.difference-9 {
+    top: 25%;
+    left: 80%;
+    animation-delay: 1.7s;
+    transform: translateY(-200px) rotate(-25deg) scale(1.3);
+}
+
+.brutal-difference-card.difference-10 {
+    top: 65%;
+    left: 15%;
+    animation-delay: 1.9s;
+    transform: translateY(-300px) rotate(20deg) scale(0.8);
+}
+
+.brutal-difference-card.difference-11 {
+    top: 35%;
+    left: 25%;
+    animation-delay: 2.1s;
+    transform: translateY(-250px) rotate(-18deg) scale(1.1);
+}
+
+.brutal-difference-card.difference-12 {
+    top: 85%;
+    right: 20%;
+    animation-delay: 2.3s;
+    transform: translateY(-180px) rotate(22deg) scale(0.9);
+}
+
+.brutal-difference-card.difference-13 {
+    top: 45%;
+    left: 85%;
+    animation-delay: 2.5s;
+    transform: translateY(-220px) rotate(-12deg) scale(1.2);
+}
+
+.brutal-difference-card.difference-14 {
+    top: 70%;
+    left: 60%;
+    animation-delay: 2.7s;
+    transform: translateY(-280px) rotate(15deg) scale(0.6);
+}
+
 @keyframes differenceAppear {
     0% {
         opacity: 0;
-        transform: translateY(50px) rotate(-10deg);
+        transform: translateY(-200px) rotate(-15deg) scale(0.8);
     }
-    50% {
-        opacity: 0.7;
-        transform: translateY(-10px) rotate(5deg);
+    20% {
+        opacity: 0.3;
+        transform: translateY(100px) rotate(10deg) scale(1.1);
+    }
+    40% {
+        opacity: 0.6;
+        transform: translateY(-20px) rotate(-5deg) scale(0.9);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateY(30px) rotate(3deg) scale(1.05);
+    }
+    80% {
+        opacity: 0.9;
+        transform: translateY(-5px) rotate(-1deg) scale(0.98);
     }
     100% {
         opacity: 1;
-        transform: translateY(0px) rotate(0deg);
+        transform: translateY(0px) rotate(0deg) scale(1);
     }
 }
 
@@ -1161,14 +1215,14 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 60px;
     margin-top: 40px;
     position: relative;
-    min-height: 500px;
+    min-height: 800px;
 }
 
 .brutal-chaos-brick {
-    background: var(--brutal-dark-gray);
+    background: var(--brutal-white);
     border: var(--brutal-border);
     padding: 40px 30px;
     box-shadow: var(--brutal-shadow);

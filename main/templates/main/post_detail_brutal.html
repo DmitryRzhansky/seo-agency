@@ -1,0 +1,128 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs post %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog-detail-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция статьи - брутальная -->
+<section class="brutal-post-hero">
+    <div class="brutal-container">
+        <div class="brutal-post-hero-content">
+            <h1 class="brutal-post-hero-title">{{ post.title }}</h1>
+            <div class="brutal-post-hero-meta">
+                <div class="brutal-post-hero-category">{{ post.category.name }}</div>
+                <div class="brutal-post-hero-date">{{ post.published_date|date:"d.m.Y" }}</div>
+                <div class="brutal-post-hero-views">{{ post.views_count }} просмотров</div>
+            </div>
+            {% if post.excerpt %}
+            <p class="brutal-post-hero-excerpt">{{ post.excerpt }}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент статьи - брутальный -->
+<section class="brutal-post-content">
+    <div class="brutal-container">
+        <div class="brutal-post-content-wrapper">
+            <!-- Брутальные блоки контента -->
+            <div class="brutal-post-content-blocks">
+                <div class="brutal-post-content-block main">
+                    <div class="brutal-post-block-number">01</div>
+                    <h2>О статье</h2>
+                    <p>{{ post.excerpt|default:post.content|striptags|truncatewords:30 }}</p>
+                </div>
+                
+                <div class="brutal-post-content-block">
+                    <div class="brutal-post-block-number">02</div>
+                    <h3>Ключевые моменты</h3>
+                    <ul>
+                        <li>Практические советы и рекомендации</li>
+                        <li>Актуальная информация о SEO</li>
+                        <li>Реальные примеры и кейсы</li>
+                        <li>Экспертные мнения специалистов</li>
+                    </ul>
+                </div>
+                
+                <div class="brutal-post-content-block">
+                    <div class="brutal-post-block-number">03</div>
+                    <h3>Время чтения</h3>
+                    <p>Примерно {{ post.content|length|add:500|floatformat:0|div:200|floatformat:0 }} минут</p>
+                </div>
+                
+                <div class="brutal-post-content-block content">
+                    <div class="brutal-post-block-number">04</div>
+                    <h3>Полный текст статьи</h3>
+                    <div class="brutal-post-text">
+                        {{ post.content|safe }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Изображение статьи справа -->
+            {% if post.image %}
+            <div class="brutal-post-image-container">
+                <img 
+                    src="{{ post.image.url }}" 
+                    class="brutal-post-image" 
+                    alt="{{ post.title }}"
+                >
+                <div class="brutal-post-image-overlay">
+                    {{ post.category.name }}
+                </div>
+                <div class="brutal-post-image-decoration"></div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Связанные статьи - брутальные -->
+{% if related_posts %}
+<section class="brutal-related-posts">
+    <div class="brutal-container">
+        <h2 class="brutal-related-posts-title">Вам может понравиться</h2>
+        <div class="brutal-related-posts-grid">
+            {% for related_post in related_posts %}
+            <article class="brutal-related-card">
+                {% if related_post.image %}
+                <img src="{{ related_post.image.url }}" class="brutal-related-card-image" alt="{{ related_post.title }}">
+                {% else %}
+                <div class="brutal-related-card-placeholder">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                {% endif %}
+                
+                <div class="brutal-related-card-content">
+                    <div class="brutal-related-card-category">{{ related_post.category.name }}</div>
+                    <h3 class="brutal-related-card-title">{{ related_post.title }}</h3>
+                    <p class="brutal-related-card-excerpt">
+                        {% if related_post.excerpt %}
+                            {{ related_post.excerpt|truncatewords:15 }}
+                        {% else %}
+                            {{ related_post.content|striptags|truncatewords:15 }}
+                        {% endif %}
+                    </p>
+                    <a href="{% url 'blog:post_detail' slug=related_post.slug %}" class="brutal-related-card-link">
+                        Читать далее
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock content %}

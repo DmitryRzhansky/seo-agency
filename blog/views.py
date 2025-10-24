@@ -16,7 +16,7 @@ def post_list(request):
 	# Получаем все активные категории для фильтрации
 	categories = Category.objects.filter(is_active=True).order_by('order', 'name')
 	
-	return render(request, 'main/post_list.html', {
+	return render(request, 'main/post_list_brutal.html', {
 		'title': 'Блог',
 		'page_obj': page_obj,
 		'is_paginated': page_obj.has_other_pages(),
@@ -42,7 +42,7 @@ def category_posts(request, slug):
 	# Получаем все активные категории для фильтрации
 	categories = Category.objects.filter(is_active=True).order_by('order', 'name')
 	
-	return render(request, 'main/post_list.html', {
+	return render(request, 'main/post_list_brutal.html', {
 		'title': category.name,
 		'page_obj': page_obj,
 		'is_paginated': page_obj.has_other_pages(),
@@ -77,7 +77,7 @@ def search_posts(request):
 	
 	title = f'Поиск: "{query}"' if query else 'Поиск по блогу'
 	
-	return render(request, 'main/post_list.html', {
+	return render(request, 'main/post_list_brutal.html', {
 		'title': title,
 		'page_obj': page_obj,
 		'is_paginated': page_obj.has_other_pages(),
@@ -99,7 +99,7 @@ def post_detail(request, slug):
 	# Получаем связанные статьи для блока "Вам может понравиться"
 	related_posts = post.get_related_posts(limit=3)
 	
-	return render(request, 'main/post_detail.html', {
+	return render(request, 'main/post_detail_brutal.html', {
 		'title': post.title,
 		'post': post,
 		'seo_object': post,  # Передаем пост как SEO-объект

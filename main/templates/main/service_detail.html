@@ -19,138 +19,94 @@
 
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/index-modern.css' %}">
+<link rel="stylesheet" href="{% static 'css/service-detail-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция детальной страницы -->
-<section class="service-detail-hero">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="service-detail-hero-content">
-                    <h1 class="service-detail-title">{{ service.title }}</h1>
-                    <p class="service-detail-subtitle">{{ service.short_description }}</p>
-                    
-                    <!-- Анимированные элементы -->
-                    <div class="service-hero-elements">
-                        <div class="service-element element-1">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="service-element element-2">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="service-element element-3">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="service-element element-4">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Hero секция детальной страницы - брутальная -->
+<section class="brutal-service-detail-hero">
+    <div class="brutal-container">
+        <div class="brutal-service-detail-hero-content">
+            <h1 class="brutal-service-detail-title">{{ service.title }}</h1>
+            <p class="brutal-service-detail-subtitle">{{ service.short_description }}</p>
         </div>
     </div>
 </section>
 
-        <!-- Основной контент -->
-        <section class="section-modern">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        {% if service.image %}
-                        <div class="row justify-content-center mb-5"> 
-                            <div class="col-lg-10">
-                                <div class="service-image-container">
-                                    <img 
-                                        src="{{ service.image.url }}" 
-                                        class="service-detail-image" 
-                                        alt="{{ service.get_image_alt }}"
-                                    >
-                                    <div class="service-image-overlay">
-                                        <div class="service-image-category">{{ service.category.title }}</div>
-                                        <div class="service-image-price">От 50 000 ₽</div>
-                                    </div>
-                                    <div class="service-image-decoration">
-                                        <div class="service-decoration-circle circle-1"></div>
-                                        <div class="service-decoration-circle circle-2"></div>
-                                        <div class="service-decoration-circle circle-3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        
-                        <div class="service-detail-content">
-                    <!-- Анимированные элементы контента -->
-                    <div class="content-elements">
-                        <div class="content-element element-1">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="content-element element-2">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="content-element element-3">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="content-element element-4">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="service-detail-text">
+        <!-- Основной контент - брутальный -->
+        <section class="brutal-service-detail-content">
+            <div class="brutal-container">
+                <div class="brutal-service-detail-wrapper">
+                    <!-- Текстовый контент -->
+                    <div class="brutal-service-text-content">
                         {{ service.content|safe }}
                     </div>
+                    
+                    <!-- Изображение - авангардное расположение -->
+                    {% if service.image %}
+                    <div class="brutal-service-image-container">
+                        <img 
+                            src="{{ service.image.url }}" 
+                            class="brutal-service-image" 
+                            alt="{{ service.get_image_alt }}"
+                        >
+                        <div class="brutal-service-image-overlay">
+                            {{ service.category.title }}
+                        </div>
+                        <div class="brutal-service-image-decoration"></div>
+                    </div>
+                    {% endif %}
                 </div>
+            </div>
+        </section>
                 
-                <!-- CTA блок -->
-                <div class="service-cta-modern">
-                    <h3 class="service-cta-title">Готовы обсудить вашу задачу?</h3>
-                    <p class="service-cta-text">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
-                    <a href="{% url 'main:home' %}#contact" class="service-cta-btn">
-                        <i class="fas fa-paper-plane me-2"></i>Получить консультацию
-                    </a>
-                </div>
-
-                <!-- Навигация -->
-                <div class="text-center mt-4">
-                    <a href="{% url 'services:service_category' slug=service.category.slug %}" class="service-card-link">
-                        <i class="fas fa-chevron-left me-2"></i>Вернуться в раздел "{{ service.category.title }}"
+        <!-- CTA блок - брутальный -->
+        <section class="brutal-service-cta">
+            <div class="brutal-container">
+                <div class="brutal-service-cta-content">
+                    <h3 class="brutal-service-cta-title">Готовы обсудить вашу задачу?</h3>
+                    <p class="brutal-service-cta-text">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
+                    <a href="{% url 'main:home' %}#contact" class="brutal-service-cta-btn">
+                        Получить консультацию
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-<!-- Блок "Еще услуги" -->
+        <!-- Навигация - брутальная -->
+        <section class="brutal-service-navigation">
+            <div class="brutal-container">
+                <a href="{% url 'services:service_category' slug=service.category.slug %}" class="brutal-service-nav-link">
+                    ← Вернуться в раздел "{{ service.category.title }}"
+                </a>
+            </div>
+        </section>
+
+<!-- Блок "Еще услуги" - брутальный -->
 {% if related_services %}
-<section class="related-services-modern">
-    <div class="container">
-        <h2 class="related-services-title">Еще услуги</h2>
-        <div class="row g-4">
+<section class="brutal-related-services">
+    <div class="brutal-container">
+        <h2 class="brutal-related-services-title">Еще услуги</h2>
+        <div class="brutal-related-grid">
             {% for related_service in related_services %}
-            <div class="col-lg-4 col-md-6">
-                <div class="related-service-card">
-                    {% if related_service.image %}
-                        <img src="{{ related_service.image.url }}" class="related-service-image" alt="{{ related_service.get_image_alt }}">
-                    {% endif %}
-                    <div class="related-service-content">
-                        <div class="related-service-category">{{ related_service.category.title }}</div>
-                        <h3 class="related-service-title">
-                            <a href="{{ related_service.get_absolute_url }}" class="text-decoration-none" style="color: inherit;">
-                                {{ related_service.title }}
-                            </a>
-                        </h3>
-                        <p class="related-service-description">
-                            {{ related_service.short_description|truncatewords:25 }}
-                        </p>
-                        <a href="{{ related_service.get_absolute_url }}" class="related-service-link">
-                            Подробнее <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="brutal-related-card">
+                {% if related_service.image %}
+                <img src="{{ related_service.image.url }}" class="brutal-related-image" alt="{{ related_service.get_image_alt }}">
+                {% endif %}
+                <div class="brutal-related-category">{{ related_service.category.title }}</div>
+                <h3 class="brutal-related-title">
+                    <a href="{{ related_service.get_absolute_url }}" style="color: inherit; text-decoration: none;">
+                        {{ related_service.title }}
+                    </a>
+                </h3>
+                <p class="brutal-related-description">
+                    {{ related_service.short_description|truncatewords:25 }}
+                </p>
+                <a href="{{ related_service.get_absolute_url }}" class="brutal-related-link">
+                    Подробнее
+                </a>
             </div>
             {% endfor %}
         </div>

@@ -1,0 +1,502 @@
+/* Брутальный стиль для детальной страницы услуги */
+
+/* Переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #333333;
+    --brutal-green: #00ff00;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 12px 12px 0px var(--brutal-black);
+}
+
+/* Общие стили */
+* {
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero секция - брутальная */
+.brutal-service-detail-hero {
+    background: var(--brutal-white);
+    padding: 80px 0;
+    position: relative;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-service-detail-hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brutal-service-detail-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    position: relative;
+    line-height: 1.1;
+}
+
+.brutal-service-detail-title::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -60px;
+    font-size: 1.5rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+}
+
+.brutal-service-detail-subtitle {
+    font-size: 1.3rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.4;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+/* Основной контент - брутальный */
+.brutal-service-detail-content {
+    background: var(--brutal-gray);
+    padding: 80px 0;
+    position: relative;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-service-detail-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 60px;
+    align-items: start;
+}
+
+/* Изображение - авангардное расположение */
+.brutal-service-image-container {
+    position: relative;
+    order: 2;
+}
+
+.brutal-service-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.brutal-service-image:hover {
+    transform: rotate(2deg) scale(1.02);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-service-image-overlay {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 10px 20px;
+    border: 2px solid var(--brutal-black);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.brutal-service-image-decoration {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100px;
+    height: 100px;
+    background: var(--brutal-green);
+    border: 3px solid var(--brutal-black);
+    transform: rotate(45deg);
+    z-index: -1;
+}
+
+/* Текстовый контент */
+.brutal-service-text-content {
+    order: 1;
+    background: var(--brutal-white);
+    padding: 40px;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    position: relative;
+}
+
+.brutal-service-text-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--brutal-green);
+}
+
+.brutal-service-text-content h1,
+.brutal-service-text-content h2,
+.brutal-service-text-content h3,
+.brutal-service-text-content h4,
+.brutal-service-text-content h5,
+.brutal-service-text-content h6 {
+    color: var(--brutal-black);
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-left: 4px solid var(--brutal-green);
+    padding-left: 15px;
+}
+
+.brutal-service-text-content h1 {
+    font-size: 2rem;
+    border-left: 6px solid var(--brutal-green);
+}
+
+.brutal-service-text-content h2 {
+    font-size: 1.6rem;
+}
+
+.brutal-service-text-content h3 {
+    font-size: 1.4rem;
+}
+
+.brutal-service-text-content p {
+    color: var(--brutal-dark-gray);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.brutal-service-text-content ul,
+.brutal-service-text-content ol {
+    margin-bottom: 20px;
+    padding-left: 30px;
+}
+
+.brutal-service-text-content li {
+    color: var(--brutal-dark-gray);
+    line-height: 1.6;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.brutal-service-text-content ul li::before {
+    content: '▶';
+    color: var(--brutal-green);
+    font-weight: 700;
+    position: absolute;
+    left: -20px;
+}
+
+.brutal-service-text-content ol {
+    counter-reset: brutal-counter;
+}
+
+.brutal-service-text-content ol li {
+    counter-increment: brutal-counter;
+    position: relative;
+}
+
+.brutal-service-text-content ol li::before {
+    content: counter(brutal-counter) '.';
+    color: var(--brutal-green);
+    font-weight: 700;
+    position: absolute;
+    left: -25px;
+    min-width: 20px;
+}
+
+.brutal-service-text-content strong {
+    color: var(--brutal-black);
+    font-weight: 700;
+    background: linear-gradient(120deg, var(--brutal-green) 0%, transparent 100%);
+    padding: 2px 4px;
+}
+
+.brutal-service-text-content blockquote {
+    border-left: 4px solid var(--brutal-green);
+    background: var(--brutal-gray);
+    padding: 20px;
+    margin: 30px 0;
+    font-style: italic;
+    position: relative;
+}
+
+.brutal-service-text-content blockquote::before {
+    content: '"';
+    font-size: 4rem;
+    color: var(--brutal-green);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-family: serif;
+}
+
+/* CTA блок - брутальный */
+.brutal-service-cta {
+    background: var(--brutal-white);
+    padding: 60px 0;
+    text-align: center;
+    border-top: var(--brutal-border);
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-service-cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--brutal-gray);
+    padding: 40px;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    position: relative;
+}
+
+.brutal-service-cta-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--brutal-green);
+}
+
+.brutal-service-cta-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.brutal-service-cta-text {
+    font-size: 1.1rem;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.brutal-service-cta-btn {
+    display: inline-block;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 15px 30px;
+    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.brutal-service-cta-btn:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0px var(--brutal-green);
+}
+
+/* Навигация */
+.brutal-service-navigation {
+    text-align: center;
+    padding: 40px 0;
+    background: var(--brutal-white);
+}
+
+.brutal-service-nav-link {
+    display: inline-block;
+    color: var(--brutal-dark-gray);
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 2px solid var(--brutal-black);
+    background: var(--brutal-white);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.brutal-service-nav-link:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    transform: translateX(-5px);
+}
+
+/* Связанные услуги - брутальные */
+.brutal-related-services {
+    background: var(--brutal-gray);
+    padding: 80px 0;
+    border-top: 4px solid var(--brutal-green);
+}
+
+.brutal-related-services-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.brutal-related-services-title::before {
+    content: '▶';
+    position: absolute;
+    top: -15px;
+    left: -50px;
+    font-size: 1.2rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+}
+
+.brutal-related-services-title::after {
+    content: '◀';
+    position: absolute;
+    top: -15px;
+    right: -50px;
+    font-size: 1.2rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+}
+
+.brutal-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.brutal-related-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 30px;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 250px;
+    border-left: 6px solid var(--brutal-green);
+}
+
+.brutal-related-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--brutal-green);
+}
+
+.brutal-related-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-related-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid var(--brutal-black);
+    margin-bottom: 20px;
+}
+
+.brutal-related-category {
+    font-size: 0.9rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.brutal-related-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.brutal-related-description {
+    font-size: 0.95rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.brutal-related-link {
+    display: inline-block;
+    margin-top: auto;
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid var(--brutal-green);
+    transition: all 0.3s ease;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.brutal-related-link:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    border-color: var(--brutal-black);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-service-detail-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .brutal-service-image-container {
+        order: 1;
+    }
+    
+    .brutal-service-text-content {
+        order: 2;
+    }
+    
+    .brutal-service-detail-title {
+        font-size: 2.5rem;
+    }
+    
+    .brutal-service-detail-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .brutal-service-text-content {
+        padding: 25px;
+    }
+    
+    .brutal-related-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

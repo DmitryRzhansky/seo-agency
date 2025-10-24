@@ -1,0 +1,246 @@
+/* Брутальный стиль для страницы категории услуг */
+
+/* Переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #333333;
+    --brutal-green: #00ff00;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 12px 12px 0px var(--brutal-black);
+}
+
+/* Общие стили */
+* {
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero секция категории - брутальная */
+.brutal-category-hero {
+    background: var(--brutal-white);
+    padding: 80px 0;
+    position: relative;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-category-hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brutal-category-hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    position: relative;
+}
+
+.brutal-category-hero-title::after {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -60px;
+    font-size: 1.5rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+}
+
+.brutal-category-hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+/* Список услуг категории - брутальный */
+.brutal-category-services {
+    background: var(--brutal-gray);
+    padding: 80px 0;
+    position: relative;
+}
+
+.brutal-category-services-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.brutal-category-services-title::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -50px;
+    font-size: 1.2rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+}
+
+/* Сетка услуг - брутальная */
+.brutal-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.brutal-category-service-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 30px;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+}
+
+.brutal-category-service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-category-service-card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: 2px solid var(--brutal-black);
+    margin-bottom: 20px;
+}
+
+.brutal-category-service-card-placeholder {
+    width: 100%;
+    height: 200px;
+    background: var(--brutal-gray);
+    border: 2px solid var(--brutal-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.brutal-category-service-card-placeholder i {
+    font-size: 3rem;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-category-service-card-category {
+    font-size: 0.9rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.brutal-category-service-card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.brutal-category-service-card-description {
+    font-size: 1rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.brutal-category-service-card-link {
+    display: inline-block;
+    margin-top: auto;
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 2px solid var(--brutal-green);
+    transition: all 0.3s ease;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.brutal-category-service-card-link:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+}
+
+/* Пустое состояние - брутальное */
+.brutal-empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    margin: 40px 0;
+}
+
+.brutal-empty-state i {
+    font-size: 4rem;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 20px;
+}
+
+.brutal-empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 10px;
+}
+
+.brutal-empty-state p {
+    font-size: 1rem;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-category-hero-title {
+        font-size: 2rem;
+    }
+    
+    .brutal-category-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .brutal-category-services-title {
+        font-size: 2rem;
+    }
+    
+    .brutal-category-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .brutal-category-service-card {
+        min-height: 250px;
+        padding: 25px;
+    }
+    
+    .brutal-category-service-card-image,
+    .brutal-category-service-card-placeholder {
+        height: 150px;
+    }
+}

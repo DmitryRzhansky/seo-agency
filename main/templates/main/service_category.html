@@ -9,83 +9,52 @@
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/index-modern.css' %}">
+<link rel="stylesheet" href="{% static 'css/service-category-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция категории услуг -->
-<section class="services-hero-modern">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <div class="services-hero-content">
-                    <h1 class="services-hero-title">{{ category.title }}</h1>
-                    <p class="services-hero-subtitle">Здесь вы найдете полный спектр услуг по тематике «{{ category.title }}». Выберите то, что нужно вашему бизнесу.</p>
-                </div>
-            </div>
-            <div class="col-lg-4 mt-4 mt-lg-0 d-flex justify-content-center align-items-center">
-                <div class="hero-visual-modern">
-                    <div class="floating-elements">
-                        <div class="floating-element element-1">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <div class="floating-element element-2">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="floating-element element-3">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <div class="floating-element element-4">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                    </div>
-                    <i class="fas fa-briefcase services-hero-icon"></i>
-                </div>
-            </div>
+<!-- Hero секция категории услуг - брутальная -->
+<section class="brutal-category-hero">
+    <div class="brutal-container">
+        <div class="brutal-category-hero-content">
+            <h1 class="brutal-category-hero-title">{{ category.title }}</h1>
+            <p class="brutal-category-hero-subtitle">Здесь вы найдете полный спектр услуг по тематике «{{ category.title }}». Выберите то, что нужно вашему бизнесу.</p>
         </div>
     </div>
 </section>
 
-<!-- Список услуг категории -->
-<section class="section-modern">
-    <div class="container">
-        <h2 class="services-hero-title text-center mb-5">Наши услуги в разделе «{{ category.title }}»</h2>
+<!-- Список услуг категории - брутальный -->
+<section class="brutal-category-services">
+    <div class="brutal-container">
+        <h2 class="brutal-category-services-title">Наши услуги в разделе «{{ category.title }}»</h2>
         
         {% if services %}
-        <div class="services-grid-modern">
+        <div class="brutal-category-grid">
             {% for service in services %}
-            <div class="service-card-modern">
-                <div class="service-card-image-container">
-                    {% if service.image %}
-                    <img src="{{ service.image.url }}" class="service-card-image" alt="{{ service.get_image_alt }}">
-                    {% else %}
-                    <div class="service-card-placeholder">
-                        <i class="fas fa-cogs service-placeholder-icon"></i>
-                    </div>
-                    {% endif %}
-                    <div class="service-card-overlay">
-                        <div class="service-card-category-overlay">{{ service.category.title }}</div>
-                    </div>
+            <div class="brutal-category-service-card">
+                {% if service.image %}
+                <img src="{{ service.image.url }}" class="brutal-category-service-card-image" alt="{{ service.get_image_alt }}">
+                {% else %}
+                <div class="brutal-category-service-card-placeholder">
+                    <i class="fas fa-cogs"></i>
                 </div>
-                <div class="service-card-content">
-                    <div class="service-card-category">{{ service.category.title }}</div>
-                    <h3 class="service-card-title">{{ service.title }}</h3>
-                    <p class="service-card-description">{{ service.short_description }}</p>
-                    <a href="{% url 'services:service_detail' slug=service.slug %}" class="service-card-link">
-                        Подробнее об услуге <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                {% endif %}
+                <div class="brutal-category-service-card-category">{{ service.category.title }}</div>
+                <h3 class="brutal-category-service-card-title">{{ service.title }}</h3>
+                <p class="brutal-category-service-card-description">{{ service.short_description }}</p>
+                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-category-service-card-link">
+                    Подробнее об услуге
+                </a>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="text-center py-5">
-            <div class="empty-state">
-                <i class="fas fa-search fa-5x text-muted mb-4"></i>
-                <h3 class="text-muted">В этом разделе пока нет добавленных услуг</h3>
-                <p class="text-muted">Мы работаем над наполнением этого раздела. Скоро здесь появятся новые услуги!</p>
-            </div>
+        <div class="brutal-empty-state">
+            <i class="fas fa-search"></i>
+            <h3>В этом разделе пока нет добавленных услуг</h3>
+            <p>Мы работаем над наполнением этого раздела. Скоро здесь появятся новые услуги!</p>
         </div>
         {% endif %}
     </div>

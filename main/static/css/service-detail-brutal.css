@@ -76,18 +76,15 @@
 }
 
 .brutal-service-detail-wrapper {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 30px;
-    align-items: start;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
 }
 
 /* Изображение - авангардное расположение */
 .brutal-service-image-container {
     position: relative;
-    grid-column: 2;
-    grid-row: 1 / 3;
+    flex: 0 0 300px;
     order: 2;
 }
 
@@ -132,25 +129,12 @@
 
 /* Текстовый контент */
 .brutal-service-text-content {
-    grid-column: 1;
-    grid-row: 1;
+    flex: 1;
     background: var(--brutal-white);
-    padding: 30px;
+    padding: 40px;
     border: var(--brutal-border);
     box-shadow: var(--brutal-shadow);
     position: relative;
-    min-height: 300px;
-}
-
-.brutal-service-text-content.second {
-    grid-column: 1;
-    grid-row: 2;
-    background: var(--brutal-white);
-    padding: 30px;
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
-    position: relative;
-    min-height: 300px;
 }
 
 .brutal-service-text-content::before {
@@ -539,27 +523,17 @@
 /* Адаптивность */
 @media (max-width: 768px) {
     .brutal-service-detail-wrapper {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        gap: 20px;
+        flex-direction: column;
+        gap: 30px;
     }
     
     .brutal-service-image-container {
-        grid-column: 1;
-        grid-row: 1;
+        flex: none;
         order: 1;
     }
     
     .brutal-service-text-content {
-        grid-column: 1;
-        grid-row: 2;
         order: 2;
-    }
-    
-    .brutal-service-text-content.second {
-        grid-column: 1;
-        grid-row: 3;
-        order: 3;
     }
     
     .brutal-service-detail-title {
@@ -571,27 +545,7 @@
     }
     
     .brutal-service-text-content {
-        padding: 25px;
-        min-height: 250px;
-    }
-    
-    .brutal-service-text-content.second {
-        min-height: 250px;
-    }
-    
-    .brutal-content-preview {
-        max-height: 200px;
-    }
-    
-    .brutal-content-full {
-        max-height: 400px;
-    }
-    
-    .brutal-cta-link {
-        display: block;
-        text-align: center;
-        margin: 15px auto 0;
-        max-width: 200px;
+        padding: 30px;
     }
     
     .brutal-related-grid {

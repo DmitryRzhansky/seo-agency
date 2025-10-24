@@ -39,36 +39,12 @@
         <section class="brutal-service-detail-content">
             <div class="brutal-container">
                 <div class="brutal-service-detail-wrapper">
-                    <!-- Первый текстовый блок -->
+                    <!-- Весь текстовый контент -->
                     <div class="brutal-service-text-content">
-                        <h2>Описание услуги</h2>
-                        <p>{{ service.short_description }}</p>
-                        {% if service.content %}
-                            <div class="brutal-content-preview">
-                                {{ service.content|truncatewords:50|safe }}
-                            </div>
-                        {% endif %}
+                        {{ service.content|safe }}
                     </div>
                     
-                    <!-- Второй текстовый блок -->
-                    <div class="brutal-service-text-content second">
-                        <h3>Подробная информация</h3>
-                        <div class="brutal-content-full">
-                            <p><strong>Если вам нужно продвижение, вы попали точно по адресу!</strong></p>
-                            <p>Мы специализируемся на комплексном продвижении сайтов любой сложности. Наша команда экспертов поможет вашему проекту занять лидирующие позиции в поисковых системах.</p>
-                            <p>Что мы предлагаем:</p>
-                            <ul>
-                                <li>Техническая оптимизация сайта</li>
-                                <li>Создание качественного контента</li>
-                                <li>Построение ссылочной массы</li>
-                                <li>Анализ конкурентов и рынка</li>
-                                <li>Еженедельная отчетность о результатах</li>
-                            </ul>
-                            <p>Готовы начать работу? <a href="#contacts" class="brutal-cta-link">Свяжитесь с нами прямо сейчас!</a></p>
-                        </div>
-                    </div>
-                    
-                    <!-- Изображение - авангардное расположение -->
+                    <!-- Изображение справа -->
                     {% if service.image %}
                     <div class="brutal-service-image-container">
                         <img 

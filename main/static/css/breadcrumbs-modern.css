@@ -44,13 +44,34 @@
     transition: all 0.3s ease;
 }
 
-.breadcrumb-item + .breadcrumb-item::before {
+.breadcrumb-item:not(:last-child)::after {
     content: "›";
     color: rgba(99, 102, 241, 0.6);
     font-weight: 600;
-    margin: 0 12px;
+    margin-left: 12px;
     font-size: 1.1rem;
     transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+/* Дополнительная защита для стрелочек */
+.breadcrumb-item:not(:last-child) {
+    position: relative;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+    content: "›";
+    color: rgba(99, 102, 241, 0.6);
+    font-weight: 600;
+    margin-left: 12px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
 }
 
 .breadcrumb-item a {
@@ -131,8 +152,8 @@
         font-size: 0.8rem;
     }
     
-    .breadcrumb-item + .breadcrumb-item::before {
-        margin: 0 8px;
+    .breadcrumb-item:not(:last-child)::after {
+        margin-left: 8px;
         font-size: 1rem;
     }
 }

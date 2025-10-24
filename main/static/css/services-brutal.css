@@ -64,7 +64,7 @@
 }
 
 .brutal-hero-title::after {
-    content: '[001]';
+    content: '';
     position: absolute;
     top: -20px;
     left: -60px;
@@ -217,11 +217,13 @@
 
 .brutal-minimal-card.main .brutal-minimal-title {
     font-size: 1.8rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    line-height: 1.1;
 }
 
 .brutal-minimal-card.main .brutal-minimal-description {
     font-size: 1.1rem;
+    margin-top: 0;
 }
 
 .brutal-minimal-title {
@@ -243,37 +245,18 @@
     box-shadow: 10px 10px 0px var(--brutal-black);
 }
 
-/* Нумерация для блоков */
-.brutal-minimal-card::before {
-    content: attr(data-number);
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.9rem;
-    border: 2px solid var(--brutal-black);
-}
-
+/* Метка для главного блока */
 .brutal-minimal-card.main::before {
     content: "[ГЛАВНОЕ]";
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    width: auto;
-    height: auto;
-    padding: 5px 10px;
-    border-radius: 0;
+    position: absolute;
     top: 15px;
     right: 15px;
-    left: auto;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 5px 10px;
     font-size: 0.8rem;
+    font-weight: 700;
+    border: 2px solid var(--brutal-black);
 }
 
 .brutal-minimal-card .brutal-service-card-link {
@@ -629,7 +612,7 @@
 }
 
 .brutal-services-title::before {
-    content: '[002]';
+    content: '';
     position: absolute;
     top: -15px;
     left: -50px;
@@ -808,7 +791,7 @@
 }
 
 .brutal-pricing-title::before {
-    content: '[003]';
+    content: '';
     position: absolute;
     top: -15px;
     left: -50px;
@@ -1328,10 +1311,10 @@
     position: relative;
 }
 
-/* Сетка для услуг - нестандартное расположение */
+/* Сетка для услуг - удобная и функциональная */
 .brutal-services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     margin-top: 40px;
     max-width: 1200px;
@@ -1339,36 +1322,105 @@
     margin-right: auto;
 }
 
+/* Первая карточка - выделенная */
+.brutal-services-grid .brutal-service-card:first-child {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    grid-column: span 2;
+    min-height: 200px;
+}
+
+.brutal-services-grid .brutal-service-card:first-child .brutal-service-card-title,
+.brutal-services-grid .brutal-service-card:first-child .brutal-service-card-description {
+    color: var(--brutal-white);
+}
+
+.brutal-services-grid .brutal-service-card:first-child .brutal-service-card-link {
+    color: var(--brutal-white);
+    border: 2px solid var(--brutal-white);
+}
+
+.brutal-services-grid .brutal-service-card:first-child .brutal-service-card-link:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-green);
+}
+
 .brutal-service-card {
     background: var(--brutal-white);
     border: 3px solid var(--brutal-black);
-    padding: 25px;
+    padding: 30px;
     box-shadow: 6px 6px 0px var(--brutal-black);
     transition: all 0.3s ease;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 180px;
 }
 
 .brutal-service-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 10px 10px 0px var(--brutal-black);
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 0px var(--brutal-black);
 }
 
 .brutal-service-card-title {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: var(--brutal-black);
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     line-height: 1.2;
 }
 
 .brutal-service-card-description {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--brutal-dark-gray);
-    line-height: 1.4;
-    margin-bottom: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.brutal-service-card-link {
+    display: inline-block;
+    margin-top: auto;
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid var(--brutal-green);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.brutal-service-card-link:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .brutal-services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+    .brutal-services-grid .brutal-service-card:first-child {
+        grid-column: span 1;
+    }
+    
+    .brutal-service-card {
+        min-height: 160px;
+        padding: 25px;
+    }
+    
+    .brutal-service-card-title {
+        font-size: 1.2rem;
+    }
+    
+    .brutal-service-card-description {
+        font-size: 0.9rem;
+    }
 }
 
 .brutal-chaos-grid {

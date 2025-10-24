@@ -13,15 +13,20 @@
 <section class="brutal-hero">
     <div class="brutal-container">
         <div class="brutal-hero-content">
-            <h1 class="brutal-hero-title">Что мы делаем</h1>
+            <h1 class="brutal-hero-title typing-text">Что мы делаем</h1>
             <div class="brutal-hero-animation">
-                <div class="brutal-hero-brick">SEO</div>
-                <div class="brutal-hero-brick">Контекст</div>
-                <div class="brutal-hero-brick">Аналитика</div>
-                <div class="brutal-hero-brick">Разработка</div>
-                <div class="brutal-hero-brick">Дизайн</div>
+                <div class="brutal-hero-brick brick-1">SEO</div>
+                <div class="brutal-hero-brick brick-2">Контекст</div>
+                <div class="brutal-hero-brick brick-3">Аналитика</div>
+                <div class="brutal-hero-brick brick-4">Разработка</div>
+                <div class="brutal-hero-brick brick-5">Дизайн</div>
             </div>
-            <p class="brutal-hero-subtitle">Комплексные решения для роста вашего бизнеса. Строим ваш успех кирпичик за кирпичиком.</p>
+            <p class="brutal-hero-subtitle">
+                Комплексные решения для роста вашего бизнеса. Строим ваш успех 
+                <span class="brick-text">кирпичик</span>
+                <span class="brick-text">за</span>
+                <span class="brick-text">кирпичиком.</span>
+            </p>
         </div>
     </div>
 </section>
@@ -29,7 +34,7 @@
 <!-- Секция услуг - брутальная сетка -->
 <section class="brutal-services">
     <div class="brutal-container">
-        <h2 class="brutal-services-title">Наши услуги</h2>
+        <h2 class="brutal-services-title">Чем мы отличаемся</h2>
         
         <div class="brutal-services-grid">
             <!-- Главная карточка (зеленая, большая) - первая услуга -->
@@ -130,47 +135,12 @@
     <div class="brutal-container">
         <h2 class="brutal-services-title">Все услуги</h2>
         
-        <!-- Кирпичный дом - разделы услуг -->
+        <!-- Кирпичный дом - категории услуг -->
         <div class="brutal-brick-house">
-            <div class="brutal-brick-row">
-                <div class="brutal-brick-card">
-                    <h3 class="brutal-service-card-title">Аудит</h3>
-                    <p class="brutal-service-card-description">Находим проблемы</p>
-                </div>
-            </div>
-            <div class="brutal-brick-row">
-                <div class="brutal-brick-card">
-                    <h3 class="brutal-service-card-title">Техническое SEO</h3>
-                    <p class="brutal-service-card-description">Исправляем ошибки</p>
-                </div>
-                <div class="brutal-brick-card special">
-                    <h3 class="brutal-service-card-title">Продвижение</h3>
-                    <p class="brutal-service-card-description">Растем в поиске</p>
-                </div>
-                <div class="brutal-brick-card">
-                    <h3 class="brutal-service-card-title">Контент</h3>
-                    <p class="brutal-service-card-description">Пишем тексты</p>
-                </div>
-            </div>
-            <div class="brutal-brick-row">
-                <div class="brutal-brick-card">
-                    <h3 class="brutal-service-card-title">Ссылки</h3>
-                    <p class="brutal-service-card-description">Получаем авторитет</p>
-                </div>
-                <div class="brutal-brick-card">
-                    <h3 class="brutal-service-card-title">Аналитика</h3>
-                    <p class="brutal-service-card-description">Отслеживаем результат</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Лестница - категории услуг -->
-        <div class="brutal-all-services-grid">
             {% for category in categories %}
-            <div class="brutal-stair-card">
-                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
+            <div class="brutal-brick-card brick-size-{{ forloop.counter|add:1 }}">
                 <h3 class="brutal-service-card-title">{{ category.title }}</h3>
-                <p class="brutal-service-card-description">{{ category.description|truncatewords:15 }}</p>
+                <p class="brutal-service-card-description">{{ category.description|truncatewords:10 }}</p>
                 <a href="{% url 'services:service_category' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
             </div>
             {% endfor %}

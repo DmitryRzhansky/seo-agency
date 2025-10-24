@@ -104,6 +104,32 @@
 .brutal-hero-brick:nth-child(4) { animation-delay: 0.4s; }
 .brutal-hero-brick:nth-child(5) { animation-delay: 0.5s; }
 
+/* Разные размеры кирпичиков */
+.brutal-hero-brick.brick-1 {
+    animation-delay: 0.2s;
+    transform: translateY(50px) rotate(-5deg) scale(0.8);
+}
+
+.brutal-hero-brick.brick-2 {
+    animation-delay: 0.4s;
+    transform: translateY(50px) rotate(3deg) scale(1.1);
+}
+
+.brutal-hero-brick.brick-3 {
+    animation-delay: 0.6s;
+    transform: translateY(50px) rotate(-2deg) scale(0.9);
+}
+
+.brutal-hero-brick.brick-4 {
+    animation-delay: 0.8s;
+    transform: translateY(50px) rotate(4deg) scale(1.2);
+}
+
+.brutal-hero-brick.brick-5 {
+    animation-delay: 1.0s;
+    transform: translateY(50px) rotate(-3deg) scale(0.7);
+}
+
 @keyframes heroBrickBuild {
     0% {
         opacity: 0;
@@ -132,6 +158,52 @@
     margin-top: 30px;
     line-height: 1.2;
     max-width: 600px;
+}
+
+/* Анимация набора текста */
+.typing-text {
+    overflow: hidden;
+    border-right: 3px solid var(--brutal-green);
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--brutal-green); }
+}
+
+/* Стилизация текста "кирпичик за кирпичиком" */
+.brick-text {
+    display: inline-block;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 2px solid var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+    transform: rotate(-2deg);
+    animation: brickTextFloat 2s ease-in-out infinite;
+}
+
+.brick-text:nth-child(2) {
+    animation-delay: 0.5s;
+    transform: rotate(1deg);
+}
+
+.brick-text:nth-child(3) {
+    animation-delay: 1s;
+    transform: rotate(-1deg);
+}
+
+@keyframes brickTextFloat {
+    0%, 100% { transform: rotate(-2deg) translateY(0px); }
+    50% { transform: rotate(-2deg) translateY(-5px); }
 }
 
 /* Секция услуг - брутальная сетка */
@@ -738,8 +810,9 @@
 /* Кирпичный дом из разделов услуг */
 .brutal-brick-house {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
     gap: 20px;
     margin-top: 40px;
     margin-bottom: 60px;
@@ -768,6 +841,8 @@
     animation: brickBuild 0.8s ease-out forwards;
     opacity: 0;
     transform: translateY(50px);
+    margin: 10px;
+    flex: 0 0 auto;
 }
 
 .brutal-brick-card:nth-child(1) { animation-delay: 0.1s; }
@@ -808,6 +883,37 @@
 .brutal-brick-card.special:hover {
     transform: translateY(-8px) rotate(-3deg) scale(1.15);
     box-shadow: 20px 20px 0px var(--brutal-black);
+}
+
+/* Разные размеры кирпичиков для категорий */
+.brutal-brick-card.brick-size-1 {
+    transform: scale(0.8) rotate(-2deg);
+    animation-delay: 0.1s;
+}
+
+.brutal-brick-card.brick-size-2 {
+    transform: scale(1.1) rotate(1deg);
+    animation-delay: 0.2s;
+}
+
+.brutal-brick-card.brick-size-3 {
+    transform: scale(0.9) rotate(-1deg);
+    animation-delay: 0.3s;
+}
+
+.brutal-brick-card.brick-size-4 {
+    transform: scale(1.2) rotate(2deg);
+    animation-delay: 0.4s;
+}
+
+.brutal-brick-card.brick-size-5 {
+    transform: scale(0.7) rotate(-3deg);
+    animation-delay: 0.5s;
+}
+
+.brutal-brick-card.brick-size-6 {
+    transform: scale(1.0) rotate(1deg);
+    animation-delay: 0.6s;
 }
 
 

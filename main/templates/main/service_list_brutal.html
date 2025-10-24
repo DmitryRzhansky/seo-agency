@@ -25,41 +25,61 @@
         <h2 class="brutal-services-title">Наши услуги</h2>
         
         <div class="brutal-services-grid">
-            <!-- Главная карточка (зеленая, большая) -->
-            <div class="brutal-main-card">
-                <h3 class="brutal-main-card-title">Находим, где у вас косяки</h3>
-                <p class="brutal-main-card-description">Технический аудит, семантика, анализ конкурентов. За 48 часов.</p>
-                <a href="{% url 'services:service_list' %}?category=audit" class="brutal-main-card-link">Заказать аудит</a>
-            </div>
+            <!-- Главная карточка (зеленая, большая) - первая услуга -->
+            {% if filtered_services %}
+                {% with first_service=filtered_services.0 %}
+                <div class="brutal-main-card">
+                    <h3 class="brutal-main-card-title">{{ first_service.title }}</h3>
+                    <p class="brutal-main-card-description">{{ first_service.short_description }}</p>
+                    <a href="{% url 'services:service_detail' slug=first_service.slug %}" class="brutal-main-card-link">Подробнее</a>
+                </div>
+                {% endwith %}
 
-            <!-- Обычные карточки услуг -->
-            <div class="brutal-service-card">
-                <div class="brutal-service-card-number">02.</div>
-                <h3 class="brutal-service-card-title">Чиним всё, что сломано</h3>
-                <p class="brutal-service-card-description">Скорость, индексация, структура, мета-теги, разметка. Без воды.</p>
-                <a href="{% url 'services:service_list' %}?category=optimization" class="brutal-service-card-link">Подробнее →</a>
-            </div>
+                <!-- Остальные услуги -->
+                {% for service in filtered_services|slice:"1:5" %}
+                <div class="brutal-service-card">
+                    <div class="brutal-service-card-number">{{ forloop.counter|add:1 }}.</div>
+                    <h3 class="brutal-service-card-title">{{ service.title }}</h3>
+                    <p class="brutal-service-card-description">{{ service.short_description|truncatewords:15 }}</p>
+                    <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <!-- Если нет услуг, показываем заглушки -->
+                <div class="brutal-main-card">
+                    <h3 class="brutal-main-card-title">Находим, где у вас косяки</h3>
+                    <p class="brutal-main-card-description">Технический аудит, семантика, анализ конкурентов. За 48 часов.</p>
+                    <a href="{% url 'main:contacts' %}" class="brutal-main-card-link">Заказать аудит</a>
+                </div>
 
-            <div class="brutal-service-card">
-                <div class="brutal-service-card-number">03.</div>
-                <h3 class="brutal-service-card-title">Пишем нормальные тексты</h3>
-                <p class="brutal-service-card-description">Не шлак с ключами через слово, а полезный контент для людей.</p>
-                <a href="{% url 'services:service_list' %}?category=content" class="brutal-service-card-link">Подробнее →</a>
-            </div>
+                <div class="brutal-service-card">
+                    <div class="brutal-service-card-number">02.</div>
+                    <h3 class="brutal-service-card-title">Чиним всё, что сломано</h3>
+                    <p class="brutal-service-card-description">Скорость, индексация, структура, мета-теги, разметка. Без воды.</p>
+                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
+                </div>
 
-            <div class="brutal-service-card">
-                <div class="brutal-service-card-number">04.</div>
-                <h3 class="brutal-service-card-title">Получаем ссылки</h3>
-                <p class="brutal-service-card-description">Белые методы: PR, гостевые посты. Никаких бирж и помоек.</p>
-                <a href="{% url 'services:service_list' %}?category=linkbuilding" class="brutal-service-card-link">Подробнее →</a>
-            </div>
+                <div class="brutal-service-card">
+                    <div class="brutal-service-card-number">03.</div>
+                    <h3 class="brutal-service-card-title">Пишем нормальные тексты</h3>
+                    <p class="brutal-service-card-description">Не шлак с ключами через слово, а полезный контент для людей.</p>
+                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
+                </div>
 
-            <div class="brutal-service-card">
-                <div class="brutal-service-card-number">05.</div>
-                <h3 class="brutal-service-card-title">Показываем результат</h3>
-                <p class="brutal-service-card-description">Отчёты с реальными цифрами каждый месяц.</p>
-                <a href="{% url 'services:service_list' %}?category=analytics" class="brutal-service-card-link">Подробнее →</a>
-            </div>
+                <div class="brutal-service-card">
+                    <div class="brutal-service-card-number">04.</div>
+                    <h3 class="brutal-service-card-title">Получаем ссылки</h3>
+                    <p class="brutal-service-card-description">Белые методы: PR, гостевые посты. Никаких бирж и помоек.</p>
+                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
+                </div>
+
+                <div class="brutal-service-card">
+                    <div class="brutal-service-card-number">05.</div>
+                    <h3 class="brutal-service-card-title">Показываем результат</h3>
+                    <p class="brutal-service-card-description">Отчёты с реальными цифрами каждый месяц.</p>
+                    <a href="{% url 'main:contacts' %}" class="brutal-service-card-link">Подробнее →</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -96,6 +116,26 @@
         </div>
     </div>
 </section>
+
+<!-- Полный список услуг -->
+{% if filtered_services and filtered_services|length > 5 %}
+<section class="brutal-services">
+    <div class="brutal-container">
+        <h2 class="brutal-services-title">Все услуги</h2>
+        
+        <div class="brutal-all-services-grid">
+            {% for service in filtered_services %}
+            <div class="brutal-service-card">
+                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
+                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
+                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:15 }}</p>
+                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
 
 <!-- CTA секция -->
 <section class="brutal-cta">

@@ -216,7 +216,7 @@
 .brutal-service-card-number {
     position: absolute;
     top: 20px;
-    left: 20px;
+    right: 20px;
     font-size: 1.5rem;
     font-weight: 900;
     color: var(--brutal-black);
@@ -383,14 +383,23 @@
     color: var(--brutal-black);
 }
 
+/* Полный список услуг */
+.brutal-all-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
 /* CTA секция */
 .brutal-cta {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
+    background: var(--brutal-white);
+    color: var(--brutal-black);
     padding: 80px 0;
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-top: var(--brutal-border);
 }
 
 .brutal-cta::before {
@@ -430,24 +439,24 @@
 
 .brutal-cta-button {
     display: inline-block;
-    background: var(--brutal-green);
-    color: var(--brutal-black);
+    background: var(--brutal-black);
+    color: var(--brutal-white);
     padding: 20px 40px;
     text-decoration: none;
     font-weight: 900;
     font-size: 1.2rem;
-    border: 4px solid var(--brutal-green);
+    border: 4px solid var(--brutal-black);
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 8px 8px 0px var(--brutal-white);
+    box-shadow: 8px 8px 0px var(--brutal-green);
 }
 
 .brutal-cta-button:hover {
-    background: var(--brutal-white);
+    background: var(--brutal-green);
     color: var(--brutal-black);
     transform: translateY(-2px);
-    box-shadow: 12px 12px 0px var(--brutal-white);
+    box-shadow: 12px 12px 0px var(--brutal-black);
 }
 
 /* Адаптивность */

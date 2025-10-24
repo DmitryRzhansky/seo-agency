@@ -463,24 +463,24 @@ class Service(SEOModel):
         return breadcrumbs
     
     def get_related_services(self, limit=3):
-        """Возвращает связанные услуги для блока 'Еще услуги'"""
-        # Сначала ищем услуги из той же категории
-        related = Service.objects.filter(
-            category=self.category,
+        """Возвращает случайные услуги для блока 'Еще услуги'"""
+        from django.db.models import Q
+        from random import sample
+        
+        # Получаем все опубликованные услуги кроме текущей
+        all_services = Service.objects.filter(
             is_published=True
-        ).exclude(pk=self.pk).order_by('order')[:limit]
+        ).exclude(pk=self.pk)
         
-        # Если не хватает услуг из той же категории, дополняем из других категорий
-        if related.count() < limit:
-            remaining = limit - related.count()
-            additional = Service.objects.filter(
-                is_published=True
-            ).exclude(
-                pk__in=[s.pk for s in related]
-            ).exclude(pk=self.pk).order_by('order')[:remaining]
-            related = list(related) + list(additional)
+        # Если услуг меньше лимита, возвращаем все доступные
+        if all_services.count() <= limit:
+            return list(all_services)
         
-        return related
+        # Получаем случайные услуги
+        services_list = list(all_services)
+        random_services = sample(services_list, limit)
+        
+        return random_services
 
 
 

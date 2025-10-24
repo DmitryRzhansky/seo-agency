@@ -801,6 +801,228 @@ body {
     }
 }
 
+/* === СОВРЕМЕННЫЙ ХЕДЕР === */
+.navbar-modern {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-modern.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand-modern {
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-brand-modern:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.nav-link-modern {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 600;
+    padding: 10px 20px !important;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link-modern:hover {
+    color: #ffffff !important;
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+}
+
+.nav-link-modern.active {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff !important;
+}
+
+/* === ГОРИЗОНТАЛЬНОЕ ВЫПАДАЮЩЕЕ МЕНЮ УСЛУГ === */
+.services-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 1000;
+    max-width: 100vw;
+    overflow-x: auto;
+}
+
+.services-mega-menu.show {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-category-modern {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.service-category-modern:hover {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.3);
+    transform: translateY(-5px);
+}
+
+.category-title-modern {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #6366f1;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-title-modern::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(135deg, #6366f1, #ec4899);
+    border-radius: 2px;
+}
+
+.services-list-modern {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.services-list-modern li {
+    margin-bottom: 8px;
+}
+
+.services-list-modern a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.services-list-modern a:hover {
+    color: #ffffff;
+    background: rgba(99, 102, 241, 0.2);
+    transform: translateX(5px);
+}
+
+/* === ГОРОД ВЫБОР === */
+.city-selector-modern {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 25px;
+    padding: 8px 20px;
+    color: #6366f1;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.city-selector-modern:hover {
+    background: rgba(99, 102, 241, 0.2);
+    transform: translateY(-2px);
+}
+
+/* === КОНТАКТЫ В ХЕДЕРЕ === */
+.header-contacts-modern {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.phone-modern {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.phone-modern:hover {
+    color: #6366f1;
+    transform: scale(1.05);
+}
+
+.email-modern {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.email-modern:hover {
+    color: #6366f1;
+}
+
+/* === МОБИЛЬНАЯ ВЕРСИЯ === */
+@media (max-width: 992px) {
+    .services-mega-menu {
+        position: static;
+        background: rgba(0, 0, 0, 0.9);
+        border-radius: 15px;
+        margin: 10px 0;
+        box-shadow: none;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .header-contacts-modern {
+        align-items: flex-start;
+        margin-top: 15px;
+    }
+}
+
 /* === АНИМАЦИИ === */
 @keyframes fadeInUp {
     from {

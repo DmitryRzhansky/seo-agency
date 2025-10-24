@@ -206,10 +206,10 @@
 }
 
 .brutal-contacts-details small {
-    color: var(--brutal-black);
+    color: var(--brutal-black) !important;
     font-size: 0.9rem;
     font-style: italic;
-    font-weight: 600;
+    font-weight: 700 !important;
 }
 
 /* Форма обратной связи */
@@ -286,13 +286,13 @@
 .brutal-contacts-form textarea {
     padding: 12px 15px;
     border: var(--brutal-border);
-    background: var(--brutal-white);
+    background: var(--brutal-white) !important;
     font-size: 1rem;
-    font-weight: 600;
-    color: var(--brutal-black);
+    font-weight: 700 !important;
+    color: var(--brutal-black) !important;
     transition: all 0.3s ease;
     box-shadow: 3px 3px 0px var(--brutal-black);
-    font-family: 'Courier New', monospace;
+    font-family: 'Courier New', monospace !important;
 }
 
 .brutal-contacts-form input:focus,

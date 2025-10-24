@@ -102,7 +102,7 @@
 }
 
 .brutal-blog-search-button:hover {
-    background: var(--brutal-black);
+    background: var(--brutal-green);
     color: var(--brutal-white);
     transform: translateY(-2px);
     box-shadow: var(--brutal-shadow-hover);
@@ -168,6 +168,7 @@
 
 .brutal-blog-category-link:hover {
     color: var(--brutal-white);
+    text-decoration: underline;
 }
 
 /* Сетка статей */
@@ -297,10 +298,10 @@
 }
 
 .brutal-blog-card-link:hover {
-    background: var(--brutal-black);
+    background: var(--brutal-green);
     color: var(--brutal-white);
     transform: translateY(-2px);
-    box-shadow: 6px 6px 0px var(--brutal-green);
+    box-shadow: 6px 6px 0px var(--brutal-black);
 }
 
 /* Пустое состояние */

@@ -874,6 +874,46 @@ body {
     transition: all 0.3s ease;
 }
 
+/* Индикаторы прокрутки */
+.services-mega-menu::before,
+.services-mega-menu::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: rgba(99, 102, 241, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.services-mega-menu::before {
+    left: 10px;
+    content: '‹';
+}
+
+.services-mega-menu::after {
+    right: 10px;
+    content: '›';
+}
+
+.services-mega-menu.scroll-left::before {
+    opacity: 1;
+}
+
+.services-mega-menu.scroll-right::after {
+    opacity: 1;
+}
+
 .services-mega-menu.show {
     display: block;
     opacity: 1;
@@ -908,13 +948,14 @@ body {
 }
 
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    flex-direction: row;
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
     overflow-x: auto;
     padding-bottom: 10px;
+    scroll-behavior: smooth;
 }
 
 /* Стили для горизонтальной прокрутки */
@@ -942,6 +983,9 @@ body {
     border-radius: 15px;
     padding: 20px;
     transition: all 0.3s ease;
+    flex: 0 0 280px;
+    min-width: 280px;
+    max-width: 280px;
 }
 
 .service-category-modern:hover {

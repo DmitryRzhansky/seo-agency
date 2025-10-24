@@ -74,11 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Поддержка сенсорной прокрутки для мега-меню
+    // Поддержка прокрутки для мега-меню
     const servicesGrid = document.querySelector('.services-grid');
     if (servicesGrid) {
         let isScrolling = false;
         
+        // Сенсорная прокрутка
         servicesGrid.addEventListener('touchstart', function() {
             isScrolling = true;
         });
@@ -93,5 +94,47 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.stopPropagation();
             }
         });
+        
+        // Прокрутка колесиком мыши
+        servicesGrid.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            servicesGrid.scrollLeft += e.deltaY;
+        });
+        
+        // Прокрутка клавишами
+        servicesGrid.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                servicesGrid.scrollLeft -= 300;
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                servicesGrid.scrollLeft += 300;
+            }
+        });
+        
+        // Делаем контейнер фокусируемым для клавиатуры
+        servicesGrid.setAttribute('tabindex', '0');
+        
+        // Обновляем индикаторы прокрутки
+        function updateScrollIndicators() {
+            const megaMenu = document.querySelector('.services-mega-menu');
+            const scrollLeft = servicesGrid.scrollLeft;
+            const maxScroll = servicesGrid.scrollWidth - servicesGrid.clientWidth;
+            
+            megaMenu.classList.remove('scroll-left', 'scroll-right');
+            
+            if (scrollLeft > 10) {
+                megaMenu.classList.add('scroll-left');
+            }
+            if (scrollLeft < maxScroll - 10) {
+                megaMenu.classList.add('scroll-right');
+            }
+        }
+        
+        // Обновляем индикаторы при прокрутке
+        servicesGrid.addEventListener('scroll', updateScrollIndicators);
+        
+        // Инициализируем индикаторы
+        setTimeout(updateScrollIndicators, 100);
     }
 });

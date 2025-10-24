@@ -452,7 +452,8 @@ def sitemap_page(request):
     HTML-страница карты сайта с красивым дизайном
     """
     # Получаем все данные для карты сайта
-    services = ServiceCategory.objects.all().prefetch_related('services')
+    service_categories = ServiceCategory.objects.all().prefetch_related('services')
+    all_services = Service.objects.filter(is_published=True)  # Все услуги для подсчета
     blog_categories = Category.objects.all().prefetch_related('post_set')
     blog_posts = Post.objects.filter(is_published=True).select_related('category')
     cities = City.objects.all()
@@ -467,7 +468,8 @@ def sitemap_page(request):
             {'title': 'Портфолио', 'url': '/portfolio/', 'description': 'Примеры наших работ'},
             {'title': 'Контакты', 'url': '/#contact', 'description': 'Свяжитесь с нами'},
         ],
-        'services': services,
+        'services': service_categories,
+        'all_services': all_services,  # Добавляем все услуги для подсчета
         'blog_categories': blog_categories,
         'blog_posts': blog_posts,
         'cities': cities,

@@ -14,19 +14,29 @@
     <div class="brutal-container">
         <div class="brutal-hero-content">
             <h1 class="brutal-hero-title typing-text">Что мы делаем</h1>
-            <div class="brutal-hero-animation">
-                <div class="brutal-hero-brick brick-1">SEO</div>
-                <div class="brutal-hero-brick brick-2">Контекст</div>
-                <div class="brutal-hero-brick brick-3">Аналитика</div>
-                <div class="brutal-hero-brick brick-4">Разработка</div>
-                <div class="brutal-hero-brick brick-5">Дизайн</div>
-            </div>
             <p class="brutal-hero-subtitle">
                 Комплексные решения для роста вашего бизнеса. Строим ваш успех 
                 <span class="brick-text">кирпичик</span>
                 <span class="brick-text">за</span>
                 <span class="brick-text">кирпичиком.</span>
             </p>
+        </div>
+    </div>
+</section>
+
+<!-- Рандомные блоки услуг -->
+<section class="brutal-random-services">
+    <div class="brutal-container">
+        <h2 class="brutal-services-title">Чем мы отличаемся</h2>
+        <div class="brutal-random-grid">
+            {% for service in filtered_services|slice:":5" %}
+            <div class="brutal-random-card random-card-{{ forloop.counter }}">
+                <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
+                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
+                <p class="brutal-service-card-description">{{ service.short_description|truncatewords:15 }}</p>
+                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
@@ -130,15 +140,12 @@
 </section>
 
 <!-- Полный список услуг -->
-{% if filtered_services and filtered_services|length > 5 %}
-<section class="brutal-services">
+<!-- Хаотичные кирпичи - категории услуг -->
+<section class="brutal-chaos-bricks">
     <div class="brutal-container">
-        <h2 class="brutal-services-title">Все услуги</h2>
-        
-        <!-- Кирпичный дом - категории услуг -->
-        <div class="brutal-brick-house">
+        <div class="brutal-chaos-grid">
             {% for category in categories %}
-            <div class="brutal-brick-card brick-size-{{ forloop.counter|add:1 }}">
+            <div class="brutal-chaos-brick chaos-brick-{{ forloop.counter }}">
                 <h3 class="brutal-service-card-title">{{ category.title }}</h3>
                 <p class="brutal-service-card-description">{{ category.description|truncatewords:10 }}</p>
                 <a href="{% url 'services:service_category' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
@@ -147,7 +154,6 @@
         </div>
     </div>
 </section>
-{% endif %}
 
 <!-- CTA секция -->
 <section class="brutal-cta">

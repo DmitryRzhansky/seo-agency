@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const servicesMenu = document.getElementById('servicesMenu');
     const servicesDropdown = document.getElementById('servicesDropdown');
-    const servicesMegaMenu = document.querySelector('.services-mega-menu');
+    const servicesMegaMenu = document.getElementById('servicesMegaMenu');
     
     // Показать/скрыть мега-меню при наведении
     if (servicesMenu && servicesMegaMenu) {
@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
         servicesMenu.addEventListener('mouseenter', function() {
             clearTimeout(hoverTimeout);
             servicesMegaMenu.classList.add('show');
-            servicesDropdown.setAttribute('aria-expanded', 'true');
+            servicesDropdown.querySelector('i').style.transform = 'rotate(180deg)';
         });
         
         servicesMenu.addEventListener('mouseleave', function() {
             hoverTimeout = setTimeout(function() {
                 servicesMegaMenu.classList.remove('show');
-                servicesDropdown.setAttribute('aria-expanded', 'false');
+                servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
             }, 300);
         });
         
@@ -25,10 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         servicesDropdown.addEventListener('click', function(e) {
             if (window.innerWidth < 992) {
                 e.preventDefault();
+                const isOpen = servicesMegaMenu.classList.contains('show');
                 servicesMegaMenu.classList.toggle('show');
-                servicesDropdown.setAttribute('aria-expanded', 
-                    servicesMegaMenu.classList.contains('show') ? 'true' : 'false'
-                );
+                servicesDropdown.querySelector('i').style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
             }
         });
     }
@@ -37,7 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(e) {
         if (servicesMegaMenu && !servicesMenu.contains(e.target)) {
             servicesMegaMenu.classList.remove('show');
-            servicesDropdown.setAttribute('aria-expanded', 'false');
+            if (servicesDropdown.querySelector('i')) {
+                servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
+            }
         }
     });
     

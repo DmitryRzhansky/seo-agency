@@ -856,24 +856,44 @@ body {
 .services-mega-menu {
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 30px;
-    margin-top: 10px;
+    margin-top: 15px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     display: none;
     z-index: 1000;
-    max-width: 100vw;
-    overflow-x: auto;
+    min-width: 800px;
+    max-width: 90vw;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
 
 .services-mega-menu.show {
     display: block;
+    opacity: 1;
+    visibility: visible;
     animation: slideDown 0.3s ease;
+}
+
+/* Позиционирование для servicesMenu */
+#servicesMenu {
+    position: relative;
+}
+
+/* Анимация стрелки */
+#servicesDropdown i {
+    transition: transform 0.3s ease;
+}
+
+#servicesMenu:hover #servicesDropdown i,
+#servicesMegaMenu.show ~ #servicesDropdown i {
+    transform: rotate(180deg);
 }
 
 @keyframes slideDown {
@@ -1010,6 +1030,10 @@ body {
         border-radius: 15px;
         margin: 10px 0;
         box-shadow: none;
+        min-width: auto;
+        max-width: none;
+        transform: none;
+        left: auto;
     }
     
     .services-grid {
@@ -1020,6 +1044,10 @@ body {
     .header-contacts-modern {
         align-items: flex-start;
         margin-top: 15px;
+    }
+    
+    #servicesMenu {
+        position: static;
     }
 }
 

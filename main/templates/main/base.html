@@ -110,12 +110,12 @@
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
                         <!-- Услуги с мега-меню -->
-                        <li class="nav-item dropdown" id="servicesMenu">
-                            <a class="nav-link-modern dropdown-toggle" href="{% url 'services:service_list' %}" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Услуги
+                        <li class="nav-item" id="servicesMenu">
+                            <a class="nav-link-modern" href="{% url 'services:service_list' %}" id="servicesDropdown">
+                                Услуги <i class="fas fa-chevron-down ms-1"></i>
                             </a>
                             <!-- Мега-меню услуг -->
-                            <div class="services-mega-menu dropdown-menu" aria-labelledby="servicesDropdown">
+                            <div class="services-mega-menu" id="servicesMegaMenu">
                                 <div class="services-grid">
                                     {% for category in service_categories_menu %}
                                     <div class="service-category-modern">

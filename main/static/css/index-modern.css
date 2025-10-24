@@ -1559,6 +1559,12 @@ body {
     -webkit-text-fill-color: transparent;
     margin-bottom: 20px;
     line-height: 1.2;
+    animation: titleFloat 3s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
 }
 
 .services-hero-subtitle {
@@ -1868,7 +1874,9 @@ body {
 
 @keyframes iconFloat {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(5deg); }
+    25% { transform: translateY(-15px) rotate(5deg); }
+    50% { transform: translateY(-5px) rotate(-3deg); }
+    75% { transform: translateY(-10px) rotate(3deg); }
 }
 
 .service-card-overlay {
@@ -2488,10 +2496,10 @@ body {
 .service-cta-modern {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
     border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 25px;
+    border-radius: 0;
     padding: 40px;
     text-align: center;
-    margin: 50px 0;
+    margin: 0;
 }
 
 .service-cta-title {

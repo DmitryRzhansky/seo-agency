@@ -38,7 +38,6 @@ CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.getenv('CSRF_TRUSTED_ORIGINS', '')
 # Application definition
 
 INSTALLED_APPS = [
-    'unfold',  # Django Unfold должен быть перед django.contrib.admin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -65,8 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'main.middleware.RedirectMiddleware',  # Редиректы должны быть рано в цепочке
-    'main.middleware.GeoLocationMiddleware',
+   #  'main.middleware.RedirectMiddleware',  # Редиректы должны быть рано в цепочке
+   # 'main.middleware.GeoLocationMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -81,7 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
+		'django.template.context_processors.static',
                 'main.context_processors.services_menu',
             ],
             'builtins': [
@@ -106,15 +105,23 @@ DATABASES = {
 
 # Легкое кэширование с коротким TTL
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'LOCATION': 'unique-snowflake',
-        'TIMEOUT': 300,  # 5 минут
-        'OPTIONS': {
-            'MAX_ENTRIES': 1000,
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",  # /1 - это номер базы данных в Redis, можно использовать любой
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
 }
+
+
+
+
+
+
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -265,185 +272,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Без ключа: 1000 запросов/день, только HTTP
 # С ключом: больше запросов, HTTPS, больше данных
 
+# Настройки Django Unfold 
 # Настройки Django Unfold
-UNFOLD = {
-    "SITE_TITLE": "Isakov Agency - путник, ты нашел свое место...",
-    "SITE_HEADER": "Путник, ты нашел свое место...",
-    "SITE_SYMBOL": "👹",
-    "SHOW_HISTORY": True,
-    "SHOW_VIEW_ON_SITE": True,
-    "ENVIRONMENT": "Isakov Agency Development",
-    "SIDEBAR": {
-        "show_search": True,
-        "show_all_applications": False,
-        "navigation": [
-            {
-                "title": "🏙️ Региональное SEO",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Города",
-                        "icon": "location_city",
-                        "link": lambda request: reverse_lazy("admin:main_city_changelist"),
-                    },
-                    {
-                        "title": "Региональные адаптации статей",
-                        "icon": "article",
-                        "link": lambda request: reverse_lazy("admin:main_regionalpostadaptation_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "💼 Услуги",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Категории услуг",
-                        "icon": "folder",
-                        "link": lambda request: reverse_lazy("admin:main_servicecategory_changelist"),
-                    },
-                    {
-                        "title": "Услуги",
-                        "icon": "business",
-                        "link": lambda request: reverse_lazy("admin:main_service_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "📝 Блог",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Категории блога",
-                        "icon": "folder",
-                        "link": lambda request: reverse_lazy("admin:blog_category_changelist"),
-                    },
-                    {
-                        "title": "Статьи блога",
-                        "icon": "article",
-                        "link": lambda request: reverse_lazy("admin:blog_post_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "👥 Команда и отзывы",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Участники команды",
-                        "icon": "people",
-                        "link": lambda request: reverse_lazy("admin:main_teammember_changelist"),
-                    },
-                    {
-                        "title": "Отзывы клиентов",
-                        "icon": "star",
-                        "link": lambda request: reverse_lazy("admin:main_testimonial_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "💼 Портфолио",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Работы в портфолио",
-                        "icon": "work",
-                        "link": lambda request: reverse_lazy("admin:main_portfolioitem_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "📄 Заявки",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Заявки с сайта",
-                        "icon": "mail",
-                        "link": lambda request: reverse_lazy("admin:main_contactrequest_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "🔍 SEO и система",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Кастомные скрипты",
-                        "icon": "code",
-                        "link": lambda request: reverse_lazy("admin:main_customheadscript_changelist"),
-                    },
-                    {
-                        "title": "Хлебные крошки",
-                        "icon": "menu",
-                        "link": lambda request: reverse_lazy("admin:seo_breadcrumb_changelist"),
-                    },
-                    {
-                        "title": "Sitemap",
-                        "icon": "map",
-                        "link": lambda request: reverse_lazy("admin:seo_management_sitemapsettings_changelist"),
-                    },
-                    {
-                        "title": "Robots.txt",
-                        "icon": "settings",
-                        "link": lambda request: reverse_lazy("admin:seo_management_robotstxtsettings_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "📄 Страницы",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Статические страницы",
-                        "icon": "description",
-                        "link": lambda request: reverse_lazy("admin:pages_simplepage_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": "👥 Пользователи и группы",
-                "separator": True,
-                "items": [
-                    {
-                        "title": "Пользователи",
-                        "icon": "person",
-                        "link": lambda request: reverse_lazy("admin:auth_user_changelist"),
-                    },
-                    {
-                        "title": "Группы",
-                        "icon": "group",
-                        "link": lambda request: reverse_lazy("admin:auth_group_changelist"),
-                    },
-                ],
-            },
-        ],
-    },
-    "DASHBOARD_CALLBACKS": [],
-    "EXTENSIONS": {
-        "modeltranslation": {
-            "flags": {
-                "en": "🇺🇸",
-                "ru": "🇷🇺",
-            },
-        },
-    },
-    "SILENCED_SYSTEM_CHECKS": ["security.W019"],
-    "HIDE_APPS": [
-        "auth",
-        "contenttypes", 
-        "sessions",
-        "admin",
-        "pages",
-        "seo"
-    ],
-}
-
-# Настройки админки
-ADMIN_COLLAPSED_GROUPS = [
-    'main',
-    'blog', 
-    'services',
-    'seo',
-    'seo_management',
-    'pages'
-]

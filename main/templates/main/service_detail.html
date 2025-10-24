@@ -1,12 +1,18 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% load seo_tags %}
-
+{% load custom_filters %}
 {% block title %}{{ service.title }}{% endblock title %}
+
+    {% block seo_meta %}
+	<meta name="robots" content="noindex, nofollow">
+    {% endblock seo_meta %}
+
 
 {% block breadcrumbs %}
 {% breadcrumbs service %}
 {% endblock breadcrumbs %}
+
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/service_detail.css' %}">

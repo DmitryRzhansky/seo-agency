@@ -213,7 +213,6 @@ class SEOValidationMixin:
             return format_html('<div style="color: #0f5132;">✅ SEO готово</div>')
     seo_validation.short_description = "SEO статус"
 
-@admin.register(City)
 class CityAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     class Meta:
         verbose_name = _('Город')

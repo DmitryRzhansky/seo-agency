@@ -28,43 +28,10 @@ def get_client_ip(request):
 
 def get_city_by_ip(ip_address: str) -> Optional[str]:
     """
-    Определяет город по IP адресу используя бесплатный API
-    Возвращает название города на русском языке или None
+    Временно возвращаем фиксированный город 'Perm', чтобы сайт работал без ошибок 500.
     """
-    if not ip_address or ip_address in ['127.0.0.1', '::1']:
-        # Локальная разработка: используем дефолтный город, чтобы плашка отображалась
-        try:
-            if getattr(settings, 'DEBUG', False):
-                return 'Perm'
-        except Exception:
-            pass
-        return None
-    
-    try:
-        # Используем API ipapi.co
-        api_key = getattr(settings, 'IPAPI_KEY', None)
-        if api_key:
-            # С API ключом (рекомендуется для продакшена)
-            url = f'https://ipapi.co/{ip_address}/json/?key={api_key}'
-        else:
-            # Без API ключа (бесплатный тариф) — используем HTTPS
-            url = f'https://ipapi.co/{ip_address}/json/'
-        
-        response = requests.get(url, timeout=5)
-        response.raise_for_status()
-        data = response.json()
-        
-        city = data.get('city')
-        country = data.get('country_name')
-        
-        # Если это Россия, возвращаем город
-        if country == 'Russia' and city:
-            return city
-            
-    except Exception as e:
-        logger.error(f"Ошибка при определении геолокации для IP {ip_address}: {e}")
-    
-    return None
+    return 'Perm'
+
 
 def get_city_slug_by_name(city_name: str) -> Optional[str]:
     """

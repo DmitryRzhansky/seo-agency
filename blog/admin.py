@@ -7,7 +7,7 @@ from .models import Category, Post
 from seo.admin import SEOAdminMixin
 from main.admin_seo import SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin
 from main.models import CustomHeadScript
-from main.admin_site import admin_site
+from django.contrib import admin
 
 
 class CategoryAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
@@ -126,5 +126,5 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
         super().save_model(request, obj, form, change)
 
 # Регистрируем модели в кастомном админ-сайте
-admin_site.register(Category, CategoryAdmin)
-admin_site.register(Post, PostAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Post, PostAdmin)

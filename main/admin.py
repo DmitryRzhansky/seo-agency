@@ -8,17 +8,17 @@ from .admin_seo import (
 )
 
 # Импортируем кастомный админ-сайт
-from .admin_site import admin_site
+from django.contrib import admin
 
 # Регистрируем все модели в кастомном админ-сайте
 from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, RegionalPostAdaptation
 
-admin_site.register(City, CityAdmin)
-admin_site.register(ServiceCategory, ServiceCategoryAdmin)
-admin_site.register(Service, ServiceAdmin)
-admin_site.register(TeamMember, TeamMemberAdmin)
-admin_site.register(Testimonial, TestimonialAdmin)
-admin_site.register(ContactRequest, ContactRequestAdmin)
-admin_site.register(PortfolioItem, PortfolioItemAdmin)
-admin_site.register(CustomHeadScript, CustomHeadScriptAdmin)
-admin_site.register(RegionalPostAdaptation, RegionalPostAdaptationAdmin)
+#admin.site.register(City, CityAdmin)
+#admin.site.register(ServiceCategory, ServiceCategoryAdmin)
+#admin.site.register(Service, ServiceAdmin)
+#admin.site.register(TeamMember, TeamMemberAdmin)
+#admin.site.register(Testimonial, TestimonialAdmin)
+#admin.site.register(ContactRequest, ContactRequestAdmin)
+#admin.site.register(PortfolioItem, PortfolioItemAdmin)
+#admin.site.register(CustomHeadScript, CustomHeadScriptAdmin)
+#admin.site.register(RegionalPostAdaptation, RegionalPostAdaptationAdmin)

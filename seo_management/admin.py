@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.contrib import messages
 from .models import SitemapSettings, RobotsTxtSettings, Redirect
-from main.admin_site import admin_site
+from django.contrib import admin
 
 
 class SitemapSettingsAdmin(admin.ModelAdmin):
@@ -185,6 +185,6 @@ class RedirectAdmin(admin.ModelAdmin):
 
 
 # Регистрируем модели в кастомном админ-сайте
-admin_site.register(SitemapSettings, SitemapSettingsAdmin)
-admin_site.register(RobotsTxtSettings, RobotsTxtSettingsAdmin)
-admin_site.register(Redirect, RedirectAdmin)
+admin.site.register(SitemapSettings, SitemapSettingsAdmin)
+admin.site.register(RobotsTxtSettings, RobotsTxtSettingsAdmin)
+admin.site.register(Redirect, RedirectAdmin)

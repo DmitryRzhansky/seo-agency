@@ -79,6 +79,7 @@
     display: flex;
     gap: 40px;
     align-items: flex-start;
+    position: relative;
 }
 
 /* Брутальные блоки контента */
@@ -88,6 +89,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 20px;
     align-items: stretch;
+    margin-right: 0;
 }
 
 .brutal-content-block {
@@ -119,6 +121,10 @@
     background: var(--brutal-gray);
     grid-column: span 2;
     min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-right: 0;
 }
 
 .brutal-block-number {
@@ -159,6 +165,8 @@
 .brutal-content-block p {
     margin-bottom: 15px;
     line-height: 1.6;
+    color: var(--brutal-black);
+    font-weight: 500;
 }
 
 .brutal-content-block ul {
@@ -169,6 +177,8 @@
 .brutal-content-block li {
     margin-bottom: 8px;
     position: relative;
+    color: var(--brutal-black);
+    font-weight: 500;
 }
 
 .brutal-content-block li::before {
@@ -204,11 +214,14 @@
     flex: 1;
     overflow-y: auto;
     max-height: 400px;
+    width: 100%;
 }
 
 .brutal-content-text p {
     margin-bottom: 15px;
     line-height: 1.6;
+    color: var(--brutal-black);
+    font-weight: 500;
 }
 
 .brutal-content-text h1,
@@ -243,6 +256,8 @@
 .brutal-content-text li {
     margin-bottom: 8px;
     position: relative;
+    color: var(--brutal-black);
+    font-weight: 500;
 }
 
 .brutal-content-text li::before {
@@ -258,6 +273,28 @@
     font-weight: 700;
     background: linear-gradient(120deg, var(--brutal-green) 0%, transparent 100%);
     padding: 2px 4px;
+}
+
+.brutal-content-text {
+    color: var(--brutal-black);
+}
+
+.brutal-content-text * {
+    color: var(--brutal-black);
+}
+
+.brutal-content-text h1,
+.brutal-content-text h2,
+.brutal-content-text h3,
+.brutal-content-text h4,
+.brutal-content-text h5,
+.brutal-content-text h6 {
+    color: var(--brutal-black);
+}
+
+.brutal-content-text div,
+.brutal-content-text span {
+    color: var(--brutal-black);
 }
 
 /* Изображение - авангардное расположение */

@@ -10,7 +10,7 @@ from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, 
 from blog.models import Post, Category
 from .forms import ContactForm
 from pages.models import SimplePage
-from django.views.decorators.cache import never_cache, cache_page # отключаем кэш для index
+from django.views.decorators.cache import never_cache  # cache_page ОТКЛЮЧЕН
 from django.conf import settings # <<< Импорт settings для времени кэша
 
 # --- Главная страница (Landing Page) ---
@@ -166,7 +166,7 @@ def post_detail(request, slug):
 
 # --- Представления для Городов ---
 
-@cache_page(300)  # 5 минут кэш для списка городов
+# @cache_page(300)  # КЭШИРОВАНИЕ ОТКЛЮЧЕНО
 def city_list(request):
     """
     Страница со списком всех городов-миллионников.
@@ -356,7 +356,7 @@ def privacy_policy(request):
 
 # --- Портфолио ---
 
-@cache_page(300)  # 5 минут кэш для списка портфолио
+# @cache_page(300)  # КЭШИРОВАНИЕ ОТКЛЮЧЕНО
 def portfolio_list(request):
     """
     Страница со списком всех работ в портфолио с фильтрацией и поиском

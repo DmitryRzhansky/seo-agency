@@ -66,9 +66,11 @@
 
 /* Список услуг категории - брутальный */
 .brutal-category-services {
-    background: var(--brutal-gray);
+    background: linear-gradient(135deg, var(--brutal-gray) 0%, #e8e8e8 100%);
     padding: 80px 0;
     position: relative;
+    border-top: 4px solid var(--brutal-green);
+    border-bottom: 4px solid var(--brutal-green);
 }
 
 .brutal-category-services-title {
@@ -83,10 +85,20 @@
 }
 
 .brutal-category-services-title::before {
-    content: '';
+    content: '▶';
     position: absolute;
     top: -15px;
     left: -50px;
+    font-size: 1.2rem;
+    color: var(--brutal-green);
+    font-weight: 700;
+}
+
+.brutal-category-services-title::after {
+    content: '◀';
+    position: absolute;
+    top: -15px;
+    right: -50px;
     font-size: 1.2rem;
     color: var(--brutal-green);
     font-weight: 700;
@@ -110,6 +122,38 @@
     display: flex;
     flex-direction: column;
     min-height: 300px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: cardAppear 0.6s ease-out forwards;
+    border-left: 6px solid var(--brutal-green);
+}
+
+.brutal-category-service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--brutal-green);
+}
+
+.brutal-category-service-card:nth-child(1) { animation-delay: 0.1s; }
+.brutal-category-service-card:nth-child(2) { animation-delay: 0.2s; }
+.brutal-category-service-card:nth-child(3) { animation-delay: 0.3s; }
+.brutal-category-service-card:nth-child(4) { animation-delay: 0.4s; }
+.brutal-category-service-card:nth-child(5) { animation-delay: 0.5s; }
+.brutal-category-service-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .brutal-category-service-card:hover {
@@ -184,6 +228,8 @@
     background: var(--brutal-green);
     color: var(--brutal-white);
     transform: translateX(5px);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    border-color: var(--brutal-black);
 }
 
 /* Пустое состояние - брутальное */

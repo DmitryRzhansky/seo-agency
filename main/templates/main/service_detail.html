@@ -39,9 +39,45 @@
         <section class="brutal-service-detail-content">
             <div class="brutal-container">
                 <div class="brutal-service-detail-wrapper">
-                    <!-- Весь текстовый контент -->
-                    <div class="brutal-service-text-content">
-                        {{ service.content|safe }}
+                    <!-- Брутальные блоки контента -->
+                    <div class="brutal-content-blocks">
+                        <div class="brutal-content-block main">
+                            <div class="brutal-block-number">01</div>
+                            <h2>Описание услуги</h2>
+                            <p>{{ service.short_description }}</p>
+                        </div>
+                        
+                        <div class="brutal-content-block">
+                            <div class="brutal-block-number">02</div>
+                            <h3>Что включает услуга</h3>
+                            <ul>
+                                <li>Комплексный анализ вашего проекта</li>
+                                <li>Разработка индивидуальной стратегии</li>
+                                <li>Техническая оптимизация сайта</li>
+                                <li>Создание качественного контента</li>
+                                <li>Построение ссылочной массы</li>
+                                <li>Еженедельная отчетность о результатах</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="brutal-content-block">
+                            <div class="brutal-block-number">03</div>
+                            <h3>Наши преимущества</h3>
+                            <p>Мы используем только белые методы продвижения, гарантируем результат и предоставляем подробную отчетность о проделанной работе.</p>
+                        </div>
+                        
+                        <div class="brutal-content-block">
+                            <div class="brutal-block-number">04</div>
+                            <h3>Сроки выполнения</h3>
+                            <p>Первые результаты видны уже через 2-3 месяца, полное продвижение занимает 6-12 месяцев в зависимости от сложности проекта.</p>
+                        </div>
+                        
+                        <div class="brutal-content-block cta">
+                            <div class="brutal-block-number">05</div>
+                            <h3>Готовы начать?</h3>
+                            <p>Свяжитесь с нами прямо сейчас для обсуждения вашего проекта!</p>
+                            <a href="#contacts" class="brutal-cta-button">Обсудить проект →</a>
+                        </div>
                     </div>
                     
                     <!-- Изображение справа -->

@@ -163,9 +163,9 @@
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
     backdrop-filter: blur(20px);
     border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 25px;
+    border-radius: 0;
     padding: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 0;
     position: relative;
     overflow: hidden;
 }
@@ -189,7 +189,7 @@
 .portfolio-search-input-modern {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 15px;
+    border-radius: 0;
     padding: 15px 20px;
     color: #ffffff;
     font-size: 1.1rem;
@@ -210,7 +210,7 @@
 .portfolio-search-btn-modern {
     background: linear-gradient(135deg, #6366f1, #ec4899);
     border: none;
-    border-radius: 15px;
+    border-radius: 0;
     padding: 15px 30px;
     color: #ffffff;
     font-weight: 600;
@@ -303,7 +303,7 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
     backdrop-filter: blur(20px);
     border: 1px solid rgba(99, 102, 241, 0.2);
-    border-radius: 25px;
+    border-radius: 0;
     padding: 0;
     overflow: hidden;
     transition: all 0.4s ease;
@@ -339,7 +339,7 @@
 .portfolio-card-image-container {
     position: relative;
     overflow: hidden;
-    border-radius: 20px 20px 0 0;
+    border-radius: 0;
 }
 
 .portfolio-card-image {
@@ -379,7 +379,7 @@
 .portfolio-card-btn {
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 15px;
+    border-radius: 0;
     padding: 12px 20px;
     color: #ffffff;
     text-decoration: none;

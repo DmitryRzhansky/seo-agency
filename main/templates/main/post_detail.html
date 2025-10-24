@@ -9,74 +9,79 @@
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/blog-modern.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<section class="section-padding bg-light pt-5 mt-5" id="post-detail">
+<!-- Hero секция детальной страницы поста -->
+<section class="post-detail-hero">
     <div class="container">
-        <!-- Поисковая форма -->
-        <div class="row justify-content-center mb-4">
-            <div class="col-lg-6">
-                <form method="get" action="{% url 'blog:search' %}" class="d-flex">
-                    <div class="input-group">
-                        <input type="text" 
-                               class="form-control" 
-                               name="q" 
-                               placeholder="Поиск по статьям..." 
-                               aria-label="Поиск по статьям">
-                        <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <article class="p-4 p-md-5 rounded shadow-sm">
-                    
-                    <h1 class="display-5 fw-bold mb-3">{{ post.title }}</h1>
-                    
-                    <p class="text-muted small mb-4">
-                        <i class="fas fa-calendar-alt me-2"></i> Опубликовано: {{ post.published_date|date:"d F Y" }}
-                        <span class="mx-3">|</span>
-                        <i class="fas fa-eye me-1"></i> {{ post.views_count }} просмотров
-                        
-                        {% if post.author %}
-                            <span class="mx-3">|</span> 
-                            <i class="fas fa-user-edit me-1"></i> Автор: 
-                            <span class="fw-bold">{{ post.author.get_full_name|default:post.author.username }}</span>
-                        {% endif %}
+                <div class="post-detail-hero-content">
+                    <h1 class="post-detail-title">{{ post.title }}</h1>
+                    <p class="post-detail-subtitle">
+                        {% if post.excerpt %}{{ post.excerpt }}{% else %}{{ post.content|striptags|truncatewords:30 }}{% endif %}
                     </p>
-                    {% if post.image %}
-                        <div class="row justify-content-center mb-4"> 
-                            <div class="col-lg-8">
-                                <img 
-                                    src="{{ post.image.url }}" 
-                                    class="img-fluid rounded mx-auto d-block" 
-                                    alt="{{ post.get_image_alt }}" 
-                                    style="max-height: 400px; width: auto; object-fit: cover;"
-                                >
-                            </div>
+                    
+                    <div class="post-detail-meta">
+                        <div class="post-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            {{ post.published_date|date:"d M Y" }}
                         </div>
-                    {% endif %}
+                        <div class="post-meta-item">
+                            <i class="fas fa-eye"></i>
+                            {{ post.views_count }} просмотров
+                        </div>
+                        {% if post.author %}
+                        <div class="post-meta-item">
+                            <i class="fas fa-user"></i>
+                            {{ post.author.get_full_name|default:post.author.username }}
+                        </div>
+                        {% endif %}
+                        {% if post.category %}
+                        <div class="post-meta-item">
+                            <i class="fas fa-tag"></i>
+                            {{ post.category.name }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <div class="post-content lead">
+<!-- Основной контент -->
+<section class="section-modern">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                {% if post.image %}
+                <div class="row justify-content-center mb-5"> 
+                    <div class="col-lg-8">
+                        <img 
+                            src="{{ post.image.url }}" 
+                            class="img-fluid rounded mx-auto d-block" 
+                            alt="{{ post.get_image_alt }}" 
+                            style="max-height: 400px; width: auto; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);"
+                        >
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="post-detail-content">
+                    <div class="post-detail-text">
                         {{ post.content|safe }}
                     </div>
+                </div>
 
-                    <hr class="my-5">
-
-                    <div class="text-center">
-                        <a href="{% url 'blog:post_list' %}" class="btn btn-outline-primary btn-lg">
-                            <i class="fas fa-arrow-left me-2"></i> Все статьи блога
-                        </a>
-                    </div>
-
-                </article>
+                <div class="text-center mt-5">
+                    <a href="{% url 'blog:post_list' %}" class="btn btn-outline-primary btn-lg" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1)); border: 1px solid rgba(99, 102, 241, 0.3); color: #6366f1; border-radius: 15px; padding: 15px 30px;">
+                        <i class="fas fa-arrow-left me-2"></i> Все статьи блога
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -84,52 +89,34 @@
 
 <!-- Блок "Вам может понравиться" -->
 {% if related_posts %}
-<section class="section-padding bg-light" id="related-posts">
+<section class="related-posts-modern">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h2 class="section-title text-center mb-5">Вам может понравиться</h2>
-            </div>
-        </div>
+        <h2 class="related-posts-title">Вам может понравиться</h2>
         <div class="row g-4">
             {% for related_post in related_posts %}
             <div class="col-lg-4 col-md-6">
-                <div class="card h-100 shadow-sm border-0 related-post-card">
+                <div class="related-post-card">
                     {% if related_post.image %}
-                        <img src="{{ related_post.image.url }}" class="card-img-top" alt="{{ related_post.get_image_alt }}" style="height: 200px; object-fit: cover;">
+                        <img src="{{ related_post.image.url }}" class="related-post-image" alt="{{ related_post.get_image_alt }}">
                     {% else %}
-                        <img src="{% static 'main/img/blog_placeholder.jpg' %}" class="card-img-top" alt="Изображение блога" style="height: 200px; object-fit: cover;">
+                        <img src="{% static 'main/img/blog_placeholder.jpg' %}" class="related-post-image" alt="Изображение блога">
                     {% endif %}
                     
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">
-                            <a href="{{ related_post.get_absolute_url }}" class="text-decoration-none">
+                    <div class="related-post-content">
+                        {% if related_post.category %}
+                        <div class="related-post-category">{{ related_post.category.name }}</div>
+                        {% endif %}
+                        <h3 class="related-post-title">
+                            <a href="{{ related_post.get_absolute_url }}" class="text-decoration-none" style="color: inherit;">
                                 {{ related_post.title }}
                             </a>
-                        </h5>
-                        
-                        {% if related_post.category %}
-                        <span class="badge mb-3" style="background-color: {{ related_post.category.color }}; color: white;">
-                            {{ related_post.category.name }}
-                        </span>
-                        {% endif %}
-                        
-                        <p class="card-text text-muted small flex-grow-1">
+                        </h3>
+                        <p class="related-post-description">
                             {{ related_post.content|striptags|truncatewords:20 }}
                         </p>
-                        
-                        <div class="mt-auto">
-                            <a href="{{ related_post.get_absolute_url }}" class="btn btn-outline-primary btn-sm">
-                                Читать далее
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="card-footer bg-transparent border-0">
-                        <small class="text-muted">
-                            <i class="fas fa-calendar-alt me-1"></i>
-                            {{ related_post.published_date|date:"d F Y" }}
-                        </small>
+                        <a href="{{ related_post.get_absolute_url }}" class="related-post-link">
+                            Читать далее <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>

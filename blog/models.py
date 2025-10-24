@@ -165,27 +165,20 @@ class Post(SEOModel):
         return self.image_alt or self.title
     
     def get_related_posts(self, limit=3):
-        """Возвращает связанные статьи для блока 'Вам может понравиться'"""
-        # Сначала ищем статьи из той же категории
-        if self.category:
-            related = Post.objects.filter(
-                category=self.category,
-                is_published=True
-            ).exclude(pk=self.pk).order_by('-published_date')[:limit]
-            
-            # Если не хватает статей из той же категории, дополняем из других категорий
-            if related.count() < limit:
-                remaining = limit - related.count()
-                additional = Post.objects.filter(
-                    is_published=True
-                ).exclude(
-                    pk__in=[p.pk for p in related]
-                ).exclude(pk=self.pk).order_by('-published_date')[:remaining]
-                related = list(related) + list(additional)
-        else:
-            # Если нет категории, просто берем последние статьи
-            related = Post.objects.filter(
-                is_published=True
-            ).exclude(pk=self.pk).order_by('-published_date')[:limit]
+        """Возвращает случайные связанные статьи для блока 'Вам может понравиться'"""
+        from random import sample
         
-        return related
+        # Получаем все опубликованные статьи кроме текущей
+        all_posts = Post.objects.filter(
+            is_published=True
+        ).exclude(pk=self.pk)
+        
+        # Если статей меньше лимита, возвращаем все доступные
+        if all_posts.count() <= limit:
+            return list(all_posts)
+        
+        # Получаем случайные статьи
+        posts_list = list(all_posts)
+        random_posts = sample(posts_list, limit)
+        
+        return random_posts

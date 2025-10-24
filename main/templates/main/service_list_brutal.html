@@ -171,7 +171,7 @@
                 <div class="brutal-service-card-number">{{ forloop.counter }}.</div>
                 <h3 class="brutal-service-card-title">{{ category.title }}</h3>
                 <p class="brutal-service-card-description">{{ category.description|truncatewords:15 }}</p>
-                <a href="{% url 'services:service_category_detail' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
+                <a href="{% url 'services:service_category' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
             </div>
             {% endfor %}
         </div>

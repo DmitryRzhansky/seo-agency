@@ -132,23 +132,13 @@
 }
 
 .brutal-blog-category-card {
-    background: var(--brutal-white);
-    border: var(--brutal-border);
-    padding: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: var(--brutal-shadow);
-    position: relative;
-}
-
-.brutal-blog-category-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--brutal-shadow-hover);
+    display: inline-block;
+    margin: 5px;
 }
 
 .brutal-blog-category-card.active {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    /* Активная категория стилизуется через кнопку */
+    position: relative;
 }
 
 .brutal-blog-category-link {

@@ -247,7 +247,7 @@
 
 /* Метка для главного блока */
 .brutal-minimal-card.main::before {
-    content: "[ГЛАВНОЕ]";
+    content: "ГЛАВНОЕ";
     position: absolute;
     top: 15px;
     right: 15px;
@@ -654,7 +654,7 @@
 }
 
 .brutal-main-card::before {
-    content: '[ГЛАВНОЕ]';
+    content: 'ГЛАВНОЕ';
     position: absolute;
     top: 20px;
     right: 20px;
@@ -857,7 +857,7 @@
 }
 
 .brutal-pricing-card.popular::before {
-    content: '[ПОПУЛЯРНО]';
+    content: 'ПОПУЛЯРНО';
     position: absolute;
     top: -15px;
     right: 20px;
@@ -1311,13 +1311,13 @@
     position: relative;
 }
 
-/* Сетка для услуг - удобная и функциональная */
+/* Сетка для услуг - простая и ровная */
 .brutal-services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     margin-top: 40px;
-    max-width: 1200px;
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1420,6 +1420,17 @@
     
     .brutal-service-card-description {
         font-size: 0.9rem;
+    }
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .brutal-services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .brutal-services-grid .brutal-service-card:first-child {
+        grid-column: span 2;
     }
 }
 

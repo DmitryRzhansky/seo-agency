@@ -21,7 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
             hoverTimeout = setTimeout(function() {
                 servicesMegaMenu.classList.remove('show');
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
-                // Скрыть все панели услуг
+                // Скрыть контейнер услуг и все панели
+                const servicesContainer = document.querySelector('.brutal-mega-menu-services');
+                if (servicesContainer) {
+                    servicesContainer.classList.remove('show');
+                }
                 servicesPanels.forEach(panel => panel.classList.remove('show'));
                 categories.forEach(category => category.classList.remove('active'));
             }, 300);
@@ -39,11 +43,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Активировать текущую категорию
                 this.classList.add('active');
                 
-                // Показать панель услуг - ищем внутри контейнера услуг
+                // Показать контейнер услуг
                 const servicesContainer = document.querySelector('.brutal-mega-menu-services');
-                const servicesPanel = servicesContainer ? servicesContainer.querySelector(`[data-panel="${categorySlug}"]`) : null;
-                if (servicesPanel) {
-                    servicesPanel.classList.add('show');
+                if (servicesContainer) {
+                    servicesContainer.classList.add('show');
+                    
+                    // Показать панель услуг
+                    const servicesPanel = servicesContainer.querySelector(`[data-panel="${categorySlug}"]`);
+                    if (servicesPanel) {
+                        servicesPanel.classList.add('show');
+                    }
                 }
             });
         });
@@ -66,13 +75,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Активировать текущую категорию
                     category.classList.add('active');
                     
-                    // Показать панель услуг - ищем внутри контейнера услуг
+                    // Показать контейнер услуг
                     const servicesContainer = document.querySelector('.brutal-mega-menu-services');
-                    const servicesPanel = servicesContainer ? servicesContainer.querySelector(`[data-panel="${categorySlug}"]`) : null;
-                    console.log('Найдена панель услуг:', servicesPanel); // Отладка
-                    if (servicesPanel) {
-                        servicesPanel.classList.add('show');
-                        console.log('Панель услуг показана'); // Отладка
+                    if (servicesContainer) {
+                        servicesContainer.classList.add('show');
+                        
+                        // Показать панель услуг
+                        const servicesPanel = servicesContainer.querySelector(`[data-panel="${categorySlug}"]`);
+                        console.log('Найдена панель услуг:', servicesPanel); // Отладка
+                        if (servicesPanel) {
+                            servicesPanel.classList.add('show');
+                            console.log('Панель услуг показана'); // Отладка
+                        }
                     }
                 });
             }
@@ -87,6 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
             hoverTimeout = setTimeout(function() {
                 servicesMegaMenu.classList.remove('show');
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
+                // Скрыть контейнер услуг и все панели
+                const servicesContainer = document.querySelector('.brutal-mega-menu-services');
+                if (servicesContainer) {
+                    servicesContainer.classList.remove('show');
+                }
                 servicesPanels.forEach(panel => panel.classList.remove('show'));
                 categories.forEach(category => category.classList.remove('active'));
             }, 300);
@@ -109,6 +128,11 @@ document.addEventListener('DOMContentLoaded', function() {
             servicesMegaMenu.classList.remove('show');
             if (servicesDropdown.querySelector('i')) {
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
+            }
+            // Скрыть контейнер услуг и все панели
+            const servicesContainer = document.querySelector('.brutal-mega-menu-services');
+            if (servicesContainer) {
+                servicesContainer.classList.remove('show');
             }
             servicesPanels.forEach(panel => panel.classList.remove('show'));
             categories.forEach(category => category.classList.remove('active'));

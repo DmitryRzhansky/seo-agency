@@ -1650,9 +1650,11 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     width: 200px; /* Фиксированная ширина */
     min-width: 200px; /* Минимальная ширина */
     max-width: 200px; /* Максимальная ширина */
+    height: 120px; /* Фиксированная высота */
     border-right: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
+    position: relative; /* Для позиционирования панели услуг */
 }
 
 .brutal-mega-menu-category:last-child {
@@ -1674,10 +1676,11 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     text-align: center;
     transition: var(--brutal-transition);
     font-family: 'Courier New', monospace;
-    min-height: 60px; /* Минимальная высота */
+    height: 80px; /* Фиксированная высота */
     white-space: normal; /* Позволяем перенос текста */
     word-wrap: break-word; /* Перенос длинных слов */
     cursor: pointer; /* Показываем, что это кликабельно */
+    overflow: hidden; /* Скрываем переполнение */
 }
 
 /* Ссылка на категорию */
@@ -1722,11 +1725,22 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     transform: rotate(180deg);
 }
 
-/* Контейнер услуг (всегда показан) */
+/* Контейнер услуг (скрыт по умолчанию) */
 .brutal-mega-menu-services {
-    display: block; /* Показываем контейнер */
+    display: none; /* Скрываем контейнер по умолчанию */
     padding: 20px;
     background: var(--brutal-gray);
+    position: absolute;
+    top: 100%; /* Под категориями */
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    border: 2px solid var(--brutal-black);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-mega-menu-services.show {
+    display: block; /* Показываем контейнер */
 }
 
 /* Панели услуг внутри контейнера (скрыты по умолчанию) */

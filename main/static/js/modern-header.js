@@ -1,23 +1,63 @@
-// Современный хедер с мега-меню
+// Многоуровневое мега-меню
 document.addEventListener('DOMContentLoaded', function() {
     const servicesMenu = document.getElementById('servicesMenu');
     const servicesDropdown = document.getElementById('servicesDropdown');
     const servicesMegaMenu = document.getElementById('servicesMegaMenu');
+    const categories = document.querySelectorAll('.brutal-mega-menu-category');
+    const servicesPanels = document.querySelectorAll('.brutal-mega-menu-services-panel');
     
-    // Показать/скрыть мега-меню при наведении
     if (servicesMenu && servicesMegaMenu) {
         let hoverTimeout;
         
+        // Показать мега-меню при наведении
         servicesMenu.addEventListener('mouseenter', function() {
             clearTimeout(hoverTimeout);
             servicesMegaMenu.classList.add('show');
             servicesDropdown.querySelector('i').style.transform = 'rotate(180deg)';
         });
         
+        // Скрыть мега-меню при уходе мыши
         servicesMenu.addEventListener('mouseleave', function() {
             hoverTimeout = setTimeout(function() {
                 servicesMegaMenu.classList.remove('show');
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
+                // Скрыть все панели услуг
+                servicesPanels.forEach(panel => panel.classList.remove('show'));
+                categories.forEach(category => category.classList.remove('active'));
+            }, 300);
+        });
+        
+        // Обработка наведения на категорию
+        categories.forEach(category => {
+            category.addEventListener('mouseenter', function() {
+                const categorySlug = this.dataset.category;
+                
+                // Убрать активность с других категорий
+                categories.forEach(cat => cat.classList.remove('active'));
+                servicesPanels.forEach(panel => panel.classList.remove('show'));
+                
+                // Активировать текущую категорию
+                this.classList.add('active');
+                
+                // Показать панель услуг
+                const servicesPanel = document.querySelector(`[data-panel="${categorySlug}"]`);
+                if (servicesPanel) {
+                    servicesPanel.classList.add('show');
+                }
+            });
+        });
+        
+        // Предотвратить закрытие при наведении на само меню
+        servicesMegaMenu.addEventListener('mouseenter', function() {
+            clearTimeout(hoverTimeout);
+        });
+        
+        servicesMegaMenu.addEventListener('mouseleave', function() {
+            hoverTimeout = setTimeout(function() {
+                servicesMegaMenu.classList.remove('show');
+                servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
+                servicesPanels.forEach(panel => panel.classList.remove('show'));
+                categories.forEach(category => category.classList.remove('active'));
             }, 300);
         });
         
@@ -39,6 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (servicesDropdown.querySelector('i')) {
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
             }
+            servicesPanels.forEach(panel => panel.classList.remove('show'));
+            categories.forEach(category => category.classList.remove('active'));
         }
     });
     

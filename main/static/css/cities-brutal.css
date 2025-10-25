@@ -389,7 +389,7 @@
 
 .brutal-city-service-category {
     font-family: var(--brutal-font);
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--brutal-green);
@@ -1160,7 +1160,7 @@
 
 .brutal-city-category-service-category {
     font-family: var(--brutal-font);
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--brutal-green);

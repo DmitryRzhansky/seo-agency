@@ -21,12 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hoverTimeout = setTimeout(function() {
                 servicesMegaMenu.classList.remove('show');
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
-                // Скрыть контейнер услуг и все панели
-                const servicesContainer = document.querySelector('.brutal-mega-menu-services');
-                if (servicesContainer) {
-                    servicesContainer.classList.remove('show');
-                }
-                servicesPanels.forEach(panel => panel.classList.remove('show'));
+                // Скрыть все категории
                 categories.forEach(category => category.classList.remove('active'));
             }, 300);
         });
@@ -34,26 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Обработка наведения на категорию
         categories.forEach(category => {
             category.addEventListener('mouseenter', function() {
-                const categorySlug = this.dataset.category;
-                
                 // Убрать активность с других категорий
                 categories.forEach(cat => cat.classList.remove('active'));
-                servicesPanels.forEach(panel => panel.classList.remove('show'));
                 
                 // Активировать текущую категорию
                 this.classList.add('active');
-                
-                // Показать контейнер услуг
-                const servicesContainer = document.querySelector('.brutal-mega-menu-services');
-                if (servicesContainer) {
-                    servicesContainer.classList.add('show');
-                    
-                    // Показать панель услуг
-                    const servicesPanel = servicesContainer.querySelector(`[data-panel="${categorySlug}"]`);
-                    if (servicesPanel) {
-                        servicesPanel.classList.add('show');
-                    }
-                }
             });
         });
         
@@ -70,24 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Убрать активность с других категорий
                     categories.forEach(cat => cat.classList.remove('active'));
-                    servicesPanels.forEach(panel => panel.classList.remove('show'));
                     
                     // Активировать текущую категорию
                     category.classList.add('active');
-                    
-                    // Показать контейнер услуг
-                    const servicesContainer = document.querySelector('.brutal-mega-menu-services');
-                    if (servicesContainer) {
-                        servicesContainer.classList.add('show');
-                        
-                        // Показать панель услуг
-                        const servicesPanel = servicesContainer.querySelector(`[data-panel="${categorySlug}"]`);
-                        console.log('Найдена панель услуг:', servicesPanel); // Отладка
-                        if (servicesPanel) {
-                            servicesPanel.classList.add('show');
-                            console.log('Панель услуг показана'); // Отладка
-                        }
-                    }
+                    console.log('Категория активирована:', categorySlug); // Отладка
                 });
             }
         });
@@ -101,12 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hoverTimeout = setTimeout(function() {
                 servicesMegaMenu.classList.remove('show');
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
-                // Скрыть контейнер услуг и все панели
-                const servicesContainer = document.querySelector('.brutal-mega-menu-services');
-                if (servicesContainer) {
-                    servicesContainer.classList.remove('show');
-                }
-                servicesPanels.forEach(panel => panel.classList.remove('show'));
+                // Скрыть все категории
                 categories.forEach(category => category.classList.remove('active'));
             }, 300);
         });
@@ -129,12 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (servicesDropdown.querySelector('i')) {
                 servicesDropdown.querySelector('i').style.transform = 'rotate(0deg)';
             }
-            // Скрыть контейнер услуг и все панели
-            const servicesContainer = document.querySelector('.brutal-mega-menu-services');
-            if (servicesContainer) {
-                servicesContainer.classList.remove('show');
-            }
-            servicesPanels.forEach(panel => panel.classList.remove('show'));
+            // Скрыть все категории
             categories.forEach(category => category.classList.remove('active'));
         }
     });

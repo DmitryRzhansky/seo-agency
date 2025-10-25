@@ -124,35 +124,28 @@
                         <div class="brutal-mega-menu-categories">
                             {% for category in service_categories_menu %}
                             <div class="brutal-mega-menu-category" data-category="{{ category.slug }}">
-                                <div class="brutal-mega-menu-category-title">
+                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-category-title">
                                     <span>{{ category.title }}</span>
                                     <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-category-link">
-                                    Перейти к категории
                                 </a>
-                            </div>
-                            {% endfor %}
-                        </div>
-                        
-                        <!-- Второй уровень - услуги (скрыт по умолчанию) -->
-                        <div class="brutal-mega-menu-services">
-                            {% for category in service_categories_menu %}
-                            <div class="brutal-mega-menu-services-panel" data-panel="{{ category.slug }}">
-                                <div class="brutal-mega-menu-services-grid">
-                                    {% for service in category.services.all|slice:":6" %}
-                                    <div class="brutal-mega-menu-service">
-                                        <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}">
-                                            <h4>{{ service.title }}</h4>
-                                            <p>{{ service.short_description|truncatewords:8 }}</p>
+                                
+                                <!-- Панель услуг для этой категории -->
+                                <div class="brutal-mega-menu-services">
+                                    <div class="brutal-mega-menu-services-grid">
+                                        {% for service in category.services.all|slice:":6" %}
+                                        <div class="brutal-mega-menu-service">
+                                            <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}">
+                                                <h4>{{ service.title }}</h4>
+                                                <p>{{ service.short_description|truncatewords:8 }}</p>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="brutal-mega-menu-services-footer">
+                                        <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-all-services">
+                                            Все услуги категории →
                                         </a>
                                     </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="brutal-mega-menu-services-footer">
-                                    <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-all-services">
-                                        Все услуги категории →
-                                    </a>
                                 </div>
                             </div>
                             {% endfor %}

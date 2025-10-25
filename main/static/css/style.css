@@ -1661,7 +1661,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     border-right: none;
 }
 
-/* Заголовок категории */
+/* Заголовок категории (теперь ссылка) */
 .brutal-mega-menu-category-title {
     display: flex;
     align-items: center;
@@ -1669,6 +1669,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     padding: 15px 10px;
     background: var(--brutal-green);
     color: var(--brutal-white);
+    text-decoration: none;
     font-weight: 700;
     font-size: 0.9rem;
     text-transform: uppercase;
@@ -1681,28 +1682,6 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     word-wrap: break-word; /* Перенос длинных слов */
     cursor: pointer; /* Показываем, что это кликабельно */
     overflow: hidden; /* Скрываем переполнение */
-}
-
-/* Ссылка на категорию */
-.brutal-mega-menu-category-link {
-    display: block;
-    padding: 8px 15px;
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-align: center;
-    transition: var(--brutal-transition);
-    font-family: 'Courier New', monospace;
-    border-top: 1px solid var(--brutal-gray);
-}
-
-.brutal-mega-menu-category-link:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
 }
 
 .brutal-mega-menu-category-title:hover {
@@ -1741,6 +1720,22 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 
 .brutal-mega-menu-services.show {
     display: block; /* Показываем контейнер */
+}
+
+/* Панель услуг под конкретной категорией */
+.brutal-mega-menu-category .brutal-mega-menu-services {
+    display: none;
+    position: absolute;
+    top: 100%; /* Под конкретной категорией */
+    left: 0;
+    right: 0;
+    z-index: 1002;
+    min-width: 400px;
+    max-width: 600px;
+}
+
+.brutal-mega-menu-category.active .brutal-mega-menu-services {
+    display: block;
 }
 
 /* Панели услуг внутри контейнера (скрыты по умолчанию) */

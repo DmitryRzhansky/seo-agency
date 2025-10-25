@@ -1652,23 +1652,20 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     max-width: 200px; /* Максимальная ширина */
     height: 70px; /* Увеличена высота для большего шрифта */
     border-right: 2px solid var(--brutal-gray);
+    border-bottom: 2px solid var(--brutal-gray); /* Нижняя граница для всех категорий */
     background: var(--brutal-white);
     transition: var(--brutal-transition);
     position: relative; /* Для позиционирования панели услуг */
 }
 
-.brutal-mega-menu-category:last-child {
+/* Убираем правую границу у последней категории в каждой строке */
+.brutal-mega-menu-category:nth-child(4n) {
     border-right: none;
 }
 
-/* Последние категории в каждой строке прилипают к нижней границе */
-.brutal-mega-menu-category:nth-child(4n) {
-    border-bottom: 2px solid var(--brutal-gray);
-}
-
-/* Для последней строки - все категории прилипают к границе */
-.brutal-mega-menu-category:nth-last-child(-n+4) {
-    border-bottom: 2px solid var(--brutal-gray);
+/* Убираем правую границу у последней категории */
+.brutal-mega-menu-category:last-child {
+    border-right: none;
 }
 
 /* Заголовок категории (теперь ссылка) */
@@ -2468,3 +2465,4 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
         gap: 15px;
     }
 }
+

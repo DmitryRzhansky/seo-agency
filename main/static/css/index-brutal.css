@@ -21,10 +21,10 @@
 ======================================== */
 
 .brutal-hero {
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 40px 0 20px;
+    padding: 60px 0 40px;
     background: var(--brutal-white);
     position: relative;
 }
@@ -223,6 +223,7 @@
     box-shadow: var(--brutal-shadow);
     padding: 40px;
     text-align: center;
+    margin-top: -100px;
 }
 
 
@@ -958,7 +959,8 @@
 }
 
 .brutal-form-group input,
-.brutal-form-group textarea {
+.brutal-form-group textarea,
+.brutal-form-group .form-control {
     width: 100%;
     background: var(--brutal-white);
     border: 2px solid var(--brutal-dark-gray);
@@ -970,14 +972,18 @@
 }
 
 .brutal-form-group input::placeholder,
-.brutal-form-group textarea::placeholder {
+.brutal-form-group textarea::placeholder,
+.brutal-form-group .form-control::placeholder {
     color: var(--brutal-dark-gray);
     opacity: 0.7;
 }
 
 .brutal-form-group input:focus,
-.brutal-form-group textarea:focus {
+.brutal-form-group textarea:focus,
+.brutal-form-group .form-control:focus {
     outline: none;
+    border-color: var(--brutal-green);
+    box-shadow: 3px 3px 0px var(--brutal-green), 0 0 0 2px var(--brutal-green);
 }
 
 .brutal-form-group textarea {

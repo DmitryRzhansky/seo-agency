@@ -2,6 +2,27 @@
    БРУТАЛЬНЫЙ СТИЛЬ ГЛАВНОЙ СТРАНИЦЫ
 ======================================== */
 
+/* Брутальный скроллбар */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--brutal-black);
+    border: 2px solid var(--brutal-green);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border: 2px solid var(--brutal-black);
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
+    border: 2px solid var(--brutal-green);
+}
+
 /* Базовые переменные */
 :root {
     --brutal-black: #000000;
@@ -23,7 +44,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 100px 0 50px;
+    padding: 60px 0 40px;
     background: var(--brutal-white);
     position: relative;
 }
@@ -740,6 +761,24 @@
     font-family: 'Courier New', monospace;
 }
 
+.brutal-service-btn {
+    display: inline-block;
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    padding: 15px 30px;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
 /* ========================================
    CTA SECTION
 ======================================== */
@@ -884,6 +923,12 @@
     font-size: 1rem;
     font-family: 'Courier New', monospace;
     box-shadow: 3px 3px 0px var(--brutal-green);
+}
+
+.brutal-form-group input::placeholder,
+.brutal-form-group textarea::placeholder {
+    color: var(--brutal-dark-gray);
+    opacity: 0.7;
 }
 
 .brutal-form-group input:focus,

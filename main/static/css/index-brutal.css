@@ -223,7 +223,7 @@
     box-shadow: var(--brutal-shadow);
     padding: 40px;
     text-align: center;
-    margin-top: -100px;
+    margin-top: -120px;
 }
 
 
@@ -960,30 +960,39 @@
 
 .brutal-form-group input,
 .brutal-form-group textarea,
-.brutal-form-group .form-control {
-    width: 100%;
-    background: var(--brutal-white);
-    border: 2px solid var(--brutal-dark-gray);
-    padding: 15px 20px;
-    color: var(--brutal-black);
-    font-size: 1rem;
-    font-family: 'Courier New', monospace;
-    box-shadow: 3px 3px 0px var(--brutal-green);
+.brutal-form-group .form-control,
+.brutal-contact-form input,
+.brutal-contact-form textarea,
+.brutal-contact-form .form-control {
+    width: 100% !important;
+    background: var(--brutal-white) !important;
+    border: 2px solid var(--brutal-dark-gray) !important;
+    padding: 15px 20px !important;
+    color: var(--brutal-black) !important;
+    font-size: 1rem !important;
+    font-family: 'Courier New', monospace !important;
+    box-shadow: 3px 3px 0px var(--brutal-green) !important;
 }
 
 .brutal-form-group input::placeholder,
 .brutal-form-group textarea::placeholder,
-.brutal-form-group .form-control::placeholder {
-    color: var(--brutal-dark-gray);
-    opacity: 0.7;
+.brutal-form-group .form-control::placeholder,
+.brutal-contact-form input::placeholder,
+.brutal-contact-form textarea::placeholder,
+.brutal-contact-form .form-control::placeholder {
+    color: var(--brutal-dark-gray) !important;
+    opacity: 0.7 !important;
 }
 
 .brutal-form-group input:focus,
 .brutal-form-group textarea:focus,
-.brutal-form-group .form-control:focus {
-    outline: none;
-    border-color: var(--brutal-green);
-    box-shadow: 3px 3px 0px var(--brutal-green), 0 0 0 2px var(--brutal-green);
+.brutal-form-group .form-control:focus,
+.brutal-contact-form input:focus,
+.brutal-contact-form textarea:focus,
+.brutal-contact-form .form-control:focus {
+    outline: none !important;
+    border-color: var(--brutal-green) !important;
+    box-shadow: 3px 3px 0px var(--brutal-green), 0 0 0 2px var(--brutal-green) !important;
 }
 
 .brutal-form-group textarea {

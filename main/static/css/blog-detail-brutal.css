@@ -673,13 +673,15 @@
     }
     
     .brutal-post-content-blocks {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 20px;
         margin-right: 0 !important;
+        margin-left: 0 !important;
         order: 2;
-        max-width: 100%;
-        width: 100%;
-        box-sizing: border-box;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
     }
     
     .brutal-post-content-block.main,
@@ -690,8 +692,16 @@
     .brutal-post-image-container {
         flex: none;
         order: 1;
-        max-width: 100%;
-        width: 100%;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    
+    .brutal-post-image-container img {
+        max-width: 100% !important;
+        height: auto !important;
+        width: 100% !important;
     }
     
     .brutal-post-content-block {

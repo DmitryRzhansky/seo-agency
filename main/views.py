@@ -75,7 +75,7 @@ def index(request):
         'page_type': 'home',
         'page_slug': None,
     }
-    return render(request, 'main/index.html', context)
+    return render(request, 'main/index_new.html', context)
 
 
 # --- Представления для Услуг ---

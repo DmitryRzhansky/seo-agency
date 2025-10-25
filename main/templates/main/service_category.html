@@ -44,7 +44,7 @@
                 <div class="brutal-category-service-card-category">{{ service.category.title }}</div>
                 <h3 class="brutal-category-service-card-title">{{ service.title }}</h3>
                 <p class="brutal-category-service-card-description">{{ service.short_description }}</p>
-                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-category-service-card-link">
+                <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="brutal-category-service-card-link">
                     Подробнее об услуге
                 </a>
             </div>

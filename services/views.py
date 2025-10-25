@@ -43,6 +43,7 @@ def service_list(request):
         'filtered_services': page_obj,
         'is_paginated': page_obj.has_other_pages(),
         'current_category': current_category,
+        'category': current_category,  # Добавляем для совместимости с шаблонами
         'search_query': query,
         # Для списка услуг SEO-объект не задаем, используем дефолтные мета
     })
@@ -67,14 +68,31 @@ def service_category_detail(request, slug):
 	})
 
 
-def service_detail(request, slug):
-	service = get_object_or_404(Service, slug=slug)
+def service_detail(request, category_slug, service_slug):
+	# Получаем категорию для проверки
+	category = get_object_or_404(ServiceCategory, slug=category_slug)
+	# Получаем услугу по slug и проверяем, что она относится к указанной категории
+	service = get_object_or_404(Service, slug=service_slug, category=category)
 	# Получаем связанные услуги для блока "Еще услуги"
 	related_services = service.get_related_services(limit=3)
 	
 	return render(request, 'main/service_detail.html', {
 		'title': service.title,
 		'service': service,
+		'category': category,  # Добавляем категорию в контекст
 		'related_services': related_services,  # Связанные услуги
 		'seo_object': service,  # Включаем SEO теги услуги
 	})
+
+
+def service_detail_legacy(request, slug):
+	"""Старый URL для обратной совместимости - делает редирект на новый URL"""
+	from django.shortcuts import redirect
+	from django.http import Http404
+	
+	service = get_object_or_404(Service, slug=slug)
+	# Делаем редирект на новый URL с указанием категории
+	return redirect('services:service_detail', 
+	                category_slug=service.category.slug, 
+	                service_slug=service.slug, 
+	                permanent=True)

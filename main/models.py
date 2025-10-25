@@ -431,9 +431,12 @@ class Service(SEOModel):
         return f"{self.title} ({self.category.title})"
 
     def get_absolute_url(self):
-        # Ссылка на отдельную страницу услуги
+        # Ссылка на отдельную страницу услуги с указанием категории
         from django.urls import reverse
-        return reverse('services:service_detail', kwargs={'slug': self.slug})
+        return reverse('services:service_detail', kwargs={
+            'category_slug': self.category.slug, 
+            'service_slug': self.slug
+        })
     
     def get_image_alt(self):
         """Возвращает alt-текст для изображения услуги"""

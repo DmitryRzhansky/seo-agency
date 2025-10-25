@@ -264,7 +264,7 @@ def city_category_detail(request, city_slug, category_slug):
         'page_type': 'city_category_detail',
         'page_slug': f"{city.slug}/{category.slug}",
     }
-    return render(request, 'main/city_category_detail.html', context)
+    return render(request, 'main/city_category_detail_brutal.html', context)
 
 
 @never_cache

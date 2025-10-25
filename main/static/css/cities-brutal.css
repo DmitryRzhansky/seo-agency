@@ -388,18 +388,12 @@
 }
 
 .brutal-city-service-category {
-    font-family: var(--brutal-font);
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--brutal-green);
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    display: none;
 }
 
 .brutal-city-service-title {
     font-family: var(--brutal-font);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--brutal-black);
@@ -1159,18 +1153,12 @@
 }
 
 .brutal-city-category-service-category {
-    font-family: var(--brutal-font);
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--brutal-green);
-    letter-spacing: 0.5px;
-    margin-bottom: 8px;
+    display: none;
 }
 
 .brutal-city-category-service-title {
     font-family: var(--brutal-font);
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--brutal-black);

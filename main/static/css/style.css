@@ -1641,14 +1641,14 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     gap: 0;
     padding: 0;
     border-bottom: 2px solid var(--brutal-gray);
+    max-width: 100%; /* Ограничиваем ширину контейнера */
 }
 
 /* Категория */
 .brutal-mega-menu-category {
-    flex: 0 0 auto; /* Не растягивается, не сжимается */
-    width: 200px; /* Фиксированная ширина */
-    min-width: 200px;
-    max-width: 200px;
+    flex: 1 1 200px; /* Может растягиваться и сжиматься, базовая ширина 200px */
+    min-width: 180px; /* Минимальная ширина */
+    max-width: 250px; /* Максимальная ширина */
     border-right: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
@@ -1729,6 +1729,15 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 .brutal-mega-menu-services.show {
+    display: block;
+}
+
+/* Панели услуг внутри контейнера */
+.brutal-mega-menu-services-panel {
+    display: none;
+}
+
+.brutal-mega-menu-services-panel.show {
     display: block;
 }
 

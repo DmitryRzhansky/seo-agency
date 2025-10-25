@@ -52,9 +52,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const title = category.querySelector('.brutal-mega-menu-category-title');
             if (title) {
                 title.addEventListener('click', function(e) {
+                    e.preventDefault();
                     e.stopPropagation();
                     
                     const categorySlug = category.dataset.category;
+                    console.log('Клик на категорию:', categorySlug); // Отладка
                     
                     // Убрать активность с других категорий
                     categories.forEach(cat => cat.classList.remove('active'));
@@ -65,8 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Показать панель услуг
                     const servicesPanel = document.querySelector(`[data-panel="${categorySlug}"]`);
+                    console.log('Найдена панель услуг:', servicesPanel); // Отладка
                     if (servicesPanel) {
                         servicesPanel.classList.add('show');
+                        console.log('Панель услуг показана'); // Отладка
                     }
                 });
             }

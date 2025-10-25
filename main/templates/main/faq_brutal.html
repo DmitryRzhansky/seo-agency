@@ -89,7 +89,7 @@
                         {% for item in items %}
                         <div class="brutal-faq-item">
                             <div class="brutal-faq-item-question">
-                                <a href="{% url 'main:faq_item' category.slug item.id %}" class="brutal-faq-item-link">
+                                <a href="{% url 'main:faq_item' category.slug item.slug %}" class="brutal-faq-item-link">
                                     {{ item.question }}
                                 </a>
                             </div>

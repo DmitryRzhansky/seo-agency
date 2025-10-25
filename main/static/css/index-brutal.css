@@ -2,48 +2,6 @@
    БРУТАЛЬНЫЙ СТИЛЬ ГЛАВНОЙ СТРАНИЦЫ
 ======================================== */
 
-/* Брутальный скроллбар */
-::-webkit-scrollbar {
-    width: 16px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--brutal-black);
-    border: 3px solid var(--brutal-green);
-    box-shadow: inset 2px 2px 0px var(--brutal-green);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--brutal-green);
-    border: 3px solid var(--brutal-black);
-    border-radius: 8px;
-    box-shadow: 3px 3px 0px var(--brutal-black);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--brutal-black);
-    border: 3px solid var(--brutal-green);
-    box-shadow: 3px 3px 0px var(--brutal-green);
-}
-
-::-webkit-scrollbar-corner {
-    background: var(--brutal-black);
-}
-
-/* Firefox скроллбар */
-html {
-    scrollbar-width: thick;
-    scrollbar-color: var(--brutal-green) var(--brutal-black);
-}
-
-/* Брутальный курсор */
-* {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%2300ff00" stroke="%23000000" stroke-width="2"/></svg>'), auto;
-}
-
-a, button, [role="button"], input[type="submit"], input[type="button"] {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="20" height="20" fill="%23000000" stroke="%2300ff00" stroke-width="2"/></svg>'), pointer;
-}
 
 /* Базовые переменные */
 :root {

@@ -1,0 +1,61 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция городов - брутальная -->
+<section class="brutal-cities-hero">
+    <div class="brutal-container">
+        <div class="brutal-cities-hero-content">
+            <h1 class="brutal-cities-hero-title">Города присутствия</h1>
+            <p class="brutal-cities-hero-subtitle">
+                Мы предоставляем услуги SEO-продвижения и комплексного интернет-маркетинга 
+                в крупнейших городах России и СНГ.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент -->
+<section class="brutal-cities-content">
+    <div class="brutal-container">
+        <!-- Список городов -->
+        <div class="brutal-cities-grid">
+            {% for city in cities %}
+            <div class="brutal-city-card">
+                <div class="brutal-city-region">{{ city.region }}</div>
+                <h3 class="brutal-city-title">{{ city.name }}</h3>
+                {% if city.local_description %}
+                <p class="brutal-city-description">{{ city.local_description|truncatewords:20 }}</p>
+                {% endif %}
+                <a href="{{ city.get_absolute_url }}" class="brutal-city-link">
+                    SEO {{ city.get_name_prepositional }}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- CTA секция -->
+        <div class="brutal-cities-cta">
+            <div class="brutal-cities-cta-content">
+                <h3 class="brutal-cities-cta-title">Не нашли свой город?</h3>
+                <p class="brutal-cities-cta-text">
+                    Мы работаем по всей России и СНГ. Свяжитесь с нами для обсуждения 
+                    условий работы в вашем регионе
+                </p>
+                <a href="{% url 'main:contacts' %}" class="brutal-cities-cta-btn">
+                    Связаться с нами
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

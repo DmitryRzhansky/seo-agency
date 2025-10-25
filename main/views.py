@@ -191,7 +191,7 @@ def city_list(request):
         'page_type': 'city_list',
         'page_slug': None,
     }
-    return render(request, 'main/city_list.html', context)
+    return render(request, 'main/city_list_brutal.html', context)
 
 
 @never_cache
@@ -218,7 +218,7 @@ def city_detail(request, slug):
         'page_type': 'city_detail',
         'page_slug': city.slug,
     }
-    return render(request, 'main/city_detail.html', context)
+    return render(request, 'main/city_detail_brutal.html', context)
 
 
 @never_cache
@@ -337,7 +337,7 @@ def city_post_detail(request, city_slug, post_slug):
         'page_type': 'city_post_detail',
         'page_slug': f"{city.slug}/{post.slug}",
     }
-    return render(request, 'main/city_post_detail.html', context)
+    return render(request, 'main/city_post_detail_brutal.html', context)
 
 
 def set_city(request, slug):

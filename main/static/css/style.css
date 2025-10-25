@@ -1641,6 +1641,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     gap: 0;
     padding: 0;
     max-width: 800px; /* Ограничиваем ширину контейнера для принудительного переноса */
+    border-bottom: 2px solid var(--brutal-gray); /* Нижняя граница для прилипания */
 }
 
 /* Категория */
@@ -1658,6 +1659,16 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 
 .brutal-mega-menu-category:last-child {
     border-right: none;
+}
+
+/* Последние категории в каждой строке прилипают к нижней границе */
+.brutal-mega-menu-category:nth-child(4n) {
+    border-bottom: 2px solid var(--brutal-gray);
+}
+
+/* Для последней строки - все категории прилипают к границе */
+.brutal-mega-menu-category:nth-last-child(-n+4) {
+    border-bottom: 2px solid var(--brutal-gray);
 }
 
 /* Заголовок категории (теперь ссылка) */

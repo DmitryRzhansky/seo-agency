@@ -649,6 +649,11 @@
         grid-column: span 1;
     }
     
+    .brutal-post-content-block.content {
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+    
     .brutal-post-image-container {
         flex: none;
         order: 1;
@@ -673,5 +678,10 @@
     .brutal-related-posts-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+    
+    .brutal-container {
+        padding: 0 15px;
+        overflow-x: hidden;
     }
 }

@@ -977,11 +977,17 @@
     .brutal-content-blocks {
         grid-template-columns: 1fr;
         gap: 20px;
+        margin-right: 0;
     }
     
     .brutal-content-block.main,
     .brutal-content-block.content {
         grid-column: span 1;
+    }
+    
+    .brutal-content-block.content {
+        width: 100% !important;
+        margin-right: 0 !important;
     }
     
     .brutal-service-image-container {
@@ -1012,5 +1018,10 @@
     .brutal-related-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+    
+    .brutal-container {
+        padding: 0 15px;
+        overflow-x: hidden;
     }
 }

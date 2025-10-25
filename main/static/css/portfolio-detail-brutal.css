@@ -821,6 +821,11 @@
         grid-column: span 1;
     }
     
+    .brutal-portfolio-detail-block.content {
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+    
     .brutal-portfolio-detail-image-container {
         flex: none;
         order: 1;
@@ -857,5 +862,10 @@
     .brutal-related-portfolio-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+    }
+    
+    .brutal-container {
+        padding: 0 15px;
+        overflow-x: hidden;
     }
 }

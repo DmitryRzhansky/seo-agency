@@ -105,40 +105,51 @@
     .breadcrumb {
         font-size: 0.85rem;
         padding: 15px 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        flex-wrap: nowrap;
     }
     
     .breadcrumb-item {
-        max-width: 120px;
+        max-width: 140px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        flex-shrink: 0;
     }
     
     .breadcrumb-item a,
     .breadcrumb-item.active {
         padding: 6px 12px;
         font-size: 0.8rem;
+        white-space: nowrap;
     }
     
     .breadcrumb-item:not(:last-child)::after {
         margin: 0 8px;
         font-size: 1rem;
+        flex-shrink: 0;
     }
 }
 
 @media (max-width: 480px) {
     .breadcrumb {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         padding: 12px 0;
     }
     
     .breadcrumb-item {
-        max-width: 100px;
+        max-width: 110px;
     }
     
     .breadcrumb-item a,
     .breadcrumb-item.active {
         padding: 4px 8px;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+    }
+    
+    .breadcrumb-item:not(:last-child)::after {
+        margin: 0 6px;
+        font-size: 0.9rem;
     }
 }

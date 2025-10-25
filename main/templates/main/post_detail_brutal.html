@@ -90,6 +90,17 @@
     </div>
 </section>
 
+<!-- Навигация - брутальная -->
+{% if post.category %}
+<section class="brutal-post-navigation">
+    <div class="brutal-container">
+        <a href="{% url 'blog:category_posts' slug=post.category.slug %}" class="brutal-post-nav-link">
+            ← Вернуться в категорию "{{ post.category.name }}"
+        </a>
+    </div>
+</section>
+{% endif %}
+
 <!-- Связанные статьи - брутальные -->
 {% if related_posts %}
 <section class="brutal-related-posts">
@@ -116,7 +127,7 @@
                             {{ related_post.content|striptags|truncatewords:15 }}
                         {% endif %}
                     </p>
-                    <a href="{% url 'blog:post_detail' slug=related_post.slug %}" class="brutal-related-card-link">
+                    <a href="{% url 'blog:post_detail' category_slug=related_post.category.slug post_slug=related_post.slug %}" class="brutal-related-card-link">
                         Читать далее
                     </a>
                 </div>

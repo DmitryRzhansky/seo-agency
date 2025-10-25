@@ -105,7 +105,7 @@
                         <span class="brutal-blog-card-date">{{ post.published_date|date:"d.m.Y" }}</span>
                         <span class="brutal-blog-card-views">{{ post.views_count }} просмотров</span>
                     </div>
-                    <a href="{% url 'blog:post_detail' slug=post.slug %}" class="brutal-blog-card-link">
+                    <a href="{% url 'blog:post_detail' category_slug=post.category.slug post_slug=post.slug %}" class="brutal-blog-card-link">
                         Читать далее
                     </a>
                 </div>

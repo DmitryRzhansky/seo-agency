@@ -118,8 +118,15 @@ class Post(SEOModel):
         return self.title
 
     def get_absolute_url(self):
-        # Ссылка на отдельный пост
-        return reverse('blog:post_detail', kwargs={'slug': self.slug})
+        # Ссылка на отдельный пост с указанием категории
+        if self.category:
+            return reverse('blog:post_detail', kwargs={
+                'category_slug': self.category.slug,
+                'post_slug': self.slug
+            })
+        else:
+            # Fallback для постов без категории (не должно быть, но на всякий случай)
+            return reverse('blog:post_detail_legacy', kwargs={'slug': self.slug})
     
     def get_breadcrumbs(self, city=None):
         """Возвращает хлебные крошки для статьи блога"""

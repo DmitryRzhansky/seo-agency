@@ -89,8 +89,11 @@ def search_posts(request):
 
 
 @never_cache
-def post_detail(request, slug):
-	post = get_object_or_404(Post, slug=slug)
+def post_detail(request, category_slug, post_slug):
+	# Получаем категорию для проверки
+	category = get_object_or_404(Category, slug=category_slug, is_active=True)
+	# Получаем пост по slug и проверяем, что он относится к указанной категории
+	post = get_object_or_404(Post, slug=post_slug, category=category)
 	session_key = f"viewed_post_{post.pk}"
 	if not request.session.get(session_key):
 		Post.objects.filter(pk=post.pk).update(views_count=F('views_count') + 1)
@@ -102,6 +105,25 @@ def post_detail(request, slug):
 	return render(request, 'main/post_detail_brutal.html', {
 		'title': post.title,
 		'post': post,
+		'category': category,  # Добавляем категорию в контекст
 		'seo_object': post,  # Передаем пост как SEO-объект
 		'related_posts': related_posts,  # Связанные статьи
 	})
+
+
+def post_detail_legacy(request, slug):
+	"""Старый URL для обратной совместимости - делает редирект на новый URL"""
+	from django.shortcuts import redirect
+	
+	post = get_object_or_404(Post, slug=slug)
+	
+	# Если у поста нет категории, выдаем 404 (не должно быть, но на всякий случай)
+	if not post.category:
+		from django.http import Http404
+		raise Http404("Post not found")
+	
+	# Делаем редирект на новый URL с указанием категории
+	return redirect('blog:post_detail', 
+	                category_slug=post.category.slug, 
+	                post_slug=post.slug, 
+	                permanent=True)

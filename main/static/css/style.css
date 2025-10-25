@@ -1641,14 +1641,15 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     gap: 0;
     padding: 0;
     border-bottom: 2px solid var(--brutal-gray);
-    max-width: 100%; /* Ограничиваем ширину контейнера */
+    max-width: 800px; /* Ограничиваем ширину контейнера для принудительного переноса */
 }
 
 /* Категория */
 .brutal-mega-menu-category {
-    flex: 1 1 200px; /* Может растягиваться и сжиматься, базовая ширина 200px */
-    min-width: 180px; /* Минимальная ширина */
-    max-width: 250px; /* Максимальная ширина */
+    flex: 0 0 200px; /* НЕ растягивается, НЕ сжимается, фиксированная ширина 200px */
+    width: 200px; /* Фиксированная ширина */
+    min-width: 200px; /* Минимальная ширина */
+    max-width: 200px; /* Максимальная ширина */
     border-right: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
@@ -1721,24 +1722,20 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     transform: rotate(180deg);
 }
 
-/* Панель услуг (скрыта по умолчанию) */
+/* Контейнер услуг (всегда показан) */
 .brutal-mega-menu-services {
-    display: none;
+    display: block; /* Показываем контейнер */
     padding: 20px;
     background: var(--brutal-gray);
 }
 
-.brutal-mega-menu-services.show {
-    display: block;
-}
-
-/* Панели услуг внутри контейнера */
+/* Панели услуг внутри контейнера (скрыты по умолчанию) */
 .brutal-mega-menu-services-panel {
-    display: none;
+    display: none; /* Скрываем отдельные панели */
 }
 
 .brutal-mega-menu-services-panel.show {
-    display: block;
+    display: block; /* Показываем активную панель */
 }
 
 /* Сетка услуг */

@@ -39,8 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Активировать текущую категорию
                 this.classList.add('active');
                 
-                // Показать панель услуг
-                const servicesPanel = document.querySelector(`[data-panel="${categorySlug}"]`);
+                // Показать панель услуг - ищем внутри контейнера услуг
+                const servicesContainer = document.querySelector('.brutal-mega-menu-services');
+                const servicesPanel = servicesContainer ? servicesContainer.querySelector(`[data-panel="${categorySlug}"]`) : null;
                 if (servicesPanel) {
                     servicesPanel.classList.add('show');
                 }
@@ -65,8 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Активировать текущую категорию
                     category.classList.add('active');
                     
-                    // Показать панель услуг
-                    const servicesPanel = document.querySelector(`[data-panel="${categorySlug}"]`);
+                    // Показать панель услуг - ищем внутри контейнера услуг
+                    const servicesContainer = document.querySelector('.brutal-mega-menu-services');
+                    const servicesPanel = servicesContainer ? servicesContainer.querySelector(`[data-panel="${categorySlug}"]`) : null;
                     console.log('Найдена панель услуг:', servicesPanel); // Отладка
                     if (servicesPanel) {
                         servicesPanel.classList.add('show');

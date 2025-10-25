@@ -634,19 +634,19 @@ def faq_category(request, slug):
 
 
 @never_cache
-def faq_item(request, category_slug, item_id):
+def faq_item(request, category_slug, item_slug):
     """
     Отдельный вопрос-ответ
     """
     category = get_object_or_404(FAQCategory, slug=category_slug, is_active=True)
-    faq_item = get_object_or_404(FAQItem, id=item_id, category=category, is_published=True)
+    faq_item = get_object_or_404(FAQItem, slug=item_slug, category=category, is_published=True)
     
     
     # Получаем похожие вопросы из той же категории
     related_items = FAQItem.objects.filter(
         category=category,
         is_published=True
-    ).exclude(id=faq_item.id).order_by('order', 'question')[:5]
+    ).exclude(slug=faq_item.slug).order_by('order', 'question')[:5]
     
     # SEO данные
     seo_title = f"{faq_item.question} | FAQ | Isakov Agency"
@@ -676,47 +676,49 @@ def glossary_list(request):
     # Получаем все активные категории
     categories = GlossaryCategory.objects.filter(is_active=True).order_by('order', 'name')
     
-    # Получаем все опубликованные термины
-    glossary_terms = GlossaryTerm.objects.filter(is_published=True).select_related('category').order_by('term')
-    
     # Фильтрация по категории
     category_slug = request.GET.get('category')
     selected_category = None
+    glossary_by_category = {}
+    search_query = request.GET.get('search', '').strip()
+    alphabet_filter = request.GET.get('alphabet')
+    
     if category_slug:
         try:
             selected_category = GlossaryCategory.objects.get(slug=category_slug, is_active=True)
-            glossary_terms = glossary_terms.filter(category=selected_category)
+            # Получаем термины только для выбранной категории
+            glossary_terms = GlossaryTerm.objects.filter(
+                category=selected_category,
+                is_published=True
+            ).order_by('term')
+            
+            # Фильтрация по алфавиту
+            if alphabet_filter:
+                if alphabet_filter == 'ru':
+                    # Русские буквы
+                    glossary_terms = glossary_terms.filter(term__regex=r'^[А-Яа-я]')
+                elif alphabet_filter == 'en':
+                    # Английские буквы
+                    glossary_terms = glossary_terms.filter(term__regex=r'^[A-Za-z]')
+                elif alphabet_filter != 'all':
+                    # Конкретная буква
+                    glossary_terms = glossary_terms.filter(term__istartswith=alphabet_filter)
+            
+            # Поиск по терминам и определениям
+            if search_query:
+                glossary_terms = glossary_terms.filter(
+                    Q(term__icontains=search_query) | 
+                    Q(definition__icontains=search_query)
+                )
+            
+            # Группируем термины по категориям
+            for term in glossary_terms:
+                category = term.category
+                if category not in glossary_by_category:
+                    glossary_by_category[category] = []
+                glossary_by_category[category].append(term)
         except GlossaryCategory.DoesNotExist:
             selected_category = None
-    
-    # Фильтрация по алфавиту
-    alphabet_filter = request.GET.get('alphabet')
-    if alphabet_filter:
-        if alphabet_filter == 'ru':
-            # Русские буквы
-            glossary_terms = glossary_terms.filter(term__regex=r'^[А-Яа-я]')
-        elif alphabet_filter == 'en':
-            # Английские буквы
-            glossary_terms = glossary_terms.filter(term__regex=r'^[A-Za-z]')
-        elif alphabet_filter != 'all':
-            # Конкретная буква
-            glossary_terms = glossary_terms.filter(term__istartswith=alphabet_filter)
-    
-    # Поиск по терминам и определениям
-    search_query = request.GET.get('search', '').strip()
-    if search_query:
-        glossary_terms = glossary_terms.filter(
-            Q(term__icontains=search_query) | 
-            Q(definition__icontains=search_query)
-        )
-    
-    # Группируем термины по категориям
-    glossary_by_category = {}
-    for term in glossary_terms:
-        category = term.category
-        if category not in glossary_by_category:
-            glossary_by_category[category] = []
-        glossary_by_category[category].append(term)
     
     # SEO данные
     seo_title = "Глоссарий терминов | Isakov Agency"
@@ -815,18 +817,18 @@ def glossary_category(request, slug):
 
 
 @never_cache
-def glossary_term(request, category_slug, term_id):
+def glossary_term(request, category_slug, term_slug):
     """
     Отдельный термин глоссария
     """
     category = get_object_or_404(GlossaryCategory, slug=category_slug, is_active=True)
-    glossary_term = get_object_or_404(GlossaryTerm, id=term_id, category=category, is_published=True)
+    glossary_term = get_object_or_404(GlossaryTerm, slug=term_slug, category=category, is_published=True)
 
     # Получаем похожие термины из той же категории
     related_terms = GlossaryTerm.objects.filter(
         category=category,
         is_published=True
-    ).exclude(id=glossary_term.id).order_by('term')[:5]
+    ).exclude(slug=glossary_term.slug).order_by('term')[:5]
 
     # SEO данные
     seo_title = f"{glossary_term.term} - Глоссарий | Isakov Agency"

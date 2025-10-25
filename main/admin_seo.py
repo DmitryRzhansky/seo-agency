@@ -684,11 +684,12 @@ class FAQItemAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     list_display = ['question_short', 'category', 'order', 'is_published', 'created_at']
     list_filter = ['category', 'is_published', 'created_at']
     search_fields = ['question', 'answer']
+    prepopulated_fields = {'slug': ('question',)}
     ordering = ['order', 'question']
     
     fieldsets = (
         ('Основная информация', {
-            'fields': ('category', 'question', 'answer', 'order', 'is_published')
+            'fields': ('category', 'question', 'slug', 'answer', 'order', 'is_published')
         }),
         ('Хлебные крошки', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
@@ -751,11 +752,12 @@ class GlossaryTermAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin)
     list_display = ['term_short', 'category', 'order', 'is_published', 'created_at']
     list_filter = ['category', 'is_published', 'created_at']
     search_fields = ['term', 'definition']
+    prepopulated_fields = {'slug': ('term',)}
     ordering = ['order', 'term']
     
     fieldsets = (
         ('Основная информация', {
-            'fields': ('category', 'term', 'definition', 'order', 'is_published')
+            'fields': ('category', 'term', 'slug', 'definition', 'order', 'is_published')
         }),
         ('Хлебные крошки', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),

@@ -52,7 +52,7 @@
         <div class="brutal-glossary-related-terms">
             {% for term in related_terms %}
             <div class="brutal-glossary-related-term">
-                <a href="{% url 'main:glossary_term' category.slug term.id %}" class="brutal-glossary-related-term-link">
+                <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="brutal-glossary-related-term-link">
                     {{ term.term }}
                 </a>
             </div>

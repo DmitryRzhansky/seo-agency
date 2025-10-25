@@ -93,38 +93,63 @@
 <!-- Глоссарий контент - брутальный -->
 <section class="brutal-glossary-content">
     <div class="brutal-container">
-        {% if glossary_by_category %}
-            {% for category, terms in glossary_by_category.items %}
-            <div class="brutal-glossary-category">
-                <h2 class="brutal-glossary-category-title">
-                    <a href="{% url 'main:glossary_category' category.slug %}" class="brutal-glossary-category-link">
-                        {{ category.name }}
-                    </a>
-                </h2>
-                {% if category.description %}
-                <p class="brutal-glossary-category-description">{{ category.description }}</p>
-                {% endif %}
-                
-                <div class="brutal-glossary-terms">
-                    {% for term in terms %}
-                    <div class="brutal-glossary-term">
-                        <div class="brutal-glossary-term-name">
-                            <a href="{% url 'main:glossary_term' category.slug term.id %}" class="brutal-glossary-term-link">
-                                {{ term.term }}
-                            </a>
+        {% if selected_category %}
+            <!-- Показываем термины выбранной категории -->
+            {% if glossary_by_category %}
+                {% for category, terms in glossary_by_category.items %}
+                <div class="brutal-glossary-category">
+                    <h2 class="brutal-glossary-category-title">
+                        <a href="{% url 'main:glossary_category' category.slug %}" class="brutal-glossary-category-link">
+                            {{ category.name }}
+                        </a>
+                    </h2>
+                    {% if category.description %}
+                    <p class="brutal-glossary-category-description">{{ category.description }}</p>
+                    {% endif %}
+                    
+                    <div class="brutal-glossary-terms">
+                        {% for term in terms %}
+                        <div class="brutal-glossary-term">
+                            <div class="brutal-glossary-term-name">
+                                <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="brutal-glossary-term-link">
+                                    {{ term.term }}
+                                </a>
+                            </div>
+                            <div class="brutal-glossary-term-definition">
+                                {{ term.definition|truncatewords:30|striptags }}
+                            </div>
                         </div>
-                        <div class="brutal-glossary-term-definition">
-                            {{ term.definition|truncatewords:30|striptags }}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="brutal-glossary-empty">
+                    <h3>Термины не найдены</h3>
+                    <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
+                </div>
+            {% endif %}
+        {% else %}
+            <!-- Показываем только список категорий -->
+            <div class="brutal-glossary-categories">
+                <h2 class="brutal-glossary-categories-title">Выберите категорию терминов:</h2>
+                <div class="brutal-glossary-categories-grid">
+                    {% for category in categories %}
+                    <div class="brutal-glossary-category-card">
+                        <h3 class="brutal-glossary-category-card-title">
+                            <a href="{% url 'main:glossary_category' category.slug %}" class="brutal-glossary-category-card-link">
+                                {{ category.name }}
+                            </a>
+                        </h3>
+                        {% if category.description %}
+                        <p class="brutal-glossary-category-card-description">{{ category.description }}</p>
+                        {% endif %}
+                        <div class="brutal-glossary-category-card-meta">
+                            <span class="brutal-glossary-category-card-count">{{ category.glossary_terms.count }} терминов</span>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            {% endfor %}
-        {% else %}
-            <div class="brutal-glossary-empty">
-                <h3>Термины не найдены</h3>
-                <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
             </div>
         {% endif %}
     </div>

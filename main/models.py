@@ -963,6 +963,7 @@ class GlossaryTerm(SEOModel):
         verbose_name="Категория"
     )
     term = models.CharField(max_length=200, verbose_name="Термин")
+    slug = models.SlugField(max_length=200, verbose_name="URL-идентификатор")
     definition = CKEditor5Field(verbose_name="Определение", config_name='extends')
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
@@ -994,7 +995,7 @@ class GlossaryTerm(SEOModel):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('main:glossary_term', kwargs={'category_slug': self.category.slug, 'term_id': self.id})
+        return reverse('main:glossary_term', kwargs={'category_slug': self.category.slug, 'term_slug': self.slug})
 
     def get_breadcrumbs(self):
         """Возвращает хлебные крошки для термина глоссария"""
@@ -1091,6 +1092,7 @@ class FAQItem(SEOModel):
         verbose_name="Категория"
     )
     question = models.CharField(max_length=300, verbose_name="Вопрос")
+    slug = models.SlugField(max_length=300, verbose_name="URL-идентификатор")
     answer = CKEditor5Field(verbose_name="Ответ", config_name='extends')
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
@@ -1123,7 +1125,7 @@ class FAQItem(SEOModel):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('main:faq_item', kwargs={'category_slug': self.category.slug, 'item_id': self.id})
+        return reverse('main:faq_item', kwargs={'category_slug': self.category.slug, 'item_slug': self.slug})
     
     def get_breadcrumbs(self):
         """Возвращает хлебные крошки для вопроса-ответа"""

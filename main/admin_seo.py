@@ -658,7 +658,7 @@ class FAQCategoryAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
             'fields': ('name', 'slug', 'description', 'order', 'is_active')
         }),
         ('SEO настройки', {
-            'fields': ('seo_title', 'seo_description', 'seo_keywords'),
+            'fields': ('seo_title', 'seo_description', 'seo_index', 'seo_canonical'),
             'classes': ('collapse',)
         }),
         ('Хлебные крошки', {
@@ -699,7 +699,7 @@ class FAQItemAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
             'classes': ('collapse',)
         }),
         ('SEO настройки', {
-            'fields': ('seo_title', 'seo_description', 'seo_keywords'),
+            'fields': ('seo_title', 'seo_description', 'seo_index', 'seo_canonical'),
             'classes': ('collapse',)
         }),
         ('Хлебные крошки', {

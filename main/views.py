@@ -563,6 +563,16 @@ def faq_list(request):
     seo_description = "Ответы на популярные вопросы о SEO-продвижении, контекстной рекламе и digital-маркетинге. Найдем ответ на ваш вопрос!"
     seo_keywords = "FAQ, вопросы, ответы, SEO, продвижение, контекстная реклама"
     
+    # Создаем простой объект для хлебных крошек
+    class FAQPage:
+        def get_breadcrumbs(self):
+            return [
+                {"title": "Главная", "url": "/"},
+                {"title": "FAQ", "url": "/faq/"}
+            ]
+    
+    faq_page = FAQPage()
+    
     context = {
         'title': seo_title,
         'seo_description': seo_description,
@@ -572,6 +582,7 @@ def faq_list(request):
         'selected_category': selected_category,
         'search_query': search_query,
         'page_type': 'faq_list',
+        'faq_page': faq_page,  # Объект для хлебных крошек
     }
     
     return render(request, 'main/faq_brutal.html', context)

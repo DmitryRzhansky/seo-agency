@@ -5,16 +5,7 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-<!-- Хлебные крошки для главной страницы FAQ -->
-<div class="brutal-breadcrumbs">
-    <div class="brutal-container">
-        <div class="brutal-breadcrumbs-content">
-            <a href="/" class="brutal-breadcrumb-link">Главная</a>
-            <span class="brutal-breadcrumb-separator">/</span>
-            <span class="brutal-breadcrumb-current">FAQ</span>
-        </div>
-    </div>
-</div>
+{% breadcrumbs faq_page %}
 {% endblock breadcrumbs %}
 
 {% block extra_css %}

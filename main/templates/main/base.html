@@ -9,9 +9,9 @@
     
     {% block seo_meta %}
         {% if seo_object %}
-            {% seo_meta_tags seo_object title "Комплексное продвижение бизнеса | Isakov Agency" %}
+            {% seo_meta_tags seo_object title "Комплексное продвижение бизнеса | За деньги в ТОП" %}
         {% else %}
-            <title>{% block title %}{{ title }}{% endblock title %} | Isakov Agency</title>
+            <title>{% block title %}{{ title }}{% endblock title %} | За деньги в ТОП</title>
             <meta name="description" content="{% block description %}Комплексное продвижение бизнеса в интернете. SEO, контекстная реклама, создание сайтов.{% endblock description %}">
        
         {% endif %}
@@ -75,25 +75,16 @@
                 {% if page_type == 'home' %}
                 <span class="brutal-logo">
                     <span class="brutal-logo-icon">⚡</span>
-                    <span class="brutal-logo-text">Isakov Agency</span>
+                    <span class="brutal-logo-text">За деньги в ТОП</span>
                 </span>
                 {% else %}
                 <a href="{% url 'main:home' %}" class="brutal-logo">
                     <span class="brutal-logo-icon">⚡</span>
-                    <span class="brutal-logo-text">Isakov Agency</span>
+                    <span class="brutal-logo-text">За деньги в ТОП</span>
                 </a>
                 {% endif %}
             </div>
 
-            <!-- Поиск (только на десктопе) -->
-            <div class="brutal-search-section d-none d-lg-block">
-                <form class="brutal-search-form" action="{% url 'blog:search' %}" method="get">
-                    <input type="text" name="q" placeholder="Поиск по сайту..." class="brutal-search-input">
-                    <button type="submit" class="brutal-search-button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
 
             <!-- Выбор города (только на десктопе) -->
             <div class="brutal-city-section d-none d-lg-block">
@@ -120,11 +111,6 @@
             
             <!-- Основная навигация -->
             <nav class="brutal-nav d-none d-lg-flex">
-                <a href="{% url 'main:home' %}" class="brutal-nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-                    <i class="fas fa-home"></i>
-                    <span>Главная</span>
-                </a>
-                
                 <!-- Услуги с мега-меню -->
                 <div class="brutal-nav-dropdown">
                     <a href="{% url 'services:service_list' %}" class="brutal-nav-link brutal-nav-dropdown-toggle {% if 'services' in request.resolver_match.namespace %}active{% endif %}">
@@ -138,9 +124,7 @@
                             <div class="brutal-mega-menu-section">
                                 <h4 class="brutal-mega-menu-title">{{ category.title }}</h4>
                                 <ul class="brutal-mega-menu-links">
-                                    {% for service in category.services.all %}
-                                    <li><a href="{% url 'services:service_detail' slug=service.slug %}">{{ service.title }}</a></li>
-                                    {% endfor %}
+                                    <li><a href="{% url 'services:service_category' category.slug %}">Все услуги категории</a></li>
                                 </ul>
                             </div>
                             {% endfor %}
@@ -155,10 +139,6 @@
                 <a href="{% url 'blog:post_list' %}" class="brutal-nav-link {% if 'blog' in request.resolver_match.namespace %}active{% endif %}">
                     <i class="fas fa-blog"></i>
                     <span>Блог</span>
-                </a>
-                <a href="{% url 'main:city_list' %}" class="brutal-nav-link {% if 'city' in request.resolver_match.url_name %}active{% endif %}">
-                    <i class="fas fa-city"></i>
-                    <span>Города</span>
                 </a>
                 <a href="{% url 'main:contacts' %}" class="brutal-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="fas fa-phone"></i>
@@ -176,23 +156,8 @@
         
         <!-- Мобильное меню -->
         <div class="brutal-mobile-menu d-lg-none" id="brutalMobileMenu">
-            <!-- Мобильный поиск -->
-            <div class="brutal-mobile-search">
-                <form class="brutal-mobile-search-form" action="{% url 'blog:search' %}" method="get">
-                    <input type="text" name="q" placeholder="Поиск по сайту..." class="brutal-mobile-search-input">
-                    <button type="submit" class="brutal-mobile-search-button">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
-            
             <!-- Мобильная навигация -->
             <nav class="brutal-mobile-nav">
-                <a href="{% url 'main:home' %}" class="brutal-mobile-nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
-                    <i class="fas fa-home"></i>
-                    <span>Главная</span>
-                </a>
-                
                 <!-- Мобильные услуги -->
                 <div class="brutal-mobile-dropdown">
                     <button class="brutal-mobile-dropdown-toggle" type="button">
@@ -204,9 +169,7 @@
                         {% for category in service_categories_menu %}
                         <div class="brutal-mobile-dropdown-section">
                             <h5 class="brutal-mobile-dropdown-title">{{ category.title }}</h5>
-                            {% for service in category.services.all %}
-                            <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-mobile-dropdown-link">{{ service.title }}</a>
-                            {% endfor %}
+                            <a href="{% url 'services:service_category' category.slug %}" class="brutal-mobile-dropdown-link">Все услуги категории</a>
                         </div>
                         {% endfor %}
                     </div>
@@ -220,35 +183,11 @@
                     <i class="fas fa-blog"></i>
                     <span>Блог</span>
                 </a>
-                <a href="{% url 'main:city_list' %}" class="brutal-mobile-nav-link {% if 'city' in request.resolver_match.url_name %}active{% endif %}">
-                    <i class="fas fa-city"></i>
-                    <span>Города</span>
-                </a>
                 <a href="{% url 'main:contacts' %}" class="brutal-mobile-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="fas fa-phone"></i>
                     <span>Контакты</span>
                 </a>
             </nav>
-            
-            <!-- Мобильный выбор города -->
-            <div class="brutal-mobile-city">
-                <div class="brutal-mobile-city-header">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Выбор города</span>
-                </div>
-                <div class="brutal-mobile-city-list">
-                    {% for city in cities_menu %}
-                        {% if not current_city or city.slug != current_city.slug %}
-                        <a href="{% url 'main:set_city' slug=city.slug %}" class="brutal-mobile-city-item">
-                            {{ city.name }}
-                        </a>
-                        {% endif %}
-                    {% endfor %}
-                    <a href="{% url 'main:city_list' %}" class="brutal-mobile-city-item brutal-mobile-city-all">
-                        Все города
-                    </a>
-                </div>
-            </div>
         </div>
     </header>
 
@@ -280,7 +219,7 @@
                 <!-- Бренд и статистика -->
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <div class="footer-brand">
-                        <h3>Isakov Agency</h3>
+                        <h3>За деньги в ТОП</h3>
                         <p>Комплексное продвижение бизнеса в интернете. Помогаем компаниям расти и привлекать больше клиентов с 2015 года.</p>
                         
                         <div class="footer-stats">
@@ -382,7 +321,7 @@
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <div class="footer-copyright">
-                        © 2015-{% now "Y" %} Isakov Agency. Все права защищены.
+                        © 2015-{% now "Y" %} За деньги в ТОП. Все права защищены.
                     </div>
                     <div class="footer-bottom-links">
                         <a href="{% url 'main:privacy_policy' %}">Политика конфиденциальности</a>

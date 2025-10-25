@@ -191,7 +191,7 @@
 .brutal-contacts-details p {
     margin-bottom: 5px;
     font-weight: 600;
-    color: var(--brutal-black);
+    color: var(--brutal-black) !important;
 }
 
 .brutal-contacts-details a {
@@ -213,6 +213,12 @@
     font-weight: 900 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
+}
+
+/* Принудительно исправляем цвет для времени работы */
+.brutal-contacts-item .brutal-contacts-details p {
+    color: var(--brutal-black) !important;
+    font-weight: 600 !important;
 }
 
 /* Форма обратной связи */
@@ -574,4 +580,10 @@
     .brutal-contacts-social {
         flex-wrap: wrap;
     }
+}
+
+/* КРИТИЧЕСКИ ВАЖНО: Принудительно исправляем цвет времени работы */
+.brutal-contacts-content .brutal-contacts-item .brutal-contacts-details p {
+    color: #000000 !important;
+    font-weight: 600 !important;
 }

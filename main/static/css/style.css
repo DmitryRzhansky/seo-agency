@@ -1649,9 +1649,8 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     width: 200px; /* Фиксированная ширина */
     min-width: 200px; /* Минимальная ширина */
     max-width: 200px; /* Максимальная ширина */
-    height: 60px; /* Максимально уменьшенная высота */
+    height: 70px; /* Увеличена высота для большего шрифта */
     border-right: 2px solid var(--brutal-gray);
-    border-bottom: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
     position: relative; /* Для позиционирования панели услуг */
@@ -1666,18 +1665,18 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 4px;
+    padding: 8px 6px;
     background: var(--brutal-green);
     color: var(--brutal-white);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.75rem;
+    font-size: 0.9rem; /* Увеличенный размер шрифта для лучшей читаемости */
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
     transition: var(--brutal-transition);
     font-family: 'Courier New', monospace;
-    height: 40px; /* Максимально уменьшенная высота */
+    height: 50px; /* Увеличена высота для большего шрифта */
     white-space: normal; /* Позволяем перенос текста */
     word-wrap: break-word; /* Перенос длинных слов */
     cursor: pointer; /* Показываем, что это кликабельно */

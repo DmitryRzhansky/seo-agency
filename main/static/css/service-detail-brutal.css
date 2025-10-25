@@ -1079,4 +1079,25 @@
     body {
         overflow-x: hidden;
     }
+    
+    .breadcrumb-item:not(:last-child)::after {
+        content: "→" !important;
+        margin: 0 6px !important;
+        font-size: 0.9rem !important;
+        flex-shrink: 0 !important;
+        display: inline-block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumb-item:not(:last-child)::after {
+        content: "→" !important;
+        margin: 0 4px !important;
+        font-size: 0.8rem !important;
+        display: inline-block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
 }

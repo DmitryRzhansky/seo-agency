@@ -26,6 +26,9 @@ urlpatterns = [
     # --- Карта сайта ---
     path('sitemap/', views.sitemap_page, name='sitemap'),
     
-    # path('faq/', views.faq, name='faq'),
+    # --- FAQ (Вопрос-Ответ) ---
+    path('faq/', views.faq_list, name='faq_list'),
+    path('faq/category/<slug:slug>/', views.faq_category, name='faq_category'),
+    path('faq/category/<slug:category_slug>/<int:item_id>/', views.faq_item, name='faq_item'),
 
 ]

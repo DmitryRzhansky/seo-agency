@@ -262,6 +262,7 @@
                         <div class="brutal-footer-links">
                             <a href="{% url 'blog:post_list' %}" class="brutal-footer-link">Блог</a>
                             <a href="{% url 'main:portfolio_list' %}" class="brutal-footer-link">Портфолио</a>
+                            <a href="{% url 'main:faq_list' %}" class="brutal-footer-link">FAQ</a>
                             <a href="{% url 'main:contacts' %}" class="brutal-footer-link">Контакты</a>
                             {% for p in footer_pages %}
                             <a href="{% url 'pages:detail' slug=p.slug %}" class="brutal-footer-link">{{ p.title }}</a>

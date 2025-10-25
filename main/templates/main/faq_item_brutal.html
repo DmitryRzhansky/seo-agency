@@ -1,0 +1,104 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs faq_item %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/faq-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция вопроса - брутальная -->
+<section class="brutal-faq-hero">
+    <div class="brutal-container">
+        <div class="brutal-faq-hero-content">
+            <br><br>
+            <div class="brutal-faq-item-category">
+                <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-item-category-link">
+                    {{ category.name }}
+                </a>
+            </div>
+            <h1 class="brutal-faq-hero-title">{{ faq_item.question }}</h1>
+        </div>
+    </div>
+</section>
+
+<!-- Навигация - брутальная -->
+<section class="brutal-faq-nav">
+    <div class="brutal-container">
+        <div class="brutal-faq-nav-content">
+            <a href="{% url 'main:faq_list' %}" class="brutal-faq-nav-link">
+                ← Все FAQ
+            </a>
+            <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-nav-link">
+                ← {{ category.name }}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Ответ на вопрос - брутальный -->
+<section class="brutal-faq-answer">
+    <div class="brutal-container">
+        <div class="brutal-faq-answer-content">
+            <div class="brutal-faq-answer-text">
+                {{ faq_item.answer|safe }}
+            </div>
+            <div class="brutal-faq-answer-meta">
+                <div class="brutal-faq-answer-stats">
+                    <span class="brutal-faq-answer-views">{{ faq_item.views_count }} просмотров</span>
+                    <span class="brutal-faq-answer-date">Обновлено: {{ faq_item.updated_at|date:"d.m.Y" }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Похожие вопросы - брутальные -->
+{% if related_items %}
+<section class="brutal-faq-related">
+    <div class="brutal-container">
+        <div class="brutal-faq-related-content">
+            <h2 class="brutal-faq-related-title">Похожие вопросы</h2>
+            <div class="brutal-faq-related-items">
+                {% for item in related_items %}
+                <div class="brutal-faq-related-item">
+                    <a href="{% url 'main:faq_item' category.slug item.id %}" class="brutal-faq-related-link">
+                        {{ item.question }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA секция - брутальная -->
+<section class="brutal-faq-cta">
+    <div class="brutal-container">
+        <div class="brutal-faq-cta-content">
+            <h2 class="brutal-faq-cta-title">Остались вопросы?</h2>
+            <p class="brutal-faq-cta-subtitle">
+                Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
+            </p>
+            <div class="brutal-faq-cta-buttons">
+                <a href="{% url 'main:contacts' %}" class="brutal-faq-cta-button">
+                    Связаться с нами
+                </a>
+                <a href="{% url 'main:faq_list' %}" class="brutal-faq-cta-button secondary">
+                    Все FAQ
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -5,7 +5,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
-from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation
+from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation, FAQCategory, FAQItem
 from seo.admin import SEOAdminMixin
 
 # Настройка заголовков админки
@@ -639,3 +639,82 @@ class RegionalPostAdaptationAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationM
     def get_queryset(self, request):
         """Оптимизируем запросы"""
         return super().get_queryset(request).select_related('post', 'city')
+
+
+# --- Админ-классы для FAQ ---
+
+@admin.register(FAQCategory)
+class FAQCategoryAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    """Админ-класс для категорий FAQ"""
+    
+    list_display = ['name', 'slug', 'order', 'is_active', 'faq_items_count', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['name', 'description']
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ['order', 'name']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('name', 'slug', 'description', 'order', 'is_active')
+        }),
+        ('SEO настройки', {
+            'fields': ('seo_title', 'seo_description', 'seo_keywords'),
+            'classes': ('collapse',)
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def faq_items_count(self, obj):
+        """Показывает количество вопросов в категории"""
+        count = obj.faq_items.filter(is_published=True).count()
+        if count > 0:
+            url = reverse('admin:main_faqitem_changelist') + f'?category__id__exact={obj.id}'
+            return format_html('<a href="{}">{} вопросов</a>', url, count)
+        return '0 вопросов'
+    faq_items_count.short_description = 'Количество вопросов'
+    
+    def get_queryset(self, request):
+        """Оптимизируем запросы"""
+        return super().get_queryset(request).prefetch_related('faq_items')
+
+
+@admin.register(FAQItem)
+class FAQItemAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    """Админ-класс для вопросов-ответов"""
+    
+    list_display = ['question_short', 'category', 'order', 'is_published', 'views_count', 'created_at']
+    list_filter = ['category', 'is_published', 'created_at']
+    search_fields = ['question', 'answer']
+    ordering = ['order', 'question']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('category', 'question', 'answer', 'order', 'is_published')
+        }),
+        ('Статистика', {
+            'fields': ('views_count',),
+            'classes': ('collapse',)
+        }),
+        ('SEO настройки', {
+            'fields': ('seo_title', 'seo_description', 'seo_keywords'),
+            'classes': ('collapse',)
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def question_short(self, obj):
+        """Показывает сокращенный вопрос"""
+        if len(obj.question) > 60:
+            return obj.question[:60] + '...'
+        return obj.question
+    question_short.short_description = 'Вопрос'
+    
+    def get_queryset(self, request):
+        """Оптимизируем запросы"""
+        return super().get_queryset(request).select_related('category')

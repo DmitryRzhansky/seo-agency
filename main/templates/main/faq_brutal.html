@@ -1,0 +1,131 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/faq-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция FAQ - брутальная -->
+<section class="brutal-faq-hero">
+    <div class="brutal-container">
+        <div class="brutal-faq-hero-content">
+            <br><br>
+            <h1 class="brutal-faq-hero-title">Часто задаваемые вопросы</h1>
+            <p class="brutal-faq-hero-subtitle">
+                Ответы на популярные вопросы о SEO-продвижении, контекстной рекламе и digital-маркетинге. 
+                Найдем ответ на ваш вопрос!
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Поиск по FAQ - брутальный -->
+<section class="brutal-faq-search">
+    <div class="brutal-container">
+        <form method="get" action="{% url 'main:faq_list' %}" class="brutal-faq-search-form">
+            <input 
+                type="text" 
+                name="search" 
+                value="{{ search_query|default:'' }}" 
+                placeholder="Поиск по вопросам и ответам..." 
+                class="brutal-faq-search-input"
+            >
+            <button type="submit" class="brutal-faq-search-button">
+                Найти
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- Фильтры по категориям - брутальные -->
+<section class="brutal-faq-filters">
+    <div class="brutal-container">
+        <div class="brutal-faq-filters-content">
+            <h3 class="brutal-faq-filters-title">Категории вопросов:</h3>
+            <div class="brutal-faq-filters-buttons">
+                <a href="{% url 'main:faq_list' %}" 
+                   class="brutal-faq-filter-btn {% if not selected_category %}active{% endif %}">
+                    Все категории
+                </a>
+                {% for category in categories %}
+                <a href="{% url 'main:faq_list' %}?category={{ category.slug }}" 
+                   class="brutal-faq-filter-btn {% if selected_category == category %}active{% endif %}">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ контент - брутальный -->
+<section class="brutal-faq-content">
+    <div class="brutal-container">
+        {% if faq_by_category %}
+            {% for category, items in faq_by_category.items %}
+            <div class="brutal-faq-category">
+                <h2 class="brutal-faq-category-title">
+                    <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-category-link">
+                        {{ category.name }}
+                    </a>
+                </h2>
+                {% if category.description %}
+                <p class="brutal-faq-category-description">{{ category.description }}</p>
+                {% endif %}
+                
+                <div class="brutal-faq-items">
+                    {% for item in items %}
+                    <div class="brutal-faq-item">
+                        <div class="brutal-faq-item-question">
+                            <a href="{% url 'main:faq_item' category.slug item.id %}" class="brutal-faq-item-link">
+                                {{ item.question }}
+                            </a>
+                        </div>
+                        <div class="brutal-faq-item-answer">
+                            {{ item.answer|truncatewords:30|striptags }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="brutal-faq-empty">
+                <h3>Вопросы не найдены</h3>
+                <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CTA секция - брутальная -->
+<section class="brutal-faq-cta">
+    <div class="brutal-container">
+        <div class="brutal-faq-cta-content">
+            <h2 class="brutal-faq-cta-title">Не нашли ответ на свой вопрос?</h2>
+            <p class="brutal-faq-cta-subtitle">
+                Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
+            </p>
+            <div class="brutal-faq-cta-buttons">
+                <a href="{% url 'main:contacts' %}" class="brutal-faq-cta-button">
+                    Связаться с нами
+                </a>
+                <a href="{% url 'main:home' %}" class="brutal-faq-cta-button secondary">
+                    На главную
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

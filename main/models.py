@@ -889,3 +889,138 @@ class RegionalPostAdaptation(SEOModel):
         })
         
         return breadcrumbs
+
+
+# --- Модели для FAQ (Вопрос-Ответ) ---
+
+class FAQCategory(SEOModel):
+    """Модель для категорий вопросов-ответов"""
+    name = models.CharField(max_length=100, verbose_name="Название категории")
+    slug = models.SlugField(unique=True, max_length=100, verbose_name="URL-идентификатор")
+    description = models.TextField(
+        max_length=300,
+        blank=True,
+        verbose_name="Описание категории",
+        help_text="Краткое описание категории вопросов"
+    )
+    order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
+
+    class Meta:
+        verbose_name = "Категория FAQ"
+        verbose_name_plural = "Категории FAQ"
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('main:faq_category', kwargs={'slug': self.slug})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для категории FAQ"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        breadcrumbs.append({"title": "FAQ", "url": "/faq/"})
+        breadcrumbs.append({
+            "title": self.name,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs
+
+
+class FAQItem(SEOModel):
+    """Модель для вопросов-ответов"""
+    category = models.ForeignKey(
+        FAQCategory,
+        on_delete=models.CASCADE,
+        related_name='faq_items',
+        verbose_name="Категория"
+    )
+    question = models.CharField(max_length=300, verbose_name="Вопрос")
+    answer = CKEditor5Field(verbose_name="Ответ", config_name='extends')
+    order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
+    
+    # Статистика
+    views_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Просмотры",
+        help_text="Количество просмотров этого вопроса"
+    )
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Создано")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлено")
+
+    class Meta:
+        verbose_name = "Вопрос-ответ"
+        verbose_name_plural = "Вопросы-ответы"
+        ordering = ['order', 'question']
+
+    def __str__(self):
+        return f"{self.question[:50]}..." if len(self.question) > 50 else self.question
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('main:faq_item', kwargs={'category_slug': self.category.slug, 'item_id': self.id})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для вопроса-ответа"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        breadcrumbs.append({"title": "FAQ", "url": "/faq/"})
+        breadcrumbs.append({
+            "title": self.category.name,
+            "url": self.category.get_absolute_url()
+        })
+        breadcrumbs.append({
+            "title": self.question[:50] + "..." if len(self.question) > 50 else self.question,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs

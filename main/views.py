@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.db.models import Count, F
+from django.db.models import Count, F, Q
 from django.contrib import messages
 from django.urls import reverse
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage
+from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage, FAQCategory, FAQItem
 from blog.models import Post, Category
 from .forms import ContactForm
 from pages.models import SimplePage
@@ -516,3 +516,137 @@ def sitemap_page(request):
         'page_type': 'sitemap',
     }
     return render(request, 'main/sitemap_brutal.html', context)
+
+
+# --- FAQ (Вопрос-Ответ) ---
+
+@never_cache
+def faq_list(request):
+    """
+    Список всех FAQ с фильтрацией по категориям и поиском
+    """
+    # Получаем все активные категории
+    categories = FAQCategory.objects.filter(is_active=True).order_by('order', 'name')
+    
+    # Получаем все опубликованные вопросы
+    faq_items = FAQItem.objects.filter(is_published=True).select_related('category').order_by('category__order', 'order', 'question')
+    
+    # Фильтрация по категории
+    category_slug = request.GET.get('category')
+    if category_slug:
+        try:
+            selected_category = FAQCategory.objects.get(slug=category_slug, is_active=True)
+            faq_items = faq_items.filter(category=selected_category)
+        except FAQCategory.DoesNotExist:
+            selected_category = None
+    else:
+        selected_category = None
+    
+    # Поиск по вопросам и ответам
+    search_query = request.GET.get('search', '').strip()
+    if search_query:
+        faq_items = faq_items.filter(
+            Q(question__icontains=search_query) | 
+            Q(answer__icontains=search_query)
+        )
+    
+    # Группируем вопросы по категориям
+    faq_by_category = {}
+    for item in faq_items:
+        category = item.category
+        if category not in faq_by_category:
+            faq_by_category[category] = []
+        faq_by_category[category].append(item)
+    
+    # SEO данные
+    seo_title = "Часто задаваемые вопросы | Isakov Agency"
+    seo_description = "Ответы на популярные вопросы о SEO-продвижении, контекстной рекламе и digital-маркетинге. Найдем ответ на ваш вопрос!"
+    seo_keywords = "FAQ, вопросы, ответы, SEO, продвижение, контекстная реклама"
+    
+    context = {
+        'title': seo_title,
+        'seo_description': seo_description,
+        'seo_keywords': seo_keywords,
+        'categories': categories,
+        'faq_by_category': faq_by_category,
+        'selected_category': selected_category,
+        'search_query': search_query,
+        'page_type': 'faq_list',
+    }
+    
+    return render(request, 'main/faq_brutal.html', context)
+
+
+@never_cache
+def faq_category(request, slug):
+    """
+    FAQ по конкретной категории
+    """
+    category = get_object_or_404(FAQCategory, slug=slug, is_active=True)
+    
+    # Получаем все опубликованные вопросы этой категории
+    faq_items = FAQItem.objects.filter(
+        category=category,
+        is_published=True
+    ).order_by('order', 'question')
+    
+    # Поиск по вопросам и ответам
+    search_query = request.GET.get('search', '').strip()
+    if search_query:
+        faq_items = faq_items.filter(
+            Q(question__icontains=search_query) | 
+            Q(answer__icontains=search_query)
+        )
+    
+    # SEO данные
+    seo_title = f"{category.name} - Часто задаваемые вопросы | Isakov Agency"
+    seo_description = category.description or f"Ответы на вопросы по теме: {category.name}"
+    seo_keywords = f"FAQ, {category.name}, вопросы, ответы"
+    
+    context = {
+        'title': seo_title,
+        'seo_description': seo_description,
+        'seo_keywords': seo_keywords,
+        'category': category,
+        'faq_items': faq_items,
+        'search_query': search_query,
+        'page_type': 'faq_category',
+    }
+    
+    return render(request, 'main/faq_category_brutal.html', context)
+
+
+@never_cache
+def faq_item(request, category_slug, item_id):
+    """
+    Отдельный вопрос-ответ
+    """
+    category = get_object_or_404(FAQCategory, slug=category_slug, is_active=True)
+    faq_item = get_object_or_404(FAQItem, id=item_id, category=category, is_published=True)
+    
+    # Увеличиваем счетчик просмотров
+    faq_item.views_count += 1
+    faq_item.save(update_fields=['views_count'])
+    
+    # Получаем похожие вопросы из той же категории
+    related_items = FAQItem.objects.filter(
+        category=category,
+        is_published=True
+    ).exclude(id=faq_item.id).order_by('order', 'question')[:5]
+    
+    # SEO данные
+    seo_title = f"{faq_item.question} | FAQ | Isakov Agency"
+    seo_description = f"Ответ на вопрос: {faq_item.question}"
+    seo_keywords = f"FAQ, {category.name}, {faq_item.question}"
+    
+    context = {
+        'title': seo_title,
+        'seo_description': seo_description,
+        'seo_keywords': seo_keywords,
+        'category': category,
+        'faq_item': faq_item,
+        'related_items': related_items,
+        'page_type': 'faq_item',
+    }
+    
+    return render(request, 'main/faq_item_brutal.html', context)

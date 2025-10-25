@@ -23,6 +23,12 @@
     border: 2px solid var(--brutal-green);
 }
 
+/* Firefox скроллбар */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--brutal-green) var(--brutal-black);
+}
+
 /* Базовые переменные */
 :root {
     --brutal-black: #000000;
@@ -799,11 +805,14 @@
     border: var(--brutal-border);
     box-shadow: var(--brutal-shadow);
     padding: 60px;
-    text-align: center;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 40px;
     align-items: center;
+}
+
+.brutal-cta-content {
+    text-align: left;
 }
 
 .brutal-cta-title {

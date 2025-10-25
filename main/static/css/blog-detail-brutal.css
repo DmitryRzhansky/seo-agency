@@ -651,6 +651,10 @@
 
 /* Адаптивность */
 @media (max-width: 768px) {
+    * {
+        box-sizing: border-box;
+    }
+    
     .brutal-post-hero-title {
         font-size: 2rem;
     }
@@ -663,36 +667,47 @@
     .brutal-post-content-wrapper {
         flex-direction: column;
         gap: 30px;
-        overflow-x: hidden;
+        overflow-x: hidden !important;
+        max-width: 100%;
+        width: 100%;
     }
     
     .brutal-post-content-blocks {
         grid-template-columns: 1fr;
         gap: 20px;
-        margin-right: 0;
+        margin-right: 0 !important;
         order: 2;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .brutal-post-content-block.main,
     .brutal-post-content-block.content {
-        grid-column: span 1;
+        grid-column: span 1 !important;
     }
     
     .brutal-post-image-container {
         flex: none;
         order: 1;
+        max-width: 100%;
+        width: 100%;
     }
     
     .brutal-post-content-block {
-        padding: 20px;
-        width: 100%;
+        padding: 20px !important;
+        width: 100% !important;
         margin-right: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .brutal-post-content-block.content {
         width: 100% !important;
         margin-right: 0 !important;
-        max-width: 100%;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        box-sizing: border-box !important;
     }
     
     .brutal-post-content-block.main {
@@ -737,5 +752,10 @@
         padding: 0 15px;
         overflow-x: hidden;
         width: 100%;
+        box-sizing: border-box;
+    }
+    
+    body {
+        overflow-x: hidden;
     }
 }

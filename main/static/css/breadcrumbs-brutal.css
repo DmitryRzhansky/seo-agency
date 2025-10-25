@@ -47,15 +47,17 @@
 }
 
 .breadcrumb-item:not(:last-child)::after {
-    content: "→";
-    color: var(--brutal-black);
-    font-weight: 700;
-    margin: 0 15px;
-    font-size: 1.2rem;
+    content: "→" !important;
+    color: var(--brutal-black) !important;
+    font-weight: 700 !important;
+    margin: 0 15px !important;
+    font-size: 1.2rem !important;
     transition: all 0.3s ease;
-    display: inline-block;
-    position: relative;
-    z-index: 1;
+    display: inline-block !important;
+    position: relative !important;
+    z-index: 1 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .breadcrumb-item a {
@@ -128,9 +130,13 @@
     }
     
     .breadcrumb-item:not(:last-child)::after {
-        margin: 0 6px;
-        font-size: 0.9rem;
-        flex-shrink: 0;
+        content: "→" !important;
+        margin: 0 6px !important;
+        font-size: 0.9rem !important;
+        flex-shrink: 0 !important;
+        display: inline-block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 }
 
@@ -153,7 +159,11 @@
     }
     
     .breadcrumb-item:not(:last-child)::after {
-        margin: 0 4px;
-        font-size: 0.8rem;
+        content: "→" !important;
+        margin: 0 4px !important;
+        font-size: 0.8rem !important;
+        display: inline-block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 }

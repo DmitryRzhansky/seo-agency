@@ -969,26 +969,38 @@
 
 /* Адаптивность */
 @media (max-width: 768px) {
+    * {
+        box-sizing: border-box;
+    }
+    
     .brutal-service-detail-wrapper {
         flex-direction: column;
         gap: 30px;
+        overflow-x: hidden !important;
+        max-width: 100%;
+        width: 100%;
     }
     
     .brutal-content-blocks {
         grid-template-columns: 1fr;
         gap: 20px;
-        margin-right: 0;
+        margin-right: 0 !important;
         order: 2;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .brutal-content-block.main,
     .brutal-content-block.content {
-        grid-column: span 1;
+        grid-column: span 1 !important;
     }
     
     .brutal-service-image-container {
         flex: none;
         order: 1;
+        max-width: 100%;
+        width: 100%;
     }
     
     .brutal-service-detail-title {
@@ -1000,25 +1012,32 @@
     }
     
     .brutal-content-block {
-        padding: 20px;
-        width: 100%;
+        padding: 20px !important;
+        width: 100% !important;
         margin-right: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .brutal-content-block.content {
         width: 100% !important;
         margin-right: 0 !important;
-        max-width: 100%;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        box-sizing: border-box !important;
     }
     
     .brutal-content-block.main {
-        padding: 25px;
-        width: 100%;
+        padding: 25px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .brutal-content-block:not(.main):not(.content) {
-        width: 100%;
-        margin-right: 0;
+        width: 100% !important;
+        margin-right: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .brutal-content-block p,
@@ -1042,6 +1061,12 @@
     
     .brutal-container {
         padding: 0 15px;
+        overflow-x: hidden;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    body {
         overflow-x: hidden;
     }
 }

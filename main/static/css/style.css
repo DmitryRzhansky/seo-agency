@@ -686,7 +686,8 @@ body {
 }
 
 /* Back-to-top button */
-.back-to-top {
+.back-to-top,
+.back-to-top-modern {
     position: fixed;
     right: 20px;
     bottom: 90px; /* над cookie баннером */
@@ -709,7 +710,8 @@ body {
     font-family: 'Courier New', monospace;
 }
 
-.back-to-top:hover {
+.back-to-top:hover,
+.back-to-top-modern:hover {
     background: var(--brutal-black);
     color: var(--brutal-green);
     transform: translateY(-3px);
@@ -732,7 +734,8 @@ body {
     z-index: 5400;
 }
 
-.social-float__btn {
+.social-float__btn,
+.social-float-modern a {
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -750,7 +753,8 @@ body {
     font-family: 'Courier New', monospace;
 }
 
-.social-float__btn:hover {
+.social-float__btn:hover,
+.social-float-modern a:hover {
     transform: translateY(-3px) scale(1.03);
     box-shadow: var(--brutal-shadow-hover);
     opacity: 1;
@@ -758,8 +762,10 @@ body {
     color: var(--brutal-green);
 }
 
-.social-float__btn.vk { background: var(--brutal-green); }
-.social-float__btn.tg { background: var(--brutal-green); }
+.social-float__btn.vk,
+.social-float-modern .vk { background: var(--brutal-green); }
+.social-float__btn.tg,
+.social-float-modern .tg { background: var(--brutal-green); }
 
 .social-float__btn i { font-size: 1.25rem; }
 

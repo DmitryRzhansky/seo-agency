@@ -1158,10 +1158,10 @@
 
 .brutal-city-category-service-title {
     font-family: var(--brutal-font);
-    font-size: 0.6rem;
-    font-weight: 900;
+    font-size: 0.3rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--brutal-black);
+    color: var(--brutalblack);
     margin-bottom: 12px;
     line-height: 1.1;
 }

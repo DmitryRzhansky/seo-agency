@@ -1613,27 +1613,25 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 .brutal-mega-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
     background: var(--brutal-white);
     border: var(--brutal-border);
     box-shadow: var(--brutal-shadow);
     z-index: 1000;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
     transition: var(--brutal-transition);
     margin-top: 5px;
     min-width: 600px;
-    max-width: calc(100vw - 40px); /* Ограничиваем ширину экрана */
+    max-width: calc(100vw - 40px);
     width: max-content;
-    /* Проверяем, не выходит ли за правый край */
-    right: auto;
 }
 
 .brutal-mega-menu.show {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 /* Контейнер категорий */
@@ -1647,10 +1645,10 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 
 /* Категория */
 .brutal-mega-menu-category {
-    flex: 1;
-    width: 180px; /* Фиксированная ширина */
-    min-width: 180px;
-    max-width: 180px;
+    flex: 0 0 auto; /* Не растягивается, не сжимается */
+    width: 200px; /* Фиксированная ширина */
+    min-width: 200px;
+    max-width: 200px;
     border-right: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
@@ -1665,20 +1663,19 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 15px;
+    padding: 15px 10px;
     background: var(--brutal-green);
     color: var(--brutal-white);
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
     transition: var(--brutal-transition);
     font-family: 'Courier New', monospace;
-    height: 60px; /* Фиксированная высота */
-    white-space: nowrap; /* Не переносим текст */
-    overflow: hidden;
-    text-overflow: ellipsis;
+    min-height: 60px; /* Минимальная высота */
+    white-space: normal; /* Позволяем перенос текста */
+    word-wrap: break-word; /* Перенос длинных слов */
     cursor: pointer; /* Показываем, что это кликабельно */
 }
 
@@ -1770,6 +1767,9 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-family: 'Courier New', monospace;
+    white-space: normal; /* Позволяем перенос текста */
+    word-wrap: break-word; /* Перенос длинных слов */
+    line-height: 1.2;
 }
 
 .brutal-mega-menu-service p {
@@ -1778,6 +1778,8 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     line-height: 1.3;
     margin: 0;
     font-family: 'Courier New', monospace;
+    white-space: normal; /* Позволяем перенос текста */
+    word-wrap: break-word; /* Перенос длинных слов */
 }
 
 /* Футер панели услуг */

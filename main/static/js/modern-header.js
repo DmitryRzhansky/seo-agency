@@ -9,31 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (servicesMenu && servicesMegaMenu) {
         let hoverTimeout;
         
-        // Функция для проверки позиционирования
-        function adjustMegaMenuPosition() {
-            if (servicesMegaMenu.classList.contains('show')) {
-                const menuRect = servicesMegaMenu.getBoundingClientRect();
-                const viewportWidth = window.innerWidth;
-                
-                // Если меню выходит за правый край экрана
-                if (menuRect.right > viewportWidth - 20) {
-                    servicesMegaMenu.style.left = 'auto';
-                    servicesMegaMenu.style.right = '0';
-                } else {
-                    servicesMegaMenu.style.left = '0';
-                    servicesMegaMenu.style.right = 'auto';
-                }
-            }
-        }
-        
         // Показать мега-меню при наведении
         servicesMenu.addEventListener('mouseenter', function() {
             clearTimeout(hoverTimeout);
             servicesMegaMenu.classList.add('show');
             servicesDropdown.querySelector('i').style.transform = 'rotate(180deg)';
-            
-            // Небольшая задержка для правильного позиционирования
-            setTimeout(adjustMegaMenuPosition, 10);
         });
         
         // Скрыть мега-меню при уходе мыши
@@ -67,12 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Предотвратить переход при клике на заголовок категории
+        // Обработка клика на категорию - раскрывает услуги
         categories.forEach(category => {
             const title = category.querySelector('.brutal-mega-menu-category-title');
             if (title) {
                 title.addEventListener('click', function(e) {
-                    e.preventDefault();
                     e.stopPropagation();
                     
                     const categorySlug = category.dataset.category;
@@ -130,8 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Пересчитывать позицию при изменении размера окна
-    window.addEventListener('resize', adjustMegaMenuPosition);
     
     // Эффект скролла для хедера
     const navbar = document.querySelector('.navbar-modern');

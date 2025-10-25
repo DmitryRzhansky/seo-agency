@@ -136,7 +136,6 @@
                                         <div class="brutal-mega-menu-service">
                                             <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}">
                                                 <h4>{{ service.title }}</h4>
-                                                <p>{{ service.short_description|truncatewords:8 }}</p>
                                             </a>
                                         </div>
                                         {% endfor %}

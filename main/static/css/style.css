@@ -1650,7 +1650,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     width: 200px; /* Фиксированная ширина */
     min-width: 200px; /* Минимальная ширина */
     max-width: 200px; /* Максимальная ширина */
-    height: 100px; /* Уменьшенная высота */
+    height: 80px; /* Еще больше уменьшенная высота */
     border-right: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
@@ -1666,18 +1666,18 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 8px;
+    padding: 8px 6px;
     background: var(--brutal-green);
     color: var(--brutal-white);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
     transition: var(--brutal-transition);
     font-family: 'Courier New', monospace;
-    height: 60px; /* Уменьшенная высота */
+    height: 50px; /* Еще больше уменьшенная высота */
     white-space: normal; /* Позволяем перенос текста */
     word-wrap: break-word; /* Перенос длинных слов */
     cursor: pointer; /* Показываем, что это кликабельно */
@@ -1752,18 +1752,18 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
-    max-height: 200px; /* Ограничиваем высоту */
-    overflow-y: auto; /* Прокрутка при переполнении */
 }
 
 /* Карточка услуги */
 .brutal-mega-menu-service {
     background: var(--brutal-white);
     border: 2px solid var(--brutal-black);
-    padding: 10px;
+    padding: 8px;
     transition: var(--brutal-transition);
     box-shadow: var(--brutal-shadow);
-    min-height: 80px; /* Минимальная высота */
+    min-height: 50px; /* Уменьшенная высота без описания */
+    display: flex;
+    align-items: center; /* Выравнивание по центру */
 }
 
 .brutal-mega-menu-service:hover {
@@ -1779,7 +1779,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 .brutal-mega-menu-service h4 {
     font-size: 0.9rem;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin: 0;
     color: var(--brutal-black);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1787,16 +1787,8 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     white-space: normal; /* Позволяем перенос текста */
     word-wrap: break-word; /* Перенос длинных слов */
     line-height: 1.2;
-}
-
-.brutal-mega-menu-service p {
-    font-size: 0.75rem;
-    color: var(--brutal-dark-gray);
-    line-height: 1.2;
-    margin: 0;
-    font-family: 'Courier New', monospace;
-    white-space: normal; /* Позволяем перенос текста */
-    word-wrap: break-word; /* Перенос длинных слов */
+    text-align: center; /* Выравнивание по центру */
+    width: 100%; /* Занимает всю ширину */
 }
 
 

@@ -58,6 +58,14 @@ def get_post_breadcrumbs(post, city=None):
         return post.get_breadcrumbs()
 
 @register.simple_tag
+def get_category_breadcrumbs(category, city=None):
+    """
+    Получает хлебные крошки для категории услуг с учетом контекста города.
+    Использование: {% get_category_breadcrumbs category city %}
+    """
+    return category.get_breadcrumbs(city)
+
+@register.simple_tag
 def get_custom_head_scripts(page_type, page_slug=None, position=None):
     """
     Получает кастомные скрипты и HTML-теги для head.

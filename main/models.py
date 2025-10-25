@@ -101,13 +101,17 @@ class City(SEOModel):
             'Нижний Новгород': 'в Нижнем Новгороде',
             'Самара': 'в Самаре',
             'Омск': 'в Омске',
-            'Казань': 'в Казани',
             'Ростов-на-Дону': 'в Ростове-на-Дону',
             'Уфа': 'в Уфе',
             'Красноярск': 'в Красноярске',
             'Воронеж': 'в Воронеже',
             'Пермь': 'в Перми',
             'Волгоград': 'в Волгограде',
+            'Челябинск': 'в Челябинске',
+            'Минск': 'в Минске',
+            'Алматы': 'в Алматы',
+            'Астана': 'в Астане',
+            'Ташкент': 'в Ташкенте',
         }
         
         return city_declensions.get(self.name, f"в {self.name}")
@@ -342,7 +346,7 @@ class ServiceCategory(SEOModel):
         from django.urls import reverse
         return reverse('services:service_category', kwargs={'slug': self.slug})
     
-    def get_breadcrumbs(self):
+    def get_breadcrumbs(self, city=None):
         """Возвращает хлебные крошки для категории услуг"""
         if not self.show_breadcrumbs:
             return []
@@ -353,12 +357,24 @@ class ServiceCategory(SEOModel):
         # Автоматические крошки
         breadcrumbs = [{"title": "Главная", "url": "/"}]
         
-        breadcrumbs.append({"title": "Услуги", "url": "/services/"})
-        
-        breadcrumbs.append({
-            "title": self.title,
-            "url": self.get_absolute_url()
-        })
+        # Если это категория в контексте города
+        if city:
+            breadcrumbs.append({"title": "Города", "url": "/cities/"})
+            breadcrumbs.append({
+                "title": city.name,
+                "url": city.get_absolute_url()
+            })
+            breadcrumbs.append({
+                "title": self.title,
+                "url": f"/cities/{city.slug}/category/{self.slug}/"
+            })
+        else:
+            # Обычные крошки для категории
+            breadcrumbs.append({"title": "Услуги", "url": "/services/"})
+            breadcrumbs.append({
+                "title": self.title,
+                "url": self.get_absolute_url()
+            })
         
         return breadcrumbs
 
@@ -443,6 +459,12 @@ class Service(SEOModel):
                 "title": city.name,
                 "url": city.get_absolute_url()
             })
+            # Добавляем категорию услуги
+            if self.category:
+                breadcrumbs.append({
+                    "title": self.category.title,
+                    "url": f"/cities/{city.slug}/category/{self.category.slug}/"
+                })
             breadcrumbs.append({
                 "title": self.title,
                 "url": f"/cities/{city.slug}/services/{self.slug}/"

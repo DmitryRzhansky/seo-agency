@@ -6,7 +6,10 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs city %}
+{% get_category_breadcrumbs category city as breadcrumbs %}
+{% if breadcrumbs %}
+    {% include 'seo/breadcrumbs.html' with breadcrumbs=breadcrumbs %}
+{% endif %}
 {% endblock breadcrumbs %}
 
 {% block extra_css %}

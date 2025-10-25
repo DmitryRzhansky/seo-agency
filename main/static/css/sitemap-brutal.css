@@ -1,0 +1,325 @@
+/* Брутальный стиль для карты сайта */
+
+/* Переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-green: #00ff00;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #333333;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+}
+
+/* Основные стили */
+* {
+    font-family: 'Courier New', monospace;
+}
+
+/* Контейнер */
+.brutal-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero секция карты сайта */
+.brutal-sitemap-hero {
+    background: var(--brutal-white);
+    padding: 60px 0 40px;
+    border-bottom: var(--brutal-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.brutal-sitemap-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--brutal-green) 0%, transparent 50%);
+    opacity: 0.1;
+}
+
+.brutal-sitemap-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brutal-sitemap-hero-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0px var(--brutal-black);
+    line-height: 1.1;
+}
+
+.brutal-sitemap-hero-subtitle {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* Основной контент */
+.brutal-sitemap-content {
+    padding: 40px 0;
+    background: var(--brutal-white);
+}
+
+/* Статистика */
+.brutal-sitemap-stats {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.brutal-sitemap-stats-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-sitemap-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.brutal-sitemap-stat-item {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    padding: 20px 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.brutal-sitemap-stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-sitemap-stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--brutal-green);
+    margin-bottom: 5px;
+}
+
+.brutal-sitemap-stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brutal-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Сетка контента */
+.brutal-sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* Секции */
+.brutal-sitemap-section {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    padding: 25px;
+    position: relative;
+}
+
+.brutal-sitemap-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--brutal-green);
+}
+
+.brutal-sitemap-section-title {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+/* Категории */
+.brutal-sitemap-category {
+    margin-bottom: 20px;
+}
+
+.brutal-sitemap-category:last-child {
+    margin-bottom: 0;
+}
+
+.brutal-sitemap-category-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.brutal-sitemap-category-title a {
+    color: var(--brutal-black);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.brutal-sitemap-category-title a:hover {
+    color: var(--brutal-green);
+}
+
+/* Списки */
+.brutal-sitemap-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.brutal-sitemap-list li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.brutal-sitemap-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--brutal-green);
+    font-weight: 900;
+}
+
+.brutal-sitemap-list li a {
+    color: var(--brutal-dark-gray);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 2px 0;
+}
+
+.brutal-sitemap-list li a:hover {
+    color: var(--brutal-black);
+    font-weight: 600;
+    transform: translateX(5px);
+}
+
+/* Описания */
+.brutal-sitemap-description {
+    font-size: 0.9rem;
+    color: var(--brutal-dark-gray);
+    font-style: italic;
+    margin-top: 3px;
+}
+
+/* Дополнительные страницы */
+.brutal-sitemap-additional {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.brutal-sitemap-additional-title {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.brutal-sitemap-additional-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.brutal-sitemap-additional-item {
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.brutal-sitemap-additional-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-sitemap-additional-item a {
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.brutal-sitemap-additional-item a:hover {
+    color: var(--brutal-green);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-sitemap-hero-title {
+        font-size: 2rem;
+    }
+    
+    .brutal-sitemap-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .brutal-sitemap-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .brutal-sitemap-section {
+        padding: 20px;
+    }
+    
+    .brutal-sitemap-additional-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .brutal-sitemap-hero {
+        padding: 40px 0 30px;
+    }
+    
+    .brutal-sitemap-content {
+        padding: 30px 0;
+    }
+}

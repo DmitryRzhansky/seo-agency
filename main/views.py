@@ -515,4 +515,4 @@ def sitemap_page(request):
         'sitemap_data': sitemap_data,
         'page_type': 'sitemap',
     }
-    return render(request, 'main/sitemap.html', context)
+    return render(request, 'main/sitemap_brutal.html', context)

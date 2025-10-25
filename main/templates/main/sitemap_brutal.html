@@ -1,0 +1,132 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumb-nav">
+    <div class="brutal-container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Главная</a></li>
+            <li class="breadcrumb-item active">Карта сайта</li>
+        </ol>
+    </div>
+</nav>
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/sitemap-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция карты сайта - брутальная -->
+<section class="brutal-sitemap-hero">
+    <div class="brutal-container">
+        <div class="brutal-sitemap-hero-content">
+            <h1 class="brutal-sitemap-hero-title">Карта сайта</h1>
+            <p class="brutal-sitemap-hero-subtitle">Полная структура сайта Isakov Agency. Найдите нужную информацию быстро и удобно.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент - брутальный -->
+<section class="brutal-sitemap-content">
+    <div class="brutal-container">
+        <!-- Статистика -->
+        <div class="brutal-sitemap-stats">
+            <h3 class="brutal-sitemap-stats-title">Статистика сайта</h3>
+            <div class="brutal-sitemap-stats-grid">
+                <div class="brutal-sitemap-stat-item">
+                    <span class="brutal-sitemap-stat-number">{{ sitemap_data.all_services|length }}</span>
+                    <span class="brutal-sitemap-stat-label">Услуг</span>
+                </div>
+                <div class="brutal-sitemap-stat-item">
+                    <span class="brutal-sitemap-stat-number">{{ sitemap_data.blog_posts|length }}</span>
+                    <span class="brutal-sitemap-stat-label">Статей в блоге</span>
+                </div>
+                <div class="brutal-sitemap-stat-item">
+                    <span class="brutal-sitemap-stat-number">{{ sitemap_data.cities|length }}</span>
+                    <span class="brutal-sitemap-stat-label">Городов</span>
+                </div>
+                <div class="brutal-sitemap-stat-item">
+                    <span class="brutal-sitemap-stat-number">{{ sitemap_data.pages|length }}</span>
+                    <span class="brutal-sitemap-stat-label">Дополнительных страниц</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент в сетке -->
+        <div class="brutal-sitemap-grid">
+            <!-- Услуги -->
+            <div class="brutal-sitemap-section">
+                <h3 class="brutal-sitemap-section-title">💼 Услуги</h3>
+                {% for category in sitemap_data.services %}
+                <div class="brutal-sitemap-category">
+                    <h4 class="brutal-sitemap-category-title">
+                        <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
+                    </h4>
+                    <ul class="brutal-sitemap-list">
+                        {% for service in category.services.all %}
+                        <li>
+                            <a href="{{ service.get_absolute_url }}">{{ service.title }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Блог -->
+            <div class="brutal-sitemap-section">
+                <h3 class="brutal-sitemap-section-title">📝 Блог</h3>
+                {% for category in sitemap_data.blog_categories %}
+                <div class="brutal-sitemap-category">
+                    <h4 class="brutal-sitemap-category-title">
+                        <a href="{% url 'blog:category_posts' category.slug %}">{{ category.name }}</a> ({{ category.post_set.count }} статей)
+                    </h4>
+                    <ul class="brutal-sitemap-list">
+                        {% for post in category.post_set.all|slice:":5" %}
+                        <li>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                        </li>
+                        {% endfor %}
+                        {% if category.post_set.count > 5 %}
+                        <li>
+                            <a href="{% url 'blog:category_posts' category.slug %}">... и еще {{ category.post_set.count|add:"-5" }} статей</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Региональные страницы -->
+            <div class="brutal-sitemap-section">
+                <h3 class="brutal-sitemap-section-title">🏙️ Региональные страницы</h3>
+                <ul class="brutal-sitemap-list">
+                    {% for city in sitemap_data.cities %}
+                    <li>
+                        <a href="{{ city.get_absolute_url }}">SEO {{ city.get_name_prepositional }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Дополнительные страницы -->
+        <div class="brutal-sitemap-additional">
+            <h3 class="brutal-sitemap-additional-title">📄 Дополнительные страницы</h3>
+            <div class="brutal-sitemap-additional-grid">
+                {% for page in sitemap_data.pages %}
+                <div class="brutal-sitemap-additional-item">
+                    <a href="{{ page.url }}">{{ page.title }}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

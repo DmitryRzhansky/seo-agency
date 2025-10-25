@@ -1728,14 +1728,21 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     position: absolute;
     top: 100%; /* Под конкретной категорией */
     left: 0;
-    right: 0;
     z-index: 1002;
     min-width: 400px;
     max-width: 600px;
+    width: max-content;
 }
 
 .brutal-mega-menu-category.active .brutal-mega-menu-services {
     display: block;
+}
+
+/* Смещение влево для крайних категорий */
+.brutal-mega-menu-category:nth-last-child(-n+2) .brutal-mega-menu-services {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
 }
 
 /* Панели услуг внутри контейнера (скрыты по умолчанию) */
@@ -1750,8 +1757,9 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 /* Сетка услуг */
 .brutal-mega-menu-services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* Максимум 4 колонки */
     gap: 10px;
+    max-width: 600px; /* Ограничиваем ширину */
 }
 
 /* Карточка услуги */
@@ -1805,24 +1813,22 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     }
     
     .brutal-mega-menu-category-title {
-        font-size: 0.9rem;
-        padding: 15px 10px;
+        font-size: 0.8rem;
+        padding: 8px 6px;
     }
     
     .brutal-mega-menu-services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 10px;
+        grid-template-columns: repeat(3, 1fr); /* 3 колонки на планшетах */
+        gap: 8px;
+        max-width: 450px;
     }
     
     .brutal-mega-menu-service {
-        padding: 12px;
+        padding: 6px;
+        min-height: 40px;
     }
     
     .brutal-mega-menu-service h4 {
-        font-size: 0.9rem;
-    }
-    
-    .brutal-mega-menu-service p {
         font-size: 0.8rem;
     }
 }
@@ -1867,8 +1873,8 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     }
     
     .brutal-mega-menu-services-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки на мобильных */
+        gap: 8px;
     }
 }
 

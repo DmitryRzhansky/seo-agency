@@ -654,28 +654,411 @@
     left: 0;
 }
 
+/* Детальная страница услуги города */
+.brutal-city-service-hero {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    padding: 80px 0 60px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-city-service-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 30%, var(--brutal-green) 0%, transparent 50%);
+    opacity: 0.1;
+}
+
+.brutal-city-service-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brutal-city-service-region-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow-small);
+}
+
+.brutal-city-service-region-icon {
+    font-size: 1.5rem;
+    color: var(--brutal-green);
+}
+
+.brutal-city-service-region-text {
+    text-align: left;
+}
+
+.brutal-city-service-region-title {
+    font-family: var(--brutal-font);
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--brutal-black);
+    margin-bottom: 5px;
+}
+
+.brutal-city-service-region-subtitle {
+    font-size: 1rem;
+    color: var(--brutal-dark-gray);
+    font-weight: 600;
+}
+
+.brutal-city-service-title {
+    font-family: var(--brutal-font);
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: var(--brutal-black);
+    line-height: 1.1;
+}
+
+.brutal-city-service-description {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+/* Контент услуги */
+.brutal-city-service-content {
+    padding: 80px 0;
+    background: var(--brutal-white);
+}
+
+.brutal-city-service-article {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    padding: 50px;
+}
+
+.brutal-city-service-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-city-service-text h2,
+.brutal-city-service-text h3,
+.brutal-city-service-text h4 {
+    font-family: var(--brutal-font);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--brutal-black);
+    margin: 30px 0 15px;
+}
+
+.brutal-city-service-text h2 {
+    font-size: 1.8rem;
+    border-bottom: 4px solid var(--brutal-green);
+    padding-bottom: 10px;
+}
+
+.brutal-city-service-text h3 {
+    font-size: 1.5rem;
+}
+
+.brutal-city-service-text h4 {
+    font-size: 1.3rem;
+}
+
+.brutal-city-service-text p {
+    margin-bottom: 20px;
+}
+
+.brutal-city-service-text ul,
+.brutal-city-service-text ol {
+    margin: 20px 0;
+    padding-left: 30px;
+}
+
+.brutal-city-service-text li {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* CTA секция услуги */
+.brutal-city-service-cta {
+    background: var(--brutal-gray);
+    color: var(--brutal-black);
+    padding: 60px 0;
+    text-align: center;
+    position: relative;
+    border-top: var(--brutal-border);
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-city-service-cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    padding: 40px;
+}
+
+.brutal-city-service-cta-title {
+    font-family: var(--brutal-font);
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: var(--brutal-black);
+}
+
+.brutal-city-service-cta-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-city-service-cta-btn {
+    display: inline-block;
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    padding: 16px 32px;
+    text-decoration: none;
+    font-family: var(--brutal-font);
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 4px solid var(--brutal-green);
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.brutal-city-service-cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--brutal-black);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.brutal-city-service-cta-btn:hover {
+    color: var(--brutal-white);
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px var(--brutal-black);
+}
+
+.brutal-city-service-cta-btn:hover::before {
+    left: 0;
+}
+
+/* Навигация */
+.brutal-city-service-navigation {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.brutal-city-service-back {
+    display: inline-block;
+    color: var(--brutal-dark-gray);
+    text-decoration: none;
+    font-family: var(--brutal-font);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.brutal-city-service-back:hover {
+    color: var(--brutal-green);
+}
+
+/* Связанные услуги */
+.brutal-city-service-related {
+    padding: 80px 0;
+    background: var(--brutal-white);
+}
+
+.brutal-city-service-related-title {
+    font-family: var(--brutal-font);
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--brutal-black);
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.brutal-city-service-related-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 6px;
+    background: var(--brutal-green);
+}
+
+.brutal-city-service-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.brutal-city-service-related-card {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow-small);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.brutal-city-service-related-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-city-service-related-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 4px solid var(--brutal-black);
+}
+
+.brutal-city-service-related-content {
+    padding: 25px;
+}
+
+.brutal-city-service-related-category {
+    font-family: var(--brutal-font);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--brutal-green);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.brutal-city-service-related-title-card {
+    font-family: var(--brutal-font);
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.brutal-city-service-related-title-card a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.brutal-city-service-related-title-card a:hover {
+    color: var(--brutal-green);
+}
+
+.brutal-city-service-related-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 20px;
+}
+
+.brutal-city-service-related-btn {
+    display: inline-block;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 10px 20px;
+    text-decoration: none;
+    font-family: var(--brutal-font);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--brutal-black);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.brutal-city-service-related-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--brutal-green);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.brutal-city-service-related-btn:hover {
+    color: var(--brutal-black);
+    transform: translateY(-2px);
+}
+
+.brutal-city-service-related-btn:hover::before {
+    left: 0;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     .brutal-cities-hero-title,
-    .brutal-city-hero-title {
+    .brutal-city-hero-title,
+    .brutal-city-service-title {
         font-size: 2.5rem;
     }
     
     .brutal-cities-grid,
     .brutal-city-services-grid,
-    .brutal-city-blog-grid {
+    .brutal-city-blog-grid,
+    .brutal-city-service-related-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
     
     .brutal-cities-cta-title,
-    .brutal-city-cta-title {
+    .brutal-city-cta-title,
+    .brutal-city-service-cta-title {
         font-size: 1.8rem;
     }
     
     .brutal-city-card,
     .brutal-city-service-card,
-    .brutal-city-blog-card {
+    .brutal-city-blog-card,
+    .brutal-city-service-related-card {
         padding: 20px;
+    }
+    
+    .brutal-city-service-article {
+        padding: 30px;
+    }
+    
+    .brutal-city-service-cta-content {
+        padding: 30px;
     }
 }

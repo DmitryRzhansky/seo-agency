@@ -241,7 +241,7 @@ def city_service_detail(request, city_slug, service_slug):
         'page_type': 'city_service_detail',
         'page_slug': f"{city.slug}/{service.slug}",
     }
-    return render(request, 'main/city_service_detail.html', context)
+    return render(request, 'main/city_service_detail_brutal.html', context)
 
 
 @never_cache

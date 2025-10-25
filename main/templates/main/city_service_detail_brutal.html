@@ -1,0 +1,117 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+{% load custom_filters %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% get_service_breadcrumbs service city as breadcrumbs %}
+{% if breadcrumbs %}
+    {% include 'seo/breadcrumbs.html' with breadcrumbs=breadcrumbs %}
+{% endif %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция услуги города - брутальная -->
+<section class="brutal-city-service-hero">
+    <div class="brutal-container">
+        <div class="brutal-city-service-hero-content">
+            <!-- Региональная информация -->
+            <div class="brutal-city-service-region-info">
+                <div class="brutal-city-service-region-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="brutal-city-service-region-text">
+                    <div class="brutal-city-service-region-title">{{ service.title }} {{ city.get_name_prepositional }}</div>
+                    <div class="brutal-city-service-region-subtitle">{{ city.region }}</div>
+                </div>
+            </div>
+            
+            <h1 class="brutal-city-service-title">{{ service.title }} {{ city.get_name_prepositional }}</h1>
+            <p class="brutal-city-service-description">{{ service.short_description }}</p>
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент услуги -->
+<section class="brutal-city-service-content">
+    <div class="brutal-container">
+        <div class="brutal-city-service-article">
+            <div class="brutal-city-service-text">
+                {{ service.content|safe }}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA секция -->
+<section class="brutal-city-service-cta">
+    <div class="brutal-container">
+        <div class="brutal-city-service-cta-content">
+            <h3 class="brutal-city-service-cta-title">Готовы заказать {{ service.title|lower }} {{ city.get_name_prepositional }}?</h3>
+            <p class="brutal-city-service-cta-text">
+                Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию 
+                продвижения для вашей компании {{ city.get_name_prepositional }}.
+            </p>
+            <a href="{% url 'main:home' %}#contact" class="brutal-city-service-cta-btn">
+                <i class="fas fa-paper-plane"></i>
+                Получить консультацию
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Навигация -->
+<section class="brutal-city-service-navigation">
+    <div class="brutal-container">
+        <a href="{{ city.get_absolute_url }}" class="brutal-city-service-back">
+            <i class="fas fa-chevron-left"></i>
+            Вернуться к услугам {{ city.get_name_prepositional }}
+        </a>
+    </div>
+</section>
+
+<!-- Блок "Еще услуги" -->
+{% if related_services %}
+<section class="brutal-city-service-related">
+    <div class="brutal-container">
+        <h2 class="brutal-city-service-related-title">Еще услуги {{ city.get_name_prepositional }}</h2>
+        <div class="brutal-city-service-related-grid">
+            {% for related_service in related_services %}
+            <div class="brutal-city-service-related-card">
+                {% if related_service.image %}
+                <img src="{{ related_service.image.url }}" alt="{{ related_service.get_image_alt }}" class="brutal-city-service-related-image">
+                {% endif %}
+                
+                <div class="brutal-city-service-related-content">
+                    <div class="brutal-city-service-related-category">{{ related_service.category.title }}</div>
+                    
+                    <h3 class="brutal-city-service-related-title-card">
+                        <a href="{% url 'main:city_service_detail' city.slug related_service.slug %}">
+                            {{ related_service.title }}
+                        </a>
+                    </h3>
+                    
+                    <p class="brutal-city-service-related-description">
+                        {{ related_service.short_description|truncatewords:25 }}
+                    </p>
+                    
+                    <a href="{% url 'main:city_service_detail' city.slug related_service.slug %}" class="brutal-city-service-related-btn">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endblock content %}

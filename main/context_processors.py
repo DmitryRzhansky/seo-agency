@@ -1,13 +1,16 @@
 # main/context_processors.py
 
-from .models import ServiceCategory, City
+from .models import ServiceCategory, City, PortfolioCategory
 from pages.models import SimplePage
+from blog.models import Category as BlogCategory
 
 def services_menu(request):
     """Возвращает категории услуг для использования в базовом шаблоне (меню)"""
     
     # Получаем свежие данные из БД без кэширования
     categories = ServiceCategory.objects.all().order_by('order').prefetch_related('services')
+    blog_categories = BlogCategory.objects.filter(is_active=True).order_by('order').prefetch_related('post_set')
+    portfolio_categories = PortfolioCategory.objects.filter(is_active=True).order_by('order').prefetch_related('portfolioitem_set')
     header_pages = SimplePage.objects.filter(is_published=True, show_in_header=True).order_by('order')
     footer_pages = SimplePage.objects.filter(is_published=True, show_in_footer=True).order_by('order')
     # Показываем все активные города (упорядочены)
@@ -24,6 +27,8 @@ def services_menu(request):
 
     return {
         'service_categories_menu': categories,
+        'blog_categories_menu': blog_categories,
+        'portfolio_categories_menu': portfolio_categories,
         'header_pages': header_pages,
         'footer_pages': footer_pages,
         'cities_menu': cities,

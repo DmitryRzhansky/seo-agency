@@ -147,14 +147,75 @@
                     </div>
                 </div>
                 
-                <a href="{% url 'main:portfolio_list' %}" class="brutal-nav-link {% if 'portfolio' in request.resolver_match.url_name %}active{% endif %}">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Портфолио</span>
-                </a>
-                <a href="{% url 'blog:post_list' %}" class="brutal-nav-link {% if 'blog' in request.resolver_match.namespace %}active{% endif %}">
-                    <i class="fas fa-blog"></i>
-                    <span>Блог</span>
-                </a>
+                <!-- Портфолио с мега-меню -->
+                <div class="brutal-nav-dropdown" id="portfolioMenu">
+                    <a href="{% url 'main:portfolio_list' %}" class="brutal-nav-link brutal-nav-dropdown-toggle {% if 'portfolio' in request.resolver_match.url_name %}active{% endif %}" id="portfolioDropdown">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Портфолио</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="brutal-mega-menu" id="portfolioMegaMenu">
+                        <!-- Первый уровень - категории портфолио -->
+                        <div class="brutal-mega-menu-categories">
+                            {% for category in portfolio_categories_menu %}
+                            <div class="brutal-mega-menu-category" data-category="{{ category.slug }}">
+                                <a href="{% url 'main:portfolio_category' category.slug %}" class="brutal-mega-menu-category-title">
+                                    <span>{{ category.name }}</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+
+                                <!-- Панель проектов для этой категории -->
+                                <div class="brutal-mega-menu-services">
+                                    <div class="brutal-mega-menu-services-grid">
+                                        {% for project in category.portfolioitem_set.all|slice:":6" %}
+                                        <div class="brutal-mega-menu-service">
+                                            <a href="{% url 'main:portfolio_detail' category_slug=category.slug project_slug=project.slug %}">
+                                                <h4>{{ project.title }}</h4>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Блог с мега-меню -->
+                <div class="brutal-nav-dropdown" id="blogMenu">
+                    <a href="{% url 'blog:post_list' %}" class="brutal-nav-link brutal-nav-dropdown-toggle {% if 'blog' in request.resolver_match.namespace %}active{% endif %}" id="blogDropdown">
+                        <i class="fas fa-blog"></i>
+                        <span>Блог</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="brutal-mega-menu" id="blogMegaMenu">
+                        <!-- Первый уровень - категории блога -->
+                        <div class="brutal-mega-menu-categories">
+                            {% for category in blog_categories_menu %}
+                            <div class="brutal-mega-menu-category" data-category="{{ category.slug }}">
+                                <a href="{% url 'blog:category_posts' category.slug %}" class="brutal-mega-menu-category-title">
+                                    <span>{{ category.name }}</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </a>
+
+                                <!-- Панель постов для этой категории -->
+                                <div class="brutal-mega-menu-services">
+                                    <div class="brutal-mega-menu-services-grid">
+                                        {% for post in category.post_set.all|slice:":6" %}
+                                        <div class="brutal-mega-menu-service">
+                                            <a href="{% url 'blog:post_detail' category_slug=category.slug post_slug=post.slug %}">
+                                                <h4>{{ post.title }}</h4>
+                                            </a>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
                 <a href="{% url 'main:contacts' %}" class="brutal-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="fas fa-phone"></i>
                     <span>Контакты</span>

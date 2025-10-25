@@ -26,6 +26,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         });
         
+        // Функция для умного позиционирования панели услуг
+        function adjustServicesPanelPosition(category) {
+            const servicesPanel = category.querySelector('.brutal-mega-menu-services');
+            if (!servicesPanel) return;
+            
+            // Сброс позиционирования
+            servicesPanel.style.left = '0';
+            servicesPanel.style.right = 'auto';
+            servicesPanel.style.transform = 'none';
+            
+            // Получаем позицию категории и панели
+            const categoryRect = category.getBoundingClientRect();
+            const panelRect = servicesPanel.getBoundingClientRect();
+            const viewportWidth = window.innerWidth;
+            
+            // Если панель выходит за правый край экрана
+            if (panelRect.right > viewportWidth - 20) {
+                // Смещаем влево
+                const offset = panelRect.right - viewportWidth + 20;
+                servicesPanel.style.left = `-${offset}px`;
+            }
+            
+            // Если панель выходит за левый край экрана
+            if (panelRect.left < 20) {
+                servicesPanel.style.left = '20px';
+            }
+        }
+        
         // Обработка наведения на категорию
         categories.forEach(category => {
             category.addEventListener('mouseenter', function() {
@@ -34,6 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Активировать текущую категорию
                 this.classList.add('active');
+                
+                // Умное позиционирование панели услуг
+                setTimeout(() => {
+                    adjustServicesPanelPosition(this);
+                }, 10);
             });
         });
         
@@ -54,6 +87,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Активировать текущую категорию
                     category.classList.add('active');
                     console.log('Категория активирована:', categorySlug); // Отладка
+                    
+                    // Умное позиционирование панели услуг
+                    setTimeout(() => {
+                        adjustServicesPanelPosition(category);
+                    }, 10);
                 });
             }
         });
@@ -92,6 +130,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             // Скрыть все категории
             categories.forEach(category => category.classList.remove('active'));
+        }
+    });
+    
+    // Пересчитывать позиции при изменении размера окна
+    window.addEventListener('resize', function() {
+        const activeCategory = document.querySelector('.brutal-mega-menu-category.active');
+        if (activeCategory) {
+            adjustServicesPanelPosition(activeCategory);
         }
     });
     

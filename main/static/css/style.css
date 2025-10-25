@@ -1738,13 +1738,6 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: block;
 }
 
-/* Смещение влево для крайних категорий */
-.brutal-mega-menu-category:nth-last-child(-n+2) .brutal-mega-menu-services {
-    left: auto;
-    right: 0;
-    transform: translateX(0);
-}
-
 /* Панели услуг внутри контейнера (скрыты по умолчанию) */
 .brutal-mega-menu-services-panel {
     display: none; /* Скрываем отдельные панели */

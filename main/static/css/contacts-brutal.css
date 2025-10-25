@@ -191,6 +191,7 @@
 .brutal-contacts-details p {
     margin-bottom: 5px;
     font-weight: 600;
+    color: var(--brutal-black);
 }
 
 .brutal-contacts-details a {

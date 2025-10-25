@@ -124,9 +124,12 @@
                         <div class="brutal-mega-menu-categories">
                             {% for category in service_categories_menu %}
                             <div class="brutal-mega-menu-category" data-category="{{ category.slug }}">
-                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-category-title">
-                                    {{ category.title }}
+                                <div class="brutal-mega-menu-category-title">
+                                    <span>{{ category.title }}</span>
                                     <i class="fas fa-chevron-down"></i>
+                                </div>
+                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-category-link">
+                                    Перейти к категории
                                 </a>
                             </div>
                             {% endfor %}

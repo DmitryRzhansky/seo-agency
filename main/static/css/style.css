@@ -1624,8 +1624,10 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     transition: var(--brutal-transition);
     margin-top: 5px;
     min-width: 600px;
-    max-width: 90vw;
+    max-width: calc(100vw - 40px); /* Ограничиваем ширину экрана */
     width: max-content;
+    /* Проверяем, не выходит ли за правый край */
+    right: auto;
 }
 
 .brutal-mega-menu.show {
@@ -1646,8 +1648,9 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 /* Категория */
 .brutal-mega-menu-category {
     flex: 1;
-    min-width: 150px;
-    max-width: 200px;
+    width: 180px; /* Фиксированная ширина */
+    min-width: 180px;
+    max-width: 180px;
     border-right: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
@@ -1659,21 +1662,46 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 
 /* Заголовок категории */
 .brutal-mega-menu-category-title {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px 15px;
     background: var(--brutal-green);
     color: var(--brutal-white);
-    text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
     transition: var(--brutal-transition);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     font-family: 'Courier New', monospace;
+    height: 60px; /* Фиксированная высота */
+    white-space: nowrap; /* Не переносим текст */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer; /* Показываем, что это кликабельно */
+}
+
+/* Ссылка на категорию */
+.brutal-mega-menu-category-link {
+    display: block;
+    padding: 8px 15px;
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    transition: var(--brutal-transition);
+    font-family: 'Courier New', monospace;
+    border-top: 1px solid var(--brutal-gray);
+}
+
+.brutal-mega-menu-category-link:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
 }
 
 .brutal-mega-menu-category-title:hover {

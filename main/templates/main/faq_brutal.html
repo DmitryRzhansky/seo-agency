@@ -71,38 +71,63 @@
 <!-- FAQ контент - брутальный -->
 <section class="brutal-faq-content">
     <div class="brutal-container">
-        {% if faq_by_category %}
-            {% for category, items in faq_by_category.items %}
-            <div class="brutal-faq-category">
-                <h2 class="brutal-faq-category-title">
-                    <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-category-link">
-                        {{ category.name }}
-                    </a>
-                </h2>
-                {% if category.description %}
-                <p class="brutal-faq-category-description">{{ category.description }}</p>
-                {% endif %}
-                
-                <div class="brutal-faq-items">
-                    {% for item in items %}
-                    <div class="brutal-faq-item">
-                        <div class="brutal-faq-item-question">
-                            <a href="{% url 'main:faq_item' category.slug item.id %}" class="brutal-faq-item-link">
-                                {{ item.question }}
-                            </a>
+        {% if selected_category %}
+            <!-- Показываем вопросы выбранной категории -->
+            {% if faq_by_category %}
+                {% for category, items in faq_by_category.items %}
+                <div class="brutal-faq-category">
+                    <h2 class="brutal-faq-category-title">
+                        <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-category-link">
+                            {{ category.name }}
+                        </a>
+                    </h2>
+                    {% if category.description %}
+                    <p class="brutal-faq-category-description">{{ category.description }}</p>
+                    {% endif %}
+                    
+                    <div class="brutal-faq-items">
+                        {% for item in items %}
+                        <div class="brutal-faq-item">
+                            <div class="brutal-faq-item-question">
+                                <a href="{% url 'main:faq_item' category.slug item.id %}" class="brutal-faq-item-link">
+                                    {{ item.question }}
+                                </a>
+                            </div>
+                            <div class="brutal-faq-item-answer">
+                                {{ item.answer|truncatewords:30|striptags }}
+                            </div>
                         </div>
-                        <div class="brutal-faq-item-answer">
-                            {{ item.answer|truncatewords:30|striptags }}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="brutal-faq-empty">
+                    <h3>Вопросы не найдены</h3>
+                    <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
+                </div>
+            {% endif %}
+        {% else %}
+            <!-- Показываем только список категорий -->
+            <div class="brutal-faq-categories">
+                <h2 class="brutal-faq-categories-title">Выберите категорию вопросов:</h2>
+                <div class="brutal-faq-categories-grid">
+                    {% for category in categories %}
+                    <div class="brutal-faq-category-card">
+                        <h3 class="brutal-faq-category-card-title">
+                            <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-category-card-link">
+                                {{ category.name }}
+                            </a>
+                        </h3>
+                        {% if category.description %}
+                        <p class="brutal-faq-category-card-description">{{ category.description }}</p>
+                        {% endif %}
+                        <div class="brutal-faq-category-card-meta">
+                            <span class="brutal-faq-category-card-count">{{ category.faq_items.count }} вопросов</span>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            {% endfor %}
-        {% else %}
-            <div class="brutal-faq-empty">
-                <h3>Вопросы не найдены</h3>
-                <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
             </div>
         {% endif %}
     </div>

@@ -657,10 +657,6 @@ class FAQCategoryAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
         ('Основная информация', {
             'fields': ('name', 'slug', 'description', 'order', 'is_active')
         }),
-        ('SEO настройки', {
-            'fields': ('seo_title', 'seo_description', 'seo_index', 'seo_canonical'),
-            'classes': ('collapse',)
-        }),
         ('Хлебные крошки', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
             'classes': ('collapse',)
@@ -685,7 +681,7 @@ class FAQCategoryAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
 class FAQItemAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     """Админ-класс для вопросов-ответов"""
     
-    list_display = ['question_short', 'category', 'order', 'is_published', 'views_count', 'created_at']
+    list_display = ['question_short', 'category', 'order', 'is_published', 'created_at']
     list_filter = ['category', 'is_published', 'created_at']
     search_fields = ['question', 'answer']
     ordering = ['order', 'question']
@@ -693,14 +689,6 @@ class FAQItemAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     fieldsets = (
         ('Основная информация', {
             'fields': ('category', 'question', 'answer', 'order', 'is_published')
-        }),
-        ('Статистика', {
-            'fields': ('views_count',),
-            'classes': ('collapse',)
-        }),
-        ('SEO настройки', {
-            'fields': ('seo_title', 'seo_description', 'seo_index', 'seo_canonical'),
-            'classes': ('collapse',)
         }),
         ('Хлебные крошки', {
             'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),

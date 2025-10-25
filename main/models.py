@@ -967,12 +967,6 @@ class FAQItem(SEOModel):
     order = models.IntegerField(default=100, verbose_name="Порядок отображения")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
     
-    # Статистика
-    views_count = models.PositiveIntegerField(
-        default=0,
-        verbose_name="Просмотры",
-        help_text="Количество просмотров этого вопроса"
-    )
     
     # Хлебные крошки
     show_breadcrumbs = models.BooleanField(

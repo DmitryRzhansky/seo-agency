@@ -528,35 +528,36 @@ def faq_list(request):
     # Получаем все активные категории
     categories = FAQCategory.objects.filter(is_active=True).order_by('order', 'name')
     
-    # Получаем все опубликованные вопросы
-    faq_items = FAQItem.objects.filter(is_published=True).select_related('category').order_by('category__order', 'order', 'question')
-    
     # Фильтрация по категории
     category_slug = request.GET.get('category')
+    selected_category = None
+    faq_by_category = {}
+    search_query = request.GET.get('search', '').strip()
+    
     if category_slug:
         try:
             selected_category = FAQCategory.objects.get(slug=category_slug, is_active=True)
-            faq_items = faq_items.filter(category=selected_category)
+            # Получаем вопросы только для выбранной категории
+            faq_items = FAQItem.objects.filter(
+                category=selected_category,
+                is_published=True
+            ).order_by('order', 'question')
+            
+            # Поиск по вопросам и ответам
+            if search_query:
+                faq_items = faq_items.filter(
+                    Q(question__icontains=search_query) | 
+                    Q(answer__icontains=search_query)
+                )
+            
+            # Группируем вопросы по категориям
+            for item in faq_items:
+                category = item.category
+                if category not in faq_by_category:
+                    faq_by_category[category] = []
+                faq_by_category[category].append(item)
         except FAQCategory.DoesNotExist:
             selected_category = None
-    else:
-        selected_category = None
-    
-    # Поиск по вопросам и ответам
-    search_query = request.GET.get('search', '').strip()
-    if search_query:
-        faq_items = faq_items.filter(
-            Q(question__icontains=search_query) | 
-            Q(answer__icontains=search_query)
-        )
-    
-    # Группируем вопросы по категориям
-    faq_by_category = {}
-    for item in faq_items:
-        category = item.category
-        if category not in faq_by_category:
-            faq_by_category[category] = []
-        faq_by_category[category].append(item)
     
     # SEO данные
     seo_title = "Часто задаваемые вопросы | Isakov Agency"
@@ -635,9 +636,6 @@ def faq_item(request, category_slug, item_id):
     category = get_object_or_404(FAQCategory, slug=category_slug, is_active=True)
     faq_item = get_object_or_404(FAQItem, id=item_id, category=category, is_published=True)
     
-    # Увеличиваем счетчик просмотров
-    faq_item.views_count += 1
-    faq_item.save(update_fields=['views_count'])
     
     # Получаем похожие вопросы из той же категории
     related_items = FAQItem.objects.filter(

@@ -1640,7 +1640,6 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     flex-wrap: wrap; /* Перенос на новую строку при необходимости */
     gap: 0;
     padding: 0;
-    border-bottom: 2px solid var(--brutal-gray);
     max-width: 800px; /* Ограничиваем ширину контейнера для принудительного переноса */
 }
 
@@ -1650,8 +1649,9 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     width: 200px; /* Фиксированная ширина */
     min-width: 200px; /* Минимальная ширина */
     max-width: 200px; /* Максимальная ширина */
-    height: 80px; /* Еще больше уменьшенная высота */
+    height: 60px; /* Максимально уменьшенная высота */
     border-right: 2px solid var(--brutal-gray);
+    border-bottom: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
     position: relative; /* Для позиционирования панели услуг */
@@ -1666,18 +1666,18 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 6px;
+    padding: 6px 4px;
     background: var(--brutal-green);
     color: var(--brutal-white);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
     transition: var(--brutal-transition);
     font-family: 'Courier New', monospace;
-    height: 50px; /* Еще больше уменьшенная высота */
+    height: 40px; /* Максимально уменьшенная высота */
     white-space: normal; /* Позволяем перенос текста */
     word-wrap: break-word; /* Перенос длинных слов */
     cursor: pointer; /* Показываем, что это кликабельно */

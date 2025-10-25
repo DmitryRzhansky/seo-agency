@@ -1650,7 +1650,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     width: 200px; /* Фиксированная ширина */
     min-width: 200px; /* Минимальная ширина */
     max-width: 200px; /* Максимальная ширина */
-    height: 120px; /* Фиксированная высота */
+    height: 100px; /* Уменьшенная высота */
     border-right: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
@@ -1666,18 +1666,18 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 10px;
+    padding: 10px 8px;
     background: var(--brutal-green);
     color: var(--brutal-white);
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-align: center;
     transition: var(--brutal-transition);
     font-family: 'Courier New', monospace;
-    height: 80px; /* Фиксированная высота */
+    height: 60px; /* Уменьшенная высота */
     white-space: normal; /* Позволяем перенос текста */
     word-wrap: break-word; /* Перенос длинных слов */
     cursor: pointer; /* Показываем, что это кликабельно */
@@ -1750,18 +1750,20 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 /* Сетка услуг */
 .brutal-mega-menu-services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    max-height: 200px; /* Ограничиваем высоту */
+    overflow-y: auto; /* Прокрутка при переполнении */
 }
 
 /* Карточка услуги */
 .brutal-mega-menu-service {
     background: var(--brutal-white);
     border: 2px solid var(--brutal-black);
-    padding: 15px;
+    padding: 10px;
     transition: var(--brutal-transition);
     box-shadow: var(--brutal-shadow);
+    min-height: 80px; /* Минимальная высота */
 }
 
 .brutal-mega-menu-service:hover {
@@ -1775,9 +1777,9 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 .brutal-mega-menu-service h4 {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     color: var(--brutal-black);
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -1788,41 +1790,15 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 .brutal-mega-menu-service p {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--brutal-dark-gray);
-    line-height: 1.3;
+    line-height: 1.2;
     margin: 0;
     font-family: 'Courier New', monospace;
     white-space: normal; /* Позволяем перенос текста */
     word-wrap: break-word; /* Перенос длинных слов */
 }
 
-/* Футер панели услуг */
-.brutal-mega-menu-services-footer {
-    text-align: center;
-    padding-top: 15px;
-    border-top: 2px solid var(--brutal-black);
-}
-
-.brutal-mega-menu-all-services {
-    display: inline-block;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 10px 20px;
-    text-decoration: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border: 2px solid var(--brutal-black);
-    transition: var(--brutal-transition);
-    font-family: 'Courier New', monospace;
-}
-
-.brutal-mega-menu-all-services:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-}
 
 /* Адаптивность для планшетов */
 @media (max-width: 1024px) {

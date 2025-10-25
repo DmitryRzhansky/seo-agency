@@ -1189,3 +1189,727 @@ body {
 .city-cta-block p {
     color: var(--bs-text-muted-dark) !important;
 }
+
+/* БРУТАЛЬНЫЕ СТИЛИ ДЛЯ ХЭДЕРА */
+
+/* Переменные для брутального стиля */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-green: #00ff00;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #333333;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+    --brutal-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Брутальный хэдер */
+.brutal-header {
+    background: var(--brutal-white);
+    border-bottom: var(--brutal-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 0px var(--brutal-black);
+}
+
+.brutal-header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 70px;
+}
+
+/* Логотип */
+.brutal-logo-section {
+    flex-shrink: 0;
+}
+
+.brutal-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--brutal-transition);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-logo:hover {
+    color: var(--brutal-green);
+    transform: translateX(5px);
+}
+
+.brutal-logo-icon {
+    font-size: 1.6em;
+    animation: brutal-pulse 2s infinite;
+}
+
+@keyframes brutal-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.brutal-logo-text {
+    font-weight: 700;
+    text-shadow: 2px 2px 0px var(--brutal-green);
+}
+
+/* Поиск */
+.brutal-search-section {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 20px;
+}
+
+.brutal-search-form {
+    display: flex;
+    position: relative;
+}
+
+.brutal-search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: var(--brutal-border);
+    background: var(--brutal-white);
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: var(--brutal-shadow);
+    transition: var(--brutal-transition);
+    border-radius: 0;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-search-input:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--brutal-green);
+}
+
+.brutal-search-button {
+    padding: 12px 16px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    border: var(--brutal-border);
+    border-left: none;
+    cursor: pointer;
+    transition: var(--brutal-transition);
+    font-weight: 700;
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-search-button:hover {
+    background: var(--brutal-black);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+/* Выбор города */
+.brutal-city-section {
+    flex-shrink: 0;
+}
+
+.brutal-dropdown {
+    position: relative;
+}
+
+.brutal-city-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    color: var(--brutal-green);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--brutal-transition);
+    box-shadow: var(--brutal-shadow);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-city-button:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-city-button[aria-expanded="true"] {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+}
+
+.brutal-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1001;
+    display: none;
+    margin-top: 5px;
+}
+
+.brutal-dropdown-menu.show {
+    display: block;
+}
+
+.brutal-dropdown-header {
+    padding: 12px 16px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    border-bottom: 2px solid var(--brutal-black);
+}
+
+.brutal-dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--brutal-transition);
+    border-bottom: 1px solid var(--brutal-gray);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-dropdown-item:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+}
+
+.brutal-dropdown-divider {
+    height: 2px;
+    background: var(--brutal-green);
+    margin: 5px 0;
+}
+
+/* Основная навигация */
+.brutal-nav {
+    display: flex;
+    gap: 0;
+    align-items: center;
+}
+
+.brutal-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: var(--brutal-transition);
+    border: 2px solid transparent;
+    position: relative;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-nav-link:hover {
+    color: var(--brutal-green);
+    border-color: var(--brutal-green);
+    transform: translateY(-2px);
+    background: var(--brutal-gray);
+}
+
+.brutal-nav-link.active {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    border-color: var(--brutal-black);
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+/* Dropdown навигация */
+.brutal-nav-dropdown {
+    position: relative;
+}
+
+.brutal-nav-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brutal-nav-dropdown-toggle i:last-child {
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.brutal-nav-dropdown:hover .brutal-nav-dropdown-toggle i:last-child {
+    transform: rotate(180deg);
+}
+
+/* Мега-меню */
+.brutal-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--brutal-transition);
+    min-width: 600px;
+    margin-top: 5px;
+}
+
+.brutal-mega-menu-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.brutal-mega-menu-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 30px;
+}
+
+.brutal-mega-menu-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.brutal-mega-menu-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 0px var(--brutal-green);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mega-menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.brutal-mega-menu-links li {
+    margin-bottom: 8px;
+}
+
+.brutal-mega-menu-links a {
+    color: var(--brutal-dark-gray);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--brutal-transition);
+    padding: 4px 0;
+    display: block;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mega-menu-links a:hover {
+    color: var(--brutal-green);
+    transform: translateX(5px);
+}
+
+/* Мобильная кнопка */
+.brutal-mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: var(--brutal-border);
+    padding: 8px;
+    cursor: pointer;
+    transition: var(--brutal-transition);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-mobile-toggle:hover {
+    background: var(--brutal-green);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-mobile-toggle-line {
+    width: 25px;
+    height: 3px;
+    background: var(--brutal-green);
+    transition: var(--brutal-transition);
+    transform-origin: center;
+}
+
+.brutal-mobile-toggle:hover .brutal-mobile-toggle-line {
+    background: var(--brutal-white);
+}
+
+.brutal-mobile-toggle-active .brutal-mobile-toggle-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.brutal-mobile-toggle-active .brutal-mobile-toggle-line:nth-child(2) {
+    opacity: 0;
+}
+
+.brutal-mobile-toggle-active .brutal-mobile-toggle-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Мобильное меню */
+.brutal-mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    border-top: none;
+    box-shadow: var(--brutal-shadow);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--brutal-transition);
+    z-index: 999;
+}
+
+.brutal-mobile-menu-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Мобильный поиск */
+.brutal-mobile-search {
+    padding: 20px;
+    border-bottom: 2px solid var(--brutal-green);
+    background: var(--brutal-gray);
+}
+
+.brutal-mobile-search-form {
+    display: flex;
+    gap: 10px;
+}
+
+.brutal-mobile-search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: var(--brutal-border);
+    background: var(--brutal-white);
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: var(--brutal-shadow);
+    transition: var(--brutal-transition);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-search-input:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--brutal-green);
+}
+
+.brutal-mobile-search-button {
+    padding: 12px 16px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    border: var(--brutal-border);
+    cursor: pointer;
+    transition: var(--brutal-transition);
+    font-weight: 700;
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-mobile-search-button:hover {
+    background: var(--brutal-black);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+/* Мобильная навигация */
+.brutal-mobile-nav {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.brutal-mobile-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid var(--brutal-green);
+    background: var(--brutal-white);
+    transition: var(--brutal-transition);
+    box-shadow: var(--brutal-shadow);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-nav-link:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-mobile-nav-link.active {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+}
+
+/* Мобильные dropdown */
+.brutal-mobile-dropdown {
+    margin-bottom: 10px;
+}
+
+.brutal-mobile-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-green);
+    color: var(--brutal-black);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--brutal-transition);
+    box-shadow: var(--brutal-shadow);
+    width: 100%;
+    text-align: left;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-dropdown-toggle:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-mobile-dropdown-toggle i:last-child {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.brutal-mobile-dropdown-toggle.active i:last-child {
+    transform: rotate(180deg);
+}
+
+.brutal-mobile-dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: var(--brutal-gray);
+    border: 2px solid var(--brutal-green);
+    border-top: none;
+    margin-top: -2px;
+}
+
+.brutal-mobile-dropdown-open {
+    max-height: 500px;
+}
+
+.brutal-mobile-dropdown-section {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--brutal-green);
+}
+
+.brutal-mobile-dropdown-section:last-child {
+    border-bottom: none;
+}
+
+.brutal-mobile-dropdown-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-dropdown-link {
+    display: block;
+    padding: 8px 0;
+    color: var(--brutal-dark-gray);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--brutal-transition);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-dropdown-link:hover {
+    color: var(--brutal-green);
+    transform: translateX(5px);
+}
+
+/* Мобильный выбор города */
+.brutal-mobile-city {
+    border-top: 2px solid var(--brutal-green);
+    padding: 20px;
+    background: var(--brutal-gray);
+}
+
+.brutal-mobile-city-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-city-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.brutal-mobile-city-item {
+    display: block;
+    padding: 12px 16px;
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid var(--brutal-green);
+    background: var(--brutal-white);
+    transition: var(--brutal-transition);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-city-item:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+}
+
+.brutal-mobile-city-all {
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    font-weight: 700;
+}
+
+.brutal-mobile-city-all:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .brutal-header-container {
+        gap: 15px;
+    }
+    
+    .brutal-search-section {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 992px) {
+    .brutal-search-section {
+        display: none;
+    }
+    
+    .brutal-city-section {
+        display: none;
+    }
+    
+    .brutal-nav {
+        display: none;
+    }
+    
+    .brutal-mobile-toggle {
+        display: flex;
+    }
+    
+    .brutal-mobile-menu {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .brutal-header-container {
+        padding: 0 15px;
+        gap: 10px;
+    }
+    
+    .brutal-logo {
+        font-size: 1.2rem;
+    }
+    
+    .brutal-logo-icon {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 480px) {
+    .brutal-header-container {
+        padding: 0 10px;
+    }
+    
+    .brutal-logo {
+        font-size: 1rem;
+        gap: 6px;
+    }
+    
+    .brutal-mobile-nav {
+        padding: 15px;
+        gap: 8px;
+    }
+    
+    .brutal-mobile-nav-link {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .brutal-mobile-city {
+        padding: 15px;
+    }
+    
+    .brutal-mobile-city-header {
+        font-size: 1rem;
+    }
+    
+    .brutal-mobile-city-item {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}

@@ -68,116 +68,188 @@
 </head>
 <body>
 
-    <header>
-        <nav class="navbar navbar-modern navbar-expand-lg fixed-top">
-            <div class="container">
-                <!-- Логотип -->
+    <header class="brutal-header">
+        <div class="brutal-header-container">
+            <!-- Логотип -->
+            <div class="brutal-logo-section">
                 {% if page_type == 'home' %}
-                <span class="navbar-brand-modern">
-                    <i class="fas fa-chart-line"></i>Isakov Agency
+                <span class="brutal-logo">
+                    <span class="brutal-logo-icon">⚡</span>
+                    <span class="brutal-logo-text">Isakov Agency</span>
                 </span>
                 {% else %}
-                <a class="navbar-brand-modern" href="{% url 'main:home' %}">
-                    <i class="fas fa-chart-line"></i>Isakov Agency
+                <a href="{% url 'main:home' %}" class="brutal-logo">
+                    <span class="brutal-logo-icon">⚡</span>
+                    <span class="brutal-logo-text">Isakov Agency</span>
                 </a>
                 {% endif %}
-                
-                <!-- Выбор города (только на десктопе) -->
-                <div class="d-none d-lg-block ms-3">
-                    <div class="dropdown">
-                        <button class="city-selector-modern dropdown-toggle" type="button" id="currentCityDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-map-marker-alt me-1"></i>
+            </div>
+
+            <!-- Поиск (только на десктопе) -->
+            <div class="brutal-search-section d-none d-lg-block">
+                <form class="brutal-search-form" action="{% url 'blog:search' %}" method="get">
+                    <input type="text" name="q" placeholder="Поиск по сайту..." class="brutal-search-input">
+                    <button type="submit" class="brutal-search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Выбор города (только на десктопе) -->
+            <div class="brutal-city-section d-none d-lg-block">
+                <div class="brutal-dropdown">
+                    <button class="brutal-city-button" type="button" id="brutalCityDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="brutal-city-text">
                             {% if current_city %}{{ current_city.name }}{% else %}Выбрать город{% endif %}
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="currentCityDropdown">
-                            <li><h6 class="dropdown-header">Выберите город</h6></li>
-                            {% for city in cities_menu %}
-                                {% if not current_city or city.slug != current_city.slug %}
-                                <li><a class="dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a></li>
-                                {% endif %}
-                            {% endfor %}
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'main:city_list' %}">Все города</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Мобильная кнопка -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                
-                <!-- Основное меню -->
-                <div class="collapse navbar-collapse" id="mainNav">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-                        <!-- Услуги с мега-меню -->
-                        <li class="nav-item" id="servicesMenu">
-                            <a class="nav-link-modern" href="{% url 'services:service_list' %}" id="servicesDropdown">
-                                Услуги <i class="fas fa-chevron-down ms-1"></i>
-                            </a>
-                            <!-- Мега-меню услуг -->
-                            <div class="services-mega-menu" id="servicesMegaMenu">
-                                <div class="services-grid">
-                                    {% for category in service_categories_menu %}
-                                    <div class="service-category-modern">
-                                        <h4 class="category-title-modern">{{ category.title }}</h4>
-                                        <ul class="services-list-modern">
-                                            {% for service in category.services.all %}
-                                            <li>
-                                                <a href="{% url 'services:service_detail' slug=service.slug %}">{{ service.title }}</a>
-                                            </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </li>
-                        
-                        <!-- Остальные страницы -->
-                        {% for p in header_pages %}
-                        <li class="nav-item">
-                            <a class="nav-link-modern" href="{% url 'pages:detail' slug=p.slug %}">{{ p.title }}</a>
-                        </li>
+                        </span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="brutal-dropdown-menu" aria-labelledby="brutalCityDropdown">
+                        <li class="brutal-dropdown-header">Выберите город</li>
+                        {% for city in cities_menu %}
+                            {% if not current_city or city.slug != current_city.slug %}
+                            <li><a class="brutal-dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a></li>
+                            {% endif %}
                         {% endfor %}
-                        
-                        <li class="nav-item">
-                            <a class="nav-link-modern" href="{% url 'blog:post_list' %}">Блог</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link-modern" href="{% url 'main:portfolio_list' %}">Портфолио</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link-modern" href="{% url 'main:contacts' %}">Контакты</a>
-                        </li>
-                        
-                        <!-- Города (мобильная версия) -->
-                        <li class="nav-item dropdown d-lg-none">
-                            <a class="nav-link-modern dropdown-toggle" href="#" id="citiesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Города
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="citiesDropdown">
-                                <li><a class="dropdown-item" href="{% url 'main:city_list' %}">Все города</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                {% for city in cities_menu %}
-                                    <li><a class="dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        
-                        <!-- Контакты -->
-                        <li class="nav-item ms-lg-3">
-                            <div class="header-contacts-modern">
-                                <a href="tel:+79636415944" class="phone-modern">+7 (963) 641-59-44</a>
-                                <a href="mailto:isakov@isakov.work" class="email-modern">isakov@isakov.work</a>
-                            </div>
-                        </li>
+                        <li class="brutal-dropdown-divider"></li>
+                        <li><a class="brutal-dropdown-item" href="{% url 'main:city_list' %}">Все города</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
+            
+            <!-- Основная навигация -->
+            <nav class="brutal-nav d-none d-lg-flex">
+                <a href="{% url 'main:home' %}" class="brutal-nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <i class="fas fa-home"></i>
+                    <span>Главная</span>
+                </a>
+                
+                <!-- Услуги с мега-меню -->
+                <div class="brutal-nav-dropdown">
+                    <a href="{% url 'services:service_list' %}" class="brutal-nav-link brutal-nav-dropdown-toggle {% if 'services' in request.resolver_match.namespace %}active{% endif %}">
+                        <i class="fas fa-cogs"></i>
+                        <span>Услуги</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="brutal-mega-menu">
+                        <div class="brutal-mega-menu-content">
+                            {% for category in service_categories_menu %}
+                            <div class="brutal-mega-menu-section">
+                                <h4 class="brutal-mega-menu-title">{{ category.title }}</h4>
+                                <ul class="brutal-mega-menu-links">
+                                    {% for service in category.services.all %}
+                                    <li><a href="{% url 'services:service_detail' slug=service.slug %}">{{ service.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="{% url 'main:portfolio_list' %}" class="brutal-nav-link {% if 'portfolio' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Портфолио</span>
+                </a>
+                <a href="{% url 'blog:post_list' %}" class="brutal-nav-link {% if 'blog' in request.resolver_match.namespace %}active{% endif %}">
+                    <i class="fas fa-blog"></i>
+                    <span>Блог</span>
+                </a>
+                <a href="{% url 'main:city_list' %}" class="brutal-nav-link {% if 'city' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-city"></i>
+                    <span>Города</span>
+                </a>
+                <a href="{% url 'main:contacts' %}" class="brutal-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-phone"></i>
+                    <span>Контакты</span>
+                </a>
+            </nav>
+            
+            <!-- Мобильная кнопка меню -->
+            <button class="brutal-mobile-toggle d-lg-none" type="button" id="brutalMobileToggle" aria-expanded="false">
+                <span class="brutal-mobile-toggle-line"></span>
+                <span class="brutal-mobile-toggle-line"></span>
+                <span class="brutal-mobile-toggle-line"></span>
+            </button>
+        </div>
+        
+        <!-- Мобильное меню -->
+        <div class="brutal-mobile-menu d-lg-none" id="brutalMobileMenu">
+            <!-- Мобильный поиск -->
+            <div class="brutal-mobile-search">
+                <form class="brutal-mobile-search-form" action="{% url 'blog:search' %}" method="get">
+                    <input type="text" name="q" placeholder="Поиск по сайту..." class="brutal-mobile-search-input">
+                    <button type="submit" class="brutal-mobile-search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Мобильная навигация -->
+            <nav class="brutal-mobile-nav">
+                <a href="{% url 'main:home' %}" class="brutal-mobile-nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                    <i class="fas fa-home"></i>
+                    <span>Главная</span>
+                </a>
+                
+                <!-- Мобильные услуги -->
+                <div class="brutal-mobile-dropdown">
+                    <button class="brutal-mobile-dropdown-toggle" type="button">
+                        <i class="fas fa-cogs"></i>
+                        <span>Услуги</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="brutal-mobile-dropdown-menu">
+                        {% for category in service_categories_menu %}
+                        <div class="brutal-mobile-dropdown-section">
+                            <h5 class="brutal-mobile-dropdown-title">{{ category.title }}</h5>
+                            {% for service in category.services.all %}
+                            <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-mobile-dropdown-link">{{ service.title }}</a>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <a href="{% url 'main:portfolio_list' %}" class="brutal-mobile-nav-link {% if 'portfolio' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Портфолио</span>
+                </a>
+                <a href="{% url 'blog:post_list' %}" class="brutal-mobile-nav-link {% if 'blog' in request.resolver_match.namespace %}active{% endif %}">
+                    <i class="fas fa-blog"></i>
+                    <span>Блог</span>
+                </a>
+                <a href="{% url 'main:city_list' %}" class="brutal-mobile-nav-link {% if 'city' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-city"></i>
+                    <span>Города</span>
+                </a>
+                <a href="{% url 'main:contacts' %}" class="brutal-mobile-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
+                    <i class="fas fa-phone"></i>
+                    <span>Контакты</span>
+                </a>
+            </nav>
+            
+            <!-- Мобильный выбор города -->
+            <div class="brutal-mobile-city">
+                <div class="brutal-mobile-city-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Выбор города</span>
+                </div>
+                <div class="brutal-mobile-city-list">
+                    {% for city in cities_menu %}
+                        {% if not current_city or city.slug != current_city.slug %}
+                        <a href="{% url 'main:set_city' slug=city.slug %}" class="brutal-mobile-city-item">
+                            {{ city.name }}
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+                    <a href="{% url 'main:city_list' %}" class="brutal-mobile-city-item brutal-mobile-city-all">
+                        Все города
+                    </a>
+                </div>
+            </div>
+        </div>
     </header>
 
 
@@ -352,6 +424,72 @@
     
     <script src="{% static 'js/base.js' %}"></script>
     <script src="{% static 'js/modern-header.js' %}"></script>
+    
+    <!-- Брутальный хэдер скрипты -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Мобильное меню
+            const mobileToggle = document.getElementById('brutalMobileToggle');
+            const mobileMenu = document.getElementById('brutalMobileMenu');
+            
+            if (mobileToggle && mobileMenu) {
+                mobileToggle.addEventListener('click', function() {
+                    const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+                    mobileToggle.setAttribute('aria-expanded', !isExpanded);
+                    mobileMenu.classList.toggle('brutal-mobile-menu-open');
+                    mobileToggle.classList.toggle('brutal-mobile-toggle-active');
+                });
+                
+                // Закрытие меню при клике вне его
+                document.addEventListener('click', function(event) {
+                    if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        mobileToggle.setAttribute('aria-expanded', 'false');
+                        mobileMenu.classList.remove('brutal-mobile-menu-open');
+                        mobileToggle.classList.remove('brutal-mobile-toggle-active');
+                    }
+                });
+            }
+            
+            // Мобильные dropdown
+            const mobileDropdowns = document.querySelectorAll('.brutal-mobile-dropdown-toggle');
+            mobileDropdowns.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const menu = this.nextElementSibling;
+                    const isOpen = menu.classList.contains('brutal-mobile-dropdown-open');
+                    
+                    // Закрыть все другие dropdown
+                    document.querySelectorAll('.brutal-mobile-dropdown-menu').forEach(m => {
+                        m.classList.remove('brutal-mobile-dropdown-open');
+                    });
+                    document.querySelectorAll('.brutal-mobile-dropdown-toggle').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    
+                    if (!isOpen) {
+                        menu.classList.add('brutal-mobile-dropdown-open');
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Мега-меню на десктопе
+            const navDropdowns = document.querySelectorAll('.brutal-nav-dropdown');
+            navDropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.brutal-nav-dropdown-toggle');
+                const menu = dropdown.querySelector('.brutal-mega-menu');
+                
+                if (toggle && menu) {
+                    dropdown.addEventListener('mouseenter', function() {
+                        menu.classList.add('brutal-mega-menu-open');
+                    });
+                    
+                    dropdown.addEventListener('mouseleave', function() {
+                        menu.classList.remove('brutal-mega-menu-open');
+                    });
+                }
+            });
+        });
+    </script>
     
     {% block extra_js %}{% endblock extra_js %}
 </body>

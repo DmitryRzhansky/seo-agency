@@ -491,7 +491,7 @@ def sitemap_page(request):
     blog_categories = Category.objects.all().prefetch_related('post_set')
     blog_posts = Post.objects.filter(is_published=True).select_related('category')
     cities = City.objects.all()
-    pages = SimplePage.objects.filter(is_published=True)
+    faq_categories = FAQCategory.objects.filter(is_active=True).prefetch_related('faq_items')
     
     # Создаем структуру карты сайта
     sitemap_data = {
@@ -500,6 +500,7 @@ def sitemap_page(request):
             {'title': 'Услуги', 'url': '/services/', 'description': 'Все наши услуги'},
             {'title': 'Блог', 'url': '/blog/', 'description': 'Статьи и новости'},
             {'title': 'Портфолио', 'url': '/portfolio/', 'description': 'Примеры наших работ'},
+            {'title': 'FAQ', 'url': '/faq/', 'description': 'Часто задаваемые вопросы'},
             {'title': 'Контакты', 'url': '/#contact', 'description': 'Свяжитесь с нами'},
         ],
         'services': service_categories,
@@ -507,7 +508,7 @@ def sitemap_page(request):
         'blog_categories': blog_categories,
         'blog_posts': blog_posts,
         'cities': cities,
-        'pages': pages,
+        'faq_categories': faq_categories,
     }
     
     context = {

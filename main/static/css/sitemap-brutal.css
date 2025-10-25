@@ -323,3 +323,72 @@
         padding: 30px 0;
     }
 }
+
+/* FAQ элементы в карте сайта */
+.brutal-sitemap-faq-items {
+    margin-top: 10px;
+    padding-left: 20px;
+    border-left: 2px solid var(--brutal-green);
+}
+
+.brutal-sitemap-faq-item {
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.brutal-sitemap-faq-item::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--brutal-green);
+    font-weight: 900;
+}
+
+.brutal-sitemap-faq-item a {
+    color: var(--brutal-dark-gray);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 2px 0;
+}
+
+.brutal-sitemap-faq-item a:hover {
+    color: var(--brutal-black);
+    font-weight: 500;
+    transform: translateX(3px);
+}
+
+.brutal-sitemap-faq-more {
+    margin-top: 8px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.brutal-sitemap-faq-more::before {
+    content: '...';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--brutal-green);
+    font-weight: 900;
+}
+
+.brutal-sitemap-faq-more a {
+    color: var(--brutal-green);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 2px 0;
+}
+
+.brutal-sitemap-faq-more a:hover {
+    color: var(--brutal-black);
+    font-weight: 700;
+    transform: translateX(3px);
+}

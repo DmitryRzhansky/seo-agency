@@ -389,7 +389,7 @@ def privacy_policy(request):
         'title': 'Политика конфиденциальности | Isakov Agency',
         'seo_object': None,
     }
-    return render(request, 'main/privacy_policy.html', context)
+    return render(request, 'main/privacy_policy_brutal.html', context)
 
 
 # --- Портфолио ---

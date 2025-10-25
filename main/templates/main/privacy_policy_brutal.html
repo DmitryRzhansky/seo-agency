@@ -1,0 +1,168 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumb-nav">
+    <div class="brutal-container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Главная</a></li>
+            <li class="breadcrumb-item active">Политика конфиденциальности</li>
+        </ol>
+    </div>
+</nav>
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/privacy-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция политики - брутальная -->
+<section class="brutal-privacy-hero">
+    <div class="brutal-container">
+        <div class="brutal-privacy-hero-content">
+            <h1 class="brutal-privacy-hero-title">Политика конфиденциальности</h1>
+            <p class="brutal-privacy-hero-subtitle">
+                Мы серьезно относимся к защите ваших персональных данных и соблюдаем все требования законодательства РФ.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент - брутальный -->
+<section class="brutal-privacy-content">
+    <div class="brutal-container">
+        <div class="brutal-privacy-wrapper">
+            
+            <!-- Общие положения -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">1. Общие положения</h2>
+                <p class="brutal-privacy-section-text">
+                    Настоящая Политика конфиденциальности определяет порядок обработки персональных данных пользователей сайта 
+                    <strong>zadengi-v-top.ru</strong> (далее — «Сайт»), принадлежащего ИП Исаков Виталий Александрович 
+                    (далее — «Оператор»).
+                </p>
+                <p class="brutal-privacy-section-text">
+                    Используя Сайт, вы соглашаетесь с условиями настоящей Политики конфиденциальности. 
+                    Если вы не согласны с какими-либо условиями, пожалуйста, не используйте Сайт.
+                </p>
+            </div>
+
+            <!-- Какие данные мы собираем -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">2. Какие данные мы собираем</h2>
+                <p class="brutal-privacy-section-text">
+                    Мы можем собирать следующие категории персональных данных:
+                </p>
+                <ul class="brutal-privacy-list">
+                    <li>Имя и контактная информация (телефон, email)</li>
+                    <li>Информация о компании и должности</li>
+                    <li>Данные о ваших запросах и предпочтениях</li>
+                    <li>Техническая информация (IP-адрес, тип браузера, операционная система)</li>
+                    <li>Данные о взаимодействии с Сайтом (время посещения, просмотренные страницы)</li>
+                </ul>
+            </div>
+
+            <!-- Как мы используем данные -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">3. Как мы используем ваши данные</h2>
+                <p class="brutal-privacy-section-text">
+                    Мы используем собранные данные для следующих целей:
+                </p>
+                <ul class="brutal-privacy-list">
+                    <li>Предоставление и улучшение наших услуг</li>
+                    <li>Обработка ваших запросов и заявок</li>
+                    <li>Связь с вами по вопросам сотрудничества</li>
+                    <li>Анализ эффективности Сайта и улучшение пользовательского опыта</li>
+                    <li>Соблюдение правовых обязательств</li>
+                </ul>
+            </div>
+
+            <!-- Передача данных третьим лицам -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">4. Передача данных третьим лицам</h2>
+                <p class="brutal-privacy-section-text">
+                    Мы не продаем, не обмениваем и не передаем ваши персональные данные третьим лицам без вашего согласия, 
+                    за исключением случаев:
+                </p>
+                <ul class="brutal-privacy-list">
+                    <li>Когда это требуется для выполнения наших обязательств перед вами</li>
+                    <li>Когда это необходимо для соблюдения правовых требований</li>
+                    <li>Когда это необходимо для защиты наших прав и интересов</li>
+                </ul>
+            </div>
+
+            <!-- Защита данных -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">5. Защита ваших данных</h2>
+                <p class="brutal-privacy-section-text">
+                    Мы принимаем все необходимые технические и организационные меры для защиты ваших персональных данных от 
+                    несанкционированного доступа, изменения, раскрытия или уничтожения.
+                </p>
+                <div class="brutal-privacy-highlight">
+                    <p class="brutal-privacy-highlight-text">
+                        Все данные передаются по защищенному SSL-соединению и хранятся на защищенных серверах.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Ваши права -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">6. Ваши права</h2>
+                <p class="brutal-privacy-section-text">
+                    В соответствии с Федеральным законом «О персональных данных» вы имеете право:
+                </p>
+                <ul class="brutal-privacy-list">
+                    <li>Получать информацию о том, какие ваши данные мы обрабатываем</li>
+                    <li>Требовать уточнения, блокирования или уничтожения ваших данных</li>
+                    <li>Отзывать согласие на обработку персональных данных</li>
+                    <li>Обращаться с жалобами в уполномоченный орган по защите прав субъектов персональных данных</li>
+                </ul>
+            </div>
+
+            <!-- Cookies -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">7. Использование Cookies</h2>
+                <p class="brutal-privacy-section-text">
+                    Мы используем файлы cookies для улучшения функциональности Сайта и анализа его использования. 
+                    Вы можете отключить cookies в настройках вашего браузера, однако это может повлиять на работу Сайта.
+                </p>
+            </div>
+
+            <!-- Изменения в политике -->
+            <div class="brutal-privacy-section">
+                <h2 class="brutal-privacy-section-title">8. Изменения в Политике конфиденциальности</h2>
+                <p class="brutal-privacy-section-text">
+                    Мы можем обновлять данную Политику конфиденциальности. О любых изменениях мы будем уведомлять 
+                    путем размещения новой версии на данной странице с указанием даты последнего обновления.
+                </p>
+            </div>
+
+            <!-- Контактная информация -->
+            <div class="brutal-privacy-contact">
+                <h3 class="brutal-privacy-contact-title">Контактная информация</h3>
+                <p class="brutal-privacy-contact-text">
+                    Если у вас есть вопросы по поводу данной Политики конфиденциальности или обработки ваших персональных данных, 
+                    свяжитесь с нами:
+                </p>
+                <div class="brutal-privacy-contact-info">
+                    <div class="brutal-privacy-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+7 (963) 641-59-44</span>
+                    </div>
+                    <div class="brutal-privacy-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>isakov@isakov.work</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

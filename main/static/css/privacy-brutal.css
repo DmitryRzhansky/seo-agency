@@ -1,0 +1,249 @@
+/* Брутальный стиль для политики конфиденциальности */
+
+/* Переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-green: #00ff00;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #333333;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+}
+
+/* Основные стили */
+* {
+    font-family: 'Courier New', monospace;
+}
+
+/* Контейнер */
+.brutal-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero секция политики */
+.brutal-privacy-hero {
+    background: var(--brutal-white);
+    padding: 80px 0 60px;
+    border-bottom: var(--brutal-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.brutal-privacy-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--brutal-green) 0%, transparent 50%);
+    opacity: 0.1;
+}
+
+.brutal-privacy-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brutal-privacy-hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0px var(--brutal-black);
+    line-height: 1.1;
+}
+
+.brutal-privacy-hero-subtitle {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+/* Основной контент */
+.brutal-privacy-content {
+    padding: 80px 0;
+    background: var(--brutal-white);
+}
+
+.brutal-privacy-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.brutal-privacy-section {
+    margin-bottom: 50px;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    padding: 40px;
+    position: relative;
+}
+
+.brutal-privacy-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--brutal-green);
+}
+
+.brutal-privacy-section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.brutal-privacy-section-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 20px;
+}
+
+.brutal-privacy-section-text:last-child {
+    margin-bottom: 0;
+}
+
+.brutal-privacy-list {
+    margin: 20px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.brutal-privacy-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--brutal-dark-gray);
+}
+
+.brutal-privacy-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--brutal-green);
+    font-weight: 900;
+    font-size: 1.2rem;
+}
+
+.brutal-privacy-highlight {
+    background: var(--brutal-gray);
+    border: 2px solid var(--brutal-black);
+    padding: 20px;
+    margin: 20px 0;
+    position: relative;
+}
+
+.brutal-privacy-highlight::before {
+    content: 'ВАЖНО';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    padding: 5px 15px;
+    font-weight: 900;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-privacy-highlight-text {
+    font-weight: 600;
+    color: var(--brutal-black);
+    margin: 0;
+}
+
+/* Контактная информация */
+.brutal-privacy-contact {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 40px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.brutal-privacy-contact-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-privacy-contact-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--brutal-dark-gray);
+    margin-bottom: 25px;
+}
+
+.brutal-privacy-contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.brutal-privacy-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--brutal-black);
+}
+
+.brutal-privacy-contact-item i {
+    color: var(--brutal-green);
+    font-size: 1.2rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-privacy-hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .brutal-privacy-section {
+        padding: 30px 20px;
+    }
+    
+    .brutal-privacy-section-title {
+        font-size: 1.6rem;
+    }
+    
+    .brutal-privacy-contact-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .brutal-privacy-hero {
+        padding: 60px 0 40px;
+    }
+    
+    .brutal-privacy-content {
+        padding: 60px 0;
+    }
+}

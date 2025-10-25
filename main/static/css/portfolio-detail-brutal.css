@@ -814,6 +814,16 @@
     .brutal-portfolio-detail-blocks {
         grid-template-columns: 1fr;
         gap: 20px;
+        order: 2;
+    }
+    
+    .brutal-portfolio-detail-block {
+        width: 100%;
+    }
+    
+    .brutal-portfolio-detail-block:not(.main):not(.content) {
+        width: 100%;
+        margin-right: 0;
     }
     
     .brutal-portfolio-detail-block.main,
@@ -829,10 +839,6 @@
     .brutal-portfolio-detail-image-container {
         flex: none;
         order: 1;
-    }
-    
-    .brutal-portfolio-detail-blocks {
-        order: 2;
     }
     
     .brutal-portfolio-detail-title {

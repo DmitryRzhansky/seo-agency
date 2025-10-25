@@ -689,10 +689,17 @@
     
     .brutal-post-content-block {
         padding: 20px;
+        width: 100%;
     }
     
     .brutal-post-content-block.main {
         padding: 25px;
+        width: 100%;
+    }
+    
+    .brutal-post-content-block:not(.main):not(.content) {
+        width: 100%;
+        margin-right: 0;
     }
     
     .brutal-post-text {

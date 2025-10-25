@@ -1266,6 +1266,133 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect width="24" height="24" fill="%23000000" stroke="%2300ff00" stroke-width="3"/></svg>'), pointer;
 }
 
+/* Брутальная пагинация */
+.pagination-brutal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.page-link-brutal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 48px;
+    padding: 12px 18px;
+    background: var(--brutal-white);
+    border: 3px solid var(--brutal-black);
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.page-link-brutal:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.page-link-brutal.active {
+    background: var(--brutal-black);
+    color: var(--brutal-green);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.page-link-brutal.disabled {
+    background: var(--brutal-gray);
+    color: var(--brutal-dark-gray);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.page-link-brutal.disabled:hover {
+    transform: none;
+    box-shadow: var(--brutal-shadow);
+}
+
+/* Брутальные категории блога */
+.brutal-blog-categories {
+    background: var(--brutal-white);
+    padding: 40px 0;
+    border-bottom: 4px solid var(--brutal-green);
+}
+
+.brutal-blog-categories-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-blog-categories-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.brutal-blog-category-card {
+    display: inline-block;
+}
+
+.brutal-blog-category-link {
+    display: inline-block;
+    color: var(--brutal-black);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 3px solid var(--brutal-black);
+    background: var(--brutal-white);
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.2s ease;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-blog-category-card.active .brutal-blog-category-link {
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-blog-category-link:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-green);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+/* Адаптивность для категорий блога */
+@media (max-width: 768px) {
+    .brutal-blog-categories-grid {
+        gap: 10px;
+    }
+    
+    .brutal-blog-category-link {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}
+
 /* Брутальный хэдер */
 .brutal-header {
     background: var(--brutal-white);

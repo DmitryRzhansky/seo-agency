@@ -336,11 +336,11 @@
 }
 
 .brutal-post-content-block h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .brutal-post-content-block h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .brutal-post-content-block p {
@@ -678,11 +678,6 @@
         grid-column: span 1;
     }
     
-    .brutal-post-content-block.content {
-        width: 100% !important;
-        margin-right: 0 !important;
-    }
-    
     .brutal-post-image-container {
         flex: none;
         order: 1;
@@ -691,6 +686,13 @@
     .brutal-post-content-block {
         padding: 20px;
         width: 100%;
+        margin-right: 0 !important;
+    }
+    
+    .brutal-post-content-block.content {
+        width: 100% !important;
+        margin-right: 0 !important;
+        max-width: 100%;
     }
     
     .brutal-post-content-block.main {
@@ -703,8 +705,27 @@
         margin-right: 0;
     }
     
+    .brutal-post-content-block p,
+    .brutal-post-content-block li {
+        font-size: 0.9rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
     .brutal-post-text {
         max-height: 300px;
+        overflow-y: auto;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .brutal-post-scrollable {
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     .brutal-related-posts-grid {

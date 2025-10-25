@@ -124,7 +124,7 @@
         padding: 5px 10px;
         font-size: 0.7rem;
         white-space: nowrap;
-        display: block;
+        display: inline-block;
     }
     
     .breadcrumb-item:not(:last-child)::after {
@@ -149,7 +149,7 @@
     .breadcrumb-item.active {
         padding: 4px 8px;
         font-size: 0.65rem;
-        display: block;
+        display: inline-block;
     }
     
     .breadcrumb-item:not(:last-child)::after {

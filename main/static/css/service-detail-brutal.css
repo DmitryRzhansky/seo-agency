@@ -986,11 +986,6 @@
         grid-column: span 1;
     }
     
-    .brutal-content-block.content {
-        width: 100% !important;
-        margin-right: 0 !important;
-    }
-    
     .brutal-service-image-container {
         flex: none;
         order: 1;
@@ -1007,6 +1002,13 @@
     .brutal-content-block {
         padding: 20px;
         width: 100%;
+        margin-right: 0 !important;
+    }
+    
+    .brutal-content-block.content {
+        width: 100% !important;
+        margin-right: 0 !important;
+        max-width: 100%;
     }
     
     .brutal-content-block.main {
@@ -1017,6 +1019,20 @@
     .brutal-content-block:not(.main):not(.content) {
         width: 100%;
         margin-right: 0;
+    }
+    
+    .brutal-content-block p,
+    .brutal-content-block li {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .brutal-service-scrollable {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
     }
     
     .brutal-related-grid {

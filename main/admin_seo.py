@@ -5,7 +5,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
-from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation, FAQCategory, FAQItem
+from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
 from seo.admin import SEOAdminMixin
 
 # Настройка заголовков админки
@@ -703,6 +703,73 @@ class FAQItemAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
         return obj.question
     question_short.short_description = 'Вопрос'
     
+    def get_queryset(self, request):
+        """Оптимизируем запросы"""
+        return super().get_queryset(request).select_related('category')
+
+
+# --- Админ-классы для Глоссария ---
+
+@admin.register(GlossaryCategory)
+class GlossaryCategoryAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    """Админ-класс для категорий глоссария"""
+    
+    list_display = ['name', 'slug', 'order', 'is_active', 'glossary_terms_count', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['name', 'description']
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ['order', 'name']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('name', 'slug', 'description', 'order', 'is_active')
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def glossary_terms_count(self, obj):
+        """Показывает количество терминов в категории"""
+        count = obj.glossary_terms.filter(is_published=True).count()
+        if count > 0:
+            url = reverse('admin:main_glossaryterm_changelist') + f'?category__id__exact={obj.id}'
+            return format_html('<a href="{}">{} терминов</a>', url, count)
+        return '0 терминов'
+    glossary_terms_count.short_description = 'Количество терминов'
+
+    def get_queryset(self, request):
+        """Оптимизируем запросы"""
+        return super().get_queryset(request).prefetch_related('glossary_terms')
+
+
+@admin.register(GlossaryTerm)
+class GlossaryTermAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    """Админ-класс для терминов глоссария"""
+    
+    list_display = ['term_short', 'category', 'order', 'is_published', 'created_at']
+    list_filter = ['category', 'is_published', 'created_at']
+    search_fields = ['term', 'definition']
+    ordering = ['order', 'term']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('category', 'term', 'definition', 'order', 'is_published')
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def term_short(self, obj):
+        """Показывает сокращенный термин"""
+        if len(obj.term) > 60:
+            return obj.term[:60] + '...'
+        return obj.term
+    term_short.short_description = 'Термин'
+
     def get_queryset(self, request):
         """Оптимизируем запросы"""
         return super().get_queryset(request).select_related('category')

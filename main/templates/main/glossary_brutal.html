@@ -1,0 +1,153 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs glossary_page %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/glossary-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<!-- Hero секция глоссария - брутальная -->
+<section class="brutal-glossary-hero">
+    <div class="brutal-container">
+        <div class="brutal-glossary-hero-content">
+            <h1 class="brutal-glossary-hero-title">📚 Глоссарий терминов</h1>
+            <p class="brutal-glossary-hero-description">
+                Алфавитный словарь терминов по SEO, контекстной рекламе и digital-маркетингу
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Фильтры и поиск - брутальные -->
+<section class="brutal-glossary-filters">
+    <div class="brutal-container">
+        <div class="brutal-glossary-nav">
+            <div class="brutal-glossary-nav-content">
+                <!-- Поиск -->
+                <form class="brutal-glossary-search-form" method="get">
+                    <div class="brutal-glossary-search-group">
+                        <input 
+                            type="text" 
+                            name="search" 
+                            value="{{ search_query }}"
+                            placeholder="Поиск по терминам и определениям..."
+                            class="brutal-glossary-search-input"
+                        >
+                        <button type="submit" class="brutal-glossary-search-button">
+                            🔍 Найти
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Фильтры -->
+                <div class="brutal-glossary-filters-buttons">
+                    <!-- Фильтр по категориям -->
+                    <div class="brutal-glossary-filter-group">
+                        <h4 class="brutal-glossary-filter-title">Категории:</h4>
+                        <div class="brutal-glossary-filter-buttons">
+                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if alphabet_filter %}alphabet={{ alphabet_filter }}&{% endif %}" 
+                               class="brutal-glossary-filter-button {% if not selected_category %}active{% endif %}">
+                                Все категории
+                            </a>
+                            {% for category in categories %}
+                            <a href="?category={{ category.slug }}{% if search_query %}&search={{ search_query }}{% endif %}{% if alphabet_filter %}&alphabet={{ alphabet_filter }}{% endif %}" 
+                               class="brutal-glossary-filter-button {% if selected_category == category %}active{% endif %}">
+                                {{ category.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Фильтр по алфавиту -->
+                    <div class="brutal-glossary-filter-group">
+                        <h4 class="brutal-glossary-filter-title">Алфавит:</h4>
+                        <div class="brutal-glossary-filter-buttons">
+                            <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}" 
+                               class="brutal-glossary-filter-button {% if not alphabet_filter %}active{% endif %}">
+                                Все
+                            </a>
+                            <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet=ru" 
+                               class="brutal-glossary-filter-button {% if alphabet_filter == 'ru' %}active{% endif %}">
+                                А-Я
+                            </a>
+                            <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet=en" 
+                               class="brutal-glossary-filter-button {% if alphabet_filter == 'en' %}active{% endif %}">
+                                A-Z
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Глоссарий контент - брутальный -->
+<section class="brutal-glossary-content">
+    <div class="brutal-container">
+        {% if glossary_by_category %}
+            {% for category, terms in glossary_by_category.items %}
+            <div class="brutal-glossary-category">
+                <h2 class="brutal-glossary-category-title">
+                    <a href="{% url 'main:glossary_category' category.slug %}" class="brutal-glossary-category-link">
+                        {{ category.name }}
+                    </a>
+                </h2>
+                {% if category.description %}
+                <p class="brutal-glossary-category-description">{{ category.description }}</p>
+                {% endif %}
+                
+                <div class="brutal-glossary-terms">
+                    {% for term in terms %}
+                    <div class="brutal-glossary-term">
+                        <div class="brutal-glossary-term-name">
+                            <a href="{% url 'main:glossary_term' category.slug term.id %}" class="brutal-glossary-term-link">
+                                {{ term.term }}
+                            </a>
+                        </div>
+                        <div class="brutal-glossary-term-definition">
+                            {{ term.definition|truncatewords:30|striptags }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="brutal-glossary-empty">
+                <h3>Термины не найдены</h3>
+                <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- CTA секция - брутальная -->
+<section class="brutal-glossary-cta">
+    <div class="brutal-container">
+        <div class="brutal-glossary-cta-content">
+            <h2 class="brutal-glossary-cta-title">Не нашли нужный термин?</h2>
+            <p class="brutal-glossary-cta-description">
+                Свяжитесь с нами, и мы добавим определение интересующего вас термина в глоссарий
+            </p>
+            <div class="brutal-glossary-cta-buttons">
+                <a href="{% url 'main:home' %}#contact" class="brutal-glossary-cta-button primary">
+                    Связаться с нами
+                </a>
+                <a href="{% url 'main:faq_list' %}" class="brutal-glossary-cta-button secondary">
+                    FAQ
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

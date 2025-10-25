@@ -1,0 +1,533 @@
+/* Глоссарий - брутальный дизайн */
+
+/* Переменные */
+:root {
+    --brutal-black: #000000;
+    --brutal-white: #ffffff;
+    --brutal-green: #00ff00;
+    --brutal-gray: #f5f5f5;
+    --brutal-dark-gray: #666666;
+    --brutal-border: 3px solid var(--brutal-black);
+    --brutal-shadow: 6px 6px 0px var(--brutal-black);
+    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+}
+
+/* Hero секция */
+.brutal-glossary-hero {
+    background: var(--brutal-green);
+    padding: 60px 0;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-glossary-hero-content {
+    text-align: center;
+}
+
+.brutal-glossary-hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--brutal-black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 0px var(--brutal-white);
+}
+
+.brutal-glossary-hero-description {
+    font-size: 1.2rem;
+    color: var(--brutal-black);
+    font-weight: 600;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.brutal-glossary-hero-meta {
+    margin-top: 20px;
+}
+
+.brutal-glossary-hero-category {
+    font-size: 1rem;
+    color: var(--brutal-black);
+    font-weight: 600;
+}
+
+.brutal-glossary-hero-category a {
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 2px solid var(--brutal-black);
+}
+
+.brutal-glossary-hero-category a:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-green);
+    padding: 2px 4px;
+}
+
+/* Фильтры и поиск */
+.brutal-glossary-filters {
+    background: var(--brutal-white);
+    padding: 40px 0;
+    border-bottom: var(--brutal-border);
+}
+
+.brutal-glossary-nav {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 30px;
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-glossary-nav-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Поиск */
+.brutal-glossary-search-form {
+    width: 100%;
+}
+
+.brutal-glossary-search-group {
+    display: flex;
+    gap: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.brutal-glossary-search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: var(--brutal-border);
+    border-right: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-glossary-search-input:focus {
+    outline: none;
+    box-shadow: var(--brutal-shadow-hover);
+}
+
+.brutal-glossary-search-button {
+    padding: 15px 25px;
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    border: var(--brutal-border);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.2s ease;
+}
+
+.brutal-glossary-search-button:hover {
+    background: var(--brutal-black);
+    color: var(--brutal-green);
+    box-shadow: var(--brutal-shadow-hover);
+    transform: translate(-2px, -2px);
+}
+
+/* Фильтры */
+.brutal-glossary-filters-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.brutal-glossary-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.brutal-glossary-filter-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.brutal-glossary-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.brutal-glossary-filter-button {
+    padding: 10px 20px;
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    border: var(--brutal-border);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.brutal-glossary-filter-button:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    box-shadow: var(--brutal-shadow-hover);
+    transform: translate(-2px, -2px);
+}
+
+.brutal-glossary-filter-button.active {
+    background: var(--brutal-black);
+    color: var(--brutal-green);
+}
+
+/* Контент */
+.brutal-glossary-content {
+    padding: 60px 0;
+    background: var(--brutal-white);
+}
+
+/* Категории */
+.brutal-glossary-category {
+    margin-bottom: 50px;
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 30px;
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-glossary-category-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.brutal-glossary-category-link {
+    color: var(--brutal-black);
+    text-decoration: none;
+}
+
+.brutal-glossary-category-link:hover {
+    color: var(--brutal-green);
+}
+
+.brutal-glossary-category-description {
+    font-size: 1rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* Термины */
+.brutal-glossary-terms {
+    display: grid;
+    gap: 20px;
+}
+
+.brutal-glossary-term {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 25px;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.2s ease;
+}
+
+.brutal-glossary-term:hover {
+    box-shadow: var(--brutal-shadow-hover);
+    transform: translate(-2px, -2px);
+}
+
+.brutal-glossary-term-name {
+    margin-bottom: 15px;
+}
+
+.brutal-glossary-term-link {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.brutal-glossary-term-link:hover {
+    color: var(--brutal-green);
+}
+
+.brutal-glossary-term-definition {
+    font-size: 1rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.6;
+}
+
+/* Пустое состояние */
+.brutal-glossary-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-glossary-empty h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.brutal-glossary-empty p {
+    font-size: 1rem;
+    color: var(--brutal-dark-gray);
+    line-height: 1.6;
+}
+
+/* Определение термина */
+.brutal-glossary-definition {
+    padding: 60px 0;
+    background: var(--brutal-white);
+}
+
+.brutal-glossary-definition-content {
+    background: var(--brutal-gray);
+    border: var(--brutal-border);
+    padding: 40px;
+    box-shadow: var(--brutal-shadow);
+}
+
+.brutal-glossary-definition-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--brutal-black);
+    margin-bottom: 30px;
+}
+
+.brutal-glossary-definition-text h1,
+.brutal-glossary-definition-text h2,
+.brutal-glossary-definition-text h3,
+.brutal-glossary-definition-text h4,
+.brutal-glossary-definition-text h5,
+.brutal-glossary-definition-text h6 {
+    color: var(--brutal-black);
+    font-weight: 700;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.brutal-glossary-definition-text p {
+    margin-bottom: 15px;
+}
+
+.brutal-glossary-definition-text ul,
+.brutal-glossary-definition-text ol {
+    margin-bottom: 15px;
+    padding-left: 25px;
+}
+
+.brutal-glossary-definition-text li {
+    margin-bottom: 8px;
+}
+
+.brutal-glossary-definition-text strong {
+    font-weight: 700;
+    color: var(--brutal-black);
+}
+
+.brutal-glossary-definition-text em {
+    font-style: italic;
+}
+
+.brutal-glossary-definition-text a {
+    color: var(--brutal-green);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.brutal-glossary-definition-text a:hover {
+    color: var(--brutal-black);
+    text-decoration: underline;
+}
+
+.brutal-glossary-definition-meta {
+    border-top: var(--brutal-border);
+    padding-top: 20px;
+}
+
+.brutal-glossary-definition-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.brutal-glossary-definition-date {
+    font-size: 0.9rem;
+    color: var(--brutal-dark-gray);
+    font-weight: 600;
+}
+
+/* Похожие термины */
+.brutal-glossary-related {
+    padding: 60px 0;
+    background: var(--brutal-gray);
+    border-top: var(--brutal-border);
+}
+
+.brutal-glossary-related-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--brutal-black);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.brutal-glossary-related-terms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.brutal-glossary-related-term {
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    padding: 20px;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.2s ease;
+}
+
+.brutal-glossary-related-term:hover {
+    box-shadow: var(--brutal-shadow-hover);
+    transform: translate(-2px, -2px);
+}
+
+.brutal-glossary-related-term-link {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--brutal-black);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.brutal-glossary-related-term-link:hover {
+    color: var(--brutal-green);
+}
+
+/* CTA секция */
+.brutal-glossary-cta {
+    background: var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 60px 0;
+    border-top: var(--brutal-border);
+}
+
+.brutal-glossary-cta-content {
+    text-align: center;
+}
+
+.brutal-glossary-cta-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.brutal-glossary-cta-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brutal-glossary-cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.brutal-glossary-cta-button {
+    padding: 15px 30px;
+    border: var(--brutal-border);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.brutal-glossary-cta-button.primary {
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+}
+
+.brutal-glossary-cta-button.primary:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    box-shadow: var(--brutal-shadow-hover);
+    transform: translate(-2px, -2px);
+}
+
+.brutal-glossary-cta-button.secondary {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+}
+
+.brutal-glossary-cta-button.secondary:hover {
+    background: var(--brutal-green);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-glossary-hero-title {
+        font-size: 2rem;
+    }
+    
+    .brutal-glossary-search-group {
+        flex-direction: column;
+    }
+    
+    .brutal-glossary-search-input {
+        border-right: var(--brutal-border);
+        border-bottom: none;
+    }
+    
+    .brutal-glossary-filters-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .brutal-glossary-nav-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .brutal-glossary-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .brutal-glossary-definition-stats {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .brutal-glossary-related-terms {
+        grid-template-columns: 1fr;
+    }
+}

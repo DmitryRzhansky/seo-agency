@@ -6,7 +6,7 @@ from django.urls import reverse
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage, FAQCategory, FAQItem
+from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
 from blog.models import Post, Category
 from .forms import ContactForm
 from pages.models import SimplePage
@@ -664,3 +664,183 @@ def faq_item(request, category_slug, item_id):
     }
     
     return render(request, 'main/faq_item_brutal.html', context)
+
+
+# --- Глоссарий ---
+
+@never_cache
+def glossary_list(request):
+    """
+    Список всех терминов глоссария с фильтрацией по категориям, алфавиту и поиском
+    """
+    # Получаем все активные категории
+    categories = GlossaryCategory.objects.filter(is_active=True).order_by('order', 'name')
+    
+    # Получаем все опубликованные термины
+    glossary_terms = GlossaryTerm.objects.filter(is_published=True).select_related('category').order_by('term')
+    
+    # Фильтрация по категории
+    category_slug = request.GET.get('category')
+    selected_category = None
+    if category_slug:
+        try:
+            selected_category = GlossaryCategory.objects.get(slug=category_slug, is_active=True)
+            glossary_terms = glossary_terms.filter(category=selected_category)
+        except GlossaryCategory.DoesNotExist:
+            selected_category = None
+    
+    # Фильтрация по алфавиту
+    alphabet_filter = request.GET.get('alphabet')
+    if alphabet_filter:
+        if alphabet_filter == 'ru':
+            # Русские буквы
+            glossary_terms = glossary_terms.filter(term__regex=r'^[А-Яа-я]')
+        elif alphabet_filter == 'en':
+            # Английские буквы
+            glossary_terms = glossary_terms.filter(term__regex=r'^[A-Za-z]')
+        elif alphabet_filter != 'all':
+            # Конкретная буква
+            glossary_terms = glossary_terms.filter(term__istartswith=alphabet_filter)
+    
+    # Поиск по терминам и определениям
+    search_query = request.GET.get('search', '').strip()
+    if search_query:
+        glossary_terms = glossary_terms.filter(
+            Q(term__icontains=search_query) | 
+            Q(definition__icontains=search_query)
+        )
+    
+    # Группируем термины по категориям
+    glossary_by_category = {}
+    for term in glossary_terms:
+        category = term.category
+        if category not in glossary_by_category:
+            glossary_by_category[category] = []
+        glossary_by_category[category].append(term)
+    
+    # SEO данные
+    seo_title = "Глоссарий терминов | Isakov Agency"
+    seo_description = "Алфавитный словарь терминов по SEO, контекстной рекламе и digital-маркетингу. Найдем определение любого термина!"
+    seo_keywords = "глоссарий, словарь, термины, SEO, контекстная реклама, digital-маркетинг"
+    
+    # Создаем простой объект для хлебных крошек
+    class GlossaryPage:
+        def get_breadcrumbs(self):
+            return [
+                {"title": "Главная", "url": "/"},
+                {"title": "Глоссарий", "url": "/glossary/"}
+            ]
+
+    glossary_page = GlossaryPage()
+    
+    # Создаем алфавитный индекс
+    alphabet_ru = [chr(i) for i in range(ord('А'), ord('Я') + 1)]
+    alphabet_en = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
+    
+    context = {
+        'title': seo_title,
+        'seo_description': seo_description,
+        'seo_keywords': seo_keywords,
+        'categories': categories,
+        'glossary_by_category': glossary_by_category,
+        'selected_category': selected_category,
+        'search_query': search_query,
+        'alphabet_filter': alphabet_filter,
+        'alphabet_ru': alphabet_ru,
+        'alphabet_en': alphabet_en,
+        'page_type': 'glossary_list',
+        'glossary_page': glossary_page,  # Объект для хлебных крошек
+    }
+
+    return render(request, 'main/glossary_brutal.html', context)
+
+
+@never_cache
+def glossary_category(request, slug):
+    """
+    Глоссарий по конкретной категории
+    """
+    category = get_object_or_404(GlossaryCategory, slug=slug, is_active=True)
+
+    # Получаем все опубликованные термины этой категории
+    glossary_terms = GlossaryTerm.objects.filter(
+        category=category,
+        is_published=True
+    ).order_by('term')
+
+    # Фильтрация по алфавиту
+    alphabet_filter = request.GET.get('alphabet')
+    if alphabet_filter:
+        if alphabet_filter == 'ru':
+            # Русские буквы
+            glossary_terms = glossary_terms.filter(term__regex=r'^[А-Яа-я]')
+        elif alphabet_filter == 'en':
+            # Английские буквы
+            glossary_terms = glossary_terms.filter(term__regex=r'^[A-Za-z]')
+        elif alphabet_filter != 'all':
+            # Конкретная буква
+            glossary_terms = glossary_terms.filter(term__istartswith=alphabet_filter)
+
+    # Поиск по терминам и определениям
+    search_query = request.GET.get('search', '').strip()
+    if search_query:
+        glossary_terms = glossary_terms.filter(
+            Q(term__icontains=search_query) | 
+            Q(definition__icontains=search_query)
+        )
+
+    # SEO данные
+    seo_title = f"{category.name} - Глоссарий | Isakov Agency"
+    seo_description = category.description or f"Термины по теме: {category.name}"
+    seo_keywords = f"глоссарий, {category.name}, термины, определения"
+
+    # Создаем алфавитный индекс
+    alphabet_ru = [chr(i) for i in range(ord('А'), ord('Я') + 1)]
+    alphabet_en = [chr(i) for i in range(ord('A'), ord('Z') + 1)]
+
+    context = {
+        'title': seo_title,
+        'seo_description': seo_description,
+        'seo_keywords': seo_keywords,
+        'category': category,
+        'glossary_terms': glossary_terms,
+        'search_query': search_query,
+        'alphabet_filter': alphabet_filter,
+        'alphabet_ru': alphabet_ru,
+        'alphabet_en': alphabet_en,
+        'page_type': 'glossary_category',
+    }
+
+    return render(request, 'main/glossary_category_brutal.html', context)
+
+
+@never_cache
+def glossary_term(request, category_slug, term_id):
+    """
+    Отдельный термин глоссария
+    """
+    category = get_object_or_404(GlossaryCategory, slug=category_slug, is_active=True)
+    glossary_term = get_object_or_404(GlossaryTerm, id=term_id, category=category, is_published=True)
+
+    # Получаем похожие термины из той же категории
+    related_terms = GlossaryTerm.objects.filter(
+        category=category,
+        is_published=True
+    ).exclude(id=glossary_term.id).order_by('term')[:5]
+
+    # SEO данные
+    seo_title = f"{glossary_term.term} - Глоссарий | Isakov Agency"
+    seo_description = f"Определение термина: {glossary_term.term}"
+    seo_keywords = f"глоссарий, {category.name}, {glossary_term.term}"
+
+    context = {
+        'title': seo_title,
+        'seo_description': seo_description,
+        'seo_keywords': seo_keywords,
+        'category': category,
+        'glossary_term': glossary_term,
+        'related_terms': related_terms,
+        'page_type': 'glossary_term',
+    }
+
+    return render(request, 'main/glossary_term_brutal.html', context)

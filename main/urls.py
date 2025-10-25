@@ -30,5 +30,10 @@ urlpatterns = [
     path('faq/', views.faq_list, name='faq_list'),
     path('faq/category/<slug:slug>/', views.faq_category, name='faq_category'),
     path('faq/category/<slug:category_slug>/<int:item_id>/', views.faq_item, name='faq_item'),
+    
+    # --- Глоссарий ---
+    path('glossary/', views.glossary_list, name='glossary_list'),
+    path('glossary/category/<slug:slug>/', views.glossary_category, name='glossary_category'),
+    path('glossary/category/<slug:category_slug>/<int:term_id>/', views.glossary_term, name='glossary_term'),
 
 ]

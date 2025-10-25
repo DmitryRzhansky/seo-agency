@@ -80,9 +80,11 @@
                     class="brutal-post-image" 
                     alt="{{ post.title }}"
                 >
+                {% if post.category %}
                 <div class="brutal-post-image-overlay">
                     {{ post.category.name }}
                 </div>
+                {% endif %}
                 <div class="brutal-post-image-decoration"></div>
             </div>
             {% endif %}
@@ -118,7 +120,9 @@
                 {% endif %}
                 
                 <div class="brutal-related-card-content">
+                    {% if related_post.category %}
                     <div class="brutal-related-card-category">{{ related_post.category.name }}</div>
+                    {% endif %}
                     <h3 class="brutal-related-card-title">{{ related_post.title }}</h3>
                     <p class="brutal-related-card-excerpt">
                         {% if related_post.excerpt %}
@@ -127,7 +131,7 @@
                             {{ related_post.content|striptags|truncatewords:15 }}
                         {% endif %}
                     </p>
-                    <a href="{% url 'blog:post_detail' category_slug=related_post.category.slug post_slug=related_post.slug %}" class="brutal-related-card-link">
+                    <a href="{{ related_post.get_absolute_url }}" class="brutal-related-card-link">
                         Читать далее
                     </a>
                 </div>

@@ -112,15 +112,30 @@ def post_detail(request, category_slug, post_slug):
 
 
 def post_detail_legacy(request, slug):
-	"""Старый URL для обратной совместимости - делает редирект на новый URL"""
+	"""Старый URL для обратной совместимости - делает редирект на новый URL или отображает пост"""
 	from django.shortcuts import redirect
+	from django.db.models import F
 	
 	post = get_object_or_404(Post, slug=slug)
 	
-	# Если у поста нет категории, выдаем 404 (не должно быть, но на всякий случай)
+	# Если у поста нет категории, отображаем его напрямую (для постов без категории)
 	if not post.category:
-		from django.http import Http404
-		raise Http404("Post not found")
+		session_key = f"viewed_post_{post.pk}"
+		if not request.session.get(session_key):
+			Post.objects.filter(pk=post.pk).update(views_count=F('views_count') + 1)
+			post.refresh_from_db(fields=['views_count'])
+			request.session[session_key] = True
+		
+		# Получаем связанные статьи для блока "Вам может понравиться"
+		related_posts = post.get_related_posts(limit=3)
+		
+		return render(request, 'main/post_detail_brutal.html', {
+			'title': post.title,
+			'post': post,
+			'category': None,  # Категории нет
+			'seo_object': post,  # Передаем пост как SEO-объект
+			'related_posts': related_posts,  # Связанные статьи
+		})
 	
 	# Делаем редирект на новый URL с указанием категории
 	return redirect('blog:post_detail', 

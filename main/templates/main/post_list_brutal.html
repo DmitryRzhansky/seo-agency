@@ -92,7 +92,9 @@
                 {% endif %}
                 
                 <div class="brutal-blog-card-content">
+                    {% if post.category %}
                     <div class="brutal-blog-card-category">{{ post.category.name }}</div>
+                    {% endif %}
                     <h3 class="brutal-blog-card-title">{{ post.title }}</h3>
                     <p class="brutal-blog-card-excerpt">
                         {% if post.excerpt %}
@@ -105,7 +107,7 @@
                         <span class="brutal-blog-card-date">{{ post.published_date|date:"d.m.Y" }}</span>
                         <span class="brutal-blog-card-views">{{ post.views_count }} просмотров</span>
                     </div>
-                    <a href="{% url 'blog:post_detail' category_slug=post.category.slug post_slug=post.slug %}" class="brutal-blog-card-link">
+                    <a href="{{ post.get_absolute_url }}" class="brutal-blog-card-link">
                         Читать далее
                     </a>
                 </div>

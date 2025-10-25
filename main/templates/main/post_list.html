@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     
-                    <a href="{% url 'blog:post_detail' category_slug=post.category.slug post_slug=post.slug %}" class="blog-card-link">
+                    <a href="{{ post.get_absolute_url }}" class="blog-card-link">
                         Читать полностью <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>

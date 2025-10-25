@@ -5,7 +5,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
-from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, HomePage, RegionalPostAdaptation, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
+from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, PortfolioCategory, CustomHeadScript, HomePage, RegionalPostAdaptation, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
 from seo.admin import SEOAdminMixin
 
 # Настройка заголовков админки
@@ -412,11 +412,11 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, Cus
     """Админка для работ в портфолио"""
     
     list_display = [
-        'title', 'client_name', 'project_type', 'is_published', 
+        'title', 'category', 'client_name', 'project_type', 'is_published', 
         'is_featured', 'order', 'created_at', 'seo_preview'
     ]
     list_filter = [
-        'is_published', 'is_featured', 'project_type', 'created_at'
+        'is_published', 'is_featured', 'project_type', 'category', 'created_at'
     ]
     search_fields = ['title', 'client_name', 'short_description']
     list_editable = ['is_published', 'is_featured', 'order']
@@ -425,7 +425,7 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, Cus
     fieldsets = (
         ('Основная информация', {
             'fields': (
-                'title', 'slug', 'client_name', 'project_type',
+                'title', 'slug', 'category', 'client_name', 'project_type',
                 'short_description', 'full_description'
             )
         }),
@@ -489,6 +489,40 @@ class PortfolioItemAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, Cus
             obj.seo_description = obj.short_description[:160] if obj.short_description else f"Проект {obj.title} в портфолио Isakov Agency"
             
         super().save_model(request, obj, form, change)
+
+
+@admin.register(PortfolioCategory)
+class PortfolioCategoryAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    """Админ-класс для категорий портфолио"""
+    
+    list_display = ['name', 'slug', 'order', 'is_active', 'portfolio_items_count']
+    list_filter = ['is_active']
+    search_fields = ['name', 'description']
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ['order', 'name']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('name', 'slug', 'description', 'color', 'order', 'is_active')
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def portfolio_items_count(self, obj):
+        """Показывает количество проектов в категории"""
+        count = obj.portfolioitem_set.filter(is_published=True).count()
+        if count > 0:
+            url = reverse('admin:main_portfolioitem_changelist') + f'?category__id__exact={obj.id}'
+            return format_html('<a href="{}">{} проектов</a>', url, count)
+        return '0 проектов'
+    portfolio_items_count.short_description = 'Количество проектов'
+
+    def get_queryset(self, request):
+        """Оптимизируем запросы"""
+        return super().get_queryset(request).prefetch_related('portfolioitem_set')
 
 
 @admin.register(CustomHeadScript)

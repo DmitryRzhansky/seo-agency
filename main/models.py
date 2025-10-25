@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils import timezone
 from django.contrib.auth.models import User
@@ -576,8 +577,76 @@ class Testimonial(models.Model):
 
 # --- Модели для Портфолио ---
 
+class PortfolioCategory(SEOModel):
+    """Модель для категорий портфолио"""
+    name = models.CharField(max_length=100, verbose_name="Название категории")
+    slug = models.SlugField(unique=True, max_length=100, verbose_name="URL-идентификатор")
+    description = models.TextField(blank=True, verbose_name="Описание категории")
+    color = models.CharField(
+        max_length=7, 
+        default="#007bff", 
+        verbose_name="Цвет категории (HEX)",
+        help_text="Например: #007bff для синего цвета"
+    )
+    order = models.IntegerField(default=100, verbose_name="Порядок отображения")
+    is_active = models.BooleanField(default=True, verbose_name="Активна")
+    
+    # Хлебные крошки
+    show_breadcrumbs = models.BooleanField(
+        default=True,
+        verbose_name="Показывать хлебные крошки",
+        help_text="Включить/выключить отображение хлебных крошек на этой странице"
+    )
+    
+    custom_breadcrumbs = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="Пользовательские хлебные крошки",
+        help_text="Оставьте пустым для автоматических крошек. Формат: [{\"title\": \"Название\", \"url\": \"/url/\"}]"
+    )
+
+    class Meta:
+        verbose_name = "Категория портфолио"
+        verbose_name_plural = "Категории портфолио"
+        ordering = ['order', 'name']
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('main:portfolio_category', kwargs={'slug': self.slug})
+    
+    def get_breadcrumbs(self):
+        """Возвращает хлебные крошки для категории портфолио"""
+        if not self.show_breadcrumbs:
+            return []
+        
+        if self.custom_breadcrumbs:
+            return self.custom_breadcrumbs
+        
+        # Автоматические крошки
+        breadcrumbs = [{"title": "Главная", "url": "/"}]
+        
+        breadcrumbs.append({"title": "Портфолио", "url": "/portfolio/"})
+        
+        breadcrumbs.append({
+            "title": self.name,
+            "url": self.get_absolute_url()
+        })
+        
+        return breadcrumbs
+
+
 class PortfolioItem(SEOModel):
     """Модель для работ в портфолио"""
+    category = models.ForeignKey(
+        PortfolioCategory,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Категория",
+        help_text="Выберите категорию для проекта"
+    )
     title = models.CharField(max_length=200, verbose_name="Название проекта")
     slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")
     short_description = models.TextField(max_length=300, verbose_name="Краткое описание")
@@ -694,8 +763,15 @@ class PortfolioItem(SEOModel):
         return self.title
 
     def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse('main:portfolio_detail', kwargs={'slug': self.slug})
+        # Ссылка на отдельный проект с указанием категории
+        if self.category:
+            return reverse('main:portfolio_detail', kwargs={
+                'category_slug': self.category.slug,
+                'project_slug': self.slug
+            })
+        else:
+            # Fallback для проектов без категории (не должно быть, но на всякий случай)
+            return reverse('main:portfolio_detail_legacy', kwargs={'slug': self.slug})
     
     def get_main_image_alt(self):
         """Возвращает alt-текст для главного изображения"""
@@ -714,6 +790,14 @@ class PortfolioItem(SEOModel):
         # Автоматические крошки
         breadcrumbs = [{"title": "Главная", "url": "/"}]
         breadcrumbs.append({"title": "Портфолио", "url": "/portfolio/"})
+        
+        # Добавляем категорию, если она есть
+        if self.category:
+            breadcrumbs.append({
+                "title": self.category.name,
+                "url": self.category.get_absolute_url()
+            })
+        
         breadcrumbs.append({
             "title": self.title,
             "url": self.get_absolute_url()
@@ -762,6 +846,25 @@ class PortfolioItem(SEOModel):
             return f"{self.cooperation_start} — Период не завершен"
         else:
             return "Период не указан"
+    
+    def get_related_projects(self, limit=3):
+        """Возвращает случайные связанные проекты для блока 'Еще проекты'"""
+        from random import sample
+        
+        # Получаем все опубликованные проекты кроме текущего
+        all_projects = PortfolioItem.objects.filter(
+            is_published=True
+        ).exclude(pk=self.pk)
+        
+        # Если проектов меньше лимита, возвращаем все доступные
+        if all_projects.count() <= limit:
+            return list(all_projects)
+        
+        # Получаем случайные проекты
+        projects_list = list(all_projects)
+        random_projects = sample(projects_list, limit)
+        
+        return random_projects
 
 
 class RegionalPostAdaptation(SEOModel):

@@ -6,7 +6,7 @@ from django.urls import reverse
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, HomePage, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
+from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, PortfolioCategory, HomePage, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
 from blog.models import Post, Category
 from .forms import ContactForm
 from pages.models import SimplePage
@@ -399,24 +399,35 @@ def portfolio_list(request):
     """
     Страница со списком всех работ в портфолио с фильтрацией и поиском
     """
-    # Получаем все опубликованные работы (фильтрация теперь происходит на клиенте)
-    portfolio_items = PortfolioItem.objects.filter(is_published=True).order_by('order', '-created_at')
+    # Получаем все активные категории для фильтрации
+    categories = PortfolioCategory.objects.filter(is_active=True).order_by('order', 'name')
     
-    # Получаем тип проекта для передачи в шаблон (но не фильтруем на сервере)
+    # Параметры фильтрации
+    query = request.GET.get('q', '').strip()
+    category_slug = request.GET.get('category', '').strip()
     project_type = request.GET.get('type')
     
+    current_category = None
+    filtered_projects = PortfolioItem.objects.filter(is_published=True).order_by('order', '-created_at')
+    
+    if category_slug:
+        try:
+            current_category = PortfolioCategory.objects.get(slug=category_slug, is_active=True)
+            filtered_projects = filtered_projects.filter(category=current_category)
+        except PortfolioCategory.DoesNotExist:
+            current_category = None
+    
     # Поиск по названию, описанию и клиенту
-    search_query = request.GET.get('q', '').strip()
-    if search_query:
+    if query:
         from django.db.models import Q
-        portfolio_items = portfolio_items.filter(
-            Q(title__icontains=search_query) |
-            Q(short_description__icontains=search_query) |
-            Q(client_name__icontains=search_query)
+        filtered_projects = filtered_projects.filter(
+            Q(title__icontains=query) |
+            Q(short_description__icontains=query) |
+            Q(client_name__icontains=query)
         ).distinct()
     
     # Пагинация для всех работ
-    paginator = Paginator(portfolio_items, 9)  # 9 работ на страницу
+    paginator = Paginator(filtered_projects, 9)  # 9 работ на страницу
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
@@ -445,13 +456,15 @@ def portfolio_list(request):
     
     context = {
         'title': 'Портфолио | Isakov Agency',
+        'categories': categories,
         'page_obj': page_obj,
         'featured_page_obj': featured_page_obj,
         'is_paginated': page_obj.has_other_pages(),
         'is_featured_paginated': featured_page_obj.has_other_pages(),
         'available_types': available_types,
         'current_type': project_type,
-        'search_query': search_query,
+        'current_category': current_category,
+        'search_query': query,
         'seo_object': None,  # Можно создать отдельную SEO модель для страницы портфолио
         'page_type': 'portfolio_list',
         'page_slug': None,
@@ -459,26 +472,87 @@ def portfolio_list(request):
     return render(request, 'main/portfolio_list_brutal.html', context)
 
 
-def portfolio_detail(request, slug):
+def portfolio_category(request, slug):
     """
-    Детальная страница работы из портфолио
+    Отображение проектов конкретной категории портфолио
     """
-    portfolio_item = get_object_or_404(PortfolioItem, slug=slug, is_published=True)
+    category = get_object_or_404(PortfolioCategory, slug=slug, is_active=True)
+    projects_list = PortfolioItem.objects.filter(
+        is_published=True, 
+        category=category
+    ).order_by('order', '-created_at')
     
-    # Получаем похожие проекты (из той же категории или последние)
-    related_projects = PortfolioItem.objects.filter(
-        is_published=True
-    ).exclude(pk=portfolio_item.pk).order_by('order', '-created_at')[:3]
+    paginator = Paginator(projects_list, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    # Получаем все активные категории для фильтрации
+    categories = PortfolioCategory.objects.filter(is_active=True).order_by('order', 'name')
+    
+    context = {
+        'title': f'{category.name} | Портфолио | Isakov Agency',
+        'page_obj': page_obj,
+        'is_paginated': page_obj.has_other_pages(),
+        'categories': categories,
+        'current_category': category,
+        'seo_object': category,  # Передаем категорию как SEO-объект
+        'page_type': 'portfolio_category',
+        'page_slug': category.slug,
+    }
+    return render(request, 'main/portfolio_category_brutal.html', context)
+
+
+def portfolio_detail(request, category_slug, project_slug):
+    """
+    Детальная страница работы из портфолио с указанием категории
+    """
+    # Получаем категорию для проверки
+    category = get_object_or_404(PortfolioCategory, slug=category_slug, is_active=True)
+    # Получаем проект по slug и проверяем, что он относится к указанной категории
+    portfolio_item = get_object_or_404(PortfolioItem, slug=project_slug, category=category, is_published=True)
+    
+    # Получаем связанные проекты для блока "Еще проекты"
+    related_projects = portfolio_item.get_related_projects(limit=3)
     
     context = {
         'title': f'{portfolio_item.title} | Портфолио | Isakov Agency',
         'portfolio_item': portfolio_item,
+        'category': category,  # Добавляем категорию в контекст
         'related_projects': related_projects,
         'seo_object': portfolio_item,
         'page_type': 'portfolio_detail',
         'page_slug': portfolio_item.slug,
     }
     return render(request, 'main/portfolio_detail_brutal.html', context)
+
+
+def portfolio_detail_legacy(request, slug):
+    """
+    Старый URL для обратной совместимости - делает редирект на новый URL или отображает проект
+    """
+    portfolio_item = get_object_or_404(PortfolioItem, slug=slug, is_published=True)
+    
+    # Если у проекта нет категории, отображаем его напрямую (для проектов без категории)
+    if not portfolio_item.category:
+        # Получаем связанные проекты для блока "Еще проекты"
+        related_projects = portfolio_item.get_related_projects(limit=3)
+        
+        context = {
+            'title': f'{portfolio_item.title} | Портфолио | Isakov Agency',
+            'portfolio_item': portfolio_item,
+            'category': None,  # Категории нет
+            'related_projects': related_projects,
+            'seo_object': portfolio_item,
+            'page_type': 'portfolio_detail',
+            'page_slug': portfolio_item.slug,
+        }
+        return render(request, 'main/portfolio_detail_brutal.html', context)
+    
+    # Делаем редирект на новый URL с указанием категории
+    return redirect('main:portfolio_detail', 
+                    category_slug=portfolio_item.category.slug, 
+                    project_slug=portfolio_item.slug, 
+                    permanent=True)
 
 
 def sitemap_page(request):

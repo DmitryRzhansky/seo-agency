@@ -1,0 +1,96 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ category.name }}{% endblock title %}
+
+{% block breadcrumbs %}
+{% breadcrumbs category %}
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/portfolio-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция категории портфолио - брутальная -->
+<section class="brutal-category-hero">
+    <div class="brutal-container">
+        <div class="brutal-category-hero-content">
+            <h1 class="brutal-category-hero-title">{{ category.name }}</h1>
+            <p class="brutal-category-hero-subtitle">Здесь вы найдете наши работы в категории «{{ category.name }}». Посмотрите примеры наших проектов и достигнутых результатов.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Список проектов категории - брутальный -->
+<section class="brutal-category-projects">
+    <div class="brutal-container">
+        <h2 class="brutal-category-projects-title">Наши проекты в разделе «{{ category.name }}»</h2>
+        
+        {% if page_obj %}
+        <div class="brutal-category-grid">
+            {% for project in page_obj %}
+            <div class="brutal-category-project-card">
+                {% if project.main_image %}
+                <img src="{{ project.main_image.url }}" class="brutal-category-project-card-image" alt="{{ project.get_main_image_alt }}">
+                {% else %}
+                <div class="brutal-category-project-card-placeholder">
+                    <i class="fas fa-image"></i>
+                </div>
+                {% endif %}
+                <div class="brutal-category-project-card-category">{{ project.category.name }}</div>
+                <h3 class="brutal-category-project-card-title">{{ project.title }}</h3>
+                <p class="brutal-category-project-card-description">{{ project.short_description }}</p>
+                <a href="{% url 'main:portfolio_detail' category_slug=category.slug project_slug=project.slug %}" class="brutal-category-project-card-link">
+                    Подробнее о проекте
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Пагинация -->
+        {% if is_paginated %}
+        <div class="pagination-brutal">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link-brutal">
+                    <i class="fas fa-chevron-left me-1"></i>Предыдущая
+                </a>
+            {% else %}
+                <span class="page-link-brutal disabled">
+                    <i class="fas fa-chevron-left me-1"></i>Предыдущая
+                </span>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <span class="page-link-brutal active">{{ i }}</span>
+                {% else %}
+                    <a href="?page={{ i }}" class="page-link-brutal">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link-brutal">
+                    Следующая<i class="fas fa-chevron-right ms-1"></i>
+                </a>
+            {% else %}
+                <span class="page-link-brutal disabled">
+                    Следующая<i class="fas fa-chevron-right ms-1"></i>
+                </span>
+            {% endif %}
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="brutal-empty-state">
+            <i class="fas fa-search"></i>
+            <h3>В этом разделе пока нет добавленных проектов</h3>
+            <p>Мы работаем над наполнением этого раздела. Скоро здесь появятся новые проекты!</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock content %}

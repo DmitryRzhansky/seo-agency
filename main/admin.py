@@ -4,7 +4,7 @@
 from .admin_seo import (
     CityAdmin, ServiceCategoryAdmin, ServiceAdmin, 
     TeamMemberAdmin, TestimonialAdmin, ContactRequestAdmin,
-    PortfolioItemAdmin, CustomHeadScriptAdmin, RegionalPostAdaptationAdmin,
+    PortfolioItemAdmin, PortfolioCategoryAdmin, CustomHeadScriptAdmin, RegionalPostAdaptationAdmin,
     FAQCategoryAdmin, FAQItemAdmin, GlossaryCategoryAdmin, GlossaryTermAdmin
 )
 
@@ -12,7 +12,7 @@ from .admin_seo import (
 from django.contrib import admin
 
 # Регистрируем все модели в кастомном админ-сайте
-from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, CustomHeadScript, RegionalPostAdaptation, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
+from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, PortfolioCategory, CustomHeadScript, RegionalPostAdaptation, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
 
 # Все модели уже зарегистрированы через декораторы @admin.register() в admin_seo.py
 # Регистрируем только City, так как у неё нет декоратора

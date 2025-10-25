@@ -106,6 +106,57 @@
     </div>
 </section>
 
+<!-- Список услуг с пагинацией -->
+{% if filtered_services %}
+<section class="brutal-services-list">
+    <div class="brutal-container">
+        <h2 class="brutal-services-title">Услуги</h2>
+        <div class="brutal-services-grid">
+            {% for service in filtered_services %}
+            <div class="brutal-service-card">
+                <h3 class="brutal-service-card-title">{{ service.title }}</h3>
+                <p class="brutal-service-card-description">{{ service.short_description }}</p>
+                <a href="{% url 'services:service_detail' slug=service.slug %}" class="brutal-service-card-link">Подробнее →</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Пагинация -->
+        {% if is_paginated %}
+        <div class="pagination-brutal">
+            {% if filtered_services.has_previous %}
+                <a href="?page={{ filtered_services.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_category %}&category={{ current_category.slug }}{% endif %}#services-list" class="page-link-brutal">
+                    <i class="fas fa-chevron-left me-1"></i>Предыдущая
+                </a>
+            {% else %}
+                <span class="page-link-brutal disabled">
+                    <i class="fas fa-chevron-left me-1"></i>Предыдущая
+                </span>
+            {% endif %}
+
+            {% for i in filtered_services.paginator.page_range %}
+                {% if filtered_services.number == i %}
+                    <span class="page-link-brutal active">{{ i }}</span>
+                {% else %}
+                    <a href="?page={{ i }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_category %}&category={{ current_category.slug }}{% endif %}#services-list" class="page-link-brutal">{{ i }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if filtered_services.has_next %}
+                <a href="?page={{ filtered_services.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if current_category %}&category={{ current_category.slug }}{% endif %}#services-list" class="page-link-brutal">
+                    Следующая<i class="fas fa-chevron-right ms-1"></i>
+                </a>
+            {% else %}
+                <span class="page-link-brutal disabled">
+                    Следующая<i class="fas fa-chevron-right ms-1"></i>
+                </span>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
 <!-- CTA секция -->
 <section class="brutal-cta">
     <div class="brutal-container">

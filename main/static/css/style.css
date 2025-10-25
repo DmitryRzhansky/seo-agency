@@ -1342,7 +1342,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 8px;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -1384,12 +1384,12 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 /* Адаптивность для категорий блога */
 @media (max-width: 768px) {
     .brutal-blog-categories-grid {
-        gap: 10px;
+        gap: 6px;
     }
     
     .brutal-blog-category-link {
-        padding: 10px 16px;
-        font-size: 0.9rem;
+        padding: 8px 12px;
+        font-size: 0.85rem;
     }
 }
 

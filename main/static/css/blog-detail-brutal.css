@@ -663,6 +663,7 @@
     .brutal-post-content-wrapper {
         flex-direction: column;
         gap: 30px;
+        overflow-x: hidden;
     }
     
     .brutal-post-content-blocks {
@@ -714,16 +715,6 @@
     .brutal-container {
         padding: 0 15px;
         overflow-x: hidden;
-    }
-    
-    /* Навигация */
-    .brutal-post-navigation {
-        padding: 30px 0;
-    }
-    
-    .brutal-post-nav-link {
-        display: block;
-        padding: 10px 20px;
-        font-size: 0.9rem;
+        width: 100%;
     }
 }

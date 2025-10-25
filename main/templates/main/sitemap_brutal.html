@@ -115,31 +115,27 @@
             </div>
         </div>
 
-        <!-- Глоссарий FAQ -->
-        <div class="brutal-sitemap-additional">
-            <h3 class="brutal-sitemap-additional-title">📚 Глоссарий FAQ</h3>
-            <div class="brutal-sitemap-additional-grid">
-                <!-- Главная страница FAQ -->
-                <div class="brutal-sitemap-additional-item">
-                    <a href="/faq/">Все категории FAQ</a>
-                </div>
-                
-                <!-- Категории FAQ -->
+        <!-- FAQ -->
+        <div class="brutal-sitemap-section">
+            <h3 class="brutal-sitemap-section-title">❓ FAQ</h3>
+            <div class="brutal-sitemap-sections-grid">
                 {% for category in sitemap_data.faq_categories %}
-                <div class="brutal-sitemap-additional-item">
-                    <a href="{% url 'main:faq_category' category.slug %}">{{ category.name }}</a>
-                    <div class="brutal-sitemap-faq-items">
+                <div class="brutal-sitemap-section-item">
+                    <h4 class="brutal-sitemap-section-item-title">
+                        <a href="{% url 'main:faq_category' category.slug %}">{{ category.name }}</a>
+                    </h4>
+                    <ul class="brutal-sitemap-list">
                         {% for item in category.faq_items.all|slice:":5" %}
-                        <div class="brutal-sitemap-faq-item">
+                        <li>
                             <a href="{% url 'main:faq_item' category.slug item.id %}">{{ item.question|truncatechars:60 }}</a>
-                        </div>
+                        </li>
                         {% endfor %}
                         {% if category.faq_items.count > 5 %}
-                        <div class="brutal-sitemap-faq-more">
+                        <li>
                             <a href="{% url 'main:faq_category' category.slug %}">... и еще {{ category.faq_items.count|add:"-5" }} вопросов</a>
-                        </div>
+                        </li>
                         {% endif %}
-                    </div>
+                    </ul>
                 </div>
                 {% endfor %}
             </div>

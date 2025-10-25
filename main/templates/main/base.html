@@ -89,23 +89,24 @@
             <!-- Выбор города (только на десктопе) -->
             <div class="brutal-city-section d-none d-lg-block">
                 <div class="brutal-dropdown">
-                    <button class="brutal-city-button" type="button" id="brutalCityDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="brutal-city-button" type="button" id="brutalCityDropdown" aria-expanded="false">
                         <i class="fas fa-map-marker-alt"></i>
                         <span class="brutal-city-text">
                             {% if current_city %}{{ current_city.name }}{% else %}Выбрать город{% endif %}
                         </span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <ul class="brutal-dropdown-menu" aria-labelledby="brutalCityDropdown">
-                        <li class="brutal-dropdown-header">Выберите город</li>
-                        {% for city in cities_menu %}
-                            {% if not current_city or city.slug != current_city.slug %}
-                            <li><a class="brutal-dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                        <li class="brutal-dropdown-divider"></li>
-                        <li><a class="brutal-dropdown-item" href="{% url 'main:city_list' %}">Все города</a></li>
-                    </ul>
+                    <div class="brutal-city-dropdown-menu" id="brutalCityDropdownMenu">
+                        <div class="brutal-city-dropdown-header">Выберите город</div>
+                        <div class="brutal-city-dropdown-grid">
+                            {% for city in cities_menu %}
+                                {% if not current_city or city.slug != current_city.slug %}
+                                <a class="brutal-city-dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a>
+                                {% endif %}
+                            {% endfor %}
+                            <a class="brutal-city-dropdown-item brutal-city-dropdown-all" href="{% url 'main:city_list' %}">Все города</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -122,10 +123,7 @@
                         <div class="brutal-mega-menu-content">
                             {% for category in service_categories_menu %}
                             <div class="brutal-mega-menu-section">
-                                <h4 class="brutal-mega-menu-title">{{ category.title }}</h4>
-                                <ul class="brutal-mega-menu-links">
-                                    <li><a href="{% url 'services:service_category' category.slug %}">Все услуги категории</a></li>
-                                </ul>
+                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-title">{{ category.title }}</a>
                             </div>
                             {% endfor %}
                         </div>
@@ -168,8 +166,7 @@
                     <div class="brutal-mobile-dropdown-menu">
                         {% for category in service_categories_menu %}
                         <div class="brutal-mobile-dropdown-section">
-                            <h5 class="brutal-mobile-dropdown-title">{{ category.title }}</h5>
-                            <a href="{% url 'services:service_category' category.slug %}" class="brutal-mobile-dropdown-link">Все услуги категории</a>
+                            <a href="{% url 'services:service_category' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.title }}</a>
                         </div>
                         {% endfor %}
                     </div>
@@ -410,6 +407,28 @@
                     }
                 });
             });
+            
+            // Dropdown городов
+            const cityDropdown = document.getElementById('brutalCityDropdown');
+            const cityDropdownMenu = document.getElementById('brutalCityDropdownMenu');
+            
+            if (cityDropdown && cityDropdownMenu) {
+                cityDropdown.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', !isExpanded);
+                    cityDropdownMenu.classList.toggle('show');
+                });
+                
+                // Закрытие при клике вне dropdown
+                document.addEventListener('click', function(event) {
+                    if (!cityDropdown.contains(event.target) && !cityDropdownMenu.contains(event.target)) {
+                        cityDropdown.setAttribute('aria-expanded', 'false');
+                        cityDropdownMenu.classList.remove('show');
+                    }
+                });
+            }
             
             // Мега-меню на десктопе
             const navDropdowns = document.querySelectorAll('.brutal-nav-dropdown');

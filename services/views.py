@@ -50,11 +50,19 @@ def service_list(request):
 
 def service_category_detail(request, slug):
 	category = get_object_or_404(ServiceCategory, slug=slug)
-	services_in_category = Service.objects.filter(category=category).order_by('order')
+	services_in_category = Service.objects.filter(category=category, is_published=True).order_by('order')
+	
+	# Добавляем пагинацию
+	from django.core.paginator import Paginator
+	paginator = Paginator(services_in_category, 9)
+	page_number = request.GET.get('page')
+	page_obj = paginator.get_page(page_number)
+	
 	return render(request, 'main/service_category.html', {
 		'title': category.title,
 		'category': category,
-		'services': services_in_category,
+		'services': page_obj,
+		'is_paginated': page_obj.has_other_pages(),
 		'seo_object': category,  # Включаем SEO теги категории
 	})
 

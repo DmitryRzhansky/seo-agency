@@ -817,29 +817,44 @@
         order: 2;
     }
     
-    .brutal-portfolio-detail-block {
-        width: 100%;
-    }
-    
-    .brutal-portfolio-detail-block:not(.main):not(.content) {
-        width: 100%;
-        margin-right: 0;
-    }
-    
     .brutal-portfolio-detail-block.main,
     .brutal-portfolio-detail-block.content {
-        grid-column: span 1;
+        grid-column: span 1 !important;
     }
     
     .brutal-portfolio-detail-image-container {
         flex: none;
         order: 1;
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    
+    .brutal-portfolio-detail-image-container img {
+        max-width: 100% !important;
+        height: auto !important;
+        width: 100% !important;
     }
     
     .brutal-portfolio-detail-block.content {
         width: 100% !important;
         margin-right: 0 !important;
-        max-width: 100%;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    .brutal-portfolio-detail-block.main {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    .brutal-portfolio-detail-block:not(.main):not(.content) {
+        width: 100% !important;
+        margin-right: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .brutal-portfolio-detail-block p,

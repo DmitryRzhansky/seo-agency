@@ -21,10 +21,10 @@
 ======================================== */
 
 .brutal-hero {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
-    padding: 60px 0 40px;
+    padding: 40px 0 20px;
     background: var(--brutal-white);
     position: relative;
 }
@@ -961,7 +961,7 @@
 .brutal-form-group textarea {
     width: 100%;
     background: var(--brutal-white);
-    border: var(--brutal-border);
+    border: 2px solid var(--brutal-dark-gray);
     padding: 15px 20px;
     color: var(--brutal-black);
     font-size: 1rem;

@@ -4,16 +4,6 @@
 
 {% block title %}{{ title }}{% endblock %}
 
-{% block breadcrumbs %}
-<nav class="breadcrumb-nav">
-    <div class="brutal-container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Главная</a></li>
-            <li class="breadcrumb-item active">Карта сайта</li>
-        </ol>
-    </div>
-</nav>
-{% endblock breadcrumbs %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/sitemap-brutal.css' %}">
@@ -118,10 +108,13 @@
         <!-- FAQ -->
         <div class="brutal-sitemap-section">
             <h3 class="brutal-sitemap-section-title">❓ FAQ</h3>
+            <div class="brutal-sitemap-section-description">
+                {{ sitemap_data.total_faq_count }} ответов на ваши вопросы
+            </div>
             <div class="brutal-sitemap-sections-grid">
                 {% for category in sitemap_data.faq_categories %}
                 <div class="brutal-sitemap-section-item">
-                    <h4 class="brutal-sitemap-section-item-title">
+                    <h4 class="brutal-sitemap-category-title">
                         <a href="{% url 'main:faq_category' category.slug %}">{{ category.name }}</a>
                     </h4>
                     <ul class="brutal-sitemap-list">

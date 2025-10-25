@@ -493,6 +493,9 @@ def sitemap_page(request):
     cities = City.objects.all()
     faq_categories = FAQCategory.objects.filter(is_active=True).prefetch_related('faq_items')
     
+    # Подсчитываем общее количество вопросов
+    total_faq_count = sum(category.faq_items.count() for category in faq_categories)
+    
     # Создаем структуру карты сайта
     sitemap_data = {
         'main_pages': [
@@ -509,6 +512,7 @@ def sitemap_page(request):
         'blog_posts': blog_posts,
         'cities': cities,
         'faq_categories': faq_categories,
+        'total_faq_count': total_faq_count,
     }
     
     context = {

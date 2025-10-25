@@ -1346,23 +1346,12 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     justify-content: center;
 }
 
-.brutal-blog-category-card {
+.brutal-blog-category-link {
+    display: inline-block;
+    padding: 12px 24px;
     background: var(--brutal-white);
     border: var(--brutal-border);
     box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
-}
-
-.brutal-blog-category-card:hover,
-.brutal-blog-category-card.active {
-    background: var(--brutal-green);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
-}
-
-.brutal-blog-category-link {
-    display: block;
-    padding: 12px 24px;
     color: var(--brutal-black);
     text-decoration: none;
     font-weight: 600;
@@ -1371,9 +1360,12 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     transition: all 0.3s ease;
 }
 
-.brutal-blog-category-card:hover .brutal-blog-category-link,
-.brutal-blog-category-card.active .brutal-blog-category-link {
+.brutal-blog-category-link:hover,
+.brutal-blog-category-link.active {
+    background: var(--brutal-green);
     color: var(--brutal-white);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
 }
 
 /* Адаптивность для категорий блога */

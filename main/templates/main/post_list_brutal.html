@@ -53,17 +53,13 @@
     <div class="brutal-container">
         <h2 class="brutal-blog-categories-title">Категории</h2>
         <div class="brutal-blog-categories-grid">
-            <div class="brutal-blog-category-card {% if not current_category %}active{% endif %}">
-                <a href="{% url 'blog:post_list' %}" class="brutal-blog-category-link">
-                    Все статьи
-                </a>
-            </div>
+            <a href="{% url 'blog:post_list' %}" class="brutal-blog-category-link {% if not current_category %}active{% endif %}">
+                Все статьи
+            </a>
             {% for category in categories %}
-            <div class="brutal-blog-category-card {% if current_category == category %}active{% endif %}">
-                <a href="{% url 'blog:category_posts' slug=category.slug %}" class="brutal-blog-category-link">
-                    {{ category.name }}
-                </a>
-            </div>
+            <a href="{% url 'blog:category_posts' slug=category.slug %}" class="brutal-blog-category-link {% if current_category == category %}active{% endif %}">
+                {{ category.name }}
+            </a>
             {% endfor %}
         </div>
     </div>

@@ -1325,6 +1325,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 .brutal-blog-categories {
     background: var(--brutal-white);
     padding: 40px 0;
+    border-top: 4px solid var(--brutal-green);
     border-bottom: 4px solid var(--brutal-green);
 }
 
@@ -1341,44 +1342,38 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 .brutal-blog-categories-grid {
     display: flex;
     flex-wrap: wrap;
+    gap: 15px;
     justify-content: center;
-    gap: 8px;
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
 .brutal-blog-category-card {
-    display: inline-block;
+    background: var(--brutal-white);
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    transition: all 0.3s ease;
+}
+
+.brutal-blog-category-card:hover,
+.brutal-blog-category-card.active {
+    background: var(--brutal-green);
+    transform: translateY(-2px);
+    box-shadow: var(--brutal-shadow-hover);
 }
 
 .brutal-blog-category-link {
-    display: inline-block;
-    color: var(--brutal-black);
-    font-weight: 700;
-    text-decoration: none;
+    display: block;
     padding: 12px 24px;
-    border: 3px solid var(--brutal-black);
-    background: var(--brutal-white);
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.2s ease;
-    text-align: center;
+    color: var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
 }
 
+.brutal-blog-category-card:hover .brutal-blog-category-link,
 .brutal-blog-category-card.active .brutal-blog-category-link {
-    background: var(--brutal-green);
-    color: var(--brutal-black);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
-}
-
-.brutal-blog-category-link:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-green);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    color: var(--brutal-white);
 }
 
 /* Адаптивность для категорий блога */

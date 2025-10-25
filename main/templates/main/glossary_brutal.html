@@ -84,6 +84,38 @@
                             </a>
                         </div>
                     </div>
+                    
+                    <!-- Фильтр по конкретным буквам -->
+                    <div class="brutal-glossary-filter-group">
+                        <h4 class="brutal-glossary-filter-title">Буквы:</h4>
+                        <div class="brutal-glossary-letter-buttons">
+                            <!-- Русские буквы -->
+                            <div class="brutal-glossary-letter-group">
+                                <span class="brutal-glossary-letter-group-title">Русские:</span>
+                                <div class="brutal-glossary-letter-buttons-row">
+                                    {% for letter in alphabet_ru %}
+                                    <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet={{ letter|lower }}" 
+                                       class="brutal-glossary-letter-button {% if alphabet_filter == letter|lower %}active{% endif %}">
+                                        {{ letter }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <!-- Английские буквы -->
+                            <div class="brutal-glossary-letter-group">
+                                <span class="brutal-glossary-letter-group-title">Английские:</span>
+                                <div class="brutal-glossary-letter-buttons-row">
+                                    {% for letter in alphabet_en %}
+                                    <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet={{ letter|lower }}" 
+                                       class="brutal-glossary-letter-button {% if alphabet_filter == letter|lower %}active{% endif %}">
+                                        {{ letter }}
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

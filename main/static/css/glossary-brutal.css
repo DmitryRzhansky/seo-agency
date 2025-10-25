@@ -607,3 +607,72 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Стили для кнопок букв */
+.brutal-glossary-letter-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.brutal-glossary-letter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.brutal-glossary-letter-group-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--brutal-black);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.brutal-glossary-letter-buttons-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.brutal-glossary-letter-button {
+    padding: 8px 12px;
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    border: 2px solid var(--brutal-black);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 35px;
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0px var(--brutal-black);
+}
+
+.brutal-glossary-letter-button:hover {
+    background: var(--brutal-green);
+    color: var(--brutal-black);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    transform: translate(-1px, -1px);
+}
+
+.brutal-glossary-letter-button.active {
+    background: var(--brutal-black);
+    color: var(--brutal-green);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+}
+
+/* Адаптивность для кнопок букв */
+@media (max-width: 768px) {
+    .brutal-glossary-letter-buttons-row {
+        gap: 6px;
+    }
+    
+    .brutal-glossary-letter-button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        min-width: 30px;
+    }
+}

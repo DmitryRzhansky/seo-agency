@@ -2033,7 +2033,8 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 .brutal-mobile-dropdown-open {
-    max-height: 500px;
+    max-height: 70vh; /* Используем viewport height вместо фиксированной высоты */
+    overflow-y: auto; /* Добавляем прокрутку */
 }
 
 .brutal-mobile-dropdown-section {
@@ -2085,26 +2086,64 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 /* Стили для списка услуг в мобильном меню */
+.brutal-mobile-category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brutal-mobile-services-toggle {
+    background: var(--brutal-green);
+    border: 2px solid var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: var(--brutal-transition);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-mobile-services-toggle:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+}
+
+.brutal-mobile-services-toggle.active i {
+    transform: rotate(180deg);
+}
+
 .brutal-mobile-services-list {
     padding-left: 20px;
     margin-top: 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.brutal-mobile-services-list.open {
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .brutal-mobile-service-link {
     display: block;
-    padding: 8px 12px;
-    color: var(--brutal-gray-dark);
+    padding: 10px 15px;
+    color: var(--brutal-black);
     text-decoration: none;
     font-size: 0.9rem;
-    border-left: 2px solid var(--brutal-gray);
-    margin-bottom: 4px;
+    background: var(--brutal-white);
+    border: 2px solid var(--brutal-black);
+    margin-bottom: 6px;
+    border-radius: 0;
     transition: var(--brutal-transition);
+    font-family: 'Courier New', monospace;
+    font-weight: 500;
 }
 
 .brutal-mobile-service-link:hover {
-    background: var(--brutal-gray);
-    color: var(--brutal-black);
-    border-left-color: var(--brutal-green);
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    transform: translateX(5px);
+    box-shadow: 4px 4px 0px var(--brutal-black);
 }
 
 

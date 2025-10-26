@@ -216,8 +216,13 @@
                     <div class="brutal-mobile-dropdown-menu">
                         {% for category in service_categories_menu %}
                         <div class="brutal-mobile-dropdown-section">
-                            <a href="{% url 'services:service_category' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.title }}</a>
-                            <div class="brutal-mobile-services-list">
+                            <div class="brutal-mobile-category-header">
+                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.title }}</a>
+                                <button class="brutal-mobile-services-toggle" type="button" data-category="{{ category.slug }}">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="brutal-mobile-services-list" id="services-{{ category.slug }}">
                                 {% for service in category.services.all|slice:":5" %}
                                 <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="brutal-mobile-service-link">
                                     {{ service.title }}
@@ -473,6 +478,29 @@
                     
                     if (!isOpen) {
                         menu.classList.add('brutal-mobile-dropdown-open');
+                        this.classList.add('active');
+                    }
+                });
+            });
+            
+            // Разворачивание услуг в категориях
+            const serviceToggles = document.querySelectorAll('.brutal-mobile-services-toggle');
+            serviceToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const categorySlug = this.getAttribute('data-category');
+                    const servicesList = document.getElementById(`services-${categorySlug}`);
+                    const isOpen = servicesList.classList.contains('open');
+                    
+                    // Закрыть все другие списки услуг
+                    document.querySelectorAll('.brutal-mobile-services-list').forEach(list => {
+                        list.classList.remove('open');
+                    });
+                    document.querySelectorAll('.brutal-mobile-services-toggle').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    if (!isOpen) {
+                        servicesList.classList.add('open');
                         this.classList.add('active');
                     }
                 });

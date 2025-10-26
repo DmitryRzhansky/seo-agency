@@ -566,7 +566,7 @@
     position: relative;
     z-index: 2;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    overflow: visible;
+    overflow: hidden;
 }
 
 .post-detail-content::before {
@@ -599,9 +599,6 @@
     font-size: 1.15rem;
     position: relative;
     z-index: 3;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
 }
 
 .post-detail-text h2 {

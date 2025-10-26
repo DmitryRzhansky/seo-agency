@@ -2492,7 +2492,6 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     border-bottom: 2px solid var(--brutal-gray);
     background: var(--brutal-white);
     transition: var(--brutal-transition);
-    position: relative;
 }
 
 #portfolioMegaMenu .brutal-mega-menu-category:nth-child(4n),
@@ -2509,7 +2508,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 #blogMegaMenu .brutal-mega-menu-category-title {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 8px 6px;
     background: var(--brutal-green);
     color: var(--brutal-white);
@@ -2524,73 +2523,45 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     height: 50px;
     white-space: normal;
     word-wrap: break-word;
-    cursor: pointer;
     overflow: hidden;
 }
 
-#portfolioMegaMenu .brutal-mega-menu-category .brutal-mega-menu-services,
-#blogMegaMenu .brutal-mega-menu-category .brutal-mega-menu-services {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1002;
-    min-width: 400px;
-    max-width: 600px;
-    width: max-content;
-    padding: 20px;
-    background: var(--brutal-gray);
-    border: 2px solid var(--brutal-black);
-    box-shadow: var(--brutal-shadow);
-}
-
-#portfolioMegaMenu .brutal-mega-menu-category.active .brutal-mega-menu-services,
-#blogMegaMenu .brutal-mega-menu-category.active .brutal-mega-menu-services {
-    display: block;
-}
-
-#portfolioMegaMenu .brutal-mega-menu-services-grid,
-#blogMegaMenu .brutal-mega-menu-services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    max-width: 600px;
-}
-
-#portfolioMegaMenu .brutal-mega-menu-service,
-#blogMegaMenu .brutal-mega-menu-service {
-    background: var(--brutal-white);
-    border: 2px solid var(--brutal-black);
-    padding: 8px;
-    transition: var(--brutal-transition);
-    box-shadow: var(--brutal-shadow);
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-}
-
-#portfolioMegaMenu .brutal-mega-menu-service h4,
-#blogMegaMenu .brutal-mega-menu-service h4 {
-    font-size: 0.9rem;
-    margin: 0;
-    text-align: center;
-    width: 100%;
-}
+/* Убираем стили для панелей услуг - они больше не нужны */
 
 /* Адаптивность для планшетов */
 @media (max-width: 1024px) {
-    #portfolioMegaMenu .brutal-mega-menu-services-grid,
-    #blogMegaMenu .brutal-mega-menu-services-grid {
-        grid-template-columns: repeat(3, 1fr);
-        max-width: 450px;
+    #portfolioMegaMenu .brutal-mega-menu-category,
+    #blogMegaMenu .brutal-mega-menu-category {
+        min-width: 120px;
+        max-width: 150px;
+    }
+    
+    #portfolioMegaMenu .brutal-mega-menu-category-title,
+    #blogMegaMenu .brutal-mega-menu-category-title {
+        font-size: 0.8rem;
+        padding: 8px 6px;
     }
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-    #portfolioMegaMenu .brutal-mega-menu-services-grid,
-    #blogMegaMenu .brutal-mega-menu-services-grid {
-        grid-template-columns: repeat(2, 1fr);
+    #portfolioMegaMenu .brutal-mega-menu,
+    #blogMegaMenu .brutal-mega-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        transform: translateY(-100%);
+        z-index: 9999;
+    }
+    
+    #portfolioMegaMenu .brutal-mega-menu.show,
+    #blogMegaMenu .brutal-mega-menu.show {
+        transform: translateY(0);
     }
 }
 

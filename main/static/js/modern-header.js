@@ -260,12 +260,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ===== МЕГА-МЕНЮ ДЛЯ ПОРТФОЛИО =====
+// ===== МЕГА-МЕНЮ ДЛЯ ПОРТФОЛИО (только категории) =====
 document.addEventListener('DOMContentLoaded', function() {
     const portfolioMenu = document.getElementById('portfolioMenu');
     const portfolioDropdown = document.getElementById('portfolioDropdown');
     const portfolioMegaMenu = document.getElementById('portfolioMegaMenu');
-    const portfolioCategories = document.querySelectorAll('#portfolioMegaMenu .brutal-mega-menu-category');
     
     if (portfolioMenu && portfolioMegaMenu) {
         let hoverTimeout;
@@ -282,60 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hoverTimeout = setTimeout(function() {
                 portfolioMegaMenu.classList.remove('show');
                 portfolioDropdown.querySelector('i').style.transform = 'rotate(0deg)';
-                // Скрыть все категории
-                portfolioCategories.forEach(category => category.classList.remove('active'));
             }, 300);
-        });
-        
-        // Функция для умного позиционирования панели проектов
-        function adjustPortfolioPanelPosition(category) {
-            const servicesPanel = category.querySelector('.brutal-mega-menu-services');
-            if (!servicesPanel) return;
-            
-            // Сброс позиционирования
-            servicesPanel.style.left = '0';
-            servicesPanel.style.right = 'auto';
-            servicesPanel.style.transform = 'none';
-            
-            // Получаем позицию категории и панели
-            const categoryRect = category.getBoundingClientRect();
-            const panelRect = servicesPanel.getBoundingClientRect();
-            const viewportWidth = window.innerWidth;
-            
-            // Если панель выходит за правый край экрана
-            if (panelRect.right > viewportWidth - 20) {
-                // Смещаем влево
-                const offset = panelRect.right - viewportWidth + 20;
-                servicesPanel.style.left = `-${offset}px`;
-            }
-            
-            // Если панель выходит за левый край экрана
-            if (panelRect.left < 20) {
-                servicesPanel.style.left = '20px';
-            }
-        }
-        
-        // Обработка наведения на категории портфолио
-        portfolioCategories.forEach(category => {
-            category.addEventListener('mouseenter', function() {
-                // Убираем активность с других категорий
-                portfolioCategories.forEach(cat => cat.classList.remove('active'));
-                // Активируем текущую категорию
-                category.classList.add('active');
-                // Позиционируем панель
-                adjustPortfolioPanelPosition(category);
-            });
-            
-            category.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                // Убираем активность с других категорий
-                portfolioCategories.forEach(cat => cat.classList.remove('active'));
-                // Активируем текущую категорию
-                category.classList.add('active');
-                // Позиционируем панель
-                adjustPortfolioPanelPosition(category);
-            });
         });
         
         // Скрыть мега-меню при клике вне его
@@ -343,27 +289,16 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!portfolioMenu.contains(e.target)) {
                 portfolioMegaMenu.classList.remove('show');
                 portfolioDropdown.querySelector('i').style.transform = 'rotate(0deg)';
-                portfolioCategories.forEach(category => category.classList.remove('active'));
             }
-        });
-        
-        // Обработка изменения размера окна
-        window.addEventListener('resize', function() {
-            portfolioCategories.forEach(category => {
-                if (category.classList.contains('active')) {
-                    adjustPortfolioPanelPosition(category);
-                }
-            });
         });
     }
 });
 
-// ===== МЕГА-МЕНЮ ДЛЯ БЛОГА =====
+// ===== МЕГА-МЕНЮ ДЛЯ БЛОГА (только категории) =====
 document.addEventListener('DOMContentLoaded', function() {
     const blogMenu = document.getElementById('blogMenu');
     const blogDropdown = document.getElementById('blogDropdown');
     const blogMegaMenu = document.getElementById('blogMegaMenu');
-    const blogCategories = document.querySelectorAll('#blogMegaMenu .brutal-mega-menu-category');
     
     if (blogMenu && blogMegaMenu) {
         let hoverTimeout;
@@ -380,60 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hoverTimeout = setTimeout(function() {
                 blogMegaMenu.classList.remove('show');
                 blogDropdown.querySelector('i').style.transform = 'rotate(0deg)';
-                // Скрыть все категории
-                blogCategories.forEach(category => category.classList.remove('active'));
             }, 300);
-        });
-        
-        // Функция для умного позиционирования панели постов
-        function adjustBlogPanelPosition(category) {
-            const servicesPanel = category.querySelector('.brutal-mega-menu-services');
-            if (!servicesPanel) return;
-            
-            // Сброс позиционирования
-            servicesPanel.style.left = '0';
-            servicesPanel.style.right = 'auto';
-            servicesPanel.style.transform = 'none';
-            
-            // Получаем позицию категории и панели
-            const categoryRect = category.getBoundingClientRect();
-            const panelRect = servicesPanel.getBoundingClientRect();
-            const viewportWidth = window.innerWidth;
-            
-            // Если панель выходит за правый край экрана
-            if (panelRect.right > viewportWidth - 20) {
-                // Смещаем влево
-                const offset = panelRect.right - viewportWidth + 20;
-                servicesPanel.style.left = `-${offset}px`;
-            }
-            
-            // Если панель выходит за левый край экрана
-            if (panelRect.left < 20) {
-                servicesPanel.style.left = '20px';
-            }
-        }
-        
-        // Обработка наведения на категории блога
-        blogCategories.forEach(category => {
-            category.addEventListener('mouseenter', function() {
-                // Убираем активность с других категорий
-                blogCategories.forEach(cat => cat.classList.remove('active'));
-                // Активируем текущую категорию
-                category.classList.add('active');
-                // Позиционируем панель
-                adjustBlogPanelPosition(category);
-            });
-            
-            category.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                // Убираем активность с других категорий
-                blogCategories.forEach(cat => cat.classList.remove('active'));
-                // Активируем текущую категорию
-                category.classList.add('active');
-                // Позиционируем панель
-                adjustBlogPanelPosition(category);
-            });
         });
         
         // Скрыть мега-меню при клике вне его
@@ -441,17 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!blogMenu.contains(e.target)) {
                 blogMegaMenu.classList.remove('show');
                 blogDropdown.querySelector('i').style.transform = 'rotate(0deg)';
-                blogCategories.forEach(category => category.classList.remove('active'));
             }
-        });
-        
-        // Обработка изменения размера окна
-        window.addEventListener('resize', function() {
-            blogCategories.forEach(category => {
-                if (category.classList.contains('active')) {
-                    adjustBlogPanelPosition(category);
-                }
-            });
         });
     }
 });

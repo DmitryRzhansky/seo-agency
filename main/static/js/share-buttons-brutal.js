@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
     copyButtons.forEach(button => {
         button.addEventListener('click', function() {
             // Получаем текст из блока контента
-            const contentBlock = document.querySelector('.brutal-service-detail-content');
+            const contentBlock = document.querySelector('.brutal-service-detail-content') || 
+                                document.querySelector('.post-detail-content');
             let textToCopy = '';
             
             if (contentBlock) {

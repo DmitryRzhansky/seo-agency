@@ -2084,6 +2084,29 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     transform: translateX(5px);
 }
 
+/* Стили для списка услуг в мобильном меню */
+.brutal-mobile-services-list {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.brutal-mobile-service-link {
+    display: block;
+    padding: 8px 12px;
+    color: var(--brutal-gray-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-left: 2px solid var(--brutal-gray);
+    margin-bottom: 4px;
+    transition: var(--brutal-transition);
+}
+
+.brutal-mobile-service-link:hover {
+    background: var(--brutal-gray);
+    color: var(--brutal-black);
+    border-left-color: var(--brutal-green);
+}
+
 
 /* Адаптивность */
 @media (max-width: 1200px) {

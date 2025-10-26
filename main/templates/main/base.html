@@ -217,19 +217,51 @@
                         {% for category in service_categories_menu %}
                         <div class="brutal-mobile-dropdown-section">
                             <a href="{% url 'services:service_category' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.title }}</a>
+                            <div class="brutal-mobile-services-list">
+                                {% for service in category.services.all|slice:":5" %}
+                                <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="brutal-mobile-service-link">
+                                    {{ service.title }}
+                                </a>
+                                {% endfor %}
+                            </div>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
                 
-                <a href="{% url 'main:portfolio_list' %}" class="brutal-mobile-nav-link {% if 'portfolio' in request.resolver_match.url_name %}active{% endif %}">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Портфолио</span>
-                </a>
-                <a href="{% url 'blog:post_list' %}" class="brutal-mobile-nav-link {% if 'blog' in request.resolver_match.namespace %}active{% endif %}">
-                    <i class="fas fa-blog"></i>
-                    <span>Блог</span>
-                </a>
+                <!-- Мобильное портфолио -->
+                <div class="brutal-mobile-dropdown">
+                    <button class="brutal-mobile-dropdown-toggle" type="button">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Портфолио</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="brutal-mobile-dropdown-menu">
+                        <a href="{% url 'main:portfolio_list' %}" class="brutal-mobile-dropdown-title">Все проекты</a>
+                        {% for category in portfolio_categories_menu %}
+                        <div class="brutal-mobile-dropdown-section">
+                            <a href="{% url 'main:portfolio_category' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.name }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Мобильный блог -->
+                <div class="brutal-mobile-dropdown">
+                    <button class="brutal-mobile-dropdown-toggle" type="button">
+                        <i class="fas fa-blog"></i>
+                        <span>Блог</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="brutal-mobile-dropdown-menu">
+                        <a href="{% url 'blog:post_list' %}" class="brutal-mobile-dropdown-title">Все статьи</a>
+                        {% for category in blog_categories_menu %}
+                        <div class="brutal-mobile-dropdown-section">
+                            <a href="{% url 'blog:category_posts' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.name }}</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
                 <a href="{% url 'main:contacts' %}" class="brutal-mobile-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
                     <i class="fas fa-phone"></i>
                     <span>Контакты</span>

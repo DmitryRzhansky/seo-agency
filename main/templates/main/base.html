@@ -468,23 +468,21 @@
                     const menu = this.nextElementSibling;
                     const isOpen = menu.classList.contains('brutal-mobile-dropdown-open');
                     
-                    // Закрыть все другие dropdown
-                    document.querySelectorAll('.brutal-mobile-dropdown-menu').forEach(m => {
-                        m.classList.remove('brutal-mobile-dropdown-open');
-                    });
-                    document.querySelectorAll('.brutal-mobile-dropdown-toggle').forEach(t => {
-                        t.classList.remove('active');
-                    });
-                    
-                    if (!isOpen) {
+                    if (isOpen) {
+                        // Если меню открыто - закрываем его
+                        menu.classList.remove('brutal-mobile-dropdown-open');
+                        this.classList.remove('active');
+                    } else {
+                        // Если меню закрыто - закрываем все другие и открываем текущее
+                        document.querySelectorAll('.brutal-mobile-dropdown-menu').forEach(m => {
+                            m.classList.remove('brutal-mobile-dropdown-open');
+                        });
+                        document.querySelectorAll('.brutal-mobile-dropdown-toggle').forEach(t => {
+                            t.classList.remove('active');
+                        });
+                        
                         menu.classList.add('brutal-mobile-dropdown-open');
                         this.classList.add('active');
-                        
-                        // Динамически устанавливаем высоту для лучшей прокрутки
-                        const viewportHeight = window.innerHeight;
-                        const headerHeight = 80; // Примерная высота header
-                        const availableHeight = viewportHeight - headerHeight - 20; // 20px отступ
-                        menu.style.maxHeight = availableHeight + 'px';
                     }
                 });
             });

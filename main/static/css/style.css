@@ -2033,29 +2033,11 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 .brutal-mobile-dropdown-open {
-    max-height: calc(100vh - 100px); /* Фиксированная высота */
-    overflow-y: auto; /* Добавляем прокрутку */
-    scrollbar-width: thin; /* Тонкая прокрутка для Firefox */
-    scrollbar-color: var(--brutal-green) var(--brutal-gray); /* Цвета прокрутки */
+    max-height: none; /* Убираем ограничение по высоте */
+    overflow-y: visible; /* Убираем прокрутку */
 }
 
-/* Стили для прокрутки в Webkit браузерах */
-.brutal-mobile-dropdown-open::-webkit-scrollbar {
-    width: 8px;
-}
-
-.brutal-mobile-dropdown-open::-webkit-scrollbar-track {
-    background: var(--brutal-gray);
-}
-
-.brutal-mobile-dropdown-open::-webkit-scrollbar-thumb {
-    background: var(--brutal-green);
-    border-radius: 0;
-}
-
-.brutal-mobile-dropdown-open::-webkit-scrollbar-thumb:hover {
-    background: var(--brutal-black);
-}
+/* Стили прокрутки больше не нужны, так как убрали ограничение по высоте */
 
 .brutal-mobile-dropdown-section {
     padding: 15px 20px;

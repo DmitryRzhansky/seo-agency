@@ -34,7 +34,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const copyButtons = document.querySelectorAll('.brutal-copy-btn');
     copyButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const textToCopy = this.getAttribute('data-text');
+            // Получаем текст из блока контента
+            const contentBlock = document.querySelector('.brutal-service-detail-content');
+            let textToCopy = '';
+            
+            if (contentBlock) {
+                // Извлекаем весь текстовый контент из блока
+                textToCopy = contentBlock.innerText || contentBlock.textContent;
+                
+                // Добавляем заголовок страницы и URL
+                const pageTitle = document.title;
+                const pageUrl = window.location.href;
+                
+                textToCopy = `${pageTitle}\n\n${textToCopy}\n\n${pageUrl}`;
+            } else {
+                // Fallback на data-text если блок контента не найден
+                textToCopy = this.getAttribute('data-text');
+            }
             
             if (navigator.clipboard && window.isSecureContext) {
                 // Современный способ копирования

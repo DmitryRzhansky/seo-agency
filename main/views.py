@@ -172,7 +172,7 @@ def post_detail(request, slug):
         'post': post,
         'seo_object': post,  # Передаем пост как SEO-объект
     }
-    return render(request, 'main/post_detail.html', context)
+    return render(request, 'main/post_detail_brutal.html', context)
 
 
 # --- Представления для Городов ---

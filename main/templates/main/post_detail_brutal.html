@@ -73,28 +73,6 @@
                 </div>
             </div>
             
-            <!-- Блок поделиться - брутальный -->
-            <div class="brutal-share-section" style="margin: 20px 0 40px 0; padding: 0 20px; max-width: 1200px; margin-left: auto; margin-right: auto;">
-                <div class="brutal-share-block" style="display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; background: #ffffff; border: 3px solid #000000; border-top: none; box-shadow: 8px 8px 0px #000000; font-family: 'Courier New', monospace;">
-                    <button class="brutal-copy-btn" data-text="{{ post.title }} - {{ post.excerpt|default:post.content|striptags|truncatewords:20 }} | Isakov Agency - {{ request.build_absolute_uri }}" style="background: #00ff41; border: 3px solid #000000; color: #ffffff; padding: 12px 24px; font-family: 'Courier New', monospace; font-weight: 700; font-size: 0.9rem; cursor: pointer;">
-                        <i class="fas fa-copy"></i>
-                        Скопировать текст
-                    </button>
-                    
-                    <div class="brutal-social-share" style="display: flex; align-items: center; gap: 15px;">
-                        <span class="brutal-social-label" style="font-family: 'Courier New', monospace; font-weight: 700; color: #000000; font-size: 0.9rem;">Поделиться:</span>
-                        <div class="brutal-social-links" style="display: flex; gap: 10px;">
-                            <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}" style="display: inline-block; width: 45px; height: 45px; border: 3px solid #000000; text-align: center; line-height: 39px; font-size: 1.2rem; color: #ffffff; text-decoration: none; background: #4C75A3;">
-                                <i class="fab fa-vk"></i>
-                            </a>
-                            <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}" style="display: inline-block; width: 45px; height: 45px; border: 3px solid #000000; text-align: center; line-height: 39px; font-size: 1.2rem; color: #ffffff; text-decoration: none; background: #0088cc;">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
             <!-- Изображение статьи справа -->
             {% if post.image %}
             <div class="brutal-post-image-container">
@@ -114,6 +92,28 @@
         </div>
     </div>
 </section>
+
+<!-- Блок поделиться - брутальный -->
+<div class="brutal-share-section" style="margin: 20px 0 40px 0; padding: 0 20px; max-width: 1200px; margin-left: auto; margin-right: auto;">
+    <div class="brutal-share-block" style="display: flex; justify-content: space-between; align-items: center; padding: 25px 30px; background: #ffffff; border: 3px solid #000000; border-top: none; box-shadow: 8px 8px 0px #000000; font-family: 'Courier New', monospace;">
+        <button class="brutal-copy-btn" data-text="{{ post.title }} - {{ post.excerpt|default:post.content|striptags|truncatewords:20 }} | Isakov Agency - {{ request.build_absolute_uri }}" style="background: #00ff41; border: 3px solid #000000; color: #ffffff; padding: 12px 24px; font-family: 'Courier New', monospace; font-weight: 700; font-size: 0.9rem; cursor: pointer;">
+            <i class="fas fa-copy"></i>
+            Скопировать текст
+        </button>
+        
+        <div class="brutal-social-share" style="display: flex; align-items: center; gap: 15px;">
+            <span class="brutal-social-label" style="font-family: 'Courier New', monospace; font-weight: 700; color: #000000; font-size: 0.9rem;">Поделиться:</span>
+            <div class="brutal-social-links" style="display: flex; gap: 10px;">
+                <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}" style="display: inline-block; width: 45px; height: 45px; border: 3px solid #000000; text-align: center; line-height: 39px; font-size: 1.2rem; color: #ffffff; text-decoration: none; background: #4C75A3;">
+                    <i class="fab fa-vk"></i>
+                </a>
+                <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}" style="display: inline-block; width: 45px; height: 45px; border: 3px solid #000000; text-align: center; line-height: 39px; font-size: 1.2rem; color: #ffffff; text-decoration: none; background: #0088cc;">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Навигация - брутальная -->
 {% if post.category %}

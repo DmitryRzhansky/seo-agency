@@ -21,6 +21,7 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/service-detail-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/share-buttons-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
@@ -107,6 +108,30 @@
             </div>
         </section>
 
+        <!-- Блок поделиться - брутальный -->
+        <section class="brutal-share-section">
+            <div class="brutal-container">
+                <div class="brutal-share-block">
+                    <button class="brutal-copy-btn" data-text="{{ service.title }} - {{ service.short_description }} | Isakov Agency - {{ request.build_absolute_uri }}">
+                        <i class="fas fa-copy"></i>
+                        Скопировать текст
+                    </button>
+                    
+                    <div class="brutal-social-share">
+                        <span class="brutal-social-label">Поделиться:</span>
+                        <div class="brutal-social-links">
+                            <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}">
+                                <i class="fab fa-vk"></i>
+                            </a>
+                            <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Навигация - брутальная -->
         <section class="brutal-service-navigation">
             <div class="brutal-container">
@@ -146,5 +171,8 @@
 </section>
 {% endif %}
 
+{% block extra_js %}
+<script src="{% static 'js/share-buttons-brutal.js' %}"></script>
+{% endblock extra_js %}
 
 {% endblock content %}

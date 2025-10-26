@@ -1,0 +1,181 @@
+/* ===== БРУТАЛЬНЫЕ КНОПКИ ПОДЕЛИТЬСЯ ===== */
+
+.brutal-share-section {
+    margin: 40px 0;
+    padding: 0 20px;
+}
+
+.brutal-share-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: var(--brutal-white);
+    border: 3px solid var(--brutal-black);
+    box-shadow: 8px 8px 0px var(--brutal-black);
+    transition: var(--brutal-transition);
+    font-family: 'Courier New', monospace;
+}
+
+.brutal-share-block:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 10px 10px 0px var(--brutal-black);
+}
+
+/* Кнопка копирования */
+.brutal-copy-btn {
+    background: var(--brutal-green);
+    border: 3px solid var(--brutal-black);
+    color: var(--brutal-white);
+    padding: 15px 25px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--brutal-transition);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brutal-copy-btn:hover {
+    background: var(--brutal-white);
+    color: var(--brutal-black);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--brutal-black);
+}
+
+.brutal-copy-btn:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+.brutal-copy-btn i {
+    font-size: 1.1rem;
+}
+
+/* Блок социальных сетей */
+.brutal-social-share {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.brutal-social-label {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--brutal-black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brutal-social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.brutal-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--brutal-black);
+    text-decoration: none;
+    transition: var(--brutal-transition);
+    box-shadow: 4px 4px 0px var(--brutal-black);
+    font-size: 1.3rem;
+}
+
+.brutal-social-link:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px var(--brutal-black);
+}
+
+.brutal-social-link:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0px var(--brutal-black);
+}
+
+/* ВКонтакте */
+.brutal-social-link.vk {
+    background: #4C75A3;
+    color: white;
+}
+
+.brutal-social-link.vk:hover {
+    background: #3d5f8a;
+}
+
+/* Телеграм */
+.brutal-social-link.telegram {
+    background: #0088cc;
+    color: white;
+}
+
+.brutal-social-link.telegram:hover {
+    background: #0077b3;
+}
+
+/* Уведомление о копировании */
+.brutal-copy-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--brutal-green);
+    color: var(--brutal-white);
+    padding: 15px 25px;
+    border: 3px solid var(--brutal-black);
+    box-shadow: 6px 6px 0px var(--brutal-black);
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+}
+
+.brutal-copy-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .brutal-share-block {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .brutal-social-share {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .brutal-social-links {
+        justify-content: center;
+    }
+    
+    .brutal-copy-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .brutal-copy-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        transform: translateY(-100%);
+    }
+    
+    .brutal-copy-notification.show {
+        transform: translateY(0);
+    }
+}

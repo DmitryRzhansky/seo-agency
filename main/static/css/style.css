@@ -1936,6 +1936,8 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     visibility: hidden;
     transition: var(--brutal-transition);
     z-index: 999;
+    max-height: calc(100vh - 80px); /* Ограничиваем высоту мобильного меню */
+    overflow-y: auto; /* Добавляем прокрутку */
 }
 
 .brutal-mobile-menu-open {
@@ -2032,9 +2034,29 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
     margin-top: -2px;
 }
 
+/* Стили для прокрутки в мобильном dropdown */
 .brutal-mobile-dropdown-open {
-    max-height: none; /* Убираем ограничение по высоте */
-    overflow-y: visible; /* Убираем прокрутку */
+    max-height: 60vh; /* Ограничиваем высоту dropdown */
+    overflow-y: auto; /* Добавляем прокрутку */
+    scrollbar-width: thin;
+    scrollbar-color: var(--brutal-green) var(--brutal-gray);
+}
+
+.brutal-mobile-dropdown-open::-webkit-scrollbar {
+    width: 6px;
+}
+
+.brutal-mobile-dropdown-open::-webkit-scrollbar-track {
+    background: var(--brutal-gray);
+}
+
+.brutal-mobile-dropdown-open::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border-radius: 0;
+}
+
+.brutal-mobile-dropdown-open::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
 }
 
 /* Стили прокрутки больше не нужны, так как убрали ограничение по высоте */

@@ -479,6 +479,12 @@
                     if (!isOpen) {
                         menu.classList.add('brutal-mobile-dropdown-open');
                         this.classList.add('active');
+                        
+                        // Динамически устанавливаем высоту для лучшей прокрутки
+                        const viewportHeight = window.innerHeight;
+                        const headerHeight = 80; // Примерная высота header
+                        const availableHeight = viewportHeight - headerHeight - 20; // 20px отступ
+                        menu.style.maxHeight = availableHeight + 'px';
                     }
                 });
             });

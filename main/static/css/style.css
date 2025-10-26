@@ -2033,7 +2033,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 .brutal-mobile-dropdown-open {
-    max-height: 85vh; /* Увеличиваем высоту до 85% экрана */
+    max-height: calc(100vh - 100px); /* Фиксированная высота */
     overflow-y: auto; /* Добавляем прокрутку */
     scrollbar-width: thin; /* Тонкая прокрутка для Firefox */
     scrollbar-color: var(--brutal-green) var(--brutal-gray); /* Цвета прокрутки */

@@ -1,8 +1,11 @@
 /* ===== БРУТАЛЬНЫЕ КНОПКИ ПОДЕЛИТЬСЯ ===== */
 
 .brutal-share-section {
-    margin: 20px 0 40px 0; /* Уменьшаем верхний отступ */
+    margin: 20px 0 40px 0;
     padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .brutal-share-block {

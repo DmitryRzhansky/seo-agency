@@ -92,28 +92,6 @@
                     </div>
                 </div>
 
-                <!-- Блок поделиться - брутальный -->
-                <div class="brutal-share-section">
-                    <div class="brutal-share-block">
-                        <button class="brutal-copy-btn" data-text="{{ post.title }} - {{ post.excerpt|default:post.content|striptags|truncatewords:20 }} | Isakov Agency - {{ request.build_absolute_uri }}">
-                            <i class="fas fa-copy"></i>
-                            Скопировать текст
-                        </button>
-                        
-                        <div class="brutal-social-share">
-                            <span class="brutal-social-label">Поделиться:</span>
-                            <div class="brutal-social-links">
-                                <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}">
-                                    <i class="fab fa-vk"></i>
-                                </a>
-                                <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}">
-                                    <i class="fab fa-telegram"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="text-center mt-5">
                     <a href="{% url 'blog:post_list' %}" class="btn btn-outline-primary btn-lg" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1)); border: 1px solid rgba(99, 102, 241, 0.3); color: #6366f1; border-radius: 15px; padding: 15px 30px;">
                         <i class="fas fa-arrow-left me-2"></i> Все статьи блога
@@ -123,6 +101,28 @@
         </div>
     </div>
 </section>
+
+<!-- Блок поделиться - брутальный -->
+<div class="brutal-share-section">
+    <div class="brutal-share-block">
+        <button class="brutal-copy-btn" data-text="{{ post.title }} - {{ post.excerpt|default:post.content|striptags|truncatewords:20 }} | Isakov Agency - {{ request.build_absolute_uri }}">
+            <i class="fas fa-copy"></i>
+            Скопировать текст
+        </button>
+        
+        <div class="brutal-social-share">
+            <span class="brutal-social-label">Поделиться:</span>
+            <div class="brutal-social-links">
+                <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}">
+                    <i class="fab fa-vk"></i>
+                </a>
+                <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Блок "Вам может понравиться" -->
 {% if related_posts %}

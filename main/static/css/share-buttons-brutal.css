@@ -1,7 +1,7 @@
 /* ===== БРУТАЛЬНЫЕ КНОПКИ ПОДЕЛИТЬСЯ ===== */
 
 .brutal-share-section {
-    margin: 40px 0;
+    margin: 20px 0 40px 0; /* Уменьшаем верхний отступ */
     padding: 0 20px;
 }
 
@@ -12,6 +12,7 @@
     padding: 25px 30px;
     background: var(--brutal-white);
     border: 3px solid var(--brutal-black);
+    border-top: none; /* Убираем верхнюю границу */
     box-shadow: 8px 8px 0px var(--brutal-black);
     transition: var(--brutal-transition);
     font-family: 'Courier New', monospace;

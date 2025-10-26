@@ -2033,8 +2033,28 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 }
 
 .brutal-mobile-dropdown-open {
-    max-height: 70vh; /* Используем viewport height вместо фиксированной высоты */
+    max-height: 85vh; /* Увеличиваем высоту до 85% экрана */
     overflow-y: auto; /* Добавляем прокрутку */
+    scrollbar-width: thin; /* Тонкая прокрутка для Firefox */
+    scrollbar-color: var(--brutal-green) var(--brutal-gray); /* Цвета прокрутки */
+}
+
+/* Стили для прокрутки в Webkit браузерах */
+.brutal-mobile-dropdown-open::-webkit-scrollbar {
+    width: 8px;
+}
+
+.brutal-mobile-dropdown-open::-webkit-scrollbar-track {
+    background: var(--brutal-gray);
+}
+
+.brutal-mobile-dropdown-open::-webkit-scrollbar-thumb {
+    background: var(--brutal-green);
+    border-radius: 0;
+}
+
+.brutal-mobile-dropdown-open::-webkit-scrollbar-thumb:hover {
+    background: var(--brutal-black);
 }
 
 .brutal-mobile-dropdown-section {
@@ -2044,6 +2064,7 @@ a, button, [role="button"], input[type="submit"], input[type="button"] {
 
 .brutal-mobile-dropdown-section:last-child {
     border-bottom: none;
+    padding-bottom: 20px; /* Добавляем отступ снизу для последней секции */
 }
 
 .brutal-mobile-dropdown-title {

@@ -38,6 +38,7 @@ def service_list(request):
     
     return render(request, template_name, {
         'title': 'Услуги',
+        'page_type': 'services',  # Добавляем тип страницы для правильного отображения хедера
         'categories': categories,
         'services': None,  # не используем общий список напрямую в шаблоне
         'filtered_services': page_obj,

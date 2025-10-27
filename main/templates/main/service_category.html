@@ -11,16 +11,24 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/service-category-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция категории услуг - брутальная -->
+<!-- Hero секция категории услуг - современная -->
 <section class="brutal-category-hero">
     <div class="brutal-container">
         <div class="brutal-category-hero-content">
             <h1 class="brutal-category-hero-title">{{ category.title }}</h1>
-            <p class="brutal-category-hero-subtitle">Здесь вы найдете полный спектр услуг по тематике «{{ category.title }}». Выберите то, что нужно вашему бизнесу.</p>
+            <p class="brutal-category-hero-subtitle">
+                Здесь вы найдете полный спектр услуг по тематике «{{ category.title }}». 
+                <span class="brick-text">Выберите</span>
+                <span class="brick-text">то,</span>
+                <span class="brick-text">что нужно.</span>
+            </p>
         </div>
     </div>
 </section>

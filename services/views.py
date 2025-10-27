@@ -62,6 +62,7 @@ def service_category_detail(request, slug):
 	
 	return render(request, 'main/service_category.html', {
 		'title': category.title,
+		'page_type': 'services',  # Добавляем тип страницы для правильного отображения хедера
 		'category': category,
 		'services': page_obj,
 		'is_paginated': page_obj.has_other_pages(),

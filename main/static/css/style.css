@@ -1601,7 +1601,6 @@ section {
     font-weight: 900;
     font-family: 'JetBrains Mono', monospace;
     color: var(--accent);
-    margin-bottom: 25px;
 }
 
 .btn-custom {
@@ -1917,6 +1916,9 @@ section {
     border: 2px solid var(--white);
     background: transparent;
     transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .testimonial-card:hover {
@@ -1961,6 +1963,7 @@ section {
     font-size: 12px;
     font-weight: 900;
     text-transform: uppercase;
+    margin-top: auto;
 }
 
 /* ============================================

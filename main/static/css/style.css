@@ -911,6 +911,7 @@ video {
     padding: 20px 0 40px;
     position: relative;
     overflow: hidden;
+    margin-top: 135px; /* Отступ от фиксированного хэдера */
 }
 
 .hero-bg-shapes {
@@ -3412,6 +3413,7 @@ section {
     .hero {
         padding: 40px 0;
         min-height: auto;
+        margin-top: 70px; /* Отступ от navbar на мобильных устройствах */
     }
 
     .hero-features {

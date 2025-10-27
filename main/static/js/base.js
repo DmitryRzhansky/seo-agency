@@ -65,21 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Навигация: пункт "Услуги" должен открывать dropdown на мобилке и вести на страницу на десктопе
-    const servicesLink = document.getElementById('servicesDropdown');
-    function updateServicesToggle() {
-        if (!servicesLink) return;
-        if (window.innerWidth >= 992) {
-            // Десктоп: ссылка ведет на страницу
-            servicesLink.removeAttribute('data-bs-toggle');
-        } else {
-            // Мобилка: ссылка открывает dropdown
-            servicesLink.setAttribute('data-bs-toggle', 'dropdown');
-        }
-    }
-    updateServicesToggle();
-    window.addEventListener('resize', updateServicesToggle);
-    
     // Прокрутка контента блога колесиком мыши
     const blogScrollable = document.querySelector('.brutal-post-scrollable');
     if (blogScrollable) {

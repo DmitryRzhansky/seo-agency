@@ -294,51 +294,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })();
     
-    // Анимация полос загрузки в кейсах
-    (function initProgressBars() {
-        const progressBars = document.querySelectorAll('.bar-fill');
-        console.log('Найдено полос загрузки:', progressBars.length);
-        
-        if (progressBars.length === 0) {
-            console.log('Полосы загрузки не найдены');
-            return;
-        }
-        
-        const animatedBars = new Set();
-        
-        const barObserver = new IntersectionObserver(function(entries) {
-            console.log('IntersectionObserver сработал:', entries.length);
-            entries.forEach(entry => {
-                console.log('Элемент в области видимости:', entry.isIntersecting, entry.target);
-                if (entry.isIntersecting && !animatedBars.has(entry.target)) {
-                    const bar = entry.target;
-                    const targetWidth = bar.getAttribute('data-width');
-                    console.log('Целевая ширина:', targetWidth);
-                    
-                    if (targetWidth) {
-                        animatedBars.add(bar);
-                        console.log('Анимируем полосу до:', targetWidth);
-                        
-                        // Убеждаемся, что начальная ширина 0%
-                        bar.style.width = '0%';
-                        
-                        // Небольшая задержка для плавности
+// Анимация полос загрузки в кейсах (оригинальная логика)
+function initProgressBars() {
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Анимация для результатов кейсов
+                if (entry.target.querySelector('.bar-fill')) {
+                    entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
                         setTimeout(() => {
-                            bar.style.width = targetWidth;
-                        }, 50);
-                        
-                        barObserver.unobserve(bar);
-                    }
+                            bar.style.width = width;
+                        }, 100);
+                    });
                 }
-            });
-        }, {
-            threshold: 0.1, // Уменьшаем порог для более раннего срабатывания
-            rootMargin: '0px 0px -20px 0px' // Уменьшаем отступ
+                
+                observer.unobserve(entry.target);
+            }
         });
-        
-        progressBars.forEach((bar, index) => {
-            console.log(`Наблюдаем за полосой ${index}:`, bar, 'data-width:', bar.getAttribute('data-width'));
-            barObserver.observe(bar);
-        });
-    })();
+    }, observerOptions);
+
+    // Наблюдаем за кейсами
+    document.querySelectorAll('.case-item').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// Вызываем функцию инициализации полос загрузки
+initProgressBars();
 });

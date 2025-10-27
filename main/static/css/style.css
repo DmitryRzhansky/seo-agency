@@ -2438,8 +2438,8 @@ section {
     left: 0;
     height: 100%;
     background: linear-gradient(90deg, var(--accent), var(--accent-hover));
-    width: 0%;
-    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
     overflow: hidden;
 }
 
@@ -2452,11 +2452,6 @@ section {
     right: 0;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     animation: shimmer 2s infinite;
-    opacity: 0;
-}
-
-.bar-fill.animated::after {
-    opacity: 1;
 }
 
 @keyframes shimmer {
@@ -3986,10 +3981,6 @@ section {
         transition-duration: 0.3s !important;
     }
     
-    /* Исключение для полос загрузки */
-    .bar-fill {
-        transition-duration: 1.5s !important;
-    }
     
     /* Отключаем некоторые эффекты */
     .noise-overlay {

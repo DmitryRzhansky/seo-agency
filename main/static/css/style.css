@@ -1605,6 +1605,7 @@ section {
     font-weight: 900;
     font-family: 'JetBrains Mono', monospace;
     color: var(--accent);
+    margin-top: auto;
 }
 
 .btn-custom {
@@ -1621,7 +1622,6 @@ section {
     text-transform: uppercase;
     font-family: 'Space Grotesk', sans-serif;
     letter-spacing: 1px;
-    margin-top: auto;
 }
 
 .btn-custom:hover {

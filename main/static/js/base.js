@@ -293,4 +293,36 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     })();
-})();
+    
+    // Анимация полос загрузки в кейсах
+    (function initProgressBars() {
+        const progressBars = document.querySelectorAll('.bar-fill');
+        
+        const barObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.style.width;
+                    
+                    // Сбрасываем ширину на 0
+                    bar.style.width = '0%';
+                    
+                    // Анимируем до нужной ширины
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                    
+                    // Отключаем наблюдение после анимации
+                    barObserver.unobserve(bar);
+                }
+            });
+        }, {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        });
+        
+        progressBars.forEach(bar => {
+            barObserver.observe(bar);
+        });
+    })();
+});

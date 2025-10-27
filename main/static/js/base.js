@@ -297,12 +297,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Анимация полос загрузки в кейсах
     (function initProgressBars() {
         const progressBars = document.querySelectorAll('.bar-fill');
+        const animatedBars = new Set(); // Отслеживаем уже анимированные полосы
         
         const barObserver = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !animatedBars.has(entry.target)) {
                     const bar = entry.target;
                     const width = bar.style.width;
+                    
+                    // Добавляем в список анимированных
+                    animatedBars.add(bar);
                     
                     // Сбрасываем ширину на 0
                     bar.style.width = '0%';
@@ -310,15 +314,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Анимируем до нужной ширины
                     setTimeout(() => {
                         bar.style.width = width;
-                    }, 100);
+                    }, 200);
                     
                     // Отключаем наблюдение после анимации
                     barObserver.unobserve(bar);
                 }
             });
         }, {
-            threshold: 0.5,
-            rootMargin: '0px 0px -100px 0px'
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
         });
         
         progressBars.forEach(bar => {

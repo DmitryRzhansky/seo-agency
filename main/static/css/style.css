@@ -2484,6 +2484,7 @@ section {
     transition: var(--transition);
     text-transform: uppercase;
     font-family: 'Space Grotesk', sans-serif;
+    text-decoration: none;
 }
 
 .view-all-cases:hover {

@@ -1,450 +1,1027 @@
 {% extends "main/base.html" %}
 {% load static %}
-{% load static custom_filters %}
+{% load custom_filters %}
 
-{% block title %}Комплексное продвижение бизнеса{% endblock title %}
+{% block title %}За деньги в ТОП - профессиональное SEO продвижение сайтов{% endblock title %}
 
 {% block content %}
 
-
-    <!-- HERO SECTION - Брутальный дизайн -->
-    <section class="brutal-hero" id="hero">
-        <div class="brutal-hero-container">
-            <div class="brutal-hero-content">
-                <div class="brutal-hero-text">
-                    <div class="brutal-hero-badge">
-                        <span class="brutal-badge-text">🚀 SEO СТУДИЯ №1 В РОССИИ</span>
-                    </div>
-                    <h1 class="brutal-hero-title">
-                        ВЗРЫВНОЙ РОСТ<br/>
-                        <span class="brutal-hero-accent">ВАШЕГО БИЗНЕСА</span><br/>
-                        В ИНТЕРНЕТЕ
-                    </h1>
-                    <p class="brutal-hero-description">
-                        Превращаем SEO в мощный канал продаж. Работаем с результатом, а не с процессом. 
-                        <span class="brutal-hero-highlight">150+ довольных клиентов</span> за 10 лет.
-                    </p>
-                    <div class="brutal-hero-buttons">
-                        <a href="#contact" class="brutal-btn-primary">
-                            <i class="fas fa-rocket"></i>
-                            <span>НАЧАТЬ РОСТ</span>
-                        </a>
-                        <a href="#services-preview" class="brutal-btn-secondary">
-                            <i class="fas fa-chart-line"></i>
-                            <span>ТАРИФЫ</span>
-                        </a>
-                    </div>
-                    <div class="brutal-hero-stats">
-                        <div class="brutal-stat">
-                            <div class="brutal-stat-number">150+</div>
-                            <div class="brutal-stat-label">ПРОЕКТОВ</div>
-                        </div>
-                        <div class="brutal-stat">
-                            <div class="brutal-stat-number">10</div>
-                            <div class="brutal-stat-label">ЛЕТ ОПЫТА</div>
-                        </div>
-                        <div class="brutal-stat">
-                            <div class="brutal-stat-number">100%</div>
-                            <div class="brutal-stat-label">РЕЗУЛЬТАТ</div>
-                        </div>
-                    </div>
+<!-- Главная секция -->
+<section class="hero">
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="hero-watermark">
+            <img src="{% static 'images/logo/sign.png' %}" alt="Logo">
+        </div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-label">
+                <span class="label-dot"></span>
+                <span>За деньги в ТОП</span>
+            </div>
+            <h1 class="hero-title" data-text="Продвижение сайтов">
+                <span class="word" data-word="Продвижение">Продвижение</span>
+                <span class="word" data-word="сайтов">сайтов</span>
+            </h1>
+            <p class="hero-subtitle">SEO-продвижение сайта в&nbsp;поисковых системах&nbsp;— самый эффективный способ стабильно привлекать целевых посетителей и&nbsp;увеличивать продажи. Выводим в&nbsp;ТОП-10 Яндекс и&nbsp;Google с&nbsp;гарантией результата или возвращаем 100% средств. Платите только за&nbsp;достигнутые позиции.</p>
+            <div class="hero-features">
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Оплата только за результат</span>
                 </div>
-                <div class="brutal-hero-visual">
-                    <div class="brutal-director-card">
-                        <div class="brutal-director-image">
-                            <img src="https://isakov.work/isakov.webp" alt="Виталий Исаков" class="brutal-director-photo">
-                        </div>
-                        <div class="brutal-director-content">
-                            <h3 class="brutal-director-name">ВИТАЛИЙ ИСАКОВ</h3>
-                            <p class="brutal-director-title">ОСНОВАТЕЛЬ, SEO-ЭКСПЕРТ</p>
-                            <div class="brutal-expertise-tags">
-                                <span class="brutal-tag">GOOGLE</span>
-                                <span class="brutal-tag">YANDEX</span>
-                                <span class="brutal-tag">10+ ЛЕТ</span>
-                            </div>
-                            <blockquote class="brutal-quote">
-                                "РЕЗУЛЬТАТ ВАЖНЕЕ ПРОЦЕССА. РАСТИМ ПРИБЫЛЬ, А НЕ ПРОСТО ПОЗИЦИИ."
-                            </blockquote>
-                        </div>
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Гарантия возврата 100%</span>
+                </div>
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Первый месяц бесплатно</span>
+                </div>
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Без предоплаты</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <button class="cta-button primary">
+                    <span class="button-text">Начать проект</span>
+                    <span class="button-icon">→</span>
+                </button>
+                <button class="cta-button secondary">
+                    <span class="button-text">Смотреть кейсы</span>
+                </button>
+            </div>
+        </div>
+        <div class="hero-form">
+            <div class="form-header">
+                <h3>Получить консультацию</h3>
+                <div class="form-badge">
+                    <span class="badge-dot"></span>
+                    <span>Бесплатно</span>
+                </div>
+            </div>
+            <form id="heroForm" class="quick-form">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="tel" name="phone" placeholder="Телефон" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <button type="submit" class="form-submit">
+                    <span>Отправить</span>
+                </button>
+            </form>
+            <p class="form-note">Ответим в течение 15 минут</p>
+        </div>
+    </div>
+    <div class="hero-scroll-indicator">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- Услуги -->
+<section id="services" class="services">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[01]</span>
+                <span class="title-text">Услуги</span>
+            </h2>
+            <p class="section-description">Честная работа. Измеримые результаты. Никаких обещаний&nbsp;— только факты.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-service="01">
+                <div class="service-number">01</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18"></rect>
+                        <path d="M3 9h18M9 21V9"></path>
+                    </svg>
+                </div>
+                <h3>Технический<br>аудит</h3>
+                <ul class="service-features">
+                    <li>→ Глубокий анализ сайта</li>
+                    <li>→ Выявление критических ошибок</li>
+                    <li>→ Детальный план исправлений</li>
+                    <li>→ Анализ конкурентов</li>
+                </ul>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-label">ОТ</span>
+                        <span class="price-value">50&nbsp;000&nbsp;₽</span>
                     </div>
+                    <button class="service-btn">ЗАКАЗАТЬ</button>
+                </div>
+            </div>
+            <div class="service-card" data-service="02">
+                <div class="service-number">02</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                    </svg>
+                </div>
+                <h3>Контент-<br>оптимизация</h3>
+                <ul class="service-features">
+                    <li>→ Написание SEO-текстов</li>
+                    <li>→ Оптимизация метатегов</li>
+                    <li>→ Семантическое ядро</li>
+                    <li>→ Структура контента</li>
+                </ul>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-label">ОТ</span>
+                        <span class="price-value">35&nbsp;000&nbsp;₽</span>
+                    </div>
+                    <button class="service-btn">ЗАКАЗАТЬ</button>
+                </div>
+            </div>
+            <div class="service-card" data-service="03">
+                <div class="service-number">03</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                </div>
+                <h3>Ссылочное<br>продвижение</h3>
+                <ul class="service-features">
+                    <li>→ Качественные беклинки</li>
+                    <li>→ Естественный рост</li>
+                    <li>→ Белые методы</li>
+                    <li>→ Анализ ссылочной массы</li>
+                </ul>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-label">ОТ</span>
+                        <span class="price-value">45&nbsp;000&nbsp;₽</span>
+                    </div>
+                    <button class="service-btn">ЗАКАЗАТЬ</button>
+                </div>
+            </div>
+            <div class="service-card featured" data-service="04">
+                <div class="featured-badge">ПОПУЛЯРНО</div>
+                <div class="service-number">04</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </div>
+                <h3>Комплексное<br>продвижение</h3>
+                <ul class="service-features">
+                    <li>→ Полный цикл работ</li>
+                    <li>→ Постоянная поддержка</li>
+                    <li>→ Гарантия результата</li>
+                    <li>→ Персональный менеджер</li>
+                </ul>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-label">ОТ</span>
+                        <span class="price-value">80&nbsp;000&nbsp;₽</span>
+                    </div>
+                    <button class="service-btn">ЗАКАЗАТЬ</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- PROBLEMS SECTION - Брутальный стиль -->
-    <section class="brutal-problems" id="why-no-clients">
-        <div class="brutal-problems-container">
-            <div class="brutal-problems-header">
-                <div class="brutal-section-badge">ДИАГНОСТИКА</div>
-                <h2 class="brutal-problems-title">
-                    9 ПРИЧИН ПОЧЕМУ<br/>
-                    <span class="brutal-problems-accent">ВАШ САЙТ НЕ РАБОТАЕТ</span>
+<!-- Индивидуальные тарифы -->
+<section class="custom-tariffs">
+    <div class="container">
+        <!-- Акционный баннер -->
+        <div class="promo-banner">
+            <div class="promo-banner-icon">🎁</div>
+            <div class="promo-banner-text">
+                <strong>Специальное предложение:</strong> При оплате на&nbsp;год&nbsp;— первый месяц бесплатно
+            </div>
+        </div>
+        
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[02]</span>
+                <span class="title-text">Не подходят стандартные тарифы?</span>
+            </h2>
+            <p class="section-description">Индивидуальные решения для вашего бизнеса</p>
+        </div>
+        <div class="custom-grid">
+            <div class="custom-card">
+                <div class="custom-label">Для крупного бизнеса</div>
+                <h3>Корпоративное SEO</h3>
+                <ul class="custom-features">
+                    <li>Персональная команда из 5+ специалистов</li>
+                    <li>Приоритетная поддержка 24/7</li>
+                    <li>Еженедельные встречи и отчеты</li>
+                    <li>Комплексный digital-маркетинг</li>
+                    <li>Работа с крупными бюджетами</li>
+                </ul>
+                <div class="custom-price">Индивидуально</div>
+                <button class="btn-custom">Обсудить проект</button>
+            </div>
+            <div class="custom-card highlighted">
+                <div class="custom-badge">Популярно</div>
+                <div class="custom-label">Оптимальный вариант</div>
+                <h3>SEO под ключ</h3>
+                <ul class="custom-features">
+                    <li>Аудит + техническая оптимизация</li>
+                    <li>Контент-маркетинг</li>
+                    <li>Ссылочное продвижение</li>
+                    <li>Ежемесячные отчеты</li>
+                    <li>Гибкий график платежей</li>
+                </ul>
+                <div class="custom-price">от 60&nbsp;000&nbsp;₽/мес</div>
+                <button class="btn-custom">Заказать</button>
+            </div>
+            <div class="custom-card">
+                <div class="custom-label">Для стартапов</div>
+                <h3>SEO Start</h3>
+                <ul class="custom-features">
+                    <li>Базовая техническая оптимизация</li>
+                    <li>Сбор семантического ядра</li>
+                    <li>Оптимизация 10-20 страниц</li>
+                    <li>Настройка аналитики</li>
+                    <li>Месячный отчет</li>
+                </ul>
+                <div class="custom-price">от 25&nbsp;000&nbsp;₽/мес</div>
+                <button class="btn-custom">Начать</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Что вы получите -->
+<section class="benefits">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[03]</span>
+                <span class="title-text">Что вы получите</span>
+            </h2>
+            <p class="section-description">Заказывая продвижение у нас, вы получаете полный комплекс работ</p>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Вывод в ТОП</h3>
+                <p>Вывод сайта в топ выдачи самых популярных поисковых систем — Яндекс и Google по целевым запросам</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📈</div>
+                <h3>Стабильный рост трафика</h3>
+                <p>Стабильный рост органического трафика по ключевым запросам. Увеличение посещаемости в 3-5 раз</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Рост конверсии</h3>
+                <p>Доработка сайта и увеличение конверсии на посадочных страницах. Оптимизация пути клиента</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📊</div>
+                <h3>Увеличение продаж</h3>
+                <p>Расширение клиентской базы и увеличение продаж товаров и услуг. Рост выручки от органического трафика</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🔍</div>
+                <h3>Детальная аналитика</h3>
+                <p>Прозрачная отчетность по всем показателям. Еженедельные и ежемесячные отчеты с конкретными цифрами</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Юридические гарантии</h3>
+                <p>Договор с прописанными KPI. Возврат 100% средств при невыполнении согласованных показателей</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Калькулятор -->
+<section class="calculator">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[04]</span>
+                <span class="title-text">Калькулятор стоимости</span>
+            </h2>
+            <p class="section-description">Рассчитайте примерную стоимость продвижения вашего сайта</p>
+        </div>
+        <div class="calculator-wrapper">
+            <div class="calculator-form">
+                <div class="calc-row">
+                    <label>Тематика сайта</label>
+                    <select class="calc-select">
+                        <option>E-commerce</option>
+                        <option>B2B услуги</option>
+                        <option>Медицина</option>
+                        <option>Недвижимость</option>
+                        <option>Юридические услуги</option>
+                        <option>Другое</option>
+                    </select>
+                </div>
+                <div class="calc-row">
+                    <label>Количество запросов</label>
+                    <select class="calc-select">
+                        <option>До 50</option>
+                        <option>50-100</option>
+                        <option>100-200</option>
+                        <option>200+</option>
+                    </select>
+                </div>
+                <div class="calc-row">
+                    <label>Текущие позиции</label>
+                    <select class="calc-select">
+                        <option>Нет в выдаче</option>
+                        <option>ТОП-100</option>
+                        <option>ТОП-50</option>
+                        <option>ТОП-30</option>
+                    </select>
+                </div>
+                <button class="btn-calc">Рассчитать стоимость</button>
+            </div>
+            <div class="calc-result">
+                <div class="result-box">
+                    <div class="result-title">Примерная стоимость</div>
+                    <div class="result-price">от 45&nbsp;000&nbsp;₽</div>
+                    <div class="result-note">в месяц</div>
+                    <button class="btn-order">Заказать консультацию</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Процесс работы -->
+<section class="process">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[05]</span>
+                <span class="title-text">Процесс работы</span>
+            </h2>
+            <p class="section-description">Пошаговый план продвижения от аудита до результата</p>
+        </div>
+        <div class="process-steps">
+            <div class="step-item">
+                <div class="step-number">01</div>
+                <div class="step-content">
+                    <h3>Аудит и анализ</h3>
+                    <p>Глубокий технический аудит, анализ конкурентов, формирование стратегии</p>
+                    <div class="step-time">1-2 недели</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">02</div>
+                <div class="step-content">
+                    <h3>Техническая оптимизация</h3>
+                    <p>Исправление ошибок, улучшение скорости, настройка аналитики</p>
+                    <div class="step-time">2-3 недели</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">03</div>
+                <div class="step-content">
+                    <h3>Контент и семантика</h3>
+                    <p>Сбор семантического ядра, написание текстов, оптимизация метатегов</p>
+                    <div class="step-time">3-4 недели</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">04</div>
+                <div class="step-content">
+                    <h3>Ссылочное продвижение</h3>
+                    <p>Наращивание качественной ссылочной массы белыми методами</p>
+                    <div class="step-time">Постоянно</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">05</div>
+                <div class="step-content">
+                    <h3>Мониторинг и улучшение</h3>
+                    <p>Отслеживание позиций, корректировка стратегии, отчеты</p>
+                    <div class="step-time">Постоянно</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- О компании -->
+<section id="about" class="about">
+    <div class="about-grid-bg"></div>
+    <div class="container">
+        <div class="about-layout">
+            <div class="about-text">
+                <h2 class="section-title">
+                    <span class="title-number">[06]</span>
+                    <span class="title-text">О студии</span>
                 </h2>
-                <p class="brutal-problems-description">
-                    Проверьте себя: если хотя бы 3 пункта про вас — пора действовать
+                <p class="about-description">
+                    Мы&nbsp;знаем, как перевыполнить план по&nbsp;лидам, повысить конверсию и&nbsp;вывести ваш сайт в&nbsp;ТОП поисковых систем. <span class="highlight">За&nbsp;5&nbsp;лет работы реализовали 247&nbsp;проектов</span> в&nbsp;самых конкурентных нишах.
                 </p>
+                <p class="about-description">
+                    Работаем только белыми методами по&nbsp;рекомендациям Яндекс и&nbsp;Google. Никаких серых схем и&nbsp;рисков санкций. Только стабильный долгосрочный результат с&nbsp;прозрачной отчетностью и&nbsp;юридическими гарантиями.
+                </p>
+                <p class="about-description">
+                    Специализируемся на&nbsp;сложных коммерческих проектах в&nbsp;медицине, e-commerce, B2B. Индивидуальный подход к&nbsp;каждому клиенту. Выполняем задачи, которые приносят быстрый и&nbsp;ощутимый результат.
+                </p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">БЕЗ ПРЕДОПЛАТ</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">ДОГОВОР С ГАРАНТИЯМИ</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">ПРОЗРАЧНАЯ АНАЛИТИКА</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span class="feature-text">ЕЖЕМЕСЯЧНАЯ ОТЧЕТНОСТЬ</span>
+                    </div>
+                </div>
+                <div class="about-metrics">
+                    <div class="metric-item">
+                        <div class="metric-value">24/7</div>
+                        <div class="metric-label">ПОДДЕРЖКА</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">100+</div>
+                        <div class="metric-label">СПЕЦИАЛИСТОВ</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">15</div>
+                        <div class="metric-label">НАГРАД</div>
+                    </div>
+                </div>
             </div>
-
-            <div class="brutal-problems-grid">
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-bug"></i>
+            <div class="about-visual">
+                <div class="visual-stack">
+                    <div class="stack-item" data-stack="1">
+                        <span class="stack-label">ДАННЫЕ</span>
+                        <div class="stack-progress" style="width: 95%"></div>
                     </div>
-                    <h4 class="brutal-problem-title">ТЕХНИЧЕСКИЕ ОШИБКИ</h4>
-                    <p class="brutal-problem-text">Медленная загрузка, битые ссылки, дубли страниц убивают SEO</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-danger">-60% ТРАФИКА</span>
+                    <div class="stack-item" data-stack="2">
+                        <span class="stack-label">АНАЛИТИКА</span>
+                        <div class="stack-progress" style="width: 88%"></div>
                     </div>
-                </div>
-
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-sitemap"></i>
-                    </div>
-                    <h4 class="brutal-problem-title">СЛАБАЯ СЕМАНТИКА</h4>
-                    <p class="brutal-problem-text">Неполное ядро, нет кластеризации — упускаете 70% запросов</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-warning">-70% ОХВАТ</span>
+                    <div class="stack-item" data-stack="3">
+                        <span class="stack-label">РЕЗУЛЬТАТ</span>
+                        <div class="stack-progress" style="width: 92%"></div>
                     </div>
                 </div>
-
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-feather-alt"></i>
-                    </div>
-                    <h4 class="brutal-problem-title">НЕТ КОНТЕНТ-СТРАТЕГИИ</h4>
-                    <p class="brutal-problem-text">Редкие публикации, нет плана — сайт не растет</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-warning">ЗАСТОЙ</span>
-                    </div>
-                </div>
-
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-link"></i>
-                    </div>
-                    <h4 class="brutal-problem-title">ТОКСИЧНЫЕ ССЫЛКИ</h4>
-                    <p class="brutal-problem-text">Слабый профиль тянет вниз. Один фильтр = минус год работы</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-danger">РИСК БАНА</span>
-                    </div>
-                </div>
-
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <h4 class="brutal-problem-title">НЕТ АНАЛИТИКИ</h4>
-                    <p class="brutal-problem-text">Не знаете ROI — работаете вслепую, сливаете бюджет</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-danger">-40% БЮДЖЕТ</span>
-                    </div>
-                </div>
-
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-handshake-slash"></i>
-                    </div>
-                    <h4 class="brutal-problem-title">НЕТ ЗАЯВОК</h4>
-                    <p class="brutal-problem-text">Посетители есть, но не покупают. UX и оффер не работают</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-danger">CR < 1%</span>
-                    </div>
-                </div>
-
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <h4 class="brutal-problem-title">СЛИВ БЮДЖЕТА</h4>
-                    <p class="brutal-problem-text">Трафик без конверсий = выброшенные деньги на ветер</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-danger">ROI < 0</span>
-                    </div>
-                </div>
-
-                <div class="brutal-problem-card">
-                    <div class="brutal-problem-icon">
-                        <i class="fas fa-user-slash"></i>
-                    </div>
-                    <h4 class="brutal-problem-title">МАЛО ТРАФИКА</h4>
-                    <p class="brutal-problem-text">100 посетителей в день = 3 заявки. Нужно 10x больше!</p>
-                    <div class="brutal-problem-impact">
-                        <span class="brutal-impact-badge brutal-warning">КРИТИЧНО</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="brutal-problems-cta">
-                <div class="brutal-cta-box">
-                    <h3 class="brutal-cta-title">УЗНАЛИ СЕБЯ ХОТЯ БЫ В 3 ПУНКТАХ?</h3>
-                    <p class="brutal-cta-text">Проведем бесплатный аудит и покажем как исправить всё за 30 дней</p>
-                    <a href="#contact" class="brutal-btn-primary">
-                        <i class="fas fa-gift"></i>
-                        <span>ПОЛУЧИТЬ БЕСПЛАТНЫЙ АУДИТ</span>
-                    </a>
+                <div class="visual-quote">
+                    <div class="quote-mark">"</div>
+                    <p>Единственное, что имеет значение — это позиции в выдаче и конверсии.</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- HOW WE WORK - Брутальный timeline -->
-    <section class="brutal-process" id="how-we-work">
-        <div class="brutal-process-container">
-            <div class="brutal-process-header">
-                <div class="brutal-section-badge">ПРОЦЕСС</div>
-                <h2 class="brutal-process-title">
-                    КАК МЫ<br/>
-                    <span class="brutal-process-accent">ВЗРЫВАЕМ ВАШ ТРАФИК</span>
-                </h2>
+<!-- Направления продвижения -->
+<section class="niches">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[07]</span>
+                <span class="title-text">Направления продвижения</span>
+            </h2>
+            <p class="section-description">Экспертиза в самых сложных и конкурентных нишах</p>
+        </div>
+        <div class="niches-grid">
+            <div class="niche-card">
+                <div class="niche-icon">🏥</div>
+                <h3>Медицина</h3>
+                <p>Клиники, стоматологии, медцентры. Опыт вывода в ТОП по высококонкурентным запросам</p>
+                <div class="niche-stats">42 проекта</div>
             </div>
-
-            <div class="brutal-timeline">
-                <div class="brutal-timeline-item">
-                    <div class="brutal-timeline-marker">
-                        <div class="brutal-marker-inner">1</div>
-                    </div>
-                    <div class="brutal-timeline-content">
-                        <div class="brutal-timeline-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <h3 class="brutal-timeline-title">ГЛУБОКИЙ АНАЛИЗ</h3>
-                        <p class="brutal-timeline-text">Аудит сайта, конкурентов, ниши. Находим точки роста, которые пропустили другие</p>
-                        <div class="brutal-timeline-features">
-                            <span class="brutal-feature-tag">✓ ТЕХАУДИТ 100+ ПАРАМЕТРОВ</span>
-                            <span class="brutal-feature-tag">✓ АНАЛИЗ 10 КОНКУРЕНТОВ</span>
-                            <span class="brutal-feature-tag">✓ КАРТА ТОЧЕК РОСТА</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="brutal-timeline-item">
-                    <div class="brutal-timeline-marker">
-                        <div class="brutal-marker-inner">2</div>
-                    </div>
-                    <div class="brutal-timeline-content">
-                        <div class="brutal-timeline-icon">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h3 class="brutal-timeline-title">СТРАТЕГИЯ РОСТА</h3>
-                        <p class="brutal-timeline-text">Создаем дорожную карту на 12 месяцев с четкими KPI и прогнозом результата</p>
-                        <div class="brutal-timeline-features">
-                            <span class="brutal-feature-tag">✓ ROADMAP НА ГОД</span>
-                            <span class="brutal-feature-tag">✓ ПРОГНОЗ ТРАФИКА</span>
-                            <span class="brutal-feature-tag">✓ ROI РАСЧЕТ</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="brutal-timeline-item">
-                    <div class="brutal-timeline-marker">
-                        <div class="brutal-marker-inner">3</div>
-                    </div>
-                    <div class="brutal-timeline-content">
-                        <div class="brutal-timeline-icon">
-                            <i class="fas fa-cogs"></i>
-                        </div>
-                        <h3 class="brutal-timeline-title">РЕАЛИЗАЦИЯ</h3>
-                        <p class="brutal-timeline-text">Техоптимизация, контент, ссылки. Работаем спринтами по 2 недели с отчетами</p>
-                        <div class="brutal-timeline-features">
-                            <span class="brutal-feature-tag">✓ СПРИНТЫ 2 НЕДЕЛИ</span>
-                            <span class="brutal-feature-tag">✓ ЕЖЕНЕДЕЛЬНЫЕ СОЗВОНЫ</span>
-                            <span class="brutal-feature-tag">✓ ДОСТУП К ТАСКАМ</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="brutal-timeline-item">
-                    <div class="brutal-timeline-marker">
-                        <div class="brutal-marker-inner">4</div>
-                    </div>
-                    <div class="brutal-timeline-content">
-                        <div class="brutal-timeline-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3 class="brutal-timeline-title">РОСТ И МАСШТАБИРОВАНИЕ</h3>
-                        <p class="brutal-timeline-text">Видим результат через 30-60 дней. Масштабируем то, что работает. Убираем лишнее</p>
-                        <div class="brutal-timeline-features">
-                            <span class="brutal-feature-tag">✓ ПЕРВЫЕ ЛИДЫ ЗА МЕСЯЦ</span>
-                            <span class="brutal-feature-tag">✓ X2-X5 ТРАФИК ЗА ГОД</span>
-                            <span class="brutal-feature-tag">✓ ПОСТОЯННАЯ ОПТИМИЗАЦИЯ</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="niche-card">
+                <div class="niche-icon">🛒</div>
+                <h3>E-commerce</h3>
+                <p>Интернет-магазины любой тематики. Рост трафика и продаж через SEO</p>
+                <div class="niche-stats">89 проектов</div>
+            </div>
+            <div class="niche-card">
+                <div class="niche-icon">🏢</div>
+                <h3>B2B</h3>
+                <p>Сложные B2B-услуги, производство, оптовые продажи. Целевые лиды</p>
+                <div class="niche-stats">56 проектов</div>
+            </div>
+            <div class="niche-card">
+                <div class="niche-icon">🏠</div>
+                <h3>Недвижимость</h3>
+                <p>Застройщики, агентства, риелторы. Локальное и федеральное SEO</p>
+                <div class="niche-stats">31 проект</div>
+            </div>
+            <div class="niche-card">
+                <div class="niche-icon">⚖️</div>
+                <h3>Юридические услуги</h3>
+                <p>Юрфирмы, адвокаты, нотариусы. Продвижение в регионах и Москве</p>
+                <div class="niche-stats">24 проекта</div>
+            </div>
+            <div class="niche-card">
+                <div class="niche-icon">🎓</div>
+                <h3>Образование</h3>
+                <p>Онлайн-школы, курсы, тренинги. Привлечение целевой аудитории</p>
+                <div class="niche-stats">19 проектов</div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ОСТАЛЬНЫЕ СЕКЦИИ аналогично переделаны... -->
-    <!-- Для краткости показываю структуру, полный код ниже -->
-
-    <!-- SERVICES PREVIEW - Брутальный стиль -->
-    <section class="brutal-services" id="services-preview">
-        <div class="brutal-services-container">
-            <div class="brutal-services-header">
-                <div class="brutal-section-badge">УСЛУГИ</div>
-                <h2 class="brutal-services-title">
-                    ВЕСЬ СПЕКТР<br/>
-                    <span class="brutal-services-accent">DIGITAL-МАРКЕТИНГА</span>
-                </h2>
+<!-- Кейсы -->
+<section id="cases" class="cases">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[08]</span>
+                <span class="title-text">Кейсы</span>
+            </h2>
+            <p class="section-description">Цифры не врут. Реальные результаты реальных проектов.</p>
+        </div>
+        <div class="cases-list">
+            <div class="case-item" data-case="01">
+                <div class="case-header">
+                    <div class="case-number">01</div>
+                    <div class="case-year">2024</div>
+                </div>
+                <div class="case-content">
+                    <div class="case-info">
+                        <h3>ИНТЕРНЕТ-МАГАЗИН<br>ЭЛЕКТРОНИКИ</h3>
+                        <div class="case-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>НИША: E-COMMERCE</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>СРОК: 8 МЕСЯЦЕВ</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>БЮДЖЕТ: 1.2M ₽</span>
+                            </div>
+                        </div>
+                        <p class="case-description">Комплексное продвижение с нуля. Выход в ТОП-3 по высокочастотным запросам.</p>
+                    </div>
+                    <div class="case-results">
+                        <div class="result-item">
+                            <div class="result-header">
+                                <span class="result-label">ТРАФИК</span>
+                                <span class="result-change">↑</span>
+                            </div>
+                            <span class="result-value">+340%</span>
+                            <div class="result-bar">
+                                <div class="bar-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-header">
+                                <span class="result-label">КОНВЕРСИИ</span>
+                                <span class="result-change">↑</span>
+                            </div>
+                            <span class="result-value">+215%</span>
+                            <div class="result-bar">
+                                <div class="bar-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="brutal-services-grid">
-                <div class="brutal-service-card">
-                    <div class="brutal-service-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 class="brutal-service-title">SEO ПРОДВИЖЕНИЕ</h3>
-                    <p class="brutal-service-desc">Комплексное продвижение с гарантией роста трафика</p>
-                    <ul class="brutal-service-list">
-                        <li>✓ ТЕХНИЧЕСКАЯ ОПТИМИЗАЦИЯ</li>
-                        <li>✓ КОНТЕНТ-МАРКЕТИНГ</li>
-                        <li>✓ ССЫЛОЧНОЕ ПРОДВИЖЕНИЕ</li>
-                        <li>✓ ЛОКАЛЬНОЕ SEO</li>
-                    </ul>
-                    <div class="brutal-service-price">
-                        <span class="brutal-price-label">ОТ</span>
-                        <span class="brutal-price-value">50 000 ₽</span>
-                        <span class="brutal-price-period">/МЕС</span>
-                    </div>
-                    <a href="#contact" class="brutal-service-btn">ВЫБРАТЬ ТАРИФ</a>
+            <div class="case-item" data-case="02">
+                <div class="case-header">
+                    <div class="case-number">02</div>
+                    <div class="case-year">2024</div>
                 </div>
-
-                <div class="brutal-service-card brutal-featured">
-                    <div class="brutal-featured-badge">ХИТ ПРОДАЖ</div>
-                    <div class="brutal-service-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="brutal-service-title">КОМПЛЕКСНОЕ ПРОДВИЖЕНИЕ</h3>
-                    <p class="brutal-service-desc">SEO + Контекст + SMM = максимальный охват</p>
-                    <ul class="brutal-service-list">
-                        <li>✓ ВСЁ ИЗ SEO</li>
-                        <li>✓ ЯНДЕКС ДИРЕКТ + GOOGLE ADS</li>
-                        <li>✓ ТАРГЕТ ВК + INSTAGRAM*</li>
-                        <li>✓ EMAIL-МАРКЕТИНГ</li>
-                    </ul>
-                    <div class="brutal-service-price">
-                        <span class="brutal-price-label">ОТ</span>
-                        <span class="brutal-price-value">150 000 ₽</span>
-                        <span class="brutal-price-period">/МЕС</span>
-                    </div>
-                    <a href="#contact" class="brutal-service-btn">ВЫБРАТЬ ТАРИФ</a>
-                </div>
-
-                <div class="brutal-service-card">
-                    <div class="brutal-service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="brutal-service-title">АНАЛИТИКА И CRO</h3>
-                    <p class="brutal-service-desc">Настройка аналитики и рост конверсии сайта</p>
-                    <ul class="brutal-service-list">
-                        <li>✓ СКВОЗНАЯ АНАЛИТИКА</li>
-                        <li>✓ ДАШБОРДЫ И ОТЧЕТЫ</li>
-                        <li>✓ UX-АУДИТ</li>
-                        <li>✓ A/B ТЕСТИРОВАНИЕ</li>
-                    </ul>
-                    <div class="brutal-service-price">
-                        <span class="brutal-price-label">ОТ</span>
-                        <span class="brutal-price-value">80 000 ₽</span>
-                        <span class="brutal-price-period">/МЕС</span>
-                    </div>
-                    <a href="#contact" class="brutal-service-btn">ВЫБРАТЬ ТАРИФ</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA SECTION - Брутальный стиль -->
-    <section class="brutal-cta">
-        <div class="brutal-cta-container">
-            <div class="brutal-cta-box">
-                <div class="brutal-cta-content">
-                    <h2 class="brutal-cta-title">
-                        ГОТОВЫ К <span class="brutal-cta-accent">ВЗРЫВНОМУ РОСТУ</span>?
-                    </h2>
-                    <p class="brutal-cta-text">
-                        Оставьте заявку и получите бесплатный аудит сайта + персональную стратегию роста на 50 000 ₽
-                    </p>
-                    <div class="brutal-cta-features">
-                        <span class="brutal-cta-feature">✓ АУДИТ ЗА 24 ЧАСА</span>
-                        <span class="brutal-cta-feature">✓ СТРАТЕГИЯ РОСТА</span>
-                        <span class="brutal-cta-feature">✓ ПРОГНОЗ ТРАФИКА</span>
-                    </div>
-                </div>
-                <div class="brutal-cta-button">
-                    <a href="#contact" class="brutal-btn-primary">
-                        <i class="fas fa-gift"></i>
-                        <span>ПОЛУЧИТЬ АУДИТ</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT FORM - Брутальная форма -->
-    <section class="brutal-contact" id="contact">
-        <div class="brutal-contact-container">
-            <div class="brutal-contact-header">
-                <div class="brutal-section-badge">КОНТАКТЫ</div>
-                <h2 class="brutal-contact-title">
-                    НАЧНИТЕ РОСТ<br/>
-                    <span class="brutal-contact-accent">ПРЯМО СЕЙЧАС</span>
-                </h2>
-            </div>
-
-            <div class="brutal-contact-form-container">
-                <div class="brutal-contact-form">
-                    <form method="post" action="{% url 'main:home' %}">
-                        {% csrf_token %}
-                        
-                        <div class="brutal-form-group">
-                            <label class="brutal-form-label">ВАШЕ ИМЯ</label>
-                            {{ form.name }}
-                        </div>
-
-                        <div class="brutal-form-row">
-                            <div class="brutal-form-col">
-                                <div class="brutal-form-group">
-                                    <label class="brutal-form-label">ТЕЛЕФОН</label>
-                                    {{ form.phone }}
-                                </div>
+                <div class="case-content">
+                    <div class="case-info">
+                        <h3>B2B СЕРВИС<br>ДЛЯ БИЗНЕСА</h3>
+                        <div class="case-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>НИША: B2B/SAAS</span>
                             </div>
-                            <div class="brutal-form-col">
-                                <div class="brutal-form-group">
-                                    <label class="brutal-form-label">EMAIL</label>
-                                    {{ form.email }}
-                                </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>СРОК: 6 МЕСЯЦЕВ</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>БЮДЖЕТ: 850K ₽</span>
                             </div>
                         </div>
-
-                        <div class="brutal-form-group">
-                            <label class="brutal-form-label">РАССКАЖИТЕ О ВАШЕЙ ЗАДАЧЕ</label>
-                            {{ form.message }}
+                        <p class="case-description">Техническая оптимизация + контент. Увеличение органического трафика в 3.8 раза.</p>
+                    </div>
+                    <div class="case-results">
+                        <div class="result-item">
+                            <div class="result-header">
+                                <span class="result-label">ТРАФИК</span>
+                                <span class="result-change">↑</span>
+                            </div>
+                            <span class="result-value">+280%</span>
+                            <div class="result-bar">
+                                <div class="bar-fill" style="width: 75%"></div>
+                            </div>
                         </div>
-
-                        <button type="submit" class="brutal-btn-primary brutal-btn-full">
-                            <i class="fas fa-paper-plane"></i>
-                            <span>ОТПРАВИТЬ ЗАЯВКУ</span>
-                        </button>
-
-                        <p class="brutal-form-privacy">
-                            Нажимая кнопку, вы соглашаетесь с 
-                            <a href="{% url 'main:privacy_policy' %}">политикой конфиденциальности</a>
-                        </p>
-                    </form>
+                        <div class="result-item">
+                            <div class="result-header">
+                                <span class="result-label">ЛИДЫ</span>
+                                <span class="result-change">↑</span>
+                            </div>
+                            <span class="result-value">+190%</span>
+                            <div class="result-bar">
+                                <div class="bar-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="case-item" data-case="03">
+                <div class="case-header">
+                    <div class="case-number">03</div>
+                    <div class="case-year">2023</div>
+                </div>
+                <div class="case-content">
+                    <div class="case-info">
+                        <h3>МЕДИЦИНСКАЯ<br>КЛИНИКА</h3>
+                        <div class="case-meta">
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>НИША: МЕДИЦИНА</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>СРОК: 10 МЕСЯЦЕВ</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-icon">◆</span>
+                                <span>БЮДЖЕТ: 1.5M ₽</span>
+                            </div>
+                        </div>
+                        <p class="case-description">Локальное SEO + репутационный менеджмент. Рост целевых звонков в 4+ раза.</p>
+                    </div>
+                    <div class="case-results">
+                        <div class="result-item">
+                            <div class="result-header">
+                                <span class="result-label">ТРАФИК</span>
+                                <span class="result-change">↑</span>
+                            </div>
+                            <span class="result-value">+420%</span>
+                            <div class="result-bar">
+                                <div class="bar-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-header">
+                                <span class="result-label">ЗВОНКИ</span>
+                                <span class="result-change">↑</span>
+                            </div>
+                            <span class="result-value">+310%</span>
+                            <div class="result-bar">
+                                <div class="bar-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="cases-cta">
+            <button class="view-all-cases">
+                <span>СМОТРЕТЬ ВСЕ КЕЙСЫ</span>
+                <span class="arrow">→</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Команда -->
+<section class="team">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[09]</span>
+                <span class="title-text">Наша команда</span>
+            </h2>
+            <p class="section-description">Профессионалы с подтвержденным опытом</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-number">01</div>
+                <h3>SEO-специалисты</h3>
+                <p>15+ экспертов с опытом от 5 лет. Сертификаты Яндекс и Google</p>
+            </div>
+            <div class="team-card">
+                <div class="team-number">02</div>
+                <h3>Контент-маркетологи</h3>
+                <p>Команда копирайтеров и редакторов. Создаем тексты, которые продают</p>
+            </div>
+            <div class="team-card">
+                <div class="team-number">03</div>
+                <h3>Аналитики</h3>
+                <p>Работа с данными. Google Analytics, Яндекс.Метрика, Power BI</p>
+            </div>
+            <div class="team-card">
+                <div class="team-number">04</div>
+                <h3>Технические специалисты</h3>
+                <p>Программисты и верстальщики. Решаем любые технические задачи</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Отзывы -->
+<section class="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[10]</span>
+                <span class="title-text">Отзывы клиентов</span>
+            </h2>
+            <p class="section-description">Что говорят о нас наши клиенты</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-rating">★★★★★</div>
+                <p class="testimonial-text">"Работали с командой 8 месяцев. Результат превзошел ожидания - трафик вырос в 3.5 раза, продажи удвоились. Особенно ценю прозрачную отчетность."</p>
+                <div class="testimonial-author">
+                    <div class="author-name">Алексей Петров</div>
+                    <div class="author-position">Директор интернет-магазина</div>
+                </div>
+                <div class="testimonial-result">Трафик +340%</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">★★★★★</div>
+                <p class="testimonial-text">"Профессиональный подход на всех этапах. Никакой воды в отчетах - только цифры и факты. Рекомендую всем."</p>
+                <div class="testimonial-author">
+                    <div class="author-name">Мария Иванова</div>
+                    <div class="author-position">Владелец B2B сервиса</div>
+                </div>
+                <div class="testimonial-result">Лиды +190%</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-rating">★★★★★</div>
+                <p class="testimonial-text">"Лучшее агентство с которым мы работали. Результаты видны в цифрах - количество звонков выросло в 4 раза."</p>
+                <div class="testimonial-author">
+                    <div class="author-name">Сергей Волков</div>
+                    <div class="author-position">Руководитель мед. центра</div>
+                </div>
+                <div class="testimonial-result">Звонки +310%</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Достижения -->
+<section class="achievements">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[11]</span>
+                <span class="title-text">Наши достижения</span>
+            </h2>
+            <p class="section-description">Признание экспертизы на рынке SEO</p>
+        </div>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-title">Рейтинг Рунета</div>
+                <div class="achievement-desc">1 место среди SEO агентств 3 года подряд</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">⭐</div>
+                <div class="achievement-title">Яндекс.Партнер</div>
+                <div class="achievement-desc">Сертифицированное агентство Яндекс</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">📜</div>
+                <div class="achievement-title">Google Partner</div>
+                <div class="achievement-desc">Официальный партнер Google</div>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🎖️</div>
+                <div class="achievement-title">Премия Рунета</div>
+                <div class="achievement-desc">Лучшее SEO агентство 2024</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Вопросы и ответы -->
+<section id="faq" class="faq">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[12]</span>
+                <span class="title-text">Вопросы и ответы</span>
+            </h2>
+            <p class="section-description">Самые частые вопросы о продвижении сайтов</p>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Сколько времени занимает продвижение в ТОП-10?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>В среднем от 3 до 8 месяцев в зависимости от конкурентности ниши, текущего состояния сайта и бюджета. Первые результаты видны уже через 1-2 месяца.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Какие гарантии вы даете?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Мы гарантируем выполнение всех работ согласно договору. Если не достигнем согласованных KPI, вернем деньги или продолжим работу бесплатно до результата.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Работаете ли вы с молодыми сайтами?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Да, работаем с сайтами любого возраста. Для молодых сайтов разрабатываем специальную стратегию с учетом фактора "песочницы" и особенностей ранжирования.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Какой бюджет нужен для эффективного SEO?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Минимальный бюджет от 35 000₽/месяц. Оптимальный - от 80 000₽/месяц. Точная стоимость зависит от конкурентности запросов и объема работ.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Используете ли вы серые методы продвижения?</h3>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Нет, работаем только белыми методами в соответствии с рекомендациями поисковых систем. Это гарантирует стабильный долгосрочный результат без рисков санкций.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Контакты -->
+<section id="contact" class="contact">
+    <div class="contact-decoration">
+        <div class="decoration-grid"></div>
+    </div>
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-number">[13]</span>
+                <span class="title-text">Контакты</span>
+            </h2>
+            <p class="section-description">Готовы обсудить ваш проект? Напишите нам&nbsp;— ответим в&nbsp;течение часа.</p>
+        </div>
+        <div class="contact-layout">
+            <div class="contact-form-wrapper">
+                <div class="form-header">
+                    <h3>Оставить заявку</h3>
+                    <div class="form-status">
+                        <span class="status-dot"></span>
+                        <span>Online</span>
+                    </div>
+                </div>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="example@mail.ru" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Расскажите о проекте</label>
+                        <textarea id="message" name="message" placeholder="Опишите ваш проект, цели и задачи..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <span class="button-text">Отправить заявку</span>
+                        <span class="button-icon">→</span>
+                    </button>
+                </form>
+            </div>
+            <div class="contact-info-wrapper">
+                <div class="info-block">
+                    <h3>СВЯЖИТЕСЬ С НАМИ</h3>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">EMAIL</div>
+                                <div class="contact-value">info@seostudio.ru</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">ТЕЛЕФОН</div>
+                                <div class="contact-value">+7 (495) 123-45-67</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">АДРЕС</div>
+                                <div class="contact-value">Москва, ул. Примерная, 1</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">ГРАФИК РАБОТЫ</div>
+                                <div class="contact-value">ПН-ПТ: 10:00 - 19:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-block">
+                    <h4>МЫ В СОЦСЕТЯХ</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">TELEGRAM</a>
+                        <a href="#" class="social-link">VK</a>
+                        <a href="#" class="social-link">YOUTUBE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock content %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/index-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block extra_js %}
-{% endblock extra_js %}
+<script>
+// Инициализация форм
+document.addEventListener('DOMContentLoaded', function() {
+    // Hero форма
+    const heroForm = document.getElementById('heroForm');
+    if (heroForm) {
+        heroForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Здесь будет отправка формы
+            alert('Спасибо! Мы свяжемся с вами в течение 15 минут.');
+        });
+    }
 
+    // Контактная форма
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Здесь будет отправка формы
+            alert('Спасибо! Ваша заявка отправлена.');
+        });
+    }
+
+    // Кнопки CTA
+    const ctaButtons = document.querySelectorAll('.cta-button, .service-btn, .btn-custom, .btn-calc, .btn-order');
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Прокрутка к форме
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+});
+</script>
+{% endblock extra_js %}

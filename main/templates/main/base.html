@@ -2,18 +2,17 @@
 {% load seo_tags %}
 {% load custom_filters %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" itemscope itemtype="http://schema.org/WebPage">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     {% block seo_meta %}
         {% if seo_object %}
-            {% seo_meta_tags seo_object title "Комплексное продвижение бизнеса | За деньги в ТОП" %}
+            {% seo_meta_tags seo_object title "За деньги в ТОП - профессиональное SEO продвижение сайтов" %}
         {% else %}
             <title>{% block title %}{{ title }}{% endblock title %} | За деньги в ТОП</title>
-            <meta name="description" content="{% block description %}Комплексное продвижение бизнеса в интернете. SEO, контекстная реклама, создание сайтов.{% endblock description %}">
-       
+            <meta name="description" content="{% block description %}За деньги в ТОП - профессиональное SEO продвижение сайтов. 247 проектов, 98% в ТОП-10. Гарантия результата.{% endblock description %}">
         {% endif %}
     {% endblock seo_meta %}
 
@@ -49,12 +48,16 @@
         {% endfor %}
     {% endblock custom_head_scripts_late %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=JetBrains+Mono:wght@400;700;900&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Основные стили -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/index-modern.css' %}">
     
     {% block extra_css %}{% endblock extra_css %}
 
@@ -67,490 +70,231 @@
     {% endblock custom_head_scripts_very_late %}
 </head>
 <body>
+    <!-- Прелоадер -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <img src="{% static 'images/logo/logo_color_transparent.png' %}" alt="Logo" class="logo-img">
+            </div>
+            <div class="preloader-bar">
+                <div class="bar-progress"></div>
+            </div>
+            <div class="preloader-percent">
+                <span id="percentText">0%</span>
+            </div>
+        </div>
+    </div>
 
-    <header class="brutal-header">
-        <div class="brutal-header-container">
-            <!-- Логотип -->
-            <div class="brutal-logo-section">
+    <!-- Анимированный курсор -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Шум и текстура фона -->
+    <div class="noise-overlay"></div>
+    
+    <!-- Прогресс скролла -->
+    <div class="scroll-progress"></div>
+
+    <!-- Плавающий баннер с акцией -->
+    <div class="floating-promo" id="floatingPromo">
+        <button class="promo-close" id="promoClose">×</button>
+        <div class="promo-content">
+            <div class="promo-badge">🔥 АКЦИЯ</div>
+            <div class="promo-title">Скидка 50%</div>
+            <div class="promo-subtitle">на&nbsp;SEO&#8209;продвижение</div>
+            <div class="promo-timer" id="promoTimer">
+                <span class="timer-label">До&nbsp;конца акции:</span>
+                <span class="timer-value" id="timerValue">02:45:30</span>
+            </div>
+            <button class="promo-btn" id="promoCTA">Получить скидку</button>
+        </div>
+    </div>
+    
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <div class="city-selector">
+                    <span class="city-icon">📍</span>
+                    <select id="citySelect" class="city-select">
+                        {% for city in cities_menu %}
+                        <option value="{{ city.slug }}" {% if current_city and current_city.slug == city.slug %}selected{% endif %}>{{ city.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <a href="tel:+74951234567" class="top-phone">
+                    <span class="phone-icon">📞</span>
+                    <span>+7 (495) 123-45-67</span>
+                </a>
+            </div>
+            <div class="top-bar-right">
+                <button class="top-btn" id="callbackBtn">Заказать звонок</button>
+                <button class="top-btn primary" id="proposalBtn">Получить КП</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
                 {% if page_type == 'home' %}
-                <span class="brutal-logo">
-                    <span class="brutal-logo-icon">⚡</span>
-                    <span class="brutal-logo-text">За деньги в ТОП</span>
-                </span>
+                <img src="{% static 'images/logo/sign.png' %}" alt="За деньги в ТОП" class="nav-logo">
+                <span class="brand-name">За деньги в ТОП</span>
                 {% else %}
-                <a href="{% url 'main:home' %}" class="brutal-logo">
-                    <span class="brutal-logo-icon">⚡</span>
-                    <span class="brutal-logo-text">За деньги в ТОП</span>
+                <a href="{% url 'main:home' %}">
+                    <img src="{% static 'images/logo/sign.png' %}" alt="За деньги в ТОП" class="nav-logo">
+                    <span class="brand-name">За деньги в ТОП</span>
                 </a>
                 {% endif %}
             </div>
-
-
-            <!-- Выбор города (только на десктопе) -->
-            <div class="brutal-city-section d-none d-lg-block">
-                <div class="brutal-dropdown">
-                    <button class="brutal-city-button" type="button" id="brutalCityDropdown" aria-expanded="false">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span class="brutal-city-text">
-                            {% if current_city %}{{ current_city.name }}{% else %}Выбрать город{% endif %}
-                        </span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="brutal-city-dropdown-menu" id="brutalCityDropdownMenu">
-                        <div class="brutal-city-dropdown-header">Выберите город</div>
-                        <div class="brutal-city-dropdown-grid">
-                            {% for city in cities_menu %}
-                                {% if not current_city or city.slug != current_city.slug %}
-                                <a class="brutal-city-dropdown-item" href="{% url 'main:set_city' slug=city.slug %}">{{ city.name }}</a>
-                                {% endif %}
-                            {% endfor %}
-                            <a class="brutal-city-dropdown-item brutal-city-dropdown-all" href="{% url 'main:city_list' %}">Все города</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Основная навигация -->
-            <nav class="brutal-nav d-none d-lg-flex">
-                <!-- Услуги с многоуровневым мега-меню -->
-                <div class="brutal-nav-dropdown" id="servicesMenu">
-                    <a href="{% url 'services:service_list' %}" class="brutal-nav-link brutal-nav-dropdown-toggle {% if 'services' in request.resolver_match.namespace %}active{% endif %}" id="servicesDropdown">
-                        <i class="fas fa-cogs"></i>
-                        <span>Услуги</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="brutal-mega-menu" id="servicesMegaMenu">
-                        <!-- Первый уровень - категории -->
-                        <div class="brutal-mega-menu-categories">
-                            {% for category in service_categories_menu %}
-                            <div class="brutal-mega-menu-category" data-category="{{ category.slug }}">
-                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mega-menu-category-title">
-                                    <span>{{ category.title }}</span>
-                                    <i class="fas fa-chevron-down"></i>
-                                </a>
-                                
-                                <!-- Панель услуг для этой категории -->
-                                <div class="brutal-mega-menu-services">
-                                    <div class="brutal-mega-menu-services-grid">
-                                        {% for service in category.services.all|slice:":6" %}
-                                        <div class="brutal-mega-menu-service">
-                                            <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}">
-                                                <h4>{{ service.title }}</h4>
-                                            </a>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Портфолио с мега-меню -->
-                <div class="brutal-nav-dropdown" id="portfolioMenu">
-                    <a href="{% url 'main:portfolio_list' %}" class="brutal-nav-link brutal-nav-dropdown-toggle {% if 'portfolio' in request.resolver_match.url_name %}active{% endif %}" id="portfolioDropdown">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Портфолио</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="brutal-mega-menu" id="portfolioMegaMenu">
-                        <!-- Категории портфолио -->
-                        <div class="brutal-mega-menu-categories">
-                            {% for category in portfolio_categories_menu %}
-                            <div class="brutal-mega-menu-category">
-                                <a href="{% url 'main:portfolio_category' category.slug %}" class="brutal-mega-menu-category-title">
-                                    <span>{{ category.name }}</span>
-                                </a>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Блог с мега-меню -->
-                <div class="brutal-nav-dropdown" id="blogMenu">
-                    <a href="{% url 'blog:post_list' %}" class="brutal-nav-link brutal-nav-dropdown-toggle {% if 'blog' in request.resolver_match.namespace %}active{% endif %}" id="blogDropdown">
-                        <i class="fas fa-blog"></i>
-                        <span>Блог</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
-                    <div class="brutal-mega-menu" id="blogMegaMenu">
-                        <!-- Категории блога -->
-                        <div class="brutal-mega-menu-categories">
-                            {% for category in blog_categories_menu %}
-                            <div class="brutal-mega-menu-category">
-                                <a href="{% url 'blog:category_posts' category.slug %}" class="brutal-mega-menu-category-title">
-                                    <span>{{ category.name }}</span>
-                                </a>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <a href="{% url 'main:contacts' %}" class="brutal-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
-                    <i class="fas fa-phone"></i>
-                    <span>Контакты</span>
-                </a>
-            </nav>
-            
-            <!-- Мобильная кнопка меню -->
-            <button class="brutal-mobile-toggle d-lg-none" type="button" id="brutalMobileToggle" aria-expanded="false">
-                <span class="brutal-mobile-toggle-line"></span>
-                <span class="brutal-mobile-toggle-line"></span>
-                <span class="brutal-mobile-toggle-line"></span>
-            </button>
+            <ul class="nav-menu">
+                <li><a href="{% url 'services:service_list' %}">Услуги</a></li>
+                <li><a href="{% url 'main:portfolio_list' %}">Портфолио</a></li>
+                <li><a href="{% url 'blog:post_list' %}">Блог</a></li>
+                <li><a href="{% url 'main:contacts' %}">Контакты</a></li>
+            </ul>
+            <button class="menu-toggle" id="menuToggle">☰</button>
         </div>
-        
-        <!-- Мобильное меню -->
-        <div class="brutal-mobile-menu d-lg-none" id="brutalMobileMenu">
-            <!-- Мобильная навигация -->
-            <nav class="brutal-mobile-nav">
-                <!-- Мобильные услуги -->
-                <div class="brutal-mobile-dropdown">
-                    <button class="brutal-mobile-dropdown-toggle" type="button">
-                        <i class="fas fa-cogs"></i>
-                        <span>Услуги</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="brutal-mobile-dropdown-menu">
-                        {% for category in service_categories_menu %}
-                        <div class="brutal-mobile-dropdown-section">
-                            <div class="brutal-mobile-category-header">
-                                <a href="{% url 'services:service_category' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.title }}</a>
-                                <button class="brutal-mobile-services-toggle" type="button" data-category="{{ category.slug }}">
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
-                            </div>
-                            <div class="brutal-mobile-services-list" id="services-{{ category.slug }}">
-                                {% for service in category.services.all|slice:":5" %}
-                                <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="brutal-mobile-service-link">
-                                    {{ service.title }}
-                                </a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                
-                <!-- Мобильное портфолио -->
-                <div class="brutal-mobile-dropdown">
-                    <button class="brutal-mobile-dropdown-toggle" type="button">
-                        <i class="fas fa-briefcase"></i>
-                        <span>Портфолио</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="brutal-mobile-dropdown-menu">
-                        <a href="{% url 'main:portfolio_list' %}" class="brutal-mobile-dropdown-title">Все проекты</a>
-                        {% for category in portfolio_categories_menu %}
-                        <div class="brutal-mobile-dropdown-section">
-                            <a href="{% url 'main:portfolio_category' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.name }}</a>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
+    </nav>
 
-                <!-- Мобильный блог -->
-                <div class="brutal-mobile-dropdown">
-                    <button class="brutal-mobile-dropdown-toggle" type="button">
-                        <i class="fas fa-blog"></i>
-                        <span>Блог</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="brutal-mobile-dropdown-menu">
-                        <a href="{% url 'blog:post_list' %}" class="brutal-mobile-dropdown-title">Все статьи</a>
-                        {% for category in blog_categories_menu %}
-                        <div class="brutal-mobile-dropdown-section">
-                            <a href="{% url 'blog:category_posts' category.slug %}" class="brutal-mobile-dropdown-title">{{ category.name }}</a>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                <a href="{% url 'main:contacts' %}" class="brutal-mobile-nav-link {% if 'contacts' in request.resolver_match.url_name %}active{% endif %}">
-                    <i class="fas fa-phone"></i>
-                    <span>Контакты</span>
-                </a>
-            </nav>
+    <!-- Хлебные крошки -->
+    {% block breadcrumbs %}
+    {% if page_type != 'home' %}
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="{% url 'main:home' %}">Главная</a>
+            <span class="separator">/</span>
+            <span class="current">{% block breadcrumb_current %}{{ title }}{% endblock breadcrumb_current %}</span>
         </div>
-    </header>
+    </div>
+    {% endif %}
+    {% endblock breadcrumbs %}
 
-
-    
+    <!-- Основной контент -->
     <main>
-        {% block breadcrumbs %}{% endblock breadcrumbs %}
-
-        {% if messages %}
-        <div class="flash-messages" aria-live="polite" aria-atomic="true">
-            {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show shadow" role="alert">
-                <div class="d-flex align-items-start">
-                    <div class="me-3 flex-grow-1">{{ message }}</div>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-
-        {% block content %}
-            {% endblock content %}
+        {% block content %}{% endblock content %}
     </main>
 
-    <footer class="brutal-footer">
-        <div class="brutal-footer-container">
-            <!-- Основной контент футера -->
-            <div class="brutal-footer-content">
-                <!-- Логотип и описание -->
-                <div class="brutal-footer-brand">
-                    <div class="brutal-footer-logo">
-                        <span class="brutal-footer-logo-icon">⚡</span>
-                        <span class="brutal-footer-logo-text">За деньги в ТОП</span>
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-pattern"></div>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="{% static 'images/logo/logo_color_transparent.png' %}" alt="За деньги в ТОП" class="footer-logo-img">
                     </div>
-                    <p class="brutal-footer-description">
-                        Комплексное продвижение бизнеса в интернете.<br>
-                        Помогаем компаниям расти и привлекать больше клиентов с 2015 года.
-                    </p>
-                    
-                    <!-- Статистика -->
-                    <div class="brutal-footer-stats">
-                        <div class="brutal-footer-stat">
-                            <div class="brutal-footer-stat-number">150+</div>
-                            <div class="brutal-footer-stat-label">клиентов</div>
-                        </div>
-                        <div class="brutal-footer-stat">
-                            <div class="brutal-footer-stat-number">10+</div>
-                            <div class="brutal-footer-stat-label">лет опыта</div>
-                        </div>
-                        <div class="brutal-footer-stat">
-                            <div class="brutal-footer-stat-number">100%</div>
-                            <div class="brutal-footer-stat-label">результат</div>
-                        </div>
-                    </div>
+                    <p class="footer-tagline">Продвижение сайтов<br>с гарантией результата</p>
                 </div>
-                
-                <!-- Навигация -->
-                <div class="brutal-footer-nav">
-                    <!-- Услуги -->
-                    <div class="brutal-footer-section">
-                        <h4 class="brutal-footer-section-title">Услуги</h4>
-                        <div class="brutal-footer-links">
-                            {% for category in service_categories_menu %}
-                            <a href="{% url 'services:service_category' slug=category.slug %}" class="brutal-footer-link">
-                                {{ category.title }}
-                            </a>
+                <div class="footer-links-group">
+                    <div class="footer-column">
+                        <h4>Услуги</h4>
+                        <ul>
+                            {% for category in service_categories_menu|slice:":4" %}
+                            <li><a href="{% url 'services:service_category' category.slug %}">{{ category.title }}</a></li>
                             {% endfor %}
-                        </div>
+                        </ul>
                     </div>
-                    
-                    <!-- Ресурсы -->
-                    <div class="brutal-footer-section">
-                        <h4 class="brutal-footer-section-title">Ресурсы</h4>
-                        <div class="brutal-footer-links">
-                <a href="{% url 'blog:post_list' %}" class="brutal-footer-link">Блог</a>
-                <a href="{% url 'main:portfolio_list' %}" class="brutal-footer-link">Портфолио</a>
-                <a href="{% url 'main:faq_list' %}" class="brutal-footer-link">FAQ</a>
-                <a href="{% url 'main:glossary_list' %}" class="brutal-footer-link">Глоссарий</a>
-                <a href="{% url 'main:contacts' %}" class="brutal-footer-link">Контакты</a>
-                            {% for p in footer_pages %}
-                            <a href="{% url 'pages:detail' slug=p.slug %}" class="brutal-footer-link">{{ p.title }}</a>
-                            {% endfor %}
-                        </div>
+                    <div class="footer-column">
+                        <h4>Компания</h4>
+                        <ul>
+                            <li><a href="{% url 'main:home' %}#about">О студии</a></li>
+                            <li><a href="{% url 'main:portfolio_list' %}">Портфолио</a></li>
+                            <li><a href="{% url 'main:contacts' %}">Контакты</a></li>
+                            <li><a href="#">Вакансии</a></li>
+                        </ul>
                     </div>
-                    
-                    <!-- Контакты -->
-                    <div class="brutal-footer-section">
-                        <h4 class="brutal-footer-section-title">Контакты</h4>
-                        <div class="brutal-footer-contact">
-                            <a href="tel:+79636415944" class="brutal-footer-contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>+7 (963) 641-59-44</span>
-                            </a>
-                            <a href="mailto:isakov@isakov.work" class="brutal-footer-contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>isakov@isakov.work</span>
-                            </a>
-                            <div class="brutal-footer-contact-item">
-                                <i class="fas fa-clock"></i>
-                                <span>Пн-Пт: 10:00 - 19:00</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Социальные сети -->
-                        <div class="brutal-footer-social">
-                            <a href="https://vk.com/vitaly_seo_expert" target="_blank" rel="noopener" class="brutal-footer-social-link">
-                                <i class="fab fa-vk"></i>
-                            </a>
-                            <a href="https://t.me/vitaly_seo_expert" target="_blank" rel="noopener" class="brutal-footer-social-link">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                        </div>
+                    <div class="footer-column">
+                        <h4>Ресурсы</h4>
+                        <ul>
+                            <li><a href="/sitemap.xml">Карта сайта</a></li>
+                            <li><a href="{% url 'main:home' %}#faq">Вопросы и ответы</a></li>
+                            <li><a href="{% url 'blog:post_list' %}">Блог</a></li>
+                            <li><a href="{% url 'main:portfolio_list' %}">Портфолио</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <ul>
+                            <li><a href="mailto:info@seostudio.ru">info@seostudio.ru</a></li>
+                            <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                            <li>Москва, ул. Примерная, 1</li>
+                            <li>пн-пт: 10:00 - 19:00</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            
-            <!-- Нижняя часть футера -->
-            <div class="brutal-footer-bottom">
-                <div class="brutal-footer-bottom-content">
-                    <div class="brutal-footer-copyright">
-                        © 2015-{% now "Y" %} За деньги в ТОП. Все права защищены.
-                    </div>
-                    <div class="brutal-footer-bottom-links">
-                        <a href="{% url 'main:privacy_policy' %}" class="brutal-footer-bottom-link">Политика конфиденциальности</a>
-                        <a href="{% url 'main:sitemap' %}" class="brutal-footer-bottom-link">Карта сайта</a>
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>© 2015-2025. За деньги в ТОП</p>
+                    <div class="legal-links">
+                        <a href="#">Согласие на обработку персональных данных</a>
+                        <a href="#">Политика в отношении обработки персональных данных</a>
+                        <a href="#">Пользовательское соглашение</a>
+                        <a href="#">Отзыв согласия на обработку персональных данных</a>
                     </div>
                 </div>
+                <div class="footer-social">
+                    <span>Следите за нами:</span>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">TG</a>
+                        <a href="#" class="social-icon">VK</a>
+                        <a href="#" class="social-icon">YT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-requisites">
+            <div class="container">
+                <div class="requisites-grid">
+                    <div class="requisites-column">
+                        <h5>Реквизиты</h5>
+                        <p>ИП Лакин Александр Иванович</p>
+                        <p>ИНН: 615524775085</p>
+                    </div>
+                    <div class="requisites-column">
+                        <h5>Банковские данные</h5>
+                        <p>Р/С: 40802810102870022448</p>
+                        <p>БИК: 044525593</p>
+                        <p>Банк: АО "АЛЬФА-БАНК"</p>
+                        <p>К/С: 30101810200000000593</p>
+                    </div>
+                    <div class="requisites-column">
+                        <h5>Адрес</h5>
+                        <p>улица Гайдара, д. 10в, кв./оф. 57</p>
+                        <p>Московская область, г. Подольск</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-signature">
+            <div class="container">
+                <span id="renderSpeed">Рендеринг: вычисление...</span>
             </div>
         </div>
     </footer>
 
-    <!-- Кнопка прокрутки вверх -->
-    <button id="back-to-top" class="back-to-top-modern" aria-label="Прокрутить вверх">
-        <i class="fas fa-arrow-up"></i>
+    <!-- Кнопка наверх -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
     </button>
 
-    <!-- Плавающие соц-иконки -->
-    <div class="social-float-modern" aria-label="Социальные сети">
-        <a class="vk" href="https://vk.com/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="VK">
-            <i class="fab fa-vk"></i>
-        </a>
-        <a class="tg" href="https://t.me/vitaly_seo_expert" target="_blank" rel="noopener" aria-label="Telegram">
-            <i class="fab fa-telegram"></i>
-        </a>
-    </div>
+    <!-- Плавающая кнопка скидки -->
+    <button class="discount-btn" id="discountBtn">
+        Скидка 50% на SEO
+    </button>
 
-    <!-- Баннер согласия на обработку персональных данных / cookies -->
-    <div id="cookie-consent" class="cookie-consent cookie-hidden" role="dialog" aria-live="polite" aria-label="Согласие на обработку персональных данных">
-        <div class="cookie-consent__content">
-            <div class="cookie-consent__text">
-                Мы используем файлы cookies и обрабатываем персональные данные для улучшения работы сайта и аналитики. Подробнее в нашей
-                <a href="{% url 'main:privacy_policy' %}" class="link-primary">Политике конфиденциальности</a>.
-            </div>
-            <div class="cookie-consent__actions cookie-consent__actions--prominent">
-                <button type="button" class="btn btn-primary btn-lg cookie-accept-btn" id="cookie-accept-btn">Принять</button>
-            </div>
+    <!-- Cookie уведомление -->
+    <div class="cookie-notice" id="cookieNotice">
+        <div class="cookie-content">
+            <p>Мы используем cookies для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с использованием cookies.</p>
+            <button class="cookie-btn" id="acceptCookie">Принять</button>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-    <script src="{% static 'js/base.js' %}"></script>
-    <script src="{% static 'js/modern-header.js' %}"></script>
-    
-    <!-- Брутальный хэдер скрипты -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Мобильное меню
-            const mobileToggle = document.getElementById('brutalMobileToggle');
-            const mobileMenu = document.getElementById('brutalMobileMenu');
-            
-            if (mobileToggle && mobileMenu) {
-                mobileToggle.addEventListener('click', function() {
-                    const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-                    mobileToggle.setAttribute('aria-expanded', !isExpanded);
-                    mobileMenu.classList.toggle('brutal-mobile-menu-open');
-                    mobileToggle.classList.toggle('brutal-mobile-toggle-active');
-                });
-                
-                // Закрытие меню при клике вне его
-                document.addEventListener('click', function(event) {
-                    if (!mobileToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
-                        mobileToggle.setAttribute('aria-expanded', 'false');
-                        mobileMenu.classList.remove('brutal-mobile-menu-open');
-                        mobileToggle.classList.remove('brutal-mobile-toggle-active');
-                    }
-                });
-            }
-            
-            // Мобильные dropdown
-            const mobileDropdowns = document.querySelectorAll('.brutal-mobile-dropdown-toggle');
-            mobileDropdowns.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const menu = this.nextElementSibling;
-                    const isOpen = menu.classList.contains('brutal-mobile-dropdown-open');
-                    
-                    if (isOpen) {
-                        // Если меню открыто - закрываем его
-                        menu.classList.remove('brutal-mobile-dropdown-open');
-                        this.classList.remove('active');
-                    } else {
-                        // Если меню закрыто - закрываем все другие и открываем текущее
-                        document.querySelectorAll('.brutal-mobile-dropdown-menu').forEach(m => {
-                            m.classList.remove('brutal-mobile-dropdown-open');
-                        });
-                        document.querySelectorAll('.brutal-mobile-dropdown-toggle').forEach(t => {
-                            t.classList.remove('active');
-                        });
-                        
-                        menu.classList.add('brutal-mobile-dropdown-open');
-                        this.classList.add('active');
-                    }
-                });
-            });
-            
-            // Разворачивание услуг в категориях
-            const serviceToggles = document.querySelectorAll('.brutal-mobile-services-toggle');
-            serviceToggles.forEach(toggle => {
-                toggle.addEventListener('click', function() {
-                    const categorySlug = this.getAttribute('data-category');
-                    const servicesList = document.getElementById(`services-${categorySlug}`);
-                    const isOpen = servicesList.classList.contains('open');
-                    
-                    // Закрыть все другие списки услуг
-                    document.querySelectorAll('.brutal-mobile-services-list').forEach(list => {
-                        list.classList.remove('open');
-                    });
-                    document.querySelectorAll('.brutal-mobile-services-toggle').forEach(btn => {
-                        btn.classList.remove('active');
-                    });
-                    
-                    if (!isOpen) {
-                        servicesList.classList.add('open');
-                        this.classList.add('active');
-                    }
-                });
-            });
-            
-            // Dropdown городов
-            const cityDropdown = document.getElementById('brutalCityDropdown');
-            const cityDropdownMenu = document.getElementById('brutalCityDropdownMenu');
-            
-            if (cityDropdown && cityDropdownMenu) {
-                cityDropdown.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                    this.setAttribute('aria-expanded', !isExpanded);
-                    cityDropdownMenu.classList.toggle('show');
-                });
-                
-                // Закрытие при клике вне dropdown
-                document.addEventListener('click', function(event) {
-                    if (!cityDropdown.contains(event.target) && !cityDropdownMenu.contains(event.target)) {
-                        cityDropdown.setAttribute('aria-expanded', 'false');
-                        cityDropdownMenu.classList.remove('show');
-                    }
-                });
-            }
-            
-            // Мега-меню на десктопе
-            const navDropdowns = document.querySelectorAll('.brutal-nav-dropdown');
-            navDropdowns.forEach(dropdown => {
-                const toggle = dropdown.querySelector('.brutal-nav-dropdown-toggle');
-                const menu = dropdown.querySelector('.brutal-mega-menu');
-                
-                if (toggle && menu) {
-                    dropdown.addEventListener('mouseenter', function() {
-                        menu.classList.add('brutal-mega-menu-open');
-                    });
-                    
-                    dropdown.addEventListener('mouseleave', function() {
-                        menu.classList.remove('brutal-mega-menu-open');
-                    });
-                }
-            });
-        });
-    </script>
-    
+
+    <!-- JavaScript -->
+    <script src="{% static 'js/script.js' %}"></script>
     {% block extra_js %}{% endblock extra_js %}
 </body>
 </html>

@@ -5,15 +5,18 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/services-brutal.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция - брутальная -->
+<!-- Hero секция - современная -->
 <section class="brutal-hero">
     <div class="brutal-container">
         <div class="brutal-hero-content">
-            <h1 class="brutal-hero-title typing-text">Что мы делаем</h1>
+            <h1 class="brutal-hero-title">Что мы делаем</h1>
             <p class="brutal-hero-subtitle">
                 Комплексные решения для роста вашего бизнеса. Строим ваш успех 
                 <span class="brick-text">кирпичик</span>
@@ -56,38 +59,6 @@
 </section>
 
 
-<!-- Секция цен - брутальная -->
-<section class="brutal-pricing">
-    <div class="brutal-container">
-        <h2 class="brutal-pricing-title">Сколько стоит</h2>
-        
-        <div class="brutal-pricing-grid">
-            <!-- Аудит сайта -->
-            <div class="brutal-pricing-card">
-                <h3 class="brutal-pricing-card-title">Аудит сайта</h3>
-                <div class="brutal-pricing-card-price">Бесплатно</div>
-                <p class="brutal-pricing-card-description">Смотрим на ваш сайт, находим проблемы, говорим что делать.</p>
-                <a href="{% url 'services:service_list' %}?category=audit" class="brutal-pricing-card-link">Заказать</a>
-            </div>
-
-            <!-- Продвижение сайта (популярное) -->
-            <div class="brutal-pricing-card popular">
-                <h3 class="brutal-pricing-card-title">Продвижение сайта</h3>
-                <div class="brutal-pricing-card-price">от 1200$</div>
-                <p class="brutal-pricing-card-description">Техническое SEO, контент, ссылки, аналитика. Всё что нужно для роста.</p>
-                <a href="{% url 'services:service_list' %}?category=seo" class="brutal-pricing-card-link">Обсудить</a>
-            </div>
-
-            <!-- Разовые работы -->
-            <div class="brutal-pricing-card">
-                <h3 class="brutal-pricing-card-title">Разовые работы</h3>
-                <div class="brutal-pricing-card-price">Договорная</div>
-                <p class="brutal-pricing-card-description">Аудит, контент-стратегия, линкбилдинг — делаем отдельно.</p>
-                <a href="{% url 'services:service_list' %}?category=one-time" class="brutal-pricing-card-link">Написать</a>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Полный список услуг -->
 <!-- Все услуги - минималистичные блоки -->

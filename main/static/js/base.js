@@ -303,39 +303,23 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !animatedBars.has(entry.target)) {
                     const bar = entry.target;
-                    const targetWidth = bar.getAttribute('data-width') || bar.style.width;
+                    const targetWidth = bar.getAttribute('data-width');
                     
-                    // Сохраняем оригинальную ширину
-                    if (!bar.getAttribute('data-width')) {
-                        bar.setAttribute('data-width', targetWidth);
+                    if (targetWidth) {
+                        // Добавляем в список анимированных
+                        animatedBars.add(bar);
+                        
+                        // Устанавливаем ширину напрямую
+                        bar.style.width = targetWidth;
+                        
+                        // Отключаем наблюдение
+                        barObserver.unobserve(bar);
                     }
-                    
-                    // Добавляем в список анимированных
-                    animatedBars.add(bar);
-                    
-                    // Убираем CSS transition временно
-                    bar.style.transition = 'none';
-                    bar.style.width = '0%';
-                    
-                    // Принудительный reflow
-                    bar.offsetHeight;
-                    
-                    // Восстанавливаем transition и анимируем
-                    bar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                    bar.style.width = targetWidth;
-                    
-                    // Добавляем класс для показа shimmer эффекта
-                    setTimeout(() => {
-                        bar.classList.add('animated');
-                    }, 1500);
-                    
-                    // Отключаем наблюдение
-                    barObserver.unobserve(bar);
                 }
             });
         }, {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
         });
         
         progressBars.forEach(bar => {

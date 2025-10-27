@@ -3986,6 +3986,11 @@ section {
         transition-duration: 0.3s !important;
     }
     
+    /* Исключение для полос загрузки */
+    .bar-fill {
+        transition-duration: 1.5s !important;
+    }
+    
     /* Отключаем некоторые эффекты */
     .noise-overlay {
         opacity: 0.2;

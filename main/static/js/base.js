@@ -297,32 +297,47 @@ document.addEventListener('DOMContentLoaded', function() {
     // Анимация полос загрузки в кейсах
     (function initProgressBars() {
         const progressBars = document.querySelectorAll('.bar-fill');
+        console.log('Найдено полос загрузки:', progressBars.length);
+        
+        if (progressBars.length === 0) {
+            console.log('Полосы загрузки не найдены');
+            return;
+        }
+        
         const animatedBars = new Set();
         
         const barObserver = new IntersectionObserver(function(entries) {
+            console.log('IntersectionObserver сработал:', entries.length);
             entries.forEach(entry => {
+                console.log('Элемент в области видимости:', entry.isIntersecting, entry.target);
                 if (entry.isIntersecting && !animatedBars.has(entry.target)) {
                     const bar = entry.target;
                     const targetWidth = bar.getAttribute('data-width');
+                    console.log('Целевая ширина:', targetWidth);
                     
                     if (targetWidth) {
-                        // Добавляем в список анимированных
                         animatedBars.add(bar);
+                        console.log('Анимируем полосу до:', targetWidth);
                         
-                        // Устанавливаем ширину напрямую
-                        bar.style.width = targetWidth;
+                        // Убеждаемся, что начальная ширина 0%
+                        bar.style.width = '0%';
                         
-                        // Отключаем наблюдение
+                        // Небольшая задержка для плавности
+                        setTimeout(() => {
+                            bar.style.width = targetWidth;
+                        }, 50);
+                        
                         barObserver.unobserve(bar);
                     }
                 }
             });
         }, {
-            threshold: 0.3,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.1, // Уменьшаем порог для более раннего срабатывания
+            rootMargin: '0px 0px -20px 0px' // Уменьшаем отступ
         });
         
-        progressBars.forEach(bar => {
+        progressBars.forEach((bar, index) => {
+            console.log(`Наблюдаем за полосой ${index}:`, bar, 'data-width:', bar.getAttribute('data-width'));
             barObserver.observe(bar);
         });
     })();

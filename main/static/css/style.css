@@ -737,6 +737,14 @@ video {
     transform: none !important;
 }
 
+.nav-brand a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
 .nav-brand {
     display: flex;
     align-items: center;

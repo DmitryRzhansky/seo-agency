@@ -121,6 +121,34 @@
     grid-column: span 2;
     min-height: 200px;
     max-height: 300px;
+    overflow: hidden;
+}
+
+.brutal-content-block.content .brutal-content-text {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 200px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Стилизация скроллбара для блока "Подробная информация" */
+.brutal-content-block.content .brutal-content-text::-webkit-scrollbar {
+    width: 8px;
+}
+
+.brutal-content-block.content .brutal-content-text::-webkit-scrollbar-track {
+    background: var(--white);
+    border: 1px solid var(--gray);
+}
+
+.brutal-content-block.content .brutal-content-text::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border: 1px solid var(--black);
+}
+
+.brutal-content-block.content .brutal-content-text::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
 }
 
 .brutal-block-number {
@@ -652,6 +680,11 @@
     .brutal-content-block.content {
         min-height: 200px;
         max-height: none;
+    }
+    
+    .brutal-content-block.content .brutal-content-text {
+        max-height: none;
+        overflow-y: visible;
     }
 }
 

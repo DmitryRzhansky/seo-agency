@@ -147,21 +147,27 @@
     background: var(--white);
     border-color: var(--black);
     grid-column: span 2;
-    min-height: 200px;
+    height: 500px; /* Фиксированная высота для скролла */
+    margin-right: -360px; /* Выдвигаем блок до границы изображения (gap + ширина изображения) */
+    overflow-y: auto; /* Вертикальный скролл */
+    overflow-x: hidden; /* Скрываем горизонтальный скролл */
+    cursor: default; /* Курсор по умолчанию для всего блока */
 }
 
 .brutal-portfolio-detail-block.content .brutal-portfolio-detail-text {
-    flex: 1;
-    padding: 20px;
+    padding: 20px 0 20px 20px; /* Убираем правый padding */
     margin: 0;
     box-sizing: border-box;
-    width: 100%;
+    width: 100%; /* Растягиваем текст на всю ширину блока */
+    max-width: none; /* Убираем ограничения по ширине */
     line-height: 1.7;
     color: var(--black);
     font-weight: 400;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    word-wrap: break-word; /* Переносим длинные слова */
+    overflow-wrap: break-word; /* Переносим длинные слова */
     hyphens: none;
+    overflow: visible; /* Не ограничиваем внутренний контент */
+    pointer-events: none; /* Пропускаем события к родителю для скролла по всему блоку */
 }
 
 .brutal-portfolio-detail-block-number {
@@ -298,6 +304,9 @@
     line-height: 1.6;
     color: var(--black);
     font-weight: 400;
+    width: 100%; /* Растягиваем параграфы на всю ширину */
+    max-width: none; /* Убираем ограничения по ширине */
+    word-wrap: break-word; /* Переносим длинные слова */
 }
 
 .brutal-portfolio-detail-text ul,

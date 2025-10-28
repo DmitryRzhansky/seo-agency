@@ -125,8 +125,11 @@
 
 .brutal-content-block.content .brutal-content-text {
     flex: 1;
-    padding: 0;
+    padding: 20px;
     margin: 0;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
 }
 
 .brutal-block-number {
@@ -218,6 +221,14 @@
     line-height: 1.7;
     color: var(--black);
     font-weight: 400;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.brutal-content-block.content .brutal-content-text {
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .brutal-content-text h1,
@@ -226,12 +237,23 @@
 .brutal-content-text h4,
 .brutal-content-text h5,
 .brutal-content-text h6 {
-    margin-top: 25px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--black);
+}
+
+.brutal-content-block.content .brutal-content-text h1,
+.brutal-content-block.content .brutal-content-text h2,
+.brutal-content-block.content .brutal-content-text h3,
+.brutal-content-block.content .brutal-content-text h4,
+.brutal-content-block.content .brutal-content-text h5,
+.brutal-content-block.content .brutal-content-text h6 {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 16px;
 }
 
 .brutal-content-text h2 {
@@ -245,17 +267,28 @@
 }
 
 .brutal-content-text p {
-    margin-bottom: 20px;
-    line-height: 1.7;
+    margin-bottom: 15px;
+    line-height: 1.6;
     color: var(--black);
     font-weight: 400;
 }
 
+.brutal-content-block.content .brutal-content-text p {
+    margin-bottom: 10px;
+    line-height: 1.4;
+    font-size: 14px;
+}
+
 .brutal-content-text ul,
 .brutal-content-text ol {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     padding-left: 0;
     list-style: none;
+}
+
+.brutal-content-block.content .brutal-content-text ul,
+.brutal-content-block.content .brutal-content-text ol {
+    margin-bottom: 10px;
 }
 
 .brutal-content-text li {
@@ -264,6 +297,12 @@
     color: var(--black);
     font-weight: 400;
     padding-left: 25px;
+}
+
+.brutal-content-block.content .brutal-content-text li {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    font-size: 14px;
 }
 
 .brutal-content-text ul li::before {

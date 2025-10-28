@@ -820,8 +820,23 @@ class AuthorAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     list_display = ['get_full_name', 'position', 'is_active', 'posts_count', 'created_at']
     list_filter = ['is_active', 'created_at']
     search_fields = ['first_name', 'last_name', 'position', 'bio']
-    prepopulated_fields = {'slug': ('first_name', 'last_name')}
     ordering = ['last_name', 'first_name']
+    
+    def save_model(self, request, obj, form, change):
+        """Автоматически создаем slug, если он не указан"""
+        if not obj.slug:
+            # Создаем slug из имени и фамилии
+            from django.utils.text import slugify
+            base_slug = slugify(f"{obj.first_name} {obj.last_name}")
+            obj.slug = base_slug
+            
+            # Если такой slug уже существует, добавляем номер
+            counter = 1
+            while Author.objects.filter(slug=obj.slug).exclude(pk=obj.pk).exists():
+                obj.slug = f"{base_slug}-{counter}"
+                counter += 1
+        
+        super().save_model(request, obj, form, change)
     
     fieldsets = (
         ('Основная информация', {

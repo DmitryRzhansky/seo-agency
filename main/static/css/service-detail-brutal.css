@@ -120,6 +120,7 @@
     border-color: var(--gray);
     grid-column: span 2;
     min-height: 200px;
+    margin-right: -60px; /* Выдвигаем блок вправо на размер gap */
 }
 
 .brutal-content-block.content .brutal-content-text {

@@ -4,16 +4,24 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">Карта сайта</span>
+    </div>
+</div>
+{% endblock breadcrumbs %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/sitemap-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция карты сайта - брутальная -->
+<!-- Hero секция карты сайта -->
 <section class="brutal-sitemap-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-sitemap-hero-content">
             <h1 class="brutal-sitemap-hero-title">Карта сайта</h1>
             <p class="brutal-sitemap-hero-subtitle">Полная структура сайта Isakov Agency. Найдите нужную информацию быстро и удобно.</p>
@@ -21,9 +29,9 @@
     </div>
 </section>
 
-<!-- Основной контент - брутальный -->
+<!-- Основной контент -->
 <section class="brutal-sitemap-content">
-    <div class="brutal-container">
+    <div class="container">
         <!-- Статистика -->
         <div class="brutal-sitemap-stats">
             <h3 class="brutal-sitemap-stats-title">Статистика сайта</h3>
@@ -51,7 +59,7 @@
         <div class="brutal-sitemap-grid">
             <!-- Услуги -->
             <div class="brutal-sitemap-section">
-                <h3 class="brutal-sitemap-section-title">💼 Услуги</h3>
+                <h3 class="brutal-sitemap-section-title">Услуги</h3>
                 {% for category in sitemap_data.services %}
                 <div class="brutal-sitemap-category">
                     <h4 class="brutal-sitemap-category-title">
@@ -70,7 +78,7 @@
 
             <!-- Блог -->
             <div class="brutal-sitemap-section">
-                <h3 class="brutal-sitemap-section-title">📝 Блог</h3>
+                <h3 class="brutal-sitemap-section-title">Блог</h3>
                 {% for category in sitemap_data.blog_categories %}
                 <div class="brutal-sitemap-category">
                     <h4 class="brutal-sitemap-category-title">
@@ -94,7 +102,7 @@
 
             <!-- Региональные страницы -->
             <div class="brutal-sitemap-section">
-                <h3 class="brutal-sitemap-section-title">🏙️ Региональные страницы</h3>
+                <h3 class="brutal-sitemap-section-title">Региональные страницы</h3>
                 <ul class="brutal-sitemap-list">
                     {% for city in sitemap_data.cities %}
                     <li>
@@ -107,7 +115,7 @@
 
         <!-- FAQ -->
         <div class="brutal-sitemap-section">
-            <h3 class="brutal-sitemap-section-title">❓ FAQ</h3>
+            <h3 class="brutal-sitemap-section-title">FAQ</h3>
             <div class="brutal-sitemap-sections-grid">
                 {% for category in sitemap_data.faq_categories %}
                 <div class="brutal-sitemap-section-item">

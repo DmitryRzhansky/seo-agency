@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from django.db.models import Count, F, Q
+from django.db.models import Count, F, Q, Sum
+from django.db.models.functions import Length
 from django.contrib import messages
 from django.urls import reverse
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
@@ -929,17 +930,14 @@ def glossary_term(request, category_slug, term_slug):
 
 def author_detail(request, slug):
     """
-    Страница автора статьи
+    Страница автора статьи с поиском, пагинацией и статистикой
     """
-    # Проверяем, является ли это временным автором из User
+    # Базовый queryset статей автора
     if slug.startswith('user-'):
-        # Извлекаем ID пользователя
         try:
             user_id = int(slug.replace('user-', ''))
             from django.contrib.auth.models import User
             user = get_object_or_404(User, id=user_id)
-            
-            # Создаем временный объект Author
             author = Author(
                 first_name=user.first_name or user.username,
                 last_name=user.last_name or '',
@@ -948,38 +946,61 @@ def author_detail(request, slug):
                 bio='Информация об авторе не указана.',
                 is_active=True
             )
-            
-            # Получаем статьи автора (из User)
-            author_posts = Post.objects.filter(
-                author=user,
-                is_published=True
-            ).order_by('-published_date')[:10]
-            
+            base_qs = Post.objects.filter(author=user, is_published=True)
         except (ValueError, User.DoesNotExist):
             from django.http import Http404
             raise Http404("Автор не найден")
     else:
-        # Обычный автор из модели Author
         author = get_object_or_404(Author, username=slug, is_active=True)
-        
-        # Получаем статьи автора
-        author_posts = Post.objects.filter(
-            blog_author=author,
-            is_published=True
-        ).order_by('-published_date')[:10]
-    
-    # SEO данные
+        base_qs = Post.objects.filter(blog_author=author, is_published=True)
+
+    # Поиск
+    search_query = request.GET.get('q', '').strip()
+    posts_qs = base_qs
+    if search_query:
+        posts_qs = posts_qs.filter(
+            Q(title__icontains=search_query) |
+            Q(excerpt__icontains=search_query) |
+            Q(content__icontains=search_query)
+        )
+
+    # Пагинация
+    paginator = Paginator(posts_qs.order_by('-published_date'), 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # Статистика
+    total_posts = base_qs.count()
+    first_post = base_qs.order_by('published_date').first()
+    last_post = base_qs.order_by('-published_date').first()
+    totals = base_qs.annotate(c_len=Length('content')).aggregate(sum_len=Sum('c_len'))
+    total_chars = totals.get('sum_len') or 0
+    reading_time_total_min = max(1, int((total_chars / 5) / 200)) if total_chars else 0
+
+    categories_stats = (
+        base_qs.values('category__id', 'category__name', 'category__slug')
+        .annotate(count=Count('id'))
+        .order_by('-count', 'category__name')
+    )
+
+    # SEO
     seo_title = f"{author.get_full_name()} - Автор | Isakov Agency"
     seo_description = f"Биография автора {author.get_full_name()}, {author.position}. Статьи и публикации."
     seo_keywords = f"автор, {author.get_full_name()}, {author.position}, статьи"
-    
+
     context = {
         'title': seo_title,
         'seo_description': seo_description,
         'seo_keywords': seo_keywords,
         'author': author,
-        'author_posts': author_posts,
+        'page_obj': page_obj,
+        'search_query': search_query,
+        'total_posts': total_posts,
+        'reading_time_total_min': reading_time_total_min,
+        'first_published': first_post.published_date if first_post else None,
+        'last_published': last_post.published_date if last_post else None,
+        'categories_stats': categories_stats,
         'page_type': 'author_detail',
     }
-    
+
     return render(request, 'main/author_detail_brutal.html', context)

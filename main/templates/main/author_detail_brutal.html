@@ -77,12 +77,54 @@
                 </div>
             </div>
             
-            <!-- Статьи автора -->
-            {% if author_posts %}
+            <!-- Статистика автора -->
             <div class="brutal-author-posts">
                 <h2 class="brutal-author-posts-title">Статьи автора</h2>
+
+                <!-- Поиск по статьям автора -->
+                <form method="get" class="brutal-blog-search-form" style="margin: 0 0 30px 0;">
+                    <input 
+                        type="text" 
+                        name="q" 
+                        value="{{ search_query|default:'' }}" 
+                        placeholder="Поиск по статьям автора..." 
+                        class="brutal-blog-search-input"
+                    >
+                    <button type="submit" class="brutal-blog-search-button">Найти</button>
+                </form>
+
+                <!-- Агрегаты -->
+                <div class="brutal-author-stats" style="margin-bottom: 30px;">
+                    <ul>
+                        <li>Опубликовано статей: {{ total_posts }}</li>
+                        <li>Суммарное время чтения: {% if reading_time_total_min %}~ {{ reading_time_total_min }} мин{% else %}—{% endif %}</li>
+                        <li>Первая публикация: {% if first_published %}{{ first_published|date:"d.m.Y" }}{% else %}—{% endif %}</li>
+                        <li>Последняя публикация: {% if last_published %}{{ last_published|date:"d.m.Y" }}{% else %}—{% endif %}</li>
+                    </ul>
+                </div>
+
+                <!-- Категории автора -->
+                {% if categories_stats %}
+                <div class="brutal-author-categories" style="margin-bottom: 30px;">
+                    <h3>Категории автора</h3>
+                    <ul>
+                        {% for c in categories_stats %}
+                        <li>
+                            {% if c.category__slug %}
+                                <a href="{% url 'blog:category_posts' slug=c.category__slug %}">{{ c.category__name }}</a> — {{ c.count }}
+                            {% else %}
+                                {{ c.category__name|default:"Без категории" }} — {{ c.count }}
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <!-- Список статей -->
+                {% if page_obj %}
                 <div class="brutal-author-posts-grid">
-                    {% for post in author_posts %}
+                    {% for post in page_obj %}
                     <article class="brutal-author-post-card">
                         {% if post.image %}
                         <img src="{{ post.image.url }}" class="brutal-author-post-image" alt="{{ post.title }}">
@@ -115,8 +157,37 @@
                     </article>
                     {% endfor %}
                 </div>
+                
+                <!-- Пагинация -->
+                {% if page_obj.paginator.num_pages > 1 %}
+                <div class="brutal-blog-pagination" style="margin-top: 30px;">
+                    {% if page_obj.has_previous %}
+                        <a href="?q={{ search_query }}&page=1">Первая</a>
+                        <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                    {% endif %}
+                    <span class="current">
+                        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="?q={{ search_query }}&page={{ page_obj.next_page_number }}">Следующая</a>
+                        <a href="?q={{ search_query }}&page={{ page_obj.paginator.num_pages }}">Последняя</a>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% else %}
+                <div class="brutal-blog-empty">
+                    <i class="fas fa-search"></i>
+                    <h3>Статей не найдено</h3>
+                    <p>
+                        {% if search_query %}
+                            По запросу "{{ search_query }}" ничего не найдено. Попробуйте изменить поисковый запрос.
+                        {% else %}
+                            У этого автора пока нет опубликованных статей.
+                        {% endif %}
+                    </p>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </div>
 </section>

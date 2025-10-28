@@ -814,7 +814,7 @@ class GlossaryTermAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin)
 
 
 @admin.register(Author)
-class AuthorAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+class AuthorAdmin(admin.ModelAdmin):
     """Админ-класс для авторов статей"""
     
     list_display = ['get_full_name', 'position', 'is_active', 'posts_count', 'created_at']

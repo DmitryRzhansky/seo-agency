@@ -126,12 +126,13 @@
 }
 
 .brutal-content-block.content .brutal-content-text {
-    flex: 1;
     padding: 20px 0 20px 20px; /* Убираем правый padding полностью */
     margin: 0;
     box-sizing: border-box;
     width: 100%; /* Растягиваем текст на всю ширину блока */
     max-width: none; /* Убираем ограничения по ширине */
+    word-wrap: break-word; /* Переносим длинные слова */
+    overflow-wrap: break-word; /* Переносим длинные слова */
 }
 
 .brutal-block-number {
@@ -280,6 +281,8 @@
     line-height: 1.4;
     font-size: 14px;
     width: 100%; /* Растягиваем параграфы на всю ширину */
+    max-width: none; /* Убираем ограничения по ширине */
+    word-wrap: break-word; /* Переносим длинные слова */
 }
 
 .brutal-content-text ul,

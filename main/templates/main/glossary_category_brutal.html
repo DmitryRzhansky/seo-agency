@@ -5,7 +5,11 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs category %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:glossary_list' %}">Глоссарий</a><span class="separator">/</span><span class="current">{{ category.name }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -14,9 +18,9 @@
 {% endblock extra_css %}
 
 {% block content %}
-<!-- Hero секция категории глоссария - брутальная -->
+<!-- Hero секция категории глоссария -->
 <section class="brutal-glossary-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-glossary-hero-content">
             <h1 class="brutal-glossary-hero-title">{{ category.name }}</h1>
             {% if category.description %}
@@ -26,9 +30,9 @@
     </div>
 </section>
 
-<!-- Фильтры и поиск - брутальные -->
+<!-- Фильтры и поиск -->
 <section class="brutal-glossary-filters">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-glossary-nav">
             <div class="brutal-glossary-nav-content">
                 <!-- Поиск -->
@@ -42,7 +46,7 @@
                             class="brutal-glossary-search-input"
                         >
                         <button type="submit" class="brutal-glossary-search-button">
-                            🔍 Найти
+                            Найти
                         </button>
                     </div>
                 </form>
@@ -73,9 +77,9 @@
     </div>
 </section>
 
-<!-- Термины категории - брутальные -->
+<!-- Термины категории -->
 <section class="brutal-glossary-content">
-    <div class="brutal-container">
+    <div class="container">
         {% if glossary_terms %}
             <div class="brutal-glossary-terms">
                 {% for term in glossary_terms %}
@@ -100,9 +104,9 @@
     </div>
 </section>
 
-<!-- CTA секция - брутальная -->
+<!-- CTA секция -->
 <section class="brutal-glossary-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-glossary-cta-content">
             <h2 class="brutal-glossary-cta-title">Не нашли нужный термин?</h2>
             <p class="brutal-glossary-cta-description">

@@ -5,7 +5,11 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs glossary_term %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:glossary_list' %}">Глоссарий</a><span class="separator">/</span><a href="{% url 'main:glossary_category' category.slug %}">{{ category.name }}</a><span class="separator">/</span><span class="current">{{ glossary_term.term }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -14,9 +18,9 @@
 {% endblock extra_css %}
 
 {% block content %}
-<!-- Hero секция термина - брутальная -->
+<!-- Hero секция термина -->
 <section class="brutal-glossary-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-glossary-hero-content">
             <h1 class="brutal-glossary-hero-title">{{ glossary_term.term }}</h1>
             <div class="brutal-glossary-hero-meta">
@@ -28,9 +32,9 @@
     </div>
 </section>
 
-<!-- Определение термина - брутальное -->
+<!-- Определение термина -->
 <section class="brutal-glossary-definition">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-glossary-definition-content">
             <div class="brutal-glossary-definition-text">
                 {{ glossary_term.definition|safe }}
@@ -44,10 +48,10 @@
     </div>
 </section>
 
-<!-- Похожие термины - брутальные -->
+<!-- Похожие термины -->
 {% if related_terms %}
 <section class="brutal-glossary-related">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-glossary-related-title">Похожие термины</h2>
         <div class="brutal-glossary-related-terms">
             {% for term in related_terms %}
@@ -62,9 +66,9 @@
 </section>
 {% endif %}
 
-<!-- CTA секция - брутальная -->
+<!-- CTA секция -->
 <section class="brutal-glossary-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-glossary-cta-content">
             <h2 class="brutal-glossary-cta-title">Нужна помощь с терминами?</h2>
             <p class="brutal-glossary-cta-description">

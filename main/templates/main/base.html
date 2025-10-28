@@ -292,6 +292,46 @@
     <script src="{% static 'js/base.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     
+    <!-- Глобальная модалка с контактной формой -->
+    <div id="contactModal" class="contact-modal" style="display:none; position: fixed; inset: 0; z-index: 9999;">
+        <div class="contact-modal-backdrop" data-close-modal style="position:absolute; inset:0; background: rgba(0,0,0,0.6);"></div>
+        <div class="contact-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle"
+             style="position:relative; width: 100%; max-width: 640px; margin: 8vh auto; background:#fff; border: 3px solid #000; box-shadow: 12px 12px 0 #000;">
+            <button type="button" class="contact-modal-close" data-close-modal
+                    style="position:absolute; top:10px; right:10px; width:36px; height:36px; border:3px solid #000; background:#fff; cursor:pointer; font-weight:900;">×</button>
+            <div class="contact-modal-header" style="padding:24px 24px 0 24px;">
+                <h3 id="contactModalTitle" style="margin:0 40px 16px 0; font-weight:900; font-size:28px;">Связаться с нами</h3>
+                <p style="margin:0 40px 10px 0; color:#2A2A2A;">Оставьте контакты — ответим в ближайшее время.</p>
+            </div>
+            <div class="contact-modal-body" style="padding: 0 24px 24px 24px;">
+                <form id="contactModalForm" class="contact-form" method="post" action="{% url 'main:home' %}">
+                    {% csrf_token %}
+                    <div class="form-group" style="margin-bottom:12px;">
+                        <label for="modal_name">Имя</label>
+                        <input type="text" id="modal_name" name="name" placeholder="Введите ваше имя" required style="width:100%; border:3px solid #000; padding:12px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:12px;">
+                        <label for="modal_email">Email</label>
+                        <input type="email" id="modal_email" name="email" placeholder="example@mail.ru" required style="width:100%; border:3px solid #000; padding:12px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:12px;">
+                        <label for="modal_phone">Телефон</label>
+                        <input type="tel" id="modal_phone" name="phone" placeholder="+7 (___) ___-__-__" required style="width:100%; border:3px solid #000; padding:12px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:16px;">
+                        <label for="modal_message">Кратко о задаче</label>
+                        <textarea id="modal_message" name="message" rows="4" placeholder="Опишите задачу..." required style="width:100%; border:3px solid #000; padding:12px;"></textarea>
+                    </div>
+                    <input type="hidden" name="_source" value="contact_modal">
+                    <button type="submit" class="submit-button" style="display:inline-flex; align-items:center; gap:8px; border:3px solid #000; background:#3cc33c; color:#000; padding:12px 16px; font-weight:900; cursor:pointer;">
+                        <span>Отправить заявку</span>
+                        <span>→</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
     <!-- Функция для обработки выбора города -->
     <script>
         console.log('Inline script loaded');
@@ -320,6 +360,20 @@
             
             if (citySelect) {
                 console.log('City select has', citySelect.options.length, 'options');
+            }
+            
+            // Глобальная модалка: открытие по кнопкам в топ-баре
+            const contactModal = document.getElementById('contactModal');
+            const openButtons = [
+                document.getElementById('callbackBtn'),
+                document.getElementById('proposalBtn')
+            ].filter(Boolean);
+            const closeSelectors = '[data-close-modal]';
+            const openModal = () => { if (contactModal) contactModal.style.display = 'block'; };
+            const closeModal = () => { if (contactModal) contactModal.style.display = 'none'; };
+            openButtons.forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); openModal(); }));
+            if (contactModal) {
+                contactModal.querySelectorAll(closeSelectors).forEach(el => el.addEventListener('click', closeModal));
             }
         });
     </script>

@@ -5,7 +5,11 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs current_category %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">Портфолио</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -15,11 +19,10 @@
 
 {% block content %}
 
-<!-- Hero секция портфолио - брутальная -->
+<!-- Hero секция портфолио -->
 <section class="brutal-portfolio-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-portfolio-hero-content">
-            <br><br>
             <h1 class="brutal-portfolio-hero-title">Портфолио</h1>
             <p class="brutal-portfolio-hero-subtitle">
                 Примеры успешных проектов, которые мы реализовали для наших клиентов. 
@@ -29,9 +32,9 @@
     </div>
 </section>
 
-<!-- Поиск по портфолио - брутальный -->
+<!-- Поиск по портфолио -->
 <section class="brutal-portfolio-search">
-    <div class="brutal-container">
+    <div class="container">
         <form method="get" action="{% url 'main:portfolio_list' %}" class="brutal-portfolio-search-form">
             <input 
                 type="text" 
@@ -47,10 +50,10 @@
     </div>
 </section>
 
-<!-- Фильтры по типу проекта - брутальные -->
+<!-- Фильтры по типу проекта -->
 {% if available_types %}
 <section class="brutal-portfolio-filters">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-portfolio-filters-title">Фильтр по типу проекта</h2>
         <div class="brutal-portfolio-filters-grid">
             <div class="brutal-portfolio-filter-card {% if not current_type %}active{% endif %}">
@@ -70,10 +73,10 @@
 </section>
 {% endif %}
 
-<!-- Рекомендуемые проекты - брутальные -->
+<!-- Рекомендуемые проекты -->
 {% if featured_page_obj %}
 <section class="brutal-portfolio-featured">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-portfolio-featured-title">Рекомендуемые проекты</h2>
         <div class="brutal-portfolio-featured-grid">
             {% for project in featured_page_obj %}
@@ -128,9 +131,9 @@
 </section>
 {% endif %}
 
-<!-- Все проекты - брутальные -->
+<!-- Все проекты -->
 <section class="brutal-portfolio-projects">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-portfolio-projects-title">
             {% if current_type %}
                 {{ current_type|title }} проекты

@@ -5,7 +5,11 @@
 {% block title %}{{ category.name }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs category %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:portfolio_list' %}">Портфолио</a><span class="separator">/</span><span class="current">{{ category.name }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -15,9 +19,9 @@
 
 {% block content %}
 
-<!-- Hero секция категории портфолио - брутальная -->
+<!-- Hero секция категории портфолио -->
 <section class="brutal-category-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-category-hero-content">
             <h1 class="brutal-category-hero-title">{{ category.name }}</h1>
             <p class="brutal-category-hero-subtitle">Здесь вы найдете наши работы в категории «{{ category.name }}». Посмотрите примеры наших проектов и достигнутых результатов.</p>
@@ -25,9 +29,9 @@
     </div>
 </section>
 
-<!-- Список проектов категории - брутальный -->
+<!-- Список проектов категории -->
 <section class="brutal-category-projects">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-category-projects-title">Наши проекты в разделе «{{ category.name }}»</h2>
         
         {% if page_obj %}

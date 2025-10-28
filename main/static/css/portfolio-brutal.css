@@ -1,35 +1,46 @@
-/* Брутальный стиль для портфолио */
+/* ============================================
+   ПОРТФОЛИО - НОВЫЙ СТИЛЬ
+   ============================================ */
 
-/* Переменные */
+/* Переменные из основного стиля */
 :root {
-    --brutal-black: #000000;
-    --brutal-white: #ffffff;
-    --brutal-green: #00ff00;
-    --brutal-gray: #f5f5f5;
-    --brutal-dark-gray: #333333;
-    --brutal-border: 3px solid var(--brutal-black);
-    --brutal-shadow: 6px 6px 0px var(--brutal-black);
-    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray: #808080;
+    --gray-light: #D3D3D3;
+    --gray-dark: #2A2A2A;
+    --accent: #3cc33c;
+    --accent-hover: #33aa33;
+    --border-width: 3px;
+    --border: var(--border-width) solid var(--black);
+    --transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    --font-main: 'Space Grotesk', 'Arial', 'Helvetica', sans-serif;
 }
 
-/* Основные стили */
-* {
-    font-family: 'Courier New', monospace;
-}
-
-/* Контейнер */
-.brutal-container {
-    max-width: 1200px;
+/* Общие стили */
+.container {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 50px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
 }
 
 /* Hero секция портфолио */
 .brutal-portfolio-hero {
-    background: var(--brutal-white);
-    padding: 60px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--white);
+    padding: 120px 0;
+    border-bottom: var(--border);
     position: relative;
 }
 
@@ -37,254 +48,226 @@
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .brutal-portfolio-hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 20px;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 30px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 3px 3px 0px var(--brutal-black);
-    line-height: 1.2;
+    letter-spacing: -2px;
+    position: relative;
+    line-height: 1.1;
 }
 
 .brutal-portfolio-hero-subtitle {
-    font-size: 1.2rem;
-    color: var(--brutal-dark-gray);
-    line-height: 1.6;
-    max-width: 600px;
+    font-size: 20px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+    max-width: 680px;
     margin: 0 auto;
+    font-weight: 400;
 }
 
 /* Поиск по портфолио */
 .brutal-portfolio-search {
-    background: var(--brutal-gray);
-    padding: 40px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--gray-light);
+    padding: 60px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-search-form {
     display: flex;
-    gap: 20px;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
-    align-items: center;
+    border: var(--border);
+    background: var(--white);
 }
 
 .brutal-portfolio-search-input {
-    flex: 1;
+    flex-grow: 1;
     padding: 15px 20px;
-    border: var(--brutal-border);
-    background: var(--brutal-white);
-    font-size: 1.1rem;
-    font-weight: 500;
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    font-family: var(--font-main);
+    color: var(--black);
 }
 
-.brutal-portfolio-search-input:focus {
-    outline: none;
-    box-shadow: var(--brutal-shadow-hover);
-    transform: translateY(-2px);
+.brutal-portfolio-search-input::placeholder {
+    color: var(--gray);
 }
 
 .brutal-portfolio-search-button {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    background: var(--accent);
+    color: var(--white);
+    border: none;
     padding: 15px 30px;
-    border: var(--brutal-border);
+    font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    border-left: var(--border);
 }
 
 .brutal-portfolio-search-button:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    background: var(--accent-hover);
 }
 
 /* Фильтры по типу проекта */
 .brutal-portfolio-filters {
-    background: var(--brutal-white);
-    padding: 40px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--white);
+    padding: 60px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-filters-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
+    font-size: clamp(28px, 4vw, 45px);
+    font-weight: 900;
+    color: var(--black);
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
 }
 
 .brutal-portfolio-filters-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
     justify-content: center;
+    gap: 15px;
 }
 
 .brutal-portfolio-filter-card {
-    background: var(--brutal-white);
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
+    background: var(--white);
+    border: var(--border);
+    transition: var(--transition);
 }
 
 .brutal-portfolio-filter-card:hover,
 .brutal-portfolio-filter-card.active {
-    background: var(--brutal-green);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 .brutal-portfolio-filter-link {
     display: block;
-    padding: 12px 24px;
-    color: var(--brutal-black);
+    padding: 12px 25px;
+    color: var(--black);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .brutal-portfolio-filter-card:hover .brutal-portfolio-filter-link,
 .brutal-portfolio-filter-card.active .brutal-portfolio-filter-link {
-    color: var(--brutal-white);
+    color: var(--white);
 }
 
 /* Рекомендуемые проекты */
 .brutal-portfolio-featured {
-    background: var(--brutal-gray);
-    padding: 60px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--gray-light);
+    padding: 100px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-featured-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--brutal-black);
+    font-size: clamp(32px, 5vw, 55px);
+    font-weight: 900;
+    color: var(--black);
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-}
-
-.brutal-portfolio-featured-title::before {
-    content: '★';
-    position: absolute;
-    top: -10px;
-    left: -40px;
-    font-size: 1.5rem;
-    color: var(--brutal-black);
-}
-
-.brutal-portfolio-featured-title::after {
-    content: '★';
-    position: absolute;
-    top: -10px;
-    right: -40px;
-    font-size: 1.5rem;
-    color: var(--brutal-black);
+    letter-spacing: -1px;
 }
 
 .brutal-portfolio-featured-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    margin-bottom: 60px;
 }
 
 .brutal-portfolio-featured-card {
-    background: var(--brutal-white);
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
+    background: var(--white);
+    border: var(--border);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .brutal-portfolio-featured-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--accent);
 }
 
 .brutal-portfolio-featured-image {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
-    border-bottom: var(--brutal-border);
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-featured-placeholder {
     width: 100%;
-    height: 200px;
-    background: var(--brutal-gray);
+    height: 220px;
+    background: var(--gray);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: var(--brutal-border);
-}
-
-.brutal-portfolio-featured-placeholder i {
-    font-size: 3rem;
-    color: var(--brutal-dark-gray);
+    font-size: 60px;
+    color: var(--white);
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-featured-content {
-    padding: 25px;
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .brutal-portfolio-featured-type {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 5px 12px;
-    font-size: 0.9rem;
+    font-size: 13px;
     font-weight: 700;
+    color: var(--accent);
     text-transform: uppercase;
+    margin-bottom: 10px;
     letter-spacing: 0.5px;
-    display: inline-block;
-    margin-bottom: 15px;
-    border: 2px solid var(--brutal-black);
-    box-shadow: 2px 2px 0px var(--brutal-black);
 }
 
 .brutal-portfolio-featured-title-card {
-    font-size: 1.3rem;
+    font-size: 22px;
     font-weight: 700;
-    color: var(--brutal-black);
+    color: var(--black);
     margin-bottom: 15px;
     line-height: 1.3;
 }
 
 .brutal-portfolio-featured-description {
-    color: var(--brutal-dark-gray);
-    line-height: 1.5;
+    font-size: 15px;
+    color: var(--gray-dark);
+    line-height: 1.6;
     margin-bottom: 20px;
+    flex-grow: 1;
 }
 
 .brutal-portfolio-featured-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    color: var(--brutal-dark-gray);
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--gray-light);
 }
 
 .brutal-portfolio-featured-client {
@@ -297,126 +280,121 @@
 
 .brutal-portfolio-featured-link {
     display: inline-block;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 10px 20px;
-    border: 2px solid var(--brutal-black);
-    text-decoration: none;
+    margin-top: auto;
+    color: var(--accent);
     font-weight: 700;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: var(--border);
+    border-color: var(--accent);
+    transition: var(--transition);
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: 3px 3px 0px var(--brutal-black);
 }
 
 .brutal-portfolio-featured-link:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: 5px 5px 0px var(--brutal-green);
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 /* Все проекты */
 .brutal-portfolio-projects {
-    background: var(--brutal-white);
-    padding: 60px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--white);
+    padding: 100px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-projects-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--brutal-black);
+    font-size: clamp(32px, 5vw, 55px);
+    font-weight: 900;
+    color: var(--black);
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
 }
 
 .brutal-portfolio-projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
+    gap: 40px;
+    margin-bottom: 60px;
 }
 
 .brutal-portfolio-card {
-    background: var(--brutal-white);
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
+    background: var(--white);
+    border: var(--border);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .brutal-portfolio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--accent);
 }
 
 .brutal-portfolio-card-image {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
-    border-bottom: var(--brutal-border);
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-card-placeholder {
     width: 100%;
-    height: 180px;
-    background: var(--brutal-gray);
+    height: 200px;
+    background: var(--gray);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: var(--brutal-border);
-}
-
-.brutal-portfolio-card-placeholder i {
-    font-size: 2.5rem;
-    color: var(--brutal-dark-gray);
+    font-size: 50px;
+    color: var(--white);
+    border-bottom: var(--border);
 }
 
 .brutal-portfolio-card-content {
-    padding: 20px;
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .brutal-portfolio-card-type {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 4px 10px;
-    font-size: 0.8rem;
+    font-size: 13px;
     font-weight: 700;
+    color: var(--accent);
     text-transform: uppercase;
+    margin-bottom: 10px;
     letter-spacing: 0.5px;
-    display: inline-block;
-    margin-bottom: 12px;
-    border: 2px solid var(--brutal-black);
-    box-shadow: 2px 2px 0px var(--brutal-black);
 }
 
 .brutal-portfolio-card-title {
-    font-size: 1.1rem;
+    font-size: 20px;
     font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 12px;
+    color: var(--black);
+    margin-bottom: 15px;
     line-height: 1.3;
 }
 
 .brutal-portfolio-card-description {
-    color: var(--brutal-dark-gray);
-    line-height: 1.4;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
+    font-size: 15px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
 }
 
 .brutal-portfolio-card-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    font-size: 0.85rem;
-    color: var(--brutal-dark-gray);
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--gray-light);
 }
 
 .brutal-portfolio-card-client {
@@ -429,24 +407,23 @@
 
 .brutal-portfolio-card-link {
     display: inline-block;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 8px 16px;
-    border: 2px solid var(--brutal-black);
-    text-decoration: none;
+    margin-top: auto;
+    color: var(--accent);
     font-weight: 700;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: var(--border);
+    border-color: var(--accent);
+    transition: var(--transition);
+    text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    box-shadow: 2px 2px 0px var(--brutal-black);
 }
 
 .brutal-portfolio-card-link:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: 4px 4px 0px var(--brutal-green);
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 /* Пагинация */
@@ -454,107 +431,284 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-    margin-top: 40px;
+    gap: 10px;
+    margin-top: 50px;
 }
 
 .brutal-portfolio-pagination a {
-    background: var(--brutal-white);
-    color: var(--brutal-black);
-    padding: 10px 20px;
-    border: var(--brutal-border);
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--white);
+    color: var(--black);
+    border: var(--border);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 14px;
+    transition: var(--transition);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: var(--brutal-shadow);
+    letter-spacing: 1px;
 }
 
 .brutal-portfolio-pagination a:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
 }
 
 .brutal-portfolio-pagination .current {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 10px 20px;
-    border: var(--brutal-border);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: var(--brutal-shadow);
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 /* Пустое состояние */
 .brutal-portfolio-empty {
     text-align: center;
-    padding: 60px 20px;
-    background: var(--brutal-gray);
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
+    padding: 80px 20px;
+    background: var(--gray-light);
+    border: var(--border);
 }
 
 .brutal-portfolio-empty i {
-    font-size: 4rem;
-    color: var(--brutal-dark-gray);
-    margin-bottom: 20px;
+    font-size: 60px;
+    color: var(--gray);
+    margin-bottom: 30px;
 }
 
 .brutal-portfolio-empty h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 15px;
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
 }
 
 .brutal-portfolio-empty p {
-    font-size: 1.1rem;
-    color: var(--brutal-dark-gray);
-    line-height: 1.5;
+    font-size: 18px;
+    color: var(--gray-dark);
+    line-height: 1.6;
     max-width: 500px;
     margin: 0 auto;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
+    .brutal-portfolio-hero {
+        padding: 80px 0;
+    }
+
     .brutal-portfolio-hero-title {
-        font-size: 2rem;
+        font-size: 40px;
     }
-    
+
     .brutal-portfolio-hero-subtitle {
-        font-size: 1rem;
+        font-size: 18px;
     }
-    
+
+    .brutal-portfolio-search {
+        padding: 40px 0;
+    }
+
     .brutal-portfolio-search-form {
         flex-direction: column;
-        gap: 15px;
     }
-    
+
+    .brutal-portfolio-search-button {
+        border-left: none;
+        border-top: var(--border);
+    }
+
+    .brutal-portfolio-filters {
+        padding: 40px 0;
+    }
+
+    .brutal-portfolio-filters-title {
+        font-size: 32px;
+    }
+
     .brutal-portfolio-filters-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .brutal-portfolio-featured-grid,
-    .brutal-portfolio-projects-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .brutal-portfolio-pagination {
-        flex-wrap: wrap;
         gap: 10px;
     }
-    
-    .brutal-portfolio-pagination a,
-    .brutal-portfolio-pagination .current {
-        padding: 8px 16px;
-        font-size: 0.9rem;
+
+    .brutal-portfolio-filter-link {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .brutal-portfolio-featured {
+        padding: 60px 0;
+    }
+
+    .brutal-portfolio-featured-title {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    .brutal-portfolio-featured-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .brutal-portfolio-featured-image {
+        height: 180px;
+    }
+
+    .brutal-portfolio-featured-placeholder {
+        height: 180px;
+        font-size: 50px;
+    }
+
+    .brutal-portfolio-featured-content {
+        padding: 20px;
+    }
+
+    .brutal-portfolio-featured-title-card {
+        font-size: 20px;
+    }
+
+    .brutal-portfolio-featured-description {
+        font-size: 14px;
+    }
+
+    .brutal-portfolio-featured-link {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+
+    .brutal-portfolio-projects {
+        padding: 60px 0;
+    }
+
+    .brutal-portfolio-projects-title {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    .brutal-portfolio-projects-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .brutal-portfolio-card-image {
+        height: 150px;
+    }
+
+    .brutal-portfolio-card-placeholder {
+        height: 150px;
+        font-size: 40px;
+    }
+
+    .brutal-portfolio-card-content {
+        padding: 20px;
+    }
+
+    .brutal-portfolio-card-title {
+        font-size: 18px;
+    }
+
+    .brutal-portfolio-card-description {
+        font-size: 14px;
+    }
+
+    .brutal-portfolio-card-link {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+
+    .brutal-portfolio-pagination {
+        margin-top: 30px;
+        gap: 8px;
+    }
+
+    .brutal-portfolio-pagination a {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brutal-portfolio-hero-title {
+        font-size: 32px;
+    }
+
+    .brutal-portfolio-hero-subtitle {
+        font-size: 16px;
+    }
+
+    .brutal-portfolio-search-input {
+        font-size: 14px;
+    }
+
+    .brutal-portfolio-search-button {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+
+    .brutal-portfolio-filters-title {
+        font-size: 28px;
+    }
+
+    .brutal-portfolio-filter-link {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    .brutal-portfolio-featured-title {
+        font-size: 32px;
+    }
+
+    .brutal-portfolio-featured-image {
+        height: 150px;
+    }
+
+    .brutal-portfolio-featured-placeholder {
+        height: 150px;
+        font-size: 40px;
+    }
+
+    .brutal-portfolio-featured-title-card {
+        font-size: 18px;
+    }
+
+    .brutal-portfolio-featured-description {
+        font-size: 13px;
+    }
+
+    .brutal-portfolio-featured-link {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .brutal-portfolio-projects-title {
+        font-size: 32px;
+    }
+
+    .brutal-portfolio-card-image {
+        height: 120px;
+    }
+
+    .brutal-portfolio-card-placeholder {
+        height: 120px;
+        font-size: 30px;
+    }
+
+    .brutal-portfolio-card-title {
+        font-size: 16px;
+    }
+
+    .brutal-portfolio-card-description {
+        font-size: 13px;
+    }
+
+    .brutal-portfolio-card-link {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .brutal-portfolio-pagination a {
+        padding: 8px 12px;
+        font-size: 12px;
     }
 }

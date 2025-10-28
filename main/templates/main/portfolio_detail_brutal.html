@@ -6,7 +6,11 @@
 
 {% block breadcrumbs %}
 {% if portfolio_item.show_breadcrumbs %}
-{% breadcrumbs portfolio_item %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:portfolio_list' %}">Портфолио</a><span class="separator">/</span><span class="current">{{ portfolio_item.title }}</span>
+    </div>
+</div>
 {% endif %}
 {% endblock breadcrumbs %}
 
@@ -17,9 +21,9 @@
 
 {% block content %}
 
-<!-- Hero секция проекта - брутальная -->
+<!-- Hero секция проекта -->
 <section class="brutal-portfolio-detail-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-portfolio-detail-hero-content">
             <h1 class="brutal-portfolio-detail-title">{{ portfolio_item.title }}</h1>
             <div class="brutal-portfolio-detail-meta">
@@ -35,16 +39,15 @@
                 </div>
                 {% endif %}
             </div>
-            <p class="brutal-portfolio-detail-subtitle">{{ portfolio_item.short_description }}</p>
         </div>
     </div>
 </section>
 
-<!-- Основной контент проекта - брутальный -->
+<!-- Основной контент проекта -->
 <section class="brutal-portfolio-detail-content">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-portfolio-detail-wrapper">
-            <!-- Брутальные блоки контента -->
+            <!-- Блоки контента -->
             <div class="brutal-portfolio-detail-blocks">
                 <div class="brutal-portfolio-detail-block main">
                     <div class="brutal-portfolio-detail-block-number">01</div>
@@ -116,10 +119,10 @@
     </div>
 </section>
 
-<!-- Галерея изображений - брутальная -->
+<!-- Галерея изображений -->
 {% if portfolio_item.get_gallery_images_list %}
 <section class="brutal-portfolio-gallery">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-portfolio-gallery-title">Галерея проекта</h2>
         <div class="brutal-portfolio-gallery-grid">
             {% for image_path in portfolio_item.get_gallery_images_list %}
@@ -132,10 +135,10 @@
 </section>
 {% endif %}
 
-<!-- Технологии - брутальные -->
+<!-- Технологии -->
 {% if portfolio_item.get_technologies_list %}
 <section class="brutal-portfolio-technologies">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-portfolio-technologies-title">Использованные технологии</h2>
         <div class="brutal-portfolio-technologies-list">
             {% for tech in portfolio_item.get_technologies_list %}
@@ -146,9 +149,9 @@
 </section>
 {% endif %}
 
-<!-- CTA блок - брутальный -->
+<!-- CTA блок -->
 <section class="brutal-portfolio-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-portfolio-cta-content">
             <h3 class="brutal-portfolio-cta-title">Хотите такой же результат?</h3>
             <p class="brutal-portfolio-cta-text">Оставьте заявку, и мы обсудим ваш проект и возможности его реализации.</p>
@@ -159,19 +162,19 @@
     </div>
 </section>
 
-<!-- Навигация - брутальная -->
+<!-- Навигация -->
 <section class="brutal-portfolio-navigation">
-    <div class="brutal-container">
+    <div class="container">
         <a href="{% url 'main:portfolio_list' %}" class="brutal-portfolio-nav-link">
             ← Вернуться в портфолио
         </a>
     </div>
 </section>
 
-<!-- Похожие проекты - брутальные -->
+<!-- Похожие проекты -->
 {% if related_projects %}
 <section class="brutal-related-portfolio">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-related-portfolio-title">Похожие проекты</h2>
         <div class="brutal-related-portfolio-grid">
             {% for related_project in related_projects %}

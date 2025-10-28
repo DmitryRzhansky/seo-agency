@@ -121,6 +121,7 @@
     grid-column: span 2;
     min-height: 200px;
     margin-right: -360px; /* Выдвигаем блок до границы изображения (gap + ширина изображения) */
+    overflow: hidden; /* Скрываем контент, который выходит за границы */
 }
 
 .brutal-content-block.content .brutal-content-text {
@@ -129,6 +130,7 @@
     margin: 0;
     box-sizing: border-box;
     width: 100%; /* Растягиваем текст на всю ширину блока */
+    max-width: none; /* Убираем ограничения по ширине */
 }
 
 .brutal-block-number {
@@ -276,6 +278,7 @@
     margin-bottom: 10px;
     line-height: 1.4;
     font-size: 14px;
+    width: 100%; /* Растягиваем параграфы на всю ширину */
 }
 
 .brutal-content-text ul,

@@ -176,25 +176,6 @@
             {% endfor %}
         </div>
         
-        <!-- Пагинация -->
-        {% if is_paginated %}
-        <div class="brutal-portfolio-pagination">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">Первая</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
-            {% endif %}
-            
-            <span class="current">
-                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-            </span>
-            
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
-            {% endif %}
-        </div>
-        {% endif %}
-        
         {% else %}
         <div class="brutal-portfolio-empty">
             <i class="fas fa-search"></i>

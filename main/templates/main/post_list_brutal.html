@@ -137,17 +137,22 @@
         </div>
         {% endif %}
         
-        {% else %}
-        <div class="brutal-blog-empty">
-            <i class="fas fa-search"></i>
-            <h3>Статьи не найдены</h3>
-            <p>
-                {% if search_query %}
-                    По запросу "{{ search_query }}" ничего не найдено. Попробуйте изменить поисковый запрос.
-                {% else %}
-                    В этом разделе пока нет опубликованных статей.
-                {% endif %}
-            </p>
+        <!-- Пагинация -->
+        {% if is_paginated %}
+        <div class="brutal-blog-pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">Первая</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+            
+            <span class="current">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+            </span>
+            
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+            {% endif %}
         </div>
         {% endif %}
     </div>

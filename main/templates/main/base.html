@@ -116,7 +116,7 @@
             <div class="top-bar-left">
                 <div class="city-selector">
                     <span class="city-icon">📍</span>
-                    <select id="citySelect" class="city-select">
+                    <select id="citySelect" class="city-select" onchange="handleCityChange(this)">
                         <option value="">Выберите город</option>
                         <option value="all">Все города</option>
                         {% for city in cities_menu %}
@@ -292,6 +292,39 @@
     <!-- JavaScript -->
     <script src="{% static 'js/base.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    
+    <!-- Функция для обработки выбора города -->
+    <script>
+        console.log('Inline script loaded');
+        
+        function handleCityChange(selectElement) {
+            console.log('City change handler called');
+            const selectedCitySlug = selectElement.value;
+            console.log('Selected city:', selectedCitySlug);
+            
+            if (selectedCitySlug && selectedCitySlug !== '') {
+                if (selectedCitySlug === 'all') {
+                    console.log('Redirecting to all cities');
+                    window.location.href = '/cities/';
+                } else {
+                    console.log('Redirecting to city:', selectedCitySlug);
+                    window.location.href = '/set-city/' + selectedCitySlug + '/';
+                }
+            }
+        }
+        
+        // Проверяем, что селектор существует
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            const citySelect = document.getElementById('citySelect');
+            console.log('City select found:', citySelect);
+            
+            if (citySelect) {
+                console.log('City select has', citySelect.options.length, 'options');
+            }
+        });
+    </script>
+    
     {% block extra_js %}{% endblock extra_js %}
 </body>
 </html>

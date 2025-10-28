@@ -555,7 +555,7 @@ class Author(models.Model):
     """Автор статей блога."""
     first_name = models.CharField(max_length=100, verbose_name="Имя")
     last_name = models.CharField(max_length=100, verbose_name="Фамилия")
-    slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")
+    slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор", help_text="Используется в URL страницы автора")
     bio = models.TextField(verbose_name="Биография", help_text="Подробная информация об авторе")
     photo = models.ImageField(upload_to='author_photos/', blank=True, null=True, verbose_name="Фото")
     photo_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст фото", help_text="Описание фото для SEO и доступности")

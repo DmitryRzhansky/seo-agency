@@ -43,7 +43,6 @@
             <div class="brutal-city-services-grid">
                 {% for category in service_categories %}
                 <div class="brutal-city-service-card">
-                    <div class="brutal-city-service-category">{{ category.title }}</div>
                     <h3 class="brutal-city-service-title">{{ category.title }}</h3>
                     <p class="brutal-city-service-description">{{ category.description|truncatewords:20 }}</p>
                     <a href="{% url 'main:city_category_detail' city.slug category.slug %}" class="brutal-city-service-link">

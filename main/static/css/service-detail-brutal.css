@@ -121,12 +121,13 @@
     grid-column: span 2;
     min-height: 200px;
     margin-right: -360px; /* Выдвигаем блок до границы изображения (gap + ширина изображения) */
-    overflow: hidden; /* Скрываем контент, который выходит за границы */
+    overflow-y: auto; /* Добавляем вертикальный скролл */
+    overflow-x: hidden; /* Скрываем горизонтальный скролл */
 }
 
 .brutal-content-block.content .brutal-content-text {
     flex: 1;
-    padding: 20px;
+    padding: 20px 5px 20px 20px; /* Уменьшаем правый padding */
     margin: 0;
     box-sizing: border-box;
     width: 100%; /* Растягиваем текст на всю ширину блока */

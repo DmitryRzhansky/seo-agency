@@ -1,4 +1,6 @@
 // Анимации появления при прокрутке и вспомогательные эффекты
+console.log('Base.js loaded successfully');
+
 document.addEventListener('DOMContentLoaded', function() {
     // Ленивая загрузка изображений
     const images = document.querySelectorAll('img');
@@ -331,7 +333,10 @@ initProgressBars();
 
 // Инициализация селектора городов
 (function initCitySelector() {
+    console.log('Looking for city selector...');
     const citySelect = document.getElementById('citySelect');
+    console.log('City selector element:', citySelect);
+    
     if (!citySelect) {
         console.log('City selector not found');
         return;

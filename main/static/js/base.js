@@ -332,16 +332,23 @@ initProgressBars();
 // Инициализация селектора городов
 (function initCitySelector() {
     const citySelect = document.getElementById('citySelect');
-    if (!citySelect) return;
+    if (!citySelect) {
+        console.log('City selector not found');
+        return;
+    }
 
+    console.log('City selector initialized');
+    
     citySelect.addEventListener('change', function() {
         const selectedCitySlug = this.value;
+        console.log('City selected:', selectedCitySlug);
+        
         if (selectedCitySlug && selectedCitySlug !== '') {
             if (selectedCitySlug === 'all') {
-                // Переходим на страницу всех городов
+                console.log('Redirecting to all cities');
                 window.location.href = '/cities/';
             } else {
-                // Используем специальный URL для установки города
+                console.log('Redirecting to city:', selectedCitySlug);
                 window.location.href = `/set-city/${selectedCitySlug}/`;
             }
         }

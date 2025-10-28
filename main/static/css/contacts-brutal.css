@@ -1,35 +1,46 @@
-/* Брутальный стиль для контактов */
+/* ============================================
+   КОНТАКТЫ - НОВЫЙ СТИЛЬ
+   ============================================ */
 
-/* Переменные */
+/* Переменные из основного стиля */
 :root {
-    --brutal-black: #000000;
-    --brutal-white: #ffffff;
-    --brutal-green: #00ff00;
-    --brutal-gray: #f5f5f5;
-    --brutal-dark-gray: #333333;
-    --brutal-border: 3px solid var(--brutal-black);
-    --brutal-shadow: 6px 6px 0px var(--brutal-black);
-    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray: #808080;
+    --gray-light: #D3D3D3;
+    --gray-dark: #2A2A2A;
+    --accent: #3cc33c;
+    --accent-hover: #33aa33;
+    --border-width: 3px;
+    --border: var(--border-width) solid var(--black);
+    --transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    --font-main: 'Space Grotesk', 'Arial', 'Helvetica', sans-serif;
 }
 
-/* Основные стили */
-* {
-    font-family: 'Courier New', monospace;
-}
-
-/* Контейнер */
-.brutal-container {
-    max-width: 1200px;
+/* Общие стили */
+.container {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 50px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
 }
 
 /* Hero секция контактов */
 .brutal-contacts-hero {
-    background: var(--brutal-white);
-    padding: 60px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--white);
+    padding: 120px 0;
+    border-bottom: var(--border);
     position: relative;
 }
 
@@ -37,25 +48,27 @@
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .brutal-contacts-hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 20px;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 30px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 3px 3px 0px var(--brutal-black);
-    line-height: 1.2;
+    letter-spacing: -2px;
+    line-height: 1.1;
 }
 
 .brutal-contacts-hero-subtitle {
-    font-size: 1.2rem;
-    color: var(--brutal-dark-gray);
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto 30px;
+    font-size: 20px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto 40px;
+    font-weight: 400;
 }
 
 .brutal-contacts-hero-buttons {
@@ -69,94 +82,87 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    background: var(--accent);
+    color: var(--white);
     padding: 15px 30px;
-    border: var(--brutal-border);
+    border: var(--border);
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: all 0.3s ease;
-    box-shadow: var(--brutal-shadow);
+    transition: var(--transition);
 }
 
 .brutal-contacts-hero-btn:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    background: var(--accent-hover);
 }
 
 .brutal-contacts-hero-btn.outline {
-    background: var(--brutal-white);
-    color: var(--brutal-black);
-    border: var(--brutal-border);
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--accent);
 }
 
 .brutal-contacts-hero-btn.outline:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 /* Основной контент контактов */
 .brutal-contacts-content {
-    background: var(--brutal-gray);
-    padding: 60px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--gray-light);
+    padding: 100px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-contacts-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 60px;
     align-items: start;
 }
 
 /* Контактная информация */
 .brutal-contacts-info-card {
-    background: var(--brutal-white);
-    border: var(--brutal-border);
-    padding: 30px;
-    box-shadow: var(--brutal-shadow);
+    background: var(--white);
+    border: var(--border);
+    padding: 40px;
     position: relative;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .brutal-contacts-info-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--accent);
 }
 
 .brutal-contacts-info-block-number {
     position: absolute;
     top: -15px;
-    left: 20px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    left: 30px;
+    background: var(--accent);
+    color: var(--white);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 13px;
     padding: 5px 10px;
-    border: 2px solid var(--brutal-black);
-    box-shadow: 3px 3px 0px var(--brutal-black);
+    border: 2px solid var(--black);
 }
 
 .brutal-contacts-info-card h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 25px;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 30px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
 }
 
 .brutal-contacts-item {
     display: flex;
-    gap: 15px;
-    margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid var(--brutal-gray);
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--gray-light);
 }
 
 .brutal-contacts-item:last-child {
@@ -167,23 +173,28 @@
 
 .brutal-contacts-icon {
     flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    width: 60px;
+    height: 60px;
+    background: var(--accent);
+    color: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--brutal-black);
-    box-shadow: 3px 3px 0px var(--brutal-black);
-    font-size: 1.2rem;
+    border: 2px solid var(--black);
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.brutal-contacts-icon:hover {
+    background: var(--black);
+    border-color: var(--accent);
 }
 
 .brutal-contacts-details h3 {
-    font-size: 1.1rem;
+    font-size: 18px;
     font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 5px;
+    color: var(--black);
+    margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -191,124 +202,120 @@
 .brutal-contacts-details p {
     margin-bottom: 5px;
     font-weight: 600;
-    color: var(--brutal-black) !important;
+    color: var(--black);
+    font-size: 16px;
 }
 
 .brutal-contacts-details a {
-    color: var(--brutal-black);
+    color: var(--accent);
     text-decoration: none;
     font-weight: 700;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .brutal-contacts-details a:hover {
-    color: var(--brutal-black);
+    color: var(--black);
     text-decoration: underline;
 }
 
 .brutal-contacts-details small {
-    color: var(--brutal-black) !important;
-    font-size: 1rem !important;
-    font-style: normal !important;
-    font-weight: 900 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-}
-
-/* Принудительно исправляем цвет для времени работы */
-.brutal-contacts-item .brutal-contacts-details p {
-    color: var(--brutal-black) !important;
-    font-weight: 600 !important;
+    color: var(--gray-dark);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 /* Форма обратной связи */
 .brutal-contacts-form-card {
-    background: var(--brutal-white);
-    border: var(--brutal-border);
-    padding: 30px;
-    box-shadow: var(--brutal-shadow);
+    background: var(--white);
+    border: var(--border);
+    padding: 40px;
     position: relative;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .brutal-contacts-form-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--accent);
 }
 
 .brutal-contacts-form-block-number {
     position: absolute;
     top: -15px;
-    left: 20px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    left: 30px;
+    background: var(--accent);
+    color: var(--white);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 13px;
     padding: 5px 10px;
-    border: 2px solid var(--brutal-black);
-    box-shadow: 3px 3px 0px var(--brutal-black);
+    border: 2px solid var(--black);
 }
 
 .brutal-contacts-form-card h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 15px;
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
 }
 
 .brutal-contacts-form-subtitle {
-    color: var(--brutal-dark-gray);
-    line-height: 1.5;
-    margin-bottom: 25px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 16px;
 }
 
 /* Форма */
 .brutal-contacts-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
 
 .brutal-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 25px;
 }
 
 .brutal-form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .brutal-form-label {
     font-weight: 700;
-    color: var(--brutal-black);
+    color: var(--black);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    font-size: 0.9rem;
+    font-size: 14px;
 }
 
 .brutal-contacts-form input,
 .brutal-contacts-form textarea {
-    padding: 12px 15px;
-    border: var(--brutal-border);
-    background: var(--brutal-white) !important;
-    font-size: 1rem;
-    font-weight: 700 !important;
-    color: var(--brutal-black) !important;
-    transition: all 0.3s ease;
-    box-shadow: 3px 3px 0px var(--brutal-black);
-    font-family: 'Courier New', monospace !important;
+    padding: 15px 20px;
+    border: var(--border);
+    background: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    transition: var(--transition);
+    font-family: var(--font-main);
 }
 
 .brutal-contacts-form input:focus,
 .brutal-contacts-form textarea:focus {
     outline: none;
-    box-shadow: 5px 5px 0px var(--brutal-green);
-    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.brutal-contacts-form input::placeholder,
+.brutal-contacts-form textarea::placeholder {
+    color: var(--gray);
 }
 
 .brutal-contacts-form textarea {
@@ -318,113 +325,105 @@
 
 .brutal-form-error {
     color: #dc3545;
-    font-size: 0.85rem;
+    font-size: 14px;
     font-weight: 600;
     margin-top: 5px;
 }
 
 .brutal-contacts-form-btn {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    background: var(--accent);
+    color: var(--white);
     padding: 15px 30px;
-    border: var(--brutal-border);
+    border: var(--border);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--brutal-shadow);
+    transition: var(--transition);
     display: inline-flex;
     align-items: center;
     gap: 10px;
     align-self: flex-start;
+    font-size: 16px;
 }
 
 .brutal-contacts-form-btn:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    background: var(--accent-hover);
 }
 
 /* Дополнительная информация */
 .brutal-contacts-additional {
-    background: var(--brutal-white);
-    padding: 60px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--white);
+    padding: 100px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-contacts-additional-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
 }
 
 .brutal-contacts-additional-card {
-    background: var(--brutal-gray);
-    border: var(--brutal-border);
-    padding: 30px;
-    box-shadow: var(--brutal-shadow);
+    background: var(--gray-light);
+    border: var(--border);
+    padding: 40px;
     position: relative;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     text-align: center;
 }
 
 .brutal-contacts-additional-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--accent);
 }
 
 .brutal-contacts-additional-block-number {
     position: absolute;
     top: -15px;
-    left: 20px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    left: 30px;
+    background: var(--accent);
+    color: var(--white);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 13px;
     padding: 5px 10px;
-    border: 2px solid var(--brutal-black);
-    box-shadow: 3px 3px 0px var(--brutal-black);
+    border: 2px solid var(--black);
 }
 
 .brutal-contacts-additional-card h3 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 15px;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
 }
 
 .brutal-contacts-additional-card p {
-    color: var(--brutal-dark-gray);
-    line-height: 1.5;
-    margin-bottom: 20px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 16px;
 }
 
 .brutal-contacts-additional-link {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    background: var(--accent);
+    color: var(--white);
     padding: 12px 24px;
-    border: 2px solid var(--brutal-black);
+    border: 2px solid var(--black);
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: 3px 3px 0px var(--brutal-black);
+    transition: var(--transition);
 }
 
 .brutal-contacts-additional-link:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: 5px 5px 0px var(--brutal-green);
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--accent);
 }
 
 /* Социальные сети */
@@ -441,64 +440,52 @@
     justify-content: center;
     width: 50px;
     height: 50px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    border: 2px solid var(--brutal-black);
+    background: var(--accent);
+    color: var(--white);
+    border: 2px solid var(--black);
     text-decoration: none;
     font-size: 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 3px 3px 0px var(--brutal-black);
+    transition: var(--transition);
 }
 
 .brutal-contacts-social-link:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: 5px 5px 0px var(--brutal-green);
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--accent);
 }
 
 /* CTA блок */
 .brutal-contacts-cta {
-    background: var(--brutal-gray);
-    padding: 60px 0;
+    background: var(--gray-light);
+    padding: 100px 0;
     text-align: center;
-    border-top: var(--brutal-border);
-    border-bottom: var(--brutal-border);
+    border-top: var(--border);
+    border-bottom: var(--border);
 }
 
 .brutal-contacts-cta-content {
     max-width: 600px;
     margin: 0 auto;
-    background: var(--brutal-white);
-    padding: 40px;
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
+    background: var(--white);
+    padding: 50px;
+    border: var(--border);
     position: relative;
 }
 
-.brutal-contacts-cta-content::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: var(--brutal-green);
-}
-
 .brutal-contacts-cta-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 15px;
+    font-size: clamp(28px, 4vw, 45px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 20px;
     text-transform: uppercase;
+    letter-spacing: -1px;
 }
 
 .brutal-contacts-cta-text {
-    font-size: 1.1rem;
-    color: var(--brutal-dark-gray);
+    font-size: 18px;
+    color: var(--gray-dark);
     margin-bottom: 30px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .brutal-contacts-cta-buttons {
@@ -512,78 +499,265 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    background: var(--accent);
+    color: var(--white);
     padding: 15px 30px;
-    border: 2px solid var(--brutal-black);
+    border: 2px solid var(--black);
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    box-shadow: 4px 4px 0px var(--brutal-black);
+    transition: var(--transition);
 }
 
 .brutal-contacts-cta-btn:hover {
-    background: var(--brutal-black);
-    color: var(--brutal-white);
-    transform: translateY(-3px);
-    box-shadow: 8px 8px 0px var(--brutal-green);
+    background: var(--accent-hover);
 }
 
 .brutal-contacts-cta-btn.outline {
-    background: var(--brutal-white);
-    color: var(--brutal-black);
-    border: 2px solid var(--brutal-green);
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--accent);
 }
 
 .brutal-contacts-cta-btn.outline:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
+    .brutal-contacts-hero {
+        padding: 80px 0;
+    }
+
     .brutal-contacts-hero-title {
-        font-size: 2rem;
+        font-size: 40px;
     }
-    
+
     .brutal-contacts-hero-subtitle {
-        font-size: 1rem;
+        font-size: 18px;
     }
-    
+
     .brutal-contacts-hero-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
+    .brutal-contacts-content {
+        padding: 60px 0;
+    }
+
     .brutal-contacts-wrapper {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 40px;
     }
-    
-    .brutal-form-row {
-        grid-template-columns: 1fr;
+
+    .brutal-contacts-info-card,
+    .brutal-contacts-form-card {
+        padding: 30px;
+    }
+
+    .brutal-contacts-item {
         gap: 15px;
+        margin-bottom: 25px;
+        padding-bottom: 20px;
     }
-    
-    .brutal-contacts-additional-grid {
+
+    .brutal-contacts-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .brutal-contacts-details h3 {
+        font-size: 16px;
+    }
+
+    .brutal-contacts-details p {
+        font-size: 15px;
+    }
+
+    .brutal-form-row {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
+    .brutal-contacts-form {
+        gap: 20px;
+    }
+
+    .brutal-contacts-form input,
+    .brutal-contacts-form textarea {
+        padding: 12px 15px;
+        font-size: 15px;
+    }
+
+    .brutal-contacts-form-btn {
+        padding: 12px 25px;
+        font-size: 15px;
+    }
+
+    .brutal-contacts-additional {
+        padding: 60px 0;
+    }
+
+    .brutal-contacts-additional-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .brutal-contacts-additional-card {
+        padding: 30px;
+    }
+
+    .brutal-contacts-additional-card h3 {
+        font-size: 24px;
+    }
+
+    .brutal-contacts-additional-card p {
+        font-size: 15px;
+    }
+
+    .brutal-contacts-additional-link {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .brutal-contacts-social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+    }
+
+    .brutal-contacts-cta {
+        padding: 60px 0;
+    }
+
+    .brutal-contacts-cta-content {
+        padding: 40px;
+    }
+
+    .brutal-contacts-cta-title {
+        font-size: 40px;
+    }
+
+    .brutal-contacts-cta-text {
+        font-size: 16px;
+    }
+
     .brutal-contacts-cta-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
-    .brutal-contacts-social {
-        flex-wrap: wrap;
+
+    .brutal-contacts-cta-btn {
+        padding: 12px 25px;
+        font-size: 15px;
     }
 }
 
-/* КРИТИЧЕСКИ ВАЖНО: Принудительно исправляем цвет времени работы */
-.brutal-contacts-content .brutal-contacts-item .brutal-contacts-details p {
-    color: #000000 !important;
-    font-weight: 600 !important;
+@media (max-width: 480px) {
+    .brutal-contacts-hero-title {
+        font-size: 32px;
+    }
+
+    .brutal-contacts-hero-subtitle {
+        font-size: 16px;
+    }
+
+    .brutal-contacts-hero-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .brutal-contacts-info-card,
+    .brutal-contacts-form-card {
+        padding: 25px;
+    }
+
+    .brutal-contacts-info-card h2,
+    .brutal-contacts-form-card h2 {
+        font-size: 24px;
+    }
+
+    .brutal-contacts-item {
+        gap: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+
+    .brutal-contacts-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.1rem;
+    }
+
+    .brutal-contacts-details h3 {
+        font-size: 15px;
+    }
+
+    .brutal-contacts-details p {
+        font-size: 14px;
+    }
+
+    .brutal-contacts-details small {
+        font-size: 13px;
+    }
+
+    .brutal-contacts-form-subtitle {
+        font-size: 15px;
+    }
+
+    .brutal-contacts-form input,
+    .brutal-contacts-form textarea {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .brutal-contacts-form-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .brutal-contacts-additional-card {
+        padding: 25px;
+    }
+
+    .brutal-contacts-additional-card h3 {
+        font-size: 20px;
+    }
+
+    .brutal-contacts-additional-card p {
+        font-size: 14px;
+    }
+
+    .brutal-contacts-additional-link {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .brutal-contacts-social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .brutal-contacts-cta-content {
+        padding: 30px;
+    }
+
+    .brutal-contacts-cta-title {
+        font-size: 32px;
+    }
+
+    .brutal-contacts-cta-text {
+        font-size: 14px;
+    }
+
+    .brutal-contacts-cta-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }

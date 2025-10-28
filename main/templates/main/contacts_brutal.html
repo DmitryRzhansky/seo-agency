@@ -5,7 +5,11 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs current_category %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">Контакты</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -15,11 +19,10 @@
 
 {% block content %}
 
-<!-- Hero секция контактов - брутальная -->
+<!-- Hero секция контактов -->
 <section class="brutal-contacts-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-contacts-hero-content">
-            <br><br>
             <h1 class="brutal-contacts-hero-title">Контакты</h1>
             <p class="brutal-contacts-hero-subtitle">
                 Готовы обсудить ваш проект? Мы всегда рады новым клиентам и интересным задачам!
@@ -39,11 +42,11 @@
     </div>
 </section>
 
-<!-- Основной контент контактов - брутальный -->
+<!-- Основной контент контактов -->
 <section class="brutal-contacts-content">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-contacts-wrapper">
-            <!-- Контактная информация - брутальная -->
+            <!-- Контактная информация -->
             <div class="brutal-contacts-info">
                 <div class="brutal-contacts-info-card">
                     <div class="brutal-contacts-info-block-number">01</div>
@@ -82,7 +85,7 @@
                 </div>
             </div>
             
-            <!-- Форма обратной связи - брутальная -->
+            <!-- Форма обратной связи -->
             <div class="brutal-contacts-form">
                 <div class="brutal-contacts-form-card">
                     <div class="brutal-contacts-form-block-number">02</div>
@@ -139,9 +142,9 @@
     </div>
 </section>
 
-<!-- Дополнительная информация - брутальная -->
+<!-- Дополнительная информация -->
 <section class="brutal-contacts-additional">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-contacts-additional-grid">
             <div class="brutal-contacts-additional-card">
                 <div class="brutal-contacts-additional-block-number">03</div>
@@ -170,9 +173,9 @@
     </div>
 </section>
 
-<!-- CTA блок - брутальный -->
+<!-- CTA блок -->
 <section class="brutal-contacts-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-contacts-cta-content">
             <h3 class="brutal-contacts-cta-title">Готовы начать работу?</h3>
             <p class="brutal-contacts-cta-text">Свяжитесь с нами прямо сейчас, и мы обсудим ваш проект в деталях!</p>

@@ -589,7 +589,7 @@
     font-weight: 600;
 }
 
-.brutal-city-service-title {
+.brutal-city-service-hero .brutal-city-service-title {
     font-size: clamp(36px, 5vw, 64px);
     font-weight: 900;
     color: var(--black);
@@ -1100,7 +1100,7 @@
 @media (max-width: 768px) {
     .brutal-cities-hero-title,
     .brutal-city-hero-title,
-    .brutal-city-service-title,
+    .brutal-city-service-hero .brutal-city-service-title,
     .brutal-city-category-title {
         font-size: 40px;
     }
@@ -1141,7 +1141,7 @@
 @media (max-width: 480px) {
     .brutal-cities-hero-title,
     .brutal-city-hero-title,
-    .brutal-city-service-title,
+    .brutal-city-service-hero .brutal-city-service-title,
     .brutal-city-category-title {
         font-size: 32px;
     }

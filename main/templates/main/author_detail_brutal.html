@@ -177,25 +177,24 @@
                         </article>
                         {% endfor %}
                     </div>
+                    </div>
+                    
+                    <!-- Пагинация -->
+                    {% if page_obj.paginator.num_pages > 1 %}
+                    <div class="brutal-blog-pagination" style="margin-top: 30px;">
+                        {% if page_obj.has_previous %}
+                            <a href="?q={{ search_query }}&page=1">Первая</a>
+                            <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                        {% endif %}
+                        <span class="current">
+                            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                        </span>
+                        {% if page_obj.has_next %}
+                            <a href="?q={{ search_query }}&page={{ page_obj.next_page_number }}">Следующая</a>
+                            <a href="?q={{ search_query }}&page={{ page_obj.paginator.num_pages }}">Последняя</a>
+                        {% endif %}
+                    </div>
                     {% endif %}
-                </div>
-                
-                <!-- Пагинация -->
-                {% if page_obj.paginator.num_pages > 1 %}
-                <div class="brutal-blog-pagination" style="margin-top: 30px;">
-                    {% if page_obj.has_previous %}
-                        <a href="?q={{ search_query }}&page=1">Первая</a>
-                        <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">Предыдущая</a>
-                    {% endif %}
-                    <span class="current">
-                        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-                    </span>
-                    {% if page_obj.has_next %}
-                        <a href="?q={{ search_query }}&page={{ page_obj.next_page_number }}">Следующая</a>
-                        <a href="?q={{ search_query }}&page={{ page_obj.paginator.num_pages }}">Последняя</a>
-                    {% endif %}
-                </div>
-                {% endif %}
                 {% else %}
                 <div class="brutal-blog-empty">
                     <i class="fas fa-search"></i>
@@ -209,6 +208,7 @@
                     </p>
                 </div>
                 {% endif %}
+                </div>
             </div>
         </div>
     </div>

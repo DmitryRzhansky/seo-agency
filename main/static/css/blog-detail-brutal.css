@@ -137,7 +137,11 @@
     background: var(--gray-light);
     border-color: var(--gray);
     grid-column: span 2;
-    min-height: 200px;
+    height: 500px; /* Фиксированная высота для скролла */
+    margin-right: -360px; /* Выдвигаем блок до границы изображения (gap + ширина изображения) */
+    overflow-y: auto; /* Добавляем вертикальный скролл */
+    overflow-x: hidden; /* Скрываем горизонтальный скролл */
+    cursor: default; /* Устанавливаем курсор по умолчанию для всего блока */
 }
 
 .brutal-post-block-number {
@@ -235,11 +239,15 @@
 }
 
 .brutal-post-content-block.content .brutal-post-text {
-    flex: 1;
-    padding: 20px;
+    padding: 20px 0 20px 20px; /* Убираем правый padding полностью */
     margin: 0;
     box-sizing: border-box;
-    width: 100%;
+    width: 100%; /* Растягиваем текст на всю ширину блока */
+    max-width: none; /* Убираем ограничения по ширине */
+    word-wrap: break-word; /* Переносим длинные слова */
+    overflow-wrap: break-word; /* Переносим длинные слова */
+    overflow: visible; /* Убираем любые ограничения overflow */
+    pointer-events: none; /* Позволяем событиям мыши проходить через текст к родительскому элементу */
 }
 
 .brutal-post-text h1,
@@ -288,6 +296,9 @@
     margin-bottom: 10px;
     line-height: 1.4;
     font-size: 14px;
+    width: 100%; /* Растягиваем параграфы на всю ширину */
+    max-width: none; /* Убираем ограничения по ширине */
+    word-wrap: break-word; /* Переносим длинные слова */
 }
 
 .brutal-post-text ul,

@@ -5,25 +5,23 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-<nav class="breadcrumb-nav">
-    <div class="brutal-container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'main:home' %}">Главная</a></li>
-            <li class="breadcrumb-item active">Политика конфиденциальности</li>
-        </ol>
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">Политика конфиденциальности</span>
     </div>
-</nav>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/privacy-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция политики - брутальная -->
+<!-- Hero секция политики -->
 <section class="brutal-privacy-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-privacy-hero-content">
             <h1 class="brutal-privacy-hero-title">Политика конфиденциальности</h1>
             <p class="brutal-privacy-hero-subtitle">
@@ -33,9 +31,9 @@
     </div>
 </section>
 
-<!-- Основной контент - брутальный -->
+<!-- Основной контент -->
 <section class="brutal-privacy-content">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-privacy-wrapper">
             
             <!-- Общие положения -->

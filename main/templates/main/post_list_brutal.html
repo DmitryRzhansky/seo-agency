@@ -5,7 +5,13 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs current_category %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a>
+        <span class="separator">/</span>
+        <span class="current">Блог</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -15,11 +21,10 @@
 
 {% block content %}
 
-<!-- Hero секция блога - брутальная -->
+<!-- Hero секция блога -->
 <section class="brutal-blog-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-blog-hero-content">
-            <br><br>
             <h1 class="brutal-blog-hero-title">Блог</h1>
             <p class="brutal-blog-hero-subtitle">
                 Полезные статьи о SEO, продвижении сайтов и digital-маркетинге. 
@@ -29,9 +34,9 @@
     </div>
 </section>
 
-<!-- Поиск по блогу - брутальный -->
+<!-- Поиск по блогу -->
 <section class="brutal-blog-search">
-    <div class="brutal-container">
+    <div class="container">
         <form method="get" action="{% url 'blog:search' %}" class="brutal-blog-search-form">
             <input 
                 type="text" 
@@ -47,10 +52,10 @@
     </div>
 </section>
 
-<!-- Категории блога - брутальные -->
+<!-- Категории блога -->
 {% if categories %}
 <section class="brutal-blog-categories">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-blog-categories-title">Категории</h2>
         <div class="brutal-blog-categories-grid">
             <a href="{% url 'blog:post_list' %}" class="brutal-blog-category-link {% if not current_category %}active{% endif %}">
@@ -66,9 +71,9 @@
 </section>
 {% endif %}
 
-<!-- Статьи блога - брутальные -->
+<!-- Статьи блога -->
 <section class="brutal-blog-posts">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-blog-posts-title">
             {% if current_category %}
                 {{ current_category.name }}

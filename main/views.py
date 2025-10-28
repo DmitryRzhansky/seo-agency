@@ -23,10 +23,14 @@ def index(request):
     
     # 1. ОБРАБОТКА ФОРМЫ (POST-запрос)
     if request.method == 'POST':
+        print(f"DEBUG: POST запрос получен. Данные: {request.POST}")
         form = ContactForm(request.POST) 
+        print(f"DEBUG: Форма создана. Валидна: {form.is_valid()}")
+        
         if form.is_valid():
             # Сохраняем заявку в базу данных
-            form.save()
+            contact_request = form.save()
+            print(f"DEBUG: Заявка сохранена с ID: {contact_request.id}")
             
             # TODO: Здесь можно добавить логику отправки email уведомления
             
@@ -36,7 +40,8 @@ def index(request):
             return redirect('main:home') 
         else:
             # Если форма невалидна, добавляем сообщение об ошибке
-            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+            print(f"DEBUG: Ошибки формы: {form.errors}")
+            messages.error(request, f'Пожалуйста, исправьте ошибки в форме: {form.errors}')
             # Форма с ошибками будет передана в контекст ниже
     
     # 2. ИНИЦИАЛИЗАЦИЯ ФОРМЫ (GET-запрос)

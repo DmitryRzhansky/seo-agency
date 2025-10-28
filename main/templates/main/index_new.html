@@ -6,6 +6,22 @@
 
 {% block content %}
 
+<!-- Диагностика ошибок формы -->
+{% if messages %}
+<div class="container" style="margin-top:20px; padding: 20px; background: #f0f0f0; border: 2px solid #000;">
+  {% for message in messages %}
+    <div class="alert" style="color: {% if message.tags == 'error' %}#ff0000{% else %}#00aa00{% endif %}; font-weight: bold;">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% if form and form.errors %}
+<div class="container" style="margin-top:20px; padding: 20px; background: #ffeeee; border: 2px solid #ff0000;">
+  <h3 style="color: #ff0000;">Ошибки формы:</h3>
+  <pre style="color: #ff0000; font-size: 14px;">{{ form.errors }}</pre>
+</div>
+{% endif %}
+
 <!-- Главная секция -->
 <section class="hero">
     <div class="hero-bg-shapes">

@@ -852,10 +852,6 @@ class AuthorAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
             'fields': ('social_links',),
             'classes': ('collapse',)
         }),
-        ('Хлебные крошки', {
-            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
-            'classes': ('collapse',)
-        }),
     )
     
     def get_full_name(self, obj):

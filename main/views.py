@@ -954,8 +954,9 @@ def author_detail(request, slug):
         author = get_object_or_404(Author, username=slug, is_active=True)
         base_qs = Post.objects.filter(blog_author=author, is_published=True)
 
-    # Поиск
+    # Поиск и фильтр категории
     search_query = request.GET.get('q', '').strip()
+    current_category_slug = request.GET.get('category') or ''
     posts_qs = base_qs
     if search_query:
         posts_qs = posts_qs.filter(
@@ -963,6 +964,8 @@ def author_detail(request, slug):
             Q(excerpt__icontains=search_query) |
             Q(content__icontains=search_query)
         )
+    if current_category_slug:
+        posts_qs = posts_qs.filter(category__slug=current_category_slug)
 
     # Пагинация
     paginator = Paginator(posts_qs.order_by('-published_date'), 9)
@@ -995,6 +998,7 @@ def author_detail(request, slug):
         'author': author,
         'page_obj': page_obj,
         'search_query': search_query,
+        'current_category_slug': current_category_slug,
         'total_posts': total_posts,
         'reading_time_total_min': reading_time_total_min,
         'first_published': first_post.published_date if first_post else None,

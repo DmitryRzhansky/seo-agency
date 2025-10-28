@@ -74,21 +74,7 @@
                         </div>
                     </div>
                     {% endif %}
-                    <!-- KPI-плашки автора -->
-                    <div class="author-kpi">
-                        <div class="author-kpi-badge">
-                            <span class="kpi-number">{{ total_posts|default:0 }}</span>
-                            <span class="kpi-label">статей</span>
-                        </div>
-                        <div class="author-kpi-badge">
-                            <span class="kpi-number">{% if reading_time_total_min %}~{{ reading_time_total_min }}{% else %}0{% endif %}</span>
-                            <span class="kpi-label">мин чтения</span>
-                        </div>
-                        <div class="author-kpi-badge">
-                            <span class="kpi-number">{% if first_published %}{{ first_published|date:"Y" }}{% else %}—{% endif %}</span>
-                            <span class="kpi-label">первая публикация</span>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             
@@ -133,9 +119,13 @@
                 <div class="brutal-author-categories" style="margin-bottom: 30px;">
                     <h3>Категории автора</h3>
                     <div class="author-category-chips">
+                        <a class="author-category-chip {% if not current_category_slug %}active{% endif %}" href="?q={{ search_query }}">
+                            <span class="chip-label">Все</span>
+                            <span class="chip-count">{{ total_posts }}</span>
+                        </a>
                         {% for c in categories_stats %}
                             {% if c.category__slug %}
-                                <a class="author-category-chip" href="{% url 'blog:category_posts' slug=c.category__slug %}">
+                                <a class="author-category-chip {% if current_category_slug == c.category__slug %}active{% endif %}" href="?q={{ search_query }}&category={{ c.category__slug }}">
                                     <span class="chip-label">{{ c.category__name }}</span>
                                     <span class="chip-count">{{ c.count }}</span>
                                 </a>

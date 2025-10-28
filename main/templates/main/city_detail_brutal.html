@@ -6,19 +6,23 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs city %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города присутствия</a><span class="separator">/</span><span class="current">{{ city.name }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция города - брутальная -->
+<!-- Hero секция города -->
 <section class="brutal-city-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-city-hero-content">
             <h1 class="brutal-city-hero-title">SEO продвижение {{ city.get_name_prepositional }}</h1>
             <p class="brutal-city-hero-region">{{ city.region }}</p>
@@ -31,7 +35,7 @@
 
 <!-- Основной контент -->
 <section class="brutal-city-content">
-    <div class="brutal-container">
+    <div class="container">
         <!-- Категории услуг -->
         {% if service_categories %}
         <div class="brutal-city-services">

@@ -6,22 +6,23 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% get_service_breadcrumbs service city as breadcrumbs %}
-{% if breadcrumbs %}
-    {% include 'seo/breadcrumbs.html' with breadcrumbs=breadcrumbs %}
-{% endif %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города присутствия</a><span class="separator">/</span><a href="{% url 'main:city_detail' city.slug %}">{{ city.name }}</a><span class="separator">/</span><span class="current">{{ service.title }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция услуги города - брутальная -->
+<!-- Hero секция услуги города -->
 <section class="brutal-city-service-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-city-service-hero-content">
             <!-- Региональная информация -->
             <div class="brutal-city-service-region-info">
@@ -42,7 +43,7 @@
 
 <!-- Основной контент услуги -->
 <section class="brutal-city-service-content">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-city-service-article">
             <div class="brutal-city-service-text">
                 {{ service.content|safe }}
@@ -53,7 +54,7 @@
 
 <!-- CTA секция -->
 <section class="brutal-city-service-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-city-service-cta-content">
             <h3 class="brutal-city-service-cta-title">Готовы заказать {{ service.title|lower }} {{ city.get_name_prepositional }}?</h3>
             <p class="brutal-city-service-cta-text">
@@ -70,7 +71,7 @@
 
 <!-- Навигация -->
 <section class="brutal-city-service-navigation">
-    <div class="brutal-container">
+    <div class="container">
         <a href="{{ city.get_absolute_url }}" class="brutal-city-service-back">
             <i class="fas fa-chevron-left"></i>
             Вернуться к услугам {{ city.get_name_prepositional }}
@@ -81,7 +82,7 @@
 <!-- Блок "Еще услуги" -->
 {% if related_services %}
 <section class="brutal-city-service-related">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-city-service-related-title">Еще услуги {{ city.get_name_prepositional }}</h2>
         <div class="brutal-city-service-related-grid">
             {% for related_service in related_services %}

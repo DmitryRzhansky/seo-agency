@@ -4,15 +4,24 @@
 
 {% block title %}{{ title }}{% endblock title %}
 
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">Города присутствия</span>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция городов - брутальная -->
+<!-- Hero секция городов -->
 <section class="brutal-cities-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-cities-hero-content">
             <h1 class="brutal-cities-hero-title">Города присутствия</h1>
             <p class="brutal-cities-hero-subtitle">
@@ -25,7 +34,7 @@
 
 <!-- Основной контент -->
 <section class="brutal-cities-content">
-    <div class="brutal-container">
+    <div class="container">
         <!-- Список городов -->
         <div class="brutal-cities-grid">
             {% for city in cities %}

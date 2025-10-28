@@ -6,23 +6,24 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% get_post_breadcrumbs post city as breadcrumbs %}
-{% if breadcrumbs %}
-    {% include 'seo/breadcrumbs.html' with breadcrumbs=breadcrumbs %}
-{% endif %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города присутствия</a><span class="separator">/</span><a href="{% url 'main:city_detail' city.slug %}">{{ city.name }}</a><span class="separator">/</span><span class="current">{{ post.title }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/blog-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция статьи - брутальная -->
+<!-- Hero секция статьи -->
 <section class="brutal-blog-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-blog-hero-content">
             <!-- Региональная информация -->
             <div class="brutal-blog-region-info">
@@ -63,7 +64,7 @@
 
 <!-- Основной контент статьи -->
 <section class="brutal-blog-content">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-blog-article">
             {% if post.image %}
             <div class="brutal-blog-image-container">
@@ -89,7 +90,7 @@
 <!-- Блок "Вам может понравиться" -->
 {% if related_posts %}
 <section class="brutal-blog-related">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-blog-related-title">Вам может понравиться</h2>
         <div class="brutal-blog-related-grid">
             {% for related_post in related_posts %}
@@ -129,7 +130,7 @@
 
 <!-- CTA секция -->
 <section class="brutal-blog-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-blog-cta-content">
             <h3 class="brutal-blog-cta-title">Нужна помощь с SEO?</h3>
             <p class="brutal-blog-cta-text">Получите бесплатную консультацию по продвижению вашего сайта</p>

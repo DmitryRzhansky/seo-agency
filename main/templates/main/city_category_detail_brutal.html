@@ -7,22 +7,23 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% get_category_breadcrumbs category city as breadcrumbs %}
-{% if breadcrumbs %}
-    {% include 'seo/breadcrumbs.html' with breadcrumbs=breadcrumbs %}
-{% endif %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города присутствия</a><span class="separator">/</span><a href="{% url 'main:city_detail' city.slug %}">{{ city.name }}</a><span class="separator">/</span><span class="current">{{ category.title }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 <link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция категории - брутальная -->
+<!-- Hero секция категории -->
 <section class="brutal-city-category-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-city-category-hero-content">
             <h1 class="brutal-city-category-title">{{ category.title }} {{ city.get_name_prepositional }}</h1>
             <p class="brutal-city-category-region">{{ city.region }}</p>
@@ -35,7 +36,7 @@
 
 <!-- Основной контент -->
 <section class="brutal-city-category-services">
-    <div class="brutal-container">
+    <div class="container">
         <!-- Услуги категории -->
         {% if services %}
         <div class="brutal-city-category-services">

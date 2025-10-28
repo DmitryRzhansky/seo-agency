@@ -318,13 +318,13 @@
 }
 
 .brutal-city-service-title {
-    font-size: clamp(20px, 2.5vw, 28px);
+    font-size: clamp(16px, 1.6vw, 20px);
     font-weight: 900;
     color: var(--black);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
     text-transform: uppercase;
-    letter-spacing: -1px;
-    line-height: 1.2;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
 }
 
 .brutal-city-service-description {

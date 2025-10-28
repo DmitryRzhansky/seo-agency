@@ -6,7 +6,7 @@ from django.urls import reverse
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
-from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, PortfolioCategory, HomePage, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
+from .models import City, ServiceCategory, Service, ContactRequest, TeamMember, Testimonial, PortfolioItem, PortfolioCategory, HomePage, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm, Author
 from blog.models import Post, Category
 from .forms import ContactForm
 from pages.models import SimplePage
@@ -925,3 +925,32 @@ def glossary_term(request, category_slug, term_slug):
     }
 
     return render(request, 'main/glossary_term_brutal.html', context)
+
+
+def author_detail(request, slug):
+    """
+    Страница автора статьи
+    """
+    author = get_object_or_404(Author, slug=slug, is_active=True)
+    
+    # Получаем статьи автора
+    author_posts = Post.objects.filter(
+        blog_author=author,
+        is_published=True
+    ).order_by('-published_date')[:10]
+    
+    # SEO данные
+    seo_title = f"{author.get_full_name()} - Автор | Isakov Agency"
+    seo_description = f"Биография автора {author.get_full_name()}, {author.position}. Статьи и публикации."
+    seo_keywords = f"автор, {author.get_full_name()}, {author.position}, статьи"
+    
+    context = {
+        'title': seo_title,
+        'seo_description': seo_description,
+        'seo_keywords': seo_keywords,
+        'author': author,
+        'author_posts': author_posts,
+        'page_type': 'author_detail',
+    }
+    
+    return render(request, 'main/author_detail_brutal.html', context)

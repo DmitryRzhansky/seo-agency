@@ -5,7 +5,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
-from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, PortfolioCategory, CustomHeadScript, HomePage, RegionalPostAdaptation, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm
+from .models import City, ServiceCategory, Service, TeamMember, Testimonial, ContactRequest, PortfolioItem, PortfolioCategory, CustomHeadScript, HomePage, RegionalPostAdaptation, FAQCategory, FAQItem, GlossaryCategory, GlossaryTerm, Author
 from seo.admin import SEOAdminMixin
 
 # Настройка заголовков админки
@@ -155,6 +155,8 @@ class CustomHeadScriptsMixin:
                 return 'portfolio_detail'
             elif model_name == 'city':
                 return 'city_detail'
+            elif model_name == 'author':
+                return 'author_detail'
         return 'unknown'
     
     def _get_page_slug(self, obj):
@@ -809,3 +811,53 @@ class GlossaryTermAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin)
     def get_queryset(self, request):
         """Оптимизируем запросы"""
         return super().get_queryset(request).select_related('category')
+
+
+@admin.register(Author)
+class AuthorAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
+    """Админ-класс для авторов статей"""
+    
+    list_display = ['get_full_name', 'position', 'is_active', 'posts_count', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['first_name', 'last_name', 'position', 'bio']
+    prepopulated_fields = {'slug': ('first_name', 'last_name')}
+    ordering = ['last_name', 'first_name']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('first_name', 'last_name', 'slug', 'position', 'is_active')
+        }),
+        ('Биография и опыт', {
+            'fields': ('bio', 'experience', 'specializations')
+        }),
+        ('Фото', {
+            'fields': ('photo', 'photo_alt')
+        }),
+        ('Социальные сети', {
+            'fields': ('social_links',),
+            'classes': ('collapse',)
+        }),
+        ('Хлебные крошки', {
+            'fields': ('show_breadcrumbs', 'custom_breadcrumbs'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def get_full_name(self, obj):
+        """Показывает полное имя автора"""
+        return obj.get_full_name()
+    get_full_name.short_description = 'Полное имя'
+    
+    def posts_count(self, obj):
+        """Показывает количество статей автора"""
+        from blog.models import Post
+        count = Post.objects.filter(blog_author=obj, is_published=True).count()
+        if count > 0:
+            url = reverse('admin:blog_post_changelist') + f'?blog_author__id__exact={obj.id}'
+            return format_html('<a href="{}">{} статей</a>', url, count)
+        return '0 статей'
+    posts_count.short_description = 'Количество статей'
+    
+    def get_queryset(self, request):
+        """Оптимизируем запросы"""
+        return super().get_queryset(request)

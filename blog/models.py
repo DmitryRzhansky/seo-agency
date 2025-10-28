@@ -83,7 +83,15 @@ class Post(SEOModel):
         on_delete=models.SET_NULL, # Если пользователь удаляется, поле автора остается NULL
         null=True,                 # Разрешаем NULL
         blank=True,                # Делаем необязательным в админке
-        verbose_name="Автор"
+        verbose_name="Автор (User)"
+    )
+    blog_author = models.ForeignKey(
+        'main.Author',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Автор статьи",
+        help_text="Выберите автора из списка авторов блога"
     )
     category = models.ForeignKey(
         Category,
@@ -116,6 +124,21 @@ class Post(SEOModel):
 
     def __str__(self):
         return self.title
+    
+    def get_author(self):
+        """Возвращает автора статьи (приоритет у blog_author)"""
+        if self.blog_author:
+            return self.blog_author
+        elif self.author:
+            # Создаем временный объект Author из User
+            from main.models import Author
+            return Author(
+                first_name=self.author.first_name or self.author.username,
+                last_name=self.author.last_name or '',
+                position='Автор',
+                bio=''
+            )
+        return None
 
     def get_absolute_url(self):
         # Ссылка на отдельный пост с указанием категории

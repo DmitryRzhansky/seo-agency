@@ -64,7 +64,7 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
     
     fieldsets = (
         ('📝 Основная информация', {
-            'fields': ('slug', 'category', 'author', 'is_published'),
+            'fields': ('slug', 'category', 'author', 'blog_author', 'is_published'),
             'description': 'Основная информация о статье'
         }),
         ('📄 Содержимое', {

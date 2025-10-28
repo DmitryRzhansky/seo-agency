@@ -110,6 +110,14 @@
                         <span class="brutal-blog-card-date">{{ post.published_date|date:"d.m.Y" }}</span>
                         <span class="brutal-blog-card-views">{{ post.views_count }} просмотров</span>
                     </div>
+                    {% if post.get_author %}
+                    <div class="brutal-blog-card-author">
+                        <a href="{{ post.get_author.get_absolute_url }}" class="brutal-blog-card-author-link">
+                            <i class="fas fa-user"></i>
+                            {{ post.get_author.get_full_name }}
+                        </a>
+                    </div>
+                    {% endif %}
                     <a href="{{ post.get_absolute_url }}" class="brutal-blog-card-link">
                         Читать далее
                     </a>

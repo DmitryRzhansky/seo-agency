@@ -551,6 +551,44 @@ class TeamMember(models.Model):
         return self.photo_alt or f"Фото {self.name}, {self.role}"
 
 
+class Author(models.Model):
+    """Автор статей блога."""
+    first_name = models.CharField(max_length=100, verbose_name="Имя")
+    last_name = models.CharField(max_length=100, verbose_name="Фамилия")
+    slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор")
+    bio = models.TextField(verbose_name="Биография", help_text="Подробная информация об авторе")
+    photo = models.ImageField(upload_to='author_photos/', blank=True, null=True, verbose_name="Фото")
+    photo_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст фото", help_text="Описание фото для SEO и доступности")
+    position = models.CharField(max_length=150, verbose_name="Должность")
+    experience = models.CharField(max_length=200, blank=True, verbose_name="Опыт работы")
+    specializations = models.TextField(blank=True, verbose_name="Специализации", help_text="Области экспертизы автора")
+    social_links = models.JSONField(default=dict, blank=True, verbose_name="Социальные сети", help_text="JSON с ссылками на соцсети")
+    is_active = models.BooleanField(default=True, verbose_name="Активен")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
+
+    class Meta:
+        verbose_name = "Автор"
+        verbose_name_plural = "Авторы"
+        ordering = ['last_name', 'first_name']
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    
+    def get_full_name(self):
+        """Возвращает полное имя автора"""
+        return f"{self.first_name} {self.last_name}"
+    
+    def get_photo_alt(self):
+        """Возвращает альтернативный текст фото или имя автора по умолчанию"""
+        return self.photo_alt or f"Фото {self.get_full_name()}"
+    
+    def get_absolute_url(self):
+        """Возвращает URL страницы автора"""
+        from django.urls import reverse
+        return reverse('main:author_detail', kwargs={'slug': self.slug})
+
+
 class Testimonial(models.Model):
     """Отзыв клиента для блока на главной странице."""
     author_name = models.CharField(max_length=120, verbose_name="Имя автора")

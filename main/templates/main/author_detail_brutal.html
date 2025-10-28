@@ -1,0 +1,124 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load seo_tags %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'blog:post_list' %}">Блог</a><span class="separator">/</span><span class="current">{{ author.get_full_name }}</span>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/author-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+
+<!-- Hero секция автора -->
+<section class="brutal-author-hero">
+    <div class="container">
+        <div class="brutal-author-hero-content">
+            <h1 class="brutal-author-hero-title">{{ author.get_full_name }}</h1>
+            <p class="brutal-author-hero-subtitle">{{ author.position }}</p>
+            {% if author.experience %}
+            <p class="brutal-author-hero-experience">{{ author.experience }}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Основной контент автора -->
+<section class="brutal-author-content">
+    <div class="container">
+        <div class="brutal-author-content-wrapper">
+            <!-- Информация об авторе -->
+            <div class="brutal-author-info">
+                <div class="brutal-author-photo">
+                    {% if author.photo %}
+                    <img src="{{ author.photo.url }}" alt="{{ author.get_photo_alt }}" class="brutal-author-photo-img">
+                    {% else %}
+                    <div class="brutal-author-photo-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="brutal-author-details">
+                    <h2 class="brutal-author-details-title">О авторе</h2>
+                    <div class="brutal-author-bio">
+                        {{ author.bio|linebreaks }}
+                    </div>
+                    
+                    {% if author.specializations %}
+                    <div class="brutal-author-specializations">
+                        <h3>Специализации</h3>
+                        <p>{{ author.specializations|linebreaks }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    {% if author.social_links %}
+                    <div class="brutal-author-social">
+                        <h3>Социальные сети</h3>
+                        <div class="brutal-author-social-links">
+                            {% for platform, url in author.social_links.items %}
+                            <a href="{{ url }}" target="_blank" rel="noopener" class="brutal-author-social-link">
+                                <i class="fab fa-{{ platform }}"></i>
+                                {{ platform|title }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Статьи автора -->
+            {% if author_posts %}
+            <div class="brutal-author-posts">
+                <h2 class="brutal-author-posts-title">Статьи автора</h2>
+                <div class="brutal-author-posts-grid">
+                    {% for post in author_posts %}
+                    <article class="brutal-author-post-card">
+                        {% if post.image %}
+                        <img src="{{ post.image.url }}" class="brutal-author-post-image" alt="{{ post.title }}">
+                        {% else %}
+                        <div class="brutal-author-post-placeholder">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="brutal-author-post-content">
+                            {% if post.category %}
+                            <div class="brutal-author-post-category">{{ post.category.name }}</div>
+                            {% endif %}
+                            <h3 class="brutal-author-post-title">{{ post.title }}</h3>
+                            <p class="brutal-author-post-excerpt">
+                                {% if post.excerpt %}
+                                    {{ post.excerpt|truncatewords:20 }}
+                                {% else %}
+                                    {{ post.content|striptags|truncatewords:20 }}
+                                {% endif %}
+                            </p>
+                            <div class="brutal-author-post-meta">
+                                <span class="brutal-author-post-date">{{ post.published_date|date:"d.m.Y" }}</span>
+                                <span class="brutal-author-post-views">{{ post.views_count }} просмотров</span>
+                            </div>
+                            <a href="{{ post.get_absolute_url }}" class="brutal-author-post-link">
+                                Читать далее
+                            </a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

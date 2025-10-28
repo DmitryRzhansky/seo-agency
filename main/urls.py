@@ -37,5 +37,8 @@ urlpatterns = [
     path('glossary/', views.glossary_list, name='glossary_list'),
     path('glossary/category/<slug:slug>/', views.glossary_category, name='glossary_category'),
     path('glossary/category/<slug:category_slug>/<slug:term_slug>/', views.glossary_term, name='glossary_term'),
+    
+    # --- Авторы ---
+    path('author/<slug:slug>/', views.author_detail, name='author_detail'),
 
 ]

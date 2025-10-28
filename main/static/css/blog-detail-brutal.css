@@ -26,7 +26,7 @@
 
 @media (max-width: 768px) {
     .container {
-        padding: 0 20px;
+    padding: 0 20px;
     }
 }
 
@@ -88,6 +88,30 @@
     font-size: 14px;
     color: var(--gray-dark);
     font-weight: 400;
+}
+
+.brutal-post-hero-author {
+    font-size: 14px;
+}
+
+.brutal-post-hero-author-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.brutal-post-hero-author-link:hover {
+    color: var(--accent-hover);
+}
+
+.brutal-post-hero-author-link i {
+    font-size: 12px;
 }
 
 /* Основной контент статьи */

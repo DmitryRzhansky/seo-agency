@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initNumberCounters();
     initFormHandling();
-    initTopBarButtons();
+    // initTopBarButtons(); // Удалено - обработчики перенесены в base.html
     initScrollToTop();
     initCookieNotice();
     initDiscountButton();
@@ -298,22 +298,7 @@ function initNumberCounters() {
 // ============================================
 // КНОПКИ ВЕРХНЕЙ ПАНЕЛИ
 // ============================================
-function initTopBarButtons() {
-    const callbackBtn = document.getElementById('callbackBtn');
-    const proposalBtn = document.getElementById('proposalBtn');
-
-    if (callbackBtn) {
-        callbackBtn.addEventListener('click', () => {
-            showNotification('ЗАКАЗАТЬ ЗВОНОК', 'Оставьте номер телефона, мы перезвоним в течение 5 минут', 'callback');
-        });
-    }
-
-    if (proposalBtn) {
-        proposalBtn.addEventListener('click', () => {
-            showNotification('КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ', 'Отправьте email, и мы вышлем детальное КП', 'proposal');
-        });
-    }
-}
+// Функция удалена - обработчики перенесены в base.html для модального окна
 
 // ============================================
 // КАЛЬКУЛЯТОР

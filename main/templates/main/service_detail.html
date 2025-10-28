@@ -16,13 +16,7 @@
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="container">
-        <a href="{% url 'main:home' %}">Главная</a>
-        <span class="separator">/</span>
-        <a href="{% url 'services:service_list' %}">Услуги</a>
-        <span class="separator">/</span>
-        <a href="{% url 'services:service_category' slug=service.category.slug %}">{{ service.category.title }}</a>
-        <span class="separator">/</span>
-        <span class="current">{{ service.title }}</span>
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'services:service_list' %}">Услуги</a><span class="separator">/</span><a href="{% url 'services:service_category' slug=service.category.slug %}">{{ service.category.title }}</a><span class="separator">/</span><span class="current">{{ service.title }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}

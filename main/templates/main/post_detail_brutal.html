@@ -7,15 +7,7 @@
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="container">
-        <a href="{% url 'main:home' %}">Главная</a>
-        <span class="separator">/</span>
-        <a href="{% url 'blog:post_list' %}">Блог</a>
-        {% if post.category %}
-        <span class="separator">/</span>
-        <a href="{% url 'blog:category_posts' slug=post.category.slug %}">{{ post.category.name }}</a>
-        {% endif %}
-        <span class="separator">/</span>
-        <span class="current">{{ post.title }}</span>
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'blog:post_list' %}">Блог</a>{% if post.category %}<span class="separator">/</span><a href="{% url 'blog:category_posts' slug=post.category.slug %}">{{ post.category.name }}</a>{% endif %}<span class="separator">/</span><span class="current">{{ post.title }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}

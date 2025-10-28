@@ -1,35 +1,46 @@
-/* Брутальный стиль для блога */
+/* ============================================
+   БЛОГ - НОВЫЙ СТИЛЬ
+   ============================================ */
 
-/* Переменные */
+/* Переменные из основного стиля */
 :root {
-    --brutal-black: #000000;
-    --brutal-white: #ffffff;
-    --brutal-green: #00ff00;
-    --brutal-gray: #f5f5f5;
-    --brutal-dark-gray: #333333;
-    --brutal-border: 3px solid var(--brutal-black);
-    --brutal-shadow: 6px 6px 0px var(--brutal-black);
-    --brutal-shadow-hover: 8px 8px 0px var(--brutal-black);
-}
-
-/* Основные стили */
-* {
-    font-family: 'Courier New', monospace;
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray: #808080;
+    --gray-light: #D3D3D3;
+    --gray-dark: #2A2A2A;
+    --accent: #3cc33c;
+    --accent-hover: #33aa33;
+    --border-width: 3px;
+    --border: var(--border-width) solid var(--black);
+    --transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    --font-main: 'Space Grotesk', 'Arial', 'Helvetica', sans-serif;
 }
 
 /* Контейнер */
-.brutal-container {
-    max-width: 1200px;
+.container {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 50px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
 }
 
 /* Hero секция блога */
 .brutal-blog-hero {
-    background: var(--brutal-white);
-    padding: 60px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--white);
+    padding: 120px 0;
+    border-bottom: var(--border);
     position: relative;
 }
 
@@ -37,38 +48,42 @@
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .brutal-blog-hero-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 20px;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 30px;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 3px 3px 0px var(--brutal-black);
-    line-height: 1.2;
+    letter-spacing: -2px;
+    position: relative;
+    line-height: 1.1;
 }
 
 .brutal-blog-hero-subtitle {
-    font-size: 1.2rem;
-    color: var(--brutal-dark-gray);
-    line-height: 1.6;
-    max-width: 600px;
+    font-size: 20px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+    max-width: 680px;
     margin: 0 auto;
+    font-weight: 400;
 }
 
-/* Поиск блога */
+/* Поиск по блогу */
 .brutal-blog-search {
-    background: var(--brutal-gray);
-    padding: 40px 0;
-    border-top: 4px solid var(--brutal-green);
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--gray-light);
+    padding: 60px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-blog-search-form {
     display: flex;
-    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -76,192 +91,172 @@
 .brutal-blog-search-input {
     flex: 1;
     padding: 15px 20px;
-    border: var(--brutal-border);
-    background: var(--brutal-white);
-    font-size: 1rem;
-    font-weight: 500;
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
+    border: var(--border);
+    background: var(--white);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--black);
+    font-family: var(--font-main);
 }
 
 .brutal-blog-search-input:focus {
     outline: none;
-    transform: translateY(-2px);
-    box-shadow: var(--brutal-shadow-hover);
+    border-color: var(--accent);
 }
 
 .brutal-blog-search-button {
     padding: 15px 30px;
-    background: var(--brutal-white);
-    color: var(--brutal-green);
-    border: 2px solid var(--brutal-green);
+    background: var(--accent);
+    color: var(--white);
+    border: var(--border);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    font-size: 14px;
+    font-family: var(--font-main);
 }
 
 .brutal-blog-search-button:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    transform: translateX(5px);
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
 }
 
 /* Категории блога */
 .brutal-blog-categories {
-    background: var(--brutal-white);
-    padding: 40px 0;
-    border-bottom: 4px solid var(--brutal-green);
+    background: var(--white);
+    padding: 60px 0;
+    border-bottom: var(--border);
 }
 
 .brutal-blog-categories-title {
-    font-size: 1.5rem;
+    font-size: 32px;
     font-weight: 700;
-    color: var(--brutal-black);
+    color: var(--black);
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 .brutal-blog-categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.brutal-blog-category-card {
-    display: inline-block;
-    margin: 5px;
-}
-
-.brutal-blog-category-card.active {
-    /* Активная категория стилизуется через кнопку */
-    position: relative;
 }
 
 .brutal-blog-category-link {
-    display: inline-block;
-    color: var(--brutal-green);
-    font-weight: 700;
+    padding: 15px 30px;
+    background: var(--white);
+    color: var(--black);
+    border: var(--border);
     text-decoration: none;
-    padding: 12px 24px;
-    border: 2px solid var(--brutal-green);
-    transition: all 0.3s ease;
-    text-align: center;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    font-size: 14px;
 }
 
-.brutal-blog-category-card.active .brutal-blog-category-link {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+.brutal-blog-category-link:hover,
+.brutal-blog-category-link.active {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
 }
 
-.brutal-blog-category-link:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    transform: translateX(5px);
-    box-shadow: 4px 4px 0px var(--brutal-black);
-    border-color: var(--brutal-black);
-}
-
-/* Сетка статей */
+/* Статьи блога */
 .brutal-blog-posts {
-    background: var(--brutal-white);
-    padding: 60px 0;
+    background: var(--white);
+    padding: 80px 0;
 }
 
 .brutal-blog-posts-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--brutal-black);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--black);
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
+    position: relative;
+    line-height: 1.1;
 }
 
 .brutal-blog-posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+    gap: 40px;
+    margin-bottom: 60px;
 }
 
-/* Карточка статьи */
 .brutal-blog-card {
-    background: var(--brutal-white);
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
-    transition: all 0.3s ease;
+    background: var(--white);
+    border: var(--border);
+    transition: var(--transition);
     position: relative;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
 }
 
 .brutal-blog-card:hover {
+    border-color: var(--accent);
     transform: translateY(-5px);
-    box-shadow: var(--brutal-shadow-hover);
 }
 
 .brutal-blog-card-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    border-bottom: var(--brutal-border);
+    border-bottom: var(--border);
 }
 
 .brutal-blog-card-placeholder {
     width: 100%;
     height: 200px;
-    background: var(--brutal-gray);
+    background: var(--gray-light);
+    border-bottom: var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: var(--brutal-border);
-}
-
-.brutal-blog-card-placeholder i {
-    font-size: 3rem;
-    color: var(--brutal-dark-gray);
+    font-size: 48px;
+    color: var(--gray);
 }
 
 .brutal-blog-card-content {
-    padding: 25px;
+    padding: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .brutal-blog-card-category {
-    display: inline-block;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 5px 12px;
-    font-size: 0.8rem;
+    font-size: 12px;
+    color: var(--accent);
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
     margin-bottom: 15px;
-    border: 2px solid var(--brutal-black);
-    box-shadow: 3px 3px 0px var(--brutal-black);
+    letter-spacing: 1px;
 }
 
 .brutal-blog-card-title {
-    font-size: 1.3rem;
+    font-size: 20px;
     font-weight: 700;
-    color: var(--brutal-black);
+    color: var(--black);
     margin-bottom: 15px;
     line-height: 1.3;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .brutal-blog-card-excerpt {
-    color: var(--brutal-dark-gray);
+    font-size: 16px;
+    color: var(--gray-dark);
     line-height: 1.6;
     margin-bottom: 20px;
-    font-size: 0.95rem;
+    flex-grow: 1;
+    font-weight: 400;
 }
 
 .brutal-blog-card-meta {
@@ -269,64 +264,30 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    font-size: 0.9rem;
-    color: var(--brutal-dark-gray);
-}
-
-.brutal-blog-card-date {
-    font-weight: 500;
-}
-
-.brutal-blog-card-views {
-    font-weight: 500;
+    font-size: 14px;
+    color: var(--gray);
+    font-weight: 400;
 }
 
 .brutal-blog-card-link {
     display: inline-block;
     margin-top: auto;
-    color: var(--brutal-green);
+    color: var(--accent);
     font-weight: 700;
     text-decoration: none;
-    padding: 10px 20px;
-    border: 2px solid var(--brutal-green);
-    transition: all 0.3s ease;
+    padding: 15px 30px;
+    border: var(--border);
+    transition: var(--transition);
     text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
 }
 
 .brutal-blog-card-link:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    transform: translateX(5px);
-}
-
-/* Пустое состояние */
-.brutal-blog-empty {
-    text-align: center;
-    padding: 60px 20px;
-    background: var(--brutal-gray);
-    border: var(--brutal-border);
-    box-shadow: var(--brutal-shadow);
-}
-
-.brutal-blog-empty i {
-    font-size: 4rem;
-    color: var(--brutal-dark-gray);
-    margin-bottom: 20px;
-}
-
-.brutal-blog-empty h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brutal-black);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.brutal-blog-empty p {
-    color: var(--brutal-dark-gray);
-    font-size: 1.1rem;
-    line-height: 1.6;
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
 }
 
 /* Пагинация */
@@ -338,52 +299,122 @@
     margin-top: 50px;
 }
 
-.brutal-blog-pagination a,
-.brutal-blog-pagination span {
-    display: inline-block;
-    padding: 10px 15px;
-    border: var(--brutal-border);
-    background: var(--brutal-white);
-    color: var(--brutal-black);
+.brutal-blog-pagination a {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--white);
+    color: var(--black);
+    border: var(--border);
     text-decoration: none;
     font-weight: 700;
-    transition: all 0.3s ease;
-    box-shadow: 3px 3px 0px var(--brutal-black);
+    font-size: 14px;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .brutal-blog-pagination a:hover {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    transform: translateY(-2px);
-    box-shadow: 5px 5px 0px var(--brutal-black);
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
 }
 
 .brutal-blog-pagination .current {
-    background: var(--brutal-green);
-    color: var(--brutal-white);
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--black);
+    color: var(--white);
+    border: var(--border);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Пустое состояние */
+.brutal-blog-empty {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--gray-light);
+    border: var(--border);
+}
+
+.brutal-blog-empty i {
+    font-size: 64px;
+    color: var(--gray);
+    margin-bottom: 30px;
+}
+
+.brutal-blog-empty h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.brutal-blog-empty p {
+    font-size: 16px;
+    color: var(--gray-dark);
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .brutal-blog-hero-title {
-        font-size: 2rem;
+    .brutal-blog-hero {
+        padding: 80px 0;
     }
     
-    .brutal-blog-hero-subtitle {
-        font-size: 1rem;
+    .brutal-blog-search {
+        padding: 40px 0;
     }
     
     .brutal-blog-search-form {
         flex-direction: column;
+        gap: 15px;
+    }
+    
+    .brutal-blog-search-input {
+        width: 100%;
+    }
+    
+    .brutal-blog-categories {
+        padding: 40px 0;
     }
     
     .brutal-blog-categories-grid {
-        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .brutal-blog-posts {
+        padding: 60px 0;
     }
     
     .brutal-blog-posts-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 30px;
+    }
+    
+    .brutal-blog-card-content {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brutal-blog-hero {
+        padding: 60px 0;
+    }
+    
+    .brutal-blog-categories {
+        padding: 30px 0;
+    }
+    
+    .brutal-blog-posts {
+        padding: 40px 0;
     }
     
     .brutal-blog-card-content {
@@ -391,6 +422,10 @@
     }
     
     .brutal-blog-card-title {
-        font-size: 1.1rem;
+        font-size: 18px;
+    }
+    
+    .brutal-blog-card-excerpt {
+        font-size: 14px;
     }
 }

@@ -120,7 +120,6 @@
     border-color: var(--gray);
     grid-column: span 2;
     min-height: 200px;
-    max-height: 300px;
 }
 
 .brutal-content-block.content .brutal-content-text {
@@ -129,7 +128,6 @@
     margin: 0;
     box-sizing: border-box;
     width: 100%;
-    overflow: hidden;
 }
 
 .brutal-block-number {
@@ -223,7 +221,7 @@
     font-weight: 400;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    hyphens: auto;
+    hyphens: none;
 }
 
 .brutal-content-block.content .brutal-content-text {

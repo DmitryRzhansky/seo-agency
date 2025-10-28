@@ -5,7 +5,11 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs category %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:faq_list' %}">FAQ</a><span class="separator">/</span><span class="current">{{ category.name }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -15,11 +19,10 @@
 
 {% block content %}
 
-<!-- Hero секция категории FAQ - брутальная -->
+<!-- Hero секция категории FAQ -->
 <section class="brutal-faq-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-faq-hero-content">
-            <br><br>
             <h1 class="brutal-faq-hero-title">{{ category.name }}</h1>
             {% if category.description %}
             <p class="brutal-faq-hero-subtitle">{{ category.description }}</p>
@@ -28,9 +31,9 @@
     </div>
 </section>
 
-<!-- Поиск по категории - брутальный -->
+<!-- Поиск по категории -->
 <section class="brutal-faq-search">
-    <div class="brutal-container">
+    <div class="container">
         <form method="get" action="{% url 'main:faq_category' category.slug %}" class="brutal-faq-search-form">
             <input 
                 type="text" 
@@ -46,10 +49,9 @@
     </div>
 </section>
 
-
-<!-- FAQ контент категории - брутальный -->
+<!-- FAQ контент категории -->
 <section class="brutal-faq-content">
-    <div class="brutal-container">
+    <div class="container">
         {% if faq_items %}
             <div class="brutal-faq-items">
                 {% for item in faq_items %}
@@ -74,9 +76,9 @@
     </div>
 </section>
 
-<!-- CTA секция - брутальная -->
+<!-- CTA секция -->
 <section class="brutal-faq-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-faq-cta-content">
             <h2 class="brutal-faq-cta-title">Не нашли ответ на свой вопрос?</h2>
             <p class="brutal-faq-cta-subtitle">

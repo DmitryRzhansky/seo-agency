@@ -5,7 +5,11 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs faq_item %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:faq_list' %}">FAQ</a><span class="separator">/</span><a href="{% url 'main:faq_category' category.slug %}">{{ category.name }}</a><span class="separator">/</span><span class="current">{{ faq_item.question|truncatechars:50 }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
@@ -15,11 +19,10 @@
 
 {% block content %}
 
-<!-- Hero секция вопроса - брутальная -->
+<!-- Hero секция вопроса -->
 <section class="brutal-faq-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-faq-hero-content">
-            <br><br>
             <div class="brutal-faq-item-category">
                 <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-item-category-link">
                     {{ category.name }}
@@ -30,10 +33,9 @@
     </div>
 </section>
 
-
-<!-- Ответ на вопрос - брутальный -->
+<!-- Ответ на вопрос -->
 <section class="brutal-faq-answer">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-faq-answer-content">
             <div class="brutal-faq-answer-text">
                 {{ faq_item.answer|safe }}
@@ -47,10 +49,10 @@
     </div>
 </section>
 
-<!-- Похожие вопросы - брутальные -->
+<!-- Похожие вопросы -->
 {% if related_items %}
 <section class="brutal-faq-related">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-faq-related-content">
             <h2 class="brutal-faq-related-title">Похожие вопросы</h2>
             <div class="brutal-faq-related-items">
@@ -67,9 +69,9 @@
 </section>
 {% endif %}
 
-<!-- CTA секция - брутальная -->
+<!-- CTA секция -->
 <section class="brutal-faq-cta">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-faq-cta-content">
             <h2 class="brutal-faq-cta-title">Остались вопросы?</h2>
             <p class="brutal-faq-cta-subtitle">

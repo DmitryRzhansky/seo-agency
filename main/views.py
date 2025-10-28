@@ -986,10 +986,13 @@ def author_detail(request, slug):
         clean_content = re.sub(r'\s+', ' ', clean_content).strip()
         # Считаем слова (разделители: пробелы, знаки препинания)
         words = re.findall(r'\b\w+\b', clean_content)
-        total_words += len(words)
+        word_count = len(words)
+        total_words += word_count
+        print(f"Post '{post.title}': {word_count} words")
     
     # Примерно 200 слов в минуту чтения
     reading_time_total_min = max(1, int(total_words / 200)) if total_words else 0
+    print(f"Total words: {total_words}, Reading time: {reading_time_total_min} minutes")
 
     categories_stats = (
         base_qs.values('category__id', 'category__name', 'category__slug')

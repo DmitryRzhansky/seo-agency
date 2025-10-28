@@ -216,7 +216,10 @@
 
 {% endblock content %}
 
+{% block extra_js %}
 <script>
+console.log('Author page script loading...');
+
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, looking for elements...');
     
@@ -268,3 +271,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+{% endblock extra_js %}

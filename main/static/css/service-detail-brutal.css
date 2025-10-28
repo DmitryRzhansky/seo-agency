@@ -123,6 +123,7 @@
     margin-right: -360px; /* Выдвигаем блок до границы изображения (gap + ширина изображения) */
     overflow-y: auto; /* Добавляем вертикальный скролл */
     overflow-x: hidden; /* Скрываем горизонтальный скролл */
+    cursor: default; /* Устанавливаем курсор по умолчанию для всего блока */
 }
 
 .brutal-content-block.content .brutal-content-text {
@@ -133,6 +134,8 @@
     max-width: none; /* Убираем ограничения по ширине */
     word-wrap: break-word; /* Переносим длинные слова */
     overflow-wrap: break-word; /* Переносим длинные слова */
+    overflow: visible; /* Убираем любые ограничения overflow */
+    pointer-events: none; /* Позволяем событиям мыши проходить через текст к родительскому элементу */
 }
 
 .brutal-block-number {

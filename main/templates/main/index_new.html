@@ -63,7 +63,8 @@
                     <span>Бесплатно</span>
                 </div>
             </div>
-            <form id="heroForm" class="quick-form">
+            <form id="heroForm" class="quick-form" method="post" action="">
+                {% csrf_token %}
                 <input type="text" name="name" placeholder="Ваше имя" required>
                 <input type="tel" name="phone" placeholder="Телефон" required>
                 <input type="email" name="email" placeholder="Email" required>
@@ -908,7 +909,8 @@
                         <span>Online</span>
                     </div>
                 </div>
-                <form id="contactForm" class="contact-form">
+                <form id="contactForm" class="contact-form" method="post" action="">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="name">Имя</label>
                         <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
@@ -981,34 +983,12 @@
 
 {% block extra_js %}
 <script>
-// Инициализация форм
+// Инициализация CTA кнопок (без перехвата submit форм)
 document.addEventListener('DOMContentLoaded', function() {
-    // Hero форма
-    const heroForm = document.getElementById('heroForm');
-    if (heroForm) {
-        heroForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Здесь будет отправка формы
-            alert('Спасибо! Мы свяжемся с вами в течение 15 минут.');
-        });
-    }
-
-    // Контактная форма
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // Здесь будет отправка формы
-            alert('Спасибо! Ваша заявка отправлена.');
-        });
-    }
-
-    // Кнопки CTA
     const ctaButtons = document.querySelectorAll('.cta-button, .service-btn, .btn-custom, .btn-calc, .btn-order');
     ctaButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
-            // Прокрутка к форме
             const contactSection = document.getElementById('contact');
             if (contactSection) {
                 contactSection.scrollIntoView({ behavior: 'smooth' });

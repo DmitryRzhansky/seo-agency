@@ -218,34 +218,18 @@
 
 {% block extra_js %}
 <script>
-console.log('Author page script loading...');
-
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, looking for elements...');
-    
     const categoryButtons = document.querySelectorAll('.author-category-chip[data-category]');
     const allPosts = document.querySelectorAll('.brutal-author-post-card');
     
-    console.log('Found category buttons:', categoryButtons.length);
-    console.log('Found posts:', allPosts.length);
-    
-    // Проверим, что элементы найдены
-    if (categoryButtons.length === 0) {
-        console.error('No category buttons found!');
+    if (categoryButtons.length === 0 || allPosts.length === 0) {
         return;
     }
     
-    if (allPosts.length === 0) {
-        console.error('No posts found!');
-        return;
-    }
-    
-    categoryButtons.forEach((button, index) => {
-        console.log(`Button ${index}:`, button.getAttribute('data-category'));
+    categoryButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
             const selectedCategory = this.getAttribute('data-category');
-            console.log('Clicked category:', selectedCategory);
             
             // Убираем активный класс со всех кнопок
             categoryButtons.forEach(btn => btn.classList.remove('active'));
@@ -253,20 +237,15 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             
             // Фильтруем карточки
-            let visibleCount = 0;
-            allPosts.forEach((post, postIndex) => {
+            allPosts.forEach(post => {
                 const postCategory = post.getAttribute('data-category');
-                console.log(`Post ${postIndex} category:`, postCategory, 'Selected:', selectedCategory);
                 
                 if (selectedCategory === '' || postCategory === selectedCategory) {
                     post.style.display = 'block';
-                    visibleCount++;
                 } else {
                     post.style.display = 'none';
                 }
             });
-            
-            console.log('Visible posts after filter:', visibleCount);
         });
     });
 });

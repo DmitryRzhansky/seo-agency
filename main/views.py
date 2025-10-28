@@ -977,22 +977,15 @@ def author_detail(request, slug):
     first_post = base_qs.order_by('published_date').first()
     last_post = base_qs.order_by('-published_date').first()
     
-    # Более точный расчет времени чтения
-    total_words = 0
+    # Расчет времени чтения как в post_detail_brutal.html
+    total_reading_time = 0
     for post in base_qs:
-        # Убираем HTML теги и считаем слова
-        import re
-        clean_content = re.sub(r'<[^>]+>', '', post.content)
-        clean_content = re.sub(r'\s+', ' ', clean_content).strip()
-        # Считаем слова (разделители: пробелы, знаки препинания)
-        words = re.findall(r'\b\w+\b', clean_content)
-        word_count = len(words)
-        total_words += word_count
-        print(f"Post '{post.title}': {word_count} words")
+        # Используем ту же формулу что и в шаблоне: {% widthratio post.content|length|add:500 200 1 %}
+        content_length = len(post.content)
+        reading_time = max(1, int((content_length + 500) / 200))
+        total_reading_time += reading_time
     
-    # Примерно 200 слов в минуту чтения
-    reading_time_total_min = max(1, int(total_words / 200)) if total_words else 0
-    print(f"Total words: {total_words}, Reading time: {reading_time_total_min} minutes")
+    reading_time_total_min = total_reading_time
 
     categories_stats = (
         base_qs.values('category__id', 'category__name', 'category__slug')

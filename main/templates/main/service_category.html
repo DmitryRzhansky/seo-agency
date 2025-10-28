@@ -5,7 +5,15 @@
 {% block title %}{{ category.title }}{% endblock title %}
 
 {% block breadcrumbs %}
-{% breadcrumbs category %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a>
+        <span class="separator">/</span>
+        <a href="{% url 'services:service_list' %}">Услуги</a>
+        <span class="separator">/</span>
+        <span class="current">{{ category.title }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}

@@ -14,7 +14,17 @@
 
 
 {% block breadcrumbs %}
-{% breadcrumbs service %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a>
+        <span class="separator">/</span>
+        <a href="{% url 'services:service_list' %}">Услуги</a>
+        <span class="separator">/</span>
+        <a href="{% url 'services:service_category' slug=service.category.slug %}">{{ service.category.title }}</a>
+        <span class="separator">/</span>
+        <span class="current">{{ service.title }}</span>
+    </div>
+</div>
 {% endblock breadcrumbs %}
 
 
@@ -26,9 +36,9 @@
 
 {% block content %}
 
-<!-- Hero секция детальной страницы - брутальная -->
+<!-- Hero секция детальной страницы -->
 <section class="brutal-service-detail-hero">
-    <div class="brutal-container">
+    <div class="container">
         <div class="brutal-service-detail-hero-content">
             <h1 class="brutal-service-detail-title">{{ service.title }}</h1>
             <p class="brutal-service-detail-subtitle">{{ service.short_description }}</p>
@@ -36,115 +46,114 @@
     </div>
 </section>
 
-        <!-- Основной контент - брутальный -->
-        <section class="brutal-service-detail-content">
-            <div class="brutal-container">
-                <div class="brutal-service-detail-wrapper">
-                    <!-- Брутальные блоки контента -->
-                    <div class="brutal-content-blocks">
-                        <div class="brutal-content-block main">
-                            <div class="brutal-block-number">01</div>
-                            <h2>Описание услуги</h2>
-                            <p>{{ service.short_description }}</p>
-                        </div>
-                        
-                        <div class="brutal-content-block">
-                            <div class="brutal-block-number">02</div>
-                            <h3>Что включает услуга</h3>
-                            <ul>
-                                <li>Комплексный анализ вашего проекта</li>
-                                <li>Разработка индивидуальной стратегии</li>
-                                <li>Техническая оптимизация сайта</li>
-                                <li>Создание качественного контента</li>
-                                <li>Построение ссылочной массы</li>
-                                <li>Еженедельная отчетность о результатах</li>
-                            </ul>
-                        </div>
-                        
-                        
-                        <div class="brutal-content-block">
-                            <div class="brutal-block-number">03</div>
-                            <h3>Сроки выполнения</h3>
-                            <p>Первые результаты видны уже через 2-3 месяца, полное продвижение занимает 6-12 месяцев в зависимости от сложности проекта. Мы работаем поэтапно и предоставляем отчеты о прогрессе.</p>
-                        </div>
-                        
-                        <div class="brutal-content-block content">
-                            <div class="brutal-block-number">04</div>
-                            <h3>Подробная информация</h3>
-                            <div class="brutal-content-text brutal-service-scrollable">
-                                {{ service.content|safe }}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Изображение справа -->
-                    {% if service.image %}
-                    <div class="brutal-service-image-container">
-                        <img 
-                            src="{{ service.image.url }}" 
-                            class="brutal-service-image" 
-                            alt="{{ service.get_image_alt }}"
-                        >
-                        <div class="brutal-service-image-overlay">
-                            {{ service.category.title }}
-                        </div>
-                        <div class="brutal-service-image-decoration"></div>
-                    </div>
-                    {% endif %}
+<!-- Основной контент -->
+<section class="brutal-service-detail-content">
+    <div class="container">
+        <div class="brutal-service-detail-wrapper">
+            <!-- Блоки контента -->
+            <div class="brutal-content-blocks">
+                <div class="brutal-content-block main">
+                    <div class="brutal-block-number">01</div>
+                    <h2>Описание услуги</h2>
+                    <p>{{ service.short_description }}</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Блок поделиться - брутальный -->
-        <section class="brutal-share-section">
-            <div class="brutal-container">
-                <div class="brutal-share-block">
-                    <button class="brutal-copy-btn" data-text="{{ service.title }} - {{ service.short_description }} | Isakov Agency - {{ request.build_absolute_uri }}">
-                        <i class="fas fa-copy"></i>
-                        Скопировать текст
-                    </button>
-                    
-                    <div class="brutal-social-share">
-                        <span class="brutal-social-label">Поделиться:</span>
-                        <div class="brutal-social-links">
-                            <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}">
-                                <i class="fab fa-vk"></i>
-                            </a>
-                            <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}">
-                                <i class="fab fa-telegram"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
                 
-        <!-- CTA блок - брутальный -->
-        <section class="brutal-service-cta">
-            <div class="brutal-container">
-                <div class="brutal-service-cta-content">
-                    <h3 class="brutal-service-cta-title">Готовы обсудить вашу задачу?</h3>
-                    <p class="brutal-service-cta-text">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
-                    <a href="{% url 'main:home' %}#contact" class="brutal-service-cta-btn">
-                        Получить консультацию
+                <div class="brutal-content-block">
+                    <div class="brutal-block-number">02</div>
+                    <h3>Что включает услуга</h3>
+                    <ul>
+                        <li>Комплексный анализ вашего проекта</li>
+                        <li>Разработка индивидуальной стратегии</li>
+                        <li>Техническая оптимизация сайта</li>
+                        <li>Создание качественного контента</li>
+                        <li>Построение ссылочной массы</li>
+                        <li>Еженедельная отчетность о результатах</li>
+                    </ul>
+                </div>
+                
+                <div class="brutal-content-block">
+                    <div class="brutal-block-number">03</div>
+                    <h3>Сроки выполнения</h3>
+                    <p>Первые результаты видны уже через 2-3 месяца, полное продвижение занимает 6-12 месяцев в зависимости от сложности проекта. Мы работаем поэтапно и предоставляем отчеты о прогрессе.</p>
+                </div>
+                
+                <div class="brutal-content-block content">
+                    <div class="brutal-block-number">04</div>
+                    <h3>Подробная информация</h3>
+                    <div class="brutal-content-text brutal-service-scrollable">
+                        {{ service.content|safe }}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Изображение справа -->
+            {% if service.image %}
+            <div class="brutal-service-image-container">
+                <img 
+                    src="{{ service.image.url }}" 
+                    class="brutal-service-image" 
+                    alt="{{ service.get_image_alt }}"
+                >
+                <div class="brutal-service-image-overlay">
+                    {{ service.category.title }}
+                </div>
+                <div class="brutal-service-image-decoration"></div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Блок поделиться -->
+<section class="brutal-share-section">
+    <div class="container">
+        <div class="brutal-share-block">
+            <button class="brutal-copy-btn" data-text="{{ service.title }} - {{ service.short_description }} | Isakov Agency - {{ request.build_absolute_uri }}">
+                <i class="fas fa-copy"></i>
+                Скопировать текст
+            </button>
+            
+            <div class="brutal-social-share">
+                <span class="brutal-social-label">Поделиться:</span>
+                <div class="brutal-social-links">
+                    <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}">
+                        <i class="fab fa-telegram"></i>
                     </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+            
+<!-- CTA блок -->
+<section class="brutal-service-cta">
+    <div class="container">
+        <div class="brutal-service-cta-content">
+            <h3 class="brutal-service-cta-title">Готовы обсудить вашу задачу?</h3>
+            <p class="brutal-service-cta-text">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
+            <a href="{% url 'main:home' %}#contact" class="brutal-service-cta-btn">
+                Получить консультацию
+            </a>
+        </div>
+    </div>
+</section>
 
-        <!-- Навигация - брутальная -->
-        <section class="brutal-service-navigation">
-            <div class="brutal-container">
-                <a href="{% url 'services:service_category' slug=service.category.slug %}" class="brutal-service-nav-link">
-                    ← Вернуться в раздел "{{ service.category.title }}"
-                </a>
-            </div>
-        </section>
+<!-- Навигация -->
+<section class="brutal-service-navigation">
+    <div class="container">
+        <a href="{% url 'services:service_category' slug=service.category.slug %}" class="brutal-service-nav-link">
+            ← Вернуться в раздел "{{ service.category.title }}"
+        </a>
+    </div>
+</section>
 
-<!-- Блок "Еще услуги" - брутальный -->
+<!-- Блок "Еще услуги" -->
 {% if related_services %}
 <section class="brutal-related-services">
-    <div class="brutal-container">
+    <div class="container">
         <h2 class="brutal-related-services-title">Еще услуги</h2>
         <div class="brutal-related-grid">
             {% for related_service in related_services %}

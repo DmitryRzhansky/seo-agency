@@ -88,9 +88,10 @@
 
 /* Блоки контента */
 .brutal-content-blocks {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
+    align-items: start;
 }
 
 .brutal-content-block {
@@ -109,11 +110,14 @@
     background: var(--accent);
     color: var(--white);
     border-color: var(--accent);
+    grid-column: span 2;
 }
 
 .brutal-content-block.content {
     background: var(--gray-light);
     border-color: var(--gray);
+    grid-column: span 2;
+    min-height: 400px;
 }
 
 .brutal-block-number {
@@ -626,6 +630,16 @@
     .brutal-service-image {
         height: 300px;
     }
+    
+    .brutal-content-blocks {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .brutal-content-block.main,
+    .brutal-content-block.content {
+        grid-column: span 1;
+    }
 }
 
 @media (max-width: 768px) {
@@ -638,11 +652,17 @@
     }
     
     .brutal-content-blocks {
+        grid-template-columns: 1fr;
         gap: 30px;
     }
     
     .brutal-content-block {
         padding: 30px;
+    }
+    
+    .brutal-content-block.main,
+    .brutal-content-block.content {
+        grid-column: span 1;
     }
     
     .brutal-share-block {

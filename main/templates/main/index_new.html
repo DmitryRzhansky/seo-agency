@@ -63,11 +63,12 @@
                     <span>Бесплатно</span>
                 </div>
             </div>
-            <form id="heroForm" class="quick-form" method="post" action="">
+            <form id="heroForm" class="quick-form" method="post" action="{% url 'main:home' %}">
                 {% csrf_token %}
                 <input type="text" name="name" placeholder="Ваше имя" required>
                 <input type="tel" name="phone" placeholder="Телефон" required>
                 <input type="email" name="email" placeholder="Email" required>
+                <input type="hidden" name="message" value="Заявка с главной: hero форма">
                 <button type="submit" class="form-submit">
                     <span>Отправить</span>
                 </button>
@@ -909,7 +910,7 @@
                         <span>Online</span>
                     </div>
                 </div>
-                <form id="contactForm" class="contact-form" method="post" action="">
+                <form id="contactForm" class="contact-form" method="post" action="{% url 'main:home' %}">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="name">Имя</label>
@@ -927,6 +928,7 @@
                         <label for="message">Расскажите о проекте</label>
                         <textarea id="message" name="message" placeholder="Опишите ваш проект, цели и задачи..." rows="5" required></textarea>
                     </div>
+                    <input type="hidden" name="_source" value="contact_form">
                     <button type="submit" class="submit-button">
                         <span class="button-text">Отправить заявку</span>
                         <span class="button-icon">→</span>

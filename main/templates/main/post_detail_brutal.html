@@ -15,7 +15,7 @@
         <a href="{% url 'blog:category_posts' slug=post.category.slug %}">{{ post.category.name }}</a>
         {% endif %}
         <span class="separator">/</span>
-        <span class="current">{{ post.title }}</span>
+        <span class="current">{{ post.title|strip }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}

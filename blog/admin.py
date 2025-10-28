@@ -56,7 +56,7 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
         'title', 'category', 'published_date', 'is_published', 'views_count', 
         'seo_validation', 'seo_title_length', 'seo_description_length'
     )
-    list_filter = ('is_published', 'published_date', 'category', 'author')
+    list_filter = ('is_published', 'published_date', 'category')
     search_fields = ('title', 'content', 'author__username')
     prepopulated_fields = {'slug': ('seo_title',)}
     date_hierarchy = 'published_date'
@@ -64,7 +64,7 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
     
     fieldsets = (
         ('📝 Основная информация', {
-            'fields': ('slug', 'category', 'author', 'blog_author', 'is_published'),
+            'fields': ('slug', 'category', 'blog_author', 'is_published'),
             'description': 'Основная информация о статье'
         }),
         ('📄 Содержимое', {

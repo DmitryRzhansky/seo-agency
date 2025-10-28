@@ -218,16 +218,31 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, looking for elements...');
+    
     const categoryButtons = document.querySelectorAll('.author-category-chip[data-category]');
     const allPosts = document.querySelectorAll('.brutal-author-post-card');
     
     console.log('Found category buttons:', categoryButtons.length);
     console.log('Found posts:', allPosts.length);
     
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
+    // Проверим, что элементы найдены
+    if (categoryButtons.length === 0) {
+        console.error('No category buttons found!');
+        return;
+    }
+    
+    if (allPosts.length === 0) {
+        console.error('No posts found!');
+        return;
+    }
+    
+    categoryButtons.forEach((button, index) => {
+        console.log(`Button ${index}:`, button.getAttribute('data-category'));
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
             const selectedCategory = this.getAttribute('data-category');
-            console.log('Selected category:', selectedCategory);
+            console.log('Clicked category:', selectedCategory);
             
             // Убираем активный класс со всех кнопок
             categoryButtons.forEach(btn => btn.classList.remove('active'));
@@ -236,9 +251,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Фильтруем карточки
             let visibleCount = 0;
-            allPosts.forEach(post => {
+            allPosts.forEach((post, postIndex) => {
                 const postCategory = post.getAttribute('data-category');
-                console.log('Post category:', postCategory, 'Selected:', selectedCategory);
+                console.log(`Post ${postIndex} category:`, postCategory, 'Selected:', selectedCategory);
                 
                 if (selectedCategory === '' || postCategory === selectedCategory) {
                     post.style.display = 'block';

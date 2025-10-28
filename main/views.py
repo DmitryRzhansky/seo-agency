@@ -978,17 +978,18 @@ def author_detail(request, slug):
     last_post = base_qs.order_by('-published_date').first()
     
     # Более точный расчет времени чтения
-    total_chars = 0
+    total_words = 0
     for post in base_qs:
-        # Убираем HTML теги и считаем символы
-        clean_content = post.content.replace('<', ' <').replace('>', '> ')
+        # Убираем HTML теги и считаем слова
         import re
-        clean_content = re.sub(r'<[^>]+>', '', clean_content)
+        clean_content = re.sub(r'<[^>]+>', '', post.content)
         clean_content = re.sub(r'\s+', ' ', clean_content).strip()
-        total_chars += len(clean_content)
+        # Считаем слова (разделители: пробелы, знаки препинания)
+        words = re.findall(r'\b\w+\b', clean_content)
+        total_words += len(words)
     
-    # Примерно 200 слов в минуту, 5 символов на слово
-    reading_time_total_min = max(1, int(total_chars / (200 * 5))) if total_chars else 0
+    # Примерно 200 слов в минуту чтения
+    reading_time_total_min = max(1, int(total_words / 200)) if total_words else 0
 
     categories_stats = (
         base_qs.values('category__id', 'category__name', 'category__slug')

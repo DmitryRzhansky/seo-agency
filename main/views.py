@@ -931,13 +931,42 @@ def author_detail(request, slug):
     """
     Страница автора статьи
     """
-    author = get_object_or_404(Author, slug=slug, is_active=True)
-    
-    # Получаем статьи автора
-    author_posts = Post.objects.filter(
-        blog_author=author,
-        is_published=True
-    ).order_by('-published_date')[:10]
+    # Проверяем, является ли это временным автором из User
+    if slug.startswith('user-'):
+        # Извлекаем ID пользователя
+        try:
+            user_id = int(slug.replace('user-', ''))
+            from django.contrib.auth.models import User
+            user = get_object_or_404(User, id=user_id)
+            
+            # Создаем временный объект Author
+            author = Author(
+                first_name=user.first_name or user.username,
+                last_name=user.last_name or '',
+                slug=slug,
+                position='Автор',
+                bio='Информация об авторе не указана.',
+                is_active=True
+            )
+            
+            # Получаем статьи автора (из User)
+            author_posts = Post.objects.filter(
+                author=user,
+                is_published=True
+            ).order_by('-published_date')[:10]
+            
+        except (ValueError, User.DoesNotExist):
+            from django.http import Http404
+            raise Http404("Автор не найден")
+    else:
+        # Обычный автор из модели Author
+        author = get_object_or_404(Author, slug=slug, is_active=True)
+        
+        # Получаем статьи автора
+        author_posts = Post.objects.filter(
+            blog_author=author,
+            is_published=True
+        ).order_by('-published_date')[:10]
     
     # SEO данные
     seo_title = f"{author.get_full_name()} - Автор | Isakov Agency"

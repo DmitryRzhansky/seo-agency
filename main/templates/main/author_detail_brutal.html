@@ -74,6 +74,21 @@
                         </div>
                     </div>
                     {% endif %}
+                    <!-- KPI-плашки автора -->
+                    <div class="author-kpi">
+                        <div class="author-kpi-badge">
+                            <span class="kpi-number">{{ total_posts|default:0 }}</span>
+                            <span class="kpi-label">статей</span>
+                        </div>
+                        <div class="author-kpi-badge">
+                            <span class="kpi-number">{% if reading_time_total_min %}~{{ reading_time_total_min }}{% else %}0{% endif %}</span>
+                            <span class="kpi-label">мин чтения</span>
+                        </div>
+                        <div class="author-kpi-badge">
+                            <span class="kpi-number">{% if first_published %}{{ first_published|date:"Y" }}{% else %}—{% endif %}</span>
+                            <span class="kpi-label">первая публикация</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -93,31 +108,45 @@
                     <button type="submit" class="brutal-blog-search-button">Найти</button>
                 </form>
 
-                <!-- Агрегаты -->
-                <div class="brutal-author-stats" style="margin-bottom: 30px;">
-                    <ul>
-                        <li>Опубликовано статей: {{ total_posts }}</li>
-                        <li>Суммарное время чтения: {% if reading_time_total_min %}~ {{ reading_time_total_min }} мин{% else %}—{% endif %}</li>
-                        <li>Первая публикация: {% if first_published %}{{ first_published|date:"d.m.Y" }}{% else %}—{% endif %}</li>
-                        <li>Последняя публикация: {% if last_published %}{{ last_published|date:"d.m.Y" }}{% else %}—{% endif %}</li>
-                    </ul>
+                <!-- Агрегаты (брютальные карточки) -->
+                <div class="author-stats-grid">
+                    <div class="author-stat-card primary">
+                        <div class="stat-number">{{ total_posts|default:0 }}</div>
+                        <div class="stat-label">Опубликовано статей</div>
+                    </div>
+                    <div class="author-stat-card">
+                        <div class="stat-number">{% if reading_time_total_min %}~{{ reading_time_total_min }}{% else %}0{% endif %}</div>
+                        <div class="stat-label">Суммарное чтение (мин)</div>
+                    </div>
+                    <div class="author-stat-card">
+                        <div class="stat-number">{% if first_published %}{{ first_published|date:"d.m.Y" }}{% else %}—{% endif %}</div>
+                        <div class="stat-label">Первая публикация</div>
+                    </div>
+                    <div class="author-stat-card">
+                        <div class="stat-number">{% if last_published %}{{ last_published|date:"d.m.Y" }}{% else %}—{% endif %}</div>
+                        <div class="stat-label">Последняя публикация</div>
+                    </div>
                 </div>
 
                 <!-- Категории автора -->
                 {% if categories_stats %}
                 <div class="brutal-author-categories" style="margin-bottom: 30px;">
                     <h3>Категории автора</h3>
-                    <ul>
+                    <div class="author-category-chips">
                         {% for c in categories_stats %}
-                        <li>
                             {% if c.category__slug %}
-                                <a href="{% url 'blog:category_posts' slug=c.category__slug %}">{{ c.category__name }}</a> — {{ c.count }}
+                                <a class="author-category-chip" href="{% url 'blog:category_posts' slug=c.category__slug %}">
+                                    <span class="chip-label">{{ c.category__name }}</span>
+                                    <span class="chip-count">{{ c.count }}</span>
+                                </a>
                             {% else %}
-                                {{ c.category__name|default:"Без категории" }} — {{ c.count }}
+                                <span class="author-category-chip">
+                                    <span class="chip-label">{{ c.category__name|default:"Без категории" }}</span>
+                                    <span class="chip-count">{{ c.count }}</span>
+                                </span>
                             {% endif %}
-                        </li>
                         {% endfor %}
-                    </ul>
+                    </div>
                 </div>
                 {% endif %}
 

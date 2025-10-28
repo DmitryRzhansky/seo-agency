@@ -337,8 +337,13 @@ initProgressBars();
     citySelect.addEventListener('change', function() {
         const selectedCitySlug = this.value;
         if (selectedCitySlug && selectedCitySlug !== '') {
-            // Переходим на страницу города
-            window.location.href = `/cities/${selectedCitySlug}/`;
+            if (selectedCitySlug === 'all') {
+                // Переходим на страницу всех городов
+                window.location.href = '/cities/';
+            } else {
+                // Переходим на страницу конкретного города
+                window.location.href = `/cities/${selectedCitySlug}/`;
+            }
         }
     });
 })();

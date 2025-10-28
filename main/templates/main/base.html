@@ -118,6 +118,7 @@
                     <span class="city-icon">📍</span>
                     <select id="citySelect" class="city-select">
                         <option value="">Выберите город</option>
+                        <option value="all">Все города</option>
                         {% for city in cities_menu %}
                         <option value="{{ city.slug }}" {% if current_city and current_city.slug == city.slug %}selected{% endif %}>{{ city.name }}</option>
                         {% endfor %}

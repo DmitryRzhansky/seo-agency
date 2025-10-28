@@ -219,12 +219,15 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const categoryButtons = document.querySelectorAll('.author-category-chip[data-category]');
-    const postsContainer = document.getElementById('author-posts-container');
     const allPosts = document.querySelectorAll('.brutal-author-post-card');
+    
+    console.log('Found category buttons:', categoryButtons.length);
+    console.log('Found posts:', allPosts.length);
     
     categoryButtons.forEach(button => {
         button.addEventListener('click', function() {
             const selectedCategory = this.getAttribute('data-category');
+            console.log('Selected category:', selectedCategory);
             
             // Убираем активный класс со всех кнопок
             categoryButtons.forEach(btn => btn.classList.remove('active'));
@@ -232,37 +235,20 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             
             // Фильтруем карточки
+            let visibleCount = 0;
             allPosts.forEach(post => {
                 const postCategory = post.getAttribute('data-category');
+                console.log('Post category:', postCategory, 'Selected:', selectedCategory);
                 
                 if (selectedCategory === '' || postCategory === selectedCategory) {
                     post.style.display = 'block';
+                    visibleCount++;
                 } else {
                     post.style.display = 'none';
                 }
             });
             
-            // Проверяем, есть ли видимые карточки
-            const visiblePosts = document.querySelectorAll('.brutal-author-post-card[style*="block"], .brutal-author-post-card:not([style*="none"])');
-            
-            if (visiblePosts.length === 0) {
-                postsContainer.innerHTML = `
-                    <div class="brutal-author-empty">
-                        <i class="fas fa-search"></i>
-                        <h3>Статьи не найдены</h3>
-                        <p>В выбранной категории пока нет статей.</p>
-                    </div>
-                `;
-            } else {
-                // Восстанавливаем оригинальную структуру если она была заменена
-                if (postsContainer.querySelector('.brutal-author-empty')) {
-                    postsContainer.innerHTML = `
-                        <div class="brutal-author-posts-grid">
-                            ${Array.from(visiblePosts).map(post => post.outerHTML).join('')}
-                        </div>
-                    `;
-                }
-            }
+            console.log('Visible posts after filter:', visibleCount);
         });
     });
 });

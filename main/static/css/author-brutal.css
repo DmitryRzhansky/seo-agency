@@ -240,13 +240,27 @@
     border: var(--border);
     text-decoration: none;
     color: var(--black);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    transition: var(--transition);
 }
-.author-category-chip.active { background: var(--black); color: var(--white); }
-.author-category-chip.active .chip-count { color: var(--white); }
+.author-category-chip:hover {
+    background: var(--black);
+    color: var(--white);
+}
+.author-category-chip:hover .chip-count {
+    color: var(--white);
+}
+.author-category-chip.active { 
+    background: var(--black); 
+    color: var(--white); 
+}
+.author-category-chip.active .chip-count { 
+    color: var(--white); 
+}
 .author-category-chip .chip-label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
 .author-category-chip .chip-count { font-size: 12px; color: var(--gray-dark); }
-.author-category-chip:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
-.author-category-chip:hover .chip-count { color: var(--white); }
 
 .brutal-author-social {
     margin-bottom: 0;

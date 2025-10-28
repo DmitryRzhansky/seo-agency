@@ -119,16 +119,16 @@
                 <div class="brutal-author-categories" style="margin-bottom: 30px;">
                     <h3>Категории автора</h3>
                     <div class="author-category-chips">
-                        <a class="author-category-chip {% if not current_category_slug %}active{% endif %}" href="?q={{ search_query }}">
+                        <button class="author-category-chip active" data-category="">
                             <span class="chip-label">Все</span>
                             <span class="chip-count">{{ total_posts }}</span>
-                        </a>
+                        </button>
                         {% for c in categories_stats %}
                             {% if c.category__slug %}
-                                <a class="author-category-chip {% if current_category_slug == c.category__slug %}active{% endif %}" href="?q={{ search_query }}&category={{ c.category__slug }}">
+                                <button class="author-category-chip" data-category="{{ c.category__slug }}">
                                     <span class="chip-label">{{ c.category__name }}</span>
                                     <span class="chip-count">{{ c.count }}</span>
-                                </a>
+                                </button>
                             {% else %}
                                 <span class="author-category-chip">
                                     <span class="chip-label">{{ c.category__name|default:"Без категории" }}</span>
@@ -141,40 +141,43 @@
                 {% endif %}
 
                 <!-- Список статей -->
-                {% if page_obj %}
-                <div class="brutal-author-posts-grid">
-                    {% for post in page_obj %}
-                    <article class="brutal-author-post-card">
-                        {% if post.image %}
-                        <img src="{{ post.image.url }}" class="brutal-author-post-image" alt="{{ post.title }}">
-                        {% else %}
-                        <div class="brutal-author-post-placeholder">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        {% endif %}
-                        
-                        <div class="brutal-author-post-content">
-                            {% if post.category %}
-                            <div class="brutal-author-post-category">{{ post.category.name }}</div>
-                            {% endif %}
-                            <h3 class="brutal-author-post-title">{{ post.title }}</h3>
-                            <p class="brutal-author-post-excerpt">
-                                {% if post.excerpt %}
-                                    {{ post.excerpt|truncatewords:20 }}
-                                {% else %}
-                                    {{ post.content|striptags|truncatewords:20 }}
-                                {% endif %}
-                            </p>
-                            <div class="brutal-author-post-meta">
-                                <span class="brutal-author-post-date">{{ post.published_date|date:"d.m.Y" }}</span>
-                                <span class="brutal-author-post-views">{{ post.views_count }} просмотров</span>
+                <div id="author-posts-container">
+                    {% if page_obj %}
+                    <div class="brutal-author-posts-grid">
+                        {% for post in page_obj %}
+                        <article class="brutal-author-post-card" data-category="{{ post.category.slug|default:'' }}">
+                            {% if post.image %}
+                            <img src="{{ post.image.url }}" class="brutal-author-post-image" alt="{{ post.title }}">
+                            {% else %}
+                            <div class="brutal-author-post-placeholder">
+                                <i class="fas fa-newspaper"></i>
                             </div>
-                            <a href="{{ post.get_absolute_url }}" class="brutal-author-post-link">
-                                Читать далее
-                            </a>
-                        </div>
-                    </article>
-                    {% endfor %}
+                            {% endif %}
+                            
+                            <div class="brutal-author-post-content">
+                                {% if post.category %}
+                                <div class="brutal-author-post-category">{{ post.category.name }}</div>
+                                {% endif %}
+                                <h3 class="brutal-author-post-title">{{ post.title }}</h3>
+                                <p class="brutal-author-post-excerpt">
+                                    {% if post.excerpt %}
+                                        {{ post.excerpt|truncatewords:20 }}
+                                    {% else %}
+                                        {{ post.content|striptags|truncatewords:20 }}
+                                    {% endif %}
+                                </p>
+                                <div class="brutal-author-post-meta">
+                                    <span class="brutal-author-post-date">{{ post.published_date|date:"d.m.Y" }}</span>
+                                    <span class="brutal-author-post-views">{{ post.views_count }} просмотров</span>
+                                </div>
+                                <a href="{{ post.get_absolute_url }}" class="brutal-author-post-link">
+                                    Читать далее
+                                </a>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
                 
                 <!-- Пагинация -->
@@ -212,3 +215,55 @@
 </section>
 
 {% endblock content %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryButtons = document.querySelectorAll('.author-category-chip[data-category]');
+    const postsContainer = document.getElementById('author-posts-container');
+    const allPosts = document.querySelectorAll('.brutal-author-post-card');
+    
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const selectedCategory = this.getAttribute('data-category');
+            
+            // Убираем активный класс со всех кнопок
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            // Добавляем активный класс к нажатой кнопке
+            this.classList.add('active');
+            
+            // Фильтруем карточки
+            allPosts.forEach(post => {
+                const postCategory = post.getAttribute('data-category');
+                
+                if (selectedCategory === '' || postCategory === selectedCategory) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+            
+            // Проверяем, есть ли видимые карточки
+            const visiblePosts = document.querySelectorAll('.brutal-author-post-card[style*="block"], .brutal-author-post-card:not([style*="none"])');
+            
+            if (visiblePosts.length === 0) {
+                postsContainer.innerHTML = `
+                    <div class="brutal-author-empty">
+                        <i class="fas fa-search"></i>
+                        <h3>Статьи не найдены</h3>
+                        <p>В выбранной категории пока нет статей.</p>
+                    </div>
+                `;
+            } else {
+                // Восстанавливаем оригинальную структуру если она была заменена
+                if (postsContainer.querySelector('.brutal-author-empty')) {
+                    postsContainer.innerHTML = `
+                        <div class="brutal-author-posts-grid">
+                            ${Array.from(visiblePosts).map(post => post.outerHTML).join('')}
+                        </div>
+                    `;
+                }
+            }
+        });
+    });
+});
+</script>

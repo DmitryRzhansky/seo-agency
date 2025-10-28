@@ -823,24 +823,24 @@ class AuthorAdmin(SEOAdminMixin, CustomHeadScriptsMixin, admin.ModelAdmin):
     ordering = ['last_name', 'first_name']
     
     def save_model(self, request, obj, form, change):
-        """Автоматически создаем slug, если он не указан"""
-        if not obj.slug:
-            # Создаем slug из имени и фамилии
+        """Автоматически создаем username, если он не указан"""
+        if not obj.username:
+            # Создаем username из имени и фамилии
             from django.utils.text import slugify
-            base_slug = slugify(f"{obj.first_name} {obj.last_name}")
-            obj.slug = base_slug
+            base_username = slugify(f"{obj.first_name} {obj.last_name}")
+            obj.username = base_username
             
-            # Если такой slug уже существует, добавляем номер
+            # Если такой username уже существует, добавляем номер
             counter = 1
-            while Author.objects.filter(slug=obj.slug).exclude(pk=obj.pk).exists():
-                obj.slug = f"{base_slug}-{counter}"
+            while Author.objects.filter(username=obj.username).exclude(pk=obj.pk).exists():
+                obj.username = f"{base_username}-{counter}"
                 counter += 1
         
         super().save_model(request, obj, form, change)
     
     fieldsets = (
         ('Основная информация', {
-            'fields': ('first_name', 'last_name', 'slug', 'position', 'is_active')
+            'fields': ('first_name', 'last_name', 'username', 'position', 'is_active')
         }),
         ('Биография и опыт', {
             'fields': ('bio', 'experience', 'specializations')

@@ -555,7 +555,7 @@ class Author(models.Model):
     """Автор статей блога."""
     first_name = models.CharField(max_length=100, verbose_name="Имя")
     last_name = models.CharField(max_length=100, verbose_name="Фамилия")
-    slug = models.SlugField(unique=True, max_length=200, verbose_name="URL-идентификатор", help_text="Используется в URL страницы автора")
+    username = models.CharField(max_length=200, unique=True, verbose_name="Имя пользователя", help_text="Уникальное имя для URL (например: vitaliy-isakov)", default="")
     bio = models.TextField(verbose_name="Биография", help_text="Подробная информация об авторе")
     photo = models.ImageField(upload_to='author_photos/', blank=True, null=True, verbose_name="Фото")
     photo_alt = models.CharField(max_length=200, blank=True, verbose_name="Альтернативный текст фото", help_text="Описание фото для SEO и доступности")
@@ -586,7 +586,7 @@ class Author(models.Model):
     def get_absolute_url(self):
         """Возвращает URL страницы автора"""
         from django.urls import reverse
-        return reverse('main:author_detail', kwargs={'slug': self.slug})
+        return reverse('main:author_detail', kwargs={'slug': self.username})
 
 
 class Testimonial(models.Model):

@@ -943,7 +943,7 @@ def author_detail(request, slug):
             author = Author(
                 first_name=user.first_name or user.username,
                 last_name=user.last_name or '',
-                slug=slug,
+                username=slug,
                 position='Автор',
                 bio='Информация об авторе не указана.',
                 is_active=True
@@ -960,7 +960,7 @@ def author_detail(request, slug):
             raise Http404("Автор не найден")
     else:
         # Обычный автор из модели Author
-        author = get_object_or_404(Author, slug=slug, is_active=True)
+        author = get_object_or_404(Author, username=slug, is_active=True)
         
         # Получаем статьи автора
         author_posts = Post.objects.filter(

@@ -135,7 +135,7 @@ class Post(SEOModel):
             return Author(
                 first_name=self.author.first_name or self.author.username,
                 last_name=self.author.last_name or '',
-                slug=f"user-{self.author.id}",  # Добавляем slug для временного автора
+                username=f"user-{self.author.id}",  # Добавляем username для временного автора
                 position='Автор',
                 bio=''
             )

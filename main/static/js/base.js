@@ -328,23 +328,4 @@ function initProgressBars() {
 
 // Вызываем функцию инициализации полос загрузки
 initProgressBars();
-
-// Инициализация селектора городов
-(function initCitySelector() {
-    const citySelect = document.getElementById('citySelect');
-    if (!citySelect) return;
-
-    citySelect.addEventListener('change', function() {
-        const selectedCitySlug = this.value;
-        if (selectedCitySlug && selectedCitySlug !== '') {
-            if (selectedCitySlug === 'all') {
-                // Переходим на страницу всех городов
-                window.location.href = '/cities/';
-            } else {
-                // Переходим на страницу конкретного города
-                window.location.href = `/cities/${selectedCitySlug}/`;
-            }
-        }
-    });
-})();
 });

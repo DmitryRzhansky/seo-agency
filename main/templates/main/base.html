@@ -208,11 +208,10 @@
                     <div class="footer-column">
                         <h4>Ресурсы</h4>
                         <ul>
-                            <li><a href="/sitemap.xml">Карта сайта</a></li>
+                            <li><a href="{% url 'main:sitemap' %}">Карта сайта</a></li>
                             <li><a href="{% url 'main:faq_list' %}">Вопросы и ответы</a></li>
                             <li><a href="{% url 'main:glossary_list' %}">Глоссарий</a></li>
                             <li><a href="{% url 'blog:post_list' %}">Блог</a></li>
-                            <li><a href="{% url 'main:portfolio_list' %}">Портфолио</a></li>
                         </ul>
                     </div>
                     <div class="footer-column">

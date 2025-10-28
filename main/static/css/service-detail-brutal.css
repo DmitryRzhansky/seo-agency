@@ -84,9 +84,6 @@
     grid-template-columns: 1fr 300px;
     gap: 60px;
     align-items: start;
-    grid-template-areas: 
-        "content-blocks image"
-        "full-content image";
 }
 
 /* Блоки контента */
@@ -95,7 +92,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     align-items: stretch;
-    grid-area: content-blocks;
 }
 
 .brutal-content-block {
@@ -122,8 +118,8 @@
 .brutal-content-block.content {
     background: var(--gray-light);
     border-color: var(--gray);
+    grid-column: span 3;
     min-height: 200px;
-    grid-area: full-content;
 }
 
 .brutal-content-block.content .brutal-content-text {
@@ -361,7 +357,6 @@
     height: fit-content;
     display: flex;
     flex-direction: column;
-    grid-area: image;
 }
 
 .brutal-service-image {
@@ -675,16 +670,11 @@
     .brutal-service-detail-wrapper {
         grid-template-columns: 1fr;
         gap: 40px;
-        grid-template-areas: 
-            "image"
-            "content-blocks"
-            "full-content";
     }
     
     .brutal-service-image-container {
         position: static;
         order: -1;
-        grid-area: image;
     }
     
     .brutal-service-image {
@@ -695,7 +685,6 @@
     .brutal-content-blocks {
         grid-template-columns: 1fr;
         gap: 30px;
-        grid-area: content-blocks;
     }
     
     .brutal-content-block.main,
@@ -706,7 +695,6 @@
     .brutal-content-block.content {
         min-height: 200px;
         max-height: none;
-        grid-area: full-content;
     }
 }
 

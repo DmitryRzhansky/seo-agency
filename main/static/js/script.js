@@ -360,9 +360,27 @@ function initFormHandling() {
             e.preventDefault();
             const formData = new FormData(heroForm);
             const data = Object.fromEntries(formData);
-            showNotification('ЗАЯВКА ОТПРАВЛЕНА!', 'Мы свяжемся с вами в течение 15 минут.', 'success');
-            heroForm.reset();
-            console.log('Hero form data:', data);
+            
+            try {
+                const response = await fetch(heroForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': data.csrfmiddlewaretoken
+                    }
+                });
+                
+                if (response.ok) {
+                    showNotification('ЗАЯВКА ОТПРАВЛЕНА!', 'Мы свяжемся с вами в течение 15 минут.', 'success');
+                    heroForm.reset();
+                    console.log('Hero form data:', data);
+                } else {
+                    showNotification('ОШИБКА!', 'Произошла ошибка при отправке заявки.', 'error');
+                }
+            } catch (error) {
+                console.error('Error submitting hero form:', error);
+                showNotification('ОШИБКА!', 'Произошла ошибка при отправке заявки.', 'error');
+            }
         });
     }
 
@@ -373,9 +391,27 @@ function initFormHandling() {
             e.preventDefault();
             const formData = new FormData(contactForm);
             const data = Object.fromEntries(formData);
-            showNotification('ЗАЯВКА ОТПРАВЛЕНА!', 'Мы свяжемся с вами в ближайшее время.', 'success');
-            contactForm.reset();
-            console.log('Contact form data:', data);
+            
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': data.csrfmiddlewaretoken
+                    }
+                });
+                
+                if (response.ok) {
+                    showNotification('ЗАЯВКА ОТПРАВЛЕНА!', 'Мы свяжемся с вами в ближайшее время.', 'success');
+                    contactForm.reset();
+                    console.log('Contact form data:', data);
+                } else {
+                    showNotification('ОШИБКА!', 'Произошла ошибка при отправке заявки.', 'error');
+                }
+            } catch (error) {
+                console.error('Error submitting contact form:', error);
+                showNotification('ОШИБКА!', 'Произошла ошибка при отправке заявки.', 'error');
+            }
         });
     }
 

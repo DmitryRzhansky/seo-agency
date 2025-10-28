@@ -118,7 +118,7 @@
 .brutal-content-block.content {
     background: var(--gray-light);
     border-color: var(--gray);
-    grid-column: span 3;
+    grid-column: span 2;
     min-height: 200px;
 }
 

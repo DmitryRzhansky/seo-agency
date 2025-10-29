@@ -119,10 +119,9 @@
     background: var(--gray-light);
     border-color: var(--gray);
     grid-column: span 2;
-    height: 500px; /* Фиксированная высота для скролла */
+    /* Убираем фиксированную высоту и прокрутку, ширину сохраняем за счет отрицательного отступа */
     margin-right: -360px; /* Выдвигаем блок до границы изображения (gap + ширина изображения) */
-    overflow-y: auto; /* Добавляем вертикальный скролл */
-    overflow-x: hidden; /* Скрываем горизонтальный скролл */
+    overflow: visible;
     cursor: default; /* Устанавливаем курсор по умолчанию для всего блока */
 }
 
@@ -136,6 +135,8 @@
     overflow-wrap: break-word; /* Переносим длинные слова */
     overflow: visible; /* Убираем любые ограничения overflow */
     pointer-events: none; /* Позволяем событиям мыши проходить через текст к родительскому элементу */
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 .brutal-block-number {
@@ -280,9 +281,9 @@
 }
 
 .brutal-content-block.content .brutal-content-text p {
-    margin-bottom: 10px;
-    line-height: 1.4;
-    font-size: 14px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    font-size: 16px;
     width: 100%; /* Растягиваем параграфы на всю ширину */
     max-width: none; /* Убираем ограничения по ширине */
     word-wrap: break-word; /* Переносим длинные слова */

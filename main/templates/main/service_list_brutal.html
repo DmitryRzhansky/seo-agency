@@ -13,6 +13,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/services-brutal.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
@@ -20,19 +21,80 @@
 
 {% block content %}
 
-<!-- Hero (в стиле 888) -->
-<section class="services-hero">
-    <div class="services-container">
-        <div class="services-hero-inner">
-            <div class="services-hero-label">
-                <span class="dot"></span>
+<!-- Hero секция -->
+<section class="hero">
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="hero-watermark">
+            <img src="{% static 'images/logo/sign.png' %}" alt="Logo">
+        </div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-label">
+                <span class="label-dot"></span>
                 <span>Услуги</span>
             </div>
-            <h1 class="services-hero-title">
-                <span class="word">Что мы делаем</span>
+            <h1 class="hero-title" data-text="Что мы делаем">
+                <span class="word" data-word="Что">Что</span>
+                <span class="word" data-word="мы">мы</span>
+                <span class="word" data-word="делаем">делаем</span>
             </h1>
-            <p class="services-hero-subtitle">Честная работа. Измеримые результаты. Никакой воды — только факты.</p>
+            <p class="hero-subtitle">Комплексные услуги по продвижению сайтов. От технического аудита до комплексного SEO-продвижения. Работаем только белыми методами с гарантией результата.</p>
+            <div class="hero-features">
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Оплата только за результат</span>
+                </div>
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Гарантия возврата 100%</span>
+                </div>
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Первый месяц бесплатно</span>
+                </div>
+                <div class="feature-box">
+                    <span class="feature-check">✓</span>
+                    <span>Без предоплаты</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="{% url 'main:contacts' %}" class="cta-button primary">
+                    <span class="button-text">Начать проект</span>
+                    <span class="button-icon">→</span>
+                </a>
+                <a href="{% url 'main:portfolio_list' %}" class="cta-button secondary">
+                    <span class="button-text">Смотреть кейсы</span>
+                </a>
+            </div>
         </div>
+        <div class="hero-form">
+            <div class="form-header">
+                <h3>Получить консультацию</h3>
+                <div class="form-badge">
+                    <span class="badge-dot"></span>
+                    <span>Бесплатно</span>
+                </div>
+            </div>
+            <form id="heroForm" class="quick-form" method="post" action="{% url 'main:home' %}">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="tel" name="phone" placeholder="Телефон" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="hidden" name="message" value="Заявка со страницы услуг: hero форма">
+                <button type="submit" class="form-submit">
+                    <span>Отправить</span>
+                </button>
+            </form>
+            <p class="form-note">Ответим в течение 15 минут</p>
+        </div>
+    </div>
+    <div class="hero-scroll-indicator">
+        <span>SCROLL</span>
+        <div class="scroll-line"></div>
     </div>
 </section>
 

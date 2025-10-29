@@ -2882,6 +2882,7 @@ section {
     opacity: 0.8;
     font-weight: 400;
     text-align: center;
+    color: var(--white);
 }
 
 .footer-links-group {
@@ -2902,6 +2903,7 @@ section {
     margin-bottom: 25px;
     text-transform: uppercase;
     white-space: nowrap;
+    color: var(--white);
 }
 
 .footer-column ul {
@@ -2915,6 +2917,7 @@ section {
     font-size: 14px;
     opacity: 0.8;
     line-height: 1.4;
+    color: var(--white);
 }
 
 .footer-column a {
@@ -2947,6 +2950,7 @@ section {
     opacity: 0.6;
     text-transform: uppercase;
     margin-bottom: 20px;
+    color: var(--white);
 }
 
 .legal-links {
@@ -2983,6 +2987,7 @@ section {
     letter-spacing: 2px;
     opacity: 0.6;
     text-transform: uppercase;
+    color: var(--white);
 }
 
 .social-icons {
@@ -3038,6 +3043,7 @@ section {
     opacity: 0.7;
     margin-bottom: 8px;
     font-family: 'JetBrains Mono', monospace;
+    color: var(--white);
 }
 
 .footer-signature {
@@ -3049,6 +3055,7 @@ section {
     letter-spacing: 3px;
     opacity: 0.5;
     text-transform: uppercase;
+    color: var(--white);
 }
 
 .footer-signature strong {

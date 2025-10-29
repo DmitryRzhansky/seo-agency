@@ -33,7 +33,7 @@
 .services-hero {
     position: relative;
     padding: 120px 0 80px 0;
-    background: var(--white);
+    background: var(--brutal-gray);
 }
 .services-hero::before {
     content: '';
@@ -152,7 +152,7 @@
     flex-direction: column;
     gap: 14px;
     padding: 28px;
-    background: var(--white);
+    background: var(--brutal-gray);
     border: solid var(--border) var(--black);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -168,7 +168,7 @@
     padding: 6px 10px;
     border: solid var(--border) var(--black);
     border-radius: 0;
-    background: var(--white);
+    background: var(--brutal-gray);
 }
 .service-card-title {
     margin: 0;
@@ -205,7 +205,7 @@
 .cta-box-888 {
     position: relative;
     padding: 48px 28px;
-    background: var(--white);
+    background: var(--brutal-gray);
     border: solid var(--border) var(--black);
     border-radius: 0;
     box-shadow: var(--shadow);

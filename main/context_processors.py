@@ -1,6 +1,6 @@
 # main/context_processors.py
 
-from .models import ServiceCategory, City, PortfolioCategory
+from .models import ServiceCategory, City, PortfolioCategory, Service
 from pages.models import SimplePage
 from blog.models import Category as BlogCategory
 
@@ -9,6 +9,8 @@ def services_menu(request):
     
     # Получаем свежие данные из БД без кэширования
     categories = ServiceCategory.objects.all().order_by('order').prefetch_related('services')
+    # Получаем все опубликованные услуги для футера
+    services = Service.objects.filter(is_published=True).select_related('category').order_by('category__order', 'order')
     blog_categories = BlogCategory.objects.filter(is_active=True).order_by('order').prefetch_related('post_set')
     portfolio_categories = PortfolioCategory.objects.filter(is_active=True).order_by('order').prefetch_related('portfolioitem_set')
     header_pages = SimplePage.objects.filter(is_published=True, show_in_header=True).order_by('order')
@@ -27,6 +29,7 @@ def services_menu(request):
 
     return {
         'service_categories_menu': categories,
+        'services_menu': services,  # Добавляем услуги для футера
         'blog_categories_menu': blog_categories,
         'portfolio_categories_menu': portfolio_categories,
         'header_pages': header_pages,

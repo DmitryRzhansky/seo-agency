@@ -258,18 +258,18 @@
 .brutal-content-block.content .brutal-content-text h4,
 .brutal-content-block.content .brutal-content-text h5,
 .brutal-content-block.content .brutal-content-text h6 {
-    margin-top: 10px;
-    margin-bottom: 8px;
-    font-size: 16px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .brutal-content-text h2 {
-    font-size: 24px;
+    font-size: 28px;
     color: var(--accent);
 }
 
 .brutal-content-text h3 {
-    font-size: 20px;
+    font-size: 22px;
     color: var(--black);
 }
 

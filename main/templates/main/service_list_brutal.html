@@ -48,7 +48,7 @@
 
         <div class="services-grid-888">
             {% for category in categories %}
-            <article class="service-card-888" data-tilt>
+            <article class="service-card-888">
                 <h3 class="service-card-title">
                     <a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a>
                 </h3>

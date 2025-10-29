@@ -151,20 +151,18 @@
 }
 
 .brutal-post-content-block.main {
-    background: var(--accent);
-    color: var(--white);
-    border-color: var(--accent);
+    background: var(--white);
+    border-color: var(--black);
     grid-column: span 2;
 }
 
 .brutal-post-content-block.content {
-    background: var(--gray-light);
+    background: var(--white);
     border-color: var(--gray);
     grid-column: span 2;
-    height: 500px; /* Фиксированная высота для скролла */
+    /* Убираем фиксированную высоту и прокрутку, ширину сохраняем за счет отрицательного отступа */
     margin-right: -360px; /* Выдвигаем блок до границы изображения (gap + ширина изображения) */
-    overflow-y: auto; /* Добавляем вертикальный скролл */
-    overflow-x: hidden; /* Скрываем горизонтальный скролл */
+    overflow: visible;
     cursor: default; /* Устанавливаем курсор по умолчанию для всего блока */
 }
 
@@ -183,9 +181,9 @@
 }
 
 .brutal-post-content-block.main .brutal-post-block-number {
-    background: var(--white);
-    color: var(--accent);
-    border-color: var(--white);
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 .brutal-post-content-block h2,
@@ -196,11 +194,12 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--black);
+    text-align: center;
 }
 
 .brutal-post-content-block.main h2,
 .brutal-post-content-block.main h3 {
-    color: var(--white);
+    color: var(--black);
 }
 
 .brutal-post-content-block h2 {
@@ -219,7 +218,7 @@
 }
 
 .brutal-post-content-block.main p {
-    color: var(--white);
+    color: var(--black);
 }
 
 .brutal-post-content-block ul {
@@ -237,7 +236,7 @@
 }
 
 .brutal-post-content-block.main li {
-    color: var(--white);
+    color: var(--black);
 }
 
 .brutal-post-content-block li::before {
@@ -246,11 +245,12 @@
     font-weight: 700;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0.15em;
+    line-height: 1;
 }
 
 .brutal-post-content-block.main li::before {
-    color: var(--white);
+    color: var(--accent);
 }
 
 .brutal-post-text {
@@ -272,6 +272,8 @@
     overflow-wrap: break-word; /* Переносим длинные слова */
     overflow: visible; /* Убираем любые ограничения overflow */
     pointer-events: none; /* Позволяем событиям мыши проходить через текст к родительскому элементу */
+    font-size: 16px;
+    line-height: 1.6;
 }
 
 .brutal-post-text h1,
@@ -286,6 +288,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--black);
+    text-align: center;
 }
 
 .brutal-post-content-block.content .brutal-post-text h1,
@@ -294,9 +297,9 @@
 .brutal-post-content-block.content .brutal-post-text h4,
 .brutal-post-content-block.content .brutal-post-text h5,
 .brutal-post-content-block.content .brutal-post-text h6 {
-    margin-top: 10px;
-    margin-bottom: 8px;
-    font-size: 16px;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .brutal-post-text h2 {
@@ -317,9 +320,9 @@
 }
 
 .brutal-post-content-block.content .brutal-post-text p {
-    margin-bottom: 10px;
-    line-height: 1.4;
-    font-size: 14px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+    font-size: 16px;
     width: 100%; /* Растягиваем параграфы на всю ширину */
     max-width: none; /* Убираем ограничения по ширине */
     word-wrap: break-word; /* Переносим длинные слова */
@@ -357,7 +360,8 @@
     font-weight: 700;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0.15em;
+    line-height: 1;
 }
 
 .brutal-post-text ol {
@@ -374,12 +378,14 @@
     font-weight: 700;
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0.15em;
     min-width: 20px;
+    line-height: 1;
 }
 
-.brutal-post-text strong {
-    color: var(--black);
+.brutal-post-text strong,
+.brutal-post-text b {
+    color: var(--accent);
     font-weight: 700;
 }
 

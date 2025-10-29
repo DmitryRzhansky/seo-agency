@@ -7,7 +7,7 @@
     --gray: #0e0e0e0f;
     --text-gray: #555;
     --accent: #3cc33c;
-    --radius: 16px;
+    --radius: 0;
     --border: 2px;
     --shadow: 0 20px 60px rgba(0,0,0,0.08);
 }
@@ -48,7 +48,7 @@
     gap: 10px;
     padding: 8px 14px;
     border: solid var(--border) var(--black);
-    border-radius: 999px;
+    border-radius: 0;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     letter-spacing: 0.06em;
@@ -56,7 +56,7 @@
 .services-hero-label .dot {
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    border-radius: 0;
     background: var(--accent);
     box-shadow: 0 0 0 3px rgba(60,195,60,0.25);
 }
@@ -91,7 +91,7 @@
     font-size: 14px;
     padding: 6px 10px;
     border: solid var(--border) var(--black);
-    border-radius: 10px;
+    border-radius: 0;
 }
 .section-title-888 .title-text { line-height: 1; }
 .section-description-888 {
@@ -135,7 +135,7 @@
     letter-spacing: .12em;
     padding: 6px 10px;
     border: solid var(--border) var(--black);
-    border-radius: 999px;
+    border-radius: 0;
     background: var(--white);
 }
 .service-card-title {
@@ -161,7 +161,7 @@
     text-decoration: none;
     font-weight: 800;
     border: solid var(--border) var(--black);
-    border-radius: 12px;
+    border-radius: 0;
     transition: transform .2s ease, background .2s ease, color .2s ease;
 }
 .service-card-btn .arrow { transition: transform .2s ease; }
@@ -175,7 +175,7 @@
     padding: 48px 28px;
     background: var(--white);
     border: solid var(--border) var(--black);
-    border-radius: calc(var(--radius) + 2px);
+    border-radius: 0;
     box-shadow: var(--shadow);
     text-align: center;
     overflow: hidden;
@@ -193,7 +193,7 @@
     font-weight: 900;
     font-size: clamp(28px, 4.8vw, 44px);
 }
-.cta-sub-888 { margin: 0 0 22px 0; color: var(--text-gray); }
+.cta-sub-888 { margin: 0 0 22px 0; color: var(--text-gray); text-align: center; }
 .cta-btn-888 {
     display: inline-flex;
     align-items: center;
@@ -204,7 +204,7 @@
     text-decoration: none;
     font-weight: 800;
     border: solid var(--border) var(--black);
-    border-radius: 12px;
+    border-radius: 0;
     box-shadow: 8px 8px 0 var(--accent);
     transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
 }
@@ -214,6 +214,11 @@
 @media (max-width: 768px) {
     .services-hero { padding: 96px 0 56px 0; }
 }
+
+/* Контраст хлебных крошек */
+.breadcrumbs { color: var(--black); }
+.breadcrumbs a { color: var(--black); }
+.breadcrumbs .current { color: var(--black); font-weight: 700; }
 
 .brutal-hero::before {
     content: '';

@@ -33,7 +33,6 @@
     <div class="services-container">
         <div class="section-header-888">
             <h2 class="section-title-888">
-                <span class="title-number">[01]</span>
                 <span class="title-text">Категории услуг</span>
             </h2>
             <p class="section-description-888">Выберите направление — внутри подробности и состав работ</p>
@@ -42,9 +41,6 @@
         <div class="services-grid-888">
             {% for category in categories %}
             <article class="service-card-888" data-tilt>
-                <div class="service-card-head">
-                    <div class="badge">CATEGORY</div>
-                </div>
                 <h3 class="service-card-title">
                     <a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a>
                 </h3>

@@ -70,7 +70,7 @@
                 <div class="brutal-post-content-block">
                     <div class="brutal-post-block-number">03</div>
                     <h3>Время чтения</h3>
-                    <p>Примерно {% widthratio post.content|length|add:500 200 1 %} минут</p>
+                    <p>Примерно {{ post.get_reading_time }} минут</p>
                 </div>
                 
                 <div class="brutal-post-content-block content">

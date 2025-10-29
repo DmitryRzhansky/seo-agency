@@ -977,12 +977,10 @@ def author_detail(request, slug):
     first_post = base_qs.order_by('published_date').first()
     last_post = base_qs.order_by('-published_date').first()
     
-    # Расчет времени чтения как в post_detail_brutal.html
+    # Расчет времени чтения с использованием метода get_reading_time
     total_reading_time = 0
     for post in base_qs:
-        # Используем ту же формулу что и в шаблоне: {% widthratio post.content|length|add:500 200 1 %}
-        content_length = len(post.content)
-        reading_time = max(1, int((content_length + 500) / 200))
+        reading_time = post.get_reading_time()
         total_reading_time += reading_time
     
     reading_time_total_min = total_reading_time

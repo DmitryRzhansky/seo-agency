@@ -77,9 +77,9 @@ class PostAdmin(SEOAdminMixin, SEOPreviewMixin, SEOValidationMixin, CustomHeadSc
             'description': 'Настройки навигационных хлебных крошек'
         }),
         ('📊 Статистика', {
-            'fields': ('views_count',),
+            'fields': ('views_count', 'reading_time_minutes'),
             'classes': ('collapse',),
-            'description': 'Статистика просмотров'
+            'description': 'Статистика просмотров и время чтения'
         }),
     )
     

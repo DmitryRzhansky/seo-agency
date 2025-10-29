@@ -78,6 +78,12 @@ class Post(SEOModel):
     published_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
     views_count = models.PositiveIntegerField(default=0, verbose_name="Просмотры")
+    reading_time_minutes = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        verbose_name="Время чтения (минуты)",
+        help_text="Оставьте пустым для автоматического расчета на основе длины контента"
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.SET_NULL, # Если пользователь удаляется, поле автора остается NULL
@@ -195,6 +201,16 @@ class Post(SEOModel):
     def get_image_alt(self):
         """Возвращает альтернативный текст изображения или заголовок по умолчанию"""
         return self.image_alt or self.title
+    
+    def get_reading_time(self):
+        """Возвращает время чтения в минутах.
+        Если указано вручную - использует его, иначе вычисляет автоматически."""
+        if self.reading_time_minutes is not None:
+            return self.reading_time_minutes
+        # Автоматический расчет: (длина контента + 500) / 200
+        content_length = len(self.content)
+        reading_time = max(1, int((content_length + 500) / 200))
+        return reading_time
     
     def get_related_posts(self, limit=3):
         """Возвращает случайные связанные статьи для блока 'Вам может понравиться'"""

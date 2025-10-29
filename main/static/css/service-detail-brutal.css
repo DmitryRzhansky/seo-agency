@@ -109,9 +109,8 @@
 }
 
 .brutal-content-block.main {
-    background: var(--accent);
-    color: var(--white);
-    border-color: var(--accent);
+    background: var(--white);
+    border-color: var(--black);
     grid-column: span 2;
 }
 
@@ -154,9 +153,9 @@
 }
 
 .brutal-content-block.main .brutal-block-number {
-    background: var(--white);
-    color: var(--accent);
-    border-color: var(--white);
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
 }
 
 .brutal-content-block h2,
@@ -167,11 +166,12 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--black);
+    text-align: center;
 }
 
 .brutal-content-block.main h2,
 .brutal-content-block.main h3 {
-    color: var(--white);
+    color: var(--black);
 }
 
 .brutal-content-block h2 {
@@ -182,10 +182,6 @@
     font-size: 22px;
 }
 
-/* Центрируем заголовок в блоке "Подробная информация" */
-.brutal-content-block.content h3 {
-    text-align: center;
-}
 
 .brutal-content-block p {
     margin-bottom: 20px;
@@ -195,7 +191,7 @@
 }
 
 .brutal-content-block.main p {
-    color: var(--white);
+    color: var(--black);
 }
 
 .brutal-content-block ul {
@@ -213,7 +209,7 @@
 }
 
 .brutal-content-block.main li {
-    color: var(--white);
+    color: var(--black);
 }
 
 .brutal-content-block li::before {
@@ -226,7 +222,7 @@
 }
 
 .brutal-content-block.main li::before {
-    color: var(--white);
+    color: var(--accent);
 }
 
 .brutal-content-text {
@@ -255,6 +251,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--black);
+    text-align: center;
 }
 
 .brutal-content-block.content .brutal-content-text h1,

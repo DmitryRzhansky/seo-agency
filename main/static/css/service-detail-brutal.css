@@ -194,37 +194,6 @@
     color: var(--black);
 }
 
-.brutal-content-block ul {
-    margin-bottom: 20px;
-    padding-left: 0;
-    list-style: none;
-}
-
-.brutal-content-block li {
-    margin-bottom: 12px;
-    position: relative;
-    color: var(--black);
-    font-weight: 400;
-    padding-left: 25px;
-}
-
-.brutal-content-block.main li {
-    color: var(--black);
-}
-
-.brutal-content-block li::before {
-    content: "▶";
-    color: var(--accent);
-    font-weight: 700;
-    position: absolute;
-    left: 0;
-    top: 0.15em;
-    line-height: 1;
-}
-
-.brutal-content-block.main li::before {
-    color: var(--accent);
-}
 
 .brutal-content-text {
     line-height: 1.7;
@@ -292,60 +261,6 @@
     word-wrap: break-word; /* Переносим длинные слова */
 }
 
-.brutal-content-text ul,
-.brutal-content-text ol {
-    margin-bottom: 15px;
-    padding-left: 0;
-    list-style: none;
-}
-
-.brutal-content-block.content .brutal-content-text ul,
-.brutal-content-block.content .brutal-content-text ol {
-    margin-bottom: 10px;
-}
-
-.brutal-content-text li {
-    margin-bottom: 12px;
-    position: relative;
-    color: var(--black);
-    font-weight: 400;
-    padding-left: 25px;
-}
-
-.brutal-content-block.content .brutal-content-text li {
-    margin-bottom: 8px;
-    padding-left: 20px;
-    font-size: 14px;
-}
-
-.brutal-content-text ul li::before {
-    content: "▶";
-    color: var(--accent);
-    font-weight: 700;
-    position: absolute;
-    left: 0;
-    top: 0.15em;
-    line-height: 1;
-}
-
-.brutal-content-text ol {
-    counter-reset: brutal-counter;
-}
-
-.brutal-content-text ol li {
-    counter-increment: brutal-counter;
-}
-
-.brutal-content-text ol li::before {
-    content: counter(brutal-counter) ".";
-    color: var(--accent);
-    font-weight: 700;
-    position: absolute;
-    left: 0;
-    top: 0.15em;
-    min-width: 20px;
-    line-height: 1;
-}
 
 .brutal-content-text strong,
 .brutal-content-text b {

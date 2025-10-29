@@ -215,11 +215,6 @@
     .services-hero { padding: 96px 0 56px 0; }
 }
 
-/* Контраст хлебных крошек */
-.breadcrumbs { color: var(--black); }
-.breadcrumbs a { color: var(--black); }
-.breadcrumbs .current { color: var(--black); font-weight: 700; }
-
 .brutal-hero::before {
     content: '';
     position: absolute;

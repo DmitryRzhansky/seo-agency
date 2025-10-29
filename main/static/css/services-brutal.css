@@ -29,6 +29,34 @@
     }
 }
 
+/* Переопределение hero для страницы услуг */
+.services-page-hero {
+    padding-top: 60px !important;
+    min-height: auto !important;
+}
+
+.services-page-hero .hero-title {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    align-items: baseline !important;
+}
+
+.services-page-hero .hero-title .word {
+    display: inline-block !important;
+}
+
+@media (max-width: 768px) {
+    .services-page-hero {
+        padding-top: 40px !important;
+    }
+    
+    .services-page-hero .hero-title {
+        font-size: clamp(32px, 8vw, 48px) !important;
+    }
+}
+
 /* HERO */
 .services-hero {
     position: relative;

@@ -193,14 +193,15 @@
                     <div class="footer-column">
                         <h4>Услуги</h4>
                         <ul>
-                            {% for category in service_categories_menu %}
+                            {% for category in service_categories_menu|slice:":3" %}
                             <li><strong><a href="{% url 'services:service_category' category.slug %}">{{ category.title }}</a></strong></li>
-                                {% for service in category.services.all|slice:":3" %}
+                                {% for service in category.services.all|slice:":2" %}
                                     {% if service.is_published %}
                                     <li style="margin-left: 15px;"><a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}">{{ service.title }}</a></li>
                                     {% endif %}
                                 {% endfor %}
                             {% endfor %}
+                            <li style="margin-top: 10px;"><a href="{% url 'services:service_list' %}"><strong>Все услуги →</strong></a></li>
                         </ul>
                     </div>
                     <div class="footer-column">

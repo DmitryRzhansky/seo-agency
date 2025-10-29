@@ -3,6 +3,14 @@
 
 {% block title %}Услуги{% endblock title %}
 
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="container">
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">Услуги</span>
+    </div>
+    </div>
+{% endblock breadcrumbs %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/services-brutal.css' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,7 +70,7 @@
     <div class="services-container">
         <div class="cta-box-888">
             <h2 class="cta-title-888">Готовы обсудить проект?</h2>
-            <p class="cta-sub-888">Оставьте заявку — вернёмся с понятным планом работ и сроками</p>
+            <p class="cta-sub-888"><center>Оставьте заявку — вернёмся с понятным планом работ и сроками</center></p>
             <a href="{% url 'main:contacts' %}" class="cta-btn-888">
                 <span>Связаться с нами</span>
                 <span class="arrow">→</span>

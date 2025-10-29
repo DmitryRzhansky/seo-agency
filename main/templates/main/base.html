@@ -197,7 +197,7 @@
                             <li><strong><a href="{% url 'services:service_category' category.slug %}">{{ category.title }}</a></strong></li>
                                 {% for service in category.services.all|slice:":3" %}
                                     {% if service.is_published %}
-                                    <li style="margin-left: 15px;"><a href="{% url 'services:service_detail' category.slug=service.category.slug service.slug=service.slug %}">{{ service.title }}</a></li>
+                                    <li style="margin-left: 15px;"><a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}">{{ service.title }}</a></li>
                                     {% endif %}
                                 {% endfor %}
                             {% endfor %}

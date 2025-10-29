@@ -12,79 +12,65 @@
 
 {% block content %}
 
-<!-- Hero секция - современная -->
-<section class="brutal-hero">
-    <div class="brutal-container">
-        <div class="brutal-hero-content">
-            <h1 class="brutal-hero-title">Что мы делаем</h1>
-            <p class="brutal-hero-subtitle">
-                Комплексные решения для роста вашего бизнеса. Строим ваш успех 
-                <span class="brick-text">кирпичик</span>
-                <span class="brick-text">за</span>
-                <span class="brick-text">кирпичиком.</span>
-            </p>
+<!-- Hero (в стиле 888) -->
+<section class="services-hero">
+    <div class="services-container">
+        <div class="services-hero-inner">
+            <div class="services-hero-label">
+                <span class="dot"></span>
+                <span>Услуги</span>
+            </div>
+            <h1 class="services-hero-title">
+                <span class="word">Что мы делаем</span>
+            </h1>
+            <p class="services-hero-subtitle">Честная работа. Измеримые результаты. Никакой воды — только факты.</p>
         </div>
     </div>
 </section>
 
-<br><br>
-
-<!-- Чем мы отличаемся -->
-<section class="brutal-differences">
-    <div class="brutal-container">
-        <h2 class="brutal-services-title">Чем мы отличаемся</h2>
-        <div class="brutal-minimal-grid">
-            <div class="brutal-minimal-card main">
-                <h3 class="brutal-minimal-title">Находим, где у вас косяки</h3>
-                <p class="brutal-minimal-description">Технический аудит, семантика, анализ конкурентов. За 48 часов.</p>
-            </div>
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">Чиним всё, что сломано</h3>
-                <p class="brutal-minimal-description">Скорость, индексация, структура, мета-теги, разметка. Без воды.</p>
-            </div>
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">Пишем нормальные тексты</h3>
-                <p class="brutal-minimal-description">Не шлак с ключами через слово, а полезный контент для людей.</p>
-            </div>
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">Получаем ссылки</h3>
-                <p class="brutal-minimal-description">Белые методы: PR, гостевые посты. Никаких бирж и помоек.</p>
-            </div>
-            <div class="brutal-minimal-card">
-                <h3 class="brutal-minimal-title">Показываем результат</h3>
-                <p class="brutal-minimal-description">Отчёты с реальными цифрами каждый месяц.</p>
-            </div>
+<!-- Категории (кликабельные) -->
+<section class="services-section">
+    <div class="services-container">
+        <div class="section-header-888">
+            <h2 class="section-title-888">
+                <span class="title-number">[01]</span>
+                <span class="title-text">Категории услуг</span>
+            </h2>
+            <p class="section-description-888">Выберите направление — внутри подробности и состав работ</p>
         </div>
-    </div>
-</section>
 
-
-
-<!-- Полный список услуг -->
-<!-- Все услуги - минималистичные блоки -->
-<section class="brutal-chaos-bricks">
-    <div class="brutal-container">
-        <h2 class="brutal-services-title">Все услуги</h2>
-        <div class="brutal-services-grid">
+        <div class="services-grid-888">
             {% for category in categories %}
-            <div class="brutal-service-card">
-                <h3 class="brutal-service-card-title">{{ category.title }}</h3>
-                <p class="brutal-service-card-description">{{ category.description|truncatewords:15 }}</p>
-                <a href="{% url 'services:service_category' slug=category.slug %}" class="brutal-service-card-link">Подробнее →</a>
-            </div>
+            <article class="service-card-888" data-tilt>
+                <div class="service-card-head">
+                    <div class="badge">CATEGORY</div>
+                </div>
+                <h3 class="service-card-title">
+                    <a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a>
+                </h3>
+                <p class="service-card-desc">{{ category.description|default:""|truncatewords:18 }}</p>
+                <div class="service-card-footer">
+                    <a class="service-card-btn" href="{% url 'services:service_category' slug=category.slug %}">
+                        <span>Подробнее</span>
+                        <span class="arrow">→</span>
+                    </a>
+                </div>
+            </article>
             {% endfor %}
         </div>
     </div>
 </section>
 
-
-<!-- CTA секция -->
-<section class="brutal-cta">
-    <div class="brutal-container">
-        <div class="brutal-cta-content">
-            <h2 class="brutal-cta-title">Готовы начать?</h2>
-            <p class="brutal-cta-description">Получите бесплатную консультацию и узнайте, как мы можем помочь вашему бизнесу расти.</p>
-            <a href="{% url 'main:contacts' %}" class="brutal-cta-button">Получить консультацию</a>
+<!-- CTA -->
+<section class="services-cta-888">
+    <div class="services-container">
+        <div class="cta-box-888">
+            <h2 class="cta-title-888">Готовы обсудить проект?</h2>
+            <p class="cta-sub-888">Оставьте заявку — вернёмся с понятным планом работ и сроками</p>
+            <a href="{% url 'main:contacts' %}" class="cta-btn-888">
+                <span>Связаться с нами</span>
+                <span class="arrow">→</span>
+            </a>
         </div>
     </div>
 </section>

@@ -1,37 +1,218 @@
-/* Современный дизайн для страницы услуг */
+/* Стиль страницы услуг в духе 888 */
 
-/* Основные переменные */
+/* Переменные темы (вздох 888) */
 :root {
-    --brutal-black: #000000;
-    --brutal-white: #ffffff;
-    --brutal-gray: #f5f5f5;
-    --brutal-green: #00ff00;
-    --brutal-dark-gray: #333333;
-    --brutal-border: 4px solid #000000;
-    --brutal-shadow: 8px 8px 0px #000000;
+    --black: #000;
+    --white: #fff;
+    --gray: #0e0e0e0f;
+    --text-gray: #555;
+    --accent: #3cc33c;
+    --radius: 16px;
+    --border: 2px;
+    --shadow: 0 20px 60px rgba(0,0,0,0.08);
 }
 
-/* Сброс стилей */
 * {
     box-sizing: border-box;
-    font-family: 'Courier New', monospace;
 }
 
-/* Основной контейнер */
-.brutal-container {
-    max-width: 1400px;
+/* Контейнер */
+.services-container {
+    max-width: 1220px;
     margin: 0 auto;
-    padding: 0 20px;
-    background: var(--brutal-white);
+    padding: 0 24px;
 }
 
-/* Hero секция - брутальная */
-.brutal-hero {
-    background: var(--brutal-white);
-    padding: 80px 0;
-    border-bottom: var(--brutal-border);
+/* HERO */
+.services-hero {
     position: relative;
+    padding: 120px 0 80px 0;
+    background: var(--white);
+}
+.services-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.15), transparent 60%);
+    pointer-events: none;
+}
+.services-hero-inner {
+    position: relative;
+}
+.services-hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border: solid var(--border) var(--black);
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+}
+.services-hero-label .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(60,195,60,0.25);
+}
+.services-hero-title {
+    margin: 20px 0 14px 0;
+    font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+}
+.services-hero-title .word { display: inline-block; }
+.services-hero-subtitle {
+    max-width: 760px;
+    font-size: clamp(16px, 2.2vw, 22px);
+    color: var(--text-gray);
+}
+
+/* Заголовки секций (888) */
+.section-header-888 { margin: 60px 0 28px 0; }
+.section-title-888 {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: 'Space Grotesk', system-ui;
+    font-weight: 900;
+    font-size: clamp(28px, 4.6vw, 48px);
+    letter-spacing: -0.01em;
+}
+.section-title-888 .title-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    padding: 6px 10px;
+    border: solid var(--border) var(--black);
+    border-radius: 10px;
+}
+.section-title-888 .title-text { line-height: 1; }
+.section-description-888 {
+    margin-top: 10px;
+    color: var(--text-gray);
+    font-size: 16px;
+}
+
+/* GRID КАТЕГОРИЙ */
+.services-grid-888 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+@media (max-width: 1024px) {
+    .services-grid-888 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 680px) {
+    .services-grid-888 { grid-template-columns: 1fr; }
+}
+
+.service-card-888 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px;
+    background: var(--white);
+    border: solid var(--border) var(--black);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform .25s ease, box-shadow .25s ease;
+    will-change: transform;
+}
+.service-card-888:hover { transform: translateY(-4px); }
+
+.service-card-head { display: flex; justify-content: space-between; align-items: center; }
+.service-card-888 .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    padding: 6px 10px;
+    border: solid var(--border) var(--black);
+    border-radius: 999px;
+    background: var(--white);
+}
+.service-card-title {
+    margin: 0;
+    font-family: 'Space Grotesk', system-ui;
+    font-weight: 900;
+    font-size: 28px;
+    line-height: 1.1;
+}
+.service-card-title a { color: inherit; text-decoration: none; }
+.service-card-title a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+
+.service-card-desc { color: var(--text-gray); font-size: 15px; line-height: 1.5; }
+
+.service-card-footer { margin-top: auto; display: flex; justify-content: flex-start; }
+.service-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 800;
+    border: solid var(--border) var(--black);
+    border-radius: 12px;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+.service-card-btn .arrow { transition: transform .2s ease; }
+.service-card-btn:hover { background: var(--accent); color: var(--black); transform: translateY(-2px); }
+.service-card-btn:hover .arrow { transform: translateX(4px); }
+
+/* CTA */
+.services-cta-888 { padding: 90px 0; }
+.cta-box-888 {
+    position: relative;
+    padding: 48px 28px;
+    background: var(--white);
+    border: solid var(--border) var(--black);
+    border-radius: calc(var(--radius) + 2px);
+    box-shadow: var(--shadow);
+    text-align: center;
     overflow: hidden;
+}
+.cta-box-888::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px 200px at 50% -20%, rgba(60,195,60,0.18), transparent 60%);
+    pointer-events: none;
+}
+.cta-title-888 {
+    margin: 0 0 8px 0;
+    font-family: 'Space Grotesk', system-ui;
+    font-weight: 900;
+    font-size: clamp(28px, 4.8vw, 44px);
+}
+.cta-sub-888 { margin: 0 0 22px 0; color: var(--text-gray); }
+.cta-btn-888 {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: var(--black);
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 800;
+    border: solid var(--border) var(--black);
+    border-radius: 12px;
+    box-shadow: 8px 8px 0 var(--accent);
+    transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.cta-btn-888:hover { background: var(--accent); color: var(--black); transform: translateY(-2px); box-shadow: 8px 8px 0 var(--black); }
+
+/* Адаптивность HERO */
+@media (max-width: 768px) {
+    .services-hero { padding: 96px 0 56px 0; }
 }
 
 .brutal-hero::before {

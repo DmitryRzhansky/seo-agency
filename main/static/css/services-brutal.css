@@ -215,6 +215,11 @@
     .services-hero { padding: 96px 0 56px 0; }
 }
 
+/* Хлебные крошки (страница услуг): ссылки зелёные, разделитель и текущая — тёмно-серые */
+.services-breadcrumbs a { color: var(--accent); font-weight: 700; }
+.services-breadcrumbs .separator { color: #808080; }
+.services-breadcrumbs .current { color: #808080; font-weight: 600; }
+
 .brutal-hero::before {
     content: '';
     position: absolute;

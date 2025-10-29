@@ -4,6 +4,7 @@ from django.db.models import Count, F, Q, Sum
 from django.db.models.functions import Length
 from django.contrib import messages
 from django.urls import reverse
+import re
 # from django.core.mail import send_mail # Раскомментировать для отправки реальной почты
 
 # Импорт моделей и формы
@@ -978,9 +979,23 @@ def author_detail(request, slug):
     last_post = base_qs.order_by('-published_date').first()
     
     # Расчет времени чтения с использованием метода get_reading_time
+    # Для суммирования используем числовое значение (автоподсчет или извлечение из текста)
     total_reading_time = 0
     for post in base_qs:
-        reading_time = post.get_reading_time()
+        # Если указано вручную, пытаемся извлечь число, иначе используем автоподсчет
+        if post.reading_time_minutes:
+            # Пытаемся найти число в тексте (например, "5 минут" или "Ну около 8 минут")
+            numbers = re.findall(r'\d+', post.reading_time_minutes)
+            if numbers:
+                reading_time = int(numbers[0])
+            else:
+                # Если не нашли число, используем автоподсчет
+                content_length = len(post.content)
+                reading_time = max(1, int((content_length + 500) / 200))
+        else:
+            # Автоподсчет
+            content_length = len(post.content)
+            reading_time = max(1, int((content_length + 500) / 200))
         total_reading_time += reading_time
     
     reading_time_total_min = total_reading_time

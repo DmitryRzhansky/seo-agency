@@ -20,11 +20,11 @@
 {% block content %}
 
 <!-- Hero секция портфолио -->
-<section class="brutal-portfolio-hero">
+<section class="portfolio-hero">
     <div class="container">
-        <div class="brutal-portfolio-hero-content">
-            <h1 class="brutal-portfolio-hero-title">Портфолио</h1>
-            <p class="brutal-portfolio-hero-subtitle">
+        <div class="portfolio-hero-content">
+            <h1 class="portfolio-hero-title">Портфолио</h1>
+            <p class="portfolio-hero-subtitle">
                 Примеры успешных проектов, которые мы реализовали для наших клиентов. 
                 Каждый проект - это результат профессионального подхода и глубокого понимания задач бизнеса.
             </p>
@@ -33,17 +33,17 @@
 </section>
 
 <!-- Поиск по портфолио -->
-<section class="brutal-portfolio-search">
+<section class="portfolio-search">
     <div class="container">
-        <form method="get" action="{% url 'main:portfolio_list' %}" class="brutal-portfolio-search-form">
+        <form method="get" action="{% url 'main:portfolio_list' %}" class="portfolio-search-form">
             <input 
                 type="text" 
                 name="q" 
                 value="{{ search_query|default:'' }}" 
                 placeholder="Поиск по проектам..." 
-                class="brutal-portfolio-search-input"
+                class="portfolio-search-input"
             >
-            <button type="submit" class="brutal-portfolio-search-button">
+            <button type="submit" class="portfolio-search-button">
                 Найти
             </button>
         </form>
@@ -52,18 +52,18 @@
 
 <!-- Фильтры по типу проекта -->
 {% if available_types %}
-<section class="brutal-portfolio-filters">
+<section class="portfolio-filters">
     <div class="container">
-        <h2 class="brutal-portfolio-filters-title">Фильтр по типу проекта</h2>
-        <div class="brutal-portfolio-filters-grid">
-            <div class="brutal-portfolio-filter-card {% if not current_type %}active{% endif %}">
-                <a href="{% url 'main:portfolio_list' %}" class="brutal-portfolio-filter-link">
+        <h2 class="portfolio-filters-title">Фильтр по типу проекта</h2>
+        <div class="portfolio-filters-grid">
+            <div class="portfolio-filter-card {% if not current_type %}active{% endif %}">
+                <a href="{% url 'main:portfolio_list' %}" class="portfolio-filter-link">
                     Все проекты
                 </a>
             </div>
             {% for type_value, type_label in available_types %}
-            <div class="brutal-portfolio-filter-card {% if current_type == type_value %}active{% endif %}">
-                <a href="{% url 'main:portfolio_list' %}?type={{ type_value }}" class="brutal-portfolio-filter-link">
+            <div class="portfolio-filter-card {% if current_type == type_value %}active{% endif %}">
+                <a href="{% url 'main:portfolio_list' %}?type={{ type_value }}" class="portfolio-filter-link">
                     {{ type_label }}
                 </a>
             </div>
@@ -75,33 +75,33 @@
 
 <!-- Рекомендуемые проекты -->
 {% if featured_page_obj %}
-<section class="brutal-portfolio-featured">
+<section class="portfolio-featured">
     <div class="container">
-        <h2 class="brutal-portfolio-featured-title">Рекомендуемые проекты</h2>
-        <div class="brutal-portfolio-featured-grid">
+        <h2 class="portfolio-featured-title">Рекомендуемые проекты</h2>
+        <div class="portfolio-featured-grid">
             {% for project in featured_page_obj %}
-            <div class="brutal-portfolio-featured-card">
+            <div class="portfolio-featured-card">
                 {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" class="brutal-portfolio-featured-image" alt="{{ project.get_main_image_alt }}">
+                <img src="{{ project.main_image.url }}" class="portfolio-featured-image" alt="{{ project.get_main_image_alt }}">
                 {% else %}
-                <div class="brutal-portfolio-featured-placeholder">
+                <div class="portfolio-featured-placeholder">
                     <i class="fas fa-briefcase"></i>
                 </div>
                 {% endif %}
                 
-                <div class="brutal-portfolio-featured-content">
-                    <div class="brutal-portfolio-featured-type">{{ project.get_project_type_display_ru }}</div>
-                    <h3 class="brutal-portfolio-featured-title-card">{{ project.title }}</h3>
-                    <p class="brutal-portfolio-featured-description">
+                <div class="portfolio-featured-content">
+                    <div class="portfolio-featured-type">{{ project.get_project_type_display_ru }}</div>
+                    <h3 class="portfolio-featured-title-card">{{ project.title }}</h3>
+                    <p class="portfolio-featured-description">
                         {{ project.short_description|truncatewords:20 }}
                     </p>
-                    <div class="brutal-portfolio-featured-meta">
+                    <div class="portfolio-featured-meta">
                         {% if project.client_name %}
-                        <span class="brutal-portfolio-featured-client">{{ project.client_name }}</span>
+                        <span class="portfolio-featured-client">{{ project.client_name }}</span>
                         {% endif %}
-                        <span class="brutal-portfolio-featured-date">{{ project.created_at|date:"d.m.Y" }}</span>
+                        <span class="portfolio-featured-date">{{ project.created_at|date:"d.m.Y" }}</span>
                     </div>
-                    <a href="{{ project.get_absolute_url }}" class="brutal-portfolio-featured-link">
+                    <a href="{{ project.get_absolute_url }}" class="portfolio-featured-link">
                         Смотреть проект
                     </a>
                 </div>
@@ -111,7 +111,7 @@
         
         <!-- Пагинация для рекомендуемых -->
         {% if is_featured_paginated %}
-        <div class="brutal-portfolio-pagination">
+        <div class="portfolio-pagination">
             {% if featured_page_obj.has_previous %}
                 <a href="?featured_page=1">Первая</a>
                 <a href="?featured_page={{ featured_page_obj.previous_page_number }}">Предыдущая</a>
@@ -132,9 +132,9 @@
 {% endif %}
 
 <!-- Все проекты -->
-<section class="brutal-portfolio-projects">
+<section class="portfolio-projects">
     <div class="container">
-        <h2 class="brutal-portfolio-projects-title">
+        <h2 class="portfolio-projects-title">
             {% if current_type %}
                 {{ current_type|title }} проекты
             {% elif search_query %}
@@ -145,30 +145,30 @@
         </h2>
         
         {% if page_obj %}
-        <div class="brutal-portfolio-projects-grid">
+        <div class="portfolio-projects-grid">
             {% for project in page_obj %}
-            <div class="brutal-portfolio-card">
+            <div class="portfolio-card">
                 {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" class="brutal-portfolio-card-image" alt="{{ project.get_main_image_alt }}">
+                <img src="{{ project.main_image.url }}" class="portfolio-card-image" alt="{{ project.get_main_image_alt }}">
                 {% else %}
-                <div class="brutal-portfolio-card-placeholder">
+                <div class="portfolio-card-placeholder">
                     <i class="fas fa-briefcase"></i>
                 </div>
                 {% endif %}
                 
-                <div class="brutal-portfolio-card-content">
-                    <div class="brutal-portfolio-card-type">{{ project.get_project_type_display_ru }}</div>
-                    <h3 class="brutal-portfolio-card-title">{{ project.title }}</h3>
-                    <p class="brutal-portfolio-card-description">
+                <div class="portfolio-card-content">
+                    <div class="portfolio-card-type">{{ project.get_project_type_display_ru }}</div>
+                    <h3 class="portfolio-card-title">{{ project.title }}</h3>
+                    <p class="portfolio-card-description">
                         {{ project.short_description|truncatewords:20 }}
                     </p>
-                    <div class="brutal-portfolio-card-meta">
+                    <div class="portfolio-card-meta">
                         {% if project.client_name %}
-                        <span class="brutal-portfolio-card-client">{{ project.client_name }}</span>
+                        <span class="portfolio-card-client">{{ project.client_name }}</span>
                         {% endif %}
-                        <span class="brutal-portfolio-card-date">{{ project.created_at|date:"d.m.Y" }}</span>
+                        <span class="portfolio-card-date">{{ project.created_at|date:"d.m.Y" }}</span>
                     </div>
-                    <a href="{{ project.get_absolute_url }}" class="brutal-portfolio-card-link">
+                    <a href="{{ project.get_absolute_url }}" class="portfolio-card-link">
                         Смотреть проект
                     </a>
                 </div>
@@ -177,7 +177,7 @@
         </div>
         
         {% else %}
-        <div class="brutal-portfolio-empty">
+        <div class="portfolio-empty">
             <i class="fas fa-search"></i>
             <h3>Проекты не найдены</h3>
             <p>

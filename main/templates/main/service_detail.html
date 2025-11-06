@@ -31,28 +31,28 @@
 {% block content %}
 
 <!-- Hero секция детальной страницы -->
-<section class="brutal-service-detail-hero">
+<section class="service-detail-hero">
     <div class="container">
-        <div class="brutal-service-detail-hero-content">
-            <h1 class="brutal-service-detail-title">{{ service.title }}</h1>
+        <div class="service-detail-hero-content">
+            <h1 class="service-detail-title">{{ service.title }}</h1>
         </div>
     </div>
 </section>
 
 <!-- Основной контент -->
-<section class="brutal-service-detail-content">
+<section class="service-detail-content">
     <div class="container">
-        <div class="brutal-service-detail-wrapper">
+        <div class="service-detail-wrapper">
             <!-- Блоки контента -->
-            <div class="brutal-content-blocks">
-                <div class="brutal-content-block main">
-                    <div class="brutal-block-number">01</div>
+            <div class="content-blocks">
+                <div class="content-block main">
+                    <div class="block-number">01</div>
                     <h2>Описание услуги</h2>
                     <p>{{ service.short_description }}</p>
                 </div>
                 
-                <div class="brutal-content-block">
-                    <div class="brutal-block-number">02</div>
+                <div class="content-block">
+                    <div class="block-number">02</div>
                     <h3>Что включает услуга</h3>
                     <ul>
                         <li>Комплексный анализ вашего проекта</li>
@@ -64,16 +64,16 @@
                     </ul>
                 </div>
                 
-                <div class="brutal-content-block">
-                    <div class="brutal-block-number">03</div>
+                <div class="content-block">
+                    <div class="block-number">03</div>
                     <h3>Сроки выполнения</h3>
                     <p>Первые результаты видны уже через 2-3 месяца, полное продвижение занимает 6-12 месяцев в зависимости от сложности проекта. Мы работаем поэтапно и предоставляем отчеты о прогрессе.</p>
                 </div>
                 
-                <div class="brutal-content-block content">
-                    <div class="brutal-block-number">04</div>
+                <div class="content-block content">
+                    <div class="block-number">04</div>
                     <h3>Подробная информация</h3>
-                    <div class="brutal-content-text brutal-service-scrollable">
+                    <div class="content-text service-scrollable">
                         {{ service.content|safe }}
                     </div>
                 </div>
@@ -81,16 +81,16 @@
             
             <!-- Изображение справа -->
             {% if service.image %}
-            <div class="brutal-service-image-container">
+            <div class="service-image-container">
                 <img 
                     src="{{ service.image.url }}" 
-                    class="brutal-service-image" 
+                    class="service-image" 
                     alt="{{ service.get_image_alt }}"
                 >
-                <div class="brutal-service-image-overlay">
+                <div class="service-image-overlay">
                     {{ service.category.title }}
                 </div>
-                <div class="brutal-service-image-decoration"></div>
+                <div class="service-image-decoration"></div>
             </div>
             {% endif %}
         </div>
@@ -98,21 +98,21 @@
 </section>
 
 <!-- Блок поделиться -->
-<section class="brutal-share-section">
+<section class="share-section">
     <div class="container">
-        <div class="brutal-share-block">
+        <div class="share-block">
             <button class="brutal-copy-btn" data-text="{{ service.title }} - {{ service.short_description }} | Isakov Agency - {{ request.build_absolute_uri }}">
                 <i class="fas fa-copy"></i>
                 Скопировать текст
             </button>
             
-            <div class="brutal-social-share">
-                <span class="brutal-social-label">Поделиться:</span>
-                <div class="brutal-social-links">
-                    <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}">
+            <div class="social-share">
+                <span class="social-label">Поделиться:</span>
+                <div class="social-links">
+                    <a href="#" class="social-link vk" data-url="{{ request.build_absolute_uri }}">
                         <i class="fab fa-vk"></i>
                     </a>
-                    <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}">
+                    <a href="#" class="social-link telegram" data-url="{{ request.build_absolute_uri }}">
                         <i class="fab fa-telegram"></i>
                     </a>
                 </div>
@@ -122,12 +122,12 @@
 </section>
             
 <!-- CTA блок -->
-<section class="brutal-service-cta">
+<section class="service-cta">
     <div class="container">
-        <div class="brutal-service-cta-content">
-            <h3 class="brutal-service-cta-title">Готовы обсудить вашу задачу?</h3>
-            <p class="brutal-service-cta-text">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
-            <a href="{% url 'main:home' %}#contact" class="brutal-service-cta-btn">
+        <div class="service-cta-content">
+            <h3 class="service-cta-title">Готовы обсудить вашу задачу?</h3>
+            <p class="service-cta-text">Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения для вашей компании.</p>
+            <a href="{% url 'main:home' %}#contact" class="service-cta-btn">
                 Получить консультацию
             </a>
         </div>
@@ -135,9 +135,9 @@
 </section>
 
 <!-- Навигация -->
-<section class="brutal-service-navigation">
+<section class="service-navigation">
     <div class="container">
-        <a href="{% url 'services:service_category' slug=service.category.slug %}" class="brutal-service-nav-link">
+        <a href="{% url 'services:service_category' slug=service.category.slug %}" class="service-nav-link">
             ← Вернуться в раздел "{{ service.category.title }}"
         </a>
     </div>
@@ -145,25 +145,25 @@
 
 <!-- Блок "Еще услуги" -->
 {% if related_services %}
-<section class="brutal-related-services">
+<section class="related-services">
     <div class="container">
-        <h2 class="brutal-related-services-title">Еще услуги</h2>
-        <div class="brutal-related-grid">
+        <h2 class="related-services-title">Еще услуги</h2>
+        <div class="related-grid">
             {% for related_service in related_services %}
-            <div class="brutal-related-card">
+            <div class="related-card">
                 {% if related_service.image %}
-                <img src="{{ related_service.image.url }}" class="brutal-related-image" alt="{{ related_service.get_image_alt }}">
+                <img src="{{ related_service.image.url }}" class="related-image" alt="{{ related_service.get_image_alt }}">
                 {% endif %}
-                <div class="brutal-related-category">{{ related_service.category.title }}</div>
-                <h3 class="brutal-related-title">
+                <div class="related-category">{{ related_service.category.title }}</div>
+                <h3 class="related-title">
                     <a href="{{ related_service.get_absolute_url }}" style="color: inherit; text-decoration: none;">
                         {{ related_service.title }}
                     </a>
                 </h3>
-                <p class="brutal-related-description">
+                <p class="related-description">
                     {{ related_service.short_description|truncatewords:25 }}
                 </p>
-                <a href="{{ related_service.get_absolute_url }}" class="brutal-related-link">
+                <a href="{{ related_service.get_absolute_url }}" class="related-link">
                     Подробнее
                 </a>
             </div>

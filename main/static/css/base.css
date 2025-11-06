@@ -1,0 +1,340 @@
+/* ============================================
+   БАЗОВЫЕ СТИЛИ И ПЕРЕМЕННЫЕ
+   Эталон: главная страница (style.css)
+   ============================================ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (ПЕРЕМЕННЫЕ)
+   ============================================ */
+:root {
+    /* Цветовая палитра */
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray: #808080;
+    --gray-light: #D3D3D3;
+    --gray-dark: #2A2A2A;
+    --accent: #3cc33c;
+    --accent-hover: #33aa33;
+    --accent-dark: #2d9a2d;
+    --error: #FF0000;
+    --success: #3cc33c;
+    
+    /* Золотое сечение (φ = 1.618) */
+    --golden-ratio: 1.618;
+    --inverse-golden: 0.618;
+    
+    /* Модульная сетка (базовая линия 8px) */
+    --baseline: 8px;
+    --spacing-xs: calc(var(--baseline) * 1);   /* 8px */
+    --spacing-sm: calc(var(--baseline) * 2);   /* 16px */
+    --spacing-md: calc(var(--baseline) * 3);   /* 24px */
+    --spacing-lg: calc(var(--baseline) * 4);   /* 32px */
+    --spacing-xl: calc(var(--baseline) * 6);   /* 48px */
+    --spacing-2xl: calc(var(--baseline) * 8);  /* 64px */
+    --spacing-3xl: calc(var(--baseline) * 12); /* 96px */
+    
+    /* Модульная шкала на основе золотого сечения */
+    --scale-xs: 0.618rem;   /* ~10px */
+    --scale-sm: 1rem;       /* 16px (base) */
+    --scale-md: 1.618rem;   /* ~26px */
+    --scale-lg: 2.618rem;   /* ~42px */
+    --scale-xl: 4.236rem;   /* ~68px */
+    --scale-2xl: 6.854rem;  /* ~110px */
+    
+    /* Границы */
+    --border-width: 3px;
+    --border: var(--border-width) solid var(--black);
+    --border-white: var(--border-width) solid var(--white);
+    
+    /* Профессиональные easing functions */
+    --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+    
+    /* Переходы (правильные по Лебедеву) */
+    --transition-fast: 150ms var(--ease-out-quad);
+    --transition-base: 250ms var(--ease-out-cubic);
+    --transition-slow: 350ms var(--ease-in-out-cubic);
+    --transition: var(--transition-base);
+    
+    /* Типографика */
+    --font-main: 'Space Grotesk', 'Arial', 'Helvetica', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --line-height-tight: 1.1;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.7;
+    
+    /* Контроль висячих строк */
+    --min-widow-lines: 2;
+    --min-orphan-lines: 2;
+    
+    /* Система Z-Index (по Лебедеву) */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+    --z-notification: 800;
+    
+    /* Тени (subtle и функциональные) */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   БАЗОВЫЙ RESET
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--white);
+    color: var(--black);
+    line-height: var(--line-height-normal);
+    overflow-x: hidden;
+    font-size: 16px;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+    
+    /* Профессиональная типографика */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* ============================================
+   ТИПОГРАФИКА
+   ============================================ */
+
+/* Оптический кернинг для заголовков */
+h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1;
+    line-height: var(--line-height-tight);
+}
+
+/* Правильные переносы и контроль висячих строк */
+p {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    
+    /* Контроль widow & orphan (по Лебедеву) */
+    widows: 2;
+    orphans: 2;
+    
+    /* Максимальная ширина строки для читабельности (60-75 символов) */
+    max-width: 75ch;
+}
+
+/* Табулярные цифры (выравнивание в таблицах и списках) */
+.metric-value,
+.price-value,
+.result-value,
+.case-item,
+.achievement-number {
+    font-feature-settings: "tnum" 1, "kern" 1;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Правильные кавычки-ёлочки */
+q::before {
+    content: "«";
+}
+
+q::after {
+    content: "»";
+}
+
+/* Висячая пунктуация */
+p {
+    hanging-punctuation: first last;
+}
+
+/* Оптические размеры шрифтов (если поддерживается) */
+@supports (font-optical-sizing: auto) {
+    body {
+        font-optical-sizing: auto;
+    }
+}
+
+/* ============================================
+   ИЗОБРАЖЕНИЯ И МЕДИА
+   ============================================ */
+img,
+video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ============================================
+   КОНТЕЙНЕР
+   ============================================ */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 50px;
+    width: 100%;
+}
+
+@media (max-width: 1400px) {
+    .container {
+        padding: 0 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY (A11Y)
+   ============================================ */
+
+/* Минимальные размеры touch targets (по WCAG 2.5.5) */
+a, button, input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Правильный контраст (WCAG AAA) */
+.text-on-white {
+    color: var(--black); /* Контраст 21:1 */
+}
+
+.text-on-black {
+    color: var(--white); /* Контраст 21:1 */
+}
+
+.text-on-accent {
+    color: var(--black); /* Контраст с зелёным > 4.5:1 */
+}
+
+/* Focus states для клавиатурной навигации */
+*:focus {
+    outline: none;
+}
+
+*:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* Состояния для форм */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 0;
+}
+
+/* Состояние успеха */
+.form-field.success,
+input.success {
+    border-color: var(--success) !important;
+    background: rgba(60, 195, 60, 0.05);
+}
+
+/* Состояние ошибки */
+.form-field.error,
+input.error {
+    border-color: var(--error) !important;
+    background: rgba(255, 0, 0, 0.05);
+}
+
+/* ============================================
+   УВАЖЕНИЕ К ПРЕДПОЧТЕНИЯМ ПОЛЬЗОВАТЕЛЯ
+   ============================================ */
+
+/* Отключение анимаций для пользователей с motion sensitivity */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Высокая контрастность для пользователей с плохим зрением */
+@media (prefers-contrast: high) {
+    :root {
+        --border-width: 4px;
+    }
+    
+    * {
+        outline-width: 3px;
+    }
+}
+
+/* ============================================
+   УТИЛИТЫ
+   ============================================ */
+.text-center { text-align: center; }
+.text-uppercase { text-transform: uppercase; }
+.font-mono { font-family: var(--font-mono); }
+.font-bold { font-weight: 700; }
+.font-black { font-weight: 900; }
+
+/* ============================================
+   ШУМ И ТЕКСТУРА
+   ============================================ */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px);
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.5;
+}
+
+/* ============================================
+   ПРОГРЕСС СКРОЛЛА
+   ============================================ */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--accent);
+    z-index: 10001;
+    transition: width 0.1s ease;
+}
+

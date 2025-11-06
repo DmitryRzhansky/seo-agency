@@ -23,11 +23,11 @@
 {% block content %}
 
 <!-- Hero секция категории услуг - современная -->
-<section class="brutal-category-hero">
-    <div class="brutal-container">
-        <div class="brutal-category-hero-content">
-            <h1 class="brutal-category-hero-title">{{ category.title }}</h1>
-            <p class="brutal-category-hero-subtitle">
+<section class="category-hero">
+    <div class="container">
+        <div class="category-hero-content">
+            <h1 class="category-hero-title">{{ category.title }}</h1>
+            <p class="category-hero-subtitle">
                 Здесь вы найдете полный спектр услуг по тематике «{{ category.title }}». 
                 <span class="brick-text">Выберите</span>
                 <span class="brick-text">то,</span>
@@ -38,25 +38,25 @@
 </section>
 
 <!-- Список услуг категории - брутальный -->
-<section class="brutal-category-services">
-    <div class="brutal-container">
-        <h2 class="brutal-category-services-title">Наши услуги в разделе «{{ category.title }}»</h2>
+<section class="category-services">
+    <div class="container">
+        <h2 class="category-services-title">Наши услуги в разделе «{{ category.title }}»</h2>
         
         {% if services %}
-        <div class="brutal-category-grid">
+        <div class="category-grid">
             {% for service in services %}
-            <div class="brutal-category-service-card">
+            <div class="category-service-card">
                 {% if service.image %}
-                <img src="{{ service.image.url }}" class="brutal-category-service-card-image" alt="{{ service.get_image_alt }}">
+                <img src="{{ service.image.url }}" class="category-service-card-image" alt="{{ service.get_image_alt }}">
                 {% else %}
-                <div class="brutal-category-service-card-placeholder">
+                <div class="category-service-card-placeholder">
                     <i class="fas fa-cogs"></i>
                 </div>
                 {% endif %}
-                <div class="brutal-category-service-card-category">{{ service.category.title }}</div>
-                <h3 class="brutal-category-service-card-title">{{ service.title }}</h3>
-                <p class="brutal-category-service-card-description">{{ service.short_description }}</p>
-                <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="brutal-category-service-card-link">
+                <div class="category-service-card-category">{{ service.category.title }}</div>
+                <h3 class="category-service-card-title">{{ service.title }}</h3>
+                <p class="category-service-card-description">{{ service.short_description }}</p>
+                <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="category-service-card-link">
                     Подробнее об услуге
                 </a>
             </div>
@@ -64,7 +64,7 @@
         </div>
 
         {% else %}
-        <div class="brutal-empty-state">
+        <div class="empty-state">
             <i class="fas fa-search"></i>
             <h3>В этом разделе пока нет добавленных услуг</h3>
             <p>Мы работаем над наполнением этого раздела. Скоро здесь появятся новые услуги!</p>

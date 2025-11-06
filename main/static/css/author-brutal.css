@@ -1,582 +1,107 @@
 /* ============================================
-   СТРАНИЦА АВТОРА - НОВЫЙ СТИЛЬ
+   СТРАНИЦА АВТОРА - СПЕЦИФИЧНЫЕ СТИЛИ
+   Эталон: главная страница
+   Базовые стили: base.css, components.css, layouts.css
    ============================================ */
 
-/* Переменные из основного стиля */
-:root {
-    --black: #000000;
-    --white: #FFFFFF;
-    --gray: #808080;
-    --gray-light: #D3D3D3;
-    --gray-dark: #2A2A2A;
-    --accent: #3cc33c;
-    --accent-hover: #33aa33;
-    --border-width: 3px;
-    --border: var(--border-width) solid var(--black);
-    --transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
-    --font-main: 'Space Grotesk', 'Arial', 'Helvetica', sans-serif;
-}
-
-/* Контейнер */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 50px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-}
-
 /* Hero секция автора */
-.brutal-author-hero {
+.author-hero {
     background: var(--white);
     padding: 120px 0;
     border-bottom: var(--border);
-    position: relative;
+    margin-top: 135px;
 }
 
-.brutal-author-hero-content {
+.author-hero-content {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
 }
 
-.brutal-author-hero-title {
+.author-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent);
+    margin: 0 auto 30px;
+    display: block;
+}
+
+.author-name {
     font-size: clamp(42px, 6vw, 80px);
     font-weight: 900;
     color: var(--black);
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: -2px;
-    position: relative;
     line-height: 1.1;
 }
 
-.brutal-author-hero-subtitle {
-    font-size: 24px;
+.author-role {
+    font-size: 20px;
     color: var(--accent);
     font-weight: 700;
-    margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-.brutal-author-hero-experience {
-    font-size: 18px;
-    color: var(--gray-dark);
-    line-height: 1.6;
-    font-weight: 400;
-}
-
-/* Основной контент автора */
-.brutal-author-content {
-    background: var(--white);
-    padding: 100px 0;
-    position: relative;
-}
-
-.brutal-author-content-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 60px;
-    align-items: start;
-}
-
-/* Информация об авторе */
-.brutal-author-info {
-    background: var(--white);
-    border: var(--border);
-    padding: 40px;
-    position: sticky;
-    top: 120px;
-    height: fit-content;
-}
-
-.brutal-author-photo {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 30px;
-    border: var(--border);
-    overflow: hidden;
-    position: relative;
-}
-
-.brutal-author-photo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.brutal-author-photo-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--gray-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 64px;
-    color: var(--gray);
-}
-
-.brutal-author-details-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--black);
     margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-/* KPI-плашки под описанием автора */
-.author-kpi {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    margin-top: 16px;
-}
-.author-kpi-badge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: var(--border);
-    padding: 14px 10px;
-    background: var(--white);
-}
-.author-kpi-badge .kpi-number {
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-    line-height: 1;
-}
-.author-kpi-badge .kpi-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--gray-dark);
-}
-
-.brutal-author-bio {
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--black);
-    margin-bottom: 30px;
-    font-weight: 400;
-}
-
-.brutal-author-specializations {
-    margin-bottom: 30px;
-}
-
-.brutal-author-specializations h3 {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--black);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.brutal-author-specializations p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--gray-dark);
-    font-weight: 400;
-}
-
-/* Сетка статов автора */
-.author-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-}
-.author-stat-card {
-    border: var(--border);
-    background: var(--white);
-    padding: 18px;
-}
-.author-stat-card.primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--white);
-}
-.author-stat-card .stat-number {
-    font-size: 28px;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-}
-.author-stat-card .stat-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: inherit;
-    opacity: 0.9;
-}
-
-/* Чипы категорий автора */
-.author-category-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.author-category-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    background: var(--white);
-    border: var(--border);
-    text-decoration: none;
-    color: var(--black);
-    cursor: pointer;
-    font-family: inherit;
-    font-size: inherit;
-    transition: var(--transition);
-}
-.author-category-chip:hover {
-    background: var(--black);
-    color: var(--white);
-}
-.author-category-chip:hover .chip-count {
-    color: var(--white);
-}
-.author-category-chip.active { 
-    background: var(--black); 
-    color: var(--white); 
-}
-.author-category-chip.active .chip-count { 
-    color: var(--white); 
-}
-.author-category-chip .chip-label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-.author-category-chip .chip-count { font-size: 12px; color: var(--gray-dark); }
-
-.brutal-author-social {
-    margin-bottom: 0;
-}
-
-.brutal-author-social h3 {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--black);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.brutal-author-social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.brutal-author-social-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 20px;
-    background: var(--white);
-    color: var(--black);
-    border: var(--border);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: var(--transition);
-}
-
-.brutal-author-social-link:hover {
-    background: var(--accent);
-    color: var(--white);
-    border-color: var(--accent);
-}
-
-.brutal-author-social-link i {
+.author-bio {
     font-size: 18px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+    max-width: 680px;
+    margin: 0 auto;
+    font-weight: 400;
 }
 
 /* Статьи автора */
-.brutal-author-posts {
+.author-posts {
     background: var(--white);
+    padding: 100px 0;
 }
 
-.brutal-author-posts-title {
-    font-size: clamp(32px, 4vw, 48px);
+.author-posts-title {
+    font-size: clamp(32px, 5vw, 55px);
     font-weight: 900;
     color: var(--black);
-    margin-bottom: 40px;
+    text-align: center;
+    margin-bottom: 60px;
     text-transform: uppercase;
     letter-spacing: -1px;
-    position: relative;
-    line-height: 1.1;
 }
 
-.brutal-author-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-.brutal-author-post-card {
-    background: var(--white);
-    border: var(--border);
-    transition: var(--transition);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
-}
-
-.brutal-author-post-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-}
-
-.brutal-author-post-image {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-bottom: var(--border);
-}
-
-.brutal-author-post-placeholder {
-    width: 100%;
-    height: 200px;
-    background: var(--gray-light);
-    border-bottom: var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: var(--gray);
-}
-
-.brutal-author-post-content {
-    padding: 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.brutal-author-post-category {
-    font-size: 11px;
-    color: var(--accent);
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-}
-
-.brutal-author-post-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--black);
-    margin-bottom: 10px;
-    line-height: 1.3;
-}
-
-.brutal-author-post-excerpt {
-    font-size: 14px;
-    color: var(--gray-dark);
-    line-height: 1.55;
-    margin-bottom: 16px;
-    flex-grow: 1;
-    font-weight: 400;
-}
-
-.brutal-author-post-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    font-size: 12px;
-    color: var(--gray);
-    font-weight: 400;
-}
-
-.brutal-author-post-link {
-    display: inline-block;
-    margin-top: auto;
-    color: var(--accent);
-    font-weight: 700;
-    text-decoration: none;
-    padding: 10px 16px;
-    border: var(--border);
-    transition: var(--transition);
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 12px;
-}
-
-.brutal-author-post-link:hover {
-    background: var(--accent);
-    color: var(--white);
-    border-color: var(--accent);
-}
+/* Наследует стили карточек из blog-brutal.css */
 
 /* Адаптивность */
-@media (max-width: 1024px) {
-    .brutal-author-content-wrapper {
-        grid-template-columns: 1fr;
-        gap: 40px;
+@media (max-width: 768px) {
+    .author-hero {
+        padding: 80px 0;
+        margin-top: 70px;
     }
     
-    .brutal-author-info {
-        position: static;
-        order: -1;
-    }
-    
-    .brutal-author-photo {
+    .author-photo {
         width: 150px;
         height: 150px;
     }
-}
-
-@media (max-width: 768px) {
-    .brutal-author-hero {
-        padding: 80px 0;
-    }
     
-    .brutal-author-content {
+    .author-posts {
         padding: 60px 0;
-    }
-    
-    .brutal-author-info {
-        padding: 30px;
-    }
-    
-    .brutal-author-photo {
-        width: 120px;
-        height: 120px;
-    }
-    
-    .brutal-author-posts-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .author-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .author-kpi { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    
-    .brutal-author-post-content {
-        padding: 18px;
     }
 }
 
 @media (max-width: 480px) {
-    .brutal-author-hero {
+    .author-hero {
         padding: 60px 0;
     }
     
-    .brutal-author-content {
+    .author-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .author-posts {
         padding: 40px 0;
     }
-    
-    .brutal-author-info {
-        padding: 25px;
-    }
-    
-    .brutal-author-photo {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .brutal-author-post-content {
-        padding: 16px;
-    }
-    
-    .brutal-author-post-title {
-        font-size: 16px;
-    }
-    
-    .brutal-author-post-excerpt {
-        font-size: 13px;
-    }
-
-    .author-stats-grid { grid-template-columns: 1fr; }
-    .author-kpi { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 }
-
-/* Поиск и пагинация (локальные стили для страницы автора) */
-.brutal-blog-search-form {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-.brutal-blog-search-input {
-    flex: 1;
-    padding: 10px 14px;
-    border: var(--border);
-    background: var(--white);
-    font-size: 14px;
-    font-family: var(--font-main);
-}
-.brutal-blog-search-input:focus { outline: none; border-color: var(--accent); }
-.brutal-blog-search-button {
-    padding: 10px 16px;
-    background: var(--accent);
-    color: var(--white);
-    border: var(--border);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 12px;
-}
-.brutal-blog-search-button:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
-
-.brutal-blog-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-.brutal-blog-pagination a {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 12px;
-    background: var(--white);
-    color: var(--black);
-    border: var(--border);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 12px;
-    transition: var(--transition);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.brutal-blog-pagination a:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
-.brutal-blog-pagination .current {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 12px;
-    background: var(--black);
-    color: var(--white);
-    border: var(--border);
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Вспомогательные блоки статистики/категорий */
-.brutal-author-stats ul,
-.brutal-author-categories ul { list-style: none; padding: 0; margin: 0; }
-.brutal-author-stats li,
-.brutal-author-categories li { font-size: 14px; margin-bottom: 8px; color: var(--black); }
-.brutal-author-categories a { color: var(--black); text-decoration: none; border-bottom: 2px solid transparent; }
-.brutal-author-categories a:hover { color: var(--accent); border-color: var(--accent); }

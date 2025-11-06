@@ -20,11 +20,11 @@
 {% block content %}
 
 <!-- Hero секция блога -->
-<section class="brutal-blog-hero">
+<section class="blog-hero">
     <div class="container">
-        <div class="brutal-blog-hero-content">
-            <h1 class="brutal-blog-hero-title">Блог</h1>
-            <p class="brutal-blog-hero-subtitle">
+        <div class="blog-hero-content">
+            <h1 class="blog-hero-title">Блог</h1>
+            <p class="blog-hero-subtitle">
                 Полезные статьи о SEO, продвижении сайтов и digital-маркетинге. 
                 Экспертные советы от нашей команды.
             </p>
@@ -33,17 +33,17 @@
 </section>
 
 <!-- Поиск по блогу -->
-<section class="brutal-blog-search">
+<section class="blog-search">
     <div class="container">
-        <form method="get" action="{% url 'blog:search' %}" class="brutal-blog-search-form">
+        <form method="get" action="{% url 'blog:search' %}" class="blog-search-form">
             <input 
                 type="text" 
                 name="q" 
                 value="{{ search_query|default:'' }}" 
                 placeholder="Поиск по статьям..." 
-                class="brutal-blog-search-input"
+                class="blog-search-input"
             >
-            <button type="submit" class="brutal-blog-search-button">
+            <button type="submit" class="blog-search-button">
                 Найти
             </button>
         </form>
@@ -52,15 +52,15 @@
 
 <!-- Категории блога -->
 {% if categories %}
-<section class="brutal-blog-categories">
+<section class="blog-categories">
     <div class="container">
-        <h2 class="brutal-blog-categories-title">Категории</h2>
-        <div class="brutal-blog-categories-grid">
-            <a href="{% url 'blog:post_list' %}" class="brutal-blog-category-link {% if not current_category %}active{% endif %}">
+        <h2 class="blog-categories-title">Категории</h2>
+        <div class="blog-categories-grid">
+            <a href="{% url 'blog:post_list' %}" class="blog-category-link {% if not current_category %}active{% endif %}">
                 Все статьи
             </a>
             {% for category in categories %}
-            <a href="{% url 'blog:category_posts' slug=category.slug %}" class="brutal-blog-category-link {% if current_category == category %}active{% endif %}">
+            <a href="{% url 'blog:category_posts' slug=category.slug %}" class="blog-category-link {% if current_category == category %}active{% endif %}">
                 {{ category.name }}
             </a>
             {% endfor %}
@@ -70,9 +70,9 @@
 {% endif %}
 
 <!-- Статьи блога -->
-<section class="brutal-blog-posts">
+<section class="blog-posts">
     <div class="container">
-        <h2 class="brutal-blog-posts-title">
+        <h2 class="blog-posts-title">
             {% if current_category %}
                 {{ current_category.name }}
             {% elif search_query %}
@@ -83,42 +83,42 @@
         </h2>
         
         {% if page_obj %}
-        <div class="brutal-blog-posts-grid">
+        <div class="blog-posts-grid">
             {% for post in page_obj %}
-            <article class="brutal-blog-card">
+            <article class="blog-card">
                 {% if post.image %}
-                <img src="{{ post.image.url }}" class="brutal-blog-card-image" alt="{{ post.title }}">
+                <img src="{{ post.image.url }}" class="blog-card-image" alt="{{ post.title }}">
                 {% else %}
-                <div class="brutal-blog-card-placeholder">
+                <div class="blog-card-placeholder">
                     <i class="fas fa-newspaper"></i>
                 </div>
                 {% endif %}
                 
-                <div class="brutal-blog-card-content">
+                <div class="blog-card-content">
                     {% if post.category %}
-                    <div class="brutal-blog-card-category">{{ post.category.name }}</div>
+                    <div class="blog-card-category">{{ post.category.name }}</div>
                     {% endif %}
-                    <h3 class="brutal-blog-card-title">{{ post.title }}</h3>
-                    <p class="brutal-blog-card-excerpt">
+                    <h3 class="blog-card-title">{{ post.title }}</h3>
+                    <p class="blog-card-excerpt">
                         {% if post.excerpt %}
                             {{ post.excerpt|truncatewords:20 }}
                         {% else %}
                             {{ post.content|striptags|truncatewords:20 }}
                         {% endif %}
                     </p>
-                    <div class="brutal-blog-card-meta">
-                        <span class="brutal-blog-card-date">{{ post.published_date|date:"d.m.Y" }}</span>
-                        <span class="brutal-blog-card-views">{{ post.views_count }} просмотров</span>
+                    <div class="blog-card-meta">
+                        <span class="blog-card-date">{{ post.published_date|date:"d.m.Y" }}</span>
+                        <span class="blog-card-views">{{ post.views_count }} просмотров</span>
                     </div>
                     {% if post.get_author %}
-                    <div class="brutal-blog-card-author">
-                        <a href="{{ post.get_author.get_absolute_url }}" class="brutal-blog-card-author-link">
+                    <div class="blog-card-author">
+                        <a href="{{ post.get_author.get_absolute_url }}" class="blog-card-author-link">
                             <i class="fas fa-user"></i>
                             {{ post.get_author.get_full_name }}
                         </a>
                     </div>
                     {% endif %}
-                    <a href="{{ post.get_absolute_url }}" class="brutal-blog-card-link">
+                    <a href="{{ post.get_absolute_url }}" class="blog-card-link">
                         Читать далее
                     </a>
                 </div>
@@ -128,7 +128,7 @@
         
         <!-- Пагинация -->
         {% if is_paginated %}
-        <div class="brutal-blog-pagination">
+        <div class="blog-pagination">
             {% if page_obj.has_previous %}
                 <a href="?page=1">Первая</a>
                 <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
@@ -146,7 +146,7 @@
         {% endif %}
         
         {% else %}
-        <div class="brutal-blog-empty">
+        <div class="blog-empty">
             <i class="fas fa-search"></i>
             <h3>Статьи не найдены</h3>
             <p>

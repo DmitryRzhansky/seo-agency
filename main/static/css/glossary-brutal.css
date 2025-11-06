@@ -1,58 +1,24 @@
 /* ============================================
-   ГЛОССАРИЙ - НОВЫЙ СТИЛЬ
+   ГЛОССАРИЙ - СПЕЦИФИЧНЫЕ СТИЛИ
+   Эталон: главная страница
+   Базовые стили: base.css, components.css, layouts.css
    ============================================ */
 
-/* Переменные из основного стиля */
-:root {
-    --black: #000000;
-    --white: #FFFFFF;
-    --gray: #808080;
-    --gray-light: #D3D3D3;
-    --gray-dark: #2A2A2A;
-    --accent: #3cc33c;
-    --accent-hover: #33aa33;
-    --border-width: 3px;
-    --border: var(--border-width) solid var(--black);
-    --transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
-    --font-main: 'Space Grotesk', 'Arial', 'Helvetica', sans-serif;
-}
-
-/* Общие стили */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 50px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-}
-
-/* Hero секция */
-.brutal-glossary-hero {
+/* Hero секция глоссария */
+.glossary-hero {
     background: var(--white);
     padding: 120px 0;
     border-bottom: var(--border);
-    position: relative;
+    margin-top: 135px;
 }
 
-.brutal-glossary-hero-content {
+.glossary-hero-content {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
 }
 
-.brutal-glossary-hero-title {
+.glossary-hero-title {
     font-size: clamp(42px, 6vw, 80px);
     font-weight: 900;
     color: var(--black);
@@ -62,1048 +28,208 @@
     line-height: 1.1;
 }
 
-.brutal-glossary-hero-description {
+.glossary-hero-subtitle {
     font-size: 20px;
     color: var(--gray-dark);
     line-height: 1.7;
     max-width: 680px;
-    margin: 0 auto 40px;
+    margin: 0 auto;
     font-weight: 400;
 }
 
-.brutal-glossary-hero-meta {
-    margin-top: 20px;
-}
-
-.brutal-glossary-hero-category {
-    font-size: 16px;
-    color: var(--gray-dark);
-    font-weight: 500;
-}
-
-.brutal-glossary-hero-category a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 700;
-    transition: var(--transition);
-}
-
-.brutal-glossary-hero-category a:hover {
-    color: var(--black);
-    text-decoration: underline;
-}
-
-/* Фильтры и поиск */
-.brutal-glossary-filters {
+/* Поиск по глоссарию */
+.glossary-search {
     background: var(--gray-light);
     padding: 60px 0;
     border-bottom: var(--border);
 }
 
-.brutal-glossary-nav {
-    background: var(--white);
-    border: var(--border);
-    padding: 40px;
-    position: relative;
-    transition: var(--transition);
-}
-
-.brutal-glossary-nav:hover {
-    border-color: var(--accent);
-}
-
-.brutal-glossary-nav-content {
+.glossary-search-form {
     display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-/* Поиск */
-.brutal-glossary-search-form {
-    width: 100%;
-}
-
-.brutal-glossary-search-group {
-    display: flex;
-    gap: 0;
     max-width: 600px;
     margin: 0 auto;
-}
-
-.brutal-glossary-search-input {
-    flex: 1;
-    padding: 15px 20px;
     border: var(--border);
-    border-right: none;
-    font-size: 16px;
-    font-weight: 500;
     background: var(--white);
-    color: var(--black);
-    transition: var(--transition);
-    font-family: var(--font-main);
 }
 
-.brutal-glossary-search-input:focus {
+.glossary-search-input {
+    flex-grow: 1;
+    padding: 15px 20px;
+    border: none;
+    font-size: 16px;
     outline: none;
-    border-color: var(--accent);
+    font-family: var(--font-main);
+    color: var(--black);
 }
 
-.brutal-glossary-search-input::placeholder {
-    color: var(--gray);
-}
-
-.brutal-glossary-search-button {
-    padding: 15px 25px;
+.glossary-search-button {
     background: var(--accent);
     color: var(--white);
-    border: var(--border);
+    border: none;
+    padding: 15px 30px;
     font-size: 16px;
     font-weight: 700;
-    cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
+    cursor: pointer;
     transition: var(--transition);
-    font-family: var(--font-main);
+    border-left: var(--border);
 }
 
-.brutal-glossary-search-button:hover {
+.glossary-search-button:hover {
     background: var(--accent-hover);
 }
 
-/* Фильтры */
-.brutal-glossary-filters-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center;
+/* Алфавитный фильтр */
+.glossary-alphabet {
+    background: var(--white);
+    padding: 60px 0;
+    border-bottom: var(--border);
 }
 
-.brutal-glossary-filter-group {
+.glossary-alphabet-grid {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.glossary-alphabet-link {
+    display: flex;
     align-items: center;
-}
-
-.brutal-glossary-filter-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--black);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0;
-}
-
-.brutal-glossary-filter-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
     justify-content: center;
-}
-
-.brutal-glossary-filter-button {
-    padding: 12px 20px;
+    width: 50px;
+    height: 50px;
     background: var(--white);
     color: var(--black);
     border: var(--border);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-weight: 900;
+    font-size: 18px;
     transition: var(--transition);
-    display: inline-block;
 }
 
-.brutal-glossary-filter-button:hover {
+.glossary-alphabet-link:hover,
+.glossary-alphabet-link.active {
     background: var(--accent);
     color: var(--white);
-}
-
-.brutal-glossary-filter-button.active {
-    background: var(--black);
-    color: var(--white);
-}
-
-/* Контент */
-.brutal-glossary-content {
-    padding: 100px 0;
-    background: var(--white);
-}
-
-/* Категории */
-.brutal-glossary-category {
-    margin-bottom: 60px;
-    background: var(--gray-light);
-    border: var(--border);
-    padding: 40px;
-    position: relative;
-    transition: var(--transition);
-}
-
-.brutal-glossary-category:hover {
     border-color: var(--accent);
-}
-
-.brutal-glossary-category-title {
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 900;
-    color: var(--black);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
-
-.brutal-glossary-category-link {
-    color: var(--black);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.brutal-glossary-category-link:hover {
-    color: var(--accent);
-}
-
-.brutal-glossary-category-description {
-    font-size: 16px;
-    color: var(--gray-dark);
-    line-height: 1.6;
-    margin-bottom: 30px;
-    font-style: italic;
 }
 
 /* Термины */
-.brutal-glossary-terms {
-    display: grid;
-    gap: 25px;
-}
-
-.brutal-glossary-term {
+.glossary-terms {
     background: var(--white);
-    border: var(--border);
-    padding: 30px;
-    position: relative;
-    transition: var(--transition);
+    padding: 80px 0;
 }
 
-.brutal-glossary-term:hover {
-    border-color: var(--accent);
-}
-
-.brutal-glossary-term-name {
-    margin-bottom: 20px;
-}
-
-.brutal-glossary-term-link {
-    font-size: clamp(18px, 2.5vw, 24px);
-    font-weight: 700;
-    color: var(--black);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: var(--transition);
-}
-
-.brutal-glossary-term-link:hover {
-    color: var(--accent);
-}
-
-.brutal-glossary-term-definition {
-    font-size: 16px;
-    color: var(--gray-dark);
-    line-height: 1.6;
-}
-
-/* Список категорий */
-.brutal-glossary-categories {
-    margin-top: 40px;
-}
-
-.brutal-glossary-categories-title {
-    font-size: clamp(28px, 4vw, 45px);
-    font-weight: 900;
-    color: var(--black);
-    margin-bottom: 40px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
-
-.brutal-glossary-categories-grid {
+.glossary-terms-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 40px;
-    margin-top: 40px;
 }
 
-.brutal-glossary-category-card {
-    background: var(--gray-light);
-    border: var(--border);
-    padding: 40px;
-    position: relative;
-    transition: var(--transition);
-    text-align: center;
-}
-
-.brutal-glossary-category-card:hover {
-    border-color: var(--accent);
-}
-
-.brutal-glossary-category-card-title {
-    font-size: clamp(20px, 3vw, 28px);
-    font-weight: 900;
-    color: var(--black);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
-
-.brutal-glossary-category-card-link {
-    color: var(--black);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.brutal-glossary-category-card-link:hover {
-    color: var(--accent);
-}
-
-.brutal-glossary-category-card-description {
-    font-size: 16px;
-    color: var(--gray-dark);
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.brutal-glossary-category-card-meta {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.brutal-glossary-category-card-count {
-    background: var(--accent);
-    color: var(--white);
-    padding: 10px 20px;
-    border: 2px solid var(--black);
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Пустое состояние */
-.brutal-glossary-empty {
-    text-align: center;
-    padding: 80px 40px;
-    background: var(--gray-light);
-    border: var(--border);
-    position: relative;
-    transition: var(--transition);
-}
-
-.brutal-glossary-empty:hover {
-    border-color: var(--accent);
-}
-
-.brutal-glossary-empty h3 {
-    font-size: clamp(20px, 3vw, 28px);
-    font-weight: 900;
-    color: var(--black);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
-
-.brutal-glossary-empty p {
-    font-size: 16px;
-    color: var(--gray-dark);
-    line-height: 1.6;
-}
-
-/* Определение термина */
-.brutal-glossary-definition {
-    padding: 100px 0;
-    background: var(--white);
-}
-
-.brutal-glossary-definition-content {
-    background: var(--gray-light);
-    border: var(--border);
-    padding: 50px;
-    position: relative;
-    transition: var(--transition);
-}
-
-.brutal-glossary-definition-content:hover {
-    border-color: var(--accent);
-}
-
-.brutal-glossary-definition-text {
-    font-size: 18px;
-    line-height: 1.8;
-    color: var(--black);
-    margin-bottom: 40px;
-}
-
-.brutal-glossary-definition-text h1,
-.brutal-glossary-definition-text h2,
-.brutal-glossary-definition-text h3,
-.brutal-glossary-definition-text h4,
-.brutal-glossary-definition-text h5,
-.brutal-glossary-definition-text h6 {
-    color: var(--black);
-    font-weight: 700;
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-
-.brutal-glossary-definition-text p {
-    margin-bottom: 20px;
-}
-
-.brutal-glossary-definition-text ul,
-.brutal-glossary-definition-text ol {
-    margin-bottom: 20px;
-    padding-left: 30px;
-}
-
-.brutal-glossary-definition-text li {
-    margin-bottom: 10px;
-}
-
-.brutal-glossary-definition-text strong {
-    font-weight: 700;
-    color: var(--black);
-}
-
-.brutal-glossary-definition-text em {
-    font-style: italic;
-}
-
-.brutal-glossary-definition-text a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.brutal-glossary-definition-text a:hover {
-    color: var(--black);
-    text-decoration: underline;
-}
-
-.brutal-glossary-definition-meta {
-    border-top: var(--border);
-    padding-top: 25px;
-}
-
-.brutal-glossary-definition-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.brutal-glossary-definition-date {
-    font-size: 14px;
-    color: var(--gray-dark);
-    font-weight: 600;
-}
-
-/* Похожие термины */
-.brutal-glossary-related {
-    padding: 100px 0;
-    background: var(--gray-light);
-    border-top: var(--border);
-}
-
-.brutal-glossary-related-title {
-    font-size: clamp(28px, 4vw, 45px);
-    font-weight: 900;
-    color: var(--black);
-    margin-bottom: 40px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    text-align: center;
-}
-
-.brutal-glossary-related-terms {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-}
-
-.brutal-glossary-related-term {
+.glossary-term-card {
     background: var(--white);
     border: var(--border);
-    padding: 25px;
-    position: relative;
+    padding: 35px;
     transition: var(--transition);
 }
 
-.brutal-glossary-related-term:hover {
+.glossary-term-card:hover {
     border-color: var(--accent);
+    transform: translateY(-5px);
 }
 
-.brutal-glossary-related-term-link {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--black);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: var(--transition);
-}
-
-.brutal-glossary-related-term-link:hover {
-    color: var(--accent);
-}
-
-/* CTA секция */
-.brutal-glossary-cta {
-    background: var(--black);
-    color: var(--white);
-    padding: 100px 0;
-    border-top: var(--border);
-}
-
-.brutal-glossary-cta-content {
-    text-align: center;
-}
-
-.brutal-glossary-cta-title {
-    font-size: clamp(28px, 4vw, 45px);
+.glossary-term-title {
+    font-size: 24px;
     font-weight: 900;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: -1px;
+    color: var(--black);
 }
 
-.brutal-glossary-cta-description {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 40px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.brutal-glossary-cta-buttons {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.brutal-glossary-cta-button {
-    padding: 15px 30px;
-    border: 2px solid var(--white);
-    text-decoration: none;
-    font-weight: 700;
+.glossary-term-definition {
     font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: var(--transition);
+    line-height: 1.7;
+    color: var(--gray-dark);
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.glossary-term-link {
     display: inline-block;
-}
-
-.brutal-glossary-cta-button.primary {
-    background: var(--accent);
-    color: var(--black);
-    border-color: var(--accent);
-}
-
-.brutal-glossary-cta-button.primary:hover {
-    background: var(--white);
-    color: var(--black);
-    border-color: var(--white);
-}
-
-.brutal-glossary-cta-button.secondary {
-    background: var(--white);
-    color: var(--black);
-    border-color: var(--white);
-}
-
-.brutal-glossary-cta-button.secondary:hover {
-    background: var(--accent);
-    color: var(--black);
-    border-color: var(--accent);
-}
-
-/* Стили для кнопок букв */
-.brutal-glossary-letter-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    width: 100%;
-}
-
-.brutal-glossary-letter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.brutal-glossary-letter-group-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--black);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 5px;
-}
-
-.brutal-glossary-letter-buttons-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.brutal-glossary-letter-button {
-    padding: 10px 15px;
-    background: var(--white);
-    color: var(--black);
-    border: 2px solid var(--black);
+    color: var(--accent);
+    font-weight: 700;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    min-width: 40px;
-    text-align: center;
+    padding: 12px 24px;
+    border: var(--border);
+    border-color: var(--accent);
     transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
 }
 
-.brutal-glossary-letter-button:hover {
+.glossary-term-link:hover {
     background: var(--accent);
-    color: var(--white);
-}
-
-.brutal-glossary-letter-button.active {
-    background: var(--black);
     color: var(--white);
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .brutal-glossary-hero {
+    .glossary-hero {
         padding: 80px 0;
+        margin-top: 70px;
     }
-
-    .brutal-glossary-hero-title {
-        font-size: 40px;
-    }
-
-    .brutal-glossary-hero-description {
-        font-size: 18px;
-    }
-
-    .brutal-glossary-filters {
+    
+    .glossary-search {
         padding: 40px 0;
     }
-
-    .brutal-glossary-nav {
-        padding: 30px;
-    }
-
-    .brutal-glossary-nav-content {
-        gap: 30px;
-    }
-
-    .brutal-glossary-search-group {
+    
+    .glossary-search-form {
         flex-direction: column;
     }
-
-    .brutal-glossary-search-input {
-        border-right: var(--border);
-        border-bottom: none;
+    
+    .glossary-search-button {
+        border-left: none;
+        border-top: var(--border);
     }
-
-    .brutal-glossary-filters-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
+    
+    .glossary-alphabet {
+        padding: 40px 0;
     }
-
-    .brutal-glossary-content {
+    
+    .glossary-alphabet-link {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .glossary-terms {
         padding: 60px 0;
     }
-
-    .brutal-glossary-category {
-        padding: 30px;
-        margin-bottom: 40px;
+    
+    .glossary-terms-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
-
-    .brutal-glossary-category-title {
-        font-size: 24px;
-    }
-
-    .brutal-glossary-category-description {
-        font-size: 15px;
-    }
-
-    .brutal-glossary-terms {
-        gap: 20px;
-    }
-
-    .brutal-glossary-term {
+    
+    .glossary-term-card {
         padding: 25px;
-    }
-
-    .brutal-glossary-term-link {
-        font-size: 20px;
-    }
-
-    .brutal-glossary-term-definition {
-        font-size: 15px;
-    }
-
-    .brutal-glossary-categories-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .brutal-glossary-category-card {
-        padding: 30px;
-    }
-
-    .brutal-glossary-category-card-title {
-        font-size: 24px;
-    }
-
-    .brutal-glossary-category-card-description {
-        font-size: 15px;
-    }
-
-    .brutal-glossary-category-card-count {
-        padding: 8px 16px;
-        font-size: 13px;
-    }
-
-    .brutal-glossary-empty {
-        padding: 60px 30px;
-    }
-
-    .brutal-glossary-empty h3 {
-        font-size: 24px;
-    }
-
-    .brutal-glossary-empty p {
-        font-size: 15px;
-    }
-
-    .brutal-glossary-definition {
-        padding: 60px 0;
-    }
-
-    .brutal-glossary-definition-content {
-        padding: 40px;
-    }
-
-    .brutal-glossary-definition-text {
-        font-size: 16px;
-    }
-
-    .brutal-glossary-definition-text h1,
-    .brutal-glossary-definition-text h2,
-    .brutal-glossary-definition-text h3,
-    .brutal-glossary-definition-text h4,
-    .brutal-glossary-definition-text h5,
-    .brutal-glossary-definition-text h6 {
-        margin-top: 25px;
-        margin-bottom: 15px;
-    }
-
-    .brutal-glossary-definition-text p {
-        margin-bottom: 15px;
-    }
-
-    .brutal-glossary-definition-text ul,
-    .brutal-glossary-definition-text ol {
-        margin-bottom: 15px;
-        padding-left: 25px;
-    }
-
-    .brutal-glossary-definition-text li {
-        margin-bottom: 8px;
-    }
-
-    .brutal-glossary-definition-stats {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .brutal-glossary-related {
-        padding: 60px 0;
-    }
-
-    .brutal-glossary-related-title {
-        font-size: 40px;
-    }
-
-    .brutal-glossary-related-terms {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .brutal-glossary-related-term {
-        padding: 20px;
-    }
-
-    .brutal-glossary-related-term-link {
-        font-size: 15px;
-    }
-
-    .brutal-glossary-cta {
-        padding: 60px 0;
-    }
-
-    .brutal-glossary-cta-title {
-        font-size: 40px;
-    }
-
-    .brutal-glossary-cta-description {
-        font-size: 16px;
-    }
-
-    .brutal-glossary-cta-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .brutal-glossary-cta-button {
-        padding: 12px 25px;
-        font-size: 15px;
-    }
-
-    .brutal-glossary-letter-buttons {
-        gap: 20px;
-    }
-
-    .brutal-glossary-letter-group {
-        gap: 12px;
-    }
-
-    .brutal-glossary-letter-group-title {
-        font-size: 13px;
-    }
-
-    .brutal-glossary-letter-buttons-row {
-        gap: 8px;
-    }
-
-    .brutal-glossary-letter-button {
-        padding: 8px 12px;
-        font-size: 13px;
-        min-width: 35px;
     }
 }
 
 @media (max-width: 480px) {
-    .brutal-glossary-hero-title {
-        font-size: 32px;
+    .glossary-hero {
+        padding: 60px 0;
     }
-
-    .brutal-glossary-hero-description {
-        font-size: 16px;
+    
+    .glossary-terms {
+        padding: 40px 0;
     }
-
-    .brutal-glossary-hero-category {
-        font-size: 14px;
-    }
-
-    .brutal-glossary-nav {
-        padding: 25px;
-    }
-
-    .brutal-glossary-nav-content {
-        gap: 25px;
-    }
-
-    .brutal-glossary-search-input {
-        padding: 12px 15px;
-        font-size: 15px;
-    }
-
-    .brutal-glossary-search-button {
-        padding: 12px 20px;
-        font-size: 15px;
-    }
-
-    .brutal-glossary-filters-buttons {
-        gap: 25px;
-    }
-
-    .brutal-glossary-filter-group {
-        gap: 15px;
-    }
-
-    .brutal-glossary-filter-title {
-        font-size: 16px;
-    }
-
-    .brutal-glossary-filter-buttons {
-        gap: 12px;
-    }
-
-    .brutal-glossary-filter-button {
-        padding: 10px 16px;
-        font-size: 13px;
-    }
-
-    .brutal-glossary-category {
-        padding: 25px;
-        margin-bottom: 30px;
-    }
-
-    .brutal-glossary-category-title {
+    
+    .glossary-term-title {
         font-size: 20px;
-    }
-
-    .brutal-glossary-category-description {
-        font-size: 14px;
-    }
-
-    .brutal-glossary-terms {
-        gap: 15px;
-    }
-
-    .brutal-glossary-term {
-        padding: 20px;
-    }
-
-    .brutal-glossary-term-link {
-        font-size: 18px;
-    }
-
-    .brutal-glossary-term-definition {
-        font-size: 14px;
-    }
-
-    .brutal-glossary-categories-grid {
-        gap: 25px;
-    }
-
-    .brutal-glossary-category-card {
-        padding: 25px;
-    }
-
-    .brutal-glossary-category-card-title {
-        font-size: 20px;
-    }
-
-    .brutal-glossary-category-card-description {
-        font-size: 14px;
-    }
-
-    .brutal-glossary-category-card-count {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-
-    .brutal-glossary-empty {
-        padding: 50px 25px;
-    }
-
-    .brutal-glossary-empty h3 {
-        font-size: 20px;
-    }
-
-    .brutal-glossary-empty p {
-        font-size: 14px;
-    }
-
-    .brutal-glossary-definition-content {
-        padding: 30px;
-    }
-
-    .brutal-glossary-definition-text {
-        font-size: 15px;
-    }
-
-    .brutal-glossary-definition-text h1,
-    .brutal-glossary-definition-text h2,
-    .brutal-glossary-definition-text h3,
-    .brutal-glossary-definition-text h4,
-    .brutal-glossary-definition-text h5,
-    .brutal-glossary-definition-text h6 {
-        margin-top: 20px;
-        margin-bottom: 12px;
-    }
-
-    .brutal-glossary-definition-text p {
-        margin-bottom: 12px;
-    }
-
-    .brutal-glossary-definition-text ul,
-    .brutal-glossary-definition-text ol {
-        margin-bottom: 12px;
-        padding-left: 20px;
-    }
-
-    .brutal-glossary-definition-text li {
-        margin-bottom: 6px;
-    }
-
-    .brutal-glossary-definition-stats {
-        gap: 12px;
-    }
-
-    .brutal-glossary-definition-date {
-        font-size: 13px;
-    }
-
-    .brutal-glossary-related-title {
-        font-size: 32px;
-    }
-
-    .brutal-glossary-related-terms {
-        gap: 15px;
-    }
-
-    .brutal-glossary-related-term {
-        padding: 15px;
-    }
-
-    .brutal-glossary-related-term-link {
-        font-size: 14px;
-    }
-
-    .brutal-glossary-cta-title {
-        font-size: 32px;
-    }
-
-    .brutal-glossary-cta-description {
-        font-size: 14px;
-    }
-
-    .brutal-glossary-cta-button {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-
-    .brutal-glossary-letter-buttons {
-        gap: 15px;
-    }
-
-    .brutal-glossary-letter-group {
-        gap: 10px;
-    }
-
-    .brutal-glossary-letter-group-title {
-        font-size: 12px;
-    }
-
-    .brutal-glossary-letter-buttons-row {
-        gap: 6px;
-    }
-
-    .brutal-glossary-letter-button {
-        padding: 6px 10px;
-        font-size: 12px;
-        min-width: 30px;
     }
 }

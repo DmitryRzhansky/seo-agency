@@ -21,19 +21,19 @@
 {% block content %}
 
 <!-- Hero секция статьи - брутальная -->
-<section class="brutal-post-hero">
+<section class="post-hero">
     <div class="container">
-        <div class="brutal-post-hero-content">
-            <h1 class="brutal-post-hero-title">{{ post.title }}</h1>
-            <div class="brutal-post-hero-meta">
+        <div class="post-hero-content">
+            <h1 class="post-hero-title">{{ post.title }}</h1>
+            <div class="post-hero-meta">
                 {% if post.category %}
-                <div class="brutal-post-hero-category">{{ post.category.name }}</div>
+                <div class="post-hero-category">{{ post.category.name }}</div>
                 {% endif %}
-                <div class="brutal-post-hero-date">{{ post.published_date|date:"d.m.Y" }}</div>
-                <div class="brutal-post-hero-views">{{ post.views_count }} просмотров</div>
+                <div class="post-hero-date">{{ post.published_date|date:"d.m.Y" }}</div>
+                <div class="post-hero-views">{{ post.views_count }} просмотров</div>
                 {% if post.get_author %}
-                <div class="brutal-post-hero-author">
-                    <a href="{{ post.get_author.get_absolute_url }}" class="brutal-post-hero-author-link">
+                <div class="post-hero-author">
+                    <a href="{{ post.get_author.get_absolute_url }}" class="post-hero-author-link">
                         <i class="fas fa-user"></i>
                         {{ post.get_author.get_full_name }}
                     </a>
@@ -45,19 +45,19 @@
 </section>
 
 <!-- Основной контент статьи - брутальный -->
-<section class="brutal-post-content">
+<section class="post-content">
     <div class="container">
-        <div class="brutal-post-content-wrapper">
+        <div class="post-content-wrapper">
             <!-- Брутальные блоки контента -->
-            <div class="brutal-post-content-blocks">
-                <div class="brutal-post-content-block main">
-                    <div class="brutal-post-block-number">01</div>
+            <div class="post-content-blocks">
+                <div class="post-content-block main">
+                    <div class="post-block-number">01</div>
                     <h2>О статье</h2>
                     <p>{{ post.excerpt|default:"Краткое описание статьи не указано." }}</p>
                 </div>
                 
-                <div class="brutal-post-content-block">
-                    <div class="brutal-post-block-number">02</div>
+                <div class="post-content-block">
+                    <div class="post-block-number">02</div>
                     <h3>Ключевые моменты</h3>
                     <ul>
                         <li>Практические советы и рекомендации</li>
@@ -67,16 +67,16 @@
                     </ul>
                 </div>
                 
-                <div class="brutal-post-content-block">
-                    <div class="brutal-post-block-number">03</div>
+                <div class="post-content-block">
+                    <div class="post-block-number">03</div>
                     <h3>Время чтения</h3>
                     <p>{{ post.get_reading_time }}</p>
                 </div>
                 
-                <div class="brutal-post-content-block content">
-                    <div class="brutal-post-block-number">04</div>
+                <div class="post-content-block content">
+                    <div class="post-block-number">04</div>
                     <h3>Полный текст статьи</h3>
-                    <div class="brutal-post-text brutal-post-scrollable">
+                    <div class="post-text post-scrollable">
                         {{ post.content|safe }}
                     </div>
                 </div>
@@ -84,18 +84,18 @@
             
             <!-- Изображение статьи справа -->
             {% if post.image %}
-            <div class="brutal-post-image-container">
+            <div class="post-image-container">
                 <img 
                     src="{{ post.image.url }}" 
-                    class="brutal-post-image" 
+                    class="post-image" 
                     alt="{{ post.title }}"
                 >
                 {% if post.category %}
-                <div class="brutal-post-image-overlay">
+                <div class="post-image-overlay">
                     {{ post.category.name }}
                 </div>
                 {% endif %}
-                <div class="brutal-post-image-decoration"></div>
+                <div class="post-image-decoration"></div>
             </div>
             {% endif %}
         </div>
@@ -103,21 +103,21 @@
 </section>
 
 <!-- Блок поделиться -->
-<section class="brutal-share-section">
+<section class="share-section">
     <div class="container">
-        <div class="brutal-share-block">
-            <button class="brutal-copy-btn" data-text="{{ post.title }} - {{ post.excerpt|default:post.content|striptags|truncatewords:20 }} | Isakov Agency - {{ request.build_absolute_uri }}">
+        <div class="share-block">
+            <button class="copy-btn" data-text="{{ post.title }} - {{ post.excerpt|default:post.content|striptags|truncatewords:20 }} | Isakov Agency - {{ request.build_absolute_uri }}">
                 <i class="fas fa-copy"></i>
                 Скопировать текст
             </button>
             
-            <div class="brutal-social-share">
-                <span class="brutal-social-label">Поделиться:</span>
-                <div class="brutal-social-links">
-                    <a href="#" class="brutal-social-link vk" data-url="{{ request.build_absolute_uri }}">
+            <div class="social-share">
+                <span class="social-label">Поделиться:</span>
+                <div class="social-links">
+                    <a href="#" class="social-link vk" data-url="{{ request.build_absolute_uri }}">
                         <i class="fab fa-vk"></i>
                     </a>
-                    <a href="#" class="brutal-social-link telegram" data-url="{{ request.build_absolute_uri }}">
+                    <a href="#" class="social-link telegram" data-url="{{ request.build_absolute_uri }}">
                         <i class="fab fa-telegram"></i>
                     </a>
                 </div>
@@ -128,9 +128,9 @@
 
 <!-- Навигация -->
 {% if post.category %}
-<section class="brutal-post-navigation">
+<section class="post-navigation">
     <div class="container">
-        <a href="{% url 'blog:category_posts' slug=post.category.slug %}" class="brutal-post-nav-link">
+        <a href="{% url 'blog:category_posts' slug=post.category.slug %}" class="post-nav-link">
             ← Вернуться в категорию "{{ post.category.name }}"
         </a>
     </div>
@@ -139,33 +139,33 @@
 
 <!-- Связанные статьи -->
 {% if related_posts %}
-<section class="brutal-related-posts">
+<section class="related-posts">
     <div class="container">
-        <h2 class="brutal-related-posts-title">Вам может понравиться</h2>
-        <div class="brutal-related-posts-grid">
+        <h2 class="related-posts-title">Вам может понравиться</h2>
+        <div class="related-posts-grid">
             {% for related_post in related_posts %}
-            <article class="brutal-related-card">
+            <article class="related-card">
                 {% if related_post.image %}
-                <img src="{{ related_post.image.url }}" class="brutal-related-card-image" alt="{{ related_post.title }}">
+                <img src="{{ related_post.image.url }}" class="related-card-image" alt="{{ related_post.title }}">
                 {% else %}
-                <div class="brutal-related-card-placeholder">
+                <div class="related-card-placeholder">
                     <i class="fas fa-newspaper"></i>
                 </div>
                 {% endif %}
                 
-                <div class="brutal-related-card-content">
+                <div class="related-card-content">
                     {% if related_post.category %}
-                    <div class="brutal-related-card-category">{{ related_post.category.name }}</div>
+                    <div class="related-card-category">{{ related_post.category.name }}</div>
                     {% endif %}
-                    <h3 class="brutal-related-card-title">{{ related_post.title }}</h3>
-                    <p class="brutal-related-card-excerpt">
+                    <h3 class="related-card-title">{{ related_post.title }}</h3>
+                    <p class="related-card-excerpt">
                         {% if related_post.excerpt %}
                             {{ related_post.excerpt|truncatewords:15 }}
                         {% else %}
                             {{ related_post.content|striptags|truncatewords:15 }}
                         {% endif %}
                     </p>
-                    <a href="{{ related_post.get_absolute_url }}" class="brutal-related-card-link">
+                    <a href="{{ related_post.get_absolute_url }}" class="related-card-link">
                         Читать далее
                     </a>
                 </div>

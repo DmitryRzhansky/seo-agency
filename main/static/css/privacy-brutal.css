@@ -1,58 +1,24 @@
 /* ============================================
-   ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ - НОВЫЙ СТИЛЬ
+   ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ - СПЕЦИФИЧНЫЕ СТИЛИ
+   Эталон: главная страница
+   Базовые стили: base.css, components.css, layouts.css
    ============================================ */
 
-/* Переменные из основного стиля */
-:root {
-    --black: #000000;
-    --white: #FFFFFF;
-    --gray: #808080;
-    --gray-light: #D3D3D3;
-    --gray-dark: #2A2A2A;
-    --accent: #3cc33c;
-    --accent-hover: #33aa33;
-    --border-width: 3px;
-    --border: var(--border-width) solid var(--black);
-    --transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
-    --font-main: 'Space Grotesk', 'Arial', 'Helvetica', sans-serif;
-}
-
-/* Общие стили */
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 50px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-}
-
-/* Hero секция политики */
-.brutal-privacy-hero {
+/* Hero секция */
+.privacy-hero {
     background: var(--white);
     padding: 120px 0;
     border-bottom: var(--border);
-    position: relative;
+    margin-top: 135px;
 }
 
-.brutal-privacy-hero-content {
+.privacy-hero-content {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
 }
 
-.brutal-privacy-hero-title {
+.privacy-hero-title {
     font-size: clamp(42px, 6vw, 80px);
     font-weight: 900;
     color: var(--black);
@@ -62,7 +28,7 @@
     line-height: 1.1;
 }
 
-.brutal-privacy-hero-subtitle {
+.privacy-hero-subtitle {
     font-size: 20px;
     color: var(--gray-dark);
     line-height: 1.7;
@@ -71,357 +37,99 @@
     font-weight: 400;
 }
 
-/* Основной контент */
-.brutal-privacy-content {
+/* Контент политики */
+.privacy-content {
     background: var(--white);
     padding: 100px 0;
 }
 
-.brutal-privacy-wrapper {
+.privacy-content-wrapper {
     max-width: 900px;
     margin: 0 auto;
 }
 
-/* Секции */
-.brutal-privacy-section {
-    margin-bottom: 50px;
-    background: var(--gray-light);
-    border: var(--border);
-    padding: 50px;
-    position: relative;
-    transition: var(--transition);
+.privacy-section {
+    margin-bottom: 60px;
 }
 
-.brutal-privacy-section:hover {
-    border-color: var(--accent);
-}
-
-.brutal-privacy-section-title {
-    font-size: clamp(24px, 3vw, 36px);
+.privacy-section h2 {
+    font-size: 32px;
     font-weight: 900;
-    color: var(--black);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     text-transform: uppercase;
     letter-spacing: -1px;
-    line-height: 1.2;
-}
-
-.brutal-privacy-section-text {
-    font-size: 18px;
-    line-height: 1.8;
     color: var(--black);
-    margin-bottom: 25px;
-    font-weight: 400;
 }
 
-.brutal-privacy-section-text:last-child {
-    margin-bottom: 0;
-}
-
-.brutal-privacy-section-text strong {
+.privacy-section h3 {
+    font-size: 24px;
     font-weight: 700;
-    color: var(--black);
-}
-
-/* Списки */
-.brutal-privacy-list {
-    margin: 25px 0;
-    padding-left: 0;
-    list-style: none;
-}
-
-.brutal-privacy-list li {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 15px;
-    font-size: 18px;
-    line-height: 1.7;
-    color: var(--black);
-    font-weight: 400;
-}
-
-.brutal-privacy-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--accent);
-    font-weight: 900;
-    font-size: 18px;
-}
-
-/* Выделенные блоки */
-.brutal-privacy-highlight {
-    background: var(--white);
-    border: var(--border);
-    padding: 30px;
-    margin: 30px 0;
-    position: relative;
-    transition: var(--transition);
-}
-
-.brutal-privacy-highlight:hover {
-    border-color: var(--accent);
-}
-
-.brutal-privacy-highlight::before {
-    content: 'ВАЖНО';
-    position: absolute;
-    top: -15px;
-    left: 30px;
-    background: var(--accent);
-    color: var(--white);
-    padding: 8px 20px;
-    font-weight: 700;
-    font-size: 14px;
+    margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border: 2px solid var(--black);
-}
-
-.brutal-privacy-highlight-text {
-    font-weight: 600;
     color: var(--black);
-    margin: 0;
-    font-size: 18px;
-    line-height: 1.7;
 }
 
-/* Контактная информация */
-.brutal-privacy-contact {
-    background: var(--gray-light);
-    border: var(--border);
-    padding: 50px;
-    text-align: center;
-    margin-top: 60px;
-    position: relative;
-    transition: var(--transition);
-}
-
-.brutal-privacy-contact:hover {
-    border-color: var(--accent);
-}
-
-.brutal-privacy-contact-title {
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 900;
-    color: var(--black);
-    margin-bottom: 25px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
-
-.brutal-privacy-contact-text {
-    font-size: 18px;
-    line-height: 1.7;
-    color: var(--black);
-    margin-bottom: 30px;
+.privacy-section p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--gray-dark);
+    margin-bottom: 20px;
     font-weight: 400;
 }
 
-.brutal-privacy-contact-info {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
+.privacy-section ul,
+.privacy-section ol {
+    margin-left: 30px;
+    margin-bottom: 20px;
 }
 
-.brutal-privacy-contact-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-weight: 600;
-    color: var(--black);
-    font-size: 18px;
-    transition: var(--transition);
-}
-
-.brutal-privacy-contact-item:hover {
-    color: var(--accent);
-}
-
-.brutal-privacy-contact-item i {
-    color: var(--accent);
-    font-size: 20px;
-    transition: var(--transition);
-}
-
-.brutal-privacy-contact-item:hover i {
-    color: var(--black);
+.privacy-section li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--gray-dark);
+    margin-bottom: 12px;
+    font-weight: 400;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .brutal-privacy-hero {
+    .privacy-hero {
         padding: 80px 0;
+        margin-top: 70px;
     }
-
-    .brutal-privacy-hero-title {
-        font-size: 40px;
-    }
-
-    .brutal-privacy-hero-subtitle {
-        font-size: 18px;
-    }
-
-    .brutal-privacy-content {
+    
+    .privacy-content {
         padding: 60px 0;
     }
-
-    .brutal-privacy-wrapper {
-        max-width: 100%;
-    }
-
-    .brutal-privacy-section {
-        padding: 40px;
+    
+    .privacy-section {
         margin-bottom: 40px;
     }
-
-    .brutal-privacy-section-title {
-        font-size: 24px;
+    
+    .privacy-section h2 {
+        font-size: 28px;
     }
-
-    .brutal-privacy-section-text {
-        font-size: 16px;
-        margin-bottom: 20px;
-    }
-
-    .brutal-privacy-list {
-        margin: 20px 0;
-    }
-
-    .brutal-privacy-list li {
-        padding-left: 25px;
-        margin-bottom: 12px;
-        font-size: 16px;
-    }
-
-    .brutal-privacy-list li::before {
-        font-size: 16px;
-    }
-
-    .brutal-privacy-highlight {
-        padding: 25px;
-        margin: 25px 0;
-    }
-
-    .brutal-privacy-highlight::before {
-        top: -12px;
-        left: 25px;
-        padding: 6px 15px;
-        font-size: 13px;
-    }
-
-    .brutal-privacy-highlight-text {
-        font-size: 16px;
-    }
-
-    .brutal-privacy-contact {
-        padding: 40px;
-        margin-top: 40px;
-    }
-
-    .brutal-privacy-contact-title {
-        font-size: 24px;
-    }
-
-    .brutal-privacy-contact-text {
-        font-size: 16px;
-        margin-bottom: 25px;
-    }
-
-    .brutal-privacy-contact-info {
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    .brutal-privacy-contact-item {
-        font-size: 16px;
-        gap: 12px;
-    }
-
-    .brutal-privacy-contact-item i {
-        font-size: 18px;
+    
+    .privacy-section h3 {
+        font-size: 22px;
     }
 }
 
 @media (max-width: 480px) {
-    .brutal-privacy-hero-title {
-        font-size: 32px;
+    .privacy-hero {
+        padding: 60px 0;
     }
-
-    .brutal-privacy-hero-subtitle {
-        font-size: 16px;
+    
+    .privacy-content {
+        padding: 40px 0;
     }
-
-    .brutal-privacy-section {
-        padding: 30px;
-        margin-bottom: 30px;
+    
+    .privacy-section h2 {
+        font-size: 24px;
     }
-
-    .brutal-privacy-section-title {
+    
+    .privacy-section h3 {
         font-size: 20px;
-    }
-
-    .brutal-privacy-section-text {
-        font-size: 15px;
-        margin-bottom: 15px;
-    }
-
-    .brutal-privacy-list {
-        margin: 15px 0;
-    }
-
-    .brutal-privacy-list li {
-        padding-left: 20px;
-        margin-bottom: 10px;
-        font-size: 15px;
-    }
-
-    .brutal-privacy-list li::before {
-        font-size: 15px;
-    }
-
-    .brutal-privacy-highlight {
-        padding: 20px;
-        margin: 20px 0;
-    }
-
-    .brutal-privacy-highlight::before {
-        top: -10px;
-        left: 20px;
-        padding: 5px 12px;
-        font-size: 12px;
-    }
-
-    .brutal-privacy-highlight-text {
-        font-size: 15px;
-    }
-
-    .brutal-privacy-contact {
-        padding: 30px;
-        margin-top: 30px;
-    }
-
-    .brutal-privacy-contact-title {
-        font-size: 20px;
-    }
-
-    .brutal-privacy-contact-text {
-        font-size: 15px;
-        margin-bottom: 20px;
-    }
-
-    .brutal-privacy-contact-info {
-        gap: 20px;
-    }
-
-    .brutal-privacy-contact-item {
-        font-size: 15px;
-        gap: 10px;
-    }
-
-    .brutal-privacy-contact-item i {
-        font-size: 16px;
     }
 }

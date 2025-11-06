@@ -19,12 +19,12 @@
 
 {% block content %}
 <!-- Hero секция термина -->
-<section class="brutal-glossary-hero">
+<section class="glossary-hero">
     <div class="container">
-        <div class="brutal-glossary-hero-content">
-            <h1 class="brutal-glossary-hero-title">{{ glossary_term.term }}</h1>
-            <div class="brutal-glossary-hero-meta">
-                <span class="brutal-glossary-hero-category">
+        <div class="glossary-hero-content">
+            <h1 class="glossary-hero-title">{{ glossary_term.term }}</h1>
+            <div class="glossary-hero-meta">
+                <span class="glossary-hero-category">
                     Категория: <a href="{% url 'main:glossary_category' category.slug %}">{{ category.name }}</a>
                 </span>
             </div>
@@ -33,15 +33,15 @@
 </section>
 
 <!-- Определение термина -->
-<section class="brutal-glossary-definition">
+<section class="glossary-definition">
     <div class="container">
-        <div class="brutal-glossary-definition-content">
-            <div class="brutal-glossary-definition-text">
+        <div class="glossary-definition-content">
+            <div class="glossary-definition-text">
                 {{ glossary_term.definition|safe }}
             </div>
-            <div class="brutal-glossary-definition-meta">
-                <div class="brutal-glossary-definition-stats">
-                    <span class="brutal-glossary-definition-date">Обновлено: {{ glossary_term.updated_at|date:"d.m.Y" }}</span>
+            <div class="glossary-definition-meta">
+                <div class="glossary-definition-stats">
+                    <span class="glossary-definition-date">Обновлено: {{ glossary_term.updated_at|date:"d.m.Y" }}</span>
                 </div>
             </div>
         </div>
@@ -50,13 +50,13 @@
 
 <!-- Похожие термины -->
 {% if related_terms %}
-<section class="brutal-glossary-related">
+<section class="glossary-related">
     <div class="container">
-        <h2 class="brutal-glossary-related-title">Похожие термины</h2>
-        <div class="brutal-glossary-related-terms">
+        <h2 class="glossary-related-title">Похожие термины</h2>
+        <div class="glossary-related-terms">
             {% for term in related_terms %}
-            <div class="brutal-glossary-related-term">
-                <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="brutal-glossary-related-term-link">
+            <div class="glossary-related-term">
+                <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="glossary-related-term-link">
                     {{ term.term }}
                 </a>
             </div>
@@ -67,18 +67,18 @@
 {% endif %}
 
 <!-- CTA секция -->
-<section class="brutal-glossary-cta">
+<section class="glossary-cta">
     <div class="container">
-        <div class="brutal-glossary-cta-content">
-            <h2 class="brutal-glossary-cta-title">Нужна помощь с терминами?</h2>
-            <p class="brutal-glossary-cta-description">
+        <div class="glossary-cta-content">
+            <h2 class="glossary-cta-title">Нужна помощь с терминами?</h2>
+            <p class="glossary-cta-description">
                 Наши эксперты помогут разобраться с любыми вопросами по SEO и digital-маркетингу
             </p>
-            <div class="brutal-glossary-cta-buttons">
-                <a href="{% url 'main:home' %}#contact" class="brutal-glossary-cta-button primary">
+            <div class="glossary-cta-buttons">
+                <a href="{% url 'main:home' %}#contact" class="glossary-cta-button primary">
                     Получить консультацию
                 </a>
-                <a href="{% url 'main:glossary_category' category.slug %}" class="brutal-glossary-cta-button secondary">
+                <a href="{% url 'main:glossary_category' category.slug %}" class="glossary-cta-button secondary">
                     Все термины категории
                 </a>
             </div>

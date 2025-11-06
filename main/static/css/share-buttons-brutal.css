@@ -1,185 +1,92 @@
-/* ===== БРУТАЛЬНЫЕ КНОПКИ ПОДЕЛИТЬСЯ ===== */
+/* ============================================
+   КНОПКИ ПОДЕЛИТЬСЯ - СПЕЦИФИЧНЫЕ СТИЛИ
+   Эталон: главная страница
+   Базовые стили: base.css, components.css, layouts.css
+   ============================================ */
 
-.brutal-share-section {
-    margin: 20px 0 40px 0;
-    padding: 0 20px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.brutal-share-block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 30px;
-    background: var(--brutal-white);
-    border: 3px solid var(--brutal-black);
-    border-top: none; /* Убираем верхнюю границу */
-    box-shadow: 8px 8px 0px var(--brutal-black);
-    transition: var(--brutal-transition);
-    font-family: 'Courier New', monospace;
-}
-
-.brutal-share-block:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 10px 10px 0px var(--brutal-black);
-}
-
-/* Кнопка копирования */
-.brutal-copy-btn {
-    background: var(--brutal-green);
-    border: 3px solid var(--brutal-black);
-    color: var(--brutal-white);
-    padding: 15px 25px;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: var(--brutal-transition);
-    box-shadow: 4px 4px 0px var(--brutal-black);
+/* Блок кнопок социальных сетей */
+.share-buttons {
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.brutal-copy-btn:hover {
-    background: var(--brutal-white);
-    color: var(--brutal-black);
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px var(--brutal-black);
-}
-
-.brutal-copy-btn:active {
-    transform: translate(0, 0);
-    box-shadow: 2px 2px 0px var(--brutal-black);
-}
-
-.brutal-copy-btn i {
-    font-size: 1.1rem;
-}
-
-/* Блок социальных сетей */
-.brutal-social-share {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.brutal-social-label {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--brutal-black);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.brutal-social-links {
-    display: flex;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
-.brutal-social-link {
-    display: inline-flex;
+.share-buttons-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--black);
+    font-size: 14px;
+}
+
+.share-button {
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 50px;
     height: 50px;
-    border: 3px solid var(--brutal-black);
+    background: var(--white);
+    color: var(--black);
+    border: var(--border);
     text-decoration: none;
-    transition: var(--brutal-transition);
-    box-shadow: 4px 4px 0px var(--brutal-black);
-    font-size: 1.3rem;
+    transition: var(--transition);
+    font-size: 18px;
+    cursor: pointer;
 }
 
-.brutal-social-link:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px var(--brutal-black);
+.share-button:hover {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
 }
 
-.brutal-social-link:active {
-    transform: translate(0, 0);
-    box-shadow: 2px 2px 0px var(--brutal-black);
+.share-button.vk:hover {
+    background: #0077ff;
+    border-color: #0077ff;
 }
 
-/* ВКонтакте */
-.brutal-social-link.vk {
-    background: #4C75A3;
-    color: white;
-}
-
-.brutal-social-link.vk:hover {
-    background: #3d5f8a;
-}
-
-/* Телеграм */
-.brutal-social-link.telegram {
+.share-button.telegram:hover {
     background: #0088cc;
-    color: white;
+    border-color: #0088cc;
 }
 
-.brutal-social-link.telegram:hover {
-    background: #0077b3;
+.share-button.whatsapp:hover {
+    background: #25d366;
+    border-color: #25d366;
 }
 
-/* Уведомление о копировании */
-.brutal-copy-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--brutal-green);
-    color: var(--brutal-white);
-    padding: 15px 25px;
-    border: 3px solid var(--brutal-black);
-    box-shadow: 6px 6px 0px var(--brutal-black);
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 10000;
-    opacity: 0;
-    transform: translateX(100%);
-    transition: all 0.3s ease;
+.share-button.twitter:hover {
+    background: #1da1f2;
+    border-color: #1da1f2;
 }
 
-.brutal-copy-notification.show {
-    opacity: 1;
-    transform: translateX(0);
+.share-button.facebook:hover {
+    background: #1877f2;
+    border-color: #1877f2;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .brutal-share-block {
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px;
-    }
-    
-    .brutal-social-share {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .brutal-social-links {
+    .share-buttons {
         justify-content: center;
     }
     
-    .brutal-copy-btn {
-        width: 100%;
-        justify-content: center;
+    .share-button {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .share-buttons {
+        gap: 10px;
     }
     
-    .brutal-copy-notification {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        transform: translateY(-100%);
-    }
-    
-    .brutal-copy-notification.show {
-        transform: translateY(0);
+    .share-button {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
     }
 }

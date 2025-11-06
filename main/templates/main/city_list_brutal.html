@@ -20,11 +20,11 @@
 {% block content %}
 
 <!-- Hero секция городов -->
-<section class="brutal-cities-hero">
+<section class="cities-hero">
     <div class="container">
-        <div class="brutal-cities-hero-content">
-            <h1 class="brutal-cities-hero-title">Города присутствия</h1>
-            <p class="brutal-cities-hero-subtitle">
+        <div class="cities-hero-content">
+            <h1 class="cities-hero-title">Города присутствия</h1>
+            <p class="cities-hero-subtitle">
                 Мы предоставляем услуги SEO-продвижения и комплексного интернет-маркетинга 
                 в крупнейших городах России и СНГ.
             </p>
@@ -33,18 +33,18 @@
 </section>
 
 <!-- Основной контент -->
-<section class="brutal-cities-content">
+<section class="cities-content">
     <div class="container">
         <!-- Список городов -->
-        <div class="brutal-cities-grid">
+        <div class="cities-grid">
             {% for city in cities %}
-            <div class="brutal-city-card">
-                <div class="brutal-city-region">{{ city.region }}</div>
-                <h3 class="brutal-city-title">{{ city.name }}</h3>
+            <div class="city-card">
+                <div class="city-region">{{ city.region }}</div>
+                <h3 class="city-title">{{ city.name }}</h3>
                 {% if city.local_description %}
-                <p class="brutal-city-description">{{ city.local_description|truncatewords:20 }}</p>
+                <p class="city-description">{{ city.local_description|truncatewords:20 }}</p>
                 {% endif %}
-                <a href="{{ city.get_absolute_url }}" class="brutal-city-link">
+                <a href="{{ city.get_absolute_url }}" class="city-link">
                     SEO {{ city.get_name_prepositional }}
                 </a>
             </div>
@@ -52,14 +52,14 @@
         </div>
 
         <!-- CTA секция -->
-        <div class="brutal-cities-cta">
-            <div class="brutal-cities-cta-content">
-                <h3 class="brutal-cities-cta-title">Не нашли свой город?</h3>
-                <p class="brutal-cities-cta-text">
+        <div class="cities-cta">
+            <div class="cities-cta-content">
+                <h3 class="cities-cta-title">Не нашли свой город?</h3>
+                <p class="cities-cta-text">
                     Мы работаем по всей России и СНГ. Свяжитесь с нами для обсуждения 
                     условий работы в вашем регионе
                 </p>
-                <a href="{% url 'main:contacts' %}" class="brutal-cities-cta-btn">
+                <a href="{% url 'main:contacts' %}" class="cities-cta-btn">
                     Связаться с нами
                 </a>
             </div>

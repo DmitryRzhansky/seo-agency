@@ -18,22 +18,24 @@
 <section class="page-hero">
     <div class="container">
         <div class="page-hero-content">
-            <h1 class="page-hero-title">Глоссарий терминов</h1>
+            <h1 class="page-hero-title">Глоссарий</h1>
             <p class="page-hero-subtitle">
-                Алфавитный словарь терминов по SEO, контекстной рекламе и digital-маркетингу
+                Словарь терминов по SEO, контекстной рекламе и digital-маркетингу
             </p>
         </div>
     </div>
 </section>
 
-<!-- Термины -->
+<!-- Термины по категориям -->
 <section class="content-section">
     <div class="container">
         {% if glossary_by_category %}
             {% for category, terms in glossary_by_category.items %}
-            <div class="section-header">
+            
+            <!-- Заголовок категории -->
+            <div class="section-header" {% if not forloop.first %}style="margin-top: 80px;"{% endif %}>
                 <h2 class="section-title">
-                    <a href="{% url 'main:glossary_category' category.slug %}" style="color: inherit; text-decoration: none;">
+                    <a href="{% url 'main:glossary_category' category.slug %}" style="color: inherit; text-decoration: none; transition: color 0.3s;">
                         {{ category.name }}
                     </a>
                 </h2>
@@ -42,9 +44,10 @@
                 {% endif %}
             </div>
             
+            <!-- Термины категории -->
             <div class="content-grid">
                 {% for term in terms %}
-                <div class="content-card">
+                <article class="content-card">
                     <h3 class="content-card-title">
                         <a href="{% url 'main:glossary_term' category.slug term.slug %}">{{ term.term }}</a>
                     </h3>
@@ -55,15 +58,15 @@
                         <span>Подробнее</span>
                         <span class="arrow">→</span>
                     </a>
-                </div>
+                </article>
                 {% endfor %}
             </div>
             {% endfor %}
         {% else %}
         <div class="empty-state">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-book"></i>
             <h3>Термины не найдены</h3>
-            <p>Попробуйте изменить параметры поиска.</p>
+            <p>Глоссарий пока пуст. Мы работаем над его наполнением.</p>
         </div>
         {% endif %}
     </div>
@@ -75,7 +78,7 @@
         <div class="cta-section-content">
             <h2 class="cta-section-title">Не нашли нужный термин?</h2>
             <p class="cta-section-text">
-                Свяжитесь с нами, и мы добавим определение интересующего вас термина в глоссарий
+                Свяжитесь с нами, и мы добавим определение интересующего вас термина
             </p>
             <div class="cta-section-buttons">
                 <a href="{% url 'main:home' %}#contact" class="cta-section-button">

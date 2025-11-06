@@ -20,8 +20,7 @@
         <div class="page-hero-content">
             <h1 class="page-hero-title">Блог</h1>
             <p class="page-hero-subtitle">
-                Полезные статьи о SEO, продвижении сайтов и digital-маркетинге. 
-                Экспертные советы от нашей команды.
+                Полезные статьи о SEO, продвижении сайтов и digital-маркетинге
             </p>
         </div>
     </div>
@@ -29,18 +28,22 @@
 
 <!-- Категории -->
 {% if categories %}
-<section class="content-section">
+<section class="content-section alt-bg">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Категории</h2>
+            <h2 class="section-title">Категории блога</h2>
         </div>
         
-        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
-            <a href="{% url 'blog:post_list' %}" class="btn {% if not current_category %}btn-primary{% else %}btn-secondary{% endif %}">
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 40px;">
+            <a href="{% url 'blog:post_list' %}" 
+               class="cta-button {% if not current_category %}primary{% else %}secondary{% endif %}" 
+               style="padding: 12px 24px; font-size: 12px;">
                 Все статьи
             </a>
             {% for category in categories %}
-            <a href="{% url 'blog:category_posts' slug=category.slug %}" class="btn {% if current_category == category %}btn-primary{% else %}btn-secondary{% endif %}">
+            <a href="{% url 'blog:category_posts' slug=category.slug %}" 
+               class="cta-button {% if current_category == category %}primary{% else %}secondary{% endif %}"
+               style="padding: 12px 24px; font-size: 12px;">
                 {{ category.name }}
             </a>
             {% endfor %}
@@ -50,7 +53,7 @@
 {% endif %}
 
 <!-- Статьи -->
-<section class="content-section alt-bg">
+<section class="content-section">
     <div class="container">
         {% if page_obj %}
         <div class="content-grid">
@@ -83,9 +86,7 @@
                 <div class="content-card-footer">
                     <div class="content-card-info">
                         <span>{{ post.published_date|date:"d.m.Y" }}</span>
-                        {% if post.views_count %}
                         <span>{{ post.views_count }} просмотров</span>
-                        {% endif %}
                     </div>
                     <a href="{{ post.get_absolute_url }}" class="content-card-link">
                         <span>Читать</span>
@@ -97,20 +98,18 @@
         </div>
         
         <!-- Пагинация -->
-        {% if is_paginated %}
+        {% if page_obj.has_other_pages %}
         <div class="pagination">
             {% if page_obj.has_previous %}
-                <a href="?page=1">Первая</a>
-                <a href="?page={{ page_obj.previous_page_number }}">‹</a>
+            <a href="?page=1">← Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Пред.</a>
             {% endif %}
             
-            <span class="current">
-                {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
-            </span>
+            <span class="current">{{ page_obj.number }}</span>
             
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">›</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+            <a href="?page={{ page_obj.next_page_number }}">След.</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя →</a>
             {% endif %}
         </div>
         {% endif %}
@@ -119,15 +118,26 @@
         <div class="empty-state">
             <i class="fas fa-search"></i>
             <h3>Статьи не найдены</h3>
-            <p>
-                {% if search_query %}
-                    По запросу "{{ search_query }}" ничего не найдено.
-                {% else %}
-                    В этом разделе пока нет опубликованных статей.
-                {% endif %}
-            </p>
+            <p>В данной категории пока нет опубликованных статей.</p>
         </div>
         {% endif %}
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Хотите узнать больше?</h2>
+            <p class="cta-section-text">
+                Подпишитесь на наш блог и получайте полезные статьи о SEO и digital-маркетинге
+            </p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:home' %}#contact" class="cta-section-button">
+                    <span>Связаться с нами</span>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 

@@ -20,66 +20,81 @@
         <div class="page-hero-content">
             <h1 class="page-hero-title">Карта сайта</h1>
             <p class="page-hero-subtitle">
-                Полная структура сайта Isakov Agency. Найдите нужную информацию быстро и удобно.
+                Полная структура сайта. Найдите нужную информацию быстро и удобно
             </p>
         </div>
     </div>
 </section>
 
-<!-- Контент -->
+<!-- Услуги -->
+{% if sitemap_data.services %}
 <section class="content-section">
     <div class="container">
-        
-        <!-- Услуги -->
         <div class="section-header">
             <h2 class="section-title">Услуги</h2>
         </div>
         <div class="content-grid">
             {% for category in sitemap_data.services %}
-            <div class="content-card">
+            <article class="content-card">
                 <h3 class="content-card-title">
                     <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
                 </h3>
-                <ul class="content-list">
+                {% if category.services.all %}
+                <ul style="list-style: none; padding: 0; margin: 0;">
                     {% for service in category.services.all %}
-                    <li>
-                        <a href="{{ service.get_absolute_url }}">{{ service.title }}</a>
+                    <li style="padding: 8px 0; border-bottom: 1px solid var(--gray-light); font-size: 14px;">
+                        <a href="{{ service.get_absolute_url }}" style="color: var(--gray-dark); text-decoration: none; transition: color 0.3s;">{{ service.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
-            </div>
+                {% endif %}
+            </article>
             {% endfor %}
         </div>
+    </div>
+</section>
+{% endif %}
 
-        <!-- Блог -->
-        <div class="section-header" style="margin-top: 80px;">
+<!-- Блог -->
+{% if sitemap_data.blog_categories %}
+<section class="content-section alt-bg">
+    <div class="container">
+        <div class="section-header">
             <h2 class="section-title">Блог</h2>
         </div>
         <div class="content-grid">
             {% for category in sitemap_data.blog_categories %}
-            <div class="content-card">
+            <article class="content-card">
                 <div class="content-card-meta">{{ category.post_set.count }} статей</div>
                 <h3 class="content-card-title">
                     <a href="{% url 'blog:category_posts' category.slug %}">{{ category.name }}</a>
                 </h3>
-                <ul class="content-list">
+                {% if category.post_set.all %}
+                <ul style="list-style: none; padding: 0; margin: 0;">
                     {% for post in category.post_set.all|slice:":5" %}
-                    <li>
-                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    <li style="padding: 8px 0; border-bottom: 1px solid var(--gray-light); font-size: 14px;">
+                        <a href="{{ post.get_absolute_url }}" style="color: var(--gray-dark); text-decoration: none; transition: color 0.3s;">{{ post.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
-            </div>
+                {% endif %}
+            </article>
             {% endfor %}
         </div>
+    </div>
+</section>
+{% endif %}
 
-        <!-- Региональные страницы -->
-        <div class="section-header" style="margin-top: 80px;">
+<!-- Региональные страницы -->
+{% if sitemap_data.cities %}
+<section class="content-section">
+    <div class="container">
+        <div class="section-header">
             <h2 class="section-title">Региональные страницы</h2>
         </div>
         <div class="content-grid grid-4">
             {% for city in sitemap_data.cities %}
-            <div class="content-card">
+            <article class="content-card">
                 <h3 class="content-card-title">
                     <a href="{{ city.get_absolute_url }}">{{ city.name }}</a>
                 </h3>
@@ -87,11 +102,30 @@
                     <span>SEO {{ city.get_name_prepositional }}</span>
                     <span class="arrow">→</span>
                 </a>
-            </div>
+            </article>
             {% endfor %}
         </div>
-
     </div>
 </section>
+{% endif %}
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Нужна помощь в навигации?</h2>
+            <p class="cta-section-text">
+                Свяжитесь с нами, и мы поможем найти нужную информацию
+            </p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:contacts' %}" class="cta-section-button">
+                    <span>Связаться с нами</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
 
 {% endblock content %}

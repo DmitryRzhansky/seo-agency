@@ -1,7 +1,8 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load seo_tags %}
 
-{% block title %}Услуги{% endblock title %}
+{% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -11,98 +12,44 @@
 </div>
 {% endblock breadcrumbs %}
 
-
 {% block content %}
 
-<!-- Hero секция услуг -->
-<section class="hero services-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="hero-content">
-            <div class="hero-label">
-                <span class="label-dot"></span>
-                <span>Наши услуги</span>
-            </div>
-            <h1 class="hero-title">
-                <span class="word">Что</span>
-                <span class="word">мы</span>
-                <span class="word">делаем</span>
-            </h1>
-            <p class="hero-subtitle">
-                Комплексные услуги по продвижению сайтов. От технического аудита до комплексного SEO-продвижения. 
-                Работаем только белыми методами с гарантией результата.
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Наши услуги</h1>
+            <p class="page-hero-subtitle">
+                Комплексное продвижение бизнеса в интернете. SEO, контекстная реклама, создание сайтов
             </p>
-            <div class="hero-features">
-                <div class="feature-box">
-                    <span class="feature-check">✓</span>
-                    <span>Оплата за результат</span>
-                </div>
-                <div class="feature-box">
-                    <span class="feature-check">✓</span>
-                    <span>Гарантия возврата 100%</span>
-                </div>
-                <div class="feature-box">
-                    <span class="feature-check">✓</span>
-                    <span>Первый месяц бесплатно</span>
-                </div>
-                <div class="feature-box">
-                    <span class="feature-check">✓</span>
-                    <span>Без предоплаты</span>
-                </div>
-            </div>
-            <div class="hero-cta">
-                <a href="{% url 'main:contacts' %}" class="cta-button primary">
-                    <span class="button-text">Начать проект</span>
-                    <span class="button-icon">→</span>
-                </a>
-                <a href="{% url 'main:portfolio_list' %}" class="cta-button secondary">
-                    <span class="button-text">Смотреть кейсы</span>
-                </a>
-            </div>
-        </div>
-        <div class="hero-form">
-            <div class="form-header">
-                <h3>Получить консультацию</h3>
-                <div class="form-badge">
-                    <span class="badge-dot"></span>
-                    <span>Бесплатно</span>
-                </div>
-            </div>
-            <form id="heroForm" class="quick-form" method="post" action="{% url 'main:home' %}">
-                {% csrf_token %}
-                <input type="text" name="name" placeholder="Ваше имя" required>
-                <input type="tel" name="phone" placeholder="Телефон" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="hidden" name="message" value="Заявка со страницы услуг">
-                <button type="submit" class="form-submit">
-                    <span>Отправить</span>
-                </button>
-            </form>
-            <p class="form-note">Ответим в течение 15 минут</p>
         </div>
     </div>
 </section>
 
 <!-- Категории услуг -->
-<section class="services-categories">
+<section class="content-section">
     <div class="container">
-        <div class="services-categories-header">
-            <h2 class="services-categories-title">Категории услуг</h2>
-            <p class="services-categories-subtitle">
-                Выберите направление — внутри подробности и состав работ
-            </p>
-        </div>
-
-        <div class="services-grid">
-            {% for category in categories %}
-            <article class="service-card">
-                <h3 class="service-card-title">
+        {% if service_categories %}
+        <div class="content-grid">
+            {% for category in service_categories %}
+            <article class="content-card">
+                <div class="content-card-placeholder" style="background: var(--gray-light); color: var(--accent);">
+                    <i class="fas fa-cogs" style="font-size: 64px;"></i>
+                </div>
+                
+                <h3 class="content-card-title">
                     <a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a>
                 </h3>
-                <p class="service-card-desc">
-                    {{ category.description|default:"Описание категории"|truncatewords:20 }}
+                
+                <p class="content-card-text">
+                    {{ category.description|truncatewords:20 }}
                 </p>
-                <div class="service-card-footer">
-                    <a class="service-card-btn" href="{% url 'services:service_category' slug=category.slug %}">
+                
+                <div class="content-card-footer">
+                    <div class="content-card-info">
+                        <span>{{ category.services.count }} услуг</span>
+                    </div>
+                    <a href="{% url 'services:service_category' slug=category.slug %}" class="content-card-link">
                         <span>Подробнее</span>
                         <span class="arrow">→</span>
                     </a>
@@ -110,21 +57,29 @@
             </article>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>Услуги не найдены</h3>
+            <p>Мы работаем над наполнением этого раздела.</p>
+        </div>
+        {% endif %}
     </div>
 </section>
 
-<!-- CTA секция -->
-<section class="services-cta">
+<!-- CTA -->
+<section class="cta-section">
     <div class="container">
-        <div class="services-cta-content">
-            <h2 class="services-cta-title">Готовы обсудить проект?</h2>
-            <p class="services-cta-subtitle">
-                Оставьте заявку — вернёмся с понятным планом работ и сроками
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Готовы обсудить проект?</h2>
+            <p class="cta-section-text">
+                Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию продвижения
             </p>
-            <a href="{% url 'main:contacts' %}" class="services-cta-btn">
-                <span>Связаться с нами</span>
-                <span class="arrow">→</span>
-            </a>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:home' %}#contact" class="cta-section-button">
+                    <span>Получить консультацию</span>
+                </a>
+            </div>
         </div>
     </div>
 </section>

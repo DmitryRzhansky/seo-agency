@@ -29,11 +29,11 @@
 <!-- Контент -->
 <section class="content-section">
     <div class="container">
-        <div class="content-grid grid-2">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
             
             <!-- Форма -->
-            <div class="content-card">
-                <h2 class="content-card-title">Напишите нам</h2>
+            <div class="service-card">
+                <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 30px; text-transform: uppercase; letter-spacing: -1px;">Напишите нам</h2>
                 <form method="post" class="quick-form">
                     {% csrf_token %}
                     <input type="text" name="name" placeholder="Ваше имя" required>
@@ -47,8 +47,8 @@
             </div>
             
             <!-- Контакты -->
-            <div class="content-card">
-                <h2 class="content-card-title">Контактная информация</h2>
+            <div class="service-card">
+                <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 30px; text-transform: uppercase; letter-spacing: -1px;">Контактная информация</h2>
                 <div class="text-content">
                     <p><strong>Телефон:</strong><br>
                     <a href="tel:+79636415944">+7 (963) 641-59-44</a></p>

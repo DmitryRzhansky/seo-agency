@@ -33,14 +33,12 @@
         <div class="section-header">
             <h2 class="section-title">Услуги</h2>
         </div>
-        <div class="content-grid">
+        <div class="services-grid">
             {% for category in sitemap_data.services %}
-            <article class="content-card">
-                <h3 class="content-card-title">
-                    <a href="{{ category.get_absolute_url }}">{{ category.title }}</a>
-                </h3>
+            <article class="service-card">
+                <h3>{{ category.title }}</h3>
                 {% if category.services.all %}
-                <ul style="list-style: none; padding: 0; margin: 0;">
+                <ul style="list-style: none; padding: 0; margin: 20px 0;">
                     {% for service in category.services.all %}
                     <li style="padding: 8px 0; border-bottom: 1px solid var(--gray-light); font-size: 14px;">
                         <a href="{{ service.get_absolute_url }}" style="color: var(--gray-dark); text-decoration: none; transition: color 0.3s;">{{ service.title }}</a>
@@ -62,15 +60,13 @@
         <div class="section-header">
             <h2 class="section-title">Блог</h2>
         </div>
-        <div class="content-grid">
+        <div class="services-grid">
             {% for category in sitemap_data.blog_categories %}
-            <article class="content-card">
-                <div class="content-card-meta">{{ category.post_set.count }} статей</div>
-                <h3 class="content-card-title">
-                    <a href="{% url 'blog:category_posts' category.slug %}">{{ category.name }}</a>
-                </h3>
+            <article class="service-card">
+                <div style="font-size: 12px; color: var(--accent); font-weight: 900; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 2px;">{{ category.post_set.count }} статей</div>
+                <h3>{{ category.name }}</h3>
                 {% if category.post_set.all %}
-                <ul style="list-style: none; padding: 0; margin: 0;">
+                <ul style="list-style: none; padding: 0; margin: 20px 0;">
                     {% for post in category.post_set.all|slice:":5" %}
                     <li style="padding: 8px 0; border-bottom: 1px solid var(--gray-light); font-size: 14px;">
                         <a href="{{ post.get_absolute_url }}" style="color: var(--gray-dark); text-decoration: none; transition: color 0.3s;">{{ post.title }}</a>
@@ -92,17 +88,16 @@
         <div class="section-header">
             <h2 class="section-title">Региональные страницы</h2>
         </div>
-        <div class="content-grid grid-4">
+        <div class="benefits-grid">
             {% for city in sitemap_data.cities %}
-            <article class="content-card">
-                <h3 class="content-card-title">
-                    <a href="{{ city.get_absolute_url }}">{{ city.name }}</a>
-                </h3>
-                <a href="{{ city.get_absolute_url }}" class="content-card-link">
+            <div class="benefit-card">
+                <div class="benefit-icon">📍</div>
+                <h3>{{ city.name }}</h3>
+                <a href="{{ city.get_absolute_url }}" class="service-btn">
                     <span>SEO {{ city.get_name_prepositional }}</span>
-                    <span class="arrow">→</span>
+                    <span>→</span>
                 </a>
-            </article>
+            </div>
             {% endfor %}
         </div>
     </div>

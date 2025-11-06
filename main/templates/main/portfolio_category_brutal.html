@@ -30,37 +30,30 @@
 <section class="content-section">
     <div class="container">
         {% if page_obj %}
-        <div class="content-grid">
+        <div class="services-grid">
             {% for project in page_obj %}
-            <article class="content-card">
+            <article class="service-card">
                 {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" class="content-card-image" alt="{{ project.get_main_image_alt }}">
-                {% else %}
-                <div class="content-card-placeholder">
-                    <i class="fas fa-briefcase"></i>
+                <div style="margin: -45px -45px 30px -45px; height: 250px; overflow: hidden;">
+                    <img src="{{ project.main_image.url }}" alt="{{ project.get_main_image_alt }}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 {% endif %}
                 
-                <div class="content-card-meta">{{ project.get_project_type_display_ru }}</div>
+                <div style="font-size: 12px; color: var(--accent); font-weight: 900; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 2px;">{{ project.get_project_type_display_ru }}</div>
                 
-                <h3 class="content-card-title">
-                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                </h3>
+                <h3>{{ project.title }}</h3>
                 
-                <p class="content-card-text">
+                <p style="font-size: 15px; line-height: 1.7; color: var(--gray-dark); margin-bottom: 25px; flex-grow: 1;">
                     {{ project.short_description|truncatewords:20 }}
                 </p>
                 
-                <div class="content-card-footer">
-                    <div class="content-card-info">
-                        {% if project.client_name %}
-                        <span>{{ project.client_name }}</span>
-                        {% endif %}
-                        <span>{{ project.created_at|date:"d.m.Y" }}</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: var(--border);">
+                    <div style="font-size: 13px; color: var(--gray); font-weight: 700;">
+                        {% if project.client_name %}{{ project.client_name }} • {% endif %}{{ project.created_at|date:"d.m.Y" }}
                     </div>
-                    <a href="{{ project.get_absolute_url }}" class="content-card-link">
+                    <a href="{{ project.get_absolute_url }}" class="service-btn">
                         <span>Смотреть</span>
-                        <span class="arrow">→</span>
+                        <span>→</span>
                     </a>
                 </div>
             </article>

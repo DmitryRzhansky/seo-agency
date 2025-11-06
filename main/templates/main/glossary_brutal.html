@@ -96,19 +96,19 @@
                 {% endif %}
             </div>
             
-            <div class="content-grid">
+            <div class="services-grid">
                 {% for term in terms %}
-                <article class="content-card">
-                    <h3 class="content-card-title">
-                        <a href="{% url 'main:glossary_term' category.slug term.slug %}">{{ term.term }}</a>
-                    </h3>
-                    <p class="content-card-text">
+                <article class="service-card">
+                    <h3>{{ term.term }}</h3>
+                    <p style="font-size: 15px; line-height: 1.7; color: var(--gray-dark); margin-bottom: 25px; flex-grow: 1;">
                         {{ term.definition|truncatewords:30|striptags }}
                     </p>
-                    <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="content-card-link">
-                        <span>Подробнее</span>
-                        <span class="arrow">→</span>
-                    </a>
+                    <div style="padding-top: 20px; border-top: var(--border);">
+                        <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="service-btn">
+                            <span>Подробнее</span>
+                            <span>→</span>
+                        </a>
+                    </div>
                 </article>
                 {% endfor %}
             </div>

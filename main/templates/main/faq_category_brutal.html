@@ -28,14 +28,14 @@
 <section class="content-section">
     <div class="container">
         {% if items %}
-        <div class="content-list">
+        <div class="services-grid">
             {% for item in items %}
-            <div class="content-list-item">
-                <h3 class="content-card-title">
-                    <a href="{% url 'main:faq_item' category.slug item.slug %}">{{ item.question }}</a>
-                </h3>
-                <p class="content-card-text">{{ item.answer|truncatewords:30|striptags }}</p>
-            </div>
+            <article class="service-card">
+                <h3>{{ item.question }}</h3>
+                <div class="text-content" style="font-size: 15px; line-height: 1.7; color: var(--gray-dark);">
+                    {{ item.answer|safe|truncatewords_html:50 }}
+                </div>
+            </article>
             {% endfor %}
         </div>
         {% else %}

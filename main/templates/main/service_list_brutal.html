@@ -30,28 +30,26 @@
 <section class="content-section">
     <div class="container">
         {% if service_categories %}
-        <div class="content-grid">
+        <div class="services-grid">
             {% for category in service_categories %}
-            <article class="content-card">
-                <div class="content-card-placeholder" style="background: var(--gray-light); color: var(--accent);">
-                    <i class="fas fa-cogs" style="font-size: 64px;"></i>
+            <article class="service-card">
+                <div style="display: flex; align-items: center; justify-content: center; height: 150px; background: var(--gray-light); margin: -45px -45px 30px -45px;">
+                    <i class="fas fa-cogs" style="font-size: 72px; color: var(--accent);"></i>
                 </div>
                 
-                <h3 class="content-card-title">
-                    <a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a>
-                </h3>
+                <h3>{{ category.title }}</h3>
                 
-                <p class="content-card-text">
+                <p style="font-size: 15px; line-height: 1.7; color: var(--gray-dark); margin-bottom: 25px; flex-grow: 1;">
                     {{ category.description|truncatewords:20 }}
                 </p>
                 
-                <div class="content-card-footer">
-                    <div class="content-card-info">
-                        <span>{{ category.services.count }} услуг</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: var(--border);">
+                    <div style="font-size: 13px; color: var(--gray); font-weight: 700;">
+                        {{ category.services.count }} услуг
                     </div>
-                    <a href="{% url 'services:service_category' slug=category.slug %}" class="content-card-link">
+                    <a href="{% url 'services:service_category' slug=category.slug %}" class="service-btn">
                         <span>Подробнее</span>
-                        <span class="arrow">→</span>
+                        <span>→</span>
                     </a>
                 </div>
             </article>

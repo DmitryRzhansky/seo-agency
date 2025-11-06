@@ -30,20 +30,18 @@
 <!-- Города -->
 <section class="content-section">
     <div class="container">
-        <div class="content-grid grid-4">
+        <div class="benefits-grid">
             {% for city in cities %}
-            <div class="content-card">
-                <div class="content-card-meta">{{ city.region }}</div>
-                <h3 class="content-card-title">
-                    <a href="{{ city.get_absolute_url }}">{{ city.name }}</a>
-                </h3>
-                {% if city.local_description %}
-                <p class="content-card-text">{{ city.local_description|truncatewords:20 }}</p>
-                {% endif %}
-                <a href="{{ city.get_absolute_url }}" class="content-card-link">
-                    <span>SEO {{ city.get_name_prepositional }}</span>
-                    <span class="arrow">→</span>
-                </a>
+            <div class="benefit-card">
+                <div class="benefit-icon">📍</div>
+                <h3>{{ city.name }}</h3>
+                <p>{{ city.region }}</p>
+                <div style="margin-top: auto; padding-top: 20px;">
+                    <a href="{{ city.get_absolute_url }}" class="service-btn">
+                        <span>SEO {{ city.get_name_prepositional }}</span>
+                        <span>→</span>
+                    </a>
+                </div>
             </div>
             {% endfor %}
         </div>

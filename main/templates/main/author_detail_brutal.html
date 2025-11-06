@@ -14,29 +14,37 @@
 
 {% block content %}
 
+<!-- Hero секция -->
+<section class="page-hero">
+    <div class="container">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ author.get_full_name }}</h1>
+            {% if author.position %}
+            <p class="page-hero-subtitle">{{ author.position }}</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
 <!-- Профиль автора -->
 <section class="content-section">
     <div class="container">
-        <div class="author-profile">
-            {% if author.profile.avatar %}
-            <img src="{{ author.profile.avatar.url }}" alt="{{ author.get_full_name }}" class="author-avatar">
-            {% else %}
-            <div class="author-avatar-placeholder">
-                <i class="fas fa-user"></i>
-            </div>
+        <div style="display: grid; grid-template-columns: 250px 1fr; gap: 60px; align-items: start;">
+            {% if author.photo %}
+            <img src="{{ author.photo.url }}" alt="{{ author.get_full_name }}" style="width: 100%; border: var(--border); aspect-ratio: 1;">
             {% endif %}
             
-            <div class="author-info">
-                <h2>{{ author.get_full_name }}</h2>
-                {% if author.profile.role %}
-                <div class="author-role">{{ author.profile.role }}</div>
-                {% elif author.is_staff %}
-                <div class="author-role">Автор блога</div>
+            <div>
+                {% if author.bio %}
+                <div class="text-content">
+                    {{ author.bio|linebreaks }}
+                </div>
                 {% endif %}
                 
-                {% if author.profile.bio %}
-                <div class="author-bio">
-                    {{ author.profile.bio|linebreaks }}
+                {% if author.experience %}
+                <div style="margin-top: 30px; padding: 25px; border: var(--border); background: var(--gray-light);">
+                    <h3 style="font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Опыт работы</h3>
+                    <p style="font-size: 15px; line-height: 1.7;">{{ author.experience }}</p>
                 </div>
                 {% endif %}
             </div>
@@ -44,31 +52,31 @@
     </div>
 </section>
 
-<!-- Статистика автора -->
+<!-- Статистика -->
 <section class="content-section alt-bg">
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">Статистика</h2>
         </div>
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-value">{{ total_posts|default:posts.count }}</div>
-                <div class="stat-label">Статей опубликовано</div>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon" style="font-size: 64px; font-weight: 900; color: var(--accent); font-family: var(--font-mono);">{{ total_posts }}</div>
+                <h3>Статей опубликовано</h3>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-value">{% if first_published %}{{ first_published|date:"Y" }}{% else %}-{% endif %}</div>
-                <div class="stat-label">Первая публикация</div>
+            <div class="benefit-card">
+                <div class="benefit-icon" style="font-size: 64px; font-weight: 900; color: var(--accent); font-family: var(--font-mono);">{% if first_published %}{{ first_published|date:"d.m.Y" }}{% else %}-{% endif %}</div>
+                <h3>Первая публикация</h3>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-value">{% if last_published %}{{ last_published|date:"d.m" }}{% else %}-{% endif %}</div>
-                <div class="stat-label">Последняя публикация</div>
+            <div class="benefit-card">
+                <div class="benefit-icon" style="font-size: 64px; font-weight: 900; color: var(--accent); font-family: var(--font-mono);">{% if last_published %}{{ last_published|date:"d.m.Y" }}{% else %}-{% endif %}</div>
+                <h3>Последняя публикация</h3>
             </div>
             
-            <div class="stat-card">
-                <div class="stat-value">{{ total_read_time|default:0 }}</div>
-                <div class="stat-label">Минут чтения</div>
+            <div class="benefit-card">
+                <div class="benefit-icon" style="font-size: 64px; font-weight: 900; color: var(--accent); font-family: var(--font-mono);">{{ total_read_time|default:0 }}</div>
+                <h3>Минут чтения всего</h3>
             </div>
         </div>
     </div>

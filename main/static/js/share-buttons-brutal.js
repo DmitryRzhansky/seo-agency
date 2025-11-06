@@ -31,26 +31,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Обработчик кнопки копирования
-    const copyButtons = document.querySelectorAll('.brutal-copy-btn');
+    const copyButtons = document.querySelectorAll('.brutal-copy-btn, .copy-btn');
     copyButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Получаем текст из блока контента
-            const contentBlock = document.querySelector('.brutal-service-detail-content') || 
-                                document.querySelector('.post-detail-content');
+            // Получаем текст из блока контента (ТОЛЬКО ТЕКСТ, БЕЗ URL)
+            const contentBlock = document.querySelector('.post-detail-content') || 
+                                document.querySelector('.text-content') ||
+                                document.querySelector('.brutal-service-detail-content') ||
+                                document.querySelector('.content-section .container');
             let textToCopy = '';
             
             if (contentBlock) {
-                // Извлекаем весь текстовый контент из блока
+                // Извлекаем весь текстовый контент из блока (БЕЗ URL)
                 textToCopy = contentBlock.innerText || contentBlock.textContent;
                 
-                // Добавляем заголовок страницы и URL
-                const pageTitle = document.title;
-                const pageUrl = window.location.href;
-                
-                textToCopy = `${pageTitle}\n\n${textToCopy}\n\n${pageUrl}`;
+                // Очищаем лишние пробелы и переносы
+                textToCopy = textToCopy.trim().replace(/\n{3,}/g, '\n\n');
             } else {
                 // Fallback на data-text если блок контента не найден
-                textToCopy = this.getAttribute('data-text');
+                textToCopy = this.getAttribute('data-text') || document.body.innerText;
             }
             
             if (navigator.clipboard && window.isSecureContext) {

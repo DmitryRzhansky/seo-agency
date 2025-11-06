@@ -27,6 +27,28 @@
         <div class="text-content">
             {{ glossary_term.definition|safe }}
         </div>
+        
+        <!-- Блок "Поделиться" -->
+        <div class="share-section">
+            <div class="share-block">
+                <button class="copy-btn">
+                    <i class="fas fa-copy"></i>
+                    <span>Скопировать текст</span>
+                </button>
+                
+                <div class="social-share">
+                    <span class="social-share-label">Поделиться:</span>
+                    <div class="social-links">
+                        <a href="#" class="social-link vk brutal-social-link" data-url="{{ request.build_absolute_uri }}">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="#" class="social-link telegram brutal-social-link" data-url="{{ request.build_absolute_uri }}">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

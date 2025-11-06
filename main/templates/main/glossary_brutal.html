@@ -18,24 +18,76 @@
 <section class="page-hero">
     <div class="container">
         <div class="page-hero-content">
-            <h1 class="page-hero-title">Глоссарий</h1>
+            <h1 class="page-hero-title">Глоссарий терминов</h1>
             <p class="page-hero-subtitle">
-                Словарь терминов по SEO, контекстной рекламе и digital-маркетингу
+                Алфавитный словарь терминов по SEO, контекстной рекламе и digital-маркетингу
             </p>
         </div>
     </div>
 </section>
 
-<!-- Термины по категориям -->
+<!-- Поиск и фильтры -->
+<section class="content-section alt-bg">
+    <div class="container">
+        <div class="filters-section">
+            <!-- Поиск -->
+            <form method="get" class="search-form">
+                <input 
+                    type="text" 
+                    name="search" 
+                    value="{{ search_query }}" 
+                    placeholder="Поиск по терминам..." 
+                    class="search-input"
+                >
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i>
+                    <span>Найти</span>
+                </button>
+            </form>
+
+            <!-- Категории -->
+            {% if categories %}
+            <div class="categories-filter">
+                <a href="{% url 'main:glossary_list' %}" class="category-button {% if not selected_category %}active{% endif %}">
+                    Все категории
+                </a>
+                {% for category in categories %}
+                <a href="?category={{ category.slug }}" class="category-button {% if selected_category.slug == category.slug %}active{% endif %}">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- Алфавит -->
+            <div class="alphabet-filter">
+                <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}alphabet=all" class="alphabet-button {% if not alphabet_filter or alphabet_filter == 'all' %}active{% endif %}">
+                    Все
+                </a>
+                <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}alphabet=ru" class="alphabet-button {% if alphabet_filter == 'ru' %}active{% endif %}">
+                    А-Я
+                </a>
+                <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}alphabet=en" class="alphabet-button {% if alphabet_filter == 'en' %}active{% endif %}">
+                    A-Z
+                </a>
+                {% for letter in alphabet_ru %}
+                <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}alphabet={{ letter }}" class="alphabet-button {% if alphabet_filter == letter %}active{% endif %}">
+                    {{ letter }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Термины -->
 <section class="content-section">
     <div class="container">
         {% if glossary_by_category %}
             {% for category, terms in glossary_by_category.items %}
-            
-            <!-- Заголовок категории -->
-            <div class="section-header" {% if not forloop.first %}style="margin-top: 80px;"{% endif %}>
+            <div class="section-header">
                 <h2 class="section-title">
-                    <a href="{% url 'main:glossary_category' category.slug %}" style="color: inherit; text-decoration: none; transition: color 0.3s;">
+                    <a href="{% url 'main:glossary_category' category.slug %}" style="color: inherit; text-decoration: none;">
                         {{ category.name }}
                     </a>
                 </h2>
@@ -44,7 +96,6 @@
                 {% endif %}
             </div>
             
-            <!-- Термины категории -->
             <div class="content-grid">
                 {% for term in terms %}
                 <article class="content-card">
@@ -61,12 +112,20 @@
                 </article>
                 {% endfor %}
             </div>
+            
+            {% if not forloop.last %}
+            <div style="height: 60px;"></div>
+            {% endif %}
             {% endfor %}
         {% else %}
         <div class="empty-state">
-            <i class="fas fa-book"></i>
+            <i class="fas fa-search"></i>
             <h3>Термины не найдены</h3>
-            <p>Глоссарий пока пуст. Мы работаем над его наполнением.</p>
+            <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
+            <a href="{% url 'main:glossary_list' %}" class="content-card-link">
+                <span>Сбросить фильтры</span>
+                <span class="arrow">→</span>
+            </a>
         </div>
         {% endif %}
     </div>
@@ -78,7 +137,7 @@
         <div class="cta-section-content">
             <h2 class="cta-section-title">Не нашли нужный термин?</h2>
             <p class="cta-section-text">
-                Свяжитесь с нами, и мы добавим определение интересующего вас термина
+                Свяжитесь с нами, и мы добавим определение интересующего вас термина в глоссарий
             </p>
             <div class="cta-section-buttons">
                 <a href="{% url 'main:home' %}#contact" class="cta-section-button">

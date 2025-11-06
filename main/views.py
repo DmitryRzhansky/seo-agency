@@ -1042,11 +1042,22 @@ def author_detail(request, slug):
     
     reading_time_total_min = total_reading_time
 
-    categories_stats = (
+    # Преобразуем категории в словарь {category_object: count}
+    categories_data = (
         base_qs.values('category__id', 'category__name', 'category__slug')
         .annotate(count=Count('id'))
         .order_by('-count', 'category__name')
     )
+    
+    from blog.models import Category
+    categories_stats = {}
+    for cat_data in categories_data:
+        if cat_data['category__id']:
+            try:
+                category = Category.objects.get(id=cat_data['category__id'])
+                categories_stats[category] = cat_data['count']
+            except Category.DoesNotExist:
+                pass
 
     # SEO
     seo_title = f"{author.get_full_name()} - Автор | Isakov Agency"
@@ -1058,10 +1069,12 @@ def author_detail(request, slug):
         'seo_description': seo_description,
         'seo_keywords': seo_keywords,
         'author': author,
+        'posts': base_qs.order_by('-published_date'),  # Все посты автора для шаблона
         'page_obj': page_obj,
         'search_query': search_query,
         'current_category_slug': current_category_slug,
         'total_posts': total_posts,
+        'total_read_time': reading_time_total_min,  # Переименовано для совместимости
         'reading_time_total_min': reading_time_total_min,
         'first_published': first_post.published_date if first_post else None,
         'last_published': last_post.published_date if last_post else None,

@@ -3,6 +3,131 @@
    Все страницы используют ОДНИ И ТЕ ЖЕ классы
    ============================================ */
 
+/* ==================== ФИЛЬТРЫ И ПОИСК ==================== */
+
+.filters-section {
+    background: var(--white);
+    border: var(--border);
+    padding: 30px;
+}
+
+.search-form {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: var(--border);
+    font-family: var(--font-main);
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.search-button {
+    padding: 15px 30px;
+    background: var(--accent);
+    color: var(--white);
+    border: var(--border);
+    border-color: var(--black);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-button:hover {
+    background: var(--accent-hover);
+}
+
+.categories-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.category-button {
+    padding: 12px 20px;
+    background: var(--white);
+    border: var(--border);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--black);
+    transition: var(--transition);
+}
+
+.category-button:hover,
+.category-button.active {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--black);
+}
+
+.alphabet-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.alphabet-button {
+    min-width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    border: var(--border);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--black);
+    transition: var(--transition);
+}
+
+.alphabet-button:hover,
+.alphabet-button.active {
+    background: var(--black);
+    color: var(--white);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .filters-section {
+        padding: 20px;
+    }
+    
+    .search-form {
+        flex-direction: column;
+    }
+    
+    .search-button {
+        justify-content: center;
+    }
+    
+    .alphabet-button {
+        min-width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+}
+
 /* ==================== HERO СЕКЦИИ ==================== */
 /* Все страницы используют .page-hero с breadcrumbs */
 .page-hero {
@@ -472,6 +597,98 @@
     
     .cta-section {
         padding: 40px 0;
+    }
+}
+
+/* ==================== FAQ АККОРДЕОН ==================== */
+
+.faq-list {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    background: var(--white);
+    border: var(--border);
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    border-color: var(--accent);
+}
+
+.faq-question {
+    width: 100%;
+    padding: 25px 30px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--black);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    transition: var(--transition);
+}
+
+.faq-question:hover {
+    color: var(--accent);
+}
+
+.faq-icon {
+    flex-shrink: 0;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 1000px;
+}
+
+.faq-answer-content {
+    padding: 0 30px 30px;
+    line-height: 1.8;
+    color: var(--gray-dark);
+}
+
+.faq-answer-content p {
+    margin-bottom: 15px;
+}
+
+.faq-answer-content ul,
+.faq-answer-content ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+.faq-answer-content li {
+    margin-bottom: 10px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .faq-question {
+        padding: 20px;
+        font-size: 16px;
+    }
+    
+    .faq-answer-content {
+        padding: 0 20px 20px;
     }
 }
 

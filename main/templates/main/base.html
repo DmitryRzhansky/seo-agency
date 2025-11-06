@@ -59,6 +59,7 @@
     <!-- Стили (единая система) -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/unified-content.css' %}">
+    <link rel="stylesheet" href="{% static 'css/share-buttons.css' %}">
     
     {% block extra_css %}{% endblock extra_css %}
 
@@ -390,6 +391,9 @@
             }
         });
     </script>
+    
+    <!-- Глобальные скрипты -->
+    <script src="{% static 'js/share-buttons-brutal.js' %}"></script>
     
     {% block extra_js %}{% endblock extra_js %}
 </body>

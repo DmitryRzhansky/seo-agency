@@ -1,0 +1,154 @@
+/* ============================================
+   КНОПКИ ПОДЕЛИТЬСЯ И КОПИРОВАНИЯ
+   ============================================ */
+
+.share-section {
+    margin: 60px auto 0;
+    max-width: 900px;
+}
+
+.share-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    background: var(--white);
+    border: var(--border);
+    gap: 20px;
+    flex-wrap: wrap;
+    transition: var(--transition);
+}
+
+.share-block:hover {
+    border-color: var(--accent);
+}
+
+.copy-btn {
+    background: var(--accent);
+    border: var(--border);
+    border-color: var(--black);
+    color: var(--white);
+    padding: 12px 24px;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.copy-btn:hover {
+    background: var(--accent-hover);
+}
+
+.social-share {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-share-label {
+    font-family: var(--font-main);
+    font-weight: 700;
+    color: var(--black);
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: var(--border);
+    font-size: 1.2rem;
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.social-link.vk {
+    background: #4C75A3;
+    border-color: var(--black);
+}
+
+.social-link.vk:hover {
+    background: #3d5f85;
+}
+
+.social-link.telegram {
+    background: #0088cc;
+    border-color: var(--black);
+}
+
+.social-link.telegram:hover {
+    background: #006da8;
+}
+
+/* Уведомление о копировании */
+.copy-notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--black);
+    color: var(--white);
+    padding: 20px 30px;
+    border: var(--border);
+    border-color: var(--accent);
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.copy-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .share-block {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+    }
+    
+    .copy-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .social-share {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .copy-notification {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        text-align: center;
+    }
+}
+

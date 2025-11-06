@@ -66,6 +66,24 @@
             </article>
             {% endfor %}
         </div>
+        
+        <!-- Пагинация -->
+        {% if page_obj.has_other_pages %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+            <a href="?page=1">← Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Пред.</a>
+            {% endif %}
+            
+            <span class="current">{{ page_obj.number }}</span>
+            
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">След.</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя →</a>
+            {% endif %}
+        </div>
+        {% endif %}
+        
         {% else %}
         <div class="empty-state">
             <i class="fas fa-search"></i>
@@ -73,6 +91,23 @@
             <p>В этом разделе пока нет опубликованных проектов.</p>
         </div>
         {% endif %}
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Хотите такой же результат?</h2>
+            <p class="cta-section-text">
+                Обсудим ваш проект и разработаем индивидуальную стратегию продвижения
+            </p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:home' %}#contact" class="cta-section-button">
+                    <span>Начать проект</span>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 

@@ -38,15 +38,15 @@ def service_list(request):
     
     return render(request, template_name, {
         'title': 'Услуги',
-        'page_type': 'services',  # Добавляем тип страницы для правильного отображения хедера
+        'page_type': 'services',
+        'service_categories': categories,  # Изменено для совместимости с шаблоном
         'categories': categories,
-        'services': None,  # не используем общий список напрямую в шаблоне
+        'services': None,
         'filtered_services': page_obj,
         'is_paginated': page_obj.has_other_pages(),
         'current_category': current_category,
-        'category': current_category,  # Добавляем для совместимости с шаблонами
+        'category': current_category,
         'search_query': query,
-        # Для списка услуг SEO-объект не задаем, используем дефолтные мета
     })
 
 

@@ -12,19 +12,14 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/blog-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция блога -->
-<section class="blog-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="blog-hero-content">
-            <h1 class="blog-hero-title">Блог</h1>
-            <p class="blog-hero-subtitle">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Блог</h1>
+            <p class="page-hero-subtitle">
                 Полезные статьи о SEO, продвижении сайтов и digital-маркетинге. 
                 Экспертные советы от нашей команды.
             </p>
@@ -32,35 +27,20 @@
     </div>
 </section>
 
-<!-- Поиск по блогу -->
-<section class="blog-search">
-    <div class="container">
-        <form method="get" action="{% url 'blog:search' %}" class="blog-search-form">
-            <input 
-                type="text" 
-                name="q" 
-                value="{{ search_query|default:'' }}" 
-                placeholder="Поиск по статьям..." 
-                class="blog-search-input"
-            >
-            <button type="submit" class="blog-search-button">
-                Найти
-            </button>
-        </form>
-    </div>
-</section>
-
-<!-- Категории блога -->
+<!-- Категории -->
 {% if categories %}
-<section class="blog-categories">
+<section class="content-section">
     <div class="container">
-        <h2 class="blog-categories-title">Категории</h2>
-        <div class="blog-categories-grid">
-            <a href="{% url 'blog:post_list' %}" class="blog-category-link {% if not current_category %}active{% endif %}">
+        <div class="section-header">
+            <h2 class="section-title">Категории</h2>
+        </div>
+        
+        <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+            <a href="{% url 'blog:post_list' %}" class="btn {% if not current_category %}btn-primary{% else %}btn-secondary{% endif %}">
                 Все статьи
             </a>
             {% for category in categories %}
-            <a href="{% url 'blog:category_posts' slug=category.slug %}" class="blog-category-link {% if current_category == category %}active{% endif %}">
+            <a href="{% url 'blog:category_posts' slug=category.slug %}" class="btn {% if current_category == category %}btn-primary{% else %}btn-secondary{% endif %}">
                 {{ category.name }}
             </a>
             {% endfor %}
@@ -69,57 +49,47 @@
 </section>
 {% endif %}
 
-<!-- Статьи блога -->
-<section class="blog-posts">
+<!-- Статьи -->
+<section class="content-section alt-bg">
     <div class="container">
-        <h2 class="blog-posts-title">
-            {% if current_category %}
-                {{ current_category.name }}
-            {% elif search_query %}
-                Результаты поиска: "{{ search_query }}"
-            {% else %}
-                Все статьи
-            {% endif %}
-        </h2>
-        
         {% if page_obj %}
-        <div class="blog-posts-grid">
+        <div class="content-grid">
             {% for post in page_obj %}
-            <article class="blog-card">
+            <article class="content-card">
                 {% if post.image %}
-                <img src="{{ post.image.url }}" class="blog-card-image" alt="{{ post.title }}">
+                <img src="{{ post.image.url }}" class="content-card-image" alt="{{ post.title }}">
                 {% else %}
-                <div class="blog-card-placeholder">
+                <div class="content-card-placeholder">
                     <i class="fas fa-newspaper"></i>
                 </div>
                 {% endif %}
                 
-                <div class="blog-card-content">
-                    {% if post.category %}
-                    <div class="blog-card-category">{{ post.category.name }}</div>
+                {% if post.category %}
+                <div class="content-card-meta">{{ post.category.name }}</div>
+                {% endif %}
+                
+                <h3 class="content-card-title">
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                </h3>
+                
+                <p class="content-card-text">
+                    {% if post.excerpt %}
+                        {{ post.excerpt|truncatewords:20 }}
+                    {% else %}
+                        {{ post.content|striptags|truncatewords:20 }}
                     {% endif %}
-                    <h3 class="blog-card-title">{{ post.title }}</h3>
-                    <p class="blog-card-excerpt">
-                        {% if post.excerpt %}
-                            {{ post.excerpt|truncatewords:20 }}
-                        {% else %}
-                            {{ post.content|striptags|truncatewords:20 }}
+                </p>
+                
+                <div class="content-card-footer">
+                    <div class="content-card-info">
+                        <span>{{ post.published_date|date:"d.m.Y" }}</span>
+                        {% if post.views_count %}
+                        <span>{{ post.views_count }} просмотров</span>
                         {% endif %}
-                    </p>
-                    <div class="blog-card-meta">
-                        <span class="blog-card-date">{{ post.published_date|date:"d.m.Y" }}</span>
-                        <span class="blog-card-views">{{ post.views_count }} просмотров</span>
                     </div>
-                    {% if post.get_author %}
-                    <div class="blog-card-author">
-                        <a href="{{ post.get_author.get_absolute_url }}" class="blog-card-author-link">
-                            <i class="fas fa-user"></i>
-                            {{ post.get_author.get_full_name }}
-                        </a>
-                    </div>
-                    {% endif %}
-                    <a href="{{ post.get_absolute_url }}" class="blog-card-link">
-                        Читать далее
+                    <a href="{{ post.get_absolute_url }}" class="content-card-link">
+                        <span>Читать</span>
+                        <span class="arrow">→</span>
                     </a>
                 </div>
             </article>
@@ -128,30 +98,30 @@
         
         <!-- Пагинация -->
         {% if is_paginated %}
-        <div class="blog-pagination">
+        <div class="pagination">
             {% if page_obj.has_previous %}
                 <a href="?page=1">Первая</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                <a href="?page={{ page_obj.previous_page_number }}">‹</a>
             {% endif %}
             
             <span class="current">
-                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
             </span>
             
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                <a href="?page={{ page_obj.next_page_number }}">›</a>
                 <a href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
             {% endif %}
         </div>
         {% endif %}
         
         {% else %}
-        <div class="blog-empty">
+        <div class="empty-state">
             <i class="fas fa-search"></i>
             <h3>Статьи не найдены</h3>
             <p>
                 {% if search_query %}
-                    По запросу "{{ search_query }}" ничего не найдено. Попробуйте изменить поисковый запрос.
+                    По запросу "{{ search_query }}" ничего не найдено.
                 {% else %}
                     В этом разделе пока нет опубликованных статей.
                 {% endif %}

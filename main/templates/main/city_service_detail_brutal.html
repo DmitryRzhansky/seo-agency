@@ -1,118 +1,50 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% load seo_tags %}
-{% load custom_filters %}
-
-{% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="container">
-        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города присутствия</a><span class="separator">/</span><a href="{% url 'main:city_detail' city.slug %}">{{ city.name }}</a><span class="separator">/</span><span class="current">{{ service.title }}</span>
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города</a><span class="separator">/</span><span class="current">{{ city.name }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция услуги города -->
-<section class="city-service-hero">
+<section class="page-hero">
     <div class="container">
-        <div class="city-service-hero-content">
-            <!-- Региональная информация -->
-            <div class="city-service-region-info">
-                <div class="city-service-region-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="city-service-region-text">
-                    <div class="city-service-region-title">{{ service.title }} {{ city.get_name_prepositional }}</div>
-                    <div class="city-service-region-subtitle">{{ city.region }}</div>
-                </div>
-            </div>
-            
-            <h1 class="city-service-title">{{ service.title }} {{ city.get_name_prepositional }}</h1>
-            <p class="city-service-description">{{ service.short_description }}</p>
-        </div>
-    </div>
-</section>
-
-<!-- Основной контент услуги -->
-<section class="city-service-content">
-    <div class="container">
-        <div class="city-service-article">
-            <div class="city-service-text">
-                {{ service.content|safe }}
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA секция -->
-<section class="city-service-cta">
-    <div class="container">
-        <div class="city-service-cta-content">
-            <h3 class="city-service-cta-title">Готовы заказать {{ service.title|lower }} {{ city.get_name_prepositional }}?</h3>
-            <p class="city-service-cta-text">
-                Оставьте заявку, и мы бесплатно разработаем индивидуальную стратегию 
-                продвижения для вашей компании {{ city.get_name_prepositional }}.
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">SEO {{ city.get_name_prepositional }}</h1>
+            <p class="page-hero-subtitle">
+                Профессиональное SEO-продвижение сайтов {{ city.get_name_prepositional }}
             </p>
-            <a href="{% url 'main:home' %}#contact" class="city-service-cta-btn">
-                <i class="fas fa-paper-plane"></i>
-                Получить консультацию
-            </a>
         </div>
     </div>
 </section>
 
-<!-- Навигация -->
-<section class="city-service-navigation">
+<section class="content-section">
     <div class="container">
-        <a href="{{ city.get_absolute_url }}" class="city-service-back">
-            <i class="fas fa-chevron-left"></i>
-            Вернуться к услугам {{ city.get_name_prepositional }}
-        </a>
+        <div class="text-content">
+            {% if city.local_description %}
+            {{ city.local_description|safe }}
+            {% else %}
+            <p>Мы предоставляем услуги SEO-продвижения {{ city.get_name_prepositional }}.</p>
+            {% endif %}
+        </div>
     </div>
 </section>
 
-<!-- Блок "Еще услуги" -->
-{% if related_services %}
-<section class="city-service-related">
+<section class="cta-section">
     <div class="container">
-        <h2 class="city-service-related-title">Еще услуги {{ city.get_name_prepositional }}</h2>
-        <div class="city-service-related-grid">
-            {% for related_service in related_services %}
-            <div class="city-service-related-card">
-                {% if related_service.image %}
-                <img src="{{ related_service.image.url }}" alt="{{ related_service.get_image_alt }}" class="city-service-related-image">
-                {% endif %}
-                
-                <div class="city-service-related-content">
-                    <div class="city-service-related-category">{{ related_service.category.title }}</div>
-                    
-                    <h3 class="city-service-related-title-card">
-                        <a href="{% url 'main:city_service_detail' city.slug related_service.slug %}">
-                            {{ related_service.title }}
-                        </a>
-                    </h3>
-                    
-                    <p class="city-service-related-description">
-                        {{ related_service.short_description|truncatewords:25 }}
-                    </p>
-                    
-                    <a href="{% url 'main:city_service_detail' city.slug related_service.slug %}" class="city-service-related-btn">
-                        Подробнее
-                    </a>
-                </div>
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Готовы начать продвижение?</h2>
+            <p class="cta-section-text">Свяжитесь с нами для обсуждения вашего проекта</p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:contacts' %}" class="cta-section-button"><span>Связаться</span></a>
             </div>
-            {% endfor %}
         </div>
     </div>
 </section>
-{% endif %}
 
 {% endblock content %}

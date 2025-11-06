@@ -12,163 +12,80 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/blog-detail-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция статьи - брутальная -->
-<section class="post-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="post-hero-content">
-            <h1 class="post-hero-title">{{ post.title }}</h1>
-            <div class="post-hero-meta">
-                {% if post.category %}
-                <div class="post-hero-category">{{ post.category.name }}</div>
-                {% endif %}
-                <div class="post-hero-date">{{ post.published_date|date:"d.m.Y" }}</div>
-                <div class="post-hero-views">{{ post.views_count }} просмотров</div>
-                {% if post.get_author %}
-                <div class="post-hero-author">
-                    <a href="{{ post.get_author.get_absolute_url }}" class="post-hero-author-link">
-                        <i class="fas fa-user"></i>
-                        {{ post.get_author.get_full_name }}
-                    </a>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Основной контент статьи - брутальный -->
-<section class="post-content">
-    <div class="container">
-        <div class="post-content-wrapper">
-            <!-- Брутальные блоки контента -->
-            <div class="post-content-blocks">
-                <div class="post-content-block main">
-                    <div class="post-block-number">01</div>
-                    <h2>О статье</h2>
-                    <p>{{ post.excerpt|default:"Краткое описание статьи не указано." }}</p>
-                </div>
-                
-                <div class="post-content-block">
-                    <div class="post-block-number">02</div>
-                    <h3>Ключевые моменты</h3>
-                    <ul>
-                        <li>Практические советы и рекомендации</li>
-                        <li>Актуальная информация о SEO</li>
-                        <li>Реальные примеры и кейсы</li>
-                        <li>Экспертные мнения специалистов</li>
-                    </ul>
-                </div>
-                
-                <div class="post-content-block">
-                    <div class="post-block-number">03</div>
-                    <h3>Время чтения</h3>
-                    <p>{{ post.get_reading_time }}</p>
-                </div>
-                
-                <div class="post-content-block content">
-                    <div class="post-block-number">04</div>
-                    <h3>Полный текст статьи</h3>
-                    <div class="post-text post-scrollable">
-                        {{ post.content|safe }}
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Изображение статьи справа -->
-            {% if post.image %}
-            <div class="post-image-container">
-                <img 
-                    src="{{ post.image.url }}" 
-                    class="post-image" 
-                    alt="{{ post.title }}"
-                >
-                {% if post.category %}
-                <div class="post-image-overlay">
-                    {{ post.category.name }}
-                </div>
-                {% endif %}
-                <div class="post-image-decoration"></div>
+        <div class="page-hero-content">
+            {% if post.category %}
+            <div style="font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">
+                {{ post.category.name }}
             </div>
             {% endif %}
-        </div>
-    </div>
-</section>
-
-<!-- Блок поделиться -->
-<section class="share-section">
-    <div class="container">
-        <div class="share-block">
-            <button class="copy-btn" data-text="{{ post.title }} - {{ post.excerpt|default:post.content|striptags|truncatewords:20 }} | Isakov Agency - {{ request.build_absolute_uri }}">
-                <i class="fas fa-copy"></i>
-                Скопировать текст
-            </button>
-            
-            <div class="social-share">
-                <span class="social-label">Поделиться:</span>
-                <div class="social-links">
-                    <a href="#" class="social-link vk" data-url="{{ request.build_absolute_uri }}">
-                        <i class="fab fa-vk"></i>
-                    </a>
-                    <a href="#" class="social-link telegram" data-url="{{ request.build_absolute_uri }}">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                </div>
+            <h1 class="page-hero-title">{{ post.title }}</h1>
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 14px; color: var(--gray);">
+                <span>{{ post.published_date|date:"d.m.Y" }}</span>
+                <span>{{ post.views_count }} просмотров</span>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Навигация -->
-{% if post.category %}
-<section class="post-navigation">
+<!-- Контент -->
+<section class="content-section">
     <div class="container">
-        <a href="{% url 'blog:category_posts' slug=post.category.slug %}" class="post-nav-link">
-            ← Вернуться в категорию "{{ post.category.name }}"
-        </a>
+        {% if post.image %}
+        <div style="max-width: 1000px; margin: 0 auto 60px;">
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width: 100%; border: var(--border);">
+        </div>
+        {% endif %}
+        
+        <div class="text-content">
+            {{ post.content|safe }}
+        </div>
     </div>
 </section>
-{% endif %}
 
 <!-- Связанные статьи -->
 {% if related_posts %}
-<section class="related-posts">
+<section class="content-section alt-bg">
     <div class="container">
-        <h2 class="related-posts-title">Вам может понравиться</h2>
-        <div class="related-posts-grid">
+        <div class="section-header">
+            <h2 class="section-title">Читайте также</h2>
+        </div>
+        
+        <div class="content-grid">
             {% for related_post in related_posts %}
-            <article class="related-card">
+            <article class="content-card">
                 {% if related_post.image %}
-                <img src="{{ related_post.image.url }}" class="related-card-image" alt="{{ related_post.title }}">
+                <img src="{{ related_post.image.url }}" class="content-card-image" alt="{{ related_post.title }}">
                 {% else %}
-                <div class="related-card-placeholder">
+                <div class="content-card-placeholder">
                     <i class="fas fa-newspaper"></i>
                 </div>
                 {% endif %}
                 
-                <div class="related-card-content">
-                    {% if related_post.category %}
-                    <div class="related-card-category">{{ related_post.category.name }}</div>
+                {% if related_post.category %}
+                <div class="content-card-meta">{{ related_post.category.name }}</div>
+                {% endif %}
+                
+                <h3 class="content-card-title">
+                    <a href="{{ related_post.get_absolute_url }}">{{ related_post.title }}</a>
+                </h3>
+                
+                <p class="content-card-text">
+                    {% if related_post.excerpt %}
+                        {{ related_post.excerpt|truncatewords:15 }}
+                    {% else %}
+                        {{ related_post.content|striptags|truncatewords:15 }}
                     {% endif %}
-                    <h3 class="related-card-title">{{ related_post.title }}</h3>
-                    <p class="related-card-excerpt">
-                        {% if related_post.excerpt %}
-                            {{ related_post.excerpt|truncatewords:15 }}
-                        {% else %}
-                            {{ related_post.content|striptags|truncatewords:15 }}
-                        {% endif %}
-                    </p>
-                    <a href="{{ related_post.get_absolute_url }}" class="related-card-link">
-                        Читать далее
-                    </a>
-                </div>
+                </p>
+                
+                <a href="{{ related_post.get_absolute_url }}" class="content-card-link">
+                    <span>Читать</span>
+                    <span class="arrow">→</span>
+                </a>
             </article>
             {% endfor %}
         </div>
@@ -177,7 +94,3 @@
 {% endif %}
 
 {% endblock content %}
-
-{% block extra_js %}
-<script src="{% static 'js/share-buttons-brutal.js' %}"></script>
-{% endblock extra_js %}

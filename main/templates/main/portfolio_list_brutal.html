@@ -12,19 +12,14 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/portfolio-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция портфолио -->
-<section class="portfolio-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="portfolio-hero-content">
-            <h1 class="portfolio-hero-title">Портфолио</h1>
-            <p class="portfolio-hero-subtitle">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Портфолио</h1>
+            <p class="page-hero-subtitle">
                 Примеры успешных проектов, которые мы реализовали для наших клиентов. 
                 Каждый проект - это результат профессионального подхода и глубокого понимания задач бизнеса.
             </p>
@@ -32,161 +27,52 @@
     </div>
 </section>
 
-<!-- Поиск по портфолио -->
-<section class="portfolio-search">
+<!-- Проекты -->
+<section class="content-section">
     <div class="container">
-        <form method="get" action="{% url 'main:portfolio_list' %}" class="portfolio-search-form">
-            <input 
-                type="text" 
-                name="q" 
-                value="{{ search_query|default:'' }}" 
-                placeholder="Поиск по проектам..." 
-                class="portfolio-search-input"
-            >
-            <button type="submit" class="portfolio-search-button">
-                Найти
-            </button>
-        </form>
-    </div>
-</section>
-
-<!-- Фильтры по типу проекта -->
-{% if available_types %}
-<section class="portfolio-filters">
-    <div class="container">
-        <h2 class="portfolio-filters-title">Фильтр по типу проекта</h2>
-        <div class="portfolio-filters-grid">
-            <div class="portfolio-filter-card {% if not current_type %}active{% endif %}">
-                <a href="{% url 'main:portfolio_list' %}" class="portfolio-filter-link">
-                    Все проекты
-                </a>
-            </div>
-            {% for type_value, type_label in available_types %}
-            <div class="portfolio-filter-card {% if current_type == type_value %}active{% endif %}">
-                <a href="{% url 'main:portfolio_list' %}?type={{ type_value }}" class="portfolio-filter-link">
-                    {{ type_label }}
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- Рекомендуемые проекты -->
-{% if featured_page_obj %}
-<section class="portfolio-featured">
-    <div class="container">
-        <h2 class="portfolio-featured-title">Рекомендуемые проекты</h2>
-        <div class="portfolio-featured-grid">
-            {% for project in featured_page_obj %}
-            <div class="portfolio-featured-card">
-                {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" class="portfolio-featured-image" alt="{{ project.get_main_image_alt }}">
-                {% else %}
-                <div class="portfolio-featured-placeholder">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-                {% endif %}
-                
-                <div class="portfolio-featured-content">
-                    <div class="portfolio-featured-type">{{ project.get_project_type_display_ru }}</div>
-                    <h3 class="portfolio-featured-title-card">{{ project.title }}</h3>
-                    <p class="portfolio-featured-description">
-                        {{ project.short_description|truncatewords:20 }}
-                    </p>
-                    <div class="portfolio-featured-meta">
-                        {% if project.client_name %}
-                        <span class="portfolio-featured-client">{{ project.client_name }}</span>
-                        {% endif %}
-                        <span class="portfolio-featured-date">{{ project.created_at|date:"d.m.Y" }}</span>
-                    </div>
-                    <a href="{{ project.get_absolute_url }}" class="portfolio-featured-link">
-                        Смотреть проект
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <!-- Пагинация для рекомендуемых -->
-        {% if is_featured_paginated %}
-        <div class="portfolio-pagination">
-            {% if featured_page_obj.has_previous %}
-                <a href="?featured_page=1">Первая</a>
-                <a href="?featured_page={{ featured_page_obj.previous_page_number }}">Предыдущая</a>
-            {% endif %}
-            
-            <span class="current">
-                Страница {{ featured_page_obj.number }} из {{ featured_page_obj.paginator.num_pages }}
-            </span>
-            
-            {% if featured_page_obj.has_next %}
-                <a href="?featured_page={{ featured_page_obj.next_page_number }}">Следующая</a>
-                <a href="?featured_page={{ featured_page_obj.paginator.num_pages }}">Последняя</a>
-            {% endif %}
-        </div>
-        {% endif %}
-    </div>
-</section>
-{% endif %}
-
-<!-- Все проекты -->
-<section class="portfolio-projects">
-    <div class="container">
-        <h2 class="portfolio-projects-title">
-            {% if current_type %}
-                {{ current_type|title }} проекты
-            {% elif search_query %}
-                Результаты поиска: "{{ search_query }}"
-            {% else %}
-                Все проекты
-            {% endif %}
-        </h2>
-        
         {% if page_obj %}
-        <div class="portfolio-projects-grid">
+        <div class="content-grid">
             {% for project in page_obj %}
-            <div class="portfolio-card">
+            <article class="content-card">
                 {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" class="portfolio-card-image" alt="{{ project.get_main_image_alt }}">
+                <img src="{{ project.main_image.url }}" class="content-card-image" alt="{{ project.get_main_image_alt }}">
                 {% else %}
-                <div class="portfolio-card-placeholder">
+                <div class="content-card-placeholder">
                     <i class="fas fa-briefcase"></i>
                 </div>
                 {% endif %}
                 
-                <div class="portfolio-card-content">
-                    <div class="portfolio-card-type">{{ project.get_project_type_display_ru }}</div>
-                    <h3 class="portfolio-card-title">{{ project.title }}</h3>
-                    <p class="portfolio-card-description">
-                        {{ project.short_description|truncatewords:20 }}
-                    </p>
-                    <div class="portfolio-card-meta">
+                <div class="content-card-meta">{{ project.get_project_type_display_ru }}</div>
+                
+                <h3 class="content-card-title">
+                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                </h3>
+                
+                <p class="content-card-text">
+                    {{ project.short_description|truncatewords:20 }}
+                </p>
+                
+                <div class="content-card-footer">
+                    <div class="content-card-info">
                         {% if project.client_name %}
-                        <span class="portfolio-card-client">{{ project.client_name }}</span>
+                        <span>{{ project.client_name }}</span>
                         {% endif %}
-                        <span class="portfolio-card-date">{{ project.created_at|date:"d.m.Y" }}</span>
+                        <span>{{ project.created_at|date:"d.m.Y" }}</span>
                     </div>
-                    <a href="{{ project.get_absolute_url }}" class="portfolio-card-link">
-                        Смотреть проект
+                    <a href="{{ project.get_absolute_url }}" class="content-card-link">
+                        <span>Смотреть</span>
+                        <span class="arrow">→</span>
                     </a>
                 </div>
-            </div>
+            </article>
             {% endfor %}
         </div>
         
         {% else %}
-        <div class="portfolio-empty">
+        <div class="empty-state">
             <i class="fas fa-search"></i>
             <h3>Проекты не найдены</h3>
-            <p>
-                {% if search_query %}
-                    По запросу "{{ search_query }}" ничего не найдено. Попробуйте изменить поисковый запрос.
-                {% else %}
-                    В этом разделе пока нет опубликованных проектов.
-                {% endif %}
-            </p>
+            <p>В этом разделе пока нет опубликованных проектов.</p>
         </div>
         {% endif %}
     </div>

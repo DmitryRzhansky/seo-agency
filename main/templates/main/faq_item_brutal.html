@@ -2,88 +2,41 @@
 {% load static %}
 {% load seo_tags %}
 
-{% block title %}{{ title }}{% endblock title %}
+{% block title %}{{ faq_item.question }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="container">
-        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:faq_list' %}">FAQ</a><span class="separator">/</span><a href="{% url 'main:faq_category' category.slug %}">{{ category.name }}</a><span class="separator">/</span><span class="current">{{ faq_item.question|truncatechars:50 }}</span>
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:faq_list' %}">FAQ</a><span class="separator">/</span><a href="{% url 'main:faq_category' category.slug %}">{{ category.name }}</a><span class="separator">/</span><span class="current">{{ faq_item.question }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/faq-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция вопроса -->
-<section class="faq-hero">
+<section class="page-hero">
     <div class="container">
-        <div class="faq-hero-content">
-            <div class="faq-item-category">
-                <a href="{% url 'main:faq_category' category.slug %}" class="faq-item-category-link">
-                    {{ category.name }}
-                </a>
-            </div>
-            <h1 class="faq-hero-title">{{ faq_item.question }}</h1>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ faq_item.question }}</h1>
         </div>
     </div>
 </section>
 
-<!-- Ответ на вопрос -->
-<section class="faq-answer">
+<section class="content-section">
     <div class="container">
-        <div class="faq-answer-content">
-            <div class="faq-answer-text">
-                {{ faq_item.answer|safe }}
-            </div>
-            <div class="faq-answer-meta">
-                <div class="faq-answer-stats">
-                    <span class="faq-answer-date">Обновлено: {{ faq_item.updated_at|date:"d.m.Y" }}</span>
-                </div>
-            </div>
+        <div class="text-content">
+            {{ faq_item.answer|safe }}
         </div>
     </div>
 </section>
 
-<!-- Похожие вопросы -->
-{% if related_items %}
-<section class="faq-related">
+<section class="cta-section">
     <div class="container">
-        <div class="faq-related-content">
-            <h2 class="faq-related-title">Похожие вопросы</h2>
-            <div class="faq-related-items">
-                {% for item in related_items %}
-                <div class="faq-related-item">
-                    <a href="{% url 'main:faq_item' category.slug item.slug %}" class="faq-related-link">
-                        {{ item.question }}
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- CTA секция -->
-<section class="faq-cta">
-    <div class="container">
-        <div class="faq-cta-content">
-            <h2 class="faq-cta-title">Остались вопросы?</h2>
-            <p class="faq-cta-subtitle">
-                Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
-            </p>
-            <div class="faq-cta-buttons">
-                <a href="{% url 'main:contacts' %}" class="faq-cta-button">
-                    Связаться с нами
-                </a>
-                <a href="{% url 'main:faq_list' %}" class="faq-cta-button secondary">
-                    Все FAQ
-                </a>
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Остались вопросы?</h2>
+            <p class="cta-section-text">Свяжитесь с нами для получения консультации</p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:contacts' %}" class="cta-section-button"><span>Связаться</span></a>
             </div>
         </div>
     </div>

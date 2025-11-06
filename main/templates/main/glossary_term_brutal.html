@@ -2,7 +2,7 @@
 {% load static %}
 {% load seo_tags %}
 
-{% block title %}{{ title }}{% endblock title %}
+{% block title %}{{ glossary_term.term }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -12,75 +12,31 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/glossary-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
-<!-- Hero секция термина -->
-<section class="glossary-hero">
+
+<section class="page-hero">
     <div class="container">
-        <div class="glossary-hero-content">
-            <h1 class="glossary-hero-title">{{ glossary_term.term }}</h1>
-            <div class="glossary-hero-meta">
-                <span class="glossary-hero-category">
-                    Категория: <a href="{% url 'main:glossary_category' category.slug %}">{{ category.name }}</a>
-                </span>
-            </div>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ glossary_term.term }}</h1>
         </div>
     </div>
 </section>
 
-<!-- Определение термина -->
-<section class="glossary-definition">
+<section class="content-section">
     <div class="container">
-        <div class="glossary-definition-content">
-            <div class="glossary-definition-text">
-                {{ glossary_term.definition|safe }}
-            </div>
-            <div class="glossary-definition-meta">
-                <div class="glossary-definition-stats">
-                    <span class="glossary-definition-date">Обновлено: {{ glossary_term.updated_at|date:"d.m.Y" }}</span>
-                </div>
-            </div>
+        <div class="text-content">
+            {{ glossary_term.definition|safe }}
         </div>
     </div>
 </section>
 
-<!-- Похожие термины -->
-{% if related_terms %}
-<section class="glossary-related">
+<section class="cta-section">
     <div class="container">
-        <h2 class="glossary-related-title">Похожие термины</h2>
-        <div class="glossary-related-terms">
-            {% for term in related_terms %}
-            <div class="glossary-related-term">
-                <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="glossary-related-term-link">
-                    {{ term.term }}
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- CTA секция -->
-<section class="glossary-cta">
-    <div class="container">
-        <div class="glossary-cta-content">
-            <h2 class="glossary-cta-title">Нужна помощь с терминами?</h2>
-            <p class="glossary-cta-description">
-                Наши эксперты помогут разобраться с любыми вопросами по SEO и digital-маркетингу
-            </p>
-            <div class="glossary-cta-buttons">
-                <a href="{% url 'main:home' %}#contact" class="glossary-cta-button primary">
-                    Получить консультацию
-                </a>
-                <a href="{% url 'main:glossary_category' category.slug %}" class="glossary-cta-button secondary">
-                    Все термины категории
-                </a>
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Нужна помощь с терминами?</h2>
+            <p class="cta-section-text">Наши эксперты помогут разобраться с любыми вопросами</p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:home' %}#contact" class="cta-section-button"><span>Получить консультацию</span></a>
             </div>
         </div>
     </div>

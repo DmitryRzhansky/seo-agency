@@ -2,252 +2,55 @@
 {% load static %}
 {% load seo_tags %}
 
-{% block title %}{{ title }}{% endblock title %}
+{% block title %}{{ author.get_full_name }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="container">
-        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'blog:post_list' %}">Блог</a><span class="separator">/</span><span class="current">{{ author.get_full_name }}</span>
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">{{ author.get_full_name }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/author-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция автора -->
-<section class="author-hero">
+<section class="page-hero">
     <div class="container">
-        <div class="author-hero-content">
-            <h1 class="author-hero-title">{{ author.get_full_name }}</h1>
-            <p class="author-hero-subtitle">{{ author.position }}</p>
-            {% if author.experience %}
-            <p class="author-hero-experience">{{ author.experience }}</p>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ author.get_full_name }}</h1>
+            {% if author.role %}
+            <p class="page-hero-subtitle">{{ author.role }}</p>
             {% endif %}
         </div>
     </div>
 </section>
 
-<!-- Основной контент автора -->
-<section class="author-content">
+{% if posts %}
+<section class="content-section">
     <div class="container">
-        <div class="author-content-wrapper">
-            <!-- Информация об авторе -->
-            <div class="author-info">
-                <div class="author-photo">
-                    {% if author.photo %}
-                    <img src="{{ author.photo.url }}" alt="{{ author.get_photo_alt }}" class="author-photo-img">
-                    {% else %}
-                    <div class="author-photo-placeholder">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    {% endif %}
-                </div>
-                
-                <div class="author-details">
-                    <h2 class="author-details-title">О авторе</h2>
-                    <div class="author-bio">
-                        {{ author.bio|linebreaks }}
-                    </div>
-                    
-                    {% if author.specializations %}
-                    <div class="author-specializations">
-                        <h3>Специализации</h3>
-                        <p>{{ author.specializations|linebreaks }}</p>
-                    </div>
-                    {% endif %}
-                    
-                    {% if author.social_links %}
-                    <div class="author-social">
-                        <h3>Социальные сети</h3>
-                        <div class="author-social-links">
-                            {% for platform, url in author.social_links.items %}
-                            <a href="{{ url }}" target="_blank" rel="noopener" class="author-social-link">
-                                <i class="fab fa-{{ platform }}"></i>
-                                {{ platform|title }}
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
-                    
-                </div>
-            </div>
-            
-            <!-- Статистика автора -->
-            <div class="author-posts">
-                <h2 class="author-posts-title">Статьи автора</h2>
-
-                <!-- Поиск по статьям автора -->
-                <form method="get" class="blog-search-form" style="margin: 0 0 30px 0;">
-                    <input 
-                        type="text" 
-                        name="q" 
-                        value="{{ search_query|default:'' }}" 
-                        placeholder="Поиск по статьям автора..." 
-                        class="blog-search-input"
-                    >
-                    <button type="submit" class="blog-search-button">Найти</button>
-                </form>
-
-                <!-- Агрегаты (брютальные карточки) -->
-                <div class="author-stats-grid">
-                    <div class="author-stat-card primary">
-                        <div class="stat-number">{{ total_posts|default:0 }}</div>
-                        <div class="stat-label">Опубликовано статей</div>
-                    </div>
-                    <div class="author-stat-card">
-                        <div class="stat-number">{% if reading_time_total_min %}~{{ reading_time_total_min }}{% else %}0{% endif %}</div>
-                        <div class="stat-label">Суммарное чтение (мин)</div>
-                    </div>
-                    <div class="author-stat-card">
-                        <div class="stat-number">{% if first_published %}{{ first_published|date:"d.m.Y" }}{% else %}—{% endif %}</div>
-                        <div class="stat-label">Первая публикация</div>
-                    </div>
-                    <div class="author-stat-card">
-                        <div class="stat-number">{% if last_published %}{{ last_published|date:"d.m.Y" }}{% else %}—{% endif %}</div>
-                        <div class="stat-label">Последняя публикация</div>
-                    </div>
-                </div>
-
-                <!-- Категории автора -->
-                {% if categories_stats %}
-                <div class="author-categories" style="margin-bottom: 30px;">
-                    <h3>Категории автора</h3>
-                    <div class="author-category-chips">
-                        <button class="author-category-chip active" data-category="">
-                            <span class="chip-label">Все</span>
-                            <span class="chip-count">{{ total_posts }}</span>
-                        </button>
-                        {% for c in categories_stats %}
-                            {% if c.category__slug %}
-                                <button class="author-category-chip" data-category="{{ c.category__slug }}">
-                                    <span class="chip-label">{{ c.category__name }}</span>
-                                    <span class="chip-count">{{ c.count }}</span>
-                                </button>
-                            {% else %}
-                                <span class="author-category-chip">
-                                    <span class="chip-label">{{ c.category__name|default:"Без категории" }}</span>
-                                    <span class="chip-count">{{ c.count }}</span>
-                                </span>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
-
-                <!-- Список статей -->
-                <div id="author-posts-container">
-                    {% if page_obj %}
-                    <div class="author-posts-grid">
-                        {% for post in page_obj %}
-                        <article class="author-post-card" data-category="{{ post.category.slug|default:'' }}">
-                            {% if post.image %}
-                            <img src="{{ post.image.url }}" class="author-post-image" alt="{{ post.title }}">
-                            {% else %}
-                            <div class="author-post-placeholder">
-                                <i class="fas fa-newspaper"></i>
-                            </div>
-                            {% endif %}
-                            
-                            <div class="author-post-content">
-                                {% if post.category %}
-                                <div class="author-post-category">{{ post.category.name }}</div>
-                                {% endif %}
-                                <h3 class="author-post-title">{{ post.title }}</h3>
-                                <p class="author-post-excerpt">
-                                    {% if post.excerpt %}
-                                        {{ post.excerpt|truncatewords:20 }}
-                                    {% else %}
-                                        {{ post.content|striptags|truncatewords:20 }}
-                                    {% endif %}
-                                </p>
-                                <div class="author-post-meta">
-                                    <span class="author-post-date">{{ post.published_date|date:"d.m.Y" }}</span>
-                                    <span class="author-post-views">{{ post.views_count }} просмотров</span>
-                                </div>
-                                <a href="{{ post.get_absolute_url }}" class="author-post-link">
-                                    Читать далее
-                                </a>
-                            </div>
-                        </article>
-                        {% endfor %}
-                    </div>
-                    </div>
-                    
-                    <!-- Пагинация -->
-                    {% if page_obj.paginator.num_pages > 1 %}
-                    <div class="blog-pagination" style="margin-top: 30px;">
-                        {% if page_obj.has_previous %}
-                            <a href="?q={{ search_query }}&page=1">Первая</a>
-                            <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">Предыдущая</a>
-                        {% endif %}
-                        <span class="current">
-                            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-                        </span>
-                        {% if page_obj.has_next %}
-                            <a href="?q={{ search_query }}&page={{ page_obj.next_page_number }}">Следующая</a>
-                            <a href="?q={{ search_query }}&page={{ page_obj.paginator.num_pages }}">Последняя</a>
-                        {% endif %}
-                    </div>
-                    {% endif %}
+        <div class="section-header">
+            <h2 class="section-title">Статьи автора</h2>
+        </div>
+        <div class="content-grid">
+            {% for post in posts %}
+            <article class="content-card">
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="content-card-image" alt="{{ post.title }}">
                 {% else %}
-                <div class="blog-empty">
-                    <i class="fas fa-search"></i>
-                    <h3>Статей не найдено</h3>
-                    <p>
-                        {% if search_query %}
-                            По запросу "{{ search_query }}" ничего не найдено. Попробуйте изменить поисковый запрос.
-                        {% else %}
-                            У этого автора пока нет опубликованных статей.
-                        {% endif %}
-                    </p>
-                </div>
+                <div class="content-card-placeholder"><i class="fas fa-newspaper"></i></div>
                 {% endif %}
+                {% if post.category %}<div class="content-card-meta">{{ post.category.name }}</div>{% endif %}
+                <h3 class="content-card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <p class="content-card-text">{{ post.excerpt|default:post.content|striptags|truncatewords:20 }}</p>
+                <div class="content-card-footer">
+                    <div class="content-card-info"><span>{{ post.published_date|date:"d.m.Y" }}</span></div>
+                    <a href="{{ post.get_absolute_url }}" class="content-card-link"><span>Читать</span><span class="arrow">→</span></a>
                 </div>
-            </div>
+            </article>
+            {% endfor %}
         </div>
     </div>
 </section>
+{% endif %}
 
 {% endblock content %}
-
-{% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const categoryButtons = document.querySelectorAll('.author-category-chip[data-category]');
-    const allPosts = document.querySelectorAll('.brutal-author-post-card');
-    
-    if (categoryButtons.length === 0 || allPosts.length === 0) {
-        return;
-    }
-    
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const selectedCategory = this.getAttribute('data-category');
-            
-            // Убираем активный класс со всех кнопок
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            // Добавляем активный класс к нажатой кнопке
-            this.classList.add('active');
-            
-            // Фильтруем карточки
-            allPosts.forEach(post => {
-                const postCategory = post.getAttribute('data-category');
-                
-                if (selectedCategory === '' || postCategory === selectedCategory) {
-                    post.style.display = 'block';
-                } else {
-                    post.style.display = 'none';
-                }
-            });
-        });
-    });
-});
-</script>
-{% endblock extra_js %}

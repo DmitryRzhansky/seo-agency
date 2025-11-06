@@ -2,7 +2,7 @@
 {% load static %}
 {% load seo_tags %}
 
-{% block title %}{{ title }}{% endblock title %}
+{% block title %}{{ category.name }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -12,115 +12,42 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/glossary-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
-<!-- Hero секция категории глоссария -->
-<section class="glossary-hero">
+
+<section class="page-hero">
     <div class="container">
-        <div class="glossary-hero-content">
-            <h1 class="glossary-hero-title">{{ category.name }}</h1>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ category.name }}</h1>
             {% if category.description %}
-            <p class="glossary-hero-description">{{ category.description }}</p>
+            <p class="page-hero-subtitle">{{ category.description }}</p>
             {% endif %}
         </div>
     </div>
 </section>
 
-<!-- Фильтры и поиск -->
-<section class="glossary-filters">
+<section class="content-section">
     <div class="container">
-        <div class="glossary-nav">
-            <div class="glossary-nav-content">
-                <!-- Поиск -->
-                <form class="glossary-search-form" method="get">
-                    <div class="glossary-search-group">
-                        <input 
-                            type="text" 
-                            name="search" 
-                            value="{{ search_query }}"
-                            placeholder="Поиск по терминам и определениям..."
-                            class="glossary-search-input"
-                        >
-                        <button type="submit" class="glossary-search-button">
-                            Найти
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Фильтры -->
-                <div class="glossary-filters-buttons">
-                    <!-- Фильтр по алфавиту -->
-                    <div class="glossary-filter-group">
-                        <h4 class="glossary-filter-title">Алфавит:</h4>
-                        <div class="glossary-filter-buttons">
-                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}" 
-                               class="glossary-filter-button {% if not alphabet_filter %}active{% endif %}">
-                                Все
-                            </a>
-                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}alphabet=ru" 
-                               class="glossary-filter-button {% if alphabet_filter == 'ru' %}active{% endif %}">
-                                А-Я
-                            </a>
-                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}alphabet=en" 
-                               class="glossary-filter-button {% if alphabet_filter == 'en' %}active{% endif %}">
-                                A-Z
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        {% if terms %}
+        <div class="content-grid">
+            {% for term in terms %}
+            <div class="content-card">
+                <h3 class="content-card-title">
+                    <a href="{% url 'main:glossary_term' category.slug term.slug %}">{{ term.term }}</a>
+                </h3>
+                <p class="content-card-text">{{ term.definition|truncatewords:30|striptags }}</p>
+                <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="content-card-link">
+                    <span>Подробнее</span><span class="arrow">→</span>
+                </a>
             </div>
+            {% endfor %}
         </div>
-    </div>
-</section>
-
-<!-- Термины категории -->
-<section class="glossary-content">
-    <div class="container">
-        {% if glossary_terms %}
-            <div class="glossary-terms">
-                {% for term in glossary_terms %}
-                <div class="glossary-term">
-                    <div class="glossary-term-name">
-                        <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="glossary-term-link">
-                            {{ term.term }}
-                        </a>
-                    </div>
-                    <div class="glossary-term-definition">
-                        {{ term.definition|truncatewords:30|striptags }}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
         {% else %}
-            <div class="glossary-empty">
-                <h3>Термины не найдены</h3>
-                <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
-            </div>
-        {% endif %}
-    </div>
-</section>
-
-<!-- CTA секция -->
-<section class="glossary-cta">
-    <div class="container">
-        <div class="glossary-cta-content">
-            <h2 class="glossary-cta-title">Не нашли нужный термин?</h2>
-            <p class="glossary-cta-description">
-                Свяжитесь с нами, и мы добавим определение интересующего вас термина в глоссарий
-            </p>
-            <div class="glossary-cta-buttons">
-                <a href="{% url 'main:home' %}#contact" class="glossary-cta-button primary">
-                    Связаться с нами
-                </a>
-                <a href="{% url 'main:glossary_list' %}" class="glossary-cta-button secondary">
-                    Все термины
-                </a>
-            </div>
+        <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>Термины не найдены</h3>
+            <p>В этом разделе пока нет терминов.</p>
         </div>
+        {% endif %}
     </div>
 </section>
 

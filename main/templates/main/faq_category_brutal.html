@@ -2,7 +2,7 @@
 {% load static %}
 {% load seo_tags %}
 
-{% block title %}{{ title }}{% endblock title %}
+{% block title %}{{ category.name }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -12,87 +12,39 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/faq-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция категории FAQ -->
-<section class="faq-hero">
+<section class="page-hero">
     <div class="container">
-        <div class="faq-hero-content">
-            <h1 class="faq-hero-title">{{ category.name }}</h1>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ category.name }}</h1>
             {% if category.description %}
-            <p class="faq-hero-subtitle">{{ category.description }}</p>
+            <p class="page-hero-subtitle">{{ category.description }}</p>
             {% endif %}
         </div>
     </div>
 </section>
 
-<!-- Поиск по категории -->
-<section class="faq-search">
+<section class="content-section">
     <div class="container">
-        <form method="get" action="{% url 'main:faq_category' category.slug %}" class="faq-search-form">
-            <input 
-                type="text" 
-                name="search" 
-                value="{{ search_query|default:'' }}" 
-                placeholder="Поиск по вопросам в категории '{{ category.name }}'..." 
-                class="faq-search-input"
-            >
-            <button type="submit" class="faq-search-button">
-                Найти
-            </button>
-        </form>
-    </div>
-</section>
-
-<!-- FAQ контент категории -->
-<section class="faq-content">
-    <div class="container">
-        {% if faq_items %}
-            <div class="faq-items">
-                {% for item in faq_items %}
-                <div class="faq-item">
-                    <div class="faq-item-question">
-                        <a href="{% url 'main:faq_item' category.slug item.slug %}" class="faq-item-link">
-                            {{ item.question }}
-                        </a>
-                    </div>
-                    <div class="faq-item-answer">
-                        {{ item.answer|truncatewords:30|striptags }}
-                    </div>
-                </div>
-                {% endfor %}
+        {% if items %}
+        <div class="content-list">
+            {% for item in items %}
+            <div class="content-list-item">
+                <h3 class="content-card-title">
+                    <a href="{% url 'main:faq_item' category.slug item.slug %}">{{ item.question }}</a>
+                </h3>
+                <p class="content-card-text">{{ item.answer|truncatewords:30|striptags }}</p>
             </div>
-        {% else %}
-            <div class="faq-empty">
-                <h3>Вопросы не найдены</h3>
-                <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
-            </div>
-        {% endif %}
-    </div>
-</section>
-
-<!-- CTA секция -->
-<section class="faq-cta">
-    <div class="container">
-        <div class="faq-cta-content">
-            <h2 class="faq-cta-title">Не нашли ответ на свой вопрос?</h2>
-            <p class="faq-cta-subtitle">
-                Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
-            </p>
-            <div class="faq-cta-buttons">
-                <a href="{% url 'main:contacts' %}" class="faq-cta-button">
-                    Связаться с нами
-                </a>
-                <a href="{% url 'main:faq_list' %}" class="faq-cta-button secondary">
-                    Все FAQ
-                </a>
-            </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-question-circle"></i>
+            <h3>Вопросы не найдены</h3>
+            <p>В этом разделе пока нет вопросов.</p>
+        </div>
+        {% endif %}
     </div>
 </section>
 

@@ -12,19 +12,14 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция городов -->
-<section class="cities-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="cities-hero-content">
-            <h1 class="cities-hero-title">Города присутствия</h1>
-            <p class="cities-hero-subtitle">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Города присутствия</h1>
+            <p class="page-hero-subtitle">
                 Мы предоставляем услуги SEO-продвижения и комплексного интернет-маркетинга 
                 в крупнейших городах России и СНГ.
             </p>
@@ -32,35 +27,40 @@
     </div>
 </section>
 
-<!-- Основной контент -->
-<section class="cities-content">
+<!-- Города -->
+<section class="content-section">
     <div class="container">
-        <!-- Список городов -->
-        <div class="cities-grid">
+        <div class="content-grid grid-4">
             {% for city in cities %}
-            <div class="city-card">
-                <div class="city-region">{{ city.region }}</div>
-                <h3 class="city-title">{{ city.name }}</h3>
+            <div class="content-card">
+                <div class="content-card-meta">{{ city.region }}</div>
+                <h3 class="content-card-title">
+                    <a href="{{ city.get_absolute_url }}">{{ city.name }}</a>
+                </h3>
                 {% if city.local_description %}
-                <p class="city-description">{{ city.local_description|truncatewords:20 }}</p>
+                <p class="content-card-text">{{ city.local_description|truncatewords:20 }}</p>
                 {% endif %}
-                <a href="{{ city.get_absolute_url }}" class="city-link">
-                    SEO {{ city.get_name_prepositional }}
+                <a href="{{ city.get_absolute_url }}" class="content-card-link">
+                    <span>SEO {{ city.get_name_prepositional }}</span>
+                    <span class="arrow">→</span>
                 </a>
             </div>
             {% endfor %}
         </div>
+    </div>
+</section>
 
-        <!-- CTA секция -->
-        <div class="cities-cta">
-            <div class="cities-cta-content">
-                <h3 class="cities-cta-title">Не нашли свой город?</h3>
-                <p class="cities-cta-text">
-                    Мы работаем по всей России и СНГ. Свяжитесь с нами для обсуждения 
-                    условий работы в вашем регионе
-                </p>
-                <a href="{% url 'main:contacts' %}" class="cities-cta-btn">
-                    Связаться с нами
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Не нашли свой город?</h2>
+            <p class="cta-section-text">
+                Мы работаем по всей России и СНГ. Свяжитесь с нами для обсуждения условий работы в вашем регионе
+            </p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:contacts' %}" class="cta-section-button">
+                    <span>Связаться с нами</span>
                 </a>
             </div>
         </div>

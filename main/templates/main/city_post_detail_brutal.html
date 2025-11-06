@@ -1,148 +1,47 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% load seo_tags %}
-{% load custom_filters %}
-
-{% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="container">
-        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города присутствия</a><span class="separator">/</span><a href="{% url 'main:city_detail' city.slug %}">{{ city.name }}</a><span class="separator">/</span><span class="current">{{ post.title }}</span>
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города</a><span class="separator">/</span><span class="current">{{ city.name }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/blog-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция статьи -->
-<section class="blog-hero">
+<section class="page-hero">
     <div class="container">
-        <div class="blog-hero-content">
-            <!-- Региональная информация -->
-            <div class="blog-region-info">
-                <div class="blog-region-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="blog-region-text">
-                    <div class="blog-region-title">Статья {{ city.get_name_prepositional }}</div>
-                    <div class="blog-region-subtitle">{{ city.region }}</div>
-                </div>
-            </div>
-            
-            <h1 class="blog-hero-title">{{ post.title }}</h1>
-            
-            <div class="blog-meta">
-                <div class="blog-meta-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>{{ post.published_date|date:"d F Y" }}</span>
-                </div>
-                <div class="blog-meta-item">
-                    <i class="fas fa-eye"></i>
-                    <span>{{ post.views_count }} просмотров</span>
-                </div>
-                <div class="blog-meta-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>{{ city.name }}</span>
-                </div>
-                {% if post.author %}
-                <div class="blog-meta-item">
-                    <i class="fas fa-user-edit"></i>
-                    <span>{{ post.author.get_full_name|default:post.author.username }}</span>
-                </div>
-                {% endif %}
-            </div>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">SEO {{ city.get_name_prepositional }}</h1>
+            <p class="page-hero-subtitle">
+                Профессиональное SEO-продвижение сайтов {{ city.get_name_prepositional }}
+            </p>
         </div>
     </div>
 </section>
 
-<!-- Основной контент статьи -->
-<section class="blog-content">
+<section class="content-section">
     <div class="container">
-        <div class="blog-article">
-            {% if post.image %}
-            <div class="blog-image-container">
-                <img src="{{ post.image.url }}" alt="{{ post.get_image_alt }}" class="blog-image">
-            </div>
+        <div class="text-content">
+            {% if city.local_description %}
+            {{ city.local_description|safe }}
+            {% else %}
+            <p>Мы предоставляем услуги SEO-продвижения {{ city.get_name_prepositional }}.</p>
             {% endif %}
-
-            <div class="blog-text">
-                {{ post.content|safe }}
-            </div>
-
-            <!-- Навигация -->
-            <div class="blog-navigation">
-                <a href="{% url 'main:city_detail' city.slug %}" class="blog-nav-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    Все статьи {{ city.get_name_prepositional }}
-                </a>
-            </div>
         </div>
     </div>
 </section>
 
-<!-- Блок "Вам может понравиться" -->
-{% if related_posts %}
-<section class="blog-related">
+<section class="cta-section">
     <div class="container">
-        <h2 class="blog-related-title">Вам может понравиться</h2>
-        <div class="blog-related-grid">
-            {% for related_post in related_posts %}
-            <div class="blog-related-card">
-                {% if related_post.image %}
-                <img src="{{ related_post.image.url }}" alt="{{ related_post.get_image_alt }}" class="blog-related-image">
-                {% endif %}
-                
-                <div class="blog-related-content">
-                    {% if related_post.category %}
-                    <div class="blog-related-category">{{ related_post.category.name }}</div>
-                    {% endif %}
-                    
-                    <h3 class="blog-related-title-card">
-                        <a href="{% url 'main:city_post_detail' city.slug related_post.slug %}" class="blog-related-link">
-                            {{ related_post.title }}
-                        </a>
-                    </h3>
-                    
-                    <p class="blog-related-excerpt">
-                        {{ related_post.content|striptags|truncatewords:20 }}
-                    </p>
-                    
-                    <div class="blog-related-meta">
-                        <span class="blog-related-date">
-                            <i class="fas fa-calendar-alt"></i>
-                            {{ related_post.published_date|date:"d F Y" }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- CTA секция -->
-<section class="blog-cta">
-    <div class="container">
-        <div class="blog-cta-content">
-            <h3 class="blog-cta-title">Нужна помощь с SEO?</h3>
-            <p class="blog-cta-text">Получите бесплатную консультацию по продвижению вашего сайта</p>
-            <div class="blog-cta-buttons">
-                <a href="{% url 'main:contacts' %}" class="blog-cta-btn brutal-blog-cta-btn-primary">
-                    <i class="fas fa-phone"></i>
-                    Получить консультацию
-                </a>
-                <a href="tel:+79636415944" class="blog-cta-btn brutal-blog-cta-btn-secondary">
-                    <i class="fas fa-phone"></i>
-                    +7 (963) 641-59-44
-                </a>
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Готовы начать продвижение?</h2>
+            <p class="cta-section-text">Свяжитесь с нами для обсуждения вашего проекта</p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:contacts' %}" class="cta-section-button"><span>Связаться</span></a>
             </div>
         </div>
     </div>

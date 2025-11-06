@@ -1,0 +1,26 @@
+Обновлено шаблонов с единой системой классов:
+✅ post_list_brutal.html
+✅ post_detail_brutal.html
+✅ portfolio_list_brutal.html
+✅ portfolio_detail_brutal.html
+✅ portfolio_category_brutal.html
+✅ service_list_brutal.html
+✅ service_detail.html
+✅ service_category.html
+✅ glossary_brutal.html
+✅ faq_brutal.html
+✅ privacy_policy_brutal.html
+✅ city_list_brutal.html
+✅ sitemap_brutal.html
+✅ contacts_brutal.html
+
+Осталось обновить:
+- glossary_term_brutal.html
+- glossary_category_brutal.html
+- faq_item_brutal.html
+- faq_category_brutal.html
+- city_detail_brutal.html
+- city_service_detail_brutal.html
+- city_post_detail_brutal.html
+- city_category_detail_brutal.html
+- author_detail_brutal.html

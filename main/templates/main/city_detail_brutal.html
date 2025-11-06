@@ -1,92 +1,47 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% load seo_tags %}
-{% load global_filters %}
-
-{% block title %}{{ title }}{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
     <div class="container">
-        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города присутствия</a><span class="separator">/</span><span class="current">{{ city.name }}</span>
+        <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><a href="{% url 'main:city_list' %}">Города</a><span class="separator">/</span><span class="current">{{ city.name }}</span>
     </div>
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/cities-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция города -->
-<section class="city-hero">
+<section class="page-hero">
     <div class="container">
-        <div class="city-hero-content">
-            <h1 class="city-hero-title">SEO продвижение {{ city.get_name_prepositional }}</h1>
-            <p class="city-hero-region">{{ city.region }}</p>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">SEO {{ city.get_name_prepositional }}</h1>
+            <p class="page-hero-subtitle">
+                Профессиональное SEO-продвижение сайтов {{ city.get_name_prepositional }}
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="content-section">
+    <div class="container">
+        <div class="text-content">
             {% if city.local_description %}
-            <p class="city-hero-description">{{ city.local_description }}</p>
+            {{ city.local_description|safe }}
+            {% else %}
+            <p>Мы предоставляем услуги SEO-продвижения {{ city.get_name_prepositional }}.</p>
             {% endif %}
         </div>
     </div>
 </section>
 
-<!-- Основной контент -->
-<section class="city-content">
+<section class="cta-section">
     <div class="container">
-        <!-- Категории услуг -->
-        {% if service_categories %}
-        <div class="city-services">
-            <h2 class="city-services-title">Наши услуги {{ city.get_name_prepositional }}</h2>
-            <div class="city-services-grid">
-                {% for category in service_categories %}
-                <div class="city-service-card">
-                    <h3 class="city-service-title">{{ category.title }}</h3>
-                    <p class="city-service-description">{{ category.description|truncatewords:20 }}</p>
-                    <a href="{% url 'main:city_category_detail' city.slug category.slug %}" class="city-service-link">
-                        Услуги {{ city.get_name_prepositional }}
-                    </a>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- Блог города -->
-        {% if recent_posts %}
-        <div class="city-blog">
-            <h2 class="city-blog-title">Полезные статьи {{ city.get_name_prepositional }}</h2>
-            <div class="city-blog-grid">
-                {% for post in recent_posts %}
-                <div class="city-blog-card">
-                    {% if post.image %}
-                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="city-blog-image">
-                    {% endif %}
-                    <div class="city-blog-content">
-                        <h3 class="city-blog-title-card">{{ post.title }}</h3>
-                        <p class="city-blog-excerpt">
-                            {% if post.excerpt %}
-                                {{ post.excerpt|truncatewords:15 }}
-                            {% else %}
-                                {{ post.content|striptags|truncatewords:15 }}
-                            {% endif %}
-                        </p>
-                        <a href="{{ post.get_absolute_url }}" class="city-blog-link">Читать далее</a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- CTA секция -->
-        <div class="city-cta">
-            <div class="city-cta-content">
-                <h3 class="city-cta-title">Готовы продвигать бизнес {{ city.get_name_prepositional }}?</h3>
-                <p class="city-cta-text">Получите бесплатную консультацию по SEO продвижению в вашем городе</p>
-                <a href="{% url 'main:contacts' %}" class="city-cta-btn">Получить консультацию</a>
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Готовы начать продвижение?</h2>
+            <p class="cta-section-text">Свяжитесь с нами для обсуждения вашего проекта</p>
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:contacts' %}" class="cta-section-button"><span>Связаться</span></a>
             </div>
         </div>
     </div>

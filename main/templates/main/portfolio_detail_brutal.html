@@ -14,194 +14,72 @@
 {% endif %}
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/portfolio-detail-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция проекта -->
-<section class="portfolio-detail-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="portfolio-detail-hero-content">
-            <h1 class="portfolio-detail-title">{{ portfolio_item.title }}</h1>
-            <div class="portfolio-detail-meta">
-                <div class="portfolio-detail-type">{{ portfolio_item.get_project_type_display_ru }}</div>
-                {% if portfolio_item.client_name %}
-                <div class="portfolio-detail-client">{{ portfolio_item.client_name }}</div>
-                {% endif %}
-                {% if portfolio_item.project_url %}
-                <div class="portfolio-detail-url">
-                    <a href="{{ portfolio_item.project_url }}" target="_blank" class="portfolio-detail-link">
-                        Посмотреть проект
-                    </a>
-                </div>
-                {% endif %}
+        <div class="page-hero-content">
+            <div style="font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">
+                {{ portfolio_item.get_project_type_display_ru }}
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Основной контент проекта -->
-<section class="portfolio-detail-content">
-    <div class="container">
-        <div class="portfolio-detail-wrapper">
-            <!-- Блоки контента -->
-            <div class="portfolio-detail-blocks">
-                <div class="portfolio-detail-block main">
-                    <div class="portfolio-detail-block-number">01</div>
-                    <h2>О проекте</h2>
-                    <p>{{ portfolio_item.short_description }}</p>
-                </div>
-                
-                <div class="portfolio-detail-block">
-                    <div class="portfolio-detail-block-number">02</div>
-                    <h3>Информация о проекте</h3>
-                    <ul>
-                        <li><strong>Тип проекта:</strong> {{ portfolio_item.get_project_type_display_ru }}</li>
-                        {% if portfolio_item.client_name %}
-                        <li><strong>Клиент:</strong> {{ portfolio_item.client_name }}</li>
-                        {% endif %}
-                        {% if portfolio_item.cooperation_start %}
-                        <li><strong>Начало:</strong> {{ portfolio_item.cooperation_start }}</li>
-                        {% endif %}
-                        {% if portfolio_item.cooperation_end %}
-                        <li><strong>Окончание:</strong> {{ portfolio_item.cooperation_end }}</li>
-                        {% endif %}
-                    </ul>
-                </div>
-                
-                <div class="portfolio-detail-block">
-                    <div class="portfolio-detail-block-number">03</div>
-                    <h3>Результаты</h3>
-                    {% if portfolio_item.get_results_list %}
-                    <div class="portfolio-results">
-                        {% for result in portfolio_item.get_results_list %}
-                        <div class="portfolio-result-item">
-                            <div class="portfolio-result-metric">{{ result.metric }}</div>
-                            <div class="portfolio-result-value">{{ result.value }}</div>
-                            {% if result.description %}
-                            <div class="portfolio-result-description">{{ result.description }}</div>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% else %}
-                    <p>Результаты проекта будут добавлены позже.</p>
-                    {% endif %}
-                </div>
-                
-                <div class="portfolio-detail-block content">
-                    <div class="portfolio-detail-block-number">04</div>
-                    <h3>Подробное описание</h3>
-                    <div class="portfolio-detail-text portfolio-scrollable">
-                        {{ portfolio_item.full_description|safe }}
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Изображение проекта справа -->
-            {% if portfolio_item.main_image %}
-            <div class="portfolio-detail-image-container">
-                <img 
-                    src="{{ portfolio_item.main_image.url }}" 
-                    class="portfolio-detail-image" 
-                    alt="{{ portfolio_item.get_main_image_alt }}"
-                >
-                <div class="portfolio-detail-image-overlay">
-                    {{ portfolio_item.get_project_type_display_ru }}
-                </div>
-                <div class="portfolio-detail-image-decoration"></div>
-            </div>
+            <h1 class="page-hero-title">{{ portfolio_item.title }}</h1>
+            {% if portfolio_item.client_name %}
+            <p class="page-hero-subtitle">Клиент: {{ portfolio_item.client_name }}</p>
             {% endif %}
         </div>
     </div>
 </section>
 
-<!-- Галерея изображений -->
-{% if portfolio_item.get_gallery_images_list %}
-<section class="portfolio-gallery">
+<!-- Контент -->
+<section class="content-section">
     <div class="container">
-        <h2 class="portfolio-gallery-title">Галерея проекта</h2>
-        <div class="portfolio-gallery-grid">
-            {% for image_path in portfolio_item.get_gallery_images_list %}
-            <div class="portfolio-gallery-item">
-                <img src="{{ image_path }}" alt="Изображение проекта {{ portfolio_item.title }}" class="portfolio-gallery-image">
-            </div>
-            {% endfor %}
+        {% if portfolio_item.main_image %}
+        <div style="max-width: 1000px; margin: 0 auto 60px;">
+            <img src="{{ portfolio_item.main_image.url }}" alt="{{ portfolio_item.get_main_image_alt }}" style="width: 100%; border: var(--border);">
         </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- Технологии -->
-{% if portfolio_item.get_technologies_list %}
-<section class="portfolio-technologies">
-    <div class="container">
-        <h2 class="portfolio-technologies-title">Использованные технологии</h2>
-        <div class="portfolio-technologies-list">
-            {% for tech in portfolio_item.get_technologies_list %}
-            <span class="portfolio-tech-badge">{{ tech }}</span>
-            {% endfor %}
+        {% endif %}
+        
+        <div class="text-content">
+            {{ portfolio_item.full_description|safe }}
         </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- CTA блок -->
-<section class="portfolio-cta">
-    <div class="container">
-        <div class="portfolio-cta-content">
-            <h3 class="portfolio-cta-title">Хотите такой же результат?</h3>
-            <p class="portfolio-cta-text">Оставьте заявку, и мы обсудим ваш проект и возможности его реализации.</p>
-            <a href="{% url 'main:home' %}#contact" class="portfolio-cta-btn">
-                Обсудить проект
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Навигация -->
-<section class="portfolio-navigation">
-    <div class="container">
-        <a href="{% url 'main:portfolio_list' %}" class="portfolio-nav-link">
-            ← Вернуться в портфолио
-        </a>
     </div>
 </section>
 
 <!-- Похожие проекты -->
 {% if related_projects %}
-<section class="related-portfolio">
+<section class="content-section alt-bg">
     <div class="container">
-        <h2 class="related-portfolio-title">Похожие проекты</h2>
-        <div class="related-portfolio-grid">
+        <div class="section-header">
+            <h2 class="section-title">Похожие проекты</h2>
+        </div>
+        
+        <div class="content-grid">
             {% for related_project in related_projects %}
-            <div class="related-portfolio-card">
+            <article class="content-card">
                 {% if related_project.main_image %}
-                <img src="{{ related_project.main_image.url }}" class="related-portfolio-image" alt="{{ related_project.get_main_image_alt }}">
+                <img src="{{ related_project.main_image.url }}" class="content-card-image" alt="{{ related_project.get_main_image_alt }}">
                 {% else %}
-                <div class="related-portfolio-placeholder">
+                <div class="content-card-placeholder">
                     <i class="fas fa-briefcase"></i>
                 </div>
                 {% endif %}
                 
-                <div class="related-portfolio-content">
-                    <div class="related-portfolio-type">{{ related_project.get_project_type_display_ru }}</div>
-                    <h3 class="related-portfolio-title-card">
-                        <a href="{{ related_project.get_absolute_url }}" class="related-portfolio-title-link">
-                            {{ related_project.title }}
-                        </a>
-                    </h3>
-                    <p class="related-portfolio-description">
-                        {{ related_project.short_description|truncatewords:15 }}
-                    </p>
-                    <a href="{{ related_project.get_absolute_url }}" class="related-portfolio-link">
-                        Смотреть проект
-                    </a>
-                </div>
-            </div>
+                <div class="content-card-meta">{{ related_project.get_project_type_display_ru }}</div>
+                
+                <h3 class="content-card-title">
+                    <a href="{{ related_project.get_absolute_url }}">{{ related_project.title }}</a>
+                </h3>
+                
+                <p class="content-card-text">
+                    {{ related_project.short_description|truncatewords:15 }}
+                </p>
+                
+                <a href="{{ related_project.get_absolute_url }}" class="content-card-link">
+                    <span>Смотреть</span>
+                    <span class="arrow">→</span>
+                </a>
+            </article>
             {% endfor %}
         </div>
     </div>

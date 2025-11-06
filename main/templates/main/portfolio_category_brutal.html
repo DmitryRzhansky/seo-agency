@@ -12,64 +12,62 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/portfolio-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция категории портфолио -->
-<section class="portfolio-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="portfolio-hero-content">
-            <h1 class="portfolio-hero-title">{{ category.name }}</h1>
-            <p class="portfolio-hero-subtitle">
-                Здесь вы найдете наши работы в категории «{{ category.name }}». 
-                Посмотрите примеры наших проектов и достигнутых результатов.
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ category.name }}</h1>
+            <p class="page-hero-subtitle">
+                Наши работы в категории «{{ category.name }}»
             </p>
         </div>
     </div>
 </section>
 
-<!-- Список проектов категории -->
-<section class="portfolio-projects">
+<!-- Проекты -->
+<section class="content-section">
     <div class="container">
-        <h2 class="portfolio-projects-title">Наши проекты в разделе «{{ category.name }}»</h2>
-        
         {% if page_obj %}
-        <div class="portfolio-projects-grid">
+        <div class="content-grid">
             {% for project in page_obj %}
-            <div class="portfolio-card">
+            <article class="content-card">
                 {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" class="portfolio-card-image" alt="{{ project.get_main_image_alt }}">
+                <img src="{{ project.main_image.url }}" class="content-card-image" alt="{{ project.get_main_image_alt }}">
                 {% else %}
-                <div class="portfolio-card-placeholder">
+                <div class="content-card-placeholder">
                     <i class="fas fa-briefcase"></i>
                 </div>
                 {% endif %}
                 
-                <div class="portfolio-card-content">
-                    <div class="portfolio-card-type">{{ project.get_project_type_display_ru }}</div>
-                    <h3 class="portfolio-card-title">{{ project.title }}</h3>
-                    <p class="portfolio-card-description">
-                        {{ project.short_description|truncatewords:20 }}
-                    </p>
-                    <div class="portfolio-card-meta">
+                <div class="content-card-meta">{{ project.get_project_type_display_ru }}</div>
+                
+                <h3 class="content-card-title">
+                    <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+                </h3>
+                
+                <p class="content-card-text">
+                    {{ project.short_description|truncatewords:20 }}
+                </p>
+                
+                <div class="content-card-footer">
+                    <div class="content-card-info">
                         {% if project.client_name %}
-                        <span class="portfolio-card-client">{{ project.client_name }}</span>
+                        <span>{{ project.client_name }}</span>
                         {% endif %}
-                        <span class="portfolio-card-date">{{ project.created_at|date:"d.m.Y" }}</span>
+                        <span>{{ project.created_at|date:"d.m.Y" }}</span>
                     </div>
-                    <a href="{{ project.get_absolute_url }}" class="portfolio-card-link">
-                        Смотреть проект
+                    <a href="{{ project.get_absolute_url }}" class="content-card-link">
+                        <span>Смотреть</span>
+                        <span class="arrow">→</span>
                     </a>
                 </div>
-            </div>
+            </article>
             {% endfor %}
         </div>
         {% else %}
-        <div class="portfolio-empty">
+        <div class="empty-state">
             <i class="fas fa-search"></i>
             <h3>Проекты не найдены</h3>
             <p>В этом разделе пока нет опубликованных проектов.</p>

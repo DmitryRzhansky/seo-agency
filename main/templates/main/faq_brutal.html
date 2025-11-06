@@ -12,144 +12,70 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/faq-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция FAQ -->
-<section class="faq-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="faq-hero-content">
-            <h1 class="faq-hero-title">Часто задаваемые вопросы</h1>
-            <p class="faq-hero-subtitle">
-                Ответы на популярные вопросы о SEO-продвижении, контекстной рекламе и digital-маркетинге. 
-                Найдем ответ на ваш вопрос!
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Часто задаваемые вопросы</h1>
+            <p class="page-hero-subtitle">
+                Ответы на популярные вопросы о SEO-продвижении, контекстной рекламе и digital-маркетинге
             </p>
         </div>
     </div>
 </section>
 
-<!-- Поиск по FAQ -->
-<section class="faq-search">
+<!-- Вопросы -->
+<section class="content-section">
     <div class="container">
-        <form method="get" action="{% url 'main:faq_list' %}" class="faq-search-form">
-            <input 
-                type="text" 
-                name="search" 
-                value="{{ search_query|default:'' }}" 
-                placeholder="Поиск по вопросам и ответам..." 
-                class="faq-search-input"
-            >
-            <button type="submit" class="faq-search-button">
-                Найти
-            </button>
-        </form>
-    </div>
-</section>
-
-<!-- Фильтры по категориям -->
-<section class="faq-filters">
-    <div class="container">
-        <div class="faq-filters-content">
-            <h3 class="faq-filters-title">Категории вопросов:</h3>
-            <div class="faq-filters-buttons">
-                <a href="{% url 'main:faq_list' %}" 
-                   class="faq-filter-btn {% if not selected_category %}active{% endif %}">
-                    Все категории
-                </a>
-                {% for category in categories %}
-                <a href="{% url 'main:faq_list' %}?category={{ category.slug }}" 
-                   class="faq-filter-btn {% if selected_category == category %}active{% endif %}">
-                    {{ category.name }}
-                </a>
+        {% if faq_by_category %}
+            {% for category, items in faq_by_category.items %}
+            <div class="section-header">
+                <h2 class="section-title">
+                    <a href="{% url 'main:faq_category' category.slug %}" style="color: inherit; text-decoration: none;">
+                        {{ category.name }}
+                    </a>
+                </h2>
+                {% if category.description %}
+                <p class="section-subtitle">{{ category.description }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="content-list">
+                {% for item in items %}
+                <div class="content-list-item">
+                    <h3 class="content-card-title">
+                        <a href="{% url 'main:faq_item' category.slug item.slug %}">{{ item.question }}</a>
+                    </h3>
+                    <p class="content-card-text">
+                        {{ item.answer|truncatewords:30|striptags }}
+                    </p>
+                </div>
                 {% endfor %}
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ контент -->
-<section class="faq-content">
-    <div class="container">
-        {% if selected_category %}
-            <!-- Показываем вопросы выбранной категории -->
-            {% if faq_by_category %}
-                {% for category, items in faq_by_category.items %}
-                <div class="faq-category">
-                    <h2 class="faq-category-title">
-                        <a href="{% url 'main:faq_category' category.slug %}" class="faq-category-link">
-                            {{ category.name }}
-                        </a>
-                    </h2>
-                    {% if category.description %}
-                    <p class="faq-category-description">{{ category.description }}</p>
-                    {% endif %}
-                    
-                    <div class="faq-items">
-                        {% for item in items %}
-                        <div class="faq-item">
-                            <div class="faq-item-question">
-                                <a href="{% url 'main:faq_item' category.slug item.slug %}" class="faq-item-link">
-                                    {{ item.question }}
-                                </a>
-                            </div>
-                            <div class="faq-item-answer">
-                                {{ item.answer|truncatewords:30|striptags }}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endfor %}
-            {% else %}
-                <div class="faq-empty">
-                    <h3>Вопросы не найдены</h3>
-                    <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
-                </div>
-            {% endif %}
+            {% endfor %}
         {% else %}
-            <!-- Показываем только список категорий -->
-            <div class="faq-categories">
-                <h2 class="faq-categories-title">Выберите категорию вопросов:</h2>
-                <div class="faq-categories-grid">
-                    {% for category in categories %}
-                    <div class="faq-category-card">
-                        <h3 class="faq-category-card-title">
-                            <a href="{% url 'main:faq_category' category.slug %}" class="faq-category-card-link">
-                                {{ category.name }}
-                            </a>
-                        </h3>
-                        {% if category.description %}
-                        <p class="faq-category-card-description">{{ category.description }}</p>
-                        {% endif %}
-                        <div class="faq-category-card-meta">
-                            <span class="faq-category-card-count">{{ category.faq_items.count }} вопросов</span>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
+        <div class="empty-state">
+            <i class="fas fa-question-circle"></i>
+            <h3>Вопросы не найдены</h3>
+            <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
+        </div>
         {% endif %}
     </div>
 </section>
 
-<!-- CTA секция -->
-<section class="faq-cta">
+<!-- CTA -->
+<section class="cta-section">
     <div class="container">
-        <div class="faq-cta-content">
-            <h2 class="faq-cta-title">Не нашли ответ на свой вопрос?</h2>
-            <p class="faq-cta-subtitle">
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Не нашли ответ на свой вопрос?</h2>
+            <p class="cta-section-text">
                 Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
             </p>
-            <div class="faq-cta-buttons">
-                <a href="{% url 'main:contacts' %}" class="faq-cta-button">
-                    Связаться с нами
-                </a>
-                <a href="{% url 'main:home' %}" class="faq-cta-button secondary">
-                    На главную
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:contacts' %}" class="cta-section-button">
+                    <span>Связаться с нами</span>
                 </a>
             </div>
         </div>

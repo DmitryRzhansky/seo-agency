@@ -12,62 +12,55 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/service-category-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
-{% endblock extra_css %}
-
 {% block content %}
 
-<!-- Hero секция категории услуг - современная -->
-<section class="category-hero">
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="category-hero-content">
-            <h1 class="category-hero-title">{{ category.title }}</h1>
-            <p class="category-hero-subtitle">
-                Здесь вы найдете полный спектр услуг по тематике «{{ category.title }}». 
-                <span class="brick-text">Выберите</span>
-                <span class="brick-text">то,</span>
-                <span class="brick-text">что нужно.</span>
-            </p>
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">{{ category.title }}</h1>
+            {% if category.description %}
+            <p class="page-hero-subtitle">{{ category.description }}</p>
+            {% endif %}
         </div>
     </div>
 </section>
 
-<!-- Список услуг категории - брутальный -->
-<section class="category-services">
+<!-- Услуги -->
+<section class="content-section">
     <div class="container">
-        <h2 class="category-services-title">Наши услуги в разделе «{{ category.title }}»</h2>
-        
         {% if services %}
-        <div class="category-grid">
+        <div class="content-grid">
             {% for service in services %}
-            <div class="category-service-card">
+            <article class="content-card">
                 {% if service.image %}
-                <img src="{{ service.image.url }}" class="category-service-card-image" alt="{{ service.get_image_alt }}">
+                <img src="{{ service.image.url }}" class="content-card-image" alt="{{ service.get_image_alt }}">
                 {% else %}
-                <div class="category-service-card-placeholder">
+                <div class="content-card-placeholder">
                     <i class="fas fa-cogs"></i>
                 </div>
                 {% endif %}
-                <div class="category-service-card-category">{{ service.category.title }}</div>
-                <h3 class="category-service-card-title">{{ service.title }}</h3>
-                <p class="category-service-card-description">{{ service.short_description }}</p>
-                <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="category-service-card-link">
-                    Подробнее об услуге
+                
+                <div class="content-card-meta">{{ service.category.title }}</div>
+                
+                <h3 class="content-card-title">
+                    <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}">{{ service.title }}</a>
+                </h3>
+                
+                <p class="content-card-text">{{ service.short_description }}</p>
+                
+                <a href="{% url 'services:service_detail' category_slug=category.slug service_slug=service.slug %}" class="content-card-link">
+                    <span>Подробнее</span>
+                    <span class="arrow">→</span>
                 </a>
-            </div>
+            </article>
             {% endfor %}
         </div>
-
         {% else %}
         <div class="empty-state">
             <i class="fas fa-search"></i>
-            <h3>В этом разделе пока нет добавленных услуг</h3>
-            <p>Мы работаем над наполнением этого раздела. Скоро здесь появятся новые услуги!</p>
+            <h3>В этом разделе пока нет услуг</h3>
+            <p>Мы работаем над наполнением этого раздела.</p>
         </div>
         {% endif %}
     </div>

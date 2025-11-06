@@ -12,199 +12,74 @@
 </div>
 {% endblock breadcrumbs %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/glossary-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
-<!-- Hero секция глоссария -->
-<section class="glossary-hero">
+
+<!-- Hero секция -->
+<section class="page-hero">
     <div class="container">
-        <div class="glossary-hero-content">
-            <h1 class="glossary-hero-title">Глоссарий терминов</h1>
-            <p class="glossary-hero-description">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">Глоссарий терминов</h1>
+            <p class="page-hero-subtitle">
                 Алфавитный словарь терминов по SEO, контекстной рекламе и digital-маркетингу
             </p>
         </div>
     </div>
 </section>
 
-<!-- Фильтры и поиск -->
-<section class="glossary-filters">
+<!-- Термины -->
+<section class="content-section">
     <div class="container">
-        <div class="glossary-nav">
-            <div class="glossary-nav-content">
-                <!-- Поиск -->
-                <form class="glossary-search-form" method="get">
-                    <div class="glossary-search-group">
-                        <input 
-                            type="text" 
-                            name="search" 
-                            value="{{ search_query }}"
-                            placeholder="Поиск по терминам и определениям..."
-                            class="glossary-search-input"
-                        >
-                        <button type="submit" class="glossary-search-button">
-                            Найти
-                        </button>
-                    </div>
-                </form>
-                
-                <!-- Фильтры -->
-                <div class="glossary-filters-buttons">
-                    <!-- Фильтр по категориям -->
-                    <div class="glossary-filter-group">
-                        <h4 class="glossary-filter-title">Категории:</h4>
-                        <div class="glossary-filter-buttons">
-                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if alphabet_filter %}alphabet={{ alphabet_filter }}&{% endif %}" 
-                               class="glossary-filter-button {% if not selected_category %}active{% endif %}">
-                                Все категории
-                            </a>
-                            {% for category in categories %}
-                            <a href="?category={{ category.slug }}{% if search_query %}&search={{ search_query }}{% endif %}{% if alphabet_filter %}&alphabet={{ alphabet_filter }}{% endif %}" 
-                               class="glossary-filter-button {% if selected_category == category %}active{% endif %}">
-                                {{ category.name }}
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    
-                    <!-- Фильтр по алфавиту -->
-                    <div class="glossary-filter-group">
-                        <h4 class="glossary-filter-title">Алфавит:</h4>
-                        <div class="glossary-filter-buttons">
-                            <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}" 
-                               class="glossary-filter-button {% if not alphabet_filter %}active{% endif %}">
-                                Все
-                            </a>
-                            <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet=ru" 
-                               class="glossary-filter-button {% if alphabet_filter == 'ru' %}active{% endif %}">
-                                А-Я
-                            </a>
-                            <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet=en" 
-                               class="glossary-filter-button {% if alphabet_filter == 'en' %}active{% endif %}">
-                                A-Z
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Фильтр по конкретным буквам -->
-                    <div class="glossary-filter-group">
-                        <h4 class="glossary-filter-title">Буквы:</h4>
-                        <div class="glossary-letter-buttons">
-                            <!-- Русские буквы -->
-                            <div class="glossary-letter-group">
-                                <span class="glossary-letter-group-title">Русские:</span>
-                                <div class="glossary-letter-buttons-row">
-                                    {% for letter in alphabet_ru %}
-                                    <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet={{ letter|lower }}" 
-                                       class="glossary-letter-button {% if alphabet_filter == letter|lower %}active{% endif %}">
-                                        {{ letter }}
-                                    </a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            
-                            <!-- Английские буквы -->
-                            <div class="glossary-letter-group">
-                                <span class="glossary-letter-group-title">Английские:</span>
-                                <div class="glossary-letter-buttons-row">
-                                    {% for letter in alphabet_en %}
-                                    <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}alphabet={{ letter|lower }}" 
-                                       class="glossary-letter-button {% if alphabet_filter == letter|lower %}active{% endif %}">
-                                        {{ letter }}
-                                    </a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        {% if glossary_by_category %}
+            {% for category, terms in glossary_by_category.items %}
+            <div class="section-header">
+                <h2 class="section-title">
+                    <a href="{% url 'main:glossary_category' category.slug %}" style="color: inherit; text-decoration: none;">
+                        {{ category.name }}
+                    </a>
+                </h2>
+                {% if category.description %}
+                <p class="section-subtitle">{{ category.description }}</p>
+                {% endif %}
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- Глоссарий контент -->
-<section class="glossary-content">
-    <div class="container">
-        {% if selected_category %}
-            <!-- Показываем термины выбранной категории -->
-            {% if glossary_by_category %}
-                {% for category, terms in glossary_by_category.items %}
-                <div class="glossary-category">
-                    <h2 class="glossary-category-title">
-                        <a href="{% url 'main:glossary_category' category.slug %}" class="glossary-category-link">
-                            {{ category.name }}
-                        </a>
-                    </h2>
-                    {% if category.description %}
-                    <p class="glossary-category-description">{{ category.description }}</p>
-                    {% endif %}
-                    
-                    <div class="glossary-terms">
-                        {% for term in terms %}
-                        <div class="glossary-term">
-                            <div class="glossary-term-name">
-                                <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="glossary-term-link">
-                                    {{ term.term }}
-                                </a>
-                            </div>
-                            <div class="glossary-term-definition">
-                                {{ term.definition|truncatewords:30|striptags }}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+            
+            <div class="content-grid">
+                {% for term in terms %}
+                <div class="content-card">
+                    <h3 class="content-card-title">
+                        <a href="{% url 'main:glossary_term' category.slug term.slug %}">{{ term.term }}</a>
+                    </h3>
+                    <p class="content-card-text">
+                        {{ term.definition|truncatewords:30|striptags }}
+                    </p>
+                    <a href="{% url 'main:glossary_term' category.slug term.slug %}" class="content-card-link">
+                        <span>Подробнее</span>
+                        <span class="arrow">→</span>
+                    </a>
                 </div>
                 {% endfor %}
-            {% else %}
-                <div class="glossary-empty">
-                    <h3>Термины не найдены</h3>
-                    <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
-                </div>
-            {% endif %}
-        {% else %}
-            <!-- Показываем только список категорий -->
-            <div class="glossary-categories">
-                <h2 class="glossary-categories-title">Выберите категорию терминов:</h2>
-                <div class="glossary-categories-grid">
-                    {% for category in categories %}
-                    <div class="glossary-category-card">
-                        <h3 class="glossary-category-card-title">
-                            <a href="{% url 'main:glossary_category' category.slug %}" class="glossary-category-card-link">
-                                {{ category.name }}
-                            </a>
-                        </h3>
-                        {% if category.description %}
-                        <p class="glossary-category-card-description">{{ category.description }}</p>
-                        {% endif %}
-                        <div class="glossary-category-card-meta">
-                            <span class="glossary-category-card-count">{{ category.glossary_terms.count }} терминов</span>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
             </div>
+            {% endfor %}
+        {% else %}
+        <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>Термины не найдены</h3>
+            <p>Попробуйте изменить параметры поиска.</p>
+        </div>
         {% endif %}
     </div>
 </section>
 
-<!-- CTA секция -->
-<section class="glossary-cta">
+<!-- CTA -->
+<section class="cta-section">
     <div class="container">
-        <div class="glossary-cta-content">
-            <h2 class="glossary-cta-title">Не нашли нужный термин?</h2>
-            <p class="glossary-cta-description">
+        <div class="cta-section-content">
+            <h2 class="cta-section-title">Не нашли нужный термин?</h2>
+            <p class="cta-section-text">
                 Свяжитесь с нами, и мы добавим определение интересующего вас термина в глоссарий
             </p>
-            <div class="glossary-cta-buttons">
-                <a href="{% url 'main:home' %}#contact" class="glossary-cta-button primary">
-                    Связаться с нами
-                </a>
-                <a href="{% url 'main:faq_list' %}" class="glossary-cta-button secondary">
-                    FAQ
+            <div class="cta-section-buttons">
+                <a href="{% url 'main:home' %}#contact" class="cta-section-button">
+                    <span>Связаться с нами</span>
                 </a>
             </div>
         </div>

@@ -5,14 +5,14 @@
    ============================================ */
 
 /* Hero секция детальной страницы */
-.brutal-service-detail-hero {
+.service-detail-hero {
     background: var(--white);
     padding: 120px 0;
     border-bottom: var(--border);
     position: relative;
 }
 
-.brutal-service-detail-hero-content {
+.service-detail-hero-content {
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
@@ -20,7 +20,7 @@
     z-index: 2;
 }
 
-.brutal-service-detail-title {
+.service-detail-title {
     font-size: clamp(42px, 6vw, 80px);
     font-weight: 900;
     color: var(--black);
@@ -31,7 +31,7 @@
     line-height: 1.1;
 }
 
-.brutal-service-detail-subtitle {
+.service-detail-subtitle {
     font-size: 20px;
     color: var(--gray-dark);
     line-height: 1.7;
@@ -41,13 +41,13 @@
 }
 
 /* Основной контент */
-.brutal-service-detail-content {
+.service-detail-content {
     background: var(--white);
     padding: 100px 0;
     position: relative;
 }
 
-.brutal-service-detail-wrapper {
+.service-detail-wrapper {
     display: grid;
     grid-template-columns: 1fr 300px;
     gap: 60px;
@@ -55,14 +55,14 @@
 }
 
 /* Блоки контента */
-.brutal-content-blocks {
+.content-blocks {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     align-items: stretch;
 }
 
-.brutal-content-block {
+.content-block {
     background: var(--white);
     border: var(--border);
     padding: 40px;
@@ -72,17 +72,17 @@
     flex-direction: column;
 }
 
-.brutal-content-block:hover {
+.content-block:hover {
     border-color: var(--accent);
 }
 
-.brutal-content-block.main {
+.content-block.main {
     background: var(--white);
     border-color: var(--black);
     grid-column: span 2;
 }
 
-.brutal-content-block.content {
+.content-block.content {
     background: var(--white);
     border-color: var(--gray);
     grid-column: span 2;
@@ -91,7 +91,7 @@
     cursor: default;
 }
 
-.brutal-content-block.content .brutal-content-text {
+.content-block.content .content-text {
     padding: 20px 0 20px 20px;
     margin: 0;
     box-sizing: border-box;
@@ -105,7 +105,7 @@
     line-height: 1.6;
 }
 
-.brutal-block-number {
+.block-number {
     position: absolute;
     top: -15px;
     left: 30px;
@@ -119,14 +119,14 @@
     letter-spacing: 1px;
 }
 
-.brutal-content-block.main .brutal-block-number {
+.content-block.main .block-number {
     background: var(--black);
     color: var(--white);
     border-color: var(--black);
 }
 
-.brutal-content-block h2,
-.brutal-content-block h3 {
+.content-block h2,
+.content-block h3 {
     margin-top: 20px;
     margin-bottom: 20px;
     font-weight: 700;
@@ -136,22 +136,22 @@
     text-align: center;
 }
 
-.brutal-content-block h2 {
+.content-block h2 {
     font-size: 28px;
 }
 
-.brutal-content-block h3 {
+.content-block h3 {
     font-size: 22px;
 }
 
-.brutal-content-block p {
+.content-block p {
     margin-bottom: 20px;
     line-height: 1.7;
     color: var(--black);
     font-weight: 400;
 }
 
-.brutal-content-text {
+.content-text {
     line-height: 1.7;
     color: var(--black);
     font-weight: 400;
@@ -160,12 +160,12 @@
     hyphens: none;
 }
 
-.brutal-content-text h1,
-.brutal-content-text h2,
-.brutal-content-text h3,
-.brutal-content-text h4,
-.brutal-content-text h5,
-.brutal-content-text h6 {
+.content-text h1,
+.content-text h2,
+.content-text h3,
+.content-text h4,
+.content-text h5,
+.content-text h6 {
     margin-top: 15px;
     margin-bottom: 10px;
     font-weight: 700;
@@ -175,30 +175,30 @@
     text-align: center;
 }
 
-.brutal-content-text h2 {
+.content-text h2 {
     font-size: 28px;
     color: var(--accent);
 }
 
-.brutal-content-text h3 {
+.content-text h3 {
     font-size: 22px;
     color: var(--black);
 }
 
-.brutal-content-text p {
+.content-text p {
     margin-bottom: 15px;
     line-height: 1.6;
     color: var(--black);
     font-weight: 400;
 }
 
-.brutal-content-text strong,
-.brutal-content-text b {
+.content-text strong,
+.content-text b {
     color: var(--accent);
     font-weight: 700;
 }
 
-.brutal-content-text a {
+.content-text a {
     color: var(--accent);
     font-weight: 700;
     text-decoration: none;
@@ -206,7 +206,7 @@
     transition: var(--transition);
 }
 
-.brutal-content-text a:hover {
+.content-text a:hover {
     background: var(--accent);
     color: var(--white);
     padding: 2px 4px;
@@ -214,7 +214,7 @@
 }
 
 /* Изображение услуги */
-.brutal-service-image-container {
+.service-image-container {
     position: sticky;
     top: 120px;
     height: fit-content;
@@ -222,7 +222,7 @@
     flex-direction: column;
 }
 
-.brutal-service-image {
+.service-image {
     width: 100%;
     height: 100%;
     min-height: 655px;
@@ -232,11 +232,11 @@
     flex: 1;
 }
 
-.brutal-service-image:hover {
+.service-image:hover {
     border-color: var(--accent);
 }
 
-.brutal-service-image-overlay {
+.service-image-overlay {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -251,14 +251,14 @@
 }
 
 /* Блок поделиться */
-.brutal-share-section {
+.share-section {
     background: var(--gray-light);
     padding: 60px 0;
     border-top: var(--border);
     border-bottom: var(--border);
 }
 
-.brutal-share-block {
+.share-block {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -266,7 +266,7 @@
     flex-wrap: wrap;
 }
 
-.brutal-copy-btn {
+.copy-btn {
     background: var(--white);
     color: var(--black);
     border: var(--border);
@@ -279,23 +279,23 @@
     font-size: 14px;
 }
 
-.brutal-copy-btn:hover {
+.copy-btn:hover {
     background: var(--accent);
     color: var(--white);
     border-color: var(--accent);
 }
 
-.brutal-copy-btn i {
+.copy-btn i {
     margin-right: 8px;
 }
 
-.brutal-social-share {
+.social-share {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.brutal-social-label {
+.social-label {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -303,12 +303,12 @@
     font-size: 14px;
 }
 
-.brutal-social-links {
+.social-links {
     display: flex;
     gap: 15px;
 }
 
-.brutal-social-link {
+.social-link {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,31 +322,31 @@
     font-size: 18px;
 }
 
-.brutal-social-link:hover {
+.social-link:hover {
     background: var(--accent);
     color: var(--white);
     border-color: var(--accent);
 }
 
-.brutal-social-link.vk:hover {
+.social-link.vk:hover {
     background: #0077ff;
     border-color: #0077ff;
 }
 
-.brutal-social-link.telegram:hover {
+.social-link.telegram:hover {
     background: #0088cc;
     border-color: #0088cc;
 }
 
 /* CTA блок */
-.brutal-service-cta {
+.service-cta {
     background: var(--white);
     padding: 80px 0;
     text-align: center;
     border-bottom: var(--border);
 }
 
-.brutal-service-cta-content {
+.service-cta-content {
     max-width: 600px;
     margin: 0 auto;
     background: var(--gray-light);
@@ -355,7 +355,7 @@
     position: relative;
 }
 
-.brutal-service-cta-title {
+.service-cta-title {
     font-size: 32px;
     font-weight: 700;
     color: var(--black);
@@ -364,7 +364,7 @@
     letter-spacing: 1px;
 }
 
-.brutal-service-cta-text {
+.service-cta-text {
     font-size: 18px;
     color: var(--gray-dark);
     margin-bottom: 40px;
@@ -372,7 +372,7 @@
     font-weight: 400;
 }
 
-.brutal-service-cta-btn {
+.service-cta-btn {
     display: inline-block;
     background: var(--accent);
     color: var(--white);
@@ -387,20 +387,20 @@
     font-size: 16px;
 }
 
-.brutal-service-cta-btn:hover {
+.service-cta-btn:hover {
     background: var(--accent-hover);
     transform: translateY(-2px);
 }
 
 /* Навигация */
-.brutal-service-navigation {
+.service-navigation {
     background: var(--white);
     padding: 40px 0;
     text-align: center;
     border-bottom: var(--border);
 }
 
-.brutal-service-nav-link {
+.service-nav-link {
     display: inline-block;
     color: var(--black);
     text-decoration: none;
@@ -414,20 +414,20 @@
     font-size: 14px;
 }
 
-.brutal-service-nav-link:hover {
+.service-nav-link:hover {
     background: var(--accent);
     color: var(--white);
     border-color: var(--accent);
 }
 
 /* Связанные услуги */
-.brutal-related-services {
+.related-services {
     background: var(--gray-light);
     padding: 80px 0;
     border-bottom: var(--border);
 }
 
-.brutal-related-services-title {
+.related-services-title {
     font-size: clamp(32px, 4vw, 48px);
     font-weight: 900;
     color: var(--black);
@@ -439,13 +439,13 @@
     line-height: 1.1;
 }
 
-.brutal-related-grid {
+.related-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
 }
 
-.brutal-related-card {
+.related-card {
     background: var(--white);
     border: var(--border);
     padding: 40px;
@@ -456,12 +456,12 @@
     min-height: 350px;
 }
 
-.brutal-related-card:hover {
+.related-card:hover {
     border-color: var(--accent);
     transform: translateY(-5px);
 }
 
-.brutal-related-image {
+.related-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -469,7 +469,7 @@
     margin-bottom: 25px;
 }
 
-.brutal-related-category {
+.related-category {
     font-size: 12px;
     color: var(--accent);
     font-weight: 700;
@@ -478,7 +478,7 @@
     letter-spacing: 1px;
 }
 
-.brutal-related-title {
+.related-title {
     font-size: 20px;
     font-weight: 700;
     color: var(--black);
@@ -486,7 +486,7 @@
     line-height: 1.3;
 }
 
-.brutal-related-description {
+.related-description {
     font-size: 16px;
     color: var(--gray-dark);
     line-height: 1.6;
@@ -495,7 +495,7 @@
     font-weight: 400;
 }
 
-.brutal-related-link {
+.related-link {
     display: inline-block;
     margin-top: auto;
     color: var(--accent);
@@ -510,7 +510,7 @@
     font-size: 14px;
 }
 
-.brutal-related-link:hover {
+.related-link:hover {
     background: var(--accent);
     color: var(--white);
     border-color: var(--accent);
@@ -518,32 +518,32 @@
 
 /* Адаптивность */
 @media (max-width: 1024px) {
-    .brutal-service-detail-wrapper {
+    .service-detail-wrapper {
         grid-template-columns: 1fr;
         gap: 40px;
     }
     
-    .brutal-service-image-container {
+    .service-image-container {
         position: static;
         order: -1;
     }
     
-    .brutal-service-image {
+    .service-image {
         height: 300px;
         min-height: 300px;
     }
     
-    .brutal-content-blocks {
+    .content-blocks {
         grid-template-columns: 1fr;
         gap: 30px;
     }
     
-    .brutal-content-block.main,
-    .brutal-content-block.content {
+    .content-block.main,
+    .content-block.content {
         grid-column: span 1;
     }
     
-    .brutal-content-block.content {
+    .content-block.content {
         min-height: 200px;
         max-height: none;
         margin-right: 0;
@@ -551,81 +551,81 @@
 }
 
 @media (max-width: 768px) {
-    .brutal-service-detail-hero {
+    .service-detail-hero {
         padding: 80px 0;
     }
     
-    .brutal-service-detail-content {
+    .service-detail-content {
         padding: 60px 0;
     }
     
-    .brutal-content-blocks {
+    .content-blocks {
         grid-template-columns: 1fr;
         gap: 30px;
     }
     
-    .brutal-content-block {
+    .content-block {
         padding: 30px;
     }
     
-    .brutal-content-block.main,
-    .brutal-content-block.content {
+    .content-block.main,
+    .content-block.content {
         grid-column: span 1;
     }
     
-    .brutal-share-block {
+    .share-block {
         flex-direction: column;
         gap: 30px;
     }
     
-    .brutal-service-cta {
+    .service-cta {
         padding: 60px 0;
     }
     
-    .brutal-service-cta-content {
+    .service-cta-content {
         padding: 40px;
     }
     
-    .brutal-related-services {
+    .related-services {
         padding: 60px 0;
     }
     
-    .brutal-related-grid {
+    .related-grid {
         grid-template-columns: 1fr;
         gap: 30px;
     }
 }
 
 @media (max-width: 480px) {
-    .brutal-service-detail-hero {
+    .service-detail-hero {
         padding: 60px 0;
     }
     
-    .brutal-service-detail-content {
+    .service-detail-content {
         padding: 40px 0;
     }
     
-    .brutal-content-block {
+    .content-block {
         padding: 25px;
     }
     
-    .brutal-service-cta-content {
+    .service-cta-content {
         padding: 30px;
     }
     
-    .brutal-service-cta-title {
+    .service-cta-title {
         font-size: 24px;
     }
     
-    .brutal-service-cta-text {
+    .service-cta-text {
         font-size: 16px;
     }
     
-    .brutal-related-services {
+    .related-services {
         padding: 40px 0;
     }
     
-    .brutal-related-card {
+    .related-card {
         padding: 30px;
     }
 }

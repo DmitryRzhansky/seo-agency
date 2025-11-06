@@ -21,31 +21,31 @@
 {% block content %}
 
 <!-- Hero секция города -->
-<section class="brutal-city-hero">
+<section class="city-hero">
     <div class="container">
-        <div class="brutal-city-hero-content">
-            <h1 class="brutal-city-hero-title">SEO продвижение {{ city.get_name_prepositional }}</h1>
-            <p class="brutal-city-hero-region">{{ city.region }}</p>
+        <div class="city-hero-content">
+            <h1 class="city-hero-title">SEO продвижение {{ city.get_name_prepositional }}</h1>
+            <p class="city-hero-region">{{ city.region }}</p>
             {% if city.local_description %}
-            <p class="brutal-city-hero-description">{{ city.local_description }}</p>
+            <p class="city-hero-description">{{ city.local_description }}</p>
             {% endif %}
         </div>
     </div>
 </section>
 
 <!-- Основной контент -->
-<section class="brutal-city-content">
+<section class="city-content">
     <div class="container">
         <!-- Категории услуг -->
         {% if service_categories %}
-        <div class="brutal-city-services">
-            <h2 class="brutal-city-services-title">Наши услуги {{ city.get_name_prepositional }}</h2>
-            <div class="brutal-city-services-grid">
+        <div class="city-services">
+            <h2 class="city-services-title">Наши услуги {{ city.get_name_prepositional }}</h2>
+            <div class="city-services-grid">
                 {% for category in service_categories %}
-                <div class="brutal-city-service-card">
-                    <h3 class="brutal-city-service-title">{{ category.title }}</h3>
-                    <p class="brutal-city-service-description">{{ category.description|truncatewords:20 }}</p>
-                    <a href="{% url 'main:city_category_detail' city.slug category.slug %}" class="brutal-city-service-link">
+                <div class="city-service-card">
+                    <h3 class="city-service-title">{{ category.title }}</h3>
+                    <p class="city-service-description">{{ category.description|truncatewords:20 }}</p>
+                    <a href="{% url 'main:city_category_detail' city.slug category.slug %}" class="city-service-link">
                         Услуги {{ city.get_name_prepositional }}
                     </a>
                 </div>
@@ -56,24 +56,24 @@
 
         <!-- Блог города -->
         {% if recent_posts %}
-        <div class="brutal-city-blog">
-            <h2 class="brutal-city-blog-title">Полезные статьи {{ city.get_name_prepositional }}</h2>
-            <div class="brutal-city-blog-grid">
+        <div class="city-blog">
+            <h2 class="city-blog-title">Полезные статьи {{ city.get_name_prepositional }}</h2>
+            <div class="city-blog-grid">
                 {% for post in recent_posts %}
-                <div class="brutal-city-blog-card">
+                <div class="city-blog-card">
                     {% if post.image %}
-                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="brutal-city-blog-image">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="city-blog-image">
                     {% endif %}
-                    <div class="brutal-city-blog-content">
-                        <h3 class="brutal-city-blog-title-card">{{ post.title }}</h3>
-                        <p class="brutal-city-blog-excerpt">
+                    <div class="city-blog-content">
+                        <h3 class="city-blog-title-card">{{ post.title }}</h3>
+                        <p class="city-blog-excerpt">
                             {% if post.excerpt %}
                                 {{ post.excerpt|truncatewords:15 }}
                             {% else %}
                                 {{ post.content|striptags|truncatewords:15 }}
                             {% endif %}
                         </p>
-                        <a href="{{ post.get_absolute_url }}" class="brutal-city-blog-link">Читать далее</a>
+                        <a href="{{ post.get_absolute_url }}" class="city-blog-link">Читать далее</a>
                     </div>
                 </div>
                 {% endfor %}
@@ -82,11 +82,11 @@
         {% endif %}
 
         <!-- CTA секция -->
-        <div class="brutal-city-cta">
-            <div class="brutal-city-cta-content">
-                <h3 class="brutal-city-cta-title">Готовы продвигать бизнес {{ city.get_name_prepositional }}?</h3>
-                <p class="brutal-city-cta-text">Получите бесплатную консультацию по SEO продвижению в вашем городе</p>
-                <a href="{% url 'main:contacts' %}" class="brutal-city-cta-btn">Получить консультацию</a>
+        <div class="city-cta">
+            <div class="city-cta-content">
+                <h3 class="city-cta-title">Готовы продвигать бизнес {{ city.get_name_prepositional }}?</h3>
+                <p class="city-cta-text">Получите бесплатную консультацию по SEO продвижению в вашем городе</p>
+                <a href="{% url 'main:contacts' %}" class="city-cta-btn">Получить консультацию</a>
             </div>
         </div>
     </div>

@@ -20,29 +20,29 @@
 {% block content %}
 
 <!-- Hero секция категории FAQ -->
-<section class="brutal-faq-hero">
+<section class="faq-hero">
     <div class="container">
-        <div class="brutal-faq-hero-content">
-            <h1 class="brutal-faq-hero-title">{{ category.name }}</h1>
+        <div class="faq-hero-content">
+            <h1 class="faq-hero-title">{{ category.name }}</h1>
             {% if category.description %}
-            <p class="brutal-faq-hero-subtitle">{{ category.description }}</p>
+            <p class="faq-hero-subtitle">{{ category.description }}</p>
             {% endif %}
         </div>
     </div>
 </section>
 
 <!-- Поиск по категории -->
-<section class="brutal-faq-search">
+<section class="faq-search">
     <div class="container">
-        <form method="get" action="{% url 'main:faq_category' category.slug %}" class="brutal-faq-search-form">
+        <form method="get" action="{% url 'main:faq_category' category.slug %}" class="faq-search-form">
             <input 
                 type="text" 
                 name="search" 
                 value="{{ search_query|default:'' }}" 
                 placeholder="Поиск по вопросам в категории '{{ category.name }}'..." 
-                class="brutal-faq-search-input"
+                class="faq-search-input"
             >
-            <button type="submit" class="brutal-faq-search-button">
+            <button type="submit" class="faq-search-button">
                 Найти
             </button>
         </form>
@@ -50,25 +50,25 @@
 </section>
 
 <!-- FAQ контент категории -->
-<section class="brutal-faq-content">
+<section class="faq-content">
     <div class="container">
         {% if faq_items %}
-            <div class="brutal-faq-items">
+            <div class="faq-items">
                 {% for item in faq_items %}
-                <div class="brutal-faq-item">
-                    <div class="brutal-faq-item-question">
-                        <a href="{% url 'main:faq_item' category.slug item.slug %}" class="brutal-faq-item-link">
+                <div class="faq-item">
+                    <div class="faq-item-question">
+                        <a href="{% url 'main:faq_item' category.slug item.slug %}" class="faq-item-link">
                             {{ item.question }}
                         </a>
                     </div>
-                    <div class="brutal-faq-item-answer">
+                    <div class="faq-item-answer">
                         {{ item.answer|truncatewords:30|striptags }}
                     </div>
                 </div>
                 {% endfor %}
             </div>
         {% else %}
-            <div class="brutal-faq-empty">
+            <div class="faq-empty">
                 <h3>Вопросы не найдены</h3>
                 <p>Попробуйте изменить параметры поиска или выберите другую категорию.</p>
             </div>
@@ -77,18 +77,18 @@
 </section>
 
 <!-- CTA секция -->
-<section class="brutal-faq-cta">
+<section class="faq-cta">
     <div class="container">
-        <div class="brutal-faq-cta-content">
-            <h2 class="brutal-faq-cta-title">Не нашли ответ на свой вопрос?</h2>
-            <p class="brutal-faq-cta-subtitle">
+        <div class="faq-cta-content">
+            <h2 class="faq-cta-title">Не нашли ответ на свой вопрос?</h2>
+            <p class="faq-cta-subtitle">
                 Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
             </p>
-            <div class="brutal-faq-cta-buttons">
-                <a href="{% url 'main:contacts' %}" class="brutal-faq-cta-button">
+            <div class="faq-cta-buttons">
+                <a href="{% url 'main:contacts' %}" class="faq-cta-button">
                     Связаться с нами
                 </a>
-                <a href="{% url 'main:faq_list' %}" class="brutal-faq-cta-button secondary">
+                <a href="{% url 'main:faq_list' %}" class="faq-cta-button secondary">
                     Все FAQ
                 </a>
             </div>

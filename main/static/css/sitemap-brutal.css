@@ -9,7 +9,6 @@
     background: var(--white);
     padding: 120px 0;
     border-bottom: var(--border);
-    
 }
 
 .sitemap-hero-content {
@@ -43,10 +42,56 @@
     padding: 100px 0;
 }
 
+/* Статистика */
+.sitemap-stats {
+    background: var(--gray-light);
+    padding: 40px;
+    border: var(--border);
+    margin-bottom: 60px;
+}
+
+.sitemap-stats-title {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.sitemap-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.sitemap-stat-item {
+    text-align: center;
+}
+
+.sitemap-stat-number {
+    display: block;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.sitemap-stat-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Сетка разделов */
 .sitemap-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 40px;
+    margin-bottom: 60px;
 }
 
 .sitemap-section {
@@ -55,7 +100,7 @@
     background: var(--white);
 }
 
-.sitemap-section h2 {
+.sitemap-section-title {
     font-size: 24px;
     font-weight: 900;
     margin-bottom: 25px;
@@ -66,49 +111,106 @@
     border-bottom: 2px solid var(--black);
 }
 
-.sitemap-section ul {
+.sitemap-category {
+    margin-bottom: 25px;
+}
+
+.sitemap-category:last-child {
+    margin-bottom: 0;
+}
+
+.sitemap-category-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--black);
+}
+
+.sitemap-category-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.sitemap-category-title a:hover {
+    color: var(--accent);
+}
+
+.sitemap-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
-.sitemap-section li {
+.sitemap-list li {
     font-size: 15px;
 }
 
-.sitemap-section a {
+.sitemap-list a {
     color: var(--black);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     transition: var(--transition);
     display: inline-block;
     padding: 5px 0;
 }
 
-.sitemap-section a:hover {
+.sitemap-list a:hover {
     color: var(--accent);
     padding-left: 10px;
+}
+
+/* Секция FAQ */
+.sitemap-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.sitemap-section-item {
+    border: var(--border);
+    padding: 25px;
+    background: var(--white);
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
     .sitemap-hero {
         padding: 80px 0;
-        margin-top: 70px;
     }
     
     .sitemap-content {
         padding: 60px 0;
     }
     
+    .sitemap-stats {
+        padding: 30px;
+        margin-bottom: 40px;
+    }
+    
+    .sitemap-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .sitemap-stat-number {
+        font-size: 36px;
+    }
+    
     .sitemap-grid {
         grid-template-columns: 1fr;
         gap: 30px;
+        margin-bottom: 40px;
     }
     
     .sitemap-section {
         padding: 25px;
+    }
+    
+    .sitemap-sections-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
 
@@ -121,7 +223,15 @@
         padding: 40px 0;
     }
     
-    .sitemap-section h2 {
+    .sitemap-stats {
+        padding: 20px;
+    }
+    
+    .sitemap-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sitemap-section-title {
         font-size: 20px;
     }
 }

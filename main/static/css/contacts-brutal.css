@@ -284,6 +284,42 @@
     color: var(--white);
 }
 
+/* CTA секция */
+.contacts-cta {
+    background: var(--gray-light);
+    padding: 100px 0;
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-content h3 {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 1.1;
+}
+
+.cta-content p {
+    font-size: 18px;
+    color: var(--gray-dark);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 /* Адаптивность */
 @media (max-width: 1024px) {
     .contacts-layout {

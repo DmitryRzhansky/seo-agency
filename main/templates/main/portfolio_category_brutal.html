@@ -20,45 +20,59 @@
 {% block content %}
 
 <!-- Hero секция категории портфолио -->
-<section class="brutal-category-hero">
+<section class="portfolio-hero">
     <div class="container">
-        <div class="brutal-category-hero-content">
-            <h1 class="brutal-category-hero-title">{{ category.name }}</h1>
-            <p class="brutal-category-hero-subtitle">Здесь вы найдете наши работы в категории «{{ category.name }}». Посмотрите примеры наших проектов и достигнутых результатов.</p>
+        <div class="portfolio-hero-content">
+            <h1 class="portfolio-hero-title">{{ category.name }}</h1>
+            <p class="portfolio-hero-subtitle">
+                Здесь вы найдете наши работы в категории «{{ category.name }}». 
+                Посмотрите примеры наших проектов и достигнутых результатов.
+            </p>
         </div>
     </div>
 </section>
 
 <!-- Список проектов категории -->
-<section class="brutal-category-projects">
+<section class="portfolio-projects">
     <div class="container">
-        <h2 class="brutal-category-projects-title">Наши проекты в разделе «{{ category.name }}»</h2>
+        <h2 class="portfolio-projects-title">Наши проекты в разделе «{{ category.name }}»</h2>
         
         {% if page_obj %}
-        <div class="brutal-category-grid">
+        <div class="portfolio-projects-grid">
             {% for project in page_obj %}
-            <div class="brutal-category-project-card">
+            <div class="portfolio-card">
                 {% if project.main_image %}
-                <img src="{{ project.main_image.url }}" class="brutal-category-project-card-image" alt="{{ project.get_main_image_alt }}">
+                <img src="{{ project.main_image.url }}" class="portfolio-card-image" alt="{{ project.get_main_image_alt }}">
                 {% else %}
-                <div class="brutal-category-project-card-placeholder">
-                    <i class="fas fa-image"></i>
+                <div class="portfolio-card-placeholder">
+                    <i class="fas fa-briefcase"></i>
                 </div>
                 {% endif %}
-                <div class="brutal-category-project-card-category">{{ project.category.name }}</div>
-                <h3 class="brutal-category-project-card-title">{{ project.title }}</h3>
-                <p class="brutal-category-project-card-description">{{ project.short_description }}</p>
-                <a href="{% url 'main:portfolio_detail' category_slug=category.slug project_slug=project.slug %}" class="brutal-category-project-card-link">
-                    Подробнее о проекте
-                </a>
+                
+                <div class="portfolio-card-content">
+                    <div class="portfolio-card-type">{{ project.get_project_type_display_ru }}</div>
+                    <h3 class="portfolio-card-title">{{ project.title }}</h3>
+                    <p class="portfolio-card-description">
+                        {{ project.short_description|truncatewords:20 }}
+                    </p>
+                    <div class="portfolio-card-meta">
+                        {% if project.client_name %}
+                        <span class="portfolio-card-client">{{ project.client_name }}</span>
+                        {% endif %}
+                        <span class="portfolio-card-date">{{ project.created_at|date:"d.m.Y" }}</span>
+                    </div>
+                    <a href="{{ project.get_absolute_url }}" class="portfolio-card-link">
+                        Смотреть проект
+                    </a>
+                </div>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="brutal-empty-state">
+        <div class="portfolio-empty">
             <i class="fas fa-search"></i>
-            <h3>В этом разделе пока нет добавленных проектов</h3>
-            <p>Мы работаем над наполнением этого раздела. Скоро здесь появятся новые проекты!</p>
+            <h3>Проекты не найдены</h3>
+            <p>В этом разделе пока нет опубликованных проектов.</p>
         </div>
         {% endif %}
     </div>

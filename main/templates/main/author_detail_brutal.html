@@ -20,53 +20,53 @@
 {% block content %}
 
 <!-- Hero секция автора -->
-<section class="brutal-author-hero">
+<section class="author-hero">
     <div class="container">
-        <div class="brutal-author-hero-content">
-            <h1 class="brutal-author-hero-title">{{ author.get_full_name }}</h1>
-            <p class="brutal-author-hero-subtitle">{{ author.position }}</p>
+        <div class="author-hero-content">
+            <h1 class="author-hero-title">{{ author.get_full_name }}</h1>
+            <p class="author-hero-subtitle">{{ author.position }}</p>
             {% if author.experience %}
-            <p class="brutal-author-hero-experience">{{ author.experience }}</p>
+            <p class="author-hero-experience">{{ author.experience }}</p>
             {% endif %}
         </div>
     </div>
 </section>
 
 <!-- Основной контент автора -->
-<section class="brutal-author-content">
+<section class="author-content">
     <div class="container">
-        <div class="brutal-author-content-wrapper">
+        <div class="author-content-wrapper">
             <!-- Информация об авторе -->
-            <div class="brutal-author-info">
-                <div class="brutal-author-photo">
+            <div class="author-info">
+                <div class="author-photo">
                     {% if author.photo %}
-                    <img src="{{ author.photo.url }}" alt="{{ author.get_photo_alt }}" class="brutal-author-photo-img">
+                    <img src="{{ author.photo.url }}" alt="{{ author.get_photo_alt }}" class="author-photo-img">
                     {% else %}
-                    <div class="brutal-author-photo-placeholder">
+                    <div class="author-photo-placeholder">
                         <i class="fas fa-user"></i>
                     </div>
                     {% endif %}
                 </div>
                 
-                <div class="brutal-author-details">
-                    <h2 class="brutal-author-details-title">О авторе</h2>
-                    <div class="brutal-author-bio">
+                <div class="author-details">
+                    <h2 class="author-details-title">О авторе</h2>
+                    <div class="author-bio">
                         {{ author.bio|linebreaks }}
                     </div>
                     
                     {% if author.specializations %}
-                    <div class="brutal-author-specializations">
+                    <div class="author-specializations">
                         <h3>Специализации</h3>
                         <p>{{ author.specializations|linebreaks }}</p>
                     </div>
                     {% endif %}
                     
                     {% if author.social_links %}
-                    <div class="brutal-author-social">
+                    <div class="author-social">
                         <h3>Социальные сети</h3>
-                        <div class="brutal-author-social-links">
+                        <div class="author-social-links">
                             {% for platform, url in author.social_links.items %}
-                            <a href="{{ url }}" target="_blank" rel="noopener" class="brutal-author-social-link">
+                            <a href="{{ url }}" target="_blank" rel="noopener" class="author-social-link">
                                 <i class="fab fa-{{ platform }}"></i>
                                 {{ platform|title }}
                             </a>
@@ -79,19 +79,19 @@
             </div>
             
             <!-- Статистика автора -->
-            <div class="brutal-author-posts">
-                <h2 class="brutal-author-posts-title">Статьи автора</h2>
+            <div class="author-posts">
+                <h2 class="author-posts-title">Статьи автора</h2>
 
                 <!-- Поиск по статьям автора -->
-                <form method="get" class="brutal-blog-search-form" style="margin: 0 0 30px 0;">
+                <form method="get" class="blog-search-form" style="margin: 0 0 30px 0;">
                     <input 
                         type="text" 
                         name="q" 
                         value="{{ search_query|default:'' }}" 
                         placeholder="Поиск по статьям автора..." 
-                        class="brutal-blog-search-input"
+                        class="blog-search-input"
                     >
-                    <button type="submit" class="brutal-blog-search-button">Найти</button>
+                    <button type="submit" class="blog-search-button">Найти</button>
                 </form>
 
                 <!-- Агрегаты (брютальные карточки) -->
@@ -116,7 +116,7 @@
 
                 <!-- Категории автора -->
                 {% if categories_stats %}
-                <div class="brutal-author-categories" style="margin-bottom: 30px;">
+                <div class="author-categories" style="margin-bottom: 30px;">
                     <h3>Категории автора</h3>
                     <div class="author-category-chips">
                         <button class="author-category-chip active" data-category="">
@@ -143,34 +143,34 @@
                 <!-- Список статей -->
                 <div id="author-posts-container">
                     {% if page_obj %}
-                    <div class="brutal-author-posts-grid">
+                    <div class="author-posts-grid">
                         {% for post in page_obj %}
-                        <article class="brutal-author-post-card" data-category="{{ post.category.slug|default:'' }}">
+                        <article class="author-post-card" data-category="{{ post.category.slug|default:'' }}">
                             {% if post.image %}
-                            <img src="{{ post.image.url }}" class="brutal-author-post-image" alt="{{ post.title }}">
+                            <img src="{{ post.image.url }}" class="author-post-image" alt="{{ post.title }}">
                             {% else %}
-                            <div class="brutal-author-post-placeholder">
+                            <div class="author-post-placeholder">
                                 <i class="fas fa-newspaper"></i>
                             </div>
                             {% endif %}
                             
-                            <div class="brutal-author-post-content">
+                            <div class="author-post-content">
                                 {% if post.category %}
-                                <div class="brutal-author-post-category">{{ post.category.name }}</div>
+                                <div class="author-post-category">{{ post.category.name }}</div>
                                 {% endif %}
-                                <h3 class="brutal-author-post-title">{{ post.title }}</h3>
-                                <p class="brutal-author-post-excerpt">
+                                <h3 class="author-post-title">{{ post.title }}</h3>
+                                <p class="author-post-excerpt">
                                     {% if post.excerpt %}
                                         {{ post.excerpt|truncatewords:20 }}
                                     {% else %}
                                         {{ post.content|striptags|truncatewords:20 }}
                                     {% endif %}
                                 </p>
-                                <div class="brutal-author-post-meta">
-                                    <span class="brutal-author-post-date">{{ post.published_date|date:"d.m.Y" }}</span>
-                                    <span class="brutal-author-post-views">{{ post.views_count }} просмотров</span>
+                                <div class="author-post-meta">
+                                    <span class="author-post-date">{{ post.published_date|date:"d.m.Y" }}</span>
+                                    <span class="author-post-views">{{ post.views_count }} просмотров</span>
                                 </div>
-                                <a href="{{ post.get_absolute_url }}" class="brutal-author-post-link">
+                                <a href="{{ post.get_absolute_url }}" class="author-post-link">
                                     Читать далее
                                 </a>
                             </div>
@@ -181,7 +181,7 @@
                     
                     <!-- Пагинация -->
                     {% if page_obj.paginator.num_pages > 1 %}
-                    <div class="brutal-blog-pagination" style="margin-top: 30px;">
+                    <div class="blog-pagination" style="margin-top: 30px;">
                         {% if page_obj.has_previous %}
                             <a href="?q={{ search_query }}&page=1">Первая</a>
                             <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}">Предыдущая</a>
@@ -196,7 +196,7 @@
                     </div>
                     {% endif %}
                 {% else %}
-                <div class="brutal-blog-empty">
+                <div class="blog-empty">
                     <i class="fas fa-search"></i>
                     <h3>Статей не найдено</h3>
                     <p>

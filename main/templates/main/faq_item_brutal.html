@@ -20,29 +20,29 @@
 {% block content %}
 
 <!-- Hero секция вопроса -->
-<section class="brutal-faq-hero">
+<section class="faq-hero">
     <div class="container">
-        <div class="brutal-faq-hero-content">
-            <div class="brutal-faq-item-category">
-                <a href="{% url 'main:faq_category' category.slug %}" class="brutal-faq-item-category-link">
+        <div class="faq-hero-content">
+            <div class="faq-item-category">
+                <a href="{% url 'main:faq_category' category.slug %}" class="faq-item-category-link">
                     {{ category.name }}
                 </a>
             </div>
-            <h1 class="brutal-faq-hero-title">{{ faq_item.question }}</h1>
+            <h1 class="faq-hero-title">{{ faq_item.question }}</h1>
         </div>
     </div>
 </section>
 
 <!-- Ответ на вопрос -->
-<section class="brutal-faq-answer">
+<section class="faq-answer">
     <div class="container">
-        <div class="brutal-faq-answer-content">
-            <div class="brutal-faq-answer-text">
+        <div class="faq-answer-content">
+            <div class="faq-answer-text">
                 {{ faq_item.answer|safe }}
             </div>
-            <div class="brutal-faq-answer-meta">
-                <div class="brutal-faq-answer-stats">
-                    <span class="brutal-faq-answer-date">Обновлено: {{ faq_item.updated_at|date:"d.m.Y" }}</span>
+            <div class="faq-answer-meta">
+                <div class="faq-answer-stats">
+                    <span class="faq-answer-date">Обновлено: {{ faq_item.updated_at|date:"d.m.Y" }}</span>
                 </div>
             </div>
         </div>
@@ -51,14 +51,14 @@
 
 <!-- Похожие вопросы -->
 {% if related_items %}
-<section class="brutal-faq-related">
+<section class="faq-related">
     <div class="container">
-        <div class="brutal-faq-related-content">
-            <h2 class="brutal-faq-related-title">Похожие вопросы</h2>
-            <div class="brutal-faq-related-items">
+        <div class="faq-related-content">
+            <h2 class="faq-related-title">Похожие вопросы</h2>
+            <div class="faq-related-items">
                 {% for item in related_items %}
-                <div class="brutal-faq-related-item">
-                    <a href="{% url 'main:faq_item' category.slug item.slug %}" class="brutal-faq-related-link">
+                <div class="faq-related-item">
+                    <a href="{% url 'main:faq_item' category.slug item.slug %}" class="faq-related-link">
                         {{ item.question }}
                     </a>
                 </div>
@@ -70,18 +70,18 @@
 {% endif %}
 
 <!-- CTA секция -->
-<section class="brutal-faq-cta">
+<section class="faq-cta">
     <div class="container">
-        <div class="brutal-faq-cta-content">
-            <h2 class="brutal-faq-cta-title">Остались вопросы?</h2>
-            <p class="brutal-faq-cta-subtitle">
+        <div class="faq-cta-content">
+            <h2 class="faq-cta-title">Остались вопросы?</h2>
+            <p class="faq-cta-subtitle">
                 Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
             </p>
-            <div class="brutal-faq-cta-buttons">
-                <a href="{% url 'main:contacts' %}" class="brutal-faq-cta-button">
+            <div class="faq-cta-buttons">
+                <a href="{% url 'main:contacts' %}" class="faq-cta-button">
                     Связаться с нами
                 </a>
-                <a href="{% url 'main:faq_list' %}" class="brutal-faq-cta-button secondary">
+                <a href="{% url 'main:faq_list' %}" class="faq-cta-button secondary">
                     Все FAQ
                 </a>
             </div>

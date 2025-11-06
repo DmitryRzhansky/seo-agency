@@ -4,49 +4,41 @@
 {% block title %}Услуги{% endblock title %}
 
 {% block breadcrumbs %}
-<div class="breadcrumbs services-breadcrumbs">
+<div class="breadcrumbs">
     <div class="container">
         <a href="{% url 'main:home' %}">Главная</a><span class="separator">/</span><span class="current">Услуги</span>
     </div>
-    </div>
+</div>
 {% endblock breadcrumbs %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/services-brutal.css' %}">
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/breadcrumbs-brutal.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
 
-<!-- Hero секция -->
-<section class="hero services-page-hero">
-    <div class="hero-bg-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="hero-watermark">
-            <img src="{% static 'images/logo/sign.png' %}" alt="Logo">
-        </div>
-    </div>
+<!-- Hero секция услуг -->
+<section class="hero services-hero">
     <div class="container">
         <div class="hero-content">
             <div class="hero-label">
                 <span class="label-dot"></span>
-                <span>Услуги</span>
+                <span>Наши услуги</span>
             </div>
-            <h1 class="hero-title" data-text="Что мы делаем">
-                <span class="word" data-word="Что">Что</span>
-                <span class="word" data-word="мы">мы</span>
-                <span class="word" data-word="делаем">делаем</span>
+            <h1 class="hero-title">
+                <span class="word">Что</span>
+                <span class="word">мы</span>
+                <span class="word">делаем</span>
             </h1>
-            <p class="hero-subtitle">Комплексные услуги по продвижению сайтов. От технического аудита до комплексного SEO-продвижения. Работаем только белыми методами с гарантией результата.</p>
+            <p class="hero-subtitle">
+                Комплексные услуги по продвижению сайтов. От технического аудита до комплексного SEO-продвижения. 
+                Работаем только белыми методами с гарантией результата.
+            </p>
             <div class="hero-features">
                 <div class="feature-box">
                     <span class="feature-check">✓</span>
-                    <span>Оплата только за результат</span>
+                    <span>Оплата за результат</span>
                 </div>
                 <div class="feature-box">
                     <span class="feature-check">✓</span>
@@ -84,7 +76,7 @@
                 <input type="text" name="name" placeholder="Ваше имя" required>
                 <input type="tel" name="phone" placeholder="Телефон" required>
                 <input type="email" name="email" placeholder="Email" required>
-                <input type="hidden" name="message" value="Заявка со страницы услуг: hero форма">
+                <input type="hidden" name="message" value="Заявка со страницы услуг">
                 <button type="submit" class="form-submit">
                     <span>Отправить</span>
                 </button>
@@ -92,29 +84,27 @@
             <p class="form-note">Ответим в течение 15 минут</p>
         </div>
     </div>
-    <div class="hero-scroll-indicator">
-        <span>SCROLL</span>
-        <div class="scroll-line"></div>
-    </div>
 </section>
 
-<!-- Категории (кликабельные) -->
-<section class="services-section">
-    <div class="services-container">
-        <div class="section-header-888">
-            <h2 class="section-title-888">
-                <span class="title-text">Категории услуг</span>
-            </h2>
-            <p class="section-description-888">Выберите направление — внутри подробности и состав работ</p>
+<!-- Категории услуг -->
+<section class="services-categories">
+    <div class="container">
+        <div class="services-categories-header">
+            <h2 class="services-categories-title">Категории услуг</h2>
+            <p class="services-categories-subtitle">
+                Выберите направление — внутри подробности и состав работ
+            </p>
         </div>
 
-        <div class="services-grid-888">
+        <div class="services-grid">
             {% for category in categories %}
-            <article class="service-card-888">
+            <article class="service-card">
                 <h3 class="service-card-title">
                     <a href="{% url 'services:service_category' slug=category.slug %}">{{ category.title }}</a>
                 </h3>
-                <p class="service-card-desc">{{ category.description|default:""|truncatewords:18 }}</p>
+                <p class="service-card-desc">
+                    {{ category.description|default:"Описание категории"|truncatewords:20 }}
+                </p>
                 <div class="service-card-footer">
                     <a class="service-card-btn" href="{% url 'services:service_category' slug=category.slug %}">
                         <span>Подробнее</span>
@@ -127,13 +117,15 @@
     </div>
 </section>
 
-<!-- CTA -->
-<section class="services-cta-888">
-    <div class="services-container">
-        <div class="cta-box-888">
-            <h2 class="cta-title-888">Готовы обсудить проект?</h2>
-            <p class="cta-sub-888"><center>Оставьте заявку — вернёмся с понятным планом работ и сроками</center></p>
-            <br><a href="{% url 'main:contacts' %}" class="cta-btn-888">
+<!-- CTA секция -->
+<section class="services-cta">
+    <div class="container">
+        <div class="services-cta-content">
+            <h2 class="services-cta-title">Готовы обсудить проект?</h2>
+            <p class="services-cta-subtitle">
+                Оставьте заявку — вернёмся с понятным планом работ и сроками
+            </p>
+            <a href="{% url 'main:contacts' %}" class="services-cta-btn">
                 <span>Связаться с нами</span>
                 <span class="arrow">→</span>
             </a>

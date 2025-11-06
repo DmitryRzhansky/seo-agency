@@ -644,6 +644,23 @@ def faq_list(request):
                 faq_by_category[category].append(item)
         except FAQCategory.DoesNotExist:
             selected_category = None
+    else:
+        # Если категория не выбрана - показываем ВСЕ вопросы по всем категориям
+        all_items = FAQItem.objects.filter(is_published=True).select_related('category').order_by('category__order', 'order', 'question')
+        
+        # Применяем поиск
+        if search_query:
+            all_items = all_items.filter(
+                Q(question__icontains=search_query) | 
+                Q(answer__icontains=search_query)
+            )
+        
+        # Группируем по категориям
+        for item in all_items:
+            category = item.category
+            if category not in faq_by_category:
+                faq_by_category[category] = []
+            faq_by_category[category].append(item)
     
     # SEO данные
     seo_title = "Часто задаваемые вопросы | Isakov Agency"
@@ -800,6 +817,31 @@ def glossary_list(request):
                 glossary_by_category[category].append(term)
         except GlossaryCategory.DoesNotExist:
             selected_category = None
+    else:
+        # Если категория не выбрана - показываем ВСЕ термины по всем категориям
+        all_terms = GlossaryTerm.objects.filter(is_published=True).select_related('category').order_by('category__order', 'term')
+        
+        # Применяем фильтры
+        if alphabet_filter:
+            if alphabet_filter == 'ru':
+                all_terms = all_terms.filter(term__regex=r'^[А-Яа-я]')
+            elif alphabet_filter == 'en':
+                all_terms = all_terms.filter(term__regex=r'^[A-Za-z]')
+            elif alphabet_filter != 'all':
+                all_terms = all_terms.filter(term__istartswith=alphabet_filter)
+        
+        if search_query:
+            all_terms = all_terms.filter(
+                Q(term__icontains=search_query) | 
+                Q(definition__icontains=search_query)
+            )
+        
+        # Группируем по категориям
+        for term in all_terms:
+            category = term.category
+            if category not in glossary_by_category:
+                glossary_by_category[category] = []
+            glossary_by_category[category].append(term)
     
     # SEO данные
     seo_title = "Глоссарий терминов | Isakov Agency"

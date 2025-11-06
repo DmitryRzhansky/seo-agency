@@ -68,11 +68,7 @@
         {% if faq_by_category %}
             {% for category, items in faq_by_category.items %}
             <div class="section-header">
-                <h2 class="section-title">
-                    <a href="{% url 'main:faq_category' category.slug %}" style="color: inherit; text-decoration: none;">
-                        {{ category.name }}
-                    </a>
-                </h2>
+                <h2 class="section-title">{{ category.name }}</h2>
                 {% if category.description %}
                 <p class="section-subtitle">{{ category.description }}</p>
                 {% endif %}
@@ -81,21 +77,16 @@
             <div class="faq-list">
                 {% for item in items %}
                 <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFAQ(this)">
-                        <span>{{ item.question }}</span>
-                        <i class="fas fa-plus faq-icon"></i>
-                    </button>
+                    <h3 class="faq-question">{{ item.question }}</h3>
                     <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            {{ item.answer|safe }}
-                        </div>
+                        {{ item.answer|safe }}
                     </div>
                 </div>
                 {% endfor %}
             </div>
             
             {% if not forloop.last %}
-            <div style="height: 60px;"></div>
+            <div style="height: 80px;"></div>
             {% endif %}
             {% endfor %}
         {% else %}
@@ -116,7 +107,7 @@
 <section class="cta-section">
     <div class="container">
         <div class="cta-section-content">
-            <h2 class="cta-section-title">Не нашли ответ на свой вопрос?</h2>
+            <h2 class="cta-section-title">Не нашли ответ?</h2>
             <p class="cta-section-text">
                 Свяжитесь с нами, и мы с удовольствием ответим на все ваши вопросы!
             </p>
@@ -130,34 +121,3 @@
 </section>
 
 {% endblock content %}
-
-{% block extra_js %}
-<script>
-function toggleFAQ(button) {
-    const item = button.parentElement;
-    const answer = item.querySelector('.faq-answer');
-    const icon = button.querySelector('.faq-icon');
-    const isActive = item.classList.contains('active');
-    
-    // Закрываем все другие
-    document.querySelectorAll('.faq-item.active').forEach(el => {
-        if (el !== item) {
-            el.classList.remove('active');
-            el.querySelector('.faq-icon').classList.remove('fa-minus');
-            el.querySelector('.faq-icon').classList.add('fa-plus');
-        }
-    });
-    
-    // Переключаем текущий
-    if (isActive) {
-        item.classList.remove('active');
-        icon.classList.remove('fa-minus');
-        icon.classList.add('fa-plus');
-    } else {
-        item.classList.add('active');
-        icon.classList.remove('fa-plus');
-        icon.classList.add('fa-minus');
-    }
-}
-</script>
-{% endblock extra_js %}

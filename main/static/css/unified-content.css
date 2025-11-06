@@ -1,28 +1,29 @@
 /* ============================================
-   ЕДИНАЯ СИСТЕМА КЛАССОВ ДЛЯ ВСЕГО КОНТЕНТА
-   Все страницы используют ОДНИ И ТЕ ЖЕ классы
+   БРУТАЛЬНАЯ ЕДИНАЯ СИСТЕМА - КАК INDEX_NEW.HTML
    ============================================ */
 
 /* ==================== ФИЛЬТРЫ И ПОИСК ==================== */
 
 .filters-section {
     background: var(--white);
-    border: var(--border);
-    padding: 30px;
+    border: 3px solid var(--black);
+    padding: 40px;
 }
 
 .search-form {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 30px;
 }
 
 .search-input {
     flex: 1;
-    padding: 15px 20px;
-    border: var(--border);
+    padding: 18px 25px;
+    border: 3px solid var(--black);
+    background: var(--white);
     font-family: var(--font-main);
     font-size: 16px;
+    font-weight: 700;
     transition: var(--transition);
 }
 
@@ -32,15 +33,15 @@
 }
 
 .search-button {
-    padding: 15px 30px;
-    background: var(--accent);
+    padding: 18px 40px;
+    background: var(--black);
     color: var(--white);
-    border: var(--border);
-    border-color: var(--black);
+    border: 3px solid var(--black);
     font-family: var(--font-main);
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 900;
+    font-size: 14px;
     text-transform: uppercase;
+    letter-spacing: 2px;
     cursor: pointer;
     transition: var(--transition);
     display: flex;
@@ -49,24 +50,26 @@
 }
 
 .search-button:hover {
-    background: var(--accent-hover);
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 .categories-filter {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 30px;
 }
 
 .category-button {
-    padding: 12px 20px;
+    padding: 15px 30px;
     background: var(--white);
-    border: var(--border);
+    border: 3px solid var(--black);
     font-family: var(--font-main);
-    font-weight: 700;
-    font-size: 14px;
+    font-weight: 900;
+    font-size: 13px;
     text-transform: uppercase;
+    letter-spacing: 1.5px;
     text-decoration: none;
     color: var(--black);
     transition: var(--transition);
@@ -74,9 +77,8 @@
 
 .category-button:hover,
 .category-button.active {
-    background: var(--accent);
+    background: var(--black);
     color: var(--white);
-    border-color: var(--black);
 }
 
 .alphabet-filter {
@@ -128,35 +130,38 @@
     }
 }
 
-/* ==================== HERO СЕКЦИИ ==================== */
-/* Все страницы используют .page-hero с breadcrumbs */
+/* ==================== HERO СЕКЦИИ - БРУТАЛЬНО ==================== */
 .page-hero {
     background: var(--white);
-    padding: 80px 0;
-    border-bottom: var(--border);
+    padding: 100px 0;
+    border-bottom: 3px solid var(--black);
     text-align: center;
+    position: relative;
 }
 
 .page-hero-content {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
 .page-hero-title {
-    font-size: clamp(42px, 6vw, 80px);
+    font-size: clamp(48px, 7vw, 90px);
     font-weight: 900;
     color: var(--black);
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     text-transform: uppercase;
-    letter-spacing: -2px;
-    line-height: 1.1;
+    letter-spacing: -3px;
+    line-height: 1;
+    font-family: var(--font-main);
 }
 
 .page-hero-subtitle {
-    font-size: 20px;
+    font-size: 22px;
     color: var(--gray-dark);
     line-height: 1.7;
     font-weight: 400;
+    max-width: 750px;
+    margin: 0 auto;
 }
 
 /* ==================== КОНТЕНТНЫЕ СЕКЦИИ ==================== */
@@ -206,19 +211,21 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-/* ==================== КАРТОЧКИ ==================== */
+/* ==================== КАРТОЧКИ - БРУТАЛЬНЫЙ СТИЛЬ ==================== */
 .content-card {
     background: var(--white);
-    border: var(--border);
-    padding: 40px;
+    border: 3px solid var(--black);
+    padding: 45px;
     transition: var(--transition);
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .content-card:hover {
     border-color: var(--accent);
-    transform: translateY(-5px);
+    box-shadow: 12px 12px 0 var(--black);
+    transform: translate(-3px, -3px);
 }
 
 .content-card-image {
@@ -252,13 +259,13 @@
 }
 
 .content-card-title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-transform: uppercase;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
     color: var(--black);
-    line-height: 1.2;
+    line-height: 1.1;
 }
 
 .content-card-title a {
@@ -298,23 +305,25 @@
 .content-card-link {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 15px 30px;
+    gap: 12px;
+    padding: 18px 35px;
     background: var(--black);
     color: var(--white);
-    border: 2px solid var(--black);
+    border: 3px solid var(--black);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     transition: var(--transition);
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;
 }
 
 .content-card-link:hover {
     background: var(--accent);
     border-color: var(--accent);
+    box-shadow: 6px 6px 0 var(--black);
+    transform: translate(-2px, -2px);
 }
 
 .content-card-link .arrow {
@@ -388,61 +397,66 @@
     margin-bottom: 12px;
 }
 
-/* ==================== CTA СЕКЦИИ ==================== */
+/* ==================== CTA СЕКЦИИ - БРУТАЛЬНО ==================== */
 .cta-section {
-    background: var(--gray-light);
-    padding: 100px 0;
+    background: var(--black);
+    color: var(--white);
+    padding: 120px 0;
     text-align: center;
+    border-top: 3px solid var(--black);
 }
 
 .cta-section-content {
-    max-width: 700px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .cta-section-title {
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(42px, 6vw, 65px);
     font-weight: 900;
-    color: var(--black);
-    margin-bottom: 20px;
+    color: var(--white);
+    margin-bottom: 30px;
     text-transform: uppercase;
-    letter-spacing: -2px;
+    letter-spacing: -3px;
     line-height: 1.1;
 }
 
 .cta-section-text {
-    font-size: 18px;
-    color: var(--gray-dark);
-    margin-bottom: 40px;
-    line-height: 1.6;
+    font-size: 20px;
+    color: var(--gray-light);
+    margin-bottom: 50px;
+    line-height: 1.7;
 }
 
 .cta-section-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 
 .cta-section-button {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 18px 40px;
+    gap: 15px;
+    padding: 25px 50px;
     background: var(--accent);
     color: var(--white);
-    border: 2px solid var(--accent);
+    border: 3px solid var(--accent);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     transition: var(--transition);
     font-size: 16px;
 }
 
 .cta-section-button:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+    box-shadow: 10px 10px 0 var(--accent);
+    transform: translate(-3px, -3px);
 }
 
 .cta-section-button.secondary {
@@ -600,95 +614,264 @@
     }
 }
 
-/* ==================== FAQ АККОРДЕОН ==================== */
+/* ==================== FAQ - ПРОСТОЙ СПИСОК (БЕЗ АККОРДЕОНОВ) ==================== */
 
 .faq-list {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 40px;
 }
 
 .faq-item {
-    margin-bottom: 20px;
     background: var(--white);
-    border: var(--border);
+    border: 3px solid var(--black);
+    padding: 45px;
     transition: var(--transition);
+    position: relative;
 }
 
 .faq-item:hover {
     border-color: var(--accent);
+    box-shadow: 12px 12px 0 var(--black);
+    transform: translate(-3px, -3px);
 }
 
 .faq-question {
-    width: 100%;
-    padding: 25px 30px;
-    background: transparent;
-    border: none;
-    text-align: left;
     font-family: var(--font-main);
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: 900;
+    font-size: 24px;
     color: var(--black);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    transition: var(--transition);
-}
-
-.faq-question:hover {
-    color: var(--accent);
-}
-
-.faq-icon {
-    flex-shrink: 0;
-    font-size: 20px;
-    transition: transform 0.3s ease;
-}
-
-.faq-item.active .faq-icon {
-    transform: rotate(45deg);
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    line-height: 1.2;
 }
 
 .faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.faq-item.active .faq-answer {
-    max-height: 1000px;
-}
-
-.faq-answer-content {
-    padding: 0 30px 30px;
+    font-size: 17px;
     line-height: 1.8;
     color: var(--gray-dark);
 }
 
-.faq-answer-content p {
+.faq-answer p {
     margin-bottom: 15px;
 }
 
-.faq-answer-content ul,
-.faq-answer-content ol {
+.faq-answer ul,
+.faq-answer ol {
     margin: 15px 0;
     padding-left: 30px;
 }
 
-.faq-answer-content li {
+.faq-answer li {
     margin-bottom: 10px;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .faq-question {
-        padding: 20px;
-        font-size: 16px;
+    .faq-list {
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
     
-    .faq-answer-content {
-        padding: 0 20px 20px;
+    .faq-item {
+        padding: 30px;
     }
+    
+    .faq-question {
+        font-size: 20px;
+    }
+}
+
+/* ==================== МЕТА-ИНФОРМАЦИЯ (АВТОР, ВРЕМЯ) ==================== */
+
+.post-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 30px 0;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-wrap: wrap;
+}
+
+.post-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gray-dark);
+}
+
+.post-meta-item i {
+    font-size: 16px;
+    color: var(--accent);
+}
+
+.post-meta-item a {
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    transition: var(--transition);
+}
+
+.post-meta-item a:hover {
+    color: var(--accent);
+}
+
+/* ==================== СТАТИСТИКА (ДЛЯ AUTHOR DETAIL) ==================== */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.stat-card {
+    background: var(--white);
+    border: 3px solid var(--black);
+    padding: 50px 40px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    border-color: var(--accent);
+    box-shadow: 12px 12px 0 var(--black);
+    transform: translate(-3px, -3px);
+}
+
+.stat-value {
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 15px;
+    font-family: var(--font-mono);
+}
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gray-dark);
+}
+
+/* ==================== ПРОФИЛЬ АВТОРА ==================== */
+
+.author-profile {
+    background: var(--white);
+    border: 3px solid var(--black);
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+.author-avatar {
+    width: 200px;
+    height: 200px;
+    border: 3px solid var(--black);
+    object-fit: cover;
+}
+
+.author-avatar-placeholder {
+    width: 200px;
+    height: 200px;
+    background: var(--gray-dark);
+    border: 3px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: var(--white);
+}
+
+.author-info h2 {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+.author-role {
+    font-size: 16px;
+    color: var(--accent);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+.author-bio {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--gray-dark);
+    margin-bottom: 20px;
+}
+
+/* ==================== ФОРМЫ - БРУТАЛЬНЫЙ СТИЛЬ ==================== */
+
+.quick-form input[type="text"],
+.quick-form input[type="email"],
+.quick-form input[type="tel"],
+.quick-form textarea,
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 18px 25px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.quick-form input:focus,
+.quick-form textarea:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: var(--gray-light);
+}
+
+.quick-form input:hover,
+.quick-form textarea:hover,
+.contact-form input:hover,
+.contact-form textarea:hover {
+    border-color: var(--accent);
+}
+
+.form-submit,
+.submit-button {
+    width: 100%;
+    padding: 22px 30px !important;
+    background: var(--black) !important;
+    color: var(--white) !important;
+    border: 3px solid var(--black) !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    letter-spacing: 2px !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    text-transform: uppercase !important;
+    font-family: var(--font-main) !important;
+}
+
+.form-submit:hover,
+.submit-button:hover {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 8px 8px 0 var(--black) !important;
+    transform: translate(-2px, -2px) !important;
 }
 

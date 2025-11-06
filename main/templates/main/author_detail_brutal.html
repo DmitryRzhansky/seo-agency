@@ -14,16 +14,32 @@
 
 {% block content %}
 
-<!-- Hero секция -->
-<section class="page-hero">
+<!-- Профиль автора -->
+<section class="content-section">
     <div class="container">
-        <div class="page-hero-content">
-            <h1 class="page-hero-title">{{ author.get_full_name }}</h1>
-            {% if author.profile.role %}
-            <p class="page-hero-subtitle">{{ author.profile.role }}</p>
-            {% elif author.is_staff %}
-            <p class="page-hero-subtitle">Автор блога</p>
+        <div class="author-profile">
+            {% if author.profile.avatar %}
+            <img src="{{ author.profile.avatar.url }}" alt="{{ author.get_full_name }}" class="author-avatar">
+            {% else %}
+            <div class="author-avatar-placeholder">
+                <i class="fas fa-user"></i>
+            </div>
             {% endif %}
+            
+            <div class="author-info">
+                <h2>{{ author.get_full_name }}</h2>
+                {% if author.profile.role %}
+                <div class="author-role">{{ author.profile.role }}</div>
+                {% elif author.is_staff %}
+                <div class="author-role">Автор блога</div>
+                {% endif %}
+                
+                {% if author.profile.bio %}
+                <div class="author-bio">
+                    {{ author.profile.bio|linebreaks }}
+                </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 </section>
@@ -34,41 +50,25 @@
         <div class="section-header">
             <h2 class="section-title">Статистика</h2>
         </div>
-        <div class="content-grid grid-4">
-            <div class="content-card">
-                <div style="font-size: 48px; font-weight: 900; color: var(--accent); margin-bottom: 10px; font-family: var(--font-mono);">
-                    {{ posts.count }}
-                </div>
-                <div style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--gray-dark);">
-                    Статей опубликовано
-                </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">{{ total_posts|default:posts.count }}</div>
+                <div class="stat-label">Статей опубликовано</div>
             </div>
             
-            <div class="content-card">
-                <div style="font-size: 48px; font-weight: 900; color: var(--accent); margin-bottom: 10px; font-family: var(--font-mono);">
-                    {% if posts.exists %}{{ posts.first.published_date|date:"Y" }}{% else %}-{% endif %}
-                </div>
-                <div style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--gray-dark);">
-                    Первая публикация
-                </div>
+            <div class="stat-card">
+                <div class="stat-value">{% if first_published %}{{ first_published|date:"Y" }}{% else %}-{% endif %}</div>
+                <div class="stat-label">Первая публикация</div>
             </div>
             
-            <div class="content-card">
-                <div style="font-size: 48px; font-weight: 900; color: var(--accent); margin-bottom: 10px; font-family: var(--font-mono);">
-                    {% if posts.exists %}{{ posts.last.published_date|date:"d.m.Y" }}{% else %}-{% endif %}
-                </div>
-                <div style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--gray-dark);">
-                    Последняя публикация
-                </div>
+            <div class="stat-card">
+                <div class="stat-value">{% if last_published %}{{ last_published|date:"d.m" }}{% else %}-{% endif %}</div>
+                <div class="stat-label">Последняя публикация</div>
             </div>
             
-            <div class="content-card">
-                <div style="font-size: 48px; font-weight: 900; color: var(--accent); margin-bottom: 10px; font-family: var(--font-mono);">
-                    {% widthratio total_read_time 1 1 %}
-                </div>
-                <div style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--gray-dark);">
-                    Минут чтения всего
-                </div>
+            <div class="stat-card">
+                <div class="stat-value">{{ total_read_time|default:0 }}</div>
+                <div class="stat-label">Минут чтения</div>
             </div>
         </div>
     </div>

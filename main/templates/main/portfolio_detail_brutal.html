@@ -20,12 +20,26 @@
 <section class="page-hero">
     <div class="container">
         <div class="page-hero-content">
-            <div style="font-size: 12px; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">
+            <div style="font-size: 14px; color: var(--accent); font-weight: 900; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 3px;">
                 {{ portfolio_item.get_project_type_display_ru }}
             </div>
             <h1 class="page-hero-title">{{ portfolio_item.title }}</h1>
-            {% if portfolio_item.client_name %}
-            <p class="page-hero-subtitle">Клиент: {{ portfolio_item.client_name }}</p>
+            
+            <div class="post-meta">
+                {% if portfolio_item.client_name %}
+                <div class="post-meta-item">
+                    <i class="fas fa-building"></i>
+                    <span>{{ portfolio_item.client_name }}</span>
+                </div>
+                {% endif %}
+                <div class="post-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>{{ portfolio_item.created_at|date:"d.m.Y" }}</span>
+                </div>
+            </div>
+            
+            {% if portfolio_item.short_description %}
+            <p class="page-hero-subtitle">{{ portfolio_item.short_description }}</p>
             {% endif %}
         </div>
     </div>

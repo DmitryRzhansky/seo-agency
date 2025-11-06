@@ -26,8 +26,15 @@
 <section class="page-hero">
     <div class="container">
         <div class="page-hero-content">
+            {% if service.category %}
+            <div style="font-size: 14px; color: var(--accent); font-weight: 900; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 3px;">
+                {{ service.category.title }}
+            </div>
+            {% endif %}
             <h1 class="page-hero-title">{{ service.title }}</h1>
+            {% if service.short_description %}
             <p class="page-hero-subtitle">{{ service.short_description }}</p>
+            {% endif %}
         </div>
     </div>
 </section>
